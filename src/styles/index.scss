@@ -1,0 +1,17 @@
+$dark: #09091A;
+
+@import "scss/index";
+
+html, body {
+  font-family: Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 16pt;
+  background: #EBEBEB;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}

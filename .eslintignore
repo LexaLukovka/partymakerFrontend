@@ -1,0 +1,11 @@
+create-fonts-symlink.js
+/build/**
+/coverage/**
+/docs/**
+/jsdoc/**
+/templates/**
+/tmp/**
+*.spec.js
+/src/index.js
+/src/registerServiceWorker.js
+/src/tests/**
