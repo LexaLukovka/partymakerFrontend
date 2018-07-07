@@ -19,6 +19,9 @@ const styles = {
     flexGrow: 1,
     marginBottom: 100,
     marginTop: 10,
+    // '@media only screen and (max-width: 640px)': {
+    //   width: 640,
+    // },
   },
   flex: {
     flex: 1,
@@ -27,7 +30,7 @@ const styles = {
 
 const Header = ({ classes, auth, actions, ...props }) =>
   <div className={classes.root}>
-    <AppBar style={{ background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)' }}>
+    <AppBar className={classes.appBar} style={{ background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)' }}>
       <Container>
         <Toolbar disableGutters>
           <Grid container justify="flex-start">

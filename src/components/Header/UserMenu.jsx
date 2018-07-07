@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -11,6 +12,11 @@ const styles = {
   user_name: {
     // marginTop: 7,
     textTransform: 'uppercase',
+  },
+  menuItem: {
+    '&:focus': {
+      outline: 'none',
+    },
   },
 }
 
@@ -69,7 +75,9 @@ class UserMenu extends React.Component {
           open={open}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={push}>Settings</MenuItem>
+          <div className={classes.menuItem} onClick={this.handleClose}>
+            <MenuItem onClick={push}>Settings</MenuItem>
+          </div>
           <MenuItem onClick={onLogout}>Logout</MenuItem>
         </Menu>
       </React.Fragment>

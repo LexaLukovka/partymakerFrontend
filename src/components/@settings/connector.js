@@ -4,6 +4,7 @@ import * as actions from '../../actions/auth.action'
 
 const initMapStateToProps = state => ({
   auth: state.authReducer,
+  menuItem: state.settingsMenu.menuItem,
 })
 
 const initMapDispatchToProps = dispatch => ({

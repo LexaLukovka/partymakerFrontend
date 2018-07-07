@@ -27,6 +27,10 @@ class User {
     return User.getSaved()
   }
 
+  static getSaved() {
+    return Cache.get('user')
+  }
+
   getSaved() {
     return Cache.get('user')
   }
@@ -35,7 +39,6 @@ class User {
     Cache.put('user', user)
   }
 
-  // noinspection JSUnusedGlobalSymbols
   logout() {
     Cache.remove('user')
     Token.clear()

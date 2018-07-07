@@ -5,6 +5,7 @@ import popularRoutes from './popularRoutes.reducer'
 import alertReducer from './alert.reducer'
 import cargoReducer from './cargoReducer'
 import filterReducer from './filter.reducer'
+import settingsMenu from './settingsMenu.reducer'
 
 export default combineReducers({
   authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   cargoReducer,
   filterReducer,
   alertReducer,
+  settingsMenu,
 })
