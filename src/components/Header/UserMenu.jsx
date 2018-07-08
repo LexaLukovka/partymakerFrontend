@@ -9,8 +9,11 @@ import MenuItem from '@material-ui/core/es/MenuItem/MenuItem'
 import Typography from '@material-ui/core/es/Typography/Typography'
 
 const styles = {
+  root: {
+    display: 'flex',
+  },
   user_name: {
-    // marginTop: 7,
+    marginTop: 8,
     textTransform: 'uppercase',
   },
   menuItem: {
@@ -42,7 +45,7 @@ class UserMenu extends React.Component {
     const open = Boolean(anchorEl)
 
     return (
-      <React.Fragment>
+      <div className={classes.root}>
         <IconButton
           aria-owns={open ? 'menu-appbar' : null}
           aria-haspopup="true"
@@ -80,7 +83,7 @@ class UserMenu extends React.Component {
           </div>
           <MenuItem onClick={onLogout}>Logout</MenuItem>
         </Menu>
-      </React.Fragment>
+      </div>
     )
   }
 }

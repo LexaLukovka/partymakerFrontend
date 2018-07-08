@@ -10,6 +10,7 @@ import connector from './connector'
 const styles = {
   root: {
     display: 'flex',
+    marginTop: 30,
   },
 }
 
