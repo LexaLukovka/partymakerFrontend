@@ -13,10 +13,10 @@ import Container from '../../Container'
 
 const styles = theme => ({
   card: {
-    width: 800,
+    maxWidth: 800,
     display: 'flex',
     '@media only screen and (max-width: 1280px)': {
-      width: 650,
+      maxWidth: 650,
     },
   },
   bullet: {

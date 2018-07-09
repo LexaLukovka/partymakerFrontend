@@ -15,7 +15,7 @@ const styles = theme => ({
   root: {
     width: 300,
     marginRight: '2rem',
-    height: '100%',
+    height: 'auto',
   },
   menuItem: {
     paddingRight: 40,
