@@ -9,8 +9,8 @@ const styles = theme => ({
     minWidth: 1280,
     paddingLeft: theme.spacing.size2,
     paddingRight: theme.spacing.size2,
-    '@media only screen and (max-width: 640px)': {
-      minWidth: 'auto',
+    '@media only screen and (max-width: 1280px)': {
+      minWidth: '100%',
     },
   },
 })

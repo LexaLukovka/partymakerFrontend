@@ -6,14 +6,13 @@ import AccountCircle from '@material-ui/icons/es/AccountCircle'
 import IconButton from '@material-ui/core/es/IconButton/IconButton'
 import Menu from '@material-ui/core/es/Menu/Menu'
 import MenuItem from '@material-ui/core/es/MenuItem/MenuItem'
-import Typography from '@material-ui/core/es/Typography/Typography'
+import connector from './connector'
 
 const styles = {
   root: {
     display: 'flex',
   },
   user_name: {
-    marginTop: 8,
     textTransform: 'uppercase',
   },
   menuItem: {
@@ -35,12 +34,12 @@ class UserMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleClose = () => {
-    this.setState({ anchorEl: null })
+  handleClose = async () => {
+    await this.setState({ anchorEl: null })
   }
 
   render() {
-    const { classes, user, push, onLogout } = this.props
+    const { classes, user, push, onLogout, onLogin, onRegister } = this.props
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
 
@@ -54,15 +53,6 @@ class UserMenu extends React.Component {
         >
           <AccountCircle />
         </IconButton>
-
-        <Typography
-          className={classes.user_name}
-          variant="subheading"
-          color="inherit"
-          onClick={this.handleMenu}
-        >
-          <a>{user.name}</a>
-        </Typography>
 
         <Menu
           id="menu-appbar"
@@ -79,9 +69,18 @@ class UserMenu extends React.Component {
           onClose={this.handleClose}
         >
           <div className={classes.menuItem} onClick={this.handleClose}>
-            <MenuItem onClick={push}>Settings</MenuItem>
+            {user ?
+              <React.Fragment>
+                <MenuItem onClick={push}>{user.name}</MenuItem>
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              </React.Fragment>
+              :
+              <React.Fragment>
+                <MenuItem onClick={onLogin}>Войти</MenuItem>
+                <MenuItem onClick={onRegister}>Зарегистрироваться</MenuItem>
+              </React.Fragment>
+            }
           </div>
-          <MenuItem onClick={onLogout}>Logout</MenuItem>
         </Menu>
       </div>
     )
@@ -90,9 +89,14 @@ class UserMenu extends React.Component {
 
 UserMenu.propTypes = {
   classes: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   push: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
+  onRegister: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
 }
+UserMenu.defaultProps = {
+  user: null,
+}
 
-export default withStyles(styles)(UserMenu)
+export default withStyles(styles)(connector(UserMenu))

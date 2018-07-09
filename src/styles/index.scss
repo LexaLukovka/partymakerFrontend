@@ -8,6 +8,9 @@ html, body {
   padding: 0;
   font-size: 16pt;
   //background: #EBEBEB;
+  @media only screen and (max-width: 640px) {
+    font-size: 14pt;
+  }
 }
 
 a {

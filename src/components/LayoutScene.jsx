@@ -15,19 +15,18 @@ import SettingsScene from './@settings/SettingsScene'
 
 const LayoutScene = () =>
   <main>
-    <Header>
-      <Switch>
-        <Route exact path="/" component={IndexScene} />
-        <Route exact path="/register" component={RegisterScene} />
-        <Route exact path="/login" component={LoginScene} />
-        <Route exact path="/settings" component={SettingsScene} />
-        <Route exact path="/cargo" component={CargoScene} />
-        <AuthRoute exact path="/cargo/create" component={CreateScene} />
-        <AuthRoute exact path="/cargo/created" component={CreatedScene} />
-        <Route exact path="/cargo/:id" component={ShowCargoScene} />
-      </Switch>
-      <Alert />
-    </Header>
+    <Header />
+    <Switch>
+      <Route exact path="/" component={IndexScene} />
+      <Route exact path="/register" component={RegisterScene} />
+      <Route exact path="/login" component={LoginScene} />
+      <Route exact path="/settings" component={SettingsScene} />
+      <Route exact path="/cargo" component={CargoScene} />
+      <AuthRoute exact path="/cargo/create" component={CreateScene} />
+      <AuthRoute exact path="/cargo/created" component={CreatedScene} />
+      <Route exact path="/cargo/:id" component={ShowCargoScene} />
+    </Switch>
+    <Alert />
   </main>
 
 LayoutScene.propTypes = {}
