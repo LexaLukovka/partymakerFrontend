@@ -25,8 +25,8 @@ const BannerButton = ({ classes }) =>
       </Link>
     </Grid>
     <Grid item>
-      <Link to="/cargo/create">
-        <Button className={classes.button} fullWidth variant="raised">хочу на вечеринку</Button>
+      <Link to="/party/create">
+        <Button className={classes.button} fullWidth variant="raised">Хочу на вечеринку</Button>
       </Link>
     </Grid>
   </div>
