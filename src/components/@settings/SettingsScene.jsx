@@ -12,16 +12,21 @@ const styles = {
   root: {
     display: 'flex',
     marginTop: '5rem',
+    '@media only screen and (max-width: 765px)': {
+      marginTop: '1rem',
+    },
   },
 }
 
 const SettingsScene = ({ classes, auth, menuItem }) =>
   <Container className={classes.root}>
-    <Grid container justify="space-between">
-      <Grid item sm={12} md={4} lg={4}>
+    <Grid container justify="center">
+      {document.documentElement.clientWidth >= 1280 &&
+      <Grid>
         <SettingsMenu />
       </Grid>
-      <Grid item md={8} xs={9} className="pl-3">
+      }
+      <Grid>
         {menuItem === 0 && <ProfileCard user={auth.user} />}
         {menuItem === 1 && <PasswordCard />}
       </Grid>

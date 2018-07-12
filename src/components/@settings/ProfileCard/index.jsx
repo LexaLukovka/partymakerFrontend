@@ -15,8 +15,14 @@ const styles = theme => ({
   card: {
     maxWidth: 800,
     display: 'flex',
+    '@media only screen and (max-width: 765px)': {
+      display: 'block',
+    },
+  },
+  cardContainer: {
+    minWidth: 400,
     '@media only screen and (max-width: 1280px)': {
-      maxWidth: 650,
+      minWidth: 150,
     },
   },
   bullet: {
@@ -32,6 +38,11 @@ const styles = theme => ({
     marginTop: 55,
     marginLeft: 25,
     marginRight: 25,
+    '@media only screen and (max-width: 765px)': {
+      marginTop: 0,
+      marginLeft: 0,
+      marginRight: 0,
+    },
   },
   user_avatar: {
     flex: '0 0 150px', /* do not grow, do not shrink, start at 250px */
@@ -47,10 +58,13 @@ const ProfileCard = ({ classes, user }) =>
     <Card className={classes.card}>
       <Grid>
         {user &&
-        <CardContent style={{ width: 400 }}>
+        <CardContent className={classes.cardContainer}>
           <Typography variant="headline" color="primary" className="mb-4">
             Общие данные аккаунта
           </Typography>
+          {document.documentElement.clientWidth <= 765 &&
+          <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/photo_2018-06-02.jpg" />
+          }
           <div className={classes.input}>
             <Typography variant="subheading">Ваше имя и фамилия</Typography>
             <TextField
@@ -81,19 +95,24 @@ const ProfileCard = ({ classes, user }) =>
         </CardContent>
         }
       </Grid>
-      <Grid container justify="flex-end">
+      <Grid
+        container
+        justify={document.documentElement.clientWidth >= 765 ? 'flex-end' : 'center'}
+      >
+        {document.documentElement.clientWidth > 765 &&
         <div>
           <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/photo_2018-06-02.jpg" />
-          <CardActions className={classes.bottom_save}>
-            <Button
-              fullWidth
-              variant="raised"
-              color="primary"
-            >
-              Сохранить
-            </Button>
-          </CardActions>
         </div>
+        }
+        <CardActions className={classes.bottom_save}>
+          <Button
+            fullWidth
+            variant="raised"
+            color="primary"
+          >
+            Сохранить
+          </Button>
+        </CardActions>
       </Grid>
     </Card>
   </Container>

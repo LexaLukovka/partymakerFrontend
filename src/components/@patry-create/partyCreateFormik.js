@@ -3,13 +3,10 @@ import * as Yup from 'yup'
 
 const partyCreateFormik = withFormik({
   validationSchema: Yup.object().shape({
-
-
-    where: Yup.string()
+    district: Yup.string()
       .required('Это поле является обязательным'),
     time: Yup.string()
       .required('Это поле является обязательным'),
-
   }),
   mapPropsToValues: () => ({
     district: '',

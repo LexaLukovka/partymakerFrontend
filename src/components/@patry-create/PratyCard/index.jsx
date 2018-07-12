@@ -6,7 +6,7 @@ import Button from '@material-ui/core/es/Button/Button'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
 import Checkbox from '@material-ui/core/es/Checkbox/Checkbox'
-import partyCreateFormik from './partyCreateFormik'
+import partyCreateFormik from '../partyCreateFormik'
 import Geosuggest from '../../Geosuggest'
 
 const styles = theme => ({
@@ -38,6 +38,9 @@ const styles = theme => ({
   flex: {
     display: 'flex',
   },
+  checked: {
+    height: 25,
+  },
 })
 
 class PartyCard extends React.Component {
@@ -45,10 +48,10 @@ class PartyCard extends React.Component {
     checked: true,
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = (event) => {
     const { handleSubmit } = this.props
 
-    handleSubmit(e)
+    handleSubmit(event)
   }
 
   handleChange = name => event => {
@@ -75,9 +78,9 @@ class PartyCard extends React.Component {
           <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
           <TextField
             fullWidth
-            name="where"
+            name="district"
             label="Район"
-            value={values.where}
+            value={values.district}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -87,7 +90,7 @@ class PartyCard extends React.Component {
           <Grid className={classes.flex}>
             <Typography variant="caption">Показывать неприглашенным пользователям?</Typography>
             <Checkbox
-              style={{ height: 25 }}
+              className={classes.checked}
               name="checked"
               color="primary"
               checked={this.state.checked}
