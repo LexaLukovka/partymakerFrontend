@@ -6,7 +6,7 @@ const styles = theme => ({
   root: {
     margin: '0 auto',
     maxWidth: 1680,
-    minWidth: '100%',
+    minWidth: 1280,
     paddingLeft: theme.spacing.size2,
     paddingRight: theme.spacing.size2,
     '@media only screen and (max-width: 1280px)': {

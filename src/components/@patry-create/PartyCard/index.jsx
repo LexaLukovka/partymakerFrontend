@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import Button from '@material-ui/core/es/Button/Button'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
 import Checkbox from '@material-ui/core/es/Checkbox/Checkbox'
@@ -67,7 +66,6 @@ class PartyCard extends React.Component {
       values,
       handleChange,
       handleBlur,
-      isSubmitting,
       setFieldValue,
       setFieldTouched,
     } = this.props
@@ -160,17 +158,6 @@ class PartyCard extends React.Component {
             onBlur={handleBlur}
           />
         </div>
-        <Button
-          fullWidth
-          type="submit"
-          className={classes.button}
-          variant="raised"
-          size="large"
-          color="primary"
-          disabled={isSubmitting}
-        >
-          Дальше
-        </Button>
       </form>
     )
   }
@@ -184,7 +171,6 @@ PartyCard.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  isSubmitting: PropTypes.bool.isRequired,
 }
 
 export default withStyles(styles)(partyCreateFormik(PartyCard))
