@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import addCargoFormReducer from './createCargo.reducer'
 import authReducer from './auth.reducer'
-import popularRoutes from './popularRoutes.reducer'
+import createParty from './createParty.reducer'
+import partyCreateTags from './partyCreateTags.reducer'
 import alertReducer from './alert.reducer'
 import cargoReducer from './cargoReducer'
 import filterReducer from './filter.reducer'
@@ -9,8 +9,8 @@ import settingsMenu from './settingsMenu.reducer'
 
 export default combineReducers({
   authReducer,
-  addCargoFormReducer,
-  popularRoutes,
+  createParty,
+  partyCreateTags,
   cargoReducer,
   filterReducer,
   alertReducer,

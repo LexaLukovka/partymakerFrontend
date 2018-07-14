@@ -11,6 +11,7 @@ import Container from '../Container'
 import PartyCardForm from './PartyCardForm'
 import PartyCardIcon from './PartyCardIcon'
 import PartyCardFinish from './PartyCardFinish'
+import connector from './connector'
 
 const styles = theme => ({
   root: {
@@ -52,6 +53,16 @@ class PartyCreateScene extends React.Component {
   state = {
     activeStep: 0,
     completed: {},
+  }
+
+  componentWillMount() {
+    this.props.actions.partyTags.loadPartyTags()
+  }
+
+  componentDidUpdate() {
+    if (this.state.completed[0]) {
+      console.log(1)
+    }
   }
 
   totalSteps = () => getSteps().length
@@ -117,7 +128,6 @@ class PartyCreateScene extends React.Component {
     const { classes } = this.props
     const steps = getSteps()
     const { activeStep } = this.state
-
     return (
       <Container>
         <div className={classes.root}>
@@ -184,6 +194,7 @@ class PartyCreateScene extends React.Component {
 
 PartyCreateScene.propTypes = {
   classes: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(PartyCreateScene)
+export default withStyles(styles)(connector(PartyCreateScene))

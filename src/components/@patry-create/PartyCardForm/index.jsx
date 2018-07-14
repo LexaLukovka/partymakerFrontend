@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles/index'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
-import partyCreateFormik from '../partyCreateFormik'
+import partyCreateFormik from './partyCreateFormik'
 import Geosuggest from '../../Geosuggest'
 
 const styles = theme => ({
