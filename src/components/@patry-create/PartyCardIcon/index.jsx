@@ -59,9 +59,7 @@ const styles = theme => ({
 
 class PartyCardIcon extends React.Component {
   render() {
-    const {
-      classes,
-    } = this.props
+    const { classes } = this.props
 
     return (
       <form onSubmit={this.handleSubmit} className={classes.root}>

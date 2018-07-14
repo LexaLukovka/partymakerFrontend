@@ -1,36 +1,3 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-// import { withStyles } from '@material-ui/core/styles/index'
-// import Grid from '@material-ui/core/es/Grid/Grid'
-// import Container from '../Container'
-// import PartyCard from './PratyCard'
-// import PartyCardIcon from './PartyCardIcon'
-//
-// const styles = theme => ({
-//   root: {
-//     // color: theme.palette.common.white,
-//     flexGrow: 1,
-//     margin: theme.spacing.size2,
-//   },
-// })
-//
-// const PartyCreateScene = ({ classes }) =>
-//   <Container>
-//     <Grid container justify="center">
-//       <Grid item md={5} className={classes.root}>
-//         <PartyCard />
-//       </Grid>
-//       {/*<Grid className={classes.root}>*/}
-//         {/*<PartyCardIcon />*/}
-//       {/*</Grid>*/}
-//     </Grid>
-//   </Container>
-//
-// PartyCreateScene.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// }
-//
-// export default withStyles(styles)(PartyCreateScene)
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -43,6 +10,7 @@ import Grid from '@material-ui/core/es/Grid/Grid'
 import Container from '../Container'
 import PartyCard from './PartyCard'
 import PartyCardIcon from './PartyCardIcon'
+import PartyCardFinish from './PartyCardFinish'
 
 const styles = theme => ({
   root: {
@@ -64,7 +32,7 @@ const styles = theme => ({
 })
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad']
+  return ['Тип', 'Создание', 'Приватность']
 }
 
 function getStepContent(step) {
@@ -74,9 +42,9 @@ function getStepContent(step) {
     case 1:
       return <PartyCard />
     case 2:
-      return 'Step 3: This is the bit I really care about!'
+      return <PartyCardFinish />
     default:
-      return 'Unknown step'
+      return 'Неизвестный шаг'
   }
 }
 
@@ -160,7 +128,7 @@ class PartyCreateScene extends React.Component {
                   onClick={this.handleStep(index)}
                   completed={this.state.completed[index]}
                 >
-                  {label}
+                  {document.documentElement.clientWidth >= 765 ? label : ''}
                 </StepButton>
               </Step>
             ))}
@@ -183,7 +151,7 @@ class PartyCreateScene extends React.Component {
                       onClick={this.handleBack}
                       className={classes.button}
                     >
-                      Back
+                      Назад
                     </Button>
                     <Button
                       variant="contained"
@@ -191,16 +159,16 @@ class PartyCreateScene extends React.Component {
                       onClick={this.handleNext}
                       className={classes.button}
                     >
-                      Next
+                      Дальше
                     </Button>
                     {activeStep !== steps.length &&
                     (this.state.completed[this.state.activeStep] ? (
                       <Typography variant="caption" className={classes.completed}>
-                        Step {activeStep + 1} already completed
+                        Шаг {activeStep + 1} уже завершен
                       </Typography>
                     ) : (
                       <Button variant="contained" color="primary" onClick={this.handleComplete}>
-                        {this.completedSteps() === this.totalSteps() - 1 ? 'Finish' : 'Complete Step'}
+                        {this.completedSteps() === this.totalSteps() - 1 ? 'Создать пати' : 'Готово'}
                       </Button>
                     ))}
                   </div>

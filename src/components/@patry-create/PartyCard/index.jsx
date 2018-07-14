@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles/index'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
-import Checkbox from '@material-ui/core/es/Checkbox/Checkbox'
 import partyCreateFormik from '../partyCreateFormik'
 import Geosuggest from '../../Geosuggest'
 
@@ -42,126 +41,84 @@ const styles = theme => ({
   },
 })
 
-class PartyCard extends React.Component {
-  state = {
-    checked: true,
-  }
-
-  handleSubmit = (event) => {
-    const { handleSubmit } = this.props
-
-    handleSubmit(event)
-  }
-
-  handleChange = name => event => {
-    const { handleChange } = this.props
-    this.setState({ [name]: event.target.checked })
-
-    handleChange(event)
-  }
-
-  render() {
-    const {
-      classes,
-      values,
-      handleChange,
-      handleBlur,
-      setFieldValue,
-      setFieldTouched,
-    } = this.props
-
-    return (
-      <form onSubmit={this.handleSubmit} className={classes.root}>
-        <div className={classes.input}>
-          <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
+const PartyCard = ({ classes, values, handleChange, handleBlur, setFieldValue, setFieldTouched }) =>
+  <form onSubmit={this.handleSubmit} className={classes.root}>
+    <div className={classes.input}>
+      <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
+      <TextField
+        fullWidth
+        name="district"
+        label="Район"
+        value={values.district}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+    <div className={classes.input}>
+      <Typography variant="subheading">По какому адресу?</Typography>
+      <Geosuggest
+        fullWidth
+        id="address"
+        name="address"
+        label="Адрес"
+        value={values.address}
+        onChange={setFieldValue}
+        onBlur={setFieldTouched}
+      />
+    </div>
+    <div className={classes.input}>
+      <Typography variant="subheading">Во сколько начало?</Typography>
+      <TextField
+        fullWidth
+        type="time"
+        name="time"
+        value={values.time}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+    <div className={classes.input}>
+      <Typography variant="subheading">Сколько людей нужно?</Typography>
+      <Grid className={classes.flex}>
+        <Grid item container justify="flex-start">
+          <Typography variant="subheading">от</Typography>
           <TextField
-            fullWidth
-            name="district"
-            label="Район"
-            value={values.district}
+            type="number"
+            className={classes.inputNumber}
+            name="after"
+            value={values.after}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">По какому адресу?</Typography>
-          <Grid className={classes.flex}>
-            <Typography variant="caption">Показывать неприглашенным пользователям?</Typography>
-            <Checkbox
-              className={classes.checked}
-              name="checked"
-              color="primary"
-              checked={this.state.checked}
-              onChange={this.handleChange('checked')}
-              value={values.checked}
-            />
-          </Grid>
-          <Geosuggest
-            fullWidth
-            id="address"
-            name="address"
-            label="Адрес"
-            value={values.address}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-          />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Во сколько начало?</Typography>
+        </Grid>
+        <Grid item container justify="flex-end">
+          <Typography variant="subheading">до</Typography>
           <TextField
-            fullWidth
-            type="time"
-            name="time"
-            value={values.time}
+            type="number"
+            className={classes.inputNumber}
+            name="before"
+            value={values.before}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Сколько людей нужно?</Typography>
-          <Grid className={classes.flex}>
-            <Grid item container justify="flex-start">
-              <Typography variant="subheading">от</Typography>
-              <TextField
-                type="number"
-                className={classes.inputNumber}
-                name="after"
-                value={values.after}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Grid>
-            <Grid item container justify="flex-end">
-              <Typography variant="subheading">до</Typography>
-              <TextField
-                type="number"
-                className={classes.inputNumber}
-                name="before"
-                value={values.before}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Описание</Typography>
-          <TextField
-            fullWidth
-            multiline
-            rows={2}
-            rowsMax={3}
-            name="description"
-            label="Описание"
-            value={values.description}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </div>
-      </form>
-    )
-  }
-}
+        </Grid>
+      </Grid>
+    </div>
+    <div className={classes.input}>
+      <Typography variant="subheading">Описание</Typography>
+      <TextField
+        fullWidth
+        multiline
+        rows={2}
+        rowsMax={3}
+        name="description"
+        label="Описание"
+        value={values.description}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+  </form>
 
 PartyCard.propTypes = {
   classes: PropTypes.object.isRequired,
