@@ -62,7 +62,7 @@ class PartyCardIcon extends React.Component {
     const { classes } = this.props
 
     return (
-      <form onSubmit={this.handleSubmit} className={classes.root}>
+      <form className={classes.root}>
         <Typography variant="subheading">Выберите теги которые больше всего подходят к вашей вечеринке</Typography>
         <div className={classes.inline}>
           <div className={classes.circle}>

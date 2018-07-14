@@ -40,7 +40,7 @@ class PartyCardFinish extends React.Component {
     const { classes } = this.props
     console.log(this.state.checked)
     return (
-      <form onSubmit={this.handleSubmit} className={classes.root}>
+      <form className={classes.root}>
         <FormControlLabel
           className={classes.checked}
           label="Приватная вечеринка"
