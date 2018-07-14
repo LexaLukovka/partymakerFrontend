@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Container from '../Container'
-import PartyCard from './PartyCard'
+import PartyCardForm from './PartyCardForm'
 import PartyCardIcon from './PartyCardIcon'
 import PartyCardFinish from './PartyCardFinish'
 
@@ -40,7 +40,7 @@ function getStepContent(step) {
     case 0:
       return <PartyCardIcon />
     case 1:
-      return <PartyCard />
+      return <PartyCardForm />
     case 2:
       return <PartyCardFinish />
     default:

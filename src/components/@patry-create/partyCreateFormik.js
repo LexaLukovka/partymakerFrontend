@@ -10,7 +10,7 @@ const partyCreateFormik = withFormik({
   }),
   mapPropsToValues: () => ({
     district: '',
-    address: '',
+    address: {},
     time: '',
     after: '',
     before: '',

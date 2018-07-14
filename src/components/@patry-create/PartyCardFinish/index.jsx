@@ -38,7 +38,6 @@ class PartyCardFinish extends React.Component {
 
   render() {
     const { classes } = this.props
-    console.log(this.state.checked)
     return (
       <form className={classes.root}>
         <FormControlLabel
@@ -65,7 +64,7 @@ class PartyCardFinish extends React.Component {
           className={classes.mb}
           fullWidth
           name="link"
-          defaultValue="http://partymaker.ua/11111/ivite"
+          defaultValue="http://partymaker.ua/11111"
           disabled
         />
       </form>

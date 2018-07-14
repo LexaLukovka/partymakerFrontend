@@ -32,6 +32,10 @@ const styles = theme => ({
       background: '#AC07B2',
       color: 'white',
     },
+    '@media only screen and (max-width: 640px)': {
+      width: 100,
+      height: 100,
+    },
   },
   circle: {
     width: 70,
@@ -43,6 +47,10 @@ const styles = theme => ({
     background: '#AC07B2',
     padding: 3,
     borderRadius: '50%',
+    '@media only screen and (max-width: 640px)': {
+      marginLeft: 15,
+      marginTop: 10,
+    },
   },
   input: {
     paddingTop: 10,
