@@ -2,8 +2,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
+import classNames from 'classnames'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import Icon from '@material-ui/core/es/Icon/Icon'
+import Button from '@material-ui/core/es/Button/Button'
 import connector from '../connector'
 
 const styles = theme => ({
@@ -22,13 +24,17 @@ const styles = theme => ({
     margin: '0.25rem',
     borderRadius: '8%',
     '&:hover': {
-      background: '#AC07B2',
+      background: '#D404DC',
       color: 'white',
     },
     '@media only screen and (max-width: 640px)': {
       width: 100,
       height: 100,
     },
+  },
+  click: {
+    background: '#AC07B2',
+    color: 'white',
   },
   circle: {
     width: 70,
@@ -56,6 +62,9 @@ const styles = theme => ({
   icon: {
     fontSize: 42,
   },
+  buttonGroup: {
+    marginTop: theme.spacing.size4,
+  },
 })
 
 class PartyCardIcon extends React.Component {
@@ -63,14 +72,25 @@ class PartyCardIcon extends React.Component {
     this.props.actions.party.partyCardIcon(name)
   }
 
+  handleNext = (activeStep) => {
+    this.props.actions.stepper.stepperNavigationNext(activeStep)
+  }
+  handleBack= (activeStep) => {
+    this.props.actions.stepper.stepperNavigationBack(activeStep)
+  }
+
   render() {
-    const { classes, partyTags } = this.props
+    const { classes, party, partyTags, activeStep } = this.props
     const tags = partyTags.partyCreateTags
     return (
       <form className={classes.root}>
         <Typography variant="subheading">Выберите теги которые больше всего подходят к вашей вечеринке</Typography>
         {tags.map(tag =>
-          <div key={tag.id} onClick={() => this.handleClick(tag.name)} className={classes.inline}>
+          <div
+            key={tag.id}
+            onClick={() => this.handleClick(tag.name)}
+            className={classNames(classes.inline, party.checkClick === tag.name && classes.click)}
+          >
             <div className={classes.circle}>
               <div className={classes.input}>
                 <Icon className={classes.icon} color="primary">
@@ -80,6 +100,17 @@ class PartyCardIcon extends React.Component {
             </div>
             <Typography color="inherit" variant="body1">{tag.description}</Typography>
           </div>)}
+        <div className={classes.buttonGroup}>
+          <Button
+            disabled={activeStep === 0}
+            onClick={() => this.handleBack(activeStep)}
+          >
+            Назад
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => this.handleNext(activeStep)}>
+            Дальше
+          </Button>
+        </div>
       </form>
     )
   }
@@ -88,7 +119,9 @@ class PartyCardIcon extends React.Component {
 PartyCardIcon.propTypes = {
   classes: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  party: PropTypes.object.isRequired,
   partyTags: PropTypes.object.isRequired,
+  activeStep: PropTypes.number.isRequired,
 }
 
 export default withStyles(styles)(connector(PartyCardIcon))

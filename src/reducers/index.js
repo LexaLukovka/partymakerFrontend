@@ -6,11 +6,13 @@ import alertReducer from './alert.reducer'
 import cargoReducer from './cargoReducer'
 import filterReducer from './filter.reducer'
 import settingsMenu from './settingsMenu.reducer'
+import stepperNavigation from './stepperNavigation.reducer'
 
 export default combineReducers({
   authReducer,
-  createParty,
   partyCreateTags,
+  stepperNavigation,
+  createParty,
   cargoReducer,
   filterReducer,
   alertReducer,

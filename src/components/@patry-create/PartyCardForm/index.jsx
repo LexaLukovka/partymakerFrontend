@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
+import Button from '@material-ui/core/es/Button/Button'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
 import partyCreateFormik from './partyCreateFormik'
 import Geosuggest from '../../Geosuggest'
+import connector from '../connector'
 
 const styles = theme => ({
   root: {
@@ -39,27 +41,38 @@ const styles = theme => ({
   checked: {
     height: 25,
   },
+  buttonGroup: {
+    marginTop: theme.spacing.size4,
+  },
 })
 
-class PartyCard extends React.Component {
+class PartyCardForm extends React.Component {
   handleSubmit = (event) => {
+    console.log(2)
     const { handleSubmit } = this.props
 
     handleSubmit(event)
   }
 
+  handleNext = (activeStep) => {
+    this.props.actions.stepper.stepperNavigationNext(activeStep)
+  }
+  handleBack= (activeStep) => {
+    this.props.actions.stepper.stepperNavigationBack(activeStep)
+  }
+
   render() {
     const {
       classes,
+      activeStep,
       values,
       handleChange,
       handleBlur,
       setFieldValue,
       setFieldTouched,
     } = this.props
-
     return (
-      <form onSubmit={this.handleSubmit} className={classes.root}>
+      <form onSubmit={this.handleSubmit} className={classes.root} name="myForm">
         <div className={classes.input}>
           <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
           <TextField
@@ -135,13 +148,26 @@ class PartyCard extends React.Component {
             onBlur={handleBlur}
           />
         </div>
+        <div className={classes.buttonGroup}>
+          <Button
+            disabled={activeStep === 0}
+            onClick={() => this.handleBack(activeStep)}
+          >
+            Назад
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => this.handleNext(activeStep)}>
+            Дальше
+          </Button>
+        </div>
       </form>
     )
   }
 }
 
-PartyCard.propTypes = {
+PartyCardForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  activeStep: PropTypes.number.isRequired,
   values: PropTypes.object.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
@@ -150,4 +176,4 @@ PartyCard.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(partyCreateFormik(PartyCard))
+export default withStyles(styles)(connector(partyCreateFormik(PartyCardForm)))

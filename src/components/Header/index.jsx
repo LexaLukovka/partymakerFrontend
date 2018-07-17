@@ -55,7 +55,7 @@ class Header extends React.Component {
                 <MenuIcon onClick={this.toggleDrawer('left', true)} className={classes.icon} />
               </Grid>
               <Grid container justify="center">
-                <Typography variant="title" color="inherit" className={classes.flex}>
+                <Typography variant="title" color="inherit" align="center" className={classes.flex}>
                   <Link to="/">PartyMaker</Link>
                 </Typography>
               </Grid>

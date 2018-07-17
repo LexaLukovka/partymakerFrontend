@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlL
 import Switch from '@material-ui/core/es/Switch/Switch'
 import Button from '@material-ui/core/es/Button/Button'
 import TextField from '@material-ui/core/es/TextField/TextField'
+import connector from '../connector'
 
 const styles = theme => ({
   root: {
@@ -36,8 +37,16 @@ class PartyCardFinish extends React.Component {
     this.setState({ [name]: event.target.checked })
   }
 
+  handleNext = (activeStep) => {
+    this.props.actions.stepper.stepperNavigationNext(activeStep)
+  }
+
+  handleBack = (activeStep) => {
+    this.props.actions.stepper.stepperNavigationBack(activeStep)
+  }
+
   render() {
-    const { classes } = this.props
+    const { classes, activeStep } = this.props
     return (
       <form className={classes.root}>
         <FormControlLabel
@@ -67,6 +76,17 @@ class PartyCardFinish extends React.Component {
           defaultValue="http://partymaker.ua/11111"
           disabled
         />
+        <div className={classes.buttonGroup}>
+          <Button
+            disabled={activeStep === 0}
+            onClick={() => this.handleBack(activeStep)}
+          >
+            Назад
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => this.handleNext(activeStep)}>
+            Готово
+          </Button>
+        </div>
       </form>
     )
   }
@@ -74,6 +94,8 @@ class PartyCardFinish extends React.Component {
 
 PartyCardFinish.propTypes = {
   classes: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  activeStep: PropTypes.number.isRequired,
 }
 
-export default withStyles(styles)(PartyCardFinish)
+export default withStyles(styles)(connector(PartyCardFinish))

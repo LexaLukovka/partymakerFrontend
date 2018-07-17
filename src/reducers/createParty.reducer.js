@@ -1,8 +1,13 @@
-import { PARTY_CARD_ICON, PARTY_CARD_ICON_FULFILLED, PARTY_CARD_ICON_REJECTED } from '../actions/createParty.action'
+import {
+  PARTY_CARD_ICON,
+  OPEN_PARTY_CARD_FORM,
+} from '../actions/createParty.action'
 
 const initialState = {
   errors: null,
+  checkedOpenForm: false,
   success: false,
+  checkClick: null,
   typeParty: null,
 }
 
@@ -12,22 +17,16 @@ const createParty = (state = initialState, { type, payload }) => {
       return {
         ...state,
         typeParty: payload,
+        checkClick: state.checkClick !== payload ? payload : null,
       }
     }
 
-    case PARTY_CARD_ICON_FULFILLED: {
-      console.log(payload)
+    case OPEN_PARTY_CARD_FORM: {
       return {
         ...state,
-        typeParty: payload,
+        checkedOpenForm: payload,
       }
     }
-
-    case PARTY_CARD_ICON_REJECTED:
-      return {
-        ...state,
-        errors: payload,
-      }
 
     default:
       return state
