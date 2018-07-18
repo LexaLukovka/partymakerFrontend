@@ -5,9 +5,9 @@ import Token from './Token'
 class Http {
   constructor() {
     this.instance = axios.create({
-      // baseURL: 'http://localhost:3333',
-      baseURL: 'http://94.237.84.15',
-      timeout: 1000,
+      baseURL: 'http://localhost:3333',
+      // baseURL: 'http://94.237.84.15',
+      timeout: 10000,
       headers: { Authorization: Token.get() },
     })
   }

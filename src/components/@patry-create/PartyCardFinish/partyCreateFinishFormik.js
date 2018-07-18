@@ -1,23 +1,22 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
 
-const partyCreateFormik = withFormik({
+const partyCreateFinishFormik = withFormik({
   validationSchema: Yup.object().shape({}),
   mapPropsToValues: () => ({
-    district: '',
-    address: {},
-    time: '',
-    after: '',
-    before: '',
-    description: '',
+    pictures: [],
+    checked: '',
   }),
 
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.actions.party.partyCardForm(values)
+    if (values.checked === '') {
+      values.checked = true
+    }
+    props.actions.party.partyCardFinish(values)
     props.actions.stepper.stepperNavigationNext(props.activeStep)
     setSubmitting(false)
   },
   displayName: 'PartyCreate',
 })
 
-export default partyCreateFormik
+export default partyCreateFinishFormik

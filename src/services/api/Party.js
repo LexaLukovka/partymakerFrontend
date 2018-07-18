@@ -2,9 +2,19 @@
 import Cache from '../Cache'
 
 class Party {
-  create(name) {
+  createIcon(name) {
     Cache.put('icon', name)
     return name
+  }
+
+  createForm(form) {
+    Cache.put('form', form)
+    return form
+  }
+
+  createFinish(form) {
+    Cache.put('finish', form)
+    return form
   }
 }
 

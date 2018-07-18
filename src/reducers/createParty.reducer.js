@@ -1,6 +1,8 @@
 import {
+  PARTY_CARD_ICON_CHECK,
   PARTY_CARD_ICON,
-  OPEN_PARTY_CARD_FORM,
+  PARTY_CARD_FORM,
+  PARTY_CARD_FINISH,
 } from '../actions/createParty.action'
 
 const initialState = {
@@ -9,22 +11,36 @@ const initialState = {
   success: false,
   checkClick: null,
   typeParty: null,
+  form: null,
+  finishForm: null,
 }
 
 const createParty = (state = initialState, { type, payload }) => {
   switch (type) {
-    case PARTY_CARD_ICON: {
+    case PARTY_CARD_ICON_CHECK: {
       return {
         ...state,
-        typeParty: payload,
         checkClick: state.checkClick !== payload ? payload : null,
       }
     }
 
-    case OPEN_PARTY_CARD_FORM: {
+    case PARTY_CARD_ICON: {
       return {
         ...state,
-        checkedOpenForm: payload,
+        typeParty: payload,
+      }
+    }
+
+    case PARTY_CARD_FORM: {
+      return {
+        ...state,
+        form: payload,
+      }
+    }
+    case PARTY_CARD_FINISH: {
+      return {
+        ...state,
+        finishForm: payload,
       }
     }
 

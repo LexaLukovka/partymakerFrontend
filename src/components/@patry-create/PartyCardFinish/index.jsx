@@ -6,13 +6,15 @@ import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlL
 import Switch from '@material-ui/core/es/Switch/Switch'
 import Button from '@material-ui/core/es/Button/Button'
 import TextField from '@material-ui/core/es/TextField/TextField'
+import Grid from '@material-ui/core/es/Grid/Grid'
 import connector from '../connector'
+import PictureUpload from './PictureUpload'
+import partyCreateFinishFormik from './partyCreateFinishFormik'
 
 const styles = theme => ({
   root: {
     maxWidth: 400,
     marginTop: theme.spacing.size4,
-    // textAlign: 'center',
     '@media only screen and (max-width: 320px)': {
       marginTop: theme.spacing.size1,
     },
@@ -29,33 +31,33 @@ const styles = theme => ({
 })
 
 class PartyCardFinish extends React.Component {
-  state = {
-    checked: true,
-  }
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked })
-  }
-
-  handleNext = (activeStep) => {
-    this.props.actions.stepper.stepperNavigationNext(activeStep)
-  }
-
   handleBack = (activeStep) => {
     this.props.actions.stepper.stepperNavigationBack(activeStep)
   }
 
   render() {
-    const { classes, activeStep } = this.props
+    const {
+      classes,
+      activeStep,
+      values,
+      setFieldValue,
+      setFieldTouched,
+      handleSubmit,
+      handleChange,
+    } = this.props
+
+    if (values.checked === '') values.checked = true
+
     return (
-      <form className={classes.root}>
+      <form onSubmit={handleSubmit} className={classes.root}>
         <FormControlLabel
           className={classes.checked}
           label="Приватная вечеринка"
           control={<Switch
-            checked={this.state.checked}
-            onChange={this.handleChange('checked')}
-            value="checked"
+            name="checked"
+            checked={values.checked}
+            onChange={handleChange}
+            value={values.checked}
             color="primary"
           />}
         />
@@ -66,8 +68,14 @@ class PartyCardFinish extends React.Component {
           <Typography variant="body1" className={classes.typography}>
             Если у вас есть фотографии с места вечеринки, пожалуйста загрузите их, чтобы друзья понимали куда идут
           </Typography>
-          <Button variant="contained" color="primary">Загрузить фотки</Button>
         </div>
+        <PictureUpload
+          name="pictures"
+          value={values.pictures}
+          onChange={setFieldValue}
+          onBlur={setFieldTouched}
+        />
+
         <Typography variant="subheading" className={classes.typography}> Ссылка для приглашения </Typography>
         <TextField
           className={classes.mb}
@@ -76,17 +84,15 @@ class PartyCardFinish extends React.Component {
           defaultValue="http://partymaker.ua/11111"
           disabled
         />
-        <div className={classes.buttonGroup}>
+        <Grid container justify="center" className={classes.buttonGroup}>
           <Button
             disabled={activeStep === 0}
             onClick={() => this.handleBack(activeStep)}
           >
             Назад
           </Button>
-          <Button variant="contained" color="primary" onClick={() => this.handleNext(activeStep)}>
-            Готово
-          </Button>
-        </div>
+          <Button type="submit" variant="contained" color="primary"> Готово </Button>
+        </Grid>
       </form>
     )
   }
@@ -96,6 +102,11 @@ PartyCardFinish.propTypes = {
   classes: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
+  values: PropTypes.object.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(connector(PartyCardFinish))
+export default withStyles(styles)(connector(partyCreateFinishFormik(PartyCardFinish)))

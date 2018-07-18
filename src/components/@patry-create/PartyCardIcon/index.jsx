@@ -68,22 +68,23 @@ const styles = theme => ({
 })
 
 class PartyCardIcon extends React.Component {
-  handleClick = name => {
-    this.props.actions.party.partyCardIcon(name)
+  handleSubmit = (event) => {
+    event.preventDefault()
+    if (this.props.party.checkClick) {
+      this.props.actions.party.partyCardIcon(this.props.party.checkClick)
+      this.props.actions.stepper.stepperNavigationNext(this.props.activeStep)
+    }
   }
 
-  handleNext = (activeStep) => {
-    this.props.actions.stepper.stepperNavigationNext(activeStep)
-  }
-  handleBack= (activeStep) => {
-    this.props.actions.stepper.stepperNavigationBack(activeStep)
+  handleClick = name => {
+    this.props.actions.party.partyCardIconCheck(name)
   }
 
   render() {
-    const { classes, party, partyTags, activeStep } = this.props
+    const { classes, party, partyTags } = this.props
     const tags = partyTags.partyCreateTags
     return (
-      <form className={classes.root}>
+      <form onSubmit={this.handleSubmit} className={classes.root}>
         <Typography variant="subheading">Выберите теги которые больше всего подходят к вашей вечеринке</Typography>
         {tags.map(tag =>
           <div
@@ -102,12 +103,12 @@ class PartyCardIcon extends React.Component {
           </div>)}
         <div className={classes.buttonGroup}>
           <Button
-            disabled={activeStep === 0}
-            onClick={() => this.handleBack(activeStep)}
+            type="submit"
+            disabled={!this.props.party.checkClick}
+            variant="contained"
+            size="large"
+            color="primary"
           >
-            Назад
-          </Button>
-          <Button variant="contained" color="primary" onClick={() => this.handleNext(activeStep)}>
             Дальше
           </Button>
         </div>

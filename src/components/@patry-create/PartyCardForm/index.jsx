@@ -48,16 +48,12 @@ const styles = theme => ({
 
 class PartyCardForm extends React.Component {
   handleSubmit = (event) => {
-    console.log(2)
     const { handleSubmit } = this.props
 
     handleSubmit(event)
   }
 
-  handleNext = (activeStep) => {
-    this.props.actions.stepper.stepperNavigationNext(activeStep)
-  }
-  handleBack= (activeStep) => {
+  handleBack = (activeStep) => {
     this.props.actions.stepper.stepperNavigationBack(activeStep)
   }
 
@@ -72,7 +68,7 @@ class PartyCardForm extends React.Component {
       setFieldTouched,
     } = this.props
     return (
-      <form onSubmit={this.handleSubmit} className={classes.root} name="myForm">
+      <form onSubmit={this.handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
           <TextField
@@ -148,17 +144,22 @@ class PartyCardForm extends React.Component {
             onBlur={handleBlur}
           />
         </div>
-        <div className={classes.buttonGroup}>
+        <Grid container justify="center" className={classes.buttonGroup}>
           <Button
             disabled={activeStep === 0}
             onClick={() => this.handleBack(activeStep)}
           >
             Назад
           </Button>
-          <Button variant="contained" color="primary" onClick={() => this.handleNext(activeStep)}>
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            color="primary"
+          >
             Дальше
           </Button>
-        </div>
+        </Grid>
       </form>
     )
   }
