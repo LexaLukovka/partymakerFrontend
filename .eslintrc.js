@@ -4,6 +4,7 @@ module.exports = {
   'rules': {
     'no-trailing-spaces': 0,
     'max-len': [2, 120],
+    'import/first': 0,
     'linebreak-style': 0,
     'no-extra-semi': 2,
     'arrow-parens': 0,

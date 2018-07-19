@@ -4,26 +4,26 @@ import RegisterScene from './auth/@register/RegisterScene'
 import withTheme from '../utils/withTheme'
 import LoginScene from './auth/@login/LoginScene'
 import Header from './Header'
-import IndexScene from './@index/IndexScene'
 import Alert from './Alert'
-import CargoScene from './@cargo/CargoScene'
-import ShowCargoScene from './@cargo-id/ShowCargoScene'
 import AuthRoute from './auth/AuthRoute'
 import SettingsScene from './@settings/SettingsScene'
 import PartyCreateScene from './@patry-create/PartyCreateScene'
+import PartiesScene from './@parties/PartiesScene'
+import PartyScene from './@party/PartyScene'
 
 const LayoutScene = () =>
   <main>
     <Header />
-    <Switch>
-      <Route exact path="/" component={IndexScene} />
-      <Route exact path="/register" component={RegisterScene} />
-      <Route exact path="/login" component={LoginScene} />
-      <Route exact path="/settings" component={SettingsScene} />
-      <Route exact path="/cargo" component={CargoScene} />
-      <AuthRoute exact path="/party/create" component={PartyCreateScene} />
-      <Route exact path="/cargo/:id" component={ShowCargoScene} />
-    </Switch>
+    <div style={{ paddingTop: 55 }}>
+      <Switch>
+        <Route exact path="/" component={PartiesScene} />
+        <Route exact path="/parties/:id" component={PartyScene} />
+        <Route exact path="/register" component={RegisterScene} />
+        <Route exact path="/login" component={LoginScene} />
+        <Route exact path="/settings" component={SettingsScene} />
+        <AuthRoute exact path="/party/create" component={PartyCreateScene} />
+      </Switch>
+    </div>
     <Alert />
   </main>
 

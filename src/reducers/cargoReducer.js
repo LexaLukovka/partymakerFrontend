@@ -1,7 +1,7 @@
 import {
-  LOAD_CARGO_FULFILLED,
-  LOAD_CARGO_PENDING,
-  LOAD_CARGO_REJECTED,
+  LOAD_PARTIES_FULFILLED,
+  LOAD_PARTIES_PENDING,
+  LOAD_PARTIES_REJECTED,
   SHOW_CARGO,
 }
   from '../actions/cargo.action'
@@ -14,13 +14,13 @@ const initialState = {
 
 const cargoReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case LOAD_CARGO_PENDING: {
+    case LOAD_PARTIES_PENDING: {
       return {
         ...state,
         loading: true,
       }
     }
-    case LOAD_CARGO_FULFILLED: {
+    case LOAD_PARTIES_FULFILLED: {
       return {
         ...state,
         loading: false,
@@ -31,7 +31,7 @@ const cargoReducer = (state = initialState, { type, payload }) => {
         cargos: payload.data,
       }
     }
-    case LOAD_CARGO_REJECTED: {
+    case LOAD_PARTIES_REJECTED: {
       return {
         ...state,
         loading: false,
