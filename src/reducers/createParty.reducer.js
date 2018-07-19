@@ -3,13 +3,14 @@ import {
   PARTY_CARD_ICON,
   PARTY_CARD_FORM,
   PARTY_CARD_FINISH,
+  PARTY_PRIVATE_CHECK,
   CREATE_PARTY_REJECTED,
   CREATE_PARTY_FULFILLED,
 } from '../actions/createParty.action'
 
 const initialState = {
   errors: null,
-  checkedOpenForm: false,
+  checkedPrivate: true,
   success: false,
   checkClick: null,
   typeParty: null,
@@ -44,6 +45,13 @@ const createParty = (state = initialState, { type, payload }) => {
       return {
         ...state,
         finishForm: payload,
+      }
+    }
+
+    case PARTY_PRIVATE_CHECK: {
+      return {
+        ...state,
+        checkedPrivate: !payload,
       }
     }
 

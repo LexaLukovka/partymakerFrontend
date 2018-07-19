@@ -3,10 +3,18 @@ import * as Yup from 'yup'
 import clean from 'lodash-clean'
 
 const partyCreateFormik = withFormik({
-  validationSchema: Yup.object().shape({}),
+  validationSchema: Yup.object().shape({
+    district: Yup.string().required('Это поле является обязательным'),
+    address: Yup.object().required('Это поле является обязательным'),
+    time: Yup.string(),
+    after: Yup.number(),
+    before: Yup.number(),
+    description: Yup.string(),
+  }),
+
   mapPropsToValues: () => ({
     district: '',
-    address: {},
+    address: '',
     time: '',
     after: '',
     before: '',

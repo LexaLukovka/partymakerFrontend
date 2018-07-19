@@ -31,6 +31,10 @@ const styles = theme => ({
 })
 
 class PartyCardFinish extends React.Component {
+  handleChange = () => {
+    this.props.actions.party.partyPrivateChecked(this.props.party.checkedPrivate)
+  }
+
   handleBack = (activeStep) => {
     this.props.actions.stepper.stepperNavigationBack(activeStep)
   }
@@ -43,9 +47,9 @@ class PartyCardFinish extends React.Component {
       setFieldValue,
       setFieldTouched,
       handleSubmit,
-      handleChange,
+      party,
     } = this.props
-
+    const checked = party.checkedPrivate
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <FormControlLabel
@@ -53,9 +57,8 @@ class PartyCardFinish extends React.Component {
           label="Приватная вечеринка"
           control={<Switch
             name="checked"
-            checked={values.checked}
-            onChange={handleChange}
-            value={values.checked}
+            checked={checked}
+            onChange={this.handleChange}
             color="primary"
           />}
         />
@@ -99,12 +102,12 @@ class PartyCardFinish extends React.Component {
 PartyCardFinish.propTypes = {
   classes: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  party: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
   values: PropTypes.object.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(connector(partyCreateFinishFormik(PartyCardFinish)))

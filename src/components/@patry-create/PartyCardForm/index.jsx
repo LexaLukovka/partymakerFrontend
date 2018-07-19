@@ -47,6 +47,10 @@ const styles = theme => ({
 })
 
 class PartyCardForm extends React.Component {
+  state = {
+    isSubmited: false,
+  }
+
   handleSubmit = (event) => {
     const { handleSubmit } = this.props
 
@@ -55,6 +59,19 @@ class PartyCardForm extends React.Component {
 
   handleBack = (activeStep) => {
     this.props.actions.stepper.stepperNavigationBack(activeStep)
+  }
+
+  hasError = (fieldName) => {
+    const { isSubmited } = this.state
+    const { errors, touched } = this.props
+
+    return (!!errors[fieldName] && touched[fieldName] && isSubmited)
+  }
+
+  showHelperError = (fieldName) => {
+    const { errors, touched } = this.props
+
+    return (touched[fieldName] && errors[fieldName])
   }
 
   render() {
@@ -67,6 +84,7 @@ class PartyCardForm extends React.Component {
       setFieldValue,
       setFieldTouched,
     } = this.props
+
     return (
       <form onSubmit={this.handleSubmit} className={classes.root}>
         <div className={classes.input}>
@@ -78,6 +96,8 @@ class PartyCardForm extends React.Component {
             value={values.district}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={this.hasError('district')}
+            helperText={this.showHelperError('district')}
           />
         </div>
         <div className={classes.input}>
@@ -90,6 +110,8 @@ class PartyCardForm extends React.Component {
             value={values.address}
             onChange={setFieldValue}
             onBlur={setFieldTouched}
+            error={this.hasError('address')}
+            helperText={this.showHelperError('address')}
           />
         </div>
         <div className={classes.input}>
@@ -101,6 +123,8 @@ class PartyCardForm extends React.Component {
             value={values.time}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={this.hasError('time')}
+            helperText={this.showHelperError('time')}
           />
         </div>
         <div className={classes.input}>
@@ -115,6 +139,8 @@ class PartyCardForm extends React.Component {
                 value={values.after}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                error={this.hasError('after')}
+                helperText={this.showHelperError('after')}
               />
             </Grid>
             <Grid item container justify="flex-end">
@@ -126,6 +152,8 @@ class PartyCardForm extends React.Component {
                 value={values.before}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                error={this.hasError('before')}
+                helperText={this.showHelperError('before')}
               />
             </Grid>
           </Grid>
@@ -142,6 +170,8 @@ class PartyCardForm extends React.Component {
             value={values.description}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={this.hasError('description')}
+            helperText={this.showHelperError('description')}
           />
         </div>
         <Grid container justify="center" className={classes.buttonGroup}>
@@ -169,6 +199,8 @@ PartyCardForm.propTypes = {
   classes: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
+  errors: PropTypes.object.isRequired,
+  touched: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,

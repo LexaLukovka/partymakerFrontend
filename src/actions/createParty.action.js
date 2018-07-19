@@ -4,12 +4,18 @@ export const PARTY_CARD_ICON_CHECK = 'PARTY_CARD_ICON_CHECK'
 export const PARTY_CARD_ICON = 'PARTY_CARD_ICON'
 export const PARTY_CARD_FORM = 'PARTY_CARD_FORM'
 export const PARTY_CARD_FINISH = 'PARTY_CARD_FINISH'
+export const PARTY_PRIVATE_CHECK = 'PARTY_PRIVATE_CHECK'
 export const CREATE_PARTY = 'CREATE_PARTY'
 export const CREATE_PARTY_FULFILLED = 'CREATE_PARTY_FULFILLED'
 
 export const partyCardIconCheck = name => ({
   type: PARTY_CARD_ICON_CHECK,
   payload: name,
+})
+
+export const partyPrivateChecked = checked => ({
+  type: PARTY_PRIVATE_CHECK,
+  payload: checked,
 })
 
 export const partyCardIcon = name => ({
