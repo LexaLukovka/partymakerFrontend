@@ -3,6 +3,8 @@ import {
   PARTY_CARD_ICON,
   PARTY_CARD_FORM,
   PARTY_CARD_FINISH,
+  CREATE_PARTY_REJECTED,
+  CREATE_PARTY_FULFILLED,
 } from '../actions/createParty.action'
 
 const initialState = {
@@ -37,10 +39,24 @@ const createParty = (state = initialState, { type, payload }) => {
         form: payload,
       }
     }
+
     case PARTY_CARD_FINISH: {
       return {
         ...state,
         finishForm: payload,
+      }
+    }
+
+    case CREATE_PARTY_REJECTED: {
+      return {
+        ...state,
+        errors: payload,
+      }
+    }
+    case CREATE_PARTY_FULFILLED: {
+      return {
+        ...state,
+        success: payload,
       }
     }
 

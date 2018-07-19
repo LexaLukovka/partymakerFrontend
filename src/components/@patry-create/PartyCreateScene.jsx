@@ -5,8 +5,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/es/StepLabel/StepLabel'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Container from '../Container'
 import PartyCardForm from './PartyCardForm'
@@ -39,10 +37,6 @@ class PartyCreateScene extends React.Component {
     this.props.actions.partyTags.loadPartyTags()
   }
 
-  handleBack= (activeStep) => {
-    this.props.actions.stepper.stepperNavigationBack(activeStep)
-  }
-
   render() {
     const { classes, step } = this.props
     const activeStep = step.activeStep
@@ -60,25 +54,16 @@ class PartyCreateScene extends React.Component {
             ))}
           </Stepper>
           <div>
-            {activeStep === steps.length ? (
+            <Grid container justify="center">
               <div>
-                <Typography className={classes.instructions}>
-                  All steps completed - you&quot;re finished
-                </Typography>
-                <Button onClick={() => this.handleBack(activeStep)}> Назад</Button>
-              </div>
-            ) : (
-              <Grid container justify="center">
-                <div>
-                  <Grid className={classes.instructions}>
-                    {activeStep === 0 && <PartyCardIcon activeStep={activeStep} />}
-                    {activeStep === 1 && <PartyCardForm activeStep={activeStep} />}
-                    {activeStep === 2 && <PartyCardFinish activeStep={activeStep} />}
-                  </Grid>
+                <Grid className={classes.instructions}>
+                  {activeStep === 0 && <PartyCardIcon activeStep={activeStep} />}
+                  {activeStep === 1 && <PartyCardForm activeStep={activeStep} />}
+                  {activeStep === 2 && <PartyCardFinish activeStep={activeStep} />}
+                </Grid>
 
-                </div>
-              </Grid>
-            )}
+              </div>
+            </Grid>
           </div>
         </div>
       </Container>

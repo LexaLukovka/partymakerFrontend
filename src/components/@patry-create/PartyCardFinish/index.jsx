@@ -46,8 +46,6 @@ class PartyCardFinish extends React.Component {
       handleChange,
     } = this.props
 
-    if (values.checked === '') values.checked = true
-
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <FormControlLabel

@@ -1,5 +1,6 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
+import clean from 'lodash-clean'
 
 const partyCreateFormik = withFormik({
   validationSchema: Yup.object().shape({}),
@@ -13,7 +14,23 @@ const partyCreateFormik = withFormik({
   }),
 
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.actions.party.partyCardForm(values)
+    let form = {
+      district: values.district,
+      from: {
+        address: values.address.formatted_address,
+        lat: values.address.geometry.location.lat(),
+        lng: values.address.geometry.location.lng(),
+        placeId: values.address.place_id,
+      },
+      time: values.time,
+      after: values.after,
+      before: values.before,
+      description: values.description,
+    }
+
+    form = clean(form)
+
+    props.actions.party.partyCardForm(form)
     props.actions.stepper.stepperNavigationNext(props.activeStep)
     setSubmitting(false)
   },

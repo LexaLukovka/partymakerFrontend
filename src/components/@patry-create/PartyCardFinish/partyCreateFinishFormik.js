@@ -1,19 +1,25 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
+import clean from 'lodash-clean'
 
 const partyCreateFinishFormik = withFormik({
   validationSchema: Yup.object().shape({}),
   mapPropsToValues: () => ({
     pictures: [],
-    checked: '',
+    checked: true,
   }),
 
   handleSubmit: (values, { props, setSubmitting }) => {
-    if (values.checked === '') {
-      values.checked = true
+    let form = {
+      checked: values.checked,
+      primary_picture: values.pictures[0],
+      pictures: values.pictures,
     }
-    props.actions.party.partyCardFinish(values)
-    props.actions.stepper.stepperNavigationNext(props.activeStep)
+
+    form = clean(form)
+
+    props.actions.party.partyCardFinish(form)
+    props.actions.party.createPartyCard()
     setSubmitting(false)
   },
   displayName: 'PartyCreate',
