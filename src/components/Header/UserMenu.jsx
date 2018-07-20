@@ -39,7 +39,7 @@ class UserMenu extends React.Component {
   }
 
   render() {
-    const { classes, user, push, onLogout, onLogin, onRegister } = this.props
+    const { classes, user, onLogout, onLogin, onRegister } = this.props
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
 
@@ -71,8 +71,7 @@ class UserMenu extends React.Component {
           <div className={classes.menuItem} onClick={this.handleClose}>
             {user ?
               <React.Fragment>
-                <MenuItem onClick={push}>{user.name}</MenuItem>
-                <MenuItem onClick={onLogout}>Logout</MenuItem>
+                <MenuItem onClick={onLogout}>Выйти</MenuItem>
               </React.Fragment>
               :
               <React.Fragment>
@@ -90,7 +89,6 @@ class UserMenu extends React.Component {
 UserMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object,
-  push: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired,
   onRegister: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,

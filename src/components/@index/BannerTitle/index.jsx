@@ -7,6 +7,9 @@ import Background from './Background'
 
 const styles = {
   root: {
+    marginTop: 250,
+  },
+  block: {
     paddingTop: 60,
   },
   whiteText: {
@@ -21,9 +24,9 @@ const styles = {
 }
 
 const BannerTitle = ({ classes }) =>
-  <Grid>
+  <Grid className={classes.root}>
     <Background>
-      <Grid container justify="center" className={classes.root}>
+      <Grid container justify="center" className={classes.block}>
         <Typography className={classes.whiteText} variant="title">
           Соберем вечеринку
         </Typography>

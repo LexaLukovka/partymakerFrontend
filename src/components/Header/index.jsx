@@ -63,7 +63,6 @@ class Header extends React.Component {
                 <React.Fragment>
                   <UserMenu
                     user={auth.user}
-                    push={() => props.history.push('/settings')}
                     onLogin={() => props.history.push('/login')}
                     onRegister={() => props.history.push('/register')}
                     onLogout={() => actions.auth.logout()}
@@ -84,6 +83,7 @@ class Header extends React.Component {
             <DrawerMenu
               settings={() => this.props.history.push('/settings')}
               createParty={() => this.props.history.push('/party/create')}
+              onLogout={() => actions.auth.logout()}
             />
           </div>
         </Drawer>

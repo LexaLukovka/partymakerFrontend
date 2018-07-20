@@ -11,8 +11,6 @@ const styles = {
     marginTop: 100,
   },
   button: {
-    color: 'white',
-    background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
     marginTop: '1rem',
   },
 }
@@ -20,13 +18,29 @@ const styles = {
 const BannerButton = ({ classes }) =>
   <div>
     <Grid item className={classes.root}>
-      <Link to="/cargo">
-        <Button className={classes.button} fullWidth variant="raised">Планирую вечеринку</Button>
+      <Link to="/party">
+        <Button
+          className={classes.button}
+          fullWidth
+          variant="contained"
+          size="large"
+          color="primary"
+        >
+          Планирую вечеринку
+        </Button>
       </Link>
     </Grid>
     <Grid item>
       <Link to="/party/create">
-        <Button className={classes.button} fullWidth variant="raised">Хочу на вечеринку</Button>
+        <Button
+          className={classes.button}
+          fullWidth
+          variant="contained"
+          size="large"
+          color="primary"
+        >
+          Хочу на вечеринку
+        </Button>
       </Link>
     </Grid>
   </div>

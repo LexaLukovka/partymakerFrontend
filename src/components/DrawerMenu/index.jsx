@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/es/Grid/Grid'
 import Settings from '@material-ui/icons/es/Settings'
 import Background from './Background'
 import connector from './connector'
+import ExitToApp from '@material-ui/icons/es/ExitToApp'
 
 const styles = theme => ({
   root: {
@@ -28,7 +29,7 @@ const styles = theme => ({
   },
 })
 
-const DrawerMenu = ({ classes, auth, settings, createParty }) =>
+const DrawerMenu = ({ classes, auth, settings, createParty, onLogout }) =>
   <Background className={classes.root}>
     <Grid className={classes.user}>
       <Typography color="inherit">
@@ -55,6 +56,10 @@ const DrawerMenu = ({ classes, auth, settings, createParty }) =>
       <ListItem button onClick={settings}>
         <Settings />
         <ListItemText>Настройки</ListItemText>
+      </ListItem>
+      <ListItem button onClick={onLogout}>
+        <ExitToApp />
+        <ListItemText>Выйти</ListItemText>
       </ListItem>
     </List>
   </Background>

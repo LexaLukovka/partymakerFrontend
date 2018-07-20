@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import RegisterScene from './auth/@register/RegisterScene'
 import withTheme from '../utils/withTheme'
+import IndexScene from './@index/IndexScene'
+import RegisterScene from './auth/@register/RegisterScene'
 import LoginScene from './auth/@login/LoginScene'
 import Header from './Header'
 import Alert from './Alert'
@@ -16,11 +17,12 @@ const LayoutScene = () =>
     <Header />
     <div style={{ paddingTop: 55 }}>
       <Switch>
-        <Route exact path="/" component={PartiesScene} />
+        <Route exact path="/" component={IndexScene} />
         <Route exact path="/register" component={RegisterScene} />
         <Route exact path="/login" component={LoginScene} />
         <Route exact path="/settings" component={SettingsScene} />
         <AuthRoute exact path="/party/create" component={PartyCreateScene} />
+        <Route exact path="/party" component={PartiesScene} />
         <Route exact path="/parties/:id" component={PartyScene} />
       </Switch>
     </div>
