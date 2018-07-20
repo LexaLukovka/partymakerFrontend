@@ -8,10 +8,10 @@ import BannerButton from '../BannerButton'
 const Banner = () =>
   <Background>
     <Container>
-      <Grid container justify="center" spacing={24} style={{ paddingTop: 250 }}>
+      <Grid container justify="center">
         <BannerTitle />
       </Grid>
-      <Grid container alignItems="center" spacing={24} justify="center">
+      <Grid container alignItems="center" justify="center">
         <BannerButton />
       </Grid>
     </Container>
