@@ -63,7 +63,7 @@ const ProfileCard = ({ classes, user }) =>
             Общие данные аккаунта
           </Typography>
           {document.documentElement.clientWidth <= 765 &&
-          <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/photo_2018-06-02.jpg" />
+          <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/1531914556056.jpeg" />
           }
           <div className={classes.input}>
             <Typography variant="subheading">Ваше имя и фамилия</Typography>

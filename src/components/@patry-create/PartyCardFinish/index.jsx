@@ -50,6 +50,7 @@ class PartyCardFinish extends React.Component {
       party,
     } = this.props
     const checked = party.checkedPrivate
+
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <FormControlLabel

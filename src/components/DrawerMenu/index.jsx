@@ -10,6 +10,7 @@ import Search from '@material-ui/icons/es/Search'
 import Person from '@material-ui/icons/es/Person'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import Grid from '@material-ui/core/es/Grid/Grid'
+import Settings from '@material-ui/icons/es/Settings'
 import Background from './Background'
 import connector from './connector'
 
@@ -27,7 +28,7 @@ const styles = theme => ({
   },
 })
 
-const DrawerMenu = ({ classes, auth }) =>
+const DrawerMenu = ({ classes, auth, settings, createParty }) =>
   <Background className={classes.root}>
     <Grid className={classes.user}>
       <Typography color="inherit">
@@ -38,7 +39,7 @@ const DrawerMenu = ({ classes, auth }) =>
       </Typography>
     </Grid>
     <List component="nav">
-      <ListItem button divider>
+      <ListItem button divider onClick={createParty}>
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
@@ -51,12 +52,18 @@ const DrawerMenu = ({ classes, auth }) =>
         <Person />
         <ListItemText>Мои вечеринки</ListItemText>
       </ListItem>
+      <ListItem button onClick={settings}>
+        <Settings />
+        <ListItemText>Настройки</ListItemText>
+      </ListItem>
     </List>
   </Background>
 
 DrawerMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  createParty: PropTypes.func.isRequired,
+  settings: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(connector(DrawerMenu))

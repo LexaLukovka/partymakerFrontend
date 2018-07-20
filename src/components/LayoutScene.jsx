@@ -17,11 +17,11 @@ const LayoutScene = () =>
     <div style={{ paddingTop: 55 }}>
       <Switch>
         <Route exact path="/" component={PartiesScene} />
-        <Route exact path="/parties/:id" component={PartyScene} />
         <Route exact path="/register" component={RegisterScene} />
         <Route exact path="/login" component={LoginScene} />
         <Route exact path="/settings" component={SettingsScene} />
         <AuthRoute exact path="/party/create" component={PartyCreateScene} />
+        <Route exact path="/parties/:id" component={PartyScene} />
       </Switch>
     </div>
     <Alert />

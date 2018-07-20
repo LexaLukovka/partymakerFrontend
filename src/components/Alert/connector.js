@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '../../actions/alert.action'
 
-const initMapStateToProps = state => state.alertReducer
+const initMapStateToProps = store => store.alertReducer
 
 const initMapDispatchToProps = dispatch => ({
   actions: {

@@ -4,10 +4,10 @@ import * as actions from '../../actions/createParty.action'
 import * as load from '../../actions/partyCreateTags.action'
 import * as stepper from '../../actions/stepperNavigation.action'
 
-const initMapStateToProps = state => ({
-  party: state.createParty,
-  partyTags: state.partyCreateTags,
-  step: state.stepperNavigation,
+const initMapStateToProps = store => ({
+  party: store.createParty,
+  partyTags: store.partyCreateTags,
+  step: store.stepperNavigation,
 })
 
 const initMapDispatchToProps = dispatch => ({
