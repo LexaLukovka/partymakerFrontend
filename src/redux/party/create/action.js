@@ -1,4 +1,4 @@
-import Party from '../services/api/Party'
+import Party from '../../../services/api/Party'
 
 export const PARTY_CARD_ICON_CHECK = 'PARTY_CARD_ICON_CHECK'
 export const PARTY_CARD_ICON = 'PARTY_CARD_ICON'
@@ -7,6 +7,7 @@ export const PARTY_CARD_FINISH = 'PARTY_CARD_FINISH'
 export const PARTY_PRIVATE_CHECK = 'PARTY_PRIVATE_CHECK'
 export const CREATE_PARTY = 'CREATE_PARTY'
 export const CREATE_PARTY_FULFILLED = 'CREATE_PARTY_FULFILLED'
+export const CREATE_PARTY_REJECTED = 'CREATE_PARTY_REJECTED'
 
 export const partyCardIconCheck = name => ({
   type: PARTY_CARD_ICON_CHECK,

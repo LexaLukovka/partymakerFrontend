@@ -1,6 +1,6 @@
-import User from '../services/api/User'
-import * as alert from './alert.action'
-import store from '../store'
+import User from '../../services/api/User'
+import * as alert from '../alert/action'
+import store from '../../store'
 
 export const REGISTER_USER = 'REGISTER_USER'
 export const REGISTER_USER_PENDING = 'REGISTER_USER_PENDING'

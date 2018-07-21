@@ -1,4 +1,4 @@
-import { STEPPER_NAVIGATION_NEXT, STEPPER_NAVIGATION_BACK } from '../actions/stepperNavigation.action'
+import { STEPPER_NAVIGATION_NEXT, STEPPER_NAVIGATION_BACK } from './action'
 
 const initialState = {
   activeStep: 0,

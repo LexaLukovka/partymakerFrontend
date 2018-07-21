@@ -1,4 +1,4 @@
-import { SETTINGS_MENU } from '../actions/settingsMenu.action'
+import { SETTINGS_MENU } from './action'
 
 const initialState = {
   menuItem: 0,

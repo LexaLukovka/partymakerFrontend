@@ -9,7 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircle from '@material-ui/icons/es/AccountCircle'
 import Lock from '@material-ui/icons/es/Lock'
-import { settingsMenu } from '../../../actions/settingsMenu.action'
+import { settingsMenu } from '../../../redux/settings/menu/action'
 
 const styles = theme => ({
   root: {

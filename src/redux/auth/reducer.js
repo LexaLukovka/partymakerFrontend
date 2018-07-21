@@ -1,5 +1,5 @@
-import Cache from '../services/Cache'
-import Token from '../services/Token'
+import Cache from '../../services/Cache'
+import Token from '../../services/Token'
 
 import {
   LOGIN_USER_FULFILLED,
@@ -9,7 +9,7 @@ import {
   REGISTER_USER_FULFILLED,
   REGISTER_USER_REJECTED,
   LOAD_SAVED_USER, LOGOUT_USER,
-} from '../actions/auth.action'
+} from './action'
 
 const initialState = {
   user: null,

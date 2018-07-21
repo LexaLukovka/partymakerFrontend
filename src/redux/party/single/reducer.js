@@ -26,7 +26,7 @@ const initialState = {
     },
 }
 
-const partiesReducer = (state = initialState, { type, payload }) => {
+const partiesReducer = (state = initialState, { type }) => {
   switch (type) {
     default: {
       return state
