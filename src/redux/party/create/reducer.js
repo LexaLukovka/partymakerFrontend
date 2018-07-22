@@ -6,9 +6,12 @@ import {
   PARTY_PRIVATE_CHECK,
   CREATE_PARTY_REJECTED,
   CREATE_PARTY_FULFILLED,
-} from '../actions/createParty.action'
+} from './action'
+
+import partyTypes from '../../../mock/partyTypes.json'
 
 const initialState = {
+  partyTypes,
   errors: null,
   checkedPrivate: true,
   success: false,

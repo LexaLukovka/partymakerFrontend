@@ -81,8 +81,8 @@ class PartyCardIcon extends React.Component {
   }
 
   render() {
-    const { classes, party, partyTags } = this.props
-    const tags = partyTags.partyCreateTags
+    const { classes, party } = this.props
+    const tags = party.partyTypes
     return (
       <form onSubmit={this.handleSubmit} className={classes.root}>
         <Typography variant="subheading">Выберите теги которые больше всего подходят к вашей вечеринке</Typography>
@@ -121,7 +121,6 @@ PartyCardIcon.propTypes = {
   classes: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   party: PropTypes.object.isRequired,
-  partyTags: PropTypes.object.isRequired,
   activeStep: PropTypes.number.isRequired,
 }
 

@@ -1,4 +1,4 @@
-/* eslint-disable prefer-destructuring */
+/* eslint-disable prefer-destructuring,react/prefer-stateless-function */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -33,10 +33,6 @@ function getSteps() {
 }
 
 class PartyCreateScene extends React.Component {
-  componentWillMount() {
-    this.props.actions.partyTags.loadPartyTags()
-  }
-
   render() {
     const { classes, step } = this.props
     const activeStep = step.activeStep
@@ -73,7 +69,6 @@ class PartyCreateScene extends React.Component {
 
 PartyCreateScene.propTypes = {
   classes: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
   step: PropTypes.object.isRequired,
 }
 

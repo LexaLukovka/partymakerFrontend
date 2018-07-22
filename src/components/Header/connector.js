@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../../actions/auth.action'
+import * as auth from '../../redux/auth/action'
+import * as drawer from '../../redux/drawer/action'
 
 const initMapStateToProps = store => ({
   auth: store.authReducer,
@@ -8,7 +9,8 @@ const initMapStateToProps = store => ({
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    auth: bindActionCreators(actions, dispatch),
+    auth: bindActionCreators(auth, dispatch),
+    drawer: bindActionCreators(drawer, dispatch),
   },
 })
 

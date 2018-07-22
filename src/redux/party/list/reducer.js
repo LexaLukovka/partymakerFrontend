@@ -77,7 +77,7 @@ const initialState = {
   ],
 }
 
-const partiesReducer = (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type }) => {
   switch (type) {
     default: {
       return state
@@ -85,4 +85,4 @@ const partiesReducer = (state = initialState, { type, payload }) => {
   }
 }
 
-export default partiesReducer
+export default reducer

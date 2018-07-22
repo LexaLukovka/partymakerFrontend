@@ -9,7 +9,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm-run-all --parallel open:src",
+    "start": "node ./tools/srcServer.js",
     "dev": "node ./tools/srcServer.js"
   },
   "dependencies": {

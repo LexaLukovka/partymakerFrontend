@@ -1,7 +1,4 @@
-import {
-  SHOW_ALERT, HIDE_ALERT,
-}
-  from '../actions/alert.action'
+import { SHOW_ALERT, HIDE_ALERT } from './action'
 
 const initialState = {
   isVisible: false,

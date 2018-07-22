@@ -21,11 +21,9 @@ const styles = {
 const SettingsScene = ({ classes, auth, menuItem }) =>
   <Container className={classes.root}>
     <Grid container justify="center">
-      {document.documentElement.clientWidth >= 1280 &&
       <Grid>
         <SettingsMenu />
       </Grid>
-      }
       <Grid>
         {menuItem === 0 && <ProfileCard user={auth.user} />}
         {menuItem === 1 && <PasswordCard />}

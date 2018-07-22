@@ -11,6 +11,7 @@ import SettingsScene from './@settings/SettingsScene'
 import PartyCreateScene from './@patry-create/PartyCreateScene'
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@party/PartyScene'
+import Drawer from './Drawer'
 
 const LayoutScene = () =>
   <main>
@@ -20,12 +21,13 @@ const LayoutScene = () =>
         <Route exact path="/" component={IndexScene} />
         <Route exact path="/register" component={RegisterScene} />
         <Route exact path="/login" component={LoginScene} />
-        <Route exact path="/settings" component={SettingsScene} />
+        <AuthRoute exact path="/settings" component={SettingsScene} />
         <AuthRoute exact path="/party/create" component={PartyCreateScene} />
-        <Route exact path="/party" component={PartiesScene} />
+        <Route exact path="/parties" component={PartiesScene} />
         <Route exact path="/parties/:id" component={PartyScene} />
       </Switch>
     </div>
+    <Drawer />
     <Alert />
   </main>
 

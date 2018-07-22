@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -8,20 +7,19 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import Drawer from '@material-ui/core/Drawer'
 import MenuIcon from '@material-ui/icons/Menu'
 import Container from '../Container'
 import connector from './connector'
 import UserMenu from './UserMenu'
-import DrawerMenu from '../DrawerMenu'
+import Drawer from '../Drawer'
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
     marginBottom: 10,
   },
   appBar: {
-    background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
+    background: theme.palette.primary.main,
   },
   flex: {
     flex: 1,
@@ -30,17 +28,12 @@ const styles = {
   icon: {
     fontSize: 32,
   },
-}
+})
 
 class Header extends React.Component {
-  state = {
-    left: false,
-  }
-
-  toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open,
-    })
+  handleDrawer = () => {
+    const { actions } = this.props
+    actions.drawer.open()
   }
 
   render() {
@@ -52,7 +45,7 @@ class Header extends React.Component {
           <Container>
             <Toolbar>
               <Grid container justify="flex-start">
-                <MenuIcon onClick={this.toggleDrawer('left', true)} className={classes.icon} />
+                <MenuIcon onClick={this.handleDrawer} className={classes.icon} />
               </Grid>
               <Grid container justify="center">
                 <Typography variant="title" color="inherit" align="center" className={classes.flex}>
@@ -72,21 +65,6 @@ class Header extends React.Component {
             </Toolbar>
           </Container>
         </AppBar>
-        <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer('left', false)}
-            onKeyDown={this.toggleDrawer('left', false)}
-            style={{ width: 280 }}
-          >
-            <DrawerMenu
-              settings={() => this.props.history.push('/settings')}
-              createParty={() => this.props.history.push('/party/create')}
-              onLogout={() => actions.auth.logout()}
-            />
-          </div>
-        </Drawer>
       </div>
     )
   }
@@ -99,4 +77,4 @@ Header.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(withRouter(connector(Header)))
+export default withStyles(styles)(connector(withRouter(Header)))

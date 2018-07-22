@@ -14,6 +14,7 @@ import Settings from '@material-ui/icons/es/Settings'
 import Background from './Background'
 import connector from './connector'
 import ExitToApp from '@material-ui/icons/es/ExitToApp'
+import { Link, withRouter } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -29,7 +30,7 @@ const styles = theme => ({
   },
 })
 
-const DrawerMenu = ({ classes, auth, settings, createParty, onLogout }) =>
+const DrawerMenu = ({ classes, actions, auth }) =>
   <Background className={classes.root}>
     <Grid className={classes.user}>
       <Typography color="inherit">
@@ -40,24 +41,24 @@ const DrawerMenu = ({ classes, auth, settings, createParty, onLogout }) =>
       </Typography>
     </Grid>
     <List component="nav">
-      <ListItem button divider onClick={createParty}>
+      <ListItem button divider component={Link} to="/party/create">
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
       <Divider />
-      <ListItem button>
+      <ListItem button component={Link} to="/parties">
         <Search />
         <ListItemText>Искать вечеринки</ListItemText>
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to={`/user/${auth.user.id}/parties`}>
         <Person />
         <ListItemText>Мои вечеринки</ListItemText>
       </ListItem>
-      <ListItem button onClick={settings}>
+      <ListItem button component={Link} to="/settings">
         <Settings />
         <ListItemText>Настройки</ListItemText>
       </ListItem>
-      <ListItem button onClick={onLogout}>
+      <ListItem button onClick={actions.auth.onLogout}>
         <ExitToApp />
         <ListItemText>Выйти</ListItemText>
       </ListItem>
@@ -67,8 +68,7 @@ const DrawerMenu = ({ classes, auth, settings, createParty, onLogout }) =>
 DrawerMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  createParty: PropTypes.func.isRequired,
-  settings: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(connector(DrawerMenu))
+export default withStyles(styles)(withRouter(connector(DrawerMenu)))
