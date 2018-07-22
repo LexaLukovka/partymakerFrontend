@@ -64,7 +64,7 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <Settings />
         <ListItemText>Настройки</ListItemText>
       </ListItem>
-      <ListItem button onClick={actions.auth.onLogout}>
+      <ListItem button onClick={() => actions.auth.logout()}>
         <ExitToApp />
         <ListItemText>Выйти</ListItemText>
       </ListItem>

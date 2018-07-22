@@ -2,7 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import RegisterCard from './RegisterCard/index'
-import Background from '../Background'
+import Background from '../authComponent/Background'
 
 const styles = theme => ({
   root: {
