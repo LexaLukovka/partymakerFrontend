@@ -2,6 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import RegisterCard from './RegisterCard/index'
+import Background from '../Background'
 
 const styles = theme => ({
   root: {
@@ -12,9 +13,9 @@ const styles = theme => ({
   },
 })
 const RegisterScene = ({ classes }) =>
-  <div className={classes.root}>
+  <Background className={classes.root}>
     <RegisterCard />
-  </div>
+  </Background>
 
 RegisterScene.propTypes = {
   classes: PropTypes.object.isRequired,

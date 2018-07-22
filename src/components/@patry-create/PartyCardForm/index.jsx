@@ -70,7 +70,6 @@ class PartyCardForm extends React.Component {
 
   showHelperError = (fieldName) => {
     const { errors, touched } = this.props
-
     return (touched[fieldName] && errors[fieldName])
   }
 

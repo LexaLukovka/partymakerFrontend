@@ -16,20 +16,30 @@ import Visibility from '@material-ui/icons/es/Visibility'
 import registerFormik from './registerFormik'
 import connector from '../../connector'
 import Errors from '../Errors'
+import Grid from '@material-ui/core/es/Grid/Grid'
 
 const styles = theme => ({
   root: {
-    width: 400,
+    width: '90%',
+    marginTop: 20,
+  },
+  party: {
+    marginTop: 20,
+    color: 'white',
+    textShadow: '5px 10px 10px #2A2929',
+  },
+  title: {
+    marginTop: theme.spacing.size3,
   },
   input: {
-    marginBottom: theme.spacing.size4,
+    marginBottom: theme.spacing.size3,
   },
   inputGroup: {
-    marginTop: theme.spacing.size3,
+    marginTop: theme.spacing.size1,
   },
   link: {
     textAlign: 'center',
-    margin: '1rem',
+    margin: '0.6rem',
   },
 })
 
@@ -101,129 +111,133 @@ class RegisterCard extends React.Component {
   render() {
     const { classes, values, errors, handleChange, handleBlur, isSubmitting } = this.props
     return (
-      <Card className={classes.root}>
-        <form onSubmit={this.handleSubmit}>
-          <CardContent className={classes.inputGroup}>
-            <div className={classes.input}>
-              <Typography variant="subheading">Введите ваше имя и фамилию:</Typography>
-              <TextField
+      <Grid container justify="center">
+        <Typography variant="display2" className={classes.party}>Partymaker</Typography>
+        <Card className={classes.root}>
+          <form onSubmit={this.handleSubmit}>
+            <Typography variant="subheading" align="center" className={classes.title}>РЕГИСТРАЦИЯ</Typography>
+            <CardContent className={classes.inputGroup}>
+              <div className={classes.input}>
+                <Typography variant="subheading">Имя и фамилия</Typography>
+                <TextField
+                  fullWidth
+                  error={this.hasError('name')}
+                  helperText={this.showHelperError('name')}
+                  type="text"
+                  name="name"
+                  placeholder="Имя и фамилия"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className={classes.input}>
+                <Typography variant="subheading">Email</Typography>
+                <TextField
+                  fullWidth
+                  error={this.hasError('email')}
+                  helperText={this.showHelperError('email')}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className={classes.input}>
+                <Typography variant="subheading">Номер телефона</Typography>
+                <TextField
+                  fullWidth
+                  name="phone"
+                  error={this.hasError('phone')}
+                  helperText={this.showHelperError('phone')}
+                  type="tel"
+                  placeholder="Номер телефона"
+                  value={values.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+              <div className={classes.input}>
+                <Typography variant="subheading">Пароль</Typography>
+                <TextField
+                  fullWidth
+                  name="password"
+                  error={this.hasError('password')}
+                  helperText={this.showHelperError('password')}
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  placeholder="Пароль"
+                  autoComplete="current-password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="Toggle password visibility"
+                          onClick={this.handleClickShowPassword}
+                          onMouseDown={this.handleMouseDownPassword}
+                        >
+                          {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div className={classes.input}>
+                <Typography variant="subheading">Повторите пароль</Typography>
+                <TextField
+                  fullWidth
+                  name="repeatPassword"
+                  error={this.hasError('repeatPassword')}
+                  helperText={this.showHelperError('repeatPassword')}
+                  type={this.state.showRepeatPassword ? 'text' : 'password'}
+                  placeholder="Повторите пароль"
+                  autoComplete="current-password"
+                  value={values.repeatPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="Toggle password visibility"
+                          onClick={this.handleClickShowReapedPassword}
+                          onMouseDown={this.handleMouseDownPassword}
+                        >
+                          {this.state.showRepeatPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              {!errors.repeatPassword && values.password !== values.repeatPassword &&
+              <Errors> Пароли не совпадают </Errors>
+              }
+            </CardContent>
+            <CardActions>
+              <Button
                 fullWidth
-                error={this.hasError('name')}
-                helperText={this.showHelperError('name')}
-                type="text"
-                name="name"
-                label="Имя и фамилия"
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+                variant="raised"
+                type="submit"
+                color="primary"
+                disabled={isSubmitting}
+              >
+                Зарегистрироваться
+              </Button>
+            </CardActions>
+            <div className={classes.link}>
+              <Link to="/login">
+                <Typography color="inherit"> Есть аккаунт? </Typography>
+              </Link>
             </div>
-            <div className={classes.input}>
-              <Typography variant="subheading">Введите email:</Typography>
-              <TextField
-                fullWidth
-                error={this.hasError('email')}
-                helperText={this.showHelperError('email')}
-                type="email"
-                name="email"
-                label="Email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <div className={classes.input}>
-              <Typography variant="subheading">Введите ваш номер телефона:</Typography>
-              <TextField
-                fullWidth
-                name="phone"
-                error={this.hasError('phone')}
-                helperText={this.showHelperError('phone')}
-                type="tel"
-                label="Номер телефона"
-                value={values.phone}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            <div className={classes.input}>
-              <Typography variant="subheading">Придумайте пароль:</Typography>
-              <TextField
-                fullWidth
-                name="password"
-                error={this.hasError('password')}
-                helperText={this.showHelperError('password')}
-                type={this.state.showPassword ? 'text' : 'password'}
-                label="Пароль"
-                autoComplete="current-password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="Toggle password visibility"
-                        onClick={this.handleClickShowPassword}
-                        onMouseDown={this.handleMouseDownPassword}
-                      >
-                        {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-            <div className={classes.input}>
-              <Typography variant="subheading">Повторите пароль:</Typography>
-              <TextField
-                fullWidth
-                name="repeatPassword"
-                error={this.hasError('repeatPassword')}
-                helperText={this.showHelperError('repeatPassword')}
-                type={this.state.showRepeatPassword ? 'text' : 'password'}
-                label="Пароль"
-                autoComplete="current-password"
-                value={values.repeatPassword}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="Toggle password visibility"
-                        onClick={this.handleClickShowReapedPassword}
-                        onMouseDown={this.handleMouseDownPassword}
-                      >
-                        {this.state.showRepeatPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </div>
-            {!errors.repeatPassword && values.password !== values.repeatPassword &&
-            <Errors> Пароли не совпадают </Errors>
-            }
-          </CardContent>
-          <CardActions>
-            <Button
-              fullWidth
-              variant="raised"
-              type="submit"
-              color="primary"
-              disabled={isSubmitting}
-            >
-              Зарегистрироваться
-            </Button>
-          </CardActions>
-          <div className={classes.link}>
-            <Link to="/login">
-              <Typography variant="caption" color="inherit"> Есть аккаунт? </Typography>
-            </Link>
-          </div>
-        </form>
-      </Card>
+          </form>
+        </Card>
+      </Grid>
     )
   }
 }

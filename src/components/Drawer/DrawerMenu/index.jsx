@@ -28,10 +28,14 @@ const styles = theme => ({
       paddingTop: 148,
     },
   },
+  list: {
+    paddingTop: 192,
+  },
 })
 
 const DrawerMenu = ({ classes, actions, auth }) =>
   <Background className={classes.root}>
+    {auth.user &&
     <Grid className={classes.user}>
       <Typography color="inherit">
         {auth.user.name}
@@ -39,7 +43,8 @@ const DrawerMenu = ({ classes, actions, auth }) =>
       <Typography color="inherit">
         {auth.user.email}
       </Typography>
-    </Grid>
+    </Grid>}
+    {!auth.user && <div className={classes.list} />}
     <List component="nav">
       <ListItem button divider component={Link} to="/party/create">
         <MoveToInbox />
@@ -50,10 +55,11 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <Search />
         <ListItemText>Искать вечеринки</ListItemText>
       </ListItem>
+      {auth.user &&
       <ListItem button component={Link} to={`/user/${auth.user.id}/parties`}>
         <Person />
         <ListItemText>Мои вечеринки</ListItemText>
-      </ListItem>
+      </ListItem>}
       <ListItem button component={Link} to="/settings">
         <Settings />
         <ListItemText>Настройки</ListItemText>
