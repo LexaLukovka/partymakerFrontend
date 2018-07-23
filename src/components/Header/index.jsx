@@ -11,12 +11,10 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Container from '../Container'
 import connector from './connector'
 import UserMenu from './UserMenu'
-import Drawer from '../Drawer'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginBottom: 10,
   },
   appBar: {
     background: theme.palette.primary.main,

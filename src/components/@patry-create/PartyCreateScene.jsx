@@ -26,6 +26,11 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
   },
+  stepper: {
+    marginTop: 15,
+    padding: 5,
+    background: 'inherit',
+  },
 })
 
 function getSteps() {
@@ -40,7 +45,7 @@ class PartyCreateScene extends React.Component {
     return (
       <Container>
         <div className={classes.root}>
-          <Stepper alternativeLabel activeStep={activeStep}>
+          <Stepper alternativeLabel activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>

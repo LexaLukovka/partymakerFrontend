@@ -18,7 +18,7 @@ const styles = {
 const BannerButton = ({ classes }) =>
   <div>
     <Grid item className={classes.root}>
-      <Link to="/party">
+      <Link to="/parties">
         <Button
           className={classes.button}
           fullWidth
