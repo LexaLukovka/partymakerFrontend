@@ -1,21 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles/index'
 import { withRouter } from 'react-router-dom'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import Link from 'react-router-dom/es/Link'
+import { withStyles } from '@material-ui/core/styles/index'
 import Card from '@material-ui/core/es/Card/Card'
 import TextField from '@material-ui/core/es/TextField/TextField'
 import CardActions from '@material-ui/core/es/CardActions/CardActions'
 import CardContent from '@material-ui/core/es/CardContent/CardContent'
 import Button from '@material-ui/core/es/Button/Button'
+import Link from 'react-router-dom/es/Link'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import InputAdornment from '@material-ui/core/es/InputAdornment/InputAdornment'
 import IconButton from '@material-ui/core/es/IconButton/IconButton'
 import VisibilityOff from '@material-ui/icons/es/VisibilityOff'
 import Visibility from '@material-ui/icons/es/Visibility'
-import loginFormik from './loginFormik'
+import registerFormik from './registerFormik'
 import connector from '../../connector'
+import Errors from '../Errors'
 
 const styles = theme => ({
   title: {
@@ -33,19 +33,20 @@ const styles = theme => ({
   },
 })
 
-class LoginForm extends React.Component {
+class RegisterForm extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      showPassword: false,
       isSubmited: false,
+      showPassword: false,
+      showRepeatPassword: false,
     }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.auth.user) {
-      this.props.history.push('/')
+      this.props.history.push('/cargo')
     }
   }
 
@@ -93,14 +94,31 @@ class LoginForm extends React.Component {
     this.setState({ showPassword: !this.state.showPassword })
   }
 
-  render() {
-    const { classes, values, handleChange, handleBlur, isSubmitting } = this.props
+  handleClickShowReapedPassword = () => {
+    this.setState({ showRepeatPassword: !this.state.showRepeatPassword })
+  }
 
+  render() {
+    const { classes, values, errors, handleChange, handleBlur, isSubmitting } = this.props
     return (
       <Card>
-        <Typography variant="subheading" align="center" className={classes.title}>ВОЙТИ</Typography>
         <form onSubmit={this.handleSubmit}>
+          <Typography variant="subheading" align="center" className={classes.title}>РЕГИСТРАЦИЯ</Typography>
           <CardContent className={classes.inputGroup}>
+            <div className={classes.input}>
+              <Typography variant="subheading">Имя и фамилия</Typography>
+              <TextField
+                fullWidth
+                error={this.hasError('name')}
+                helperText={this.showHelperError('name')}
+                type="text"
+                name="name"
+                placeholder="Имя и фамилия"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
             <div className={classes.input}>
               <Typography variant="subheading">Email</Typography>
               <TextField
@@ -115,17 +133,22 @@ class LoginForm extends React.Component {
                 onBlur={handleBlur}
               />
             </div>
-            <div style={{ display: 'flex' }}>
-              <Grid container justify="flex-start">
-                <Typography variant="subheading">Пароль</Typography>
-              </Grid>
-              <Grid container justify="flex-end">
-                <Link to="/register">
-                  <Typography variant="body1">Забыли пароль?</Typography>
-                </Link>
-              </Grid>
+            <div className={classes.input}>
+              <Typography variant="subheading">Номер телефона</Typography>
+              <TextField
+                fullWidth
+                name="phone"
+                error={this.hasError('phone')}
+                helperText={this.showHelperError('phone')}
+                type="tel"
+                placeholder="Номер телефона"
+                value={values.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
             </div>
             <div className={classes.input}>
+              <Typography variant="subheading">Пароль</Typography>
               <TextField
                 fullWidth
                 name="password"
@@ -133,6 +156,7 @@ class LoginForm extends React.Component {
                 helperText={this.showHelperError('password')}
                 type={this.state.showPassword ? 'text' : 'password'}
                 placeholder="Пароль"
+                autoComplete="current-password"
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -151,6 +175,37 @@ class LoginForm extends React.Component {
                 }}
               />
             </div>
+            <div className={classes.input}>
+              <Typography variant="subheading">Повторите пароль</Typography>
+              <TextField
+                fullWidth
+                name="repeatPassword"
+                error={this.hasError('repeatPassword')}
+                helperText={this.showHelperError('repeatPassword')}
+                type={this.state.showRepeatPassword ? 'text' : 'password'}
+                placeholder="Повторите пароль"
+                autoComplete="current-password"
+                value={values.repeatPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="Toggle password visibility"
+                        onClick={this.handleClickShowReapedPassword}
+                        onMouseDown={this.handleMouseDownPassword}
+                      >
+                        {this.state.showRepeatPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            {!errors.repeatPassword && values.password !== values.repeatPassword &&
+            <Errors> Пароли не совпадают </Errors>
+            }
           </CardContent>
           <CardActions>
             <Button
@@ -160,12 +215,12 @@ class LoginForm extends React.Component {
               color="primary"
               disabled={isSubmitting}
             >
-              Войти
+              Зарегистрироваться
             </Button>
           </CardActions>
           <div className={classes.link}>
-            <Link to="/register">
-              <Typography color="inherit"> Нет аккаунта? </Typography>
+            <Link to="/login">
+              <Typography color="inherit"> Есть аккаунт? </Typography>
             </Link>
           </div>
         </form>
@@ -174,10 +229,9 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = {
-  auth: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+RegisterForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   values: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -185,6 +239,7 @@ LoginForm.propTypes = {
   handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
+  auth: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(connector(loginFormik(withRouter(LoginForm))))
+export default withStyles(styles)(connector(registerFormik(withRouter(RegisterForm))))
