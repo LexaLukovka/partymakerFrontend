@@ -87,6 +87,19 @@ class PartyCardForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} className={classes.root}>
         <div className={classes.input}>
+          <Typography variant="subheading">Название вечеринки</Typography>
+          <TextField
+            fullWidth
+            name="title"
+            label="Название"
+            value={values.title}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={this.hasError('title')}
+            helperText={this.showHelperError('title')}
+          />
+        </div>
+        <div className={classes.input}>
           <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
           <TextField
             fullWidth
