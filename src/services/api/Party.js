@@ -18,13 +18,26 @@ class Party {
     return form
   }
 
-  create() {
-    const iconForm = Cache.get('icon')
+  createParty() {
+    const icon = Cache.get('icon')
     const form = Cache.get('form')
     const finishForm = Cache.get('finish')
-    const icon = { icon: iconForm }
 
-    return Http.post('/party', { icon, form, finishForm })
+    const party = {
+      title: form.title,
+      type: icon.icon,
+      address: form.address,
+      district: form.district,
+      pictures: finishForm.pictures,
+      telegramUrl: finishForm.telegramUrl,
+      description: form.description,
+      peopleMax: form.peopleMax,
+      peopleMin: form.peopleMin,
+      startTime: form.time,
+      privateParty: finishForm.privateParty,
+    }
+
+    return Http.post('/party', party)
   }
 }
 

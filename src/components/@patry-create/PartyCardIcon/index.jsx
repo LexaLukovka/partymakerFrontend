@@ -77,7 +77,8 @@ class PartyCardIcon extends React.Component {
   }
 
   handleClick = name => {
-    this.props.actions.party.partyCardIconCheck(name)
+    const icon = { icon: name }
+    this.props.actions.party.partyCardIconCheck(icon)
   }
 
   render() {
@@ -90,7 +91,10 @@ class PartyCardIcon extends React.Component {
           <div
             key={tag.id}
             onClick={() => this.handleClick(tag.name)}
-            className={classNames(classes.inline, party.checkClick === tag.name && classes.click)}
+            className={classNames(
+              classes.inline,
+              party.checkClick !== null && party.checkClick.icon === tag.name && classes.click,
+            )}
           >
             <div className={classes.circle}>
               <div className={classes.input}>

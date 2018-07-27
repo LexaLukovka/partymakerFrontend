@@ -46,7 +46,7 @@ class RegisterForm extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.auth.user) {
-      this.props.history.push('/cargo')
+      this.props.history.push('/')
     }
   }
 

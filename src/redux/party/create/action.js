@@ -36,5 +36,5 @@ export const partyCardFinish = form => ({
 
 export const createPartyCard = () => ({
   type: CREATE_PARTY,
-  payload: Party.create(),
+  payload: Party.createParty(),
 })

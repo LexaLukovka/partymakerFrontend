@@ -13,6 +13,7 @@ const partyCreateFormik = withFormik({
   }),
 
   mapPropsToValues: () => ({
+    title: '',
     district: '',
     address: '',
     time: '',
@@ -23,16 +24,17 @@ const partyCreateFormik = withFormik({
 
   handleSubmit: (values, { props, setSubmitting }) => {
     let form = {
+      title: values.title,
       district: values.district,
-      from: {
+      address: {
         address: values.address.formatted_address,
         lat: values.address.geometry.location.lat(),
         lng: values.address.geometry.location.lng(),
         placeId: values.address.place_id,
       },
       time: values.time,
-      after: values.after,
-      before: values.before,
+      peopleMax: values.peopleMax,
+      peopleMin: values.peopleMin,
       description: values.description,
     }
 
