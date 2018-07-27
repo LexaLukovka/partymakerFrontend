@@ -82,8 +82,8 @@ class PartyCardFinish extends React.Component {
         <TextField
           className={classes.mb}
           fullWidth
-          name="telegram_url"
-          defaultValue={values.telegram_url}
+          name="telegramUrl"
+          defaultValue={values.telegramUrl}
           disabled
         />
         <Grid container justify="center" className={classes.buttonGroup}>

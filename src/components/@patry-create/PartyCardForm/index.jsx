@@ -147,12 +147,12 @@ class PartyCardForm extends React.Component {
               <TextField
                 type="number"
                 className={classes.inputNumber}
-                name="after"
-                value={values.after}
+                name="peopleMax"
+                value={values.peopleMax}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={this.hasError('after')}
-                helperText={this.showHelperError('after')}
+                error={this.hasError('peopleMax')}
+                helperText={this.showHelperError('peopleMax')}
               />
             </Grid>
             <Grid item container justify="flex-end">
@@ -160,12 +160,12 @@ class PartyCardForm extends React.Component {
               <TextField
                 type="number"
                 className={classes.inputNumber}
-                name="before"
-                value={values.before}
+                name="peopleMin"
+                value={values.peopleMin}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={this.hasError('before')}
-                helperText={this.showHelperError('before')}
+                error={this.hasError('peopleMin')}
+                helperText={this.showHelperError('peopleMin')}
               />
             </Grid>
           </Grid>

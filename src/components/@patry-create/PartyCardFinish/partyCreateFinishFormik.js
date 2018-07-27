@@ -9,15 +9,14 @@ const partyCreateFinishFormik = withFormik({
 
   mapPropsToValues: () => ({
     pictures: [],
-    telegram_url: 'http://partymaker.ua/11111',
+    telegramUrl: 'http://partymaker.ua/11111',
   }),
 
   handleSubmit: (values, { props, setSubmitting }) => {
     let form = {
-      checked: props.party.checkedPrivate,
-      primary_picture: values.pictures[0],
+      privateParty: props.party.checkedPrivate,
       pictures: values.pictures,
-      telegram_url: values.telegram_url,
+      telegramUrl: values.telegramUrl,
     }
 
     form = clean(form)
