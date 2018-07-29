@@ -1,10 +1,10 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
-import clean from 'lodash-clean'
 
-const partyCreateFinishFormik = withFormik({
+const formik = withFormik({
   validationSchema: Yup.object().shape({
     pictures: Yup.array(),
+    telegramUrl: Yup.string(),
   }),
 
   mapPropsToValues: () => ({
@@ -13,13 +13,11 @@ const partyCreateFinishFormik = withFormik({
   }),
 
   handleSubmit: (values, { props, setSubmitting }) => {
-    let form = {
+    const form = {
       privateParty: props.party.checkedPrivate,
       pictures: values.pictures,
       telegramUrl: values.telegramUrl,
     }
-
-    form = clean(form)
 
     props.actions.party.partyCardFinish(form)
     props.actions.party.createPartyCard()
@@ -28,4 +26,4 @@ const partyCreateFinishFormik = withFormik({
   displayName: 'PartyCreate',
 })
 
-export default partyCreateFinishFormik
+export default formik

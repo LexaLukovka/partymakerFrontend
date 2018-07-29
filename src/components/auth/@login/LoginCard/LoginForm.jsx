@@ -60,7 +60,6 @@ class LoginForm extends React.Component {
     const { auth } = this.props
     const serverErrors = {}
     if (auth.errors.length !== 0) {
-      console.log(auth.errors)
       if (auth.errors.data !== undefined) {
         auth.errors.data.forEach(error => {
           serverErrors[error.field] = error.message
