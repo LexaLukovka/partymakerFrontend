@@ -12,16 +12,31 @@ const styles = {
   },
 }
 
-const PartiesScene = ({ classes, parties }) =>
-  <Container className={classes.root}>
-    <Grid container justify="center">
-      {parties.map((party, index) => <PartiesCard key={index} party={party} />)}
-    </Grid>
-  </Container>
+class PartiesScene extends React.Component {
+  componentWillMount() {
+    this.props.actions.parties.outputParty()
+  }
+
+  render() {
+    const { classes, parties, partiese } = this.props
+    return (
+      <Container className={classes.root}>
+        {console.log(partiese)}
+        <Grid container justify="center">
+          {parties.map((party, index) => <PartiesCard key={index} party={party} />)}
+        </Grid>
+      </Container>
+    )
+  }
+}
 
 PartiesScene.propTypes = {
   classes: object.isRequired,
   parties: arrayOf(object).isRequired,
+  partiese: arrayOf(object),
+  actions: object.isRequired,
 }
-
+PartiesScene.defaultProps = {
+  partiese: null,
+}
 export default withStyles(styles)(connector(PartiesScene))

@@ -44,6 +44,10 @@ class Party {
 
     return Http.post('/party', party)
   }
+
+  all() {
+    return Http.get('/party')
+  }
 }
 
 export default new Party()
