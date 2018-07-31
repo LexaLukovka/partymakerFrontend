@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router-dom'
 import connector from './connector'
 
 const AuthRoute = ({ auth, ...rest }) => {
-  if (auth.token) {
+  if (auth.user) {
     return <Route {...rest} />
   }
 

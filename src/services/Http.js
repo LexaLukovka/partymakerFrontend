@@ -1,7 +1,6 @@
 /* eslint-disable dot-notation */
 import axios from 'axios'
-import to from '../utils/to'
-import Token from './Token'
+import to from 'util-to'
 import store from '../store'
 
 class Http {
@@ -10,14 +9,18 @@ class Http {
       baseURL: 'http://localhost:3333',
       // baseURL: 'http://94.237.84.15',
       timeout: 10000,
-      headers: { Authorization: Token.get() },
     })
   }
 
-  async get(url, params) {
-    const { token } = store.getState().authReducer
-    this.instance.defaults.headers.common['Authorization'] = token
+  refreshToken() {
+    const { user } = store.getState().authReducer
+    if (user) {
+      this.instance.defaults.headers.common['Authorization'] = user.token
+    }
+  }
 
+  async get(url, params) {
+    this.refreshToken()
     const [err, response] = await to(this.instance.get(url, params))
     if (err) {
       if (!err.response) {
@@ -30,9 +33,7 @@ class Http {
   }
 
   async post(url, params) {
-    const { token } = store.getState().authReducer
-    this.instance.defaults.headers.common['Authorization'] = token
-
+    this.refreshToken()
     const [err, response] = await to(this.instance.post(url, params))
 
     if (err) {

@@ -57,6 +57,7 @@
     "rimraf": "latest",
     "slick-carousel": "^1.8.1",
     "url-loader": "^1.0.1",
+    "util-to": "^1.0.2",
     "webpack": "^4.9.1",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-md5-hash": "0.0.6",
