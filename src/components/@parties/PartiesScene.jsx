@@ -19,11 +19,9 @@ class PartiesScene extends React.Component {
 
   render() {
     const { classes, parties } = this.props
-    console.log(parties)
     let allParties = {}
-    if (parties) {
-      allParties = parties.data
-    }
+    if (parties) allParties = parties.data
+
     return (
       <Container className={classes.root}>
         <Grid container justify="center">

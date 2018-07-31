@@ -9,39 +9,64 @@ import Button from '@material-ui/core/es/Button/Button'
 
 const styles = (theme) => ({
   root: {
-    overflow: 'hidden',
-    position: 'relative',
+    overflowX: 'hidden',
     height: 800,
     background: theme.palette.common.white,
   },
-
   paper: {
     position: 'absolute',
+    top: 250,
     left: 0,
-    right: 0,
     margin: 10,
-    bottom: 0,
   },
 })
 
-const PartyScene = ({ classes, party }) =>
-  <Container className={classes.root}>
-    <Carousel pictures={party.picture_urls} />
-    <div className={classes.paper}>
-      <PartyCard
-        amount={party.amount}
-        count={party.people_count}
-        address={party.address}
-        description={party.description}
-      />
-      <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
-    </div>
+class PartyScene extends React.Component {
+  componentWillMount() {
+    if (!this.props.partyId) {
+      this.props.actions.parties.show(this.props.match.params.id)
+    }
+  }
 
-  </Container>
+  render() {
+    const { classes, partyId } = this.props
+    let party = {}
+    if (partyId) party = partyId.data
+    return (
+      <Container className={classes.root}>
+        {partyId &&
+        <div>
+          <Carousel pictures={party.pictures} />
+          <div className={classes.paper}>
+            <PartyCard
+              amount="100"
+              table="Пицца"
+              admin={party.admin}
+              title={party.title}
+              status={party.status}
+              minCount={party.people_min}
+              maxCount={party.people_max}
+              address={party.address}
+              startTime={party.start_time}
+              telegramUrl={party.telegram_url}
+              description={party.description}
+            />
+            <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
+          </div>
+        </div>}
+      </Container>
+    )
+  }
+}
 
 PartyScene.propTypes = {
   classes: object.isRequired,
-  party: object.isRequired,
+  partyId: object,
+  actions: object.isRequired,
+  match: object.isRequired,
+}
+PartyScene.defaultProps = {
+  partyId: null,
 }
 
 export default withStyles(styles)(connector(PartyScene))

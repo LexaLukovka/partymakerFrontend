@@ -32,7 +32,7 @@ class Carousel extends React.Component {
     return (
       <div className={classes.root}>
         <Slider {...this.settings}>
-          {pictures.map(picture => <Avatar key={picture} className={classes.picture} src={picture} />)}
+          {pictures.map(picture => <Avatar key={picture} className={classes.picture} src={picture.url} />)}
         </Slider>
       </div>
     )
@@ -41,7 +41,7 @@ class Carousel extends React.Component {
 
 Carousel.propTypes = {
   classes: object.isRequired,
-  pictures: arrayOf(string).isRequired,
+  pictures: arrayOf(object).isRequired,
 }
 
 export default withStyles(styles)(Carousel)
