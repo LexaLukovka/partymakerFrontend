@@ -25,7 +25,7 @@ const styles = theme => ({
     paddingTop: 143,
     paddingLeft: 20,
     '@media only screen and (max-width: 640px)': {
-      paddingTop: 148,
+      paddingTop: 152,
     },
   },
   list: {

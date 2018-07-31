@@ -18,12 +18,16 @@ class PartiesScene extends React.Component {
   }
 
   render() {
-    const { classes, parties, partiese } = this.props
+    const { classes, parties } = this.props
+    console.log(parties)
+    let allParties = {}
+    if (parties) {
+      allParties = parties.data
+    }
     return (
       <Container className={classes.root}>
-        {console.log(partiese)}
         <Grid container justify="center">
-          {parties.map((party, index) => <PartiesCard key={index} party={party} />)}
+          {parties && allParties.map((party, index) => <PartiesCard key={index} party={party} />)}
         </Grid>
       </Container>
     )
@@ -32,11 +36,10 @@ class PartiesScene extends React.Component {
 
 PartiesScene.propTypes = {
   classes: object.isRequired,
-  parties: arrayOf(object).isRequired,
-  partiese: arrayOf(object),
+  parties: object,
   actions: object.isRequired,
 }
 PartiesScene.defaultProps = {
-  partiese: null,
+  parties: null,
 }
 export default withStyles(styles)(connector(PartiesScene))

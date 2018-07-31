@@ -8,7 +8,7 @@ const style = {
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   width: '100%',
-  height: '750px',
+  height: '84.5vh',
   position: 'relative',
 }
 

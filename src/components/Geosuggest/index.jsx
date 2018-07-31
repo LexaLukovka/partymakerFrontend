@@ -39,8 +39,8 @@ class Geosuggest extends Component {
     document.removeEventListener('click', this.apiObj)
   }
 
-  handleChange = e => {
-    this.setState({ value: e.target.value })
+  handleChange = event => {
+    this.setState({ value: event.target.value })
   }
 
   handleBlur = () => {
@@ -56,7 +56,6 @@ class Geosuggest extends Component {
       <TextField
         {...props}
         value={this.state.value}
-        helperText={props.helperText && props.helperText.formatted_address}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
       />

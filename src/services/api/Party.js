@@ -3,6 +3,10 @@ import Cache from '../Cache'
 import Http from '../Http'
 
 class Party {
+  all() {
+    return Http.get('/party')
+  }
+
   createIcon(name) {
     Cache.put('icon', name)
     return name
@@ -43,10 +47,6 @@ class Party {
     }
 
     return Http.post('/party', party)
-  }
-
-  all() {
-    return Http.get('/party')
   }
 }
 

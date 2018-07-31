@@ -7,7 +7,10 @@ import Background from './Background'
 
 const styles = {
   root: {
-    marginTop: 250,
+    marginTop: '40%',
+    '@media only screen and (max-width: 320px)': {
+      marginTop: '15%',
+    },
   },
   block: {
     paddingTop: 60,

@@ -2,7 +2,7 @@ import moment from 'moment'
 import { OUTPUT_PARTY, OUTPUT_PARTY_FULFILLED } from './action'
 
 const initialState = {
-  parties: [
+  partiese: [
     {
       id: 1,
       user: {
@@ -76,23 +76,15 @@ const initialState = {
       people_count: 11,
     },
   ],
-  partiese: null,
+  parties: null,
 }
 
 const listReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case OUTPUT_PARTY: {
-      console.log(payload)
+    case OUTPUT_PARTY_FULFILLED: {
       return {
         ...state,
         parties: payload,
-      }
-    }
-    case OUTPUT_PARTY_FULFILLED: {
-      console.log(payload)
-      return {
-        ...state,
-        partiese: payload,
       }
     }
     default: {

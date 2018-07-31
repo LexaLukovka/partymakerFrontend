@@ -14,11 +14,15 @@ import Button from '@material-ui/core/es/Button/Button'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import PartiesCardDescription from './PartiesCardDescription'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 const styles = theme => ({
   root: {
     marginBottom: 15,
-    maxWidth: 400,
+    width: '100%',
+    '@media only screen and (max-width: 320px)': {
+      width: '95%',
+    },
   },
   media: {
     height: 0,
@@ -26,6 +30,7 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
+    marginTop: -20,
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -41,13 +46,13 @@ const styles = theme => ({
     flexGrow: 1,
   },
   thumbnails: {
-    borderRadius: 3,
+    borderRadius: 5,
     margin: '0 2px',
     width: 60,
     height: 60,
   },
   cardContent: {
-    marginTop: 0,
+    marginTop: 10,
     paddingTop: 0,
   },
 })
@@ -55,21 +60,19 @@ const styles = theme => ({
 const PartiesCard = ({ classes, party }) =>
   <Card className={classes.root}>
     <CardHeader
-      avatar={<Avatar src={party.user.avatar_url} />}
+      avatar={<Avatar src={party.admin.avatar_url} />}
       action={<IconButton><MoreVertIcon /></IconButton>}
-      title={party.user.name}
-      subheader="September 14, 2016"
+      title={party.admin.name}
+      subheader={moment(party.updated_at).fromNow()}
     />
     <CardContent className={classes.cardContent}>
       <Grid container justify="space-around">
-        <Avatar src={party.image_url} className={classes.thumbnails} />
-        <Avatar src={party.image_url} className={classes.thumbnails} />
-        <Avatar src={party.image_url} className={classes.thumbnails} />
-        <Avatar src={party.image_url} className={classes.thumbnails} />
+        {party.pictures.map((picture, index) =>
+          <Avatar key={index} src={picture.url} className={classes.thumbnails} />)}
       </Grid>
       <PartiesCardDescription
-        amount={party.amount}
-        count={party.people_count}
+        maxCount={party.people_max}
+        amount="100"
         address={party.address}
         description={party.description}
       />
@@ -83,7 +86,7 @@ const PartiesCard = ({ classes, party }) =>
           <ShareIcon />
         </IconButton>
       </div>
-      <Link to={`/parties/${party.id}`}><Button>Подробнее</Button></Link>
+      <Link to={`/parties/${party.id}`}><Button color="primary">Подробнее</Button></Link>
     </CardActions>
   </Card>
 

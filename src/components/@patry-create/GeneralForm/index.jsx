@@ -52,7 +52,6 @@ class PartyCardForm extends React.Component {
 
   hasError = (fieldName) => {
     const { errors, touched } = this.props
-
     return (!!errors[fieldName] && touched[fieldName])
   }
 
@@ -106,7 +105,6 @@ class PartyCardForm extends React.Component {
           <Typography variant="subheading">По какому адресу?</Typography>
           <Geosuggest
             fullWidth
-            id="address"
             name="address"
             placeholder="Адрес"
             value={values.address}
@@ -152,12 +150,12 @@ class PartyCardForm extends React.Component {
               <TextField
                 type="number"
                 className={classes.inputNumber}
-                name="peopleMax"
-                value={values.peopleMax}
+                name="peopleMin"
+                value={values.peopleMin}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={this.hasError('peopleMax')}
-                helperText={this.showHelperError('peopleMax')}
+                error={this.hasError('peopleMin')}
+                helperText={this.showHelperError('peopleMin')}
               />
             </Grid>
             <Grid item container justify="flex-end">
@@ -165,12 +163,12 @@ class PartyCardForm extends React.Component {
               <TextField
                 type="number"
                 className={classes.inputNumber}
-                name="peopleMin"
-                value={values.peopleMin}
+                name="peopleMax"
+                value={values.peopleMax}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={this.hasError('peopleMin')}
-                helperText={this.showHelperError('peopleMin')}
+                error={this.hasError('peopleMax')}
+                helperText={this.showHelperError('peopleMax')}
               />
             </Grid>
           </Grid>
