@@ -1,21 +1,19 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
-import RegisterCard from './RegisterCard/index'
-import Background from '../authComponent/Background'
+import RegisterForm from './RegisterForm'
+import Card from '@material-ui/core/Card/Card'
 
 const styles = theme => ({
   root: {
-    marginTop: theme.spacing.size5,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 5,
   },
 })
+
 const RegisterScene = ({ classes }) =>
-  <Background className={classes.root}>
-    <RegisterCard />
-  </Background>
+  <Card className={classes.root}>
+    <RegisterForm />
+  </Card>
 
 RegisterScene.propTypes = {
   classes: PropTypes.object.isRequired,

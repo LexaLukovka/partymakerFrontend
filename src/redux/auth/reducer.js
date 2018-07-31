@@ -8,7 +8,8 @@ import {
   REGISTER_USER_PENDING,
   REGISTER_USER_FULFILLED,
   REGISTER_USER_REJECTED,
-  LOAD_SAVED_USER, LOGOUT_USER,
+  LOAD_SAVED_USER,
+  LOGOUT_USER,
 } from './action'
 
 const initialState = {
@@ -77,6 +78,7 @@ const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: null,
+        token: null,
       }
     }
     default: {

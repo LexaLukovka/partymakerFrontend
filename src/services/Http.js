@@ -1,6 +1,8 @@
+/* eslint-disable dot-notation */
 import axios from 'axios'
 import to from '../utils/to'
 import Token from './Token'
+import store from '../store'
 
 class Http {
   constructor() {
@@ -13,6 +15,9 @@ class Http {
   }
 
   async get(url, params) {
+    const { token } = store.getState().authReducer
+    this.instance.defaults.headers.common['Authorization'] = token
+
     const [err, response] = await to(this.instance.get(url, params))
     if (err) {
       if (!err.response) {
@@ -25,6 +30,9 @@ class Http {
   }
 
   async post(url, params) {
+    const { token } = store.getState().authReducer
+    this.instance.defaults.headers.common['Authorization'] = token
+
     const [err, response] = await to(this.instance.post(url, params))
 
     if (err) {
