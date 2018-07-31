@@ -38,7 +38,7 @@ class Header extends React.Component {
     const { classes, auth, actions, ...props } = this.props
 
     return (
-      <div className={classes.root}>
+      <header className={classes.root}>
         <AppBar className={classes.appBar}>
           <Container>
             <Toolbar>
@@ -63,7 +63,7 @@ class Header extends React.Component {
             </Toolbar>
           </Container>
         </AppBar>
-      </div>
+      </header>
     )
   }
 }

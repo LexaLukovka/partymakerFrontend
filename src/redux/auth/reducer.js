@@ -1,5 +1,4 @@
-import Cache from '../../services/Cache'
-import Token from '../../services/Token'
+import Cache from 'src/services/Cache'
 
 import {
   LOGIN_USER_FULFILLED,
@@ -8,12 +7,12 @@ import {
   REGISTER_USER_PENDING,
   REGISTER_USER_FULFILLED,
   REGISTER_USER_REJECTED,
-  LOAD_SAVED_USER, LOGOUT_USER,
+  LOAD_SAVED_USER,
+  LOGOUT_USER,
 } from './action'
 
 const initialState = {
   user: null,
-  token: Token.get(),
   errors: [],
   error: false,
   loading: false,

@@ -1,7 +1,7 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
 
-const registerFormik = withFormik({
+const formik = withFormik({
   validationSchema: Yup.object().shape({
 
     name: Yup.string()
@@ -39,4 +39,4 @@ const registerFormik = withFormik({
   displayName: 'RegisterForm',
 })
 
-export default registerFormik
+export default formik

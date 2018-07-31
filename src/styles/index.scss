@@ -3,6 +3,7 @@ $dark: #09091A;
 @import "scss/index";
 
 html, body {
+  height: 100%;
   font-family: Roboto, sans-serif;
   margin: 0;
   padding: 0;
@@ -17,6 +18,14 @@ html, body {
   @media only screen and (max-width: 320px) {
     font-size: 12pt;
   }
+}
+
+#root {
+  height: 100%;
+}
+
+#root > main {
+  height: 100%;
 }
 
 a {
