@@ -3,6 +3,12 @@ module.exports = {
   'parser': 'babel-eslint',
   'rules': {
     'no-trailing-spaces': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
+    'import/no-extraneous-dependencies': 0,
+    'import/no-duplicates': 0,
+    'import/no-named-as-default': 0,
+    'import/no-named-as-default-member': 0,
     'max-len': [2, 120],
     'import/first': 0,
     'linebreak-style': 0,
