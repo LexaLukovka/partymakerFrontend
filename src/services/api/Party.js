@@ -3,6 +3,10 @@ import Cache from '../Cache'
 import Http from '../Http'
 
 class Party {
+  all() {
+    return Http.get('/party')
+  }
+
   createIcon(name) {
     Cache.put('icon', name)
     return name
@@ -26,15 +30,20 @@ class Party {
     const party = {
       title: form.title,
       type: icon.icon,
-      address: form.address,
+      address: {
+        address: form.address.formatted_address,
+        lng: form.address.geometry.location.lng,
+        lat: form.address.geometry.location.lat,
+        placeId: form.address.placeId,
+      },
       district: form.district,
       pictures: finishForm.pictures,
-      telegramUrl: finishForm.telegramUrl,
+      telegram_url: finishForm.telegramUrl,
       description: form.description,
-      peopleMax: form.peopleMax,
-      peopleMin: form.peopleMin,
-      startTime: form.time,
-      privateParty: finishForm.privateParty,
+      people_max: form.peopleMax,
+      people_min: form.peopleMin,
+      start_time: form.startTime,
+      private_party: finishForm.privateParty,
     }
 
     return Http.post('/party', party)

@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../../redux/party/create/action'
+import * as createParty from '../../redux/party/create/action'
 import * as stepper from '../../redux/stepper/action'
 
 const initMapStateToProps = store => ({
@@ -10,7 +10,7 @@ const initMapStateToProps = store => ({
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    party: bindActionCreators(actions, dispatch),
+    party: bindActionCreators(createParty, dispatch),
     stepper: bindActionCreators(stepper, dispatch),
   },
 })

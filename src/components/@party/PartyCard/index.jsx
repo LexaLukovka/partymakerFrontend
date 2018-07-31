@@ -5,7 +5,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import connector from './connector'
+import connector from '../connector'
 import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
@@ -71,7 +71,6 @@ PartyCard.propTypes = {
     dateTime: string.isRequired,
     telegram_url: string,
   }).isRequired,
-
 }
 
 export default withStyles(styles)(connector(PartyCard))

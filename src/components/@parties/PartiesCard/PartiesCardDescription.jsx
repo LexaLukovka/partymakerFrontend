@@ -10,13 +10,13 @@ const styles = theme => ({
   root: {},
 })
 
-const PartiesCardDescription = ({ classes, amount, count, address, description }) =>
+const PartiesCardDescription = ({ classes, amount, maxCount, address, description }) =>
   <div className={classes.root}>
     <List>
       <ListItem>
         <ListItemText primary="Собирается" />
         <ListItemSecondaryAction>
-          {`${count} человек`}
+          {`до ${maxCount} человек`}
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
@@ -26,7 +26,10 @@ const PartiesCardDescription = ({ classes, amount, count, address, description }
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
-        <ListItemText primary="Адрес" secondary={address} />
+        <ListItemText primary="Район" />
+        <ListItemSecondaryAction>
+          {address.district}
+        </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
         <ListItemText primary="Описание" secondary={description} />
@@ -36,9 +39,9 @@ const PartiesCardDescription = ({ classes, amount, count, address, description }
 
 PartiesCardDescription.propTypes = {
   classes: object.isRequired,
-  amount: number.isRequired,
-  count: number.isRequired,
-  address: string.isRequired,
+  amount: string.isRequired,
+  maxCount: number.isRequired,
+  address: object.isRequired,
   description: string.isRequired,
 }
 

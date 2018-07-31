@@ -7,9 +7,9 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/es/StepLabel/StepLabel'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Container from '../Container'
-import PartyCardForm from './PartyCardForm'
-import PartyCardIcon from './PartyCardIcon'
-import PartyCardFinish from './PartyCardFinish'
+import GeneralForm from './GeneralForm'
+import TypeForm from './TypeForm'
+import SummaryForm from './SummaryForm'
 import connector from './connector'
 
 const styles = theme => ({
@@ -58,9 +58,9 @@ class PartyCreateScene extends React.Component {
             <Grid container justify="center">
               <div>
                 <Grid className={classes.instructions}>
-                  {activeStep === 0 && <PartyCardIcon activeStep={activeStep} />}
-                  {activeStep === 1 && <PartyCardForm activeStep={activeStep} />}
-                  {activeStep === 2 && <PartyCardFinish activeStep={activeStep} />}
+                  {activeStep === 0 && <TypeForm activeStep={activeStep} />}
+                  {activeStep === 1 && <GeneralForm activeStep={activeStep} />}
+                  {activeStep === 2 && <SummaryForm activeStep={activeStep} />}
                 </Grid>
 
               </div>

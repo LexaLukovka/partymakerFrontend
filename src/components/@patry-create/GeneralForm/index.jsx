@@ -5,20 +5,19 @@ import Button from '@material-ui/core/es/Button/Button'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
-import partyCreateFormik from './partyCreateFormik'
+import formik from './formik'
 import Geosuggest from '../../Geosuggest'
 import connector from '../connector'
 
 const styles = theme => ({
   root: {
-    maxWidth: 400,
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
       marginTop: theme.spacing.size1,
     },
   },
   input: {
-    marginBottom: theme.spacing.size2,
+    marginBottom: theme.spacing.size3,
     '@media only screen and (max-width: 320px)': {
       marginBottom: theme.spacing.size1,
     },
@@ -47,25 +46,13 @@ const styles = theme => ({
 })
 
 class PartyCardForm extends React.Component {
-  state = {
-    isSubmited: false,
-  }
-
-  handleSubmit = (event) => {
-    const { handleSubmit } = this.props
-
-    handleSubmit(event)
-  }
-
   handleBack = (activeStep) => {
     this.props.actions.stepper.stepperNavigationBack(activeStep)
   }
 
   hasError = (fieldName) => {
-    const { isSubmited } = this.state
     const { errors, touched } = this.props
-
-    return (!!errors[fieldName] && touched[fieldName] && isSubmited)
+    return (!!errors[fieldName] && touched[fieldName])
   }
 
   showHelperError = (fieldName) => {
@@ -78,20 +65,22 @@ class PartyCardForm extends React.Component {
       classes,
       activeStep,
       values,
+      isSubmitting,
       handleChange,
+      handleSubmit,
       handleBlur,
       setFieldValue,
       setFieldTouched,
     } = this.props
 
     return (
-      <form onSubmit={this.handleSubmit} className={classes.root}>
+      <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">Название вечеринки</Typography>
           <TextField
             fullWidth
             name="title"
-            label="Название"
+            placeholder="Название"
             value={values.title}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -104,7 +93,7 @@ class PartyCardForm extends React.Component {
           <TextField
             fullWidth
             name="district"
-            label="Район"
+            placeholder="Район"
             value={values.district}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -116,9 +105,8 @@ class PartyCardForm extends React.Component {
           <Typography variant="subheading">По какому адресу?</Typography>
           <Geosuggest
             fullWidth
-            id="address"
             name="address"
-            label="Адрес"
+            placeholder="Адрес"
             value={values.address}
             onChange={setFieldValue}
             onBlur={setFieldTouched}
@@ -127,16 +115,31 @@ class PartyCardForm extends React.Component {
           />
         </div>
         <div className={classes.input}>
+          <Typography variant="subheading">Когда состоится?</Typography>
+          <TextField
+            fullWidth
+            type="date"
+            name="startDay"
+            placeholder="Дата"
+            value={values.startDay}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={this.hasError('startDay')}
+            helperText={this.showHelperError('startDay')}
+          />
+        </div>
+        <div className={classes.input}>
           <Typography variant="subheading">Во сколько начало?</Typography>
           <TextField
             fullWidth
             type="time"
-            name="time"
-            value={values.time}
+            name="startTime"
+            placeholder="Время"
+            value={values.startTime}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={this.hasError('time')}
-            helperText={this.showHelperError('time')}
+            error={this.hasError('startTime')}
+            helperText={this.showHelperError('startTime')}
           />
         </div>
         <div className={classes.input}>
@@ -147,12 +150,12 @@ class PartyCardForm extends React.Component {
               <TextField
                 type="number"
                 className={classes.inputNumber}
-                name="peopleMax"
-                value={values.peopleMax}
+                name="peopleMin"
+                value={values.peopleMin}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={this.hasError('peopleMax')}
-                helperText={this.showHelperError('peopleMax')}
+                error={this.hasError('peopleMin')}
+                helperText={this.showHelperError('peopleMin')}
               />
             </Grid>
             <Grid item container justify="flex-end">
@@ -160,12 +163,12 @@ class PartyCardForm extends React.Component {
               <TextField
                 type="number"
                 className={classes.inputNumber}
-                name="peopleMin"
-                value={values.peopleMin}
+                name="peopleMax"
+                value={values.peopleMax}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={this.hasError('peopleMin')}
-                helperText={this.showHelperError('peopleMin')}
+                error={this.hasError('peopleMax')}
+                helperText={this.showHelperError('peopleMax')}
               />
             </Grid>
           </Grid>
@@ -178,7 +181,7 @@ class PartyCardForm extends React.Component {
             rows={2}
             rowsMax={3}
             name="description"
-            label="Описание"
+            placeholder="Описание"
             value={values.description}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -198,6 +201,7 @@ class PartyCardForm extends React.Component {
             variant="contained"
             size="large"
             color="primary"
+            disabled={isSubmitting}
           >
             Дальше
           </Button>
@@ -219,6 +223,7 @@ PartyCardForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
 }
 
-export default withStyles(styles)(connector(partyCreateFormik(PartyCardForm)))
+export default withStyles(styles)(connector(formik(PartyCardForm)))

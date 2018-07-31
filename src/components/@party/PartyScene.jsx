@@ -3,8 +3,8 @@ import { arrayOf, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import connector from './connector'
 import Container from '../Container'
-import PartyCard from './PartyCard'
-import Carousel from './Carousel'
+import PartyCard from './PartyCard/index'
+import Carousel from './Carousel/index'
 import Button from '@material-ui/core/es/Button/Button'
 
 const styles = (theme) => ({

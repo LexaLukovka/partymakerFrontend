@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/es/TextField/TextField'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import connector from '../connector'
 import PictureUpload from './PictureUpload'
-import partyCreateFinishFormik from './partyCreateFinishFormik'
+import formik from './formik'
 
 const styles = theme => ({
   root: {
@@ -111,4 +111,4 @@ PartyCardFinish.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(connector(partyCreateFinishFormik(PartyCardFinish)))
+export default withStyles(styles)(connector(formik(PartyCardFinish)))

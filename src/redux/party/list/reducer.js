@@ -1,7 +1,8 @@
 import moment from 'moment'
+import { OUTPUT_PARTY, OUTPUT_PARTY_FULFILLED } from './action'
 
 const initialState = {
-  parties: [
+  partiese: [
     {
       id: 1,
       user: {
@@ -75,14 +76,21 @@ const initialState = {
       people_count: 11,
     },
   ],
+  parties: null,
 }
 
-const reducer = (state = initialState, { type }) => {
+const listReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case OUTPUT_PARTY_FULFILLED: {
+      return {
+        ...state,
+        parties: payload,
+      }
+    }
     default: {
       return state
     }
   }
 }
 
-export default reducer
+export default listReducer
