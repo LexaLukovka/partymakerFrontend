@@ -104,7 +104,7 @@ const PartiesCard = ({ classes, party, ...props }) =>
         </IconButton>
       </div>
       <Link to={`/parties/${party.id}`}>
-        <Button color="primary" onClick={() => props.actions.parties.show(party.id)}>Подробнее</Button>
+        <Button color="primary" onClick={() => props.actions.party.show(party.id)}>Подробнее</Button>
       </Link>
     </CardActions>
   </Card>

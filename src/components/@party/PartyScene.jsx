@@ -1,17 +1,24 @@
 import React from 'react'
-import { arrayOf, object } from 'prop-types'
+import { arrayOf, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import connector from './connector'
 import Container from '../Container'
 import PartyCard from './PartyCard/index'
 import Carousel from './Carousel/index'
 import Button from '@material-ui/core/es/Button/Button'
+import isEmpty from 'lodash/isEmpty'
+import Grid from '@material-ui/core/es/Grid/Grid'
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
+import Typography from '@material-ui/core/Typography/Typography'
 
 const styles = (theme) => ({
   root: {
     overflowX: 'hidden',
     height: 800,
     background: theme.palette.common.white,
+  },
+  loading: {
+    marginTop: 20,
   },
   paper: {
     position: 'absolute',
@@ -22,38 +29,49 @@ const styles = (theme) => ({
 })
 
 class PartyScene extends React.Component {
-  componentWillMount() {
-    if (!this.props.partyId) {
-      this.props.actions.parties.show(this.props.match.params.id)
-    }
+  componentDidMount() {
+    this.props.actions.parties.show(this.props.match.params.id)
   }
 
   render() {
-    const { classes, partyId } = this.props
-    let party = {}
-    if (partyId) party = partyId.data
+    const { classes, loading, party } = this.props
+    if (loading) {
+      return (
+        <Container className={classes.loading}>
+          <Grid container justify="center">
+            <CircularProgress className={classes.progress} size={80} />
+          </Grid>
+        </Container>
+      )
+    }
+    if (isEmpty(party)) {
+      return (
+        <Container className={classes.loading}>
+          <Grid container justify="center">
+            <Typography variant="display1"> Not found</Typography>
+          </Grid>
+        </Container>
+      )
+    }
     return (
       <Container className={classes.root}>
-        {partyId &&
-        <div>
-          <Carousel pictures={party.pictures} />
-          <div className={classes.paper}>
-            <PartyCard
-              amount="100"
-              table="Пицца"
-              admin={party.admin}
-              title={party.title}
-              status={party.status}
-              minCount={party.people_min}
-              maxCount={party.people_max}
-              address={party.address}
-              startTime={party.start_time}
-              telegramUrl={party.telegram_url}
-              description={party.description}
-            />
-            <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
-          </div>
-        </div>}
+        <Carousel pictures={party.pictures} />
+        <div className={classes.paper}>
+          <PartyCard
+            amount="100"
+            table="Пицца"
+            admin={party.admin}
+            title={party.title}
+            status={party.status}
+            minCount={party.people_min}
+            maxCount={party.people_max}
+            address={party.address}
+            startTime={party.start_time}
+            telegramUrl={party.telegram_url}
+            description={party.description}
+          />
+          <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
+        </div>
       </Container>
     )
   }
@@ -61,12 +79,14 @@ class PartyScene extends React.Component {
 
 PartyScene.propTypes = {
   classes: object.isRequired,
-  partyId: object,
+  party: object,
+  loading: bool.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
 }
+
 PartyScene.defaultProps = {
-  partyId: null,
+  party: {},
 }
 
 export default withStyles(styles)(connector(PartyScene))

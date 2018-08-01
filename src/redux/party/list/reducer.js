@@ -1,24 +1,34 @@
-import { SHOW_PARTY_FULFILLED, OUTPUT_PARTY_FULFILLED } from './action'
+import { OUTPUT_PARTY_FULFILLED, OUTPUT_PARTY_PENDING, OUTPUT_PARTY_REJECTED } from './action'
 
 const initialState = {
-  parties: null,
-  partyId: null,
+  loading: false,
+  error: null,
+  parties: [],
 }
 
 const listReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case OUTPUT_PARTY_PENDING: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case OUTPUT_PARTY_REJECTED: {
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      }
+    }
     case OUTPUT_PARTY_FULFILLED: {
       return {
         ...state,
-        parties: payload,
+        loading: false,
+        parties: payload.data,
       }
     }
-    case SHOW_PARTY_FULFILLED: {
-      return {
-        ...state,
-        partyId: payload,
-      }
-    }
+
     default: {
       return state
     }
