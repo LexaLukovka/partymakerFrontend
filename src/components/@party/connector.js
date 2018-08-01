@@ -1,12 +1,12 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../../redux/auth/action'
+import * as partyActions from '../../redux/party/single/action'
 
 const initMapStateToProps = store => store.party.singleReducer
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    auth: bindActionCreators(actions, dispatch),
+    parties: bindActionCreators(partyActions, dispatch),
   },
 })
 

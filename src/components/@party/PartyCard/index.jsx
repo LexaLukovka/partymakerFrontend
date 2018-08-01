@@ -1,12 +1,14 @@
 import React from 'react'
-import { object, number, string, shape } from 'prop-types'
+import { object, number, string, array } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import connector from '../connector'
 import Paper from '@material-ui/core/Paper'
+import connector from '../connector'
+import Typography from '@material-ui/core/Typography/Typography'
+import Grid from '@material-ui/core/Grid/Grid'
 
 const styles = theme => ({
   root: {
@@ -17,45 +19,78 @@ const styles = theme => ({
     color: theme.palette.primary.main,
     borderRadius: 30,
   },
+  status: {
+    width: 17,
+    height: 17,
+    background: theme.palette.primary.main,
+    borderRadius: '50%',
+  },
 })
 
-const PartyCard = ({ classes, party }) =>
+const PartyCard = ({
+  classes,
+  title,
+  amount,
+  admin,
+  status,
+  minCount,
+  maxCount,
+  address,
+  telegramUrl,
+  startTime,
+  table,
+  description,
+}) =>
   <Paper className={classes.root}>
     <List>
       <ListItem>
-        <ListItemText primary="Скидываться" />
-        <ListItemSecondaryAction className={classes.amount}>
-          {`${party.amount} грн`}
+        <ListItemText>
+          <Grid container justify="center">
+            <Typography variant="title">{title}</Typography>
+          </Grid>
+        </ListItemText>
+      </ListItem>
+      <ListItem>
+        <div className={classes.status} />
+        <ListItemText primary={status} />
+        <ListItemSecondaryAction>
+          {admin.name}
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
-        <ListItemText primary="Адрес" secondary={party.address} />
+        <ListItemText primary="Скидываться" />
+        <ListItemSecondaryAction className={classes.amount}>
+          {`${amount} грн`}
+        </ListItemSecondaryAction>
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="Адрес" secondary={address.address} />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Приходить"
-          secondary={party.dateTime}
+          secondary={startTime}
         />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Собирается"
-          secondary={`${party.people_count} человек`}
+          secondary={`от ${minCount} до ${maxCount} человек`}
         />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Общий стол"
-          secondary={party.table.join(', ')}
+          secondary={table}
         />
       </ListItem>
       <ListItem>
-        <ListItemText primary="Описание" secondary={party.description} />
+        <ListItemText primary="Описание" secondary={description} />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Telegram"
-          secondary={<a href={party.telegram_url}>{`${party.telegram_url.substring(0, 40)}...`}</a>}
+          secondary={<a href={telegramUrl}>{`${telegramUrl.substring(0, 40)}...`}</a>}
         />
       </ListItem>
     </List>
@@ -63,14 +98,17 @@ const PartyCard = ({ classes, party }) =>
 
 PartyCard.propTypes = {
   classes: object.isRequired,
-  party: shape({
-    amount: number.isRequired,
-    people_count: number.isRequired,
-    address: string.isRequired,
-    description: string.isRequired,
-    dateTime: string.isRequired,
-    telegram_url: string,
-  }).isRequired,
+  title: string.isRequired,
+  admin: object.isRequired,
+  amount: string.isRequired,
+  status: string.isRequired,
+  table: string.isRequired,
+  maxCount: number.isRequired,
+  minCount: number.isRequired,
+  address: object.isRequired,
+  description: string.isRequired,
+  startTime: string.isRequired,
+  telegramUrl: string.isRequired,
 }
 
 export default withStyles(styles)(connector(PartyCard))

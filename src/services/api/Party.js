@@ -7,6 +7,10 @@ class Party {
     return Http.get('/party')
   }
 
+  find(id) {
+    return Http.get(`/party/${id}`)
+  }
+
   createIcon(name) {
     Cache.put('icon', name)
     return name
