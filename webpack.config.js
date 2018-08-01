@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const srcPath = path.resolve(__dirname, './src/')
 
 module.exports = {
   mode: 'development',
@@ -11,7 +10,11 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
-      src: srcPath,
+      components: path.resolve(__dirname, './src/components/'),
+      services: path.resolve(__dirname, './src/services/'),
+      redux: path.resolve(__dirname, './src/redux/'),
+      utils: path.resolve(__dirname, './src/utils/'),
+      src: path.resolve(__dirname, './src/'),
     },
   },
   devtool: 'cheap-module-eval-source-map',
