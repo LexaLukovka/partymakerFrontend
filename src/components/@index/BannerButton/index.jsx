@@ -26,7 +26,7 @@ const BannerButton = ({ classes }) =>
           size="large"
           color="primary"
         >
-          Планирую вечеринку
+          Найти вечеринку
         </Button>
       </Link>
     </Grid>
@@ -39,7 +39,7 @@ const BannerButton = ({ classes }) =>
           size="large"
           color="primary"
         >
-          Хочу на вечеринку
+          Создать вечеринку
         </Button>
       </Link>
     </Grid>
