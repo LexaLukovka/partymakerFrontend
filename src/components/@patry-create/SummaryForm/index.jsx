@@ -52,7 +52,7 @@ class SummaryForm extends React.Component {
 
   handleSwitch = () => {
     const { actions, party } = this.props
-    actions.party.update({ private: !party.form.private })
+    actions.party.update({ private: !party.form.private, step: 3 })
   }
 
   handleUpload = (name, value) => {
@@ -87,7 +87,8 @@ class SummaryForm extends React.Component {
         </Typography>
         <div className={classes.mb}>
           <Typography variant="body1" className={classes.typography}>
-            Если у вас есть фотографии с места вечеринки, пожалуйста загрузите их, чтобы друзья понимали куда идут
+            Если у вас есть фотографии с места вечеринки,
+            пожалуйста загрузите их, чтобы друзья понимали куда идут
           </Typography>
         </div>
         <PictureUpload
@@ -95,7 +96,9 @@ class SummaryForm extends React.Component {
           value={party.form.pictures || []}
           onChange={this.handleUpload}
         />
-        <Typography variant="subheading" className={classes.typography}> Ссылка для приглашения </Typography>
+        <Typography variant="subheading" className={classes.typography}>
+          Ссылка для приглашения
+        </Typography>
         <TextField
           className={classes.mb}
           fullWidth

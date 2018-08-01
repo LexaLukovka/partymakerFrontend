@@ -86,7 +86,7 @@ class GeneralForm extends React.Component {
             fullWidth
             name="title"
             placeholder="Название"
-            value={formik.values.title}
+            value={values.title}
             onChange={handleChange}
             onBlur={handleBlur}
             error={this.hasError('title')}
