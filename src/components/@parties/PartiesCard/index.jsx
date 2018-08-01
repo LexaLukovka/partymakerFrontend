@@ -16,11 +16,11 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 import ShareIcon from '@material-ui/icons/Share'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import Button from '@material-ui/core/es/Button/Button'
-import Grid from '@material-ui/core/es/Grid/Grid'
 import PartiesCardDescription from './PartiesCardDescription'
 import Checkbox from '@material-ui/core/Checkbox/Checkbox'
 import moment from 'moment'
 import connector from '../connector'
+import initialsFromUsername from 'src/utils/initialsFromUsername'
 
 const styles = theme => ({
   root: {
@@ -62,70 +62,69 @@ const styles = theme => ({
   },
   title: {
     paddingTop: 20,
+    textAlign: 'center',
   },
   cardContent: {
     paddingTop: 0,
   },
 })
-const initialsFromUsername = username => {
-  const initials = username.charAt(0).toUpperCase()
-  if (username.split(' ').length > 1) {
-    return username.split(' ')[0].charAt(0).toUpperCase() + username.split(' ')[1].charAt(0).toUpperCase()
-  }
-  if (username.length === 1) return initials
-  const numbers = parseInt(username.replace(/\D+/g, ''), 10)
-  if (!isNaN(numbers)) {
-    return initials + numbers.toString()[1].toUpperCase()
-  }
-  return initials + username.charAt(1).toUpperCase()
-}
 
-const PartiesCard = ({ classes, party, ...props }) =>
-  <Card className={classes.root}>
-    <CardHeader
-      avatar={party.admin.avatar_url
-        ? <Avatar src={party.admin.avatar_url} />
-        : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>
-      }
-      action={<IconButton><MoreVertIcon /></IconButton>}
-      title={party.admin.name}
-      subheader={moment(party.updated_at).fromNow()}
-    />
-    <CardContent className={classes.cardContent}>
-      <Grid container justify="space-around">
-        <Avatar src={party.primary_picture} className={classes.picture} />
-      </Grid>
-      <Grid container justify="center">
-        <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
-      </Grid>
-      <PartiesCardDescription
-        maxCount={party.people_max}
-        amount="100"
-        address={party.address}
-        description={party.description}
-      />
-    </CardContent>
-    <CardActions className={classes.actions} disableActionSpacing>
-      <div className={classes.flex}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              icon={<FavoriteBorder />}
-              checkedIcon={<Favorite color="primary" />}
-              value="checked"
-              onClick={() => props.actions.like.like(party.id)}
-            />}
-          label="0"
+class PartiesCard extends React.Component {
+  handleLikeClick = (id) => {
+    this.props.actions.like.like(id)
+  }
+
+  handleClick = (id) => {
+    this.props.actions.party.show(id)
+  }
+
+  render() {
+    const { classes, party } = this.props
+    return (
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={party.admin.avatar_url
+            ? <Avatar src={party.admin.avatar_url} />
+            : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>
+          }
+          action={<IconButton><MoreVertIcon /></IconButton>}
+          title={party.admin.name}
+          subheader={moment(party.updated_at).fromNow()}
         />
-        <IconButton aria-label="Share">
-          <ShareIcon />
-        </IconButton>
-      </div>
-      <Link to={`/parties/${party.id}`}>
-        <Button color="primary" onClick={() => props.actions.party.show(party.id)}>Подробнее</Button>
-      </Link>
-    </CardActions>
-  </Card>
+        <CardContent className={classes.cardContent}>
+          <Avatar src={party.primary_picture} className={classes.picture} />
+          <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
+          <PartiesCardDescription
+            maxCount={party.people_max}
+            amount="100"
+            address={party.address}
+            description={party.description}
+          />
+        </CardContent>
+        <CardActions className={classes.actions} disableActionSpacing>
+          <div className={classes.flex}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  icon={<FavoriteBorder />}
+                  checkedIcon={<Favorite color="primary" />}
+                  value="checked"
+                  onClick={() => this.handleLikeClick(party.id)}
+                />}
+              label="0"
+            />
+            <IconButton aria-label="Share">
+              <ShareIcon />
+            </IconButton>
+          </div>
+          <Link to={`/parties/${party.id}`}>
+            <Button color="primary" onClick={() => this.handleClick(party.id)}>Подробнее</Button>
+          </Link>
+        </CardActions>
+      </Card>
+    )
+  }
+}
 
 PartiesCard.propTypes = {
   classes: object.isRequired,

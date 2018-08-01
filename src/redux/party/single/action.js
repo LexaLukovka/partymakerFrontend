@@ -1,11 +1,11 @@
 import Party from 'src/services/api/Party'
 
-export const SHOW_PARTY = 'SHOW_PARTY'
-export const SHOW_PARTY_PENDING = 'SHOW_PARTY_PENDING'
-export const SHOW_PARTY_REJECTED = 'SHOW_PARTY_REJECTED'
-export const SHOW_PARTY_FULFILLED = 'SHOW_PARTY_FULFILLED'
+export const LOAD_PARTY = 'LOAD_PARTY'
+export const LOAD_PARTY_PENDING = 'LOAD_PARTY_PENDING'
+export const LOAD_PARTY_REJECTED = 'LOAD_PARTY_REJECTED'
+export const LOAD_PARTY_FULFILLED = 'LOAD_PARTY_FULFILLED'
 
 export const show = (id) => ({
-  type: SHOW_PARTY,
+  type: LOAD_PARTY,
   payload: Party.find(id),
 })

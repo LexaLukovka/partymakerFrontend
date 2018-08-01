@@ -1,4 +1,4 @@
-import { SHOW_PARTY_PENDING, SHOW_PARTY_FULFILLED, SHOW_PARTY_REJECTED } from './action'
+import { LOAD_PARTY_PENDING, LOAD_PARTY_FULFILLED, LOAD_PARTY_REJECTED } from './action'
 
 const initialState = {
   loading: false,
@@ -8,20 +8,20 @@ const initialState = {
 
 const singleReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SHOW_PARTY_PENDING: {
+    case LOAD_PARTY_PENDING: {
       return {
         ...state,
         loading: true,
       }
     }
-    case SHOW_PARTY_REJECTED: {
+    case LOAD_PARTY_REJECTED: {
       return {
         ...state,
         loading: false,
         error: payload,
       }
     }
-    case SHOW_PARTY_FULFILLED: {
+    case LOAD_PARTY_FULFILLED: {
       return {
         ...state,
         loading: false,

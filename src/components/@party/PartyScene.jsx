@@ -7,9 +7,8 @@ import PartyCard from './PartyCard/index'
 import Carousel from './Carousel/index'
 import Button from '@material-ui/core/es/Button/Button'
 import isEmpty from 'lodash/isEmpty'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
-import Typography from '@material-ui/core/Typography/Typography'
+import Loading from '../Loading'
+import NotFound from '../NotFound'
 
 const styles = (theme) => ({
   root: {
@@ -19,6 +18,7 @@ const styles = (theme) => ({
   },
   loading: {
     marginTop: 20,
+    textAlign: 'center',
   },
   paper: {
     position: 'absolute',
@@ -35,24 +35,9 @@ class PartyScene extends React.Component {
 
   render() {
     const { classes, loading, party } = this.props
-    if (loading) {
-      return (
-        <Container className={classes.loading}>
-          <Grid container justify="center">
-            <CircularProgress className={classes.progress} size={80} />
-          </Grid>
-        </Container>
-      )
-    }
-    if (isEmpty(party)) {
-      return (
-        <Container className={classes.loading}>
-          <Grid container justify="center">
-            <Typography variant="display1"> Not found</Typography>
-          </Grid>
-        </Container>
-      )
-    }
+    if (loading) return <Loading />
+    if (isEmpty(party)) return <NotFound />
+
     return (
       <Container className={classes.root}>
         <Carousel pictures={party.pictures} />
