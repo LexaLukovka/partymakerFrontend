@@ -6,7 +6,7 @@ import {
 } from './action'
 
 const initialState = {
-  errors: null,
+  error: null,
   success: false,
   activeStep: 0,
   form: {
@@ -30,10 +30,10 @@ const createParty = (state = initialState, { type, payload, step }) => {
       return { ...state, loading: true }
 
     case CREATE_PARTY_FULFILLED:
-      return { ...state, success: payload }
+      return { ...state, success: true, form: initialState.form }
 
     case CREATE_PARTY_REJECTED:
-      return { ...state, errors: payload }
+      return { ...state, error: payload }
 
     default:
       return state

@@ -35,6 +35,13 @@ class SummaryForm extends React.Component {
     actions.party.update({ step: 3 })
   }
 
+  componentDidUpdate() {
+    const { party, history } = this.props
+    if (party.success) {
+      history.push('/parties')
+    }
+  }
+
   checkRequiredFields = () => {
     const { party, history } = this.props
     const required = [
@@ -69,9 +76,11 @@ class SummaryForm extends React.Component {
 
   render() {
     const { classes, party } = this.props
-
     return (
       <form className={classes.root}>
+        <Typography gutterBottom color="error">
+          {party.error && `${party.error.status} ошибка создания вечеринки ${party.error.data.error.message}`}
+        </Typography>
         <FormControlLabel
           className={classes.checked}
           label="Приватная вечеринка"
@@ -112,7 +121,14 @@ class SummaryForm extends React.Component {
               Назад
             </Button>
           </Link>
-          <Button onClick={this.handleSubmit} variant="contained" color="primary"> Готово </Button>
+          <Button
+            onClick={this.handleSubmit}
+            variant="contained"
+            color="primary"
+            disabled={party.loading && !party.error}
+          >
+            {party.loading && !party.error ? 'Создание...' : 'Готово'}
+          </Button>
         </Grid>
       </form>
     )
