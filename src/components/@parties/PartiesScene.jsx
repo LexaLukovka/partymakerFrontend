@@ -1,10 +1,13 @@
 import React from 'react'
-import { arrayOf, object } from 'prop-types'
+import { array, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import connector from './connector'
 import PartiesCard from './PartiesCard'
 import Container from '../Container'
+import isEmpty from 'lodash/isEmpty'
+import Loading from '../Loading'
+import NotFound from '../NotFound'
 
 const styles = {
   root: {
@@ -18,16 +21,14 @@ class PartiesScene extends React.Component {
   }
 
   render() {
-    const { classes, parties } = this.props
-    console.log(parties)
-    let allParties = {}
-    if (parties) {
-      allParties = parties.data
-    }
+    const { classes, loading, parties } = this.props
+    if (loading) return <Loading />
+    if (isEmpty(parties)) return <NotFound />
+
     return (
       <Container className={classes.root}>
         <Grid container justify="center">
-          {parties && allParties.map((party, index) => <PartiesCard key={index} party={party} />)}
+          {parties.map((party, index) => <PartiesCard key={index} party={party} />)}
         </Grid>
       </Container>
     )
@@ -36,10 +37,12 @@ class PartiesScene extends React.Component {
 
 PartiesScene.propTypes = {
   classes: object.isRequired,
-  parties: object,
+  parties: array,
+  loading: bool.isRequired,
   actions: object.isRequired,
 }
+
 PartiesScene.defaultProps = {
-  parties: null,
+  parties: [],
 }
 export default withStyles(styles)(connector(PartiesScene))

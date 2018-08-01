@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import Http from 'src/services/Http'
+import Http from 'services/Http'
 import flatten from 'lodash/flattenDeep'
 
 class Party {
