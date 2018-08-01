@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore } from 'redux'
+import { persistStore } from 'redux-persist'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import promiseMiddleware from 'redux-promise-middleware'
@@ -14,8 +15,11 @@ const store = createStore(
   )),
 )
 
+export const persistor = persistStore(store)
+
 if (Cache.has('user')) {
   store.dispatch(getSavedUser())
 }
 
 export default store
+

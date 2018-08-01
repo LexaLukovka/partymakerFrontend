@@ -1,12 +1,14 @@
-require('moment/locale/ru.js')
+import { PersistGate } from 'redux-persist/integration/react'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './store'
+import store, { persistor } from './store'
+import LayoutScene from 'components/LayoutScene'
+import CircularProgress from '@material-ui/core/es/CircularProgress/CircularProgress'
+import 'moment/locale/ru.js'
 import './styles/index.scss'
-import LayoutScene from './components/LayoutScene'
 
 const render = Component => {
   ReactDOM.render(
@@ -19,11 +21,13 @@ const render = Component => {
 
 render(() =>
   <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route path="/" component={LayoutScene} />
-      </Switch>
-    </Router>
+    <PersistGate loading={<CircularProgress size={50} />} persistor={persistor}>
+      <Router>
+        <Switch>
+          <Route path="/" component={LayoutScene} />
+        </Switch>
+      </Router>
+    </PersistGate>
   </Provider>
 )
 
