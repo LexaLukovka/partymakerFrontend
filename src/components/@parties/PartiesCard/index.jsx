@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-curly-spacing */
+/* eslint-disable react/jsx-curly-spacing,no-restricted-globals */
 import React from 'react'
 import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -29,6 +29,9 @@ const styles = theme => ({
     '@media only screen and (max-width: 320px)': {
       width: '95%',
     },
+  },
+  avatarInitials: {
+    background: theme.palette.primary.main,
   },
   media: {
     height: 0,
@@ -64,11 +67,26 @@ const styles = theme => ({
     paddingTop: 0,
   },
 })
+const initialsFromUsername = username => {
+  const initials = username.charAt(0).toUpperCase()
+  if (username.split(' ').length > 1) {
+    return username.split(' ')[0].charAt(0).toUpperCase() + username.split(' ')[1].charAt(0).toUpperCase()
+  }
+  if (username.length === 1) return initials
+  const numbers = parseInt(username.replace(/\D+/g, ''), 10)
+  if (!isNaN(numbers)) {
+    return initials + numbers.toString()[1].toUpperCase()
+  }
+  return initials + username.charAt(1).toUpperCase()
+}
 
 const PartiesCard = ({ classes, party, ...props }) =>
   <Card className={classes.root}>
     <CardHeader
-      avatar={<Avatar src={party.admin.avatar_url} />}
+      avatar={party.admin.avatar_url
+        ? <Avatar src={party.admin.avatar_url} />
+        : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>
+      }
       action={<IconButton><MoreVertIcon /></IconButton>}
       title={party.admin.name}
       subheader={moment(party.updated_at).fromNow()}
