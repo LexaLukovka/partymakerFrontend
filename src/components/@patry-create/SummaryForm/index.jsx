@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
 import connector from '../connector'
 import PictureUpload from './PictureUpload'
-import formik from './formik'
 
 const styles = theme => ({
   root: {
@@ -30,7 +29,25 @@ const styles = theme => ({
 class SummaryForm extends React.Component {
   componentDidMount() {
     const { actions } = this.props
+
+    this.checkRequiredFields()
+
     actions.party.update({ step: 3 })
+  }
+
+  checkRequiredFields = () => {
+    const { party, history } = this.props
+    const required = [
+      'type', 'title', 'district', 'address',
+      'startDay', 'startTime', 'peopleMin',
+      'peopleMax', 'description',
+    ]
+
+    required.forEach(field => {
+      if (party.form[field] === undefined) {
+        history.push('/party/create/step/2')
+      }
+    })
   }
 
   handleSwitch = () => {
@@ -38,18 +55,23 @@ class SummaryForm extends React.Component {
     actions.party.update({ private: !party.form.private })
   }
 
+  handleUpload = (name, value) => {
+    const { party, actions } = this.props
+    const pictures = [...party.form.pictures]
+    pictures.push(value)
+    actions.party.update({ pictures })
+  }
+
+  handleSubmit = () => {
+    const { actions, party } = this.props
+    actions.party.create(party.form)
+  }
+
   render() {
-    const {
-      classes,
-      values,
-      setFieldValue,
-      setFieldTouched,
-      handleSubmit,
-      party,
-    } = this.props
+    const { classes, party } = this.props
 
     return (
-      <form onSubmit={handleSubmit} className={classes.root}>
+      <form className={classes.root}>
         <FormControlLabel
           className={classes.checked}
           label="Приватная вечеринка"
@@ -70,17 +92,15 @@ class SummaryForm extends React.Component {
         </div>
         <PictureUpload
           name="pictures"
-          value={values.pictures}
-          onChange={setFieldValue}
-          onBlur={setFieldTouched}
+          value={party.form.pictures || []}
+          onChange={this.handleUpload}
         />
-
         <Typography variant="subheading" className={classes.typography}> Ссылка для приглашения </Typography>
         <TextField
           className={classes.mb}
           fullWidth
-          name="telegramUrl"
-          defaultValue={values.telegramUrl}
+          name="invite_url"
+          value={party.form.invite_url}
           disabled
         />
         <Grid container justify="space-between" className={classes.buttonGroup}>
@@ -89,7 +109,7 @@ class SummaryForm extends React.Component {
               Назад
             </Button>
           </Link>
-          <Button type="submit" variant="contained" color="primary"> Готово </Button>
+          <Button onClick={this.handleSubmit} variant="contained" color="primary"> Готово </Button>
         </Grid>
       </form>
     )
@@ -97,13 +117,10 @@ class SummaryForm extends React.Component {
 }
 
 SummaryForm.propTypes = {
+  history: object.isRequired,
   classes: object.isRequired,
   actions: object.isRequired,
   party: object.isRequired,
-  values: object.isRequired,
-  setFieldValue: func.isRequired,
-  setFieldTouched: func.isRequired,
-  handleSubmit: func.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(SummaryForm)))
+export default withStyles(styles)(connector(SummaryForm))

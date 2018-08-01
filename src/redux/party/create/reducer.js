@@ -9,7 +9,12 @@ const initialState = {
   errors: null,
   success: false,
   activeStep: 0,
-  form: {},
+  form: {
+    private: false,
+    pictures: [],
+    telegram_url: 'https://t.me/joinchat/FzgsKUzTAHO691HAN1qTvQ',
+    invite_url: 'https://localhost:3333/O691HAN1qTv/invite',
+  },
 }
 
 const createParty = (state = initialState, { type, payload, step }) => {

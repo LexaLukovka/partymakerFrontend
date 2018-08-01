@@ -114,12 +114,13 @@ PictureUpload.propTypes = {
   value: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   helperText: PropTypes.string,
 }
 PictureUpload.defaultProps = {
   url: '/upload',
   helperText: '',
+  onBlur: () => {},
 }
 
 export default withStyles(styles)(PictureUpload)

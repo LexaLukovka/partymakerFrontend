@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import Http from 'src/services/Http'
+import flatten from 'lodash/flattenDeep'
 
 class Party {
   all() {
@@ -21,13 +22,13 @@ class Party {
         placeId: form.address.placeId,
       },
       district: form.district,
-      pictures: form.pictures,
-      telegram_url: form.telegramUrl,
+      pictures: flatten(form.pictures),
+      telegram_url: form.telegram_url,
       description: form.description,
       people_max: form.peopleMax,
       people_min: form.peopleMin,
       start_time: form.startTime,
-      private_party: form.privateParty,
+      private_party: form.private,
     }
 
     return Http.post('/party', party)

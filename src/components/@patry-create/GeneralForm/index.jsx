@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, func, bool } from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, TextField } from '@material-ui/core'
 import Geosuggest from 'components/Geosuggest'
@@ -46,7 +46,12 @@ const styles = theme => ({
 
 class GeneralForm extends React.Component {
   componentDidMount() {
-    const { actions } = this.props
+    const { actions, party, history } = this.props
+
+    if (!party.form.type) {
+      history.push('/party/create/step/1')
+    }
+
     actions.party.update({ step: 2 })
   }
 
@@ -61,8 +66,9 @@ class GeneralForm extends React.Component {
   }
 
   render() {
+    const { classes, ...formHOC } = this.props
+
     const {
-      classes,
       values,
       isSubmitting,
       handleChange,
@@ -70,7 +76,7 @@ class GeneralForm extends React.Component {
       handleBlur,
       setFieldValue,
       setFieldTouched,
-    } = this.props
+    } = formHOC
 
     return (
       <form className={classes.root}>
@@ -80,7 +86,7 @@ class GeneralForm extends React.Component {
             fullWidth
             name="title"
             placeholder="Название"
-            value={values.title}
+            value={formik.values.title}
             onChange={handleChange}
             onBlur={handleBlur}
             error={this.hasError('title')}
@@ -213,6 +219,8 @@ class GeneralForm extends React.Component {
 }
 
 GeneralForm.propTypes = {
+  history: object.isRequired,
+  party: object.isRequired,
   actions: object.isRequired,
   classes: object.isRequired,
   errors: object.isRequired,
@@ -226,4 +234,8 @@ GeneralForm.propTypes = {
   isSubmitting: bool.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(GeneralForm)))
+const router = withRouter(GeneralForm)
+const style = withStyles(styles)(router)
+const redux = connector(style)
+
+export default formik(redux)
