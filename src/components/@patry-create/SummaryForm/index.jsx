@@ -1,18 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
-import Typography from '@material-ui/core/es/Typography/Typography'
-import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlLabel'
-import Switch from '@material-ui/core/es/Switch/Switch'
-import Button from '@material-ui/core/es/Button/Button'
-import TextField from '@material-ui/core/es/TextField/TextField'
-import Grid from '@material-ui/core/es/Grid/Grid'
+import { Link } from 'react-router-dom'
+import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
 import connector from '../connector'
 import PictureUpload from './PictureUpload'
 import formik from './formik'
 
 const styles = theme => ({
   root: {
+    padding: '0 15px',
     maxWidth: 400,
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
@@ -30,26 +27,26 @@ const styles = theme => ({
   },
 })
 
-class PartyCardFinish extends React.Component {
-  handleChange = () => {
-    this.props.actions.party.partyPrivateChecked(this.props.party.checkedPrivate)
+class SummaryForm extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props
+    actions.party.update({ step: 3 })
   }
 
-  handleBack = (activeStep) => {
-    this.props.actions.stepper.stepperNavigationBack(activeStep)
+  handleSwitch = () => {
+    const { actions, party } = this.props
+    actions.party.update({ private: !party.form.private })
   }
 
   render() {
     const {
       classes,
-      activeStep,
       values,
       setFieldValue,
       setFieldTouched,
       handleSubmit,
       party,
     } = this.props
-    const checked = party.checkedPrivate
 
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
@@ -58,8 +55,8 @@ class PartyCardFinish extends React.Component {
           label="Приватная вечеринка"
           control={<Switch
             name="checked"
-            checked={checked}
-            onChange={this.handleChange}
+            checked={party.form.private}
+            onChange={this.handleSwitch}
             color="primary"
           />}
         />
@@ -86,13 +83,12 @@ class PartyCardFinish extends React.Component {
           defaultValue={values.telegramUrl}
           disabled
         />
-        <Grid container justify="center" className={classes.buttonGroup}>
-          <Button
-            disabled={activeStep === 0}
-            onClick={() => this.handleBack(activeStep)}
-          >
-            Назад
-          </Button>
+        <Grid container justify="space-between" className={classes.buttonGroup}>
+          <Link to="/party/create/step/2">
+            <Button>
+              Назад
+            </Button>
+          </Link>
           <Button type="submit" variant="contained" color="primary"> Готово </Button>
         </Grid>
       </form>
@@ -100,15 +96,14 @@ class PartyCardFinish extends React.Component {
   }
 }
 
-PartyCardFinish.propTypes = {
-  classes: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  party: PropTypes.object.isRequired,
-  activeStep: PropTypes.number.isRequired,
-  values: PropTypes.object.isRequired,
-  setFieldValue: PropTypes.func.isRequired,
-  setFieldTouched: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+SummaryForm.propTypes = {
+  classes: object.isRequired,
+  actions: object.isRequired,
+  party: object.isRequired,
+  values: object.isRequired,
+  setFieldValue: func.isRequired,
+  setFieldTouched: func.isRequired,
+  handleSubmit: func.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(PartyCardFinish)))
+export default withStyles(styles)(connector(formik(SummaryForm)))

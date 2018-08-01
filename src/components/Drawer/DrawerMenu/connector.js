@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../../../redux/auth/action'
+import * as actions from 'src/redux/auth/action'
 
 const initMapStateToProps = store => ({
   auth: store.authReducer,

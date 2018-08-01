@@ -1,75 +1,34 @@
 import {
-  PARTY_CARD_ICON_CHECK,
-  PARTY_CARD_ICON,
-  PARTY_CARD_FORM,
-  PARTY_CARD_FINISH,
-  PARTY_PRIVATE_CHECK,
+  CREATE_PARTY_PENDING,
   CREATE_PARTY_REJECTED,
   CREATE_PARTY_FULFILLED,
+  UPDATE_PARTY_FORM,
 } from './action'
 
-import partyTypes from '../../../mock/partyTypes.json'
-
 const initialState = {
-  partyTypes,
   errors: null,
-  checkedPrivate: true,
   success: false,
-  checkClick: null,
-  typeParty: null,
-  form: null,
-  finishForm: null,
+  activeStep: 0,
+  form: {},
 }
 
-const createParty = (state = initialState, { type, payload }) => {
+const createParty = (state = initialState, { type, payload, step }) => {
   switch (type) {
-    case PARTY_CARD_ICON_CHECK: {
+    case UPDATE_PARTY_FORM:
       return {
         ...state,
-        checkClick: state.checkClick !== payload ? payload : null,
+        form: { ...state.form, ...payload },
+        activeStep: step,
       }
-    }
 
-    case PARTY_CARD_ICON: {
-      return {
-        ...state,
-        typeParty: payload,
-      }
-    }
+    case CREATE_PARTY_PENDING:
+      return { ...state, loading: true }
 
-    case PARTY_CARD_FORM: {
-      return {
-        ...state,
-        form: payload,
-      }
-    }
+    case CREATE_PARTY_FULFILLED:
+      return { ...state, success: payload }
 
-    case PARTY_CARD_FINISH: {
-      return {
-        ...state,
-        finishForm: payload,
-      }
-    }
-
-    case PARTY_PRIVATE_CHECK: {
-      return {
-        ...state,
-        checkedPrivate: !payload,
-      }
-    }
-
-    case CREATE_PARTY_REJECTED: {
-      return {
-        ...state,
-        errors: payload,
-      }
-    }
-    case CREATE_PARTY_FULFILLED: {
-      return {
-        ...state,
-        success: payload,
-      }
-    }
+    case CREATE_PARTY_REJECTED:
+      return { ...state, errors: payload }
 
     default:
       return state

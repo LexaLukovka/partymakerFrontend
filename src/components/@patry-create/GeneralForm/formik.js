@@ -1,4 +1,5 @@
 import { withFormik } from 'formik'
+import moment from 'moment'
 import * as Yup from 'yup'
 
 const formik = withFormik({
@@ -15,18 +16,29 @@ const formik = withFormik({
 
   mapPropsToValues: () => ({
     title: '',
-    district: '',
-    address: '',
-    startDay: '',
-    startTime: '',
-    peopleMin: '',
-    peopleMax: '',
+    district: 'Шевчик',
+    address: {
+      formatted_address: '',
+      geometry: {
+        location: {
+          lat: 0,
+          lng: 0,
+        },
+      },
+    },
+    startDay: moment(new Date()).format('YYYY-MM-DD'),
+    startTime: '20:00',
+    peopleMin: 5,
+    peopleMax: 10,
     description: '',
   }),
 
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.actions.party.partyCardForm(values)
-    props.actions.stepper.stepperNavigationNext(props.activeStep)
+  handleSubmit: (form, { props, setSubmitting }) => {
+    const { actions, history } = props
+
+    actions.party.update(form)
+    history.push('/party/create/step/3')
+
     setSubmitting(false)
   },
   displayName: 'PartyCreate',

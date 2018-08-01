@@ -1,16 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles/index'
-import Button from '@material-ui/core/es/Button/Button'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import Typography from '@material-ui/core/es/Typography/Typography'
-import TextField from '@material-ui/core/es/TextField/TextField'
+import { object, func, bool } from 'prop-types'
+import { Link } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles'
+import { Button, Grid, Typography, TextField } from '@material-ui/core'
+import Geosuggest from 'components/Geosuggest'
 import formik from './formik'
-import Geosuggest from '../../Geosuggest'
 import connector from '../connector'
 
 const styles = theme => ({
   root: {
+    padding: '0 15px',
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
       marginTop: theme.spacing.size1,
@@ -45,9 +44,10 @@ const styles = theme => ({
   },
 })
 
-class PartyCardForm extends React.Component {
-  handleBack = (activeStep) => {
-    this.props.actions.stepper.stepperNavigationBack(activeStep)
+class GeneralForm extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props
+    actions.party.update({ step: 2 })
   }
 
   hasError = (fieldName) => {
@@ -63,7 +63,6 @@ class PartyCardForm extends React.Component {
   render() {
     const {
       classes,
-      activeStep,
       values,
       isSubmitting,
       handleChange,
@@ -74,7 +73,7 @@ class PartyCardForm extends React.Component {
     } = this.props
 
     return (
-      <form onSubmit={handleSubmit} className={classes.root}>
+      <form className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">Название вечеринки</Typography>
           <TextField
@@ -189,16 +188,18 @@ class PartyCardForm extends React.Component {
             helperText={this.showHelperError('description')}
           />
         </div>
-        <Grid container justify="center" className={classes.buttonGroup}>
+        <Grid container justify="space-between" className={classes.buttonGroup}>
+          <Link to="/party/create/step/1">
+            <Button
+              size="large"
+              disabled={isSubmitting}
+            >
+              Назад
+            </Button>
+          </Link>
           <Button
-            disabled={activeStep === 0}
-            onClick={() => this.handleBack(activeStep)}
-          >
-            Назад
-          </Button>
-          <Button
-            type="submit"
-            variant="contained"
+            onClick={handleSubmit}
+            variant="raised"
             size="large"
             color="primary"
             disabled={isSubmitting}
@@ -211,19 +212,18 @@ class PartyCardForm extends React.Component {
   }
 }
 
-PartyCardForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  activeStep: PropTypes.number.isRequired,
-  errors: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired,
-  setFieldValue: PropTypes.func.isRequired,
-  setFieldTouched: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  isSubmitting: PropTypes.bool.isRequired,
+GeneralForm.propTypes = {
+  actions: object.isRequired,
+  classes: object.isRequired,
+  errors: object.isRequired,
+  touched: object.isRequired,
+  values: object.isRequired,
+  setFieldValue: func.isRequired,
+  setFieldTouched: func.isRequired,
+  handleChange: func.isRequired,
+  handleBlur: func.isRequired,
+  handleSubmit: func.isRequired,
+  isSubmitting: bool.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(PartyCardForm)))
+export default withStyles(styles)(connector(formik(GeneralForm)))

@@ -1,35 +1,19 @@
 /* eslint-disable class-methods-use-this */
-import Cache from '../Cache'
-import Http from '../Http'
+import Http from 'src/services/Http'
 
 class Party {
   all() {
     return Http.get('/party')
   }
 
-  createIcon(name) {
-    Cache.put('icon', name)
-    return name
+  find(id) {
+    return Http.get(`/party/${id}`)
   }
 
-  createForm(form) {
-    Cache.put('form', form)
-    return form
-  }
-
-  createFinish(form) {
-    Cache.put('finish', form)
-    return form
-  }
-
-  createParty() {
-    const icon = Cache.get('icon')
-    const form = Cache.get('form')
-    const finishForm = Cache.get('finish')
-
+  create(form) {
     const party = {
       title: form.title,
-      type: icon.icon,
+      type: form.type,
       address: {
         address: form.address.formatted_address,
         lng: form.address.geometry.location.lng,
@@ -37,13 +21,13 @@ class Party {
         placeId: form.address.placeId,
       },
       district: form.district,
-      pictures: finishForm.pictures,
-      telegram_url: finishForm.telegramUrl,
+      pictures: form.pictures,
+      telegram_url: form.telegramUrl,
       description: form.description,
       people_max: form.peopleMax,
       people_min: form.peopleMin,
       start_time: form.startTime,
-      private_party: finishForm.privateParty,
+      private_party: form.privateParty,
     }
 
     return Http.post('/party', party)

@@ -1,61 +1,43 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
 import Typography from '@material-ui/core/es/Typography/Typography'
-import Button from '@material-ui/core/es/Button/Button'
 import connector from '../connector'
-import Tags from './Tags'
+import TagList from './TagList'
 
-const styles = theme => ({
+const styles = {
   root: {
-    maxWidth: 400,
-    marginTop: theme.spacing.size4,
     textAlign: 'center',
-    '@media only screen and (max-width: 320px)': {
-      marginTop: theme.spacing.size1,
-    },
   },
-  buttonGroup: {
-    marginTop: theme.spacing.size4,
-  },
-})
+}
 
-class PartyCardIcon extends React.Component {
-  handleSubmit = (event) => {
-    event.preventDefault()
-    if (this.props.party.checkClick) {
-      this.props.actions.party.partyCardIcon(this.props.party.checkClick)
-      this.props.actions.stepper.stepperNavigationNext(this.props.activeStep)
-    }
+class TypeForm extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props
+    actions.party.update({ step: 1 })
+  }
+
+  handleSelect = (type) => {
+    const { actions, history } = this.props
+    actions.party.update({ type })
+    history.push('/party/create/step/2')
   }
 
   render() {
-    const { classes, party } = this.props
+    const { classes } = this.props
     return (
-      <form onSubmit={this.handleSubmit} className={classes.root}>
-        <Typography variant="subheading">Выберите теги которые больше всего подходят к вашей вечеринке</Typography>
-        <Tags />
-        <div className={classes.buttonGroup}>
-          <Button
-            type="submit"
-            disabled={!party.checkClick}
-            variant="contained"
-            size="large"
-            color="primary"
-          >
-            Дальше
-          </Button>
-        </div>
+      <form className={classes.root}>
+        <Typography variant="subheading">Выберите тип вашей вечеринки</Typography>
+        <TagList onSelect={this.handleSelect} />
       </form>
     )
   }
 }
 
-PartyCardIcon.propTypes = {
-  classes: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  party: PropTypes.object.isRequired,
-  activeStep: PropTypes.number.isRequired,
+TypeForm.propTypes = {
+  classes: object.isRequired,
+  history: object.isRequired,
+  actions: object.isRequired,
 }
 
-export default withStyles(styles)(connector(PartyCardIcon))
+export default withStyles(styles)(connector(TypeForm))
