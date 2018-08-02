@@ -5,6 +5,8 @@ import LinearProgress from '@material-ui/core/es/LinearProgress/LinearProgress'
 import FormControl from '@material-ui/core/es/FormControl/FormControl'
 import FormHelperText from '@material-ui/core/es/FormHelperText/FormHelperText'
 import { withStyles } from '@material-ui/core/styles'
+import uniq from 'lodash/uniq'
+import flatten from 'lodash/flattenDeep'
 import PictureList from './PictureList'
 import Http from '../../../../services/Http'
 import AddPicture from './AddPicture'
@@ -29,7 +31,7 @@ class PictureUpload extends React.Component {
     this.state = {
       pictures: [],
       percent: 0,
-      saved: props.value,
+      saved: uniq(flatten(props.value)),
     }
 
     this.handleClickInput = this.handleClickInput.bind(this)
@@ -41,7 +43,7 @@ class PictureUpload extends React.Component {
       reader.onload = () => {
         const { pictures } = this.state
         pictures.push(reader.result)
-        this.setState({ pictures })
+        this.setState({ pictures: uniq(pictures) })
       }
       reader.readAsDataURL(image)
     }
@@ -73,7 +75,7 @@ class PictureUpload extends React.Component {
     const image = e.target.files[0]
     await this.upload(image)
     this.add(image)
-    this.props.onChange(this.props.name, this.state.saved)
+    this.props.onChange(this.props.name, flatten(this.state.saved))
   }
 
   handleBlur = () => {

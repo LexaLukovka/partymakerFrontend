@@ -67,10 +67,8 @@ class SummaryForm extends React.Component {
   }
 
   handleUpload = (name, value) => {
-    const { party, actions } = this.props
-    const pictures = [...party.form.pictures]
-    pictures.push(value)
-    actions.party.update({ pictures })
+    const { actions } = this.props
+    actions.party.update({ pictures: value })
   }
 
   handleSubmit = () => {
