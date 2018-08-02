@@ -18,6 +18,13 @@ const styles = theme => ({
   mb: {
     marginBottom: theme.spacing.size3,
   },
+  button: {
+    // background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
+    marginRight: theme.spacing.size4,
+  },
+  buttonGroup: {
+    marginTop: theme.spacing.size3,
+  },
   typography: {
     marginBottom: theme.spacing.size1,
   },
@@ -119,13 +126,15 @@ class SummaryForm extends React.Component {
         />
         <Grid container justify="space-between" className={classes.buttonGroup}>
           <Link to="/party/create/step/2">
-            <Button>
+            <Button size="large">
               Назад
             </Button>
           </Link>
           <Button
             onClick={this.handleSubmit}
+            className={classes.button}
             variant="contained"
+            size="large"
             color="primary"
             disabled={party.loading && !party.error}
           >

@@ -27,7 +27,7 @@ const styles = theme => ({
   },
   button: {
     // background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
-    marginRight: theme.spacing.size2,
+    marginRight: theme.spacing.size4,
   },
   flex: {
     display: 'flex',
@@ -202,7 +202,7 @@ class GeneralForm extends React.Component {
           <Button
             className={classes.button}
             onClick={handleSubmit}
-            variant="raised"
+            variant="contained"
             size="large"
             color="primary"
             disabled={isSubmitting}

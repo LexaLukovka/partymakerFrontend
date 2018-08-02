@@ -10,10 +10,13 @@ import Button from '@material-ui/core/es/Button/Button'
 import isEmpty from 'lodash/isEmpty'
 import Loading from '../Loading'
 import NotFound from '../NotFound'
+import { CSSTransition } from 'react-transition-group'
+import './style.css'
 
 const styles = (theme) => ({
   root: {
     overflowX: 'hidden',
+    position: 'relative',
     height: 800,
     background: theme.palette.common.white,
   },
@@ -23,20 +26,20 @@ const styles = (theme) => ({
   },
   papers: {
     position: 'absolute',
-    transaction: 'height 2s',
-    top: 250,
+    top: 200,
     left: 0,
-    margin: 10,
+    right: 0,
+    margin: 9,
   },
   paperse: {
-    top: 0,
     marginTop: 20,
+    '@media only screen and (max-width: 320px)': {
+      marginLeft: 9,
+      marginRight: 9,
+    },
   },
   container: {
     display: 'flex',
-  },
-  paper: {
-    margin: theme.spacing.unit,
   },
   svg: {
     width: 100,
@@ -75,22 +78,28 @@ class PartyScene extends React.Component {
         <div onClick={() => this.handleClick(checked)}>
           <Carousel pictures={party.pictures} />
         </div>
-        <div className={!checked ? classes.papers : classes.paperse}>
-          <PartyCard
-            amount="100"
-            table="Пицца"
-            admin={party.admin}
-            title={party.title}
-            status={party.status}
-            minCount={party.people_min}
-            maxCount={party.people_max}
-            address={party.address}
-            startTime={party.start_time}
-            telegramUrl={party.telegram_url}
-            description={party.description}
-          />
-          <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
-        </div>
+        <CSSTransition
+          in={checked}
+          timeout={500}
+          classNames="star"
+        >
+          <div className={!checked ? classes.papers : classes.paperse}>
+            <PartyCard
+              amount="100"
+              table="Пицца"
+              admin={party.admin}
+              title={party.title}
+              status={party.status}
+              minCount={party.people_min}
+              maxCount={party.people_max}
+              address={party.address}
+              startTime={party.start_time}
+              telegramUrl={party.telegram_url}
+              description={party.description}
+            />
+            <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
+          </div>
+        </CSSTransition>
       </Container>
     )
   }
