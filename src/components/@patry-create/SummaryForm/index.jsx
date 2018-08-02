@@ -36,9 +36,13 @@ class SummaryForm extends React.Component {
   }
 
   componentDidUpdate() {
-    const { party, history } = this.props
+    const { party, history, actions } = this.props
     if (party.success) {
+      actions.party.reset()
       history.push('/parties')
+    }
+    if (party.error) {
+      actions.party.reset()
     }
   }
 
