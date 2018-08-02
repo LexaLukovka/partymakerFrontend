@@ -1,5 +1,3 @@
-import Cache from 'src/services/Cache'
-
 import {
   LOGIN_USER_FULFILLED,
   LOGIN_USER_PENDING,
@@ -59,7 +57,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case REGISTER_USER_FULFILLED: {
       return {
         ...state,
-        user: Cache.get('user'),
+        user: payload,
         loading: false,
       }
     }

@@ -38,6 +38,7 @@
     "lodash-clean": "^2.0.1",
     "mdi-react": "^4.0.0",
     "moment": "^2.22.2",
+    "npm": "^6.3.0",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",

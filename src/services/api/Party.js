@@ -19,7 +19,7 @@ class Party {
         address: form.address.formatted_address,
         lng: form.address.geometry.location.lng,
         lat: form.address.geometry.location.lat,
-        placeId: form.address.placeId,
+        placeId: form.address.place_id,
       },
       district: form.district,
       pictures: flatten(form.pictures),

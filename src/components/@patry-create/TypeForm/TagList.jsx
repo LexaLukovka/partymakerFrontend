@@ -5,11 +5,6 @@ import TypeTag from './TypeTag'
 import partyTypes from 'src/mock/partyTypes.json'
 
 class TagList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
   handleClick = type => () => {
     this.props.onSelect(type)
   }

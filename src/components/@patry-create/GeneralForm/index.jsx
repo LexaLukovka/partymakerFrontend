@@ -26,12 +26,8 @@ const styles = theme => ({
     maxWidth: 70,
   },
   button: {
-    color: 'white',
-    background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
-    marginTop: theme.spacing.size4,
-    '@media only screen and (max-width: 320px)': {
-      marginTop: theme.spacing.size3,
-    },
+    // background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
+    marginRight: theme.spacing.size2,
   },
   flex: {
     display: 'flex',
@@ -204,6 +200,7 @@ class GeneralForm extends React.Component {
             </Button>
           </Link>
           <Button
+            className={classes.button}
             onClick={handleSubmit}
             variant="raised"
             size="large"
