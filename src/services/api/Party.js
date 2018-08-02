@@ -17,8 +17,8 @@ class Party {
       type: form.type,
       address: {
         address: form.address.formatted_address,
-        lng: form.address.geometry.location.lng,
-        lat: form.address.geometry.location.lat,
+        lng: form.address.geometry.location.lng(),
+        lat: form.address.geometry.location.lat(),
         placeId: form.address.place_id,
       },
       district: form.district,

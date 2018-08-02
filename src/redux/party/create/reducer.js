@@ -31,7 +31,11 @@ const createParty = (state = initialState, { type, payload, step }) => {
       return { ...state, loading: true }
 
     case CREATE_PARTY_FULFILLED:
-      return { ...state, success: true, form: initialState.form }
+      return { ...state,
+        success: true,
+        loading: false,
+        form: initialState.form,
+      }
 
     case CREATE_PARTY_REJECTED:
       return { ...state, error: payload }
@@ -41,6 +45,7 @@ const createParty = (state = initialState, { type, payload, step }) => {
         ...state,
         error: null,
         success: false,
+        loading: false,
         form: initialState.form,
       }
     default:
