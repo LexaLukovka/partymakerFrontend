@@ -1,18 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
-import Typography from '@material-ui/core/es/Typography/Typography'
-import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlLabel'
-import Switch from '@material-ui/core/es/Switch/Switch'
-import Button from '@material-ui/core/es/Button/Button'
-import TextField from '@material-ui/core/es/TextField/TextField'
-import Grid from '@material-ui/core/es/Grid/Grid'
+import { Link } from 'react-router-dom'
+import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
 import connector from '../connector'
 import PictureUpload from './PictureUpload'
-import formik from './formik'
 
 const styles = theme => ({
   root: {
+    padding: '0 15px',
     maxWidth: 400,
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
@@ -30,36 +26,70 @@ const styles = theme => ({
   },
 })
 
-class PartyCardFinish extends React.Component {
-  handleChange = () => {
-    this.props.actions.party.partyPrivateChecked(this.props.party.checkedPrivate)
+class SummaryForm extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props
+
+    this.checkRequiredFields()
+
+    actions.party.update({ step: 3 })
   }
 
-  handleBack = (activeStep) => {
-    this.props.actions.stepper.stepperNavigationBack(activeStep)
+  componentDidUpdate() {
+    const { party, history, actions } = this.props
+    if (party.success) {
+      actions.party.reset()
+      history.push('/parties')
+    }
+    if (party.error) {
+      actions.party.reset()
+    }
+  }
+
+  checkRequiredFields = () => {
+    const { party, history } = this.props
+    const required = [
+      'type', 'title', 'district', 'address',
+      'startDay', 'startTime', 'peopleMin',
+      'peopleMax', 'description',
+    ]
+
+    required.forEach(field => {
+      if (party.form[field] === undefined) {
+        history.push('/party/create/step/2')
+      }
+    })
+  }
+
+  handleSwitch = () => {
+    const { actions, party } = this.props
+    actions.party.update({ private: !party.form.private, step: 3 })
+  }
+
+  handleUpload = (name, value) => {
+    const { actions } = this.props
+    actions.party.update({ pictures: value })
+  }
+
+  handleSubmit = () => {
+    const { actions, party } = this.props
+    actions.party.create(party.form)
   }
 
   render() {
-    const {
-      classes,
-      activeStep,
-      values,
-      setFieldValue,
-      setFieldTouched,
-      handleSubmit,
-      party,
-    } = this.props
-    const checked = party.checkedPrivate
-
+    const { classes, party } = this.props
     return (
-      <form onSubmit={handleSubmit} className={classes.root}>
+      <form className={classes.root}>
+        <Typography gutterBottom color="error">
+          {party.error && `${party.error.status} ошибка создания вечеринки ${party.error.data.error.message}`}
+        </Typography>
         <FormControlLabel
           className={classes.checked}
           label="Приватная вечеринка"
           control={<Switch
             name="checked"
-            checked={checked}
-            onChange={this.handleChange}
+            checked={party.form.private}
+            onChange={this.handleSwitch}
             color="primary"
           />}
         />
@@ -68,47 +98,50 @@ class PartyCardFinish extends React.Component {
         </Typography>
         <div className={classes.mb}>
           <Typography variant="body1" className={classes.typography}>
-            Если у вас есть фотографии с места вечеринки, пожалуйста загрузите их, чтобы друзья понимали куда идут
+            Если у вас есть фотографии с места вечеринки,
+            пожалуйста загрузите их, чтобы друзья понимали куда идут
           </Typography>
         </div>
         <PictureUpload
           name="pictures"
-          value={values.pictures}
-          onChange={setFieldValue}
-          onBlur={setFieldTouched}
+          value={party.form.pictures || []}
+          onChange={this.handleUpload}
         />
-
-        <Typography variant="subheading" className={classes.typography}> Ссылка для приглашения </Typography>
+        <Typography variant="subheading" className={classes.typography}>
+          Ссылка для приглашения
+        </Typography>
         <TextField
           className={classes.mb}
           fullWidth
-          name="telegramUrl"
-          defaultValue={values.telegramUrl}
+          name="invite_url"
+          value={party.form.invite_url}
           disabled
         />
-        <Grid container justify="center" className={classes.buttonGroup}>
+        <Grid container justify="space-between" className={classes.buttonGroup}>
+          <Link to="/party/create/step/2">
+            <Button>
+              Назад
+            </Button>
+          </Link>
           <Button
-            disabled={activeStep === 0}
-            onClick={() => this.handleBack(activeStep)}
+            onClick={this.handleSubmit}
+            variant="contained"
+            color="primary"
+            disabled={party.loading && !party.error}
           >
-            Назад
+            {party.loading && !party.error ? 'Создание...' : 'Готово'}
           </Button>
-          <Button type="submit" variant="contained" color="primary"> Готово </Button>
         </Grid>
       </form>
     )
   }
 }
 
-PartyCardFinish.propTypes = {
-  classes: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  party: PropTypes.object.isRequired,
-  activeStep: PropTypes.number.isRequired,
-  values: PropTypes.object.isRequired,
-  setFieldValue: PropTypes.func.isRequired,
-  setFieldTouched: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+SummaryForm.propTypes = {
+  history: object.isRequired,
+  classes: object.isRequired,
+  actions: object.isRequired,
+  party: object.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(PartyCardFinish)))
+export default withStyles(styles)(connector(SummaryForm))

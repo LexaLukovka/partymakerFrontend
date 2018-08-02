@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-
 module.exports = {
   mode: 'development',
   resolve: {
@@ -12,7 +11,7 @@ module.exports = {
     alias: {
       components: path.resolve(__dirname, './src/components/'),
       services: path.resolve(__dirname, './src/services/'),
-      redux: path.resolve(__dirname, './src/redux/'),
+      state: path.resolve(__dirname, './src/redux/'),
       utils: path.resolve(__dirname, './src/utils/'),
       src: path.resolve(__dirname, './src/'),
     },

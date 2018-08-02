@@ -35,7 +35,6 @@ class Http {
   async post(url, params) {
     this.refreshToken()
     const [err, response] = await to(this.instance.post(url, params))
-
     if (err) {
       if (!err.response) {
         throw err.response.data

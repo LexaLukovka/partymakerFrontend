@@ -6,7 +6,7 @@ import Header from './Header'
 import Alert from './Alert'
 import AuthRoute from './@auth/AuthRoute'
 import SettingsScene from './@settings/SettingsScene'
-import PartyCreateScene from './@patry-create/PartyCreateScene'
+import CreateLayout from './@patry-create/CreateLayout'
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@party/PartyScene'
 import Drawer from './Drawer'
@@ -19,7 +19,7 @@ const LayoutScene = () =>
       <Switch>
         <Route exact path="/" component={IndexScene} />
         <AuthRoute exact path="/settings" component={SettingsScene} />
-        <AuthRoute exact path="/party/create" component={PartyCreateScene} />
+        <AuthRoute path="/party/create" component={CreateLayout} />
         <Route exact path="/parties" component={PartiesScene} />
         <Route exact path="/parties/:id" component={PartyScene} />
         <Route path="/" component={AuthLayout} />

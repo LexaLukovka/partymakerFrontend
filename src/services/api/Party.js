@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import Cache from '../Cache'
-import Http from '../Http'
+import Http from 'services/Http'
+import flatten from 'lodash/flattenDeep'
 
 class Party {
   all() {
@@ -11,43 +11,24 @@ class Party {
     return Http.get(`/party/${id}`)
   }
 
-  createIcon(name) {
-    Cache.put('icon', name)
-    return name
-  }
-
-  createForm(form) {
-    Cache.put('form', form)
-    return form
-  }
-
-  createFinish(form) {
-    Cache.put('finish', form)
-    return form
-  }
-
-  createParty() {
-    const icon = Cache.get('icon')
-    const form = Cache.get('form')
-    const finishForm = Cache.get('finish')
-
+  create(form) {
     const party = {
       title: form.title,
-      type: icon.icon,
+      type: form.type,
       address: {
         address: form.address.formatted_address,
-        lng: form.address.geometry.location.lng,
-        lat: form.address.geometry.location.lat,
-        placeId: form.address.placeId,
+        lng: form.address.geometry.location.lng(),
+        lat: form.address.geometry.location.lat(),
+        placeId: form.address.place_id,
       },
       district: form.district,
-      pictures: finishForm.pictures,
-      telegram_url: finishForm.telegramUrl,
+      pictures: flatten(form.pictures),
+      telegram_url: form.telegram_url,
       description: form.description,
       people_max: form.peopleMax,
       people_min: form.peopleMin,
       start_time: form.startTime,
-      private_party: finishForm.privateParty,
+      private_party: form.private,
     }
 
     return Http.post('/party', party)

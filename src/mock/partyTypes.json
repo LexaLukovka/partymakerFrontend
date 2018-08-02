@@ -3,60 +3,60 @@
     "id": 0,
     "name": "picnic",
     "icon": "restaurant",
-    "description": "Пикник"
+    "title": "Пикник"
   },
   {
     "id": 1,
     "name": "apartment",
     "icon": "home",
-    "description": "Квартира"
+    "title": "Квартира"
   },
   {
     "id": 2,
     "name": "countryHouse",
     "icon": "store",
-    "description": "Дача"
+    "title": "Дача"
   },
   {
     "id": 3,
     "name": "beach",
     "icon": "beach_access",
-    "description": "Пляж"
+    "title": "Пляж"
   },
   {
     "id": 4,
     "name": "area",
     "icon": "location_on",
-    "description": "На площади"
+    "title": "На площади"
   },
   {
     "id": 5,
     "name": "thematic",
     "icon": "local_bar",
-    "description": "Тематическая"
+    "title": "Тематическая"
   },
   {
     "id": 6,
     "name": "car",
     "icon": "directions_car",
-    "description": "Автомобили"
+    "title": "Автомобили"
   },
   {
     "id": 7,
     "name": "motorbike",
     "icon": "motorcycle",
-    "description": "Мотоциклы"
+    "title": "Мотоциклы"
   },
   {
     "id": 8,
     "name": "bike",
     "icon": "directions_bike",
-    "description": "Велосипеды"
+    "title": "Велосипеды"
   },
   {
     "id": 9,
     "name": "other",
     "icon": "my_location",
-    "description": "Другое"
+    "title": "Другое"
   }
 ]

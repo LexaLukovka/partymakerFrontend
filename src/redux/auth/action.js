@@ -35,19 +35,7 @@ export const login = (form) => async dispatch => {
 export const logout = () => dispatch => {
   dispatch({
     type: LOGOUT_USER,
-    payload: User.logout(),
   })
 
   dispatch(alert.show('Logged out'))
-}
-
-export const getSavedUser = () => async dispatch => {
-  await dispatch({
-    type: LOAD_SAVED_USER,
-    payload: User.getSaved(),
-  })
-
-  if (User.getSaved()) {
-    dispatch(alert.show('Logged in'))
-  }
 }
