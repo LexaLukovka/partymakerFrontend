@@ -3,6 +3,7 @@ import {
   CREATE_PARTY_REJECTED,
   CREATE_PARTY_FULFILLED,
   UPDATE_PARTY_FORM,
+  RESET_PARTY_FORM,
 } from './action'
 
 const initialState = {
@@ -35,6 +36,13 @@ const createParty = (state = initialState, { type, payload, step }) => {
     case CREATE_PARTY_REJECTED:
       return { ...state, error: payload }
 
+    case RESET_PARTY_FORM:
+      return {
+        ...state,
+        error: null,
+        success: false,
+        form: initialState.form,
+      }
     default:
       return state
   }

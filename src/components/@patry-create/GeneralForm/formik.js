@@ -18,7 +18,7 @@ const dummyGeosuggest = {
 const initValues = (form) => ({
   title: form.title || '',
   district: form.district || 'Шевчик',
-  address: form.address || dummyGeosuggest,
+  address: form.address,
   startDay: form.startDay || moment(new Date()).format('YYYY-MM-DD'),
   startTime: form.startTime || '20:00',
   peopleMin: form.peopleMin || 5,
@@ -29,7 +29,7 @@ const initValues = (form) => ({
 const rules = Yup.object().shape({
   title: Yup.string().required('Это поле является обязательным'),
   district: Yup.string().required('Это поле является обязательным'),
-  address: Yup.object().required('Это поле является обязательным'),
+  address: Yup.string().required('Это поле является обязательным для заполнения!'),
   startDay: Yup.string().required('Это поле является обязательным'),
   startTime: Yup.string().required('Это поле является обязательным'),
   peopleMin: Yup.number().required('Это поле является обязательным'),
@@ -39,6 +39,11 @@ const rules = Yup.object().shape({
 
 const handleSubmit = props => (formValues, methods) => {
   const { actions, history } = props
+
+  if (formValues.address.formatted_address === '') {
+    methods.setError('address', 'Пожалуйста выберите из списка')
+  }
+
   actions.party.update(formValues)
   history.push('/party/create/step/3')
 
