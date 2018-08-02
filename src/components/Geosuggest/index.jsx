@@ -12,26 +12,12 @@ class Geosuggest extends Component {
   }
 
   componentDidMount() {
-    if (typeof window.google !== 'undefined' && typeof window.google.maps !== 'undefined') {
-      const inputElement = document.getElementsByName(this.props.name)[0]
-      this.apiObj = new window.google.maps.places.Autocomplete(inputElement, this.props.options)
-      this.apiObj.addListener('place_changed', () => {
-        this.props.onChange(this.props.name, this.apiObj.getPlace())
-        this.setState({
-          value: this.apiObj.getPlace().formatted_address,
-        })
-      })
+    if (this.isGoogleAvailable()) {
+      this.apiObj = this.initAutocomplete()
+
+      this.apiObj.addListener('place_changed', this.handleChange)
     } else {
-      console.warn('Google API object is not defined')
-      this.props.onChange(this.props.name, {
-        formatted_address: this.state.value,
-        geometry: {
-          location: {
-            lat: () => 0,
-            lng: () => 0,
-          },
-        },
-      })
+      this.setDummyAddress()
     }
   }
 
@@ -39,8 +25,29 @@ class Geosuggest extends Component {
     document.removeEventListener('click', this.apiObj)
   }
 
+  setDummyAddress = () => {
+    console.warn('Google API object is not defined')
+    this.props.onChange(this.props.name, {
+      formatted_address: this.state.value,
+      geometry: {
+        location: {
+          lat: () => 0,
+          lng: () => 0,
+        },
+      },
+    })
+  }
+
+  initAutocomplete = () => {
+    const inputElement = document.getElementsByName(this.props.name)[0]
+    return new window.google.maps.places.Autocomplete(inputElement, this.props.options)
+  }
+
+  isGoogleAvailable = () => typeof window.google !== 'undefined' && typeof window.google.maps !== 'undefined'
+
   handleChange = event => {
-    this.setState({ value: event.target.value })
+    const { textValue } = this.state
+    this.props.onChange(this.props.name, { ...this.apiObj.getPlace(), textValue })
   }
 
   handleBlur = () => {
@@ -49,13 +56,16 @@ class Geosuggest extends Component {
 
   render() {
     const {
+      helperText,
+      value,
       ...props
     } = this.props
 
     return (
       <TextField
         {...props}
-        value={this.state.value}
+        helperText={helperText || ''}
+        defaultValue={value.formatted_address}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
       />
@@ -68,11 +78,13 @@ Geosuggest.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onBlur: PropTypes.func,
+  helperText: PropTypes.node,
   options: PropTypes.shape({}),
 }
 
 Geosuggest.defaultProps = {
   name: 'geosuggest',
+  helperText: null,
   value: '',
   onChange: () => {},
   onBlur: () => {},
