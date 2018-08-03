@@ -32,6 +32,7 @@ export const login = (form) => async dispatch => {
   dispatch(alert.show(error || 'Вы вошли'))
 }
 
+// noinspection JSUnusedGlobalSymbols
 export const logout = () => dispatch => {
   dispatch({
     type: LOGOUT_USER,

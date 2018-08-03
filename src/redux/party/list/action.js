@@ -5,7 +5,7 @@ export const OUTPUT_PARTY_PENDING = 'OUTPUT_PARTY_PENDING'
 export const OUTPUT_PARTY_REJECTED = 'OUTPUT_PARTY_REJECTED'
 export const OUTPUT_PARTY_FULFILLED = 'OUTPUT_PARTY_FULFILLED'
 
-
+// noinspection JSUnusedGlobalSymbols
 export const outputParty = () => ({
   type: OUTPUT_PARTY,
   payload: Party.all(),
