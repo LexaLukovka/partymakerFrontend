@@ -1,5 +1,5 @@
 .star-enter {
-    transform: translateY(-100px);
+    transform: translateY(-90px);
     /*position: ;*/
 }
 
@@ -9,7 +9,7 @@
 }
 
 .star-exit {
-    transform: translateY(100px);
+    transform: translateY(90px);
 }
 
 .star-exit-active {

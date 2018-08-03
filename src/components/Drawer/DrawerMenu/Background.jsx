@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const url = 'http://localhost:3333/images/ubuntu.jpg'
+const url = 'http://localhost:3333/images/Gec.jpg'
 const style = {
   backgroundImage: `url(${url})`,
   backgroundSize: 'cover',

@@ -18,19 +18,6 @@ const styles = {
 const BannerButton = ({ classes }) =>
   <div>
     <Grid item className={classes.root}>
-      <Link to="/parties">
-        <Button
-          className={classes.button}
-          fullWidth
-          variant="contained"
-          size="large"
-          color="primary"
-        >
-          Найти вечеринку
-        </Button>
-      </Link>
-    </Grid>
-    <Grid item>
       <Link to="/party/create">
         <Button
           className={classes.button}
@@ -40,6 +27,19 @@ const BannerButton = ({ classes }) =>
           color="primary"
         >
           Создать вечеринку
+        </Button>
+      </Link>
+    </Grid>
+    <Grid item>
+      <Link to="/parties">
+        <Button
+          className={classes.button}
+          fullWidth
+          variant="contained"
+          size="large"
+          color="primary"
+        >
+          Найти вечеринку
         </Button>
       </Link>
     </Grid>
