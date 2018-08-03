@@ -21,6 +21,7 @@ import Checkbox from '@material-ui/core/Checkbox/Checkbox'
 import moment from 'moment'
 import connector from '../connector'
 import initialsFromUsername from 'src/utils/initialsFromUsername'
+import isEmpty from 'lodash/isEmpty'
 
 const styles = theme => ({
   root: {
@@ -80,6 +81,7 @@ class PartiesCard extends React.Component {
 
   render() {
     const { classes, party } = this.props
+    const url = 'http://localhost:3333/images/parties.jpg'
     return (
       <Card className={classes.root}>
         <CardHeader
@@ -92,7 +94,7 @@ class PartiesCard extends React.Component {
           subheader={moment(party.updated_at).fromNow()}
         />
         <CardContent className={classes.cardContent}>
-          <Avatar src={party.primary_picture} className={classes.picture} />
+          <Avatar src={isEmpty(party.primary_picture) ? url : party.primary_picture} className={classes.picture} />
           <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
           <PartiesCardDescription
             maxCount={party.people_max}

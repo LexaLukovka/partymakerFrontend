@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Avatar from '@material-ui/core/es/Avatar/Avatar'
+import isEmpty from 'lodash/isEmpty'
 
 const styles = {
   root: {
@@ -29,10 +30,13 @@ class Carousel extends React.Component {
 
   render() {
     const { classes, pictures } = this.props
+    const url = 'http://localhost:3333/images/parties.jpg'
     return (
       <div className={classes.root}>
         <Slider {...this.settings}>
-          {pictures.map(picture => <Avatar key={picture} className={classes.picture} src={picture.url} />)}
+          {isEmpty(pictures)
+            ? <Avatar className={classes.picture} src={url} />
+            : pictures.map(picture => <Avatar key={picture} className={classes.picture} src={picture.url} />)}
         </Slider>
       </div>
     )
