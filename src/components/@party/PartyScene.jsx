@@ -17,7 +17,7 @@ const styles = (theme) => ({
   root: {
     overflowX: 'hidden',
     position: 'relative',
-    height: 800,
+    height: '100%',
     background: theme.palette.common.white,
   },
   loading: {
