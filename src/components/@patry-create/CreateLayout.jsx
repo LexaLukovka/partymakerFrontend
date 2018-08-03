@@ -17,6 +17,14 @@ const styles = () => ({
 })
 
 class CreateLayout extends React.Component {
+  componentDidMount() {
+    this.props.actions.header.show()
+  }
+
+  componentWillUnmount() {
+    this.props.actions.header.hide()
+  }
+
   render() {
     const { classes, party } = this.props
     return (
@@ -35,6 +43,7 @@ class CreateLayout extends React.Component {
 
 CreateLayout.propTypes = {
   classes: object.isRequired,
+  actions: object.isRequired,
   party: shape({
     activeStep: number,
   }).isRequired,
