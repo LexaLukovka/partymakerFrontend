@@ -6,7 +6,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store, { persistor } from './store'
 import LayoutScene from 'components/LayoutScene'
-import CircularProgress from '@material-ui/core/es/CircularProgress/CircularProgress'
+import Loading from 'components/Loading'
 import 'moment/locale/ru.js'
 import './styles/index.scss'
 
@@ -21,7 +21,7 @@ const render = Component => {
 
 render(() =>
   <Provider store={store}>
-    <PersistGate loading={<CircularProgress size={50} />} persistor={persistor}>
+    <PersistGate loading={<Loading />} persistor={persistor}>
       <Router>
         <Switch>
           <Route path="/" component={LayoutScene} />
