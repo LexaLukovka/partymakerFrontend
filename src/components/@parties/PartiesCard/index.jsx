@@ -76,8 +76,9 @@ class PartiesCard extends React.Component {
     this.props.actions.like.like(id)
   }
 
-  handleClick = (id) => {
-    this.props.actions.party.show(id)
+  handleClick = (party) => {
+    this.props.actions.party.showParty(party.id)
+    this.props.actions.header.partiesIdTitle(party.title)
   }
 
   render() {
@@ -92,11 +93,16 @@ class PartiesCard extends React.Component {
           }
           action={<IconButton><MoreVertIcon /></IconButton>}
           title={party.admin.name}
-          subheader={moment(party.updated_at).fromNow()}
+          subheader={moment(party.updated_at)
+            .fromNow()}
         />
         <CardContent className={classes.cardContent}>
           <Link to={`/parties/${party.id}`}>
-            <Avatar src={isEmpty(party.primary_picture) ? url : party.primary_picture} className={classes.picture} />
+            <Avatar
+              src={isEmpty(party.primary_picture) ? url : party.primary_picture}
+              onClick={() => this.handleClick(party)}
+              className={classes.picture}
+            />
           </Link>
           <Link to={`/parties/${party.id}`}>
             <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
@@ -125,7 +131,12 @@ class PartiesCard extends React.Component {
             </IconButton>
           </div>
           <Link to={`/parties/${party.id}`}>
-            <Button color="primary" onClick={() => this.handleClick(party.id)}>Подробнее</Button>
+            <Button
+              color="primary"
+              onClick={() => this.handleClick(party)}
+            >
+              Подробнее
+            </Button>
           </Link>
         </CardActions>
       </Card>

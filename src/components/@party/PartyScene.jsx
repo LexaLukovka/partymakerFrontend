@@ -58,12 +58,13 @@ class PartyScene extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.parties.show(this.props.match.params.id)
-    this.props.actions.header.show()
+    this.props.actions.parties.showParty(this.props.match.params.id)
+    this.props.actions.header.showBack()
   }
 
   componentWillUnmount() {
-    this.props.actions.header.hide()
+    this.props.actions.header.hideBack()
+    this.props.actions.header.closeTitle()
   }
 
   handleClick = (check) => {

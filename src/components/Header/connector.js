@@ -6,6 +6,7 @@ import * as drawer from '../../redux/drawer/action'
 const initMapStateToProps = store => ({
   auth: store.authReducer,
   isBack: store.headerReducer.isBack,
+  isOpen: store.headerReducer.isOpen,
 })
 
 const initMapDispatchToProps = dispatch => ({
