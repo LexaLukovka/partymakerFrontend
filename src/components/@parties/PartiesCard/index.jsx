@@ -58,10 +58,10 @@ const styles = theme => ({
   picture: {
     width: '100%',
     height: 200,
+    paddingBottom: 20,
     borderRadius: 5,
   },
   title: {
-    paddingTop: 20,
     textAlign: 'center',
   },
   cardContent: {
@@ -92,8 +92,14 @@ class PartiesCard extends React.Component {
           subheader={moment(party.updated_at).fromNow()}
         />
         <CardContent className={classes.cardContent}>
-          <Avatar src={party.primary_picture} className={classes.picture} />
-          <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
+          {party.primary_picture &&
+          <Link to={`/parties/${party.id}`}>
+            <Avatar src={party.primary_picture} className={classes.picture} />
+          </Link>
+          }
+          <Link to={`/parties/${party.id}`}>
+            <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
+          </Link>
           <PartiesCardDescription
             maxCount={party.people_max}
             amount="100"
