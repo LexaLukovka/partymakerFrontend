@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, object } from 'prop-types'
+import { bool, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -11,6 +11,7 @@ import { HamburgerArrow } from 'react-animated-burgers'
 import Container from '../Container'
 import connector from './connector'
 import UserMenu from './UserMenu'
+import titleSubs from '../../utils/titleSubs'
 
 const styles = theme => ({
   root: {
@@ -35,7 +36,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { classes, auth, isBack, actions, ...props } = this.props
+    const { classes, auth, isBack, isOpen, actions, ...props } = this.props
     return (
       <header className={classes.root}>
         <AppBar className={classes.appBar}>
@@ -50,7 +51,7 @@ class Header extends React.Component {
               </Grid>
               <Grid container justify="center">
                 <Typography variant="title" color="inherit" align="center" className={classes.flex}>
-                  <Link to="/">Partymaker</Link>
+                  {isOpen ? titleSubs(isOpen) : <Link to="/">Partymaker</Link>}
                 </Typography>
               </Grid>
               <Grid container justify="flex-end">
@@ -75,6 +76,7 @@ Header.propTypes = {
   classes: object.isRequired,
   auth: object.isRequired,
   isBack: bool.isRequired,
+  isOpen: string.isRequired,
   actions: object.isRequired,
   history: object.isRequired,
 }
