@@ -7,8 +7,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import MenuIcon from '@material-ui/icons/Menu'
-import ArrowBack from '@material-ui/icons/ArrowBack'
+import { HamburgerArrow } from 'react-animated-burgers'
 import Container from '../Container'
 import connector from './connector'
 import UserMenu from './UserMenu'
@@ -23,9 +22,6 @@ const styles = theme => ({
   flex: {
     flex: 1,
     paddingRight: 0,
-  },
-  icon: {
-    fontSize: 32,
   },
 })
 
@@ -46,10 +42,11 @@ class Header extends React.Component {
           <Container>
             <Toolbar>
               <Grid container justify="flex-start">
-                {isBack
-                  ? <ArrowBack onClick={this.handleBack} className={classes.icon} />
-                  : <MenuIcon onClick={this.handleDrawer} className={classes.icon} />
-                }
+                <HamburgerArrow
+                  isActive={isBack}
+                  toggleButton={isBack ? this.handleBack : this.handleDrawer}
+                  barColor="white"
+                />
               </Grid>
               <Grid container justify="center">
                 <Typography variant="title" color="inherit" align="center" className={classes.flex}>
