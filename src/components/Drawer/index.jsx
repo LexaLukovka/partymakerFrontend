@@ -1,37 +1,44 @@
 import React from 'react'
-import Drawer from '@material-ui/core/Drawer'
-
+import { SwipeableDrawer } from '@material-ui/core/es/index'
 import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import DrawerMenu from './DrawerMenu'
 import connector from './connector'
 
-const styles = {}
+const styles = {
+  paperAnchorLeft: {
+    width: '80%',
+  },
+}
 
 class MyDrawer extends React.Component {
   handleClose = () => {
     this.props.actions.drawer.close()
   }
+  handleOpen = () => {
+    this.props.actions.drawer.open()
+  }
+
 
   render() {
-    const { isOpen } = this.props
+    const { classes: { paperAnchorLeft }, isOpen } = this.props
     return (
-      <Drawer open={isOpen} onClose={this.handleClose}>
+      <SwipeableDrawer open={isOpen} onOpen={this.handleOpen} onClose={this.handleClose} classes={{ paperAnchorLeft }}>
         <div
           tabIndex={0}
           role="button"
           onClick={this.handleClose}
           onKeyDown={this.handleClose}
-          style={{ width: 280 }}
         >
           <DrawerMenu />
         </div>
-      </Drawer>
+      </SwipeableDrawer>
     )
   }
 }
 
 MyDrawer.propTypes = {
+  classes: object.isRequired,
   isOpen: bool.isRequired,
   actions: object.isRequired,
 }
