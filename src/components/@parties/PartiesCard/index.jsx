@@ -95,11 +95,9 @@ class PartiesCard extends React.Component {
           subheader={moment(party.updated_at).fromNow()}
         />
         <CardContent className={classes.cardContent}>
-          {party.primary_picture &&
           <Link to={`/parties/${party.id}`}>
             <Avatar src={isEmpty(party.primary_picture) ? url : party.primary_picture} className={classes.picture} />
           </Link>
-          }
           <Link to={`/parties/${party.id}`}>
             <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
           </Link>
