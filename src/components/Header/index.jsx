@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import MenuIcon from '@material-ui/icons/Menu'
+import { HamburgerArrow } from 'react-animated-burgers'
 import Container from '../Container'
 import connector from './connector'
 import UserMenu from './UserMenu'
@@ -23,9 +23,6 @@ const styles = theme => ({
     flex: 1,
     paddingRight: 0,
   },
-  icon: {
-    fontSize: 32,
-  },
 })
 
 class Header extends React.Component {
@@ -33,17 +30,23 @@ class Header extends React.Component {
     const { actions } = this.props
     actions.drawer.open()
   }
+  handleBack = () => {
+    this.props.history.goBack()
+  }
 
   render() {
-    const { classes, auth, actions, ...props } = this.props
-
+    const { classes, auth, isBack, actions, ...props } = this.props
     return (
       <header className={classes.root}>
         <AppBar className={classes.appBar}>
           <Container>
             <Toolbar>
               <Grid container justify="flex-start">
-                <MenuIcon onClick={this.handleDrawer} className={classes.icon} />
+                <HamburgerArrow
+                  isActive={isBack}
+                  toggleButton={isBack ? this.handleBack : this.handleDrawer}
+                  barColor="white"
+                />
               </Grid>
               <Grid container justify="center">
                 <Typography variant="title" color="inherit" align="center" className={classes.flex}>
@@ -69,10 +72,11 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  classes: object.isRequired,
+  auth: object.isRequired,
+  isBack: bool.isRequired,
+  actions: object.isRequired,
+  history: object.isRequired,
 }
 
 export default withStyles(styles)(connector(withRouter(Header)))
