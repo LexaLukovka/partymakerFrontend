@@ -1,12 +1,12 @@
-import Party from '../../../services/api/Party'
+import Party from 'services/api/Party'
 
-export const OUTPUT_PARTY = 'OUTPUT_PARTY'
-export const OUTPUT_PARTY_PENDING = 'OUTPUT_PARTY_PENDING'
-export const OUTPUT_PARTY_REJECTED = 'OUTPUT_PARTY_REJECTED'
-export const OUTPUT_PARTY_FULFILLED = 'OUTPUT_PARTY_FULFILLED'
+export const LOAD_PARTIES = 'LOAD_PARTIES'
+export const LOAD_PARTIES_PENDING = 'LOAD_PARTIES_PENDING'
+export const LOAD_PARTIES_REJECTED = 'LOAD_PARTIES_REJECTED'
+export const LOAD_PARTIES_FULFILLED = 'LOAD_PARTIES_FULFILLED'
 
 // noinspection JSUnusedGlobalSymbols
-export const outputParty = () => ({
-  type: OUTPUT_PARTY,
+export const load = () => ({
+  type: LOAD_PARTIES,
   payload: Party.all(),
 })

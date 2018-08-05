@@ -1,12 +1,15 @@
 import { combineReducers } from 'redux'
-import authReducer from './auth/reducer'
-import alertReducer from './alert/reducer'
-import settings from './settings'
-import drawerReducer from './drawer/reducer'
-import headerReducer from 'src/redux/header/reducer'
-import party from './party'
-import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+import settings from './settings'
+import party from './party'
+
+import authReducer from './auth/reducer'
+import layoutReducer from './layout/reducer'
+import drawerReducer from './drawer/reducer'
+import headerReducer from './header/reducer'
+import alertReducer from './alert/reducer'
 
 const persistConfig = {
   key: 'root',
@@ -15,12 +18,13 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-  authReducer,
   party,
+  settings,
+  authReducer,
+  layoutReducer,
   drawerReducer,
   headerReducer,
   alertReducer,
-  settings,
 })
 
 export default persistReducer(persistConfig, reducers)

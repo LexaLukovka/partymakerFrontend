@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/es/Grid/Grid'
 import connector from './connector'
 import PartiesCard from './PartiesCard'
-import Container from '../Container'
 import isEmpty from 'lodash/isEmpty'
 import Loading from '../Loading'
 import NotFound from '../NotFound'
@@ -17,7 +16,7 @@ const styles = {
 
 class PartiesScene extends React.Component {
   componentWillMount() {
-    this.props.actions.parties.outputParty()
+    this.props.actions.parties.load()
   }
 
   render() {
@@ -26,11 +25,11 @@ class PartiesScene extends React.Component {
     if (isEmpty(parties)) return <NotFound />
 
     return (
-      <Container className={classes.root}>
+      <div className={classes.root}>
         <Grid container justify="center">
           {parties.map((party, index) => <PartiesCard key={index} party={party} />)}
         </Grid>
-      </Container>
+      </div>
     )
   }
 }
