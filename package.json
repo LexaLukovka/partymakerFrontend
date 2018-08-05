@@ -2,23 +2,20 @@
   "name": "partymaker",
   "version": "0.1.0",
   "private": true,
-  "description": "PartyMaker app",
+  "description": "Partymaker app",
   "engines": {
     "node": "*"
   },
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
-    "dev": "node ./tools/srcServer.js"
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^2.0.0",
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.18.0",
-    "browser-sync": "^2.24.4",
-    "chalk": "latest",
     "classnames": "^2.2.6",
     "connect-history-api-fallback": "^1.5.0",
     "copy-webpack-plugin": "^4.5.2",
