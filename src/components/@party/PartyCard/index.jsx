@@ -1,14 +1,8 @@
 import React from 'react'
-import { object, number, string, array } from 'prop-types'
+import { object, number, string, array, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import Paper from '@material-ui/core/Paper'
+import { Paper, ListItemSecondaryAction, ListItemText, ListItem, List, Typography, Grid } from '@material-ui/core'
 import connector from '../connector'
-import Typography from '@material-ui/core/Typography/Typography'
-import Grid from '@material-ui/core/Grid/Grid'
 
 const styles = theme => ({
   root: {
@@ -27,70 +21,60 @@ const styles = theme => ({
   },
 })
 
-const PartyCard = ({
-  classes,
-  title,
-  amount,
-  admin,
-  status,
-  minCount,
-  maxCount,
-  address,
-  telegramUrl,
-  startTime,
-  table,
-  description,
-}) =>
+const PartyCard = ({ classes, party }) =>
   <Paper className={classes.root}>
     <List>
       <ListItem>
         <ListItemText>
           <Grid container justify="center">
-            <Typography variant="title">{title}</Typography>
+            <Typography variant="title">{party.title}</Typography>
           </Grid>
         </ListItemText>
       </ListItem>
       <ListItem>
         <div className={classes.status} />
-        <ListItemText primary={status} />
+        <ListItemText primary={party.status} />
         <ListItemSecondaryAction>
-          {admin.name}
+          {party.admin.name}
         </ListItemSecondaryAction>
       </ListItem>
+      {
+        party.amount &&
+        <ListItem>
+          <ListItemText primary="Скидываться" />
+          <ListItemSecondaryAction className={classes.amount}>
+            {`${party.amount} грн`}
+          </ListItemSecondaryAction>
+        </ListItem>
+      }
       <ListItem>
-        <ListItemText primary="Скидываться" />
-        <ListItemSecondaryAction className={classes.amount}>
-          {`${amount} грн`}
-        </ListItemSecondaryAction>
-      </ListItem>
-      <ListItem>
-        <ListItemText primary="Адрес" secondary={address.address} />
+        <ListItemText primary="Адрес" secondary={party.address.address} />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Приходить"
-          secondary={startTime}
+          secondary={party.start_time}
         />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Собирается"
-          secondary={`от ${minCount} до ${maxCount} человек`}
+          secondary={`от ${party.people_min} до ${party.people_max} человек`}
         />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Общий стол"
-          secondary={table}
+          secondary={party.table}
         />
       </ListItem>
       <ListItem>
-        <ListItemText primary="Описание" secondary={description} />
+        <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
       <ListItem>
         <ListItemText
           primary="Telegram"
-          secondary={<a href={telegramUrl}>{`${telegramUrl.substring(0, 40)}...`}</a>}
+          secondary={<a href={party.telegram_url}>{`${party.telegram_url.substring(0, 40)}...`}</a>}
         />
       </ListItem>
     </List>
@@ -98,17 +82,19 @@ const PartyCard = ({
 
 PartyCard.propTypes = {
   classes: object.isRequired,
-  title: string.isRequired,
-  admin: object.isRequired,
-  amount: string.isRequired,
-  status: string.isRequired,
-  table: string.isRequired,
-  maxCount: number.isRequired,
-  minCount: number.isRequired,
-  address: object.isRequired,
-  description: string.isRequired,
-  startTime: string.isRequired,
-  telegramUrl: string.isRequired,
+  party: shape({
+    admin: object.isRequired,
+    title: string.isRequired,
+    status: string.isRequired,
+    people_min: number.isRequired,
+    people_max: number.isRequired,
+    address: shape({
+      address: string.isRequired,
+    }).isRequired,
+    start_time: string.isRequired,
+    telegram_url: string.isRequired,
+    description: string.isRequired,
+  }).isRequired,
 }
 
 export default withStyles(styles)(connector(PartyCard))
