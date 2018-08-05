@@ -10,6 +10,7 @@ import connector from '../connector'
 import Typography from '@material-ui/core/Typography/Typography'
 import Grid from '@material-ui/core/Grid/Grid'
 import Button from '@material-ui/core/Button/Button'
+import titleSubs from '../../../utils/titleSubs'
 
 const styles = theme => ({
   root: {
@@ -18,7 +19,8 @@ const styles = theme => ({
   },
   amount: {
     color: theme.palette.primary.main,
-    borderRadius: 30,
+    width: '45%',
+    textAlign: 'right',
   },
   status: {
     width: 17,
@@ -54,18 +56,24 @@ const PartyCard = ({
       <ListItem>
         <div className={classes.status} />
         <ListItemText primary={status} />
-        <ListItemSecondaryAction>
+        <ListItemSecondaryAction className={classes.amount}>
           {admin.name}
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
         <ListItemText primary="Скидываться" />
-        <ListItemSecondaryAction className={classes.amount}>
+        <ListItemSecondaryAction>
           {`${amount} грн`}
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
-        <ListItemText primary="Адрес" secondary={address.district} />
+        <ListItemText primary="Район" />
+        <ListItemSecondaryAction>
+          {address.district}
+        </ListItemSecondaryAction>
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="Адрес" secondary={titleSubs(address.address)} />
         <ListItemSecondaryAction>
           <a href={`http://www.google.com/maps/?q=${address.lat},${address.lng}`}>
             <Button variant="contained" size="small" color="primary">Показать на карте</Button>
