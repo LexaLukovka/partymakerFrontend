@@ -2,15 +2,15 @@
 import React from 'react'
 import { arrayOf, bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import connector from './connector'
-import Container from '../Container'
-import PartyCard from './PartyCard/index'
-import Carousel from './Carousel/index'
-import Button from '@material-ui/core/es/Button/Button'
-import isEmpty from 'lodash/isEmpty'
-import Loading from '../Loading'
-import NotFound from '../NotFound'
 import { CSSTransition } from 'react-transition-group'
+import { Button } from '@material-ui/core'
+import isEmpty from 'lodash/isEmpty'
+import Loading from 'components/Loading'
+import NotFound from 'components/NotFound'
+import connector from './connector'
+import PartyCard from './PartyCard'
+import Carousel from './Carousel'
+
 import './style.css'
 
 const styles = (theme) => ({
@@ -81,47 +81,27 @@ class PartyScene extends React.Component {
     const { checked } = this.state
 
     return (
-      <Container className={classes.root}>
+      <div className={classes.root}>
         <div onClick={() => this.handleClick(checked)}>
           <Carousel pictures={party.pictures} />
         </div>
-        <CSSTransition
-          in={checked}
-          timeout={500}
-          classNames="star"
-        >
+        <CSSTransition in={checked} timeout={500} classNames="star">
           <div className={!checked ? classes.papers : classes.paperse}>
-            <PartyCard
-              amount="100"
-              table="Пицца"
-              admin={party.admin}
-              title={party.title}
-              status={party.status}
-              minCount={party.people_min}
-              maxCount={party.people_max}
-              address={party.address}
-              startTime={party.start_time}
-              telegramUrl={party.telegram_url}
-              description={party.description}
-            />
+            <PartyCard party={party} />
             <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
           </div>
         </CSSTransition>
-      </Container>
+      </div>
     )
   }
 }
 
 PartyScene.propTypes = {
   classes: object.isRequired,
-  party: object,
+  party: object.isRequired,
   loading: bool.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
-}
-
-PartyScene.defaultProps = {
-  party: {},
 }
 
 export default withStyles(styles)(connector(PartyScene))
