@@ -30,6 +30,13 @@ module.exports = {
   },
   target: 'web',
 
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    compress: true,
+    port: 2000,
+    historyApiFallback: true,
+  },
+
   module: {
     rules: [
       {
