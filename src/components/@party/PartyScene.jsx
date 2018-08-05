@@ -35,10 +35,6 @@ const styles = (theme) => ({
     marginTop: 20,
     marginLeft: 9,
     marginRight: 9,
-    '@media only screen and (max-width: 320px)': {
-      marginLeft: 9,
-      marginRight: 9,
-    },
   },
   container: {
     display: 'flex',

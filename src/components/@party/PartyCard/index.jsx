@@ -1,10 +1,9 @@
 import React from 'react'
 import { object, number, string, array, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, ListItemSecondaryAction, ListItemText, List, Typography } from '@material-ui/core'
+import { Paper, ListItemSecondaryAction, ListItemText, List, Typography, Button } from '@material-ui/core'
 import ListItem from './ListItem'
 import connector from '../connector'
-import Button from '@material-ui/core/Button/Button'
 import shortTitle from 'utils/shortTitle'
 
 const styles = theme => ({
