@@ -11,6 +11,7 @@ import NotFound from '../NotFound'
 const styles = {
   root: {
     marginTop: 15,
+    margin: 10,
   },
 }
 

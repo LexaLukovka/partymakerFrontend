@@ -18,6 +18,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import Button from '@material-ui/core/es/Button/Button'
 import PartiesCardDescription from './PartiesCardDescription'
 import Checkbox from '@material-ui/core/Checkbox/Checkbox'
+import Grid from '@material-ui/core/Grid/Grid'
+import TagList from './Tag/TagList'
 import moment from 'moment'
 import connector from '../connector'
 import initialsFromUsername from 'src/utils/initialsFromUsername'
@@ -63,11 +65,15 @@ const styles = theme => ({
     borderRadius: 5,
   },
   title: {
-    paddingTop: 20,
-    textAlign: 'center',
+    paddingTop: 10,
+    marginLeft: '15%',
+    marginRight: '15%',
   },
   cardContent: {
     paddingTop: 0,
+  },
+  type: {
+    display: 'flex',
   },
 })
 
@@ -99,15 +105,17 @@ class PartiesCard extends React.Component {
               className={classes.picture}
             />
           </Link>
-          <Link to={`/parties/${party.id}`}>
-            <Typography variant="title" color="primary" className={classes.title}> {party.title}</Typography>
-          </Link>
-          <PartiesCardDescription
-            maxCount={party.people_max}
-            amount="100"
-            address={party.address}
-            description={party.description}
-          />
+          <div className={classes.type}>
+            <TagList iconTag={party.type} />
+            <Grid container justify="center" className={classes.title}>
+              <Link to={`/parties/${party.id}`}>
+                <Typography align="center" variant="title" color="primary">
+                  {party.title}
+                </Typography>
+              </Link>
+            </Grid>
+          </div>
+          <PartiesCardDescription party={party} />
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <div className={classes.flex}>
