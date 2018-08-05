@@ -11,7 +11,6 @@ module.exports = {
     alias: {
       components: path.resolve(__dirname, './src/components/'),
       services: path.resolve(__dirname, './src/services/'),
-      state: path.resolve(__dirname, './src/redux/'),
       utils: path.resolve(__dirname, './src/utils/'),
       src: path.resolve(__dirname, './src/'),
     },

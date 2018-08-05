@@ -18,13 +18,13 @@ const styles = () => ({
 
 class CreateLayout extends React.Component {
   componentDidMount() {
-    this.props.actions.header.showBack()
-    this.props.actions.header.createPartyTitle()
+    const { actions } = this.props
+    actions.header.setIcon('back')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.hideBack()
-    this.props.actions.header.closeTitle()
+    const { actions } = this.props
+    actions.header.setIcon('menu')
   }
 
   render() {
