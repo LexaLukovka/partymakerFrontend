@@ -33,10 +33,8 @@ const styles = (theme) => ({
   },
   paperse: {
     marginTop: 20,
-    '@media only screen and (max-width: 320px)': {
-      marginLeft: 9,
-      marginRight: 9,
-    },
+    marginLeft: 9,
+    marginRight: 9,
   },
   container: {
     display: 'flex',
