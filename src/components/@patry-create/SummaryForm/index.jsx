@@ -9,11 +9,7 @@ import PictureUpload from './PictureUpload'
 const styles = theme => ({
   root: {
     padding: '0 15px',
-    maxWidth: 400,
-    marginTop: theme.spacing.size4,
-    '@media only screen and (max-width: 320px)': {
-      marginTop: theme.spacing.size1,
-    },
+    marginTop: theme.spacing.size1,
   },
   mb: {
     marginBottom: theme.spacing.size3,

@@ -28,17 +28,24 @@ const createParty = (state = initialState, { type, payload, step }) => {
       }
 
     case CREATE_PARTY_PENDING:
-      return { ...state, loading: true }
+      return {
+        ...state,
+        loading: true,
+      }
 
     case CREATE_PARTY_FULFILLED:
-      return { ...state,
+      return {
+        ...state,
         success: true,
         loading: false,
         form: initialState.form,
       }
 
     case CREATE_PARTY_REJECTED:
-      return { ...state, error: payload }
+      return {
+        ...state,
+        error: payload,
+      }
 
     case RESET_PARTY_FORM:
       return {
@@ -48,6 +55,7 @@ const createParty = (state = initialState, { type, payload, step }) => {
         loading: false,
         form: initialState.form,
       }
+
     default:
       return state
   }

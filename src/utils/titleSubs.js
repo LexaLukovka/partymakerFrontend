@@ -1,6 +1,6 @@
 const titleSubs = (title) => {
-  if (title.length >= 8) {
-    return `${title.substring(0, 8)}...`
+  if (title.length >= 20) {
+    return `${title.substring(0, 20)}...`
   }
   return title
 }

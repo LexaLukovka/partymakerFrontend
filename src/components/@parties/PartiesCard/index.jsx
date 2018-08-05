@@ -78,7 +78,7 @@ class PartiesCard extends React.Component {
 
   handleClick = (party) => {
     this.props.actions.party.showParty(party.id)
-    this.props.actions.header.partiesIdTitle(party.title)
+    this.props.actions.header.partiesIdTitle(party.admin.name)
   }
 
   render() {
