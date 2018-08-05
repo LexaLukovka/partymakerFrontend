@@ -2,7 +2,7 @@
   "name": "partymaker",
   "version": "0.1.0",
   "private": true,
-  "description": "PartyMaker app",
+  "description": "Partymaker app",
   "engines": {
     "node": "*"
   },
