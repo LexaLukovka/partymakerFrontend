@@ -1,4 +1,4 @@
-import { OUTPUT_PARTY_FULFILLED, OUTPUT_PARTY_PENDING, OUTPUT_PARTY_REJECTED } from './action'
+import { LOAD_PARTIES_FULFILLED, LOAD_PARTIES_PENDING, LOAD_PARTIES_REJECTED } from './action'
 
 const initialState = {
   loading: false,
@@ -8,20 +8,20 @@ const initialState = {
 
 const listReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case OUTPUT_PARTY_PENDING: {
+    case LOAD_PARTIES_PENDING: {
       return {
         ...state,
         loading: true,
       }
     }
-    case OUTPUT_PARTY_REJECTED: {
+    case LOAD_PARTIES_REJECTED: {
       return {
         ...state,
         loading: false,
         error: payload,
       }
     }
-    case OUTPUT_PARTY_FULFILLED: {
+    case LOAD_PARTIES_FULFILLED: {
       return {
         ...state,
         loading: false,

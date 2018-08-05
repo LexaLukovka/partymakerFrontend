@@ -1,12 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object, string, node, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
+    paddingTop: 55,
+    height: '100%',
     margin: '0 auto',
-    maxWidth: 1680,
-    minWidth: 1280,
+    maxWidth: 600,
     paddingLeft: theme.spacing.size2,
     paddingRight: theme.spacing.size2,
     '@media only screen and (max-width: 1280px)': {
@@ -21,14 +22,14 @@ const styles = theme => ({
 })
 
 const Container = ({ children, className, classes }) =>
-  <div className={`${classes.root} ${className}`}>
+  <main className={`${classes.root} ${className}`}>
     {children}
-  </div>
+  </main>
 
 Container.propTypes = {
-  classes: PropTypes.object.isRequired,
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  classes: object.isRequired,
+  children: node.isRequired,
+  className: string,
 }
 Container.defaultProps = {
   className: '',

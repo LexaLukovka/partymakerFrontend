@@ -1,21 +1,33 @@
 import React from 'react'
+import { object } from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import { Route, Switch } from 'react-router-dom'
-import withTheme from '../utils/withTheme'
+import withTheme from 'utils/withTheme'
+import Header from 'components/Header'
+import Alert from 'components/Alert'
+import Drawer from 'components/Drawer'
+import Container from 'components/Container'
+import AuthRoute from 'components/@auth/AuthRoute'
+
 import IndexScene from './@index/IndexScene'
-import Header from './Header'
-import Alert from './Alert'
-import AuthRoute from './@auth/AuthRoute'
 import SettingsScene from './@settings/SettingsScene'
 import CreateLayout from './@patry-create/CreateLayout'
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@party/PartyScene'
-import Drawer from './Drawer'
 import AuthLayout from './@auth/AuthLayout'
+import connector from './connector'
 
-const LayoutScene = () =>
-  <main>
+const styles = {
+  root: {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  },
+}
+
+const LayoutScene = ({ classes, layout }) =>
+  <div className={classes.root} style={{ backgroundImage: `url(${layout.background})` }}>
     <Header />
-    <section style={{ paddingTop: 55, height: '100%' }}>
+    <Container>
       <Switch>
         <Route exact path="/" component={IndexScene} />
         <AuthRoute exact path="/settings" component={SettingsScene} />
@@ -24,11 +36,14 @@ const LayoutScene = () =>
         <Route exact path="/parties/:id" component={PartyScene} />
         <Route path="/" component={AuthLayout} />
       </Switch>
-    </section>
+    </Container>
     <Drawer />
     <Alert />
-  </main>
+  </div>
 
-LayoutScene.propTypes = {}
+LayoutScene.propTypes = {
+  classes: object.isRequired,
+  layout: object.isRequired,
+}
 
-export default withTheme(LayoutScene)
+export default withTheme(withStyles(styles)(connector(LayoutScene)))

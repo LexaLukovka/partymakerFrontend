@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import Container from '../Container'
 import SettingsMenu from './SettingsMenu'
 import ProfileCard from './ProfileCard'
 import PasswordCard from './PasswordCard'
@@ -19,7 +18,7 @@ const styles = {
 }
 
 const SettingsScene = ({ classes, auth, menuItem }) =>
-  <Container className={classes.root}>
+  <div className={classes.root}>
     <Grid container justify="center">
       <Grid>
         <SettingsMenu />
@@ -29,7 +28,7 @@ const SettingsScene = ({ classes, auth, menuItem }) =>
         {menuItem === 1 && <PasswordCard />}
       </Grid>
     </Grid>
-  </Container>
+  </div>
 
 SettingsScene.propTypes = {
   classes: PropTypes.object.isRequired,

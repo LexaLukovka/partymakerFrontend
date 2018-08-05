@@ -2,7 +2,6 @@ import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography/Typography'
-import Container from '../Container'
 
 const styles = {
   root: {
@@ -12,9 +11,7 @@ const styles = {
 }
 
 const NotFound = ({ classes }) =>
-  <Container className={classes.root}>
-    <Typography variant="display1"> Not found</Typography>
-  </Container>
+  <Typography variant="display1"> Not found</Typography>
 
 NotFound.propTypes = {
   classes: object.isRequired,

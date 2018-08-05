@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/es/TextField/TextField'
 import Avatar from '@material-ui/core/es/Avatar/Avatar'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import Container from '../../Container'
 
 const styles = theme => ({
   card: {
@@ -54,68 +53,66 @@ const styles = theme => ({
 })
 
 const ProfileCard = ({ classes, user }) =>
-  <Container>
-    <Card className={classes.card}>
-      <Grid>
-        {user &&
-        <CardContent className={classes.cardContainer}>
-          <Typography variant="headline" color="primary" className="mb-4">
-            Общие данные аккаунта
-          </Typography>
-          {document.documentElement.clientWidth <= 765 &&
-          <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/1531914556056.jpeg" />
-          }
-          <div className={classes.input}>
-            <Typography variant="subheading">Ваше имя и фамилия</Typography>
-            <TextField
-              fullWidth
-              type="text"
-              name="name"
-              defaultValue={user.name}
-            />
-          </div>
-          <div className={classes.input}>
-            <Typography variant="subheading">Ваш email</Typography>
-            <TextField
-              fullWidth
-              type="text"
-              name="email"
-              defaultValue={user.email}
-            />
-          </div>
-          <div className={classes.input}>
-            <Typography variant="subheading">Ваш номер телефона</Typography>
-            <TextField
-              fullWidth
-              type="text"
-              name="phone"
-              defaultValue={user.phone}
-            />
-          </div>
-        </CardContent>
+  <Card className={classes.card}>
+    <Grid>
+      {user &&
+      <CardContent className={classes.cardContainer}>
+        <Typography variant="headline" color="primary" className="mb-4">
+          Общие данные аккаунта
+        </Typography>
+        {document.documentElement.clientWidth <= 765 &&
+        <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/1531914556056.jpeg" />
         }
-      </Grid>
-      <Grid
-        container
-        justify={document.documentElement.clientWidth >= 765 ? 'flex-end' : 'center'}
-      >
-        {document.documentElement.clientWidth > 765 &&
-        <div>
-          <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/photo_2018-06-02.jpg" />
-        </div>
-        }
-        <CardActions className={classes.bottom_save}>
-          <Button
+        <div className={classes.input}>
+          <Typography variant="subheading">Ваше имя и фамилия</Typography>
+          <TextField
             fullWidth
-            variant="raised"
-            color="primary"
-          >
-            Сохранить
-          </Button>
-        </CardActions>
-      </Grid>
-    </Card>
-  </Container>
+            type="text"
+            name="name"
+            defaultValue={user.name}
+          />
+        </div>
+        <div className={classes.input}>
+          <Typography variant="subheading">Ваш email</Typography>
+          <TextField
+            fullWidth
+            type="text"
+            name="email"
+            defaultValue={user.email}
+          />
+        </div>
+        <div className={classes.input}>
+          <Typography variant="subheading">Ваш номер телефона</Typography>
+          <TextField
+            fullWidth
+            type="text"
+            name="phone"
+            defaultValue={user.phone}
+          />
+        </div>
+      </CardContent>
+      }
+    </Grid>
+    <Grid
+      container
+      justify={document.documentElement.clientWidth >= 765 ? 'flex-end' : 'center'}
+    >
+      {document.documentElement.clientWidth > 765 &&
+      <div>
+        <Avatar className={classes.user_avatar} src="http://localhost:3333/uploads/photo_2018-06-02.jpg" />
+      </div>
+      }
+      <CardActions className={classes.bottom_save}>
+        <Button
+          fullWidth
+          variant="raised"
+          color="primary"
+        >
+          Сохранить
+        </Button>
+      </CardActions>
+    </Grid>
+  </Card>
 
 ProfileCard.propTypes = {
   classes: PropTypes.object.isRequired,
