@@ -2,70 +2,63 @@ import React from 'react'
 import { bool, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import { HamburgerArrow } from 'react-animated-burgers'
-import Container from '../Container'
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
 import connector from './connector'
 import UserMenu from './UserMenu'
-import titleSubs from '../../utils/titleSubs'
+import shortTitle from 'utils/shortTitle'
+import { ArrowBack } from '@material-ui/icons'
+import { MenuIcon } from 'mdi-react'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    color: 'white',
   },
   appBar: {
     background: theme.palette.primary.main,
   },
+  toolbar: {
+    display: 'flex',
+  },
   flex: {
     flex: 1,
-    paddingRight: 0,
   },
 })
 
 class Header extends React.Component {
-  handleDrawer = () => {
-    const { actions } = this.props
-    actions.drawer.open()
-  }
-  handleBack = () => {
+  goBack = () =>
     this.props.history.goBack()
+
+  openDrawer = () =>
+    this.props.actions.drawer.open()
+
+  renderIcon = (icon) => {
+    switch (icon) {
+      case 'menu':
+        return <MenuIcon onClick={this.openDrawer} />
+
+      case 'back':
+        return <ArrowBack onClick={this.goBack} />
+
+      default:
+        return <MenuIcon onClick={this.openDrawer} />
+    }
   }
 
   render() {
-    const { classes, auth, isBack, isOpen, actions, ...props } = this.props
+    const { classes, header } = this.props
     return (
       <header className={classes.root}>
         <AppBar className={classes.appBar}>
-          <Container>
-            <Toolbar>
-              <Grid container justify="flex-start">
-                <HamburgerArrow
-                  isActive={isBack}
-                  toggleButton={isBack ? this.handleBack : this.handleDrawer}
-                  barColor="white"
-                />
-              </Grid>
-              <Grid container justify="center">
-                <Typography variant="title" color="inherit" align="center" className={classes.flex}>
-                  {isOpen ? titleSubs(isOpen) : <Link to="/">Partymaker</Link>}
-                </Typography>
-              </Grid>
-              <Grid container justify="flex-end">
-                <React.Fragment>
-                  <UserMenu
-                    user={auth.user}
-                    onLogin={() => props.history.push('/login')}
-                    onRegister={() => props.history.push('/register')}
-                    onLogout={() => actions.auth.logout()}
-                  />
-                </React.Fragment>
-              </Grid>
-            </Toolbar>
-          </Container>
+          <Toolbar className={classes.toolbar}>
+            <IconButton color="inherit">
+              {this.renderIcon(header.icon)}
+            </IconButton>
+            <Typography variant="title" color="inherit" align="center" className={classes.flex}>
+              {shortTitle(header.title)}
+            </Typography>
+            <UserMenu />
+          </Toolbar>
         </AppBar>
       </header>
     )
@@ -74,9 +67,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   classes: object.isRequired,
-  auth: object.isRequired,
-  isBack: bool.isRequired,
-  isOpen: string.isRequired,
+  header: object.isRequired,
   actions: object.isRequired,
   history: object.isRequired,
 }

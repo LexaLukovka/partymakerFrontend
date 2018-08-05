@@ -1,53 +1,36 @@
 import {
-  SHOW_BACK,
-  HIDE_BACK,
-  CREATE_PARTY,
-  PARTIES_ID,
-  CLOSE_SCENE,
+  SET_HEADER_ICON,
+  SET_HEADER_TITLE,
+  RESET_HEADER_TITLE,
 } from './action'
 
 const initialState = {
-  isBack: false,
-  isOpen: null,
+  title: 'Partymaker',
+  icon: 'menu',
 }
 
 const headerReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SHOW_BACK: {
+    case SET_HEADER_ICON:
       return {
         ...state,
-        isBack: true,
+        icon: payload,
       }
-    }
-    case HIDE_BACK: {
-      return {
-        ...state,
-        isBack: false,
-      }
-    }
 
-    case CREATE_PARTY: {
+    case SET_HEADER_TITLE:
       return {
         ...state,
-        isOpen: 'Создание',
+        title: payload,
       }
-    }
-    case PARTIES_ID: {
-      return {
-        ...state,
-        isOpen: payload,
-      }
-    }
-    case CLOSE_SCENE: {
-      return {
-        ...state,
-        isOpen: null,
-      }
-    }
 
-    default: {
+    case RESET_HEADER_TITLE:
+      return {
+        ...state,
+        title: initialState.title,
+      }
+
+    default:
       return state
-    }
   }
 }
 

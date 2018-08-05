@@ -1,31 +1,20 @@
-export const HIDE_BACK = 'HIDE_BACK'
-export const SHOW_BACK = 'SHOW_BACK'
-export const CREATE_PARTY = 'CREATE_PARTY'
-export const PARTIES_ID = 'PARTIES_ID'
-export const CLOSE_SCENE = 'CLOSE_SCENE'
+export const SET_HEADER_ICON = 'SET_HEADER_ICON'
+export const SET_HEADER_TITLE = 'SET_HEADER_TITLE'
+export const RESET_HEADER_TITLE = 'RESET_HEADER_TITLE'
 
 // noinspection JSUnusedGlobalSymbols
-export const hideBack = () => ({
-  type: HIDE_BACK,
+export const setIcon = (icon) => ({
+  type: SET_HEADER_ICON,
+  payload: icon,
 })
 
 // noinspection JSUnusedGlobalSymbols
-export const showBack = () => ({
-  type: SHOW_BACK,
-})
-
-// noinspection JSUnusedGlobalSymbols
-export const createPartyTitle = () => ({
-  type: CREATE_PARTY,
-})
-
-// noinspection JSUnusedGlobalSymbols
-export const partiesIdTitle = (title) => ({
-  type: PARTIES_ID,
+export const setTitle = title => ({
+  type: SET_HEADER_TITLE,
   payload: title,
 })
 
 // noinspection JSUnusedGlobalSymbols
-export const closeTitle = () => ({
-  type: CLOSE_SCENE,
+export const resetTitle = () => ({
+  type: RESET_HEADER_TITLE,
 })

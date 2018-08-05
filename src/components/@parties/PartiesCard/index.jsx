@@ -76,11 +76,6 @@ class PartiesCard extends React.Component {
     this.props.actions.like.like(id)
   }
 
-  handleClick = (party) => {
-    this.props.actions.party.showParty(party.id)
-    this.props.actions.header.partiesIdTitle(party.title)
-  }
-
   render() {
     const { classes, party } = this.props
     const url = 'http://localhost:3333/images/parties.jpg'
@@ -131,12 +126,7 @@ class PartiesCard extends React.Component {
             </IconButton>
           </div>
           <Link to={`/parties/${party.id}`}>
-            <Button
-              color="primary"
-              onClick={() => this.handleClick(party)}
-            >
-              Подробнее
-            </Button>
+            <Button color="primary">Подробнее</Button>
           </Link>
         </CardActions>
       </Card>
