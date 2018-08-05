@@ -9,8 +9,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
-    "dev": "node ./tools/srcServer.js"
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
