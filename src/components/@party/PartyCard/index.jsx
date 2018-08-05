@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper'
 import connector from '../connector'
 import Typography from '@material-ui/core/Typography/Typography'
 import Grid from '@material-ui/core/Grid/Grid'
+import Button from '@material-ui/core/Button/Button'
 
 const styles = theme => ({
   root: {
@@ -64,7 +65,12 @@ const PartyCard = ({
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
-        <ListItemText primary="Адрес" secondary={address.address} />
+        <ListItemText primary="Адрес" secondary={address.district} />
+        <ListItemSecondaryAction>
+          <a href={`http://www.google.com/maps/?q=${address.lat},${address.lng}`}>
+            <Button variant="contained" size="small" color="primary">Показать на карте</Button>
+          </a>
+        </ListItemSecondaryAction>
       </ListItem>
       <ListItem>
         <ListItemText

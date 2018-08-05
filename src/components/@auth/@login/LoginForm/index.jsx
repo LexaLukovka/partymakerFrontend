@@ -32,7 +32,6 @@ const styles = theme => ({
 })
 
 class LoginForm extends React.Component {
-
   handleSubmit = (e) => {
     const { handleSubmit } = this.props
     this.setState({ isSubmited: true })

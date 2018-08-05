@@ -13,6 +13,7 @@ const styles = () => ({
   root: {
     height: '100%',
     width: 'auto',
+    paddingTop: 10,
   },
 })
 

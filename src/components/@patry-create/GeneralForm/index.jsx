@@ -10,10 +10,7 @@ import connector from '../connector'
 const styles = theme => ({
   root: {
     padding: '0 15px',
-    marginTop: theme.spacing.size4,
-    '@media only screen and (max-width: 320px)': {
-      marginTop: theme.spacing.size1,
-    },
+    marginTop: theme.spacing.size1,
   },
   input: {
     marginBottom: theme.spacing.size3,
