@@ -18,7 +18,6 @@ import formik from './formik'
 import connector from '../../connector'
 
 const styles = theme => ({
-
   input: {
     marginBottom: theme.spacing.size2,
   },
