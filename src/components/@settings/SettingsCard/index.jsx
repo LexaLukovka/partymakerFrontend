@@ -1,8 +1,10 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { List, ListItemText, Paper, Typography, Divider } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { List, ListItemText, Divider } from '@material-ui/core'
 import ListItem from './ListItem'
+import connector from '../connector'
 
 const styles = {
   root: {
@@ -11,14 +13,15 @@ const styles = {
 }
 
 const SettingsCard = ({ classes, user }) =>
-  <Paper className={classes.root}>
+  <div className={classes.root}>
     {console.log(user)}
-    <Typography align="center" variant="display1">Общие</Typography>
     <List>
-      <ListItem>
-        <ListItemText primary="Имя и фамилия" secondary={user.name} />
-      </ListItem>
-      <Divider />
+      <Link to="/name">
+        <ListItem>
+          <ListItemText primary="Имя и фамилия" secondary={user.name} />
+        </ListItem>
+        <Divider />
+      </Link>
       <ListItem>
         <ListItemText primary="Email" secondary={user.email} />
       </ListItem>
@@ -27,20 +30,22 @@ const SettingsCard = ({ classes, user }) =>
         <ListItemText primary="Номер телефона" secondary={user.phone} />
       </ListItem>
       <Divider />
-      <ListItem>
-        <ListItemText primary="Сменить пароль" />
-      </ListItem>
-      <Divider />
+      <Link to="/settings/password">
+        <ListItem>
+          <ListItemText primary="Сменить пароль" />
+        </ListItem>
+        <Divider />
+      </Link>
       <ListItem>
         <ListItemText primary="Сменить аватар" />
       </ListItem>
       <Divider />
     </List>
-  </Paper>
+  </div>
 
 SettingsCard.propTypes = {
   classes: object.isRequired,
   user: object.isRequired,
 }
 
-export default withStyles(styles)(SettingsCard)
+export default withStyles(styles)(connector(SettingsCard))

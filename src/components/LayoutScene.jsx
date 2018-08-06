@@ -10,7 +10,7 @@ import Container from 'components/Container'
 import AuthRoute from 'components/@auth/AuthRoute'
 
 import IndexScene from './@index/IndexScene'
-import SettingsScene from './@settings/SettingsScene'
+import SettingsLayout from './@settings/SettingsLayout'
 import CreateLayout from './@patry-create/CreateLayout'
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@party/PartyScene'
@@ -30,10 +30,10 @@ const LayoutScene = ({ classes, layout }) =>
     <Container>
       <Switch>
         <Route exact path="/" component={IndexScene} />
-        <AuthRoute exact path="/settings" component={SettingsScene} />
         <AuthRoute path="/party/create" component={CreateLayout} />
         <Route exact path="/parties" component={PartiesScene} />
         <Route exact path="/parties/:id" component={PartyScene} />
+        <AuthRoute path="/settings" component={SettingsLayout} />
         <Route path="/" component={AuthLayout} />
       </Switch>
     </Container>
