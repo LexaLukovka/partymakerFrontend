@@ -6,6 +6,8 @@ import SettingsScene from './SettingsScene'
 import PasswordScene from './PasswordScene'
 import NameScene from './NameScene'
 import EmailScene from './EmailScene'
+import PhoneScene from './PhoneScene'
+import AvatarScene from './AvatarScene'
 import connector from './connector'
 
 const styles = {
@@ -33,9 +35,9 @@ class SettingsLayout extends React.Component {
           <Route exact path="/settings" component={SettingsScene} />
           <Route exact path="/settings/name" component={NameScene} />
           <Route exact path="/settings/email" component={EmailScene} />
-          <Route exact path="/settings/phone" />
+          <Route exact path="/settings/phone" component={PhoneScene} />
           <Route exact path="/settings/password" component={PasswordScene} />
-          <Route exact path="/settings/avatar" />
+          <Route exact path="/settings/avatar" component={AvatarScene} />
         </Switch>
       </div>
     )
