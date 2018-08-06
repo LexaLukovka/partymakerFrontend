@@ -8,7 +8,7 @@ import connector from '../connector'
 
 const styles = {}
 
-const SettingsCard = ({ classes, user }) =>
+const SettingsScene = ({ classes, user }) =>
   <div>
     <List>
       <Link to="/settings/name">
@@ -44,9 +44,9 @@ const SettingsCard = ({ classes, user }) =>
     </List>
   </div>
 
-SettingsCard.propTypes = {
+SettingsScene.propTypes = {
   classes: object.isRequired,
   user: object.isRequired,
 }
 
-export default withStyles(styles)(connector(SettingsCard))
+export default withStyles(styles)(connector(SettingsScene))

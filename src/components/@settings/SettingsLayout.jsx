@@ -2,8 +2,9 @@ import React from 'react'
 import { object } from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
-import SettingsScene from './SettingsCard'
+import SettingsScene from './SettingsScene'
 import PasswordScene from './PasswordScene'
+import NameScene from './NameScene'
 import connector from './connector'
 
 const styles = {
@@ -29,7 +30,7 @@ class SettingsLayout extends React.Component {
       <div className={classes.root}>
         <Switch>
           <Route exact path="/settings" component={SettingsScene} />
-          <Route exact path="/settings/name" />
+          <Route exact path="/settings/name" component={NameScene} />
           <Route exact path="/settings/email" />
           <Route exact path="/settings/phone" />
           <Route exact path="/settings/password" component={PasswordScene} />
