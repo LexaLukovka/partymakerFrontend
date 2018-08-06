@@ -16,24 +16,24 @@ const styles = theme => ({
   },
 })
 
-const NameScene = ({ classes, user }) =>
+const EmailScene = ({ classes, user }) =>
   <div className={classes.root}>
     <div className={classes.input}>
-      <Typography variant="subheading">Имя и фамилия</Typography>
+      <Typography variant="subheading">Email</Typography>
       <TextField
         fullWidth
-        name="name"
-        placeholder="Имя и фамилия"
-        defaultValue={user.name}
+        name="email"
+        placeholder="Email"
+        defaultValue={user.email}
       />
     </div>
-    <Helper>Ваше имя и фамилия будут видны всем пользователям</Helper>
+    <Helper>Ваша почта будет видна всем всем людям на вашей вечеринке</Helper>
     <Button variant="raised" color="primary" className={classes.button}> Сохранить </Button>
   </div>
 
-NameScene.propTypes = {
+EmailScene.propTypes = {
   classes: object.isRequired,
   user: object.isRequired,
 }
 
-export default withStyles(styles)(connector(NameScene))
+export default withStyles(styles)(connector(EmailScene))

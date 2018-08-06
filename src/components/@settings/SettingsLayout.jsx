@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core'
 import SettingsScene from './SettingsScene'
 import PasswordScene from './PasswordScene'
 import NameScene from './NameScene'
+import EmailScene from './EmailScene'
 import connector from './connector'
 
 const styles = {
@@ -31,7 +32,7 @@ class SettingsLayout extends React.Component {
         <Switch>
           <Route exact path="/settings" component={SettingsScene} />
           <Route exact path="/settings/name" component={NameScene} />
-          <Route exact path="/settings/email" />
+          <Route exact path="/settings/email" component={EmailScene} />
           <Route exact path="/settings/phone" />
           <Route exact path="/settings/password" component={PasswordScene} />
           <Route exact path="/settings/avatar" />
