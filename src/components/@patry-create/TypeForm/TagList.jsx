@@ -25,7 +25,9 @@ class TagList extends React.Component {
 TagList.propTypes = {
   onSelect: func,
 }
+
 TagList.defaultProps = {
   onSelect: () => {},
 }
+
 export default TagList

@@ -71,12 +71,15 @@ const PartyCard = ({ classes, party }) =>
           secondary={`от ${party.people_min} до ${party.people_max} человек`}
         />
       </ListItem>
-      <ListItem>
-        <ListItemText
-          primary="Общий стол"
-          secondary={party.table}
-        />
-      </ListItem>
+      {
+        party.table &&
+        <ListItem>
+          <ListItemText
+            primary="Общий стол"
+            secondary={party.table}
+          />
+        </ListItem>
+      }
       <ListItem>
         <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
