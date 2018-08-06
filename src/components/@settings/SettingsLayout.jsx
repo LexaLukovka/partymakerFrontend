@@ -1,15 +1,14 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import SettingsScene from './SettingsCard'
-import connector from './connector'
 import { Route, Switch } from 'react-router-dom'
+import { withStyles } from '@material-ui/core'
+import SettingsScene from './SettingsCard'
 import PasswordScene from './PasswordScene'
+import connector from './connector'
 
 const styles = {
   root: {
-    paddingTop: 15,
-    padding: 10,
+    padding: 15,
   },
 }
 
