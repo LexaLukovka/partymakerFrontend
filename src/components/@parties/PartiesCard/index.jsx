@@ -1,14 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { array } from 'prop-types'
+import Grid from '@material-ui/core/es/Grid/Grid'
+import Card from './Card'
+import connector from '../connector'
 
-const styles = {}
+const PartiesForm = ({ parties }) =>
+  <Grid container justify="center">
+    {parties.map((party, index) => <Card key={index} party={party} />)}
+  </Grid>
 
-const PartiesForm = () =>
-  <div>
+PartiesForm.propTypes = {
+  parties: array,
+}
 
-  </div>
+PartiesForm.defaultProps = {
+  parties: [],
+}
 
-PartiesForm.propTypes = {}
-
-export default withStyles(styles)(PartiesForm)
+export default connector(PartiesForm)

@@ -1,12 +1,11 @@
 import React from 'react'
 import { array, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import connector from './connector'
 import PartiesCard from './PartiesCard'
 import isEmpty from 'lodash/isEmpty'
 import Loading from '../Loading'
 import NotFound from '../NotFound'
+import connector from './connector'
 
 const styles = {
   root: {
@@ -27,9 +26,7 @@ class PartiesScene extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Grid container justify="center">
-          {parties.map((party, index) => <PartiesCard key={index} party={party} />)}
-        </Grid>
+        <PartiesCard />
       </div>
     )
   }
