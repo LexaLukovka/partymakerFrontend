@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
-import Helper from 'components/@settings/Helper'
+import Helper from '../Helper'
 import connector from '../connector'
 
 const styles = theme => ({
