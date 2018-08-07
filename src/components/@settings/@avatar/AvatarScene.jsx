@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Avatar } from '@material-ui/core'
 import PictureUpload from './PictureUpload'
-import formik from 'components/@settings/AvatarScene/formik'
+import formik from './formik'
 import connector from '../connector'
 
 const styles = {
