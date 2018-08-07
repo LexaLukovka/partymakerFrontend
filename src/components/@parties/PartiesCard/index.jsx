@@ -1,42 +1,14 @@
 import React from 'react'
-import { object, func } from 'prop-types'
-import { withStyles, Card } from '@material-ui/core'
-import CardHeader from './Card/MyCardHeader'
-import CardContent from './Card/MyCardContent'
-import CardActions from './Card/MyCardActions'
-import connector from '../connector'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 
-const styles = {
-  root: {
-    marginBottom: 15,
-    width: '100%',
-    '@media only screen and (max-width: 320px)': {
-      width: '95%',
-    },
-  },
-}
+const styles = {}
 
-class PartiesCard extends React.Component {
-  handleLikeClick = (id) => {
-    this.props.actions.like.like(id)
-  }
+const PartiesForm = () =>
+  <div>
 
-  render() {
-    const { classes, party } = this.props
-    return (
-      <Card className={classes.root}>
-        <CardHeader party={party} />
-        <CardContent party={party} />
-        <CardActions party={party} onLike={() => this.handleLikeClick(party.id)} />
-      </Card>
-    )
-  }
-}
+  </div>
 
-PartiesCard.propTypes = {
-  classes: object.isRequired,
-  party: object.isRequired,
-  actions: object.isRequired,
-}
+PartiesForm.propTypes = {}
 
-export default withStyles(styles)(connector(PartiesCard))
+export default withStyles(styles)(PartiesForm)
