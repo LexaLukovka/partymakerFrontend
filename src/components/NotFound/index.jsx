@@ -6,12 +6,11 @@ import Typography from '@material-ui/core/Typography/Typography'
 const styles = {
   root: {
     marginTop: 20,
-    textAlign: 'center',
   },
 }
 
 const NotFound = ({ classes }) =>
-  <Typography variant="display1"> Not found</Typography>
+  <Typography className={classes.root} align="center" variant="display1"> Not found</Typography>
 
 NotFound.propTypes = {
   classes: object.isRequired,

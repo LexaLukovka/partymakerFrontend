@@ -1,10 +1,10 @@
 import React from 'react'
 import { object, func } from 'prop-types'
 import { withStyles, Card } from '@material-ui/core'
-import CardHeader from './Card/MyCardHeader'
-import CardContent from './Card/MyCardContent'
-import CardActions from './Card/MyCardActions'
-import connector from '../connector'
+import CardHeader from './MyCardHeader'
+import CardContent from './MyCardContent'
+import CardActions from './MyCardActions'
+import connector from '../../connector'
 
 const styles = {
   root: {

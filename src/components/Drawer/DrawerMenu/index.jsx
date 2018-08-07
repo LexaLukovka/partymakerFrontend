@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
 import MoveToInbox from '@material-ui/icons/es/MoveToInbox'
 import Search from '@material-ui/icons/es/Search'
 import Person from '@material-ui/icons/es/Person'
@@ -50,7 +49,6 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
-      <Divider />
       <ListItem button component={Link} to="/parties">
         <Search />
         <ListItemText>Искать вечеринки</ListItemText>
