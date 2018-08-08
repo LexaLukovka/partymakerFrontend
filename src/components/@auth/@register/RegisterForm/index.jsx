@@ -190,8 +190,9 @@ class RegisterForm extends React.Component {
               }}
             />
           </div>
-          {!errors.repeatPassword && values.password !== values.repeatPassword &&
-          <Errors> Пароли не совпадают </Errors>
+          {
+            !errors.repeatPassword && values.password !== values.repeatPassword &&
+            <Errors> Пароли не совпадают </Errors>
           }
         </CardContent>
         <CardActions>

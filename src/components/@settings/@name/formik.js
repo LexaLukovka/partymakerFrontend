@@ -15,8 +15,7 @@ const rules = Yup.object()
   })
 
 const handleSubmit = props => (formValues, methods) => {
-  const { actions } = props
-  actions.settings.change(formValues)
+  props.actions.settings.change(formValues)
 
   methods.setSubmitting(false)
 }
