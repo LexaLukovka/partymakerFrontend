@@ -8,7 +8,9 @@ import connector from '../connector'
 
 const styles = {
   root: {
-    paddingTop: 23,
+    paddingTop: 25,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   avatar: {
     width: 100,
@@ -17,6 +19,14 @@ const styles = {
 }
 
 class AvatarScene extends React.Component {
+  componentDidMount() {
+    this.props.actions.header.setTitle('Аватар')
+  }
+
+  componentWillUnmount() {
+    this.props.actions.header.resetTitle()
+  }
+
   handleUpload = () => {}
 
   render() {
@@ -40,6 +50,7 @@ AvatarScene.propTypes = {
   classes: object.isRequired,
   values: object.isRequired,
   user: object.isRequired,
+  actions: object.isRequired,
 }
 
 export default withStyles(styles)(connector(formik(AvatarScene)))

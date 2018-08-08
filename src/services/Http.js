@@ -44,6 +44,19 @@ class Http {
 
     return response.data
   }
+
+  async put(url, params) {
+    this.refreshToken()
+    const [err, response] = await to(this.instance.put(url, params))
+    if (err) {
+      if (!err.response) {
+        throw err.response.data
+      }
+      throw err.response
+    }
+
+    return response.data
+  }
 }
 
 export default new Http()

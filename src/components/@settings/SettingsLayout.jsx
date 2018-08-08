@@ -9,11 +9,10 @@ import EmailScene from './@email/EmailScene'
 import PhoneScene from './@phone/PhoneScene'
 import AvatarScene from './@avatar/AvatarScene'
 import connector from './connector'
+import { isEmpty } from 'lodash'
 
 const styles = {
-  root: {
-    padding: 15,
-  },
+  root: {},
 }
 
 class SettingsLayout extends React.Component {
