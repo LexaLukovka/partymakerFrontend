@@ -3,7 +3,7 @@ import { object, func, bool } from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, TextField } from '@material-ui/core'
-import Geosuggest from 'components/Geosuggest'
+import Geosuggest from '../../Geosuggest'
 import formik from './formik'
 import connector from '../connector'
 

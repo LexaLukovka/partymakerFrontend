@@ -17,6 +17,14 @@ const styles = {
 }
 
 class AvatarScene extends React.Component {
+  componentDidMount() {
+    this.props.actions.header.setTitle('Аватар')
+  }
+
+  componentWillUnmount() {
+    this.props.actions.header.resetTitle()
+  }
+
   handleUpload = () => {}
 
   render() {
@@ -40,6 +48,7 @@ AvatarScene.propTypes = {
   classes: object.isRequired,
   values: object.isRequired,
   user: object.isRequired,
+  actions: object.isRequired,
 }
 
 export default withStyles(styles)(connector(formik(AvatarScene)))

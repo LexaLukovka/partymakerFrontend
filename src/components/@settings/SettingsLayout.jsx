@@ -9,6 +9,8 @@ import EmailScene from './@email/EmailScene'
 import PhoneScene from './@phone/PhoneScene'
 import AvatarScene from './@avatar/AvatarScene'
 import connector from './connector'
+import { isEmpty } from 'lodash'
+import { withRouter } from 'react-router'
 
 const styles = {
   root: {
@@ -18,7 +20,10 @@ const styles = {
 
 class SettingsLayout extends React.Component {
   componentDidMount() {
-    const { actions } = this.props
+    const { user, actions, history } = this.props
+    if (isEmpty(user)) {
+      history.push('/login')
+    }
     actions.header.setIcon('back')
   }
 
@@ -48,6 +53,8 @@ class SettingsLayout extends React.Component {
 SettingsLayout.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
+  user: object.isRequired,
+  history: object.isRequired,
 }
 
-export default withStyles(styles)(connector(SettingsLayout))
+export default withStyles(styles)(withRouter(connector(SettingsLayout)))
