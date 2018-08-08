@@ -37,6 +37,11 @@ class Party {
 
     return Http.post('/party', party)
   }
+
+  changeSettings(settings) {
+    console.log(settings)
+    return Http.put('/settings', settings)
+  }
 }
 
 export default new Party()

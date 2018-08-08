@@ -13,7 +13,7 @@ const styles = {
 }
 
 const MyListItem = ({ classes, children, to, ...props }) =>
-  <ListItem {...props} button divider className={classes.root}>
+  <ListItem {...props} button divider component={Link} to={to} className={classes.root}>
     {children}
   </ListItem>
 
