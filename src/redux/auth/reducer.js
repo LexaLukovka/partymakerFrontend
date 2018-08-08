@@ -9,6 +9,12 @@ import {
   LOGOUT_USER,
 } from './action'
 
+import {
+  CHANGE_SETTINGS_FULFILLED,
+  CHANGE_SETTINGS_PENDING,
+  CHANGE_SETTINGS_REJECTED,
+} from 'src/redux/settings/action'
+
 const initialState = {
   user: null,
   errors: [],
@@ -70,12 +76,35 @@ const authReducer = (state = initialState, { type, payload }) => {
 
       }
     }
+
     case LOGOUT_USER: {
       return {
         ...state,
         user: null,
       }
     }
+
+    case CHANGE_SETTINGS_PENDING: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case CHANGE_SETTINGS_REJECTED: {
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      }
+    }
+    case CHANGE_SETTINGS_FULFILLED: {
+      return {
+        ...state,
+        loading: false,
+        user: payload,
+      }
+    }
+
     default: {
       return state
     }

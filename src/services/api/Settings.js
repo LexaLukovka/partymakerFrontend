@@ -1,9 +1,13 @@
 /* eslint-disable class-methods-use-this */
 import Http from '../Http'
+import JWT from 'jwt-decode'
 
 class Settings {
-  change(settings) {
-    return Http.put('/settings', settings)
+  async change(settings) {
+    const { token, refreshToken } = await Http.put('/settings', settings)
+    const user = JWT(token).data
+
+    return { token: `Bearer ${token.replace(/^"(.*)"$/, '$1')}`, refreshToken, ...user }
   }
 }
 

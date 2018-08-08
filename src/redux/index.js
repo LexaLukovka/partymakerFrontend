@@ -8,7 +8,6 @@ import authReducer from './auth/reducer'
 import layoutReducer from './layout/reducer'
 import drawerReducer from './drawer/reducer'
 import headerReducer from './header/reducer'
-import settingsReducer from './settings/reducer'
 import alertReducer from './alert/reducer'
 
 const persistConfig = {
@@ -19,7 +18,6 @@ const persistConfig = {
 
 const reducers = combineReducers({
   party,
-  settingsReducer,
   authReducer,
   layoutReducer,
   drawerReducer,
