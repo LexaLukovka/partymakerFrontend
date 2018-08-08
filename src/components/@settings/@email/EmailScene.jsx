@@ -7,7 +7,9 @@ import formik from './formik'
 
 const styles = theme => ({
   root: {
-    paddingTop: 23,
+    paddingTop: 25,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   input: {
     marginBottom: theme.spacing.size3,

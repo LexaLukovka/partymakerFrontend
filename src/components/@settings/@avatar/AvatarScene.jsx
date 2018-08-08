@@ -8,7 +8,9 @@ import connector from '../connector'
 
 const styles = {
   root: {
-    paddingTop: 23,
+    paddingTop: 25,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
   avatar: {
     width: 100,
