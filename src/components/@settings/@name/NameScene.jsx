@@ -73,7 +73,4 @@ NameScene.propTypes = {
   handleBlur: func.isRequired,
 }
 
-const style = withStyles(styles)(NameScene)
-const redux = connector(style)
-
-export default formik(redux)
+export default formik(connector(withStyles(styles)(NameScene)))
