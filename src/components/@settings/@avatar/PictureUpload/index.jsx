@@ -113,7 +113,7 @@ class PictureUpload extends React.Component {
 PictureUpload.propTypes = {
   url: string,
   classes: object.isRequired,
-  value: string.isRequired,
+  value: string,
   name: string.isRequired,
   onChange: func.isRequired,
   onBlur: func,
@@ -121,6 +121,7 @@ PictureUpload.propTypes = {
 }
 PictureUpload.defaultProps = {
   url: '/upload',
+  value: '',
   helperText: '',
   onBlur: () => {},
 }
