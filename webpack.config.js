@@ -19,7 +19,6 @@ module.exports = {
   entry: [
     './src/utils/webpack-public-path',
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client?reload=true',
     'babel-polyfill',
     path.resolve(__dirname, 'src/index.js'),
   ],
@@ -34,6 +33,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
     compress: true,
     port: 2000,
+    hot: true,
     historyApiFallback: true,
   },
 
