@@ -16,6 +16,7 @@ import CreateLayout from './@patry-create/CreateLayout'
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@party/PartyScene'
 import AuthLayout from './@auth/AuthLayout'
+import PlacesLayout from './@places/PlacesLayout'
 import connector from './connector'
 
 const styles = {
@@ -36,6 +37,7 @@ const LayoutScene = ({ classes, layout }) =>
         <Route exact path="/parties" component={PartiesScene} />
         <Route exact path="/parties/:id" component={PartyScene} />
         <AuthRoute path="/settings" component={SettingsLayout} />
+        <Route path="/places" component={PlacesLayout} />
         <Route path="/" component={AuthLayout} />
       </Switch>
     </Container>

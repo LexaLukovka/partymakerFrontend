@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import party from './party'
+import place from './place'
 
 import authReducer from './auth/reducer'
 import layoutReducer from './layout/reducer'
@@ -18,6 +19,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   party,
+  place,
   authReducer,
   layoutReducer,
   drawerReducer,
