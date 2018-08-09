@@ -16,7 +16,8 @@ const styles = {
 
 class MyPartiesScene extends React.Component {
   componentWillMount() {
-    this.props.actions.parties.userLoad(this.props.match.params.id)
+    const { actions, parties } = this.props
+    if (isEmpty(parties)) actions.parties.userLoad(this.props.match.params.id)
   }
 
   render() {
