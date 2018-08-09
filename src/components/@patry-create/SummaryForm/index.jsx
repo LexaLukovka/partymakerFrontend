@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
 import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
@@ -43,10 +43,10 @@ class SummaryForm extends React.Component {
   }
 
   componentDidUpdate() {
-    const { party, history, actions } = this.props
+    const { user, party, history, actions } = this.props
     if (party.success) {
       actions.party.reset()
-      history.push('/parties')
+      history.push(`/user/${user.id}/parties`)
     }
     if (party.error) {
       actions.party.reset()
@@ -151,6 +151,7 @@ SummaryForm.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   party: object.isRequired,
+  user: object.isRequired,
 }
 
 export default withStyles(styles)(connector(SummaryForm))
