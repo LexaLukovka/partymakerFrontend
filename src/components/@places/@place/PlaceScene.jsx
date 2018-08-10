@@ -2,8 +2,6 @@
 import React from 'react'
 import { arrayOf, bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { CSSTransition } from 'react-transition-group'
-import { Button } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
@@ -24,18 +22,6 @@ const styles = (theme) => ({
     marginTop: 20,
     textAlign: 'center',
   },
-  papers: {
-    position: 'absolute',
-    top: 200,
-    left: 0,
-    right: 0,
-    margin: 9,
-  },
-  paperse: {
-    marginTop: 20,
-    marginLeft: 9,
-    marginRight: 9,
-  },
   container: {
     display: 'flex',
   },
@@ -51,10 +37,6 @@ const styles = (theme) => ({
 })
 
 class PlaceScene extends React.Component {
-  state = {
-    checked: false,
-  }
-
   componentDidMount() {
     const { actions, match } = this.props
     actions.place.show(match.params.id)
@@ -66,29 +48,16 @@ class PlaceScene extends React.Component {
     actions.header.setIcon('menu')
   }
 
-  handleClick = (check) => {
-    this.setState({
-      checked: check === this.state.checked && !check,
-    })
-  }
 
   render() {
     const { classes, loading, place } = this.props
     if (loading) return <Loading />
     if (isEmpty(place)) return <NotFound />
-    const { checked } = this.state
 
     return (
       <div className={classes.root}>
-        <div onClick={() => this.handleClick(checked)}>
-          <Carousel pictures={place.pictures} />
-        </div>
-        <CSSTransition in={checked} timeout={500} classNames="star">
-          <div className={!checked ? classes.papers : classes.paperse}>
-            <PlaceCard place={place} />
-            <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
-          </div>
-        </CSSTransition>
+        <Carousel pictures={place.pictures} />
+        <PlaceCard place={place} />
       </div>
     )
   }
