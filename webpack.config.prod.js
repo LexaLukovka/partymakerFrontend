@@ -1,64 +1,53 @@
-/* eslint-disable global-require */
-import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import WebpackMd5Hash from 'webpack-md5-hash'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
-import path from 'path'
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production'),
-  __DEV__: false,
-}
-
-export default {
+module.exports = {
+  mode: 'production',
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
+    modules: ['node_modules'],
+    alias: {
+      components: path.resolve(__dirname, './src/components/'),
+      services: path.resolve(__dirname, './src/services/'),
+      utils: path.resolve(__dirname, './src/utils/'),
+      src: path.resolve(__dirname, './src/'),
+    },
   },
   devtool: 'source-map',
-  entry: path.resolve(__dirname, 'src/index'),
-  target: 'web',
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    filename: '[name].[chunkhash].js',
-  },
-  plugins: [
-    // Hash the files using MD5 so that their names change when the content changes.
-    new WebpackMd5Hash(),
-
-    // Tells React to build in prod mode. https://facebook.github.io/react/downloads.html
-    new webpack.DefinePlugin(GLOBALS),
-
-    // Generate an external css file with a hash in the filename
-    new ExtractTextPlugin('[name].[contenthash].css'),
-
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
-      inject: true,
-      // Note that you can add custom options here if you need to handle other custom logic in index.html
-      // To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token below.
-      trackJSToken: '',
-    }),
-
-    // Minify JS
-    new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
-    new CopyWebpackPlugin([
-      { from: 'src/img', to: 'img' },
-    ]),
+  entry: [
+    'babel-polyfill',
+    path.resolve(__dirname, 'src/index.js'),
   ],
+  output: {
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
+    filename: 'bundle.js',
+  },
+  target: 'web',
+
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true,
+        cache: true,
+        sourceMap: true,
+        uglifyOptions: {
+          ecma: 6,
+          warnings: true,
+          mangle: false,
+          keep_fnames: true,
+          output: {
+            beautify: true,
+            comments: true,
+          },
+        },
+      }),
+    ],
+  },
   module: {
     rules: [
       {
@@ -68,14 +57,18 @@ export default {
       },
       {
         test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              name: '[name].[ext]',
-            },
-          },
-        ],
+        use: ['file-loader'],
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        })),
+      },
+      {
+        test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
+        use: 'url-loader',
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -85,7 +78,6 @@ export default {
             options: {
               limit: 10000,
               mimetype: 'application/font-woff',
-              name: '[name].[ext]',
             },
           },
         ],
@@ -98,7 +90,6 @@ export default {
             options: {
               limit: 10000,
               mimetype: 'application/octet-stream',
-              name: '[name].[ext]',
             },
           },
         ],
@@ -111,7 +102,6 @@ export default {
             options: {
               limit: 10000,
               mimetype: 'image/svg+xml',
-              name: '[name].[ext]',
             },
           },
         ],
@@ -127,35 +117,23 @@ export default {
           },
         ],
       },
-      {
-        test: /(\.css|\.scss|\.sass)$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true,
-              },
-            }, {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [
-                  require('autoprefixer'),
-                ],
-                sourceMap: true,
-              },
-            }, {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [path.resolve(__dirname, 'src', 'scss')],
-                sourceMap: true,
-              },
-            },
-          ],
-        }),
-      },
     ],
   },
+
+  plugins: [
+    new BundleAnalyzerPlugin(),
+    new ExtractTextPlugin({ filename: 'styles.css', allChunks: true }),
+    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+      },
+      inject: true,
+    }),
+  ],
+
 }

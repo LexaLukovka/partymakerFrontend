@@ -1,9 +1,7 @@
 /* eslint-disable function-paren-newline,react/prefer-stateless-function,no-return-assign */
 import React from 'react'
 import PropTypes from 'prop-types'
-import LinearProgress from '@material-ui/core/es/LinearProgress/LinearProgress'
-import FormControl from '@material-ui/core/es/FormControl/FormControl'
-import FormHelperText from '@material-ui/core/es/FormHelperText/FormHelperText'
+import { LinearProgress, FormControl, FormHelperText } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import uniq from 'lodash/uniq'
 import flatten from 'lodash/flattenDeep'

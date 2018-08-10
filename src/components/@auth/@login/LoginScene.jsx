@@ -1,8 +1,8 @@
 import React from 'react'
-import Typography from '@material-ui/core/es/Typography/Typography'
-import Card from '@material-ui/core/es/Card/Card'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import { Typography, Card } from '@material-ui/core'
+
 import LoginForm from './LoginForm'
 
 const styles = theme => ({

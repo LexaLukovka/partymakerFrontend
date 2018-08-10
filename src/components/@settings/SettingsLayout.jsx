@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 import { withStyles } from '@material-ui/core'
 import SettingsScene from './SettingsScene'
 import PasswordScene from './@password/PasswordScene'

@@ -5,7 +5,7 @@ import { arrayOf, string, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Avatar from '@material-ui/core/es/Avatar/Avatar'
+import { Avatar } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 
 const styles = {

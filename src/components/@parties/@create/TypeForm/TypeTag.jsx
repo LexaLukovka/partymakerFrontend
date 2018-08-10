@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Icon from '@material-ui/core/es/Icon/Icon'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/es/Typography/Typography'
+import { Typography, Icon } from '@material-ui/core'
 
 const styles = {
   inline: {
