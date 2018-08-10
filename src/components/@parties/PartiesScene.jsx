@@ -1,7 +1,7 @@
 import React from 'react'
 import { array, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import PartiesCard from './PartiesCard'
+import PartiesList from './PartiesList'
 import isEmpty from 'lodash/isEmpty'
 import Loading from '../Loading'
 import NotFound from '../NotFound'
@@ -19,6 +19,10 @@ class PartiesScene extends React.Component {
     this.props.actions.parties.load()
   }
 
+  like = (id) => {
+    this.props.actions.like.like(id)
+  }
+
   render() {
     const { classes, loading, parties } = this.props
     if (loading) return <Loading />
@@ -26,7 +30,7 @@ class PartiesScene extends React.Component {
 
     return (
       <div className={classes.root}>
-        <PartiesCard />
+        <PartiesList onLike={this.like} parties={parties} />
       </div>
     )
   }
