@@ -7,7 +7,7 @@ export const LOAD_PLACES_FULFILLED = 'LOAD_PLACES_FULFILLED'
 
 
 // noinspection JSUnusedGlobalSymbols
-export const load = () => ({
+export const load = (searchParams) => ({
   type: LOAD_PLACES,
-  payload: Place.all(),
+  payload: Place.all(searchParams),
 })

@@ -1,10 +1,11 @@
 /* eslint-disable class-methods-use-this */
 import Http from 'services/Http'
+import qs from 'querystring'
 import flatten from 'lodash/flattenDeep'
 
 class Party {
-  all() {
-    return Http.get('/party')
+  all(searchParams) {
+    return Http.get(`/party?${qs.stringify(searchParams)}`)
   }
 
   userParty(id) {

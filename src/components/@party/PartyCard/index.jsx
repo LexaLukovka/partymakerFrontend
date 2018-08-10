@@ -1,5 +1,6 @@
 import React from 'react'
 import { object, number, string, array, shape } from 'prop-types'
+import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, ListItemSecondaryAction, ListItemText, List, Typography, Button } from '@material-ui/core'
 import ListItem from './ListItem'
@@ -62,7 +63,7 @@ const PartyCard = ({ classes, party }) =>
       <ListItem>
         <ListItemText
           primary="Приходить"
-          secondary={party.start_time}
+          secondary={moment(party.start_time).fromNow()}
         />
       </ListItem>
       <ListItem>
@@ -103,7 +104,7 @@ PartyCard.propTypes = {
     address: shape({
       address: string.isRequired,
     }).isRequired,
-    start_time: string.isRequired,
+    start_time: number.isRequired,
     telegram_url: string.isRequired,
     description: string.isRequired,
   }).isRequired,

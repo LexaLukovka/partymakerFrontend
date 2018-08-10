@@ -1,15 +1,16 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
+/* eslint-disable camelcase */
 import React from 'react'
 import { arrayOf, bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button/Button'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
+import Carousel from 'components/Carousel'
 import connector from './connector'
 import PlaceCard from './PlaceCard'
-import Carousel from './Carousel'
+import Parties from './Parties'
 
-import './style.css'
 
 const styles = (theme) => ({
   root: {
@@ -34,12 +35,21 @@ const styles = (theme) => ({
     stroke: theme.palette.divider,
     strokeWidth: 1,
   },
+
+
+  create: {
+    padding: 20,
+    textAlign: 'center',
+  },
 })
 
 class PlaceScene extends React.Component {
   componentDidMount() {
     const { actions, match } = this.props
-    actions.place.show(match.params.id)
+    const place_id = match.params.id
+    actions.place.show(place_id)
+    actions.parties.load({ place_id })
+
     actions.header.setIcon('back')
   }
 
@@ -50,14 +60,18 @@ class PlaceScene extends React.Component {
 
 
   render() {
-    const { classes, loading, place } = this.props
-    if (loading) return <Loading />
-    if (isEmpty(place)) return <NotFound />
+    const { classes, place, parties } = this.props
+    if (place.loading) return <Loading />
+    if (isEmpty(place.place)) return <NotFound />
 
     return (
       <div className={classes.root}>
-        <Carousel pictures={place.pictures} />
-        <PlaceCard place={place} />
+        <Carousel pictures={place.place.pictures} />
+        <PlaceCard place={place.place} />
+        <div className={classes.create}>
+          <Button color="primary">Создать здесь свою вечеринку</Button>
+        </div>
+        <Parties parties={parties} />
       </div>
     )
   }
@@ -66,7 +80,7 @@ class PlaceScene extends React.Component {
 PlaceScene.propTypes = {
   classes: object.isRequired,
   place: object.isRequired,
-  loading: bool.isRequired,
+  parties: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
 }

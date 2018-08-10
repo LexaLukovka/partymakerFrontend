@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     margin: '10px 10px',
   },
@@ -34,12 +34,11 @@ const PlacesCard = ({ classes, place }) =>
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small" color="primary">
-        Создать вечеринку
-      </Button>
-      <Button size="small" color="primary">
-        Смотреть вечерики
-      </Button>
+      <Link to={`/places/${place.id}`}>
+        <Button color="primary">
+          Смотреть
+        </Button>
+      </Link>
     </CardActions>
   </Card>
 
