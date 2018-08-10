@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles/index'
 import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
 import connector from '../connector'
-import PictureUpload from './PictureUpload/index'
+import PictureUpload from './PictureUpload'
 
 const styles = theme => ({
   root: {

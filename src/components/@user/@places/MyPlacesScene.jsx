@@ -1,7 +1,7 @@
 import React from 'react'
 import { array, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import PartiesList from '../../@parties/PartiesScene/PartiesList/index'
+import PartiesList from 'components/@parties/PartiesScene/PartiesList'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'

@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles'
 import uniq from 'lodash/uniq'
 import flatten from 'lodash/flattenDeep'
 import PictureList from './PictureList'
-import Http from '../../../../../services/Http'
+import Http from 'services/Http'
 import AddPicture from './AddPicture'
 
 const styles = theme => ({
