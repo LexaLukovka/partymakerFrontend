@@ -1,11 +1,11 @@
 import React from 'react'
 import { array, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import PartiesList from './PartiesList'
+import PartiesList from '../../@parties/PartiesScene/PartiesList/index'
 import isEmpty from 'lodash/isEmpty'
-import Loading from '../Loading'
-import NotFound from '../NotFound'
-import connector from './connector'
+import Loading from 'components/Loading'
+import NotFound from 'components/NotFound'
+import connector from '../connector'
 
 const styles = {
   root: {
@@ -14,10 +14,10 @@ const styles = {
   },
 }
 
-class PartiesScene extends React.Component {
+class MyPlacesScene extends React.Component {
   componentWillMount() {
     const { actions, parties } = this.props
-    if (isEmpty(parties)) actions.parties.load()
+    if (isEmpty(parties)) actions.parties.userLoad(this.props.match.params.id)
   }
 
   like = (id) => {
@@ -37,14 +37,11 @@ class PartiesScene extends React.Component {
   }
 }
 
-PartiesScene.propTypes = {
+MyPlacesScene.propTypes = {
   classes: object.isRequired,
-  parties: array,
+  parties: array.isRequired,
   loading: bool.isRequired,
   actions: object.isRequired,
+  match: object.isRequired,
 }
-
-PartiesScene.defaultProps = {
-  parties: [],
-}
-export default withStyles(styles)(connector(PartiesScene))
+export default withStyles(styles)(connector(MyPlacesScene))

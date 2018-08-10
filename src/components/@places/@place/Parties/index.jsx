@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Loading from 'components/Loading'
 import isEmpty from 'lodash/isEmpty'
 import Typography from '@material-ui/core/Typography/Typography'
-import PartiesList from 'components/@parties/PartiesList'
+import PartiesList from 'components/@parties/PartiesScene/PartiesList'
 
 
 const styles = () => ({

@@ -2,8 +2,7 @@ import React from 'react'
 import { object, number, string, array, shape } from 'prop-types'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, ListItemSecondaryAction, ListItemText, List, Typography, Button } from '@material-ui/core'
-import ListItem from './ListItem'
+import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
 import connector from '../connector'
 import shortTitle from 'utils/shortTitle'
 
@@ -28,9 +27,9 @@ const styles = theme => ({
 
 const PartyCard = ({ classes, party }) =>
   <Paper className={classes.root}>
-    <Typography align="center" variant="title">{party.title}</Typography>
+    <Typography variant="title">{party.title}</Typography>
     <List>
-      <ListItem>
+      <ListItem disableGutters>
         <div className={classes.status} />
         <ListItemText primary={party.status} />
         <ListItemSecondaryAction className={classes.amount}>
@@ -39,20 +38,20 @@ const PartyCard = ({ classes, party }) =>
       </ListItem>
       {
         party.amount &&
-        <ListItem>
+        <ListItem disableGutters>
           <ListItemText primary="Скидываться" />
           <ListItemSecondaryAction>
             {`${party.amount} грн`}
           </ListItemSecondaryAction>
         </ListItem>
       }
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText primary="Район" />
         <ListItemSecondaryAction>
           {party.address.district}
         </ListItemSecondaryAction>
       </ListItem>
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText primary="Адрес" secondary={shortTitle(party.address.address)} />
         <ListItemSecondaryAction>
           <a href={`http://www.google.com/maps/?q=${party.address.address}`}>
@@ -60,13 +59,14 @@ const PartyCard = ({ classes, party }) =>
           </a>
         </ListItemSecondaryAction>
       </ListItem>
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText
           primary="Приходить"
-          secondary={moment(party.start_time).fromNow()}
+          secondary={moment(party.start_time)
+            .fromNow()}
         />
       </ListItem>
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText
           primary="Собирается"
           secondary={`от ${party.people_min} до ${party.people_max} человек`}
@@ -74,17 +74,17 @@ const PartyCard = ({ classes, party }) =>
       </ListItem>
       {
         party.table &&
-        <ListItem>
+        <ListItem disableGutters>
           <ListItemText
             primary="Общий стол"
             secondary={party.table}
           />
         </ListItem>
       }
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText
           primary="Telegram"
           secondary={<a href={party.telegram_url}>{`${party.telegram_url.substring(0, 40)}...`}</a>}

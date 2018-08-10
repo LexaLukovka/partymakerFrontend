@@ -7,17 +7,15 @@ import Header from 'components/Header'
 import Alert from 'components/Alert'
 import Drawer from 'components/Drawer'
 import Container from 'components/Container'
-import AuthRoute from 'components/@auth/AuthRoute'
+import AuthRoute from 'components/AuthRoute'
 
 import IndexScene from './@index/IndexScene'
 import SettingsLayout from './@settings/SettingsLayout'
-import MyPartiesScene from './@parties/MyPartiesScene'
-import CreateLayout from './@patry-create/CreateLayout'
-import PartiesScene from './@parties/PartiesScene'
-import PartyScene from './@party/PartyScene'
 import AuthLayout from './@auth/AuthLayout'
 import PlacesLayout from './@places/PlacesLayout'
 import connector from './connector'
+import PartiesLayout from './@parties/PartiesLayout'
+import UserLayout from 'components/@user/UserLayout'
 
 const styles = {
   root: {
@@ -32,13 +30,11 @@ const LayoutScene = ({ classes, layout }) =>
     <Container>
       <Switch>
         <Route exact path="/" component={IndexScene} />
-        <AuthRoute path="/party/create" component={CreateLayout} />
-        <Route exact path="/user/:id/parties" component={MyPartiesScene} />
-        <Route exact path="/parties" component={PartiesScene} />
-        <Route exact path="/parties/:id" component={PartyScene} />
-        <AuthRoute path="/settings" component={SettingsLayout} />
+        <Route path="/parties" component={PartiesLayout} />
         <Route path="/places" component={PlacesLayout} />
-        <Route path="/" component={AuthLayout} />
+        <Route path="/auth" component={AuthLayout} />
+        <AuthRoute path="/settings" component={SettingsLayout} />
+        <AuthRoute path="/user" component={UserLayout} />
       </Switch>
     </Container>
     <Drawer />

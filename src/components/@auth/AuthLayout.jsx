@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import RegisterScene from './@register/RegisterScene'
 import LoginScene from './@login/LoginScene'
 import AuthDevider from './SocialLogin/AuthDevider'
@@ -34,8 +34,9 @@ class AuthLayout extends React.Component {
     return (
       <div className={classes.root}>
         <Switch>
-          <Route exact path="/register" component={RegisterScene} />
-          <Route exact path="/login" component={LoginScene} />
+          <Route exact path="/auth/register" component={RegisterScene} />
+          <Route exact path="/auth/login" component={LoginScene} />
+          <Redirect to="/auth/login" />
         </Switch>
         <AuthDevider />
         <SocialLogin />

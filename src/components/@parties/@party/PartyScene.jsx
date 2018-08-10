@@ -5,11 +5,11 @@ import { withStyles } from '@material-ui/core/styles'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
-import Loading from 'components/Loading'
-import NotFound from 'components/NotFound'
+import Loading from 'components/Loading/index'
+import NotFound from 'components/NotFound/index'
 import connector from './connector'
-import PartyCard from './PartyCard'
-import Carousel from 'components/Carousel'
+import PartyCard from './PartyCard/index'
+import Carousel from 'components/Carousel/index'
 
 import './style.css'
 
@@ -57,7 +57,7 @@ class PartyScene extends React.Component {
 
   componentDidMount() {
     const { actions, match } = this.props
-    actions.parties.showParty(match.params.id)
+    actions.parties.show(match.params.id)
     actions.header.setIcon('back')
   }
 

@@ -8,7 +8,7 @@ const AuthRoute = ({ auth, ...rest }) => {
     return <Route {...rest} />
   }
 
-  return <Redirect to="/login" />
+  return <Redirect to="/auth/login" />
 }
 
 AuthRoute.propTypes = {

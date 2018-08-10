@@ -34,13 +34,13 @@ const MyCardContent = ({ classes, party }) =>
       />
     </Link>
     <Link to={`/parties/${party.id}`}>
-      <Typography align="center" variant="title" color="primary" className={classes.title}>
+      <Typography variant="title" className={classes.title}>
         {party.title}
       </Typography>
     </Link>
 
     <List>
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText primary="Собирается" />
         <ListItemSecondaryAction>
           {`до ${party.people_max} человек`}
@@ -48,20 +48,20 @@ const MyCardContent = ({ classes, party }) =>
       </ListItem>
       {
         party.amount &&
-        <ListItem>
+        <ListItem disableGutters>
           <ListItemText primary="Скидываться" />
           <ListItemSecondaryAction>
             {`${party.amount} грн`}
           </ListItemSecondaryAction>
         </ListItem>
       }
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText primary="Район" />
         <ListItemSecondaryAction>
           {party.address.district}
         </ListItemSecondaryAction>
       </ListItem>
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
     </List>

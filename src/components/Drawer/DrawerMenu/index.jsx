@@ -1,19 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link, withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import MoveToInbox from '@material-ui/icons/es/MoveToInbox'
-import Search from '@material-ui/icons/es/Search'
-import Person from '@material-ui/icons/es/Person'
-import Typography from '@material-ui/core/es/Typography/Typography'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import Settings from '@material-ui/icons/SettingsApplications'
+import { List, ListItem, ListItemText, Typography, Grid } from '@material-ui/core'
+import { MoveToInbox, ExitToApp, SettingsApplications, Search, Person } from '@material-ui/icons'
 import Background from './Background'
 import connector from './connector'
-import ExitToApp from '@material-ui/icons/es/ExitToApp'
-import { Link, withRouter } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -45,7 +37,7 @@ const DrawerMenu = ({ classes, actions, auth }) =>
     </Grid>}
     {!auth.user && <div className={classes.list} />}
     <List component="nav">
-      <ListItem button divider component={Link} to="/party/create">
+      <ListItem button divider component={Link} to="/parties/create">
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
@@ -58,12 +50,13 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <ListItemText>Искать вечеринки</ListItemText>
       </ListItem>
       {auth.user &&
-      <ListItem button component={Link} to={`/user/${auth.user.id}/parties`}>
+      <ListItem button component={Link} to="/user/parties">
         <Person />
         <ListItemText>Мои вечеринки</ListItemText>
-      </ListItem>}
+      </ListItem>
+      }
       <ListItem button component={Link} to="/settings">
-        <Settings />
+        <SettingsApplications />
         <ListItemText>Настройки</ListItemText>
       </ListItem>
       <ListItem button onClick={() => actions.auth.logout()}>

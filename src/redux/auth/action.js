@@ -1,5 +1,5 @@
-import User from 'services/api/User'
-import * as alert from '../alert/action'
+import Auth from 'services/api/Auth'
+import * as alert from 'src/redux/alert/action'
 import store from 'src/store'
 
 export const REGISTER_USER = 'REGISTER_USER'
@@ -18,13 +18,13 @@ export const LOAD_SAVED_USER = 'LOAD_SAVED_USER'
 
 export const register = (form) => ({
   type: REGISTER_USER,
-  payload: User.register(form),
+  payload: Auth.register(form),
 })
 
 export const login = (form) => async dispatch => {
   await dispatch({
     type: LOGIN_USER,
-    payload: User.login(form),
+    payload: Auth.login(form),
   })
 
   const { error } = store.getState().authReducer
