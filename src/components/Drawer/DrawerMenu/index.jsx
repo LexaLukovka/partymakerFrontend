@@ -49,6 +49,10 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
+      <ListItem button component={Link} to="/places">
+        <Search />
+        <ListItemText>Искать места</ListItemText>
+      </ListItem>
       <ListItem button component={Link} to="/parties">
         <Search />
         <ListItemText>Искать вечеринки</ListItemText>
