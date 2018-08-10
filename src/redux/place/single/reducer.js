@@ -2,7 +2,7 @@ import { LOAD_PLACE_PENDING, LOAD_PLACE_FULFILLED, LOAD_PLACE_REJECTED } from '.
 
 const initialState = {
   loading: false,
-  party: {},
+  place: {},
   error: null,
 }
 
