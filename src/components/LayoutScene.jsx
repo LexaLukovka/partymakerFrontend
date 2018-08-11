@@ -1,6 +1,4 @@
 import React from 'react'
-import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import { Route, Switch } from 'react-router-dom'
 import withTheme from 'utils/withTheme'
 import Header from 'components/Header'
@@ -13,19 +11,13 @@ import IndexScene from './@index/IndexScene'
 import SettingsLayout from './@settings/SettingsLayout'
 import AuthLayout from './@auth/AuthLayout'
 import PlacesLayout from './@places/PlacesLayout'
-import connector from './connector'
 import PartiesLayout from './@parties/PartiesLayout'
 import UserLayout from 'components/@user/UserLayout'
+import Background from 'components/Background'
 
-const styles = {
-  root: {
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-  },
-}
 
-const LayoutScene = ({ classes, layout }) =>
-  <div className={classes.root} style={{ backgroundImage: `url(${layout.background})` }}>
+const LayoutScene = () =>
+  <Background>
     <Header />
     <Container>
       <Switch>
@@ -39,11 +31,6 @@ const LayoutScene = ({ classes, layout }) =>
     </Container>
     <Drawer />
     <Alert />
-  </div>
+  </Background>
 
-LayoutScene.propTypes = {
-  classes: object.isRequired,
-  layout: object.isRequired,
-}
-
-export default withTheme(withStyles(styles)(connector(LayoutScene)))
+export default withTheme(LayoutScene)
