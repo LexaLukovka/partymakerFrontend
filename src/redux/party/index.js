@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist'
 import { combineReducers } from 'redux'
 import createReducer from './create/reducer'
 import listReducer from './list/reducer'
+import myListReducer from './myList/reducer'
 import singleReducer from './single/reducer'
 
 const persistConfig = {
@@ -13,5 +14,6 @@ const persistConfig = {
 export default combineReducers({
   createReducer: persistReducer(persistConfig, createReducer),
   listReducer,
+  myListReducer,
   singleReducer,
 })

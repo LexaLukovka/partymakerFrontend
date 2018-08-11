@@ -7,6 +7,9 @@ class Party {
   all(searchParams) {
     return Http.get(`/party?${qs.stringify(searchParams)}`)
   }
+  userParty(id) {
+    return Http.get(`/user/${id}/parties`)
+  }
 
   find(id) {
     return Http.get(`/party/${id}`)
