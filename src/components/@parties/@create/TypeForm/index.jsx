@@ -20,7 +20,7 @@ class TypeForm extends React.Component {
   handleSelect = (type) => {
     const { actions, history } = this.props
     actions.party.update({ type })
-    history.push('/party/create/step/2')
+    history.push('/parties/create/step/2')
   }
 
   render() {

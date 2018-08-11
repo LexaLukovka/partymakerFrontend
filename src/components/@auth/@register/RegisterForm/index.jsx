@@ -1,4 +1,4 @@
-/* eslint-disable react/sort-comp */
+/* eslint-disable react/sort-comp,no-console */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
@@ -207,7 +207,7 @@ class RegisterForm extends React.Component {
           </Button>
         </CardActions>
         <div className={classes.link}>
-          <Link to="/login">
+          <Link to="/auth/login">
             <Typography> Уже есть аккаунт? Войти </Typography>
           </Link>
         </div>

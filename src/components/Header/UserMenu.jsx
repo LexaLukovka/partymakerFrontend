@@ -57,8 +57,8 @@ class UserMenu extends React.Component {
               <MenuItem onClick={this.logout}>Выйти</MenuItem>
               :
               <React.Fragment>
-                <MenuItem component={Link} to="/login">Войти</MenuItem>
-                <MenuItem component={Link} to="/register">Зарегистрироваться</MenuItem>
+                <MenuItem component={Link} to="/auth/login">Войти</MenuItem>
+                <MenuItem component={Link} to="/auth/register">Зарегистрироваться</MenuItem>
               </React.Fragment>
             }
           </div>

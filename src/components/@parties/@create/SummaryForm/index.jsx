@@ -43,10 +43,10 @@ class SummaryForm extends React.Component {
   }
 
   componentDidUpdate() {
-    const { user, party, history, actions } = this.props
+    const { party, history, actions } = this.props
     if (party.success) {
       actions.party.reset()
-      history.push(`/user/${user.id}/parties`)
+      history.push('/user/parties')
     }
     if (party.error) {
       actions.party.reset()
@@ -63,7 +63,7 @@ class SummaryForm extends React.Component {
 
     required.forEach(field => {
       if (party.form[field] === undefined) {
-        history.push('/party/create/step/2')
+        history.push('/parties/create/step/2')
       }
     })
   }
@@ -125,7 +125,7 @@ class SummaryForm extends React.Component {
           disabled
         />
         <Grid container justify="space-between" className={classes.buttonGroup}>
-          <Link to="/party/create/step/2">
+          <Link to="/parties/create/step/2">
             <Button size="large">
               Назад
             </Button>
@@ -151,7 +151,6 @@ SummaryForm.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   party: object.isRequired,
-  user: object.isRequired,
 }
 
 export default withStyles(styles)(connector(SummaryForm))

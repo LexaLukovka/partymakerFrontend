@@ -1,4 +1,4 @@
-/* eslint-disable react/sort-comp,padded-blocks */
+/* eslint-disable react/sort-comp,padded-blocks,no-console */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
@@ -110,7 +110,7 @@ class LoginForm extends React.Component {
               <Typography variant="subheading">Пароль</Typography>
             </Grid>
             <Grid container justify="flex-end">
-              <Link to="/register">
+              <Link to="/auth/register">
                 <Typography variant="body1">Забыли пароль?</Typography>
               </Link>
             </Grid>
@@ -154,7 +154,7 @@ class LoginForm extends React.Component {
           </Button>
         </CardActions>
         <div className={classes.link}>
-          <Link to="/register">
+          <Link to="/auth/register">
             <Typography color="inherit"> Нет аккаунта? </Typography>
           </Link>
         </div>

@@ -5,15 +5,6 @@ import moment from 'moment'
 import * as Yup from 'yup'
 import connector from '../connector'
 
-const dummyGeosuggest = {
-  formatted_address: '',
-  geometry: {
-    location: {
-      lat: 0,
-      lng: 0,
-    },
-  },
-}
 
 const initValues = (form) => ({
   title: form.title || '',
@@ -45,7 +36,7 @@ const handleSubmit = props => (formValues, methods) => {
   }
 
   actions.party.update(formValues)
-  history.push('/party/create/step/3')
+  history.push('/parties/create/step/3')
 
   methods.setSubmitting(false)
 }

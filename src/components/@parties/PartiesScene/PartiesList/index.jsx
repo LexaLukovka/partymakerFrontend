@@ -1,7 +1,7 @@
 import React from 'react'
 import { array, func } from 'prop-types'
 import Grid from '@material-ui/core/es/Grid/Grid'
-import PartiesCard from './PartiesCard'
+import PartiesCard from './PartiesCard/index'
 
 const PartiesList = ({ parties, onLike }) =>
   <Grid container justify="center">
@@ -17,7 +17,11 @@ const PartiesList = ({ parties, onLike }) =>
 
 PartiesList.propTypes = {
   parties: array.isRequired,
-  onLike: func.isRequired,
+  onLike: func,
+}
+
+PartiesList.defaultProps = {
+  onLike: () => {},
 }
 
 export default PartiesList

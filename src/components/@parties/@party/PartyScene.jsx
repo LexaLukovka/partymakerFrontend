@@ -57,7 +57,7 @@ class PartyScene extends React.Component {
 
   componentDidMount() {
     const { actions, match } = this.props
-    actions.parties.showParty(match.params.id)
+    actions.parties.show(match.params.id)
     actions.header.setIcon('back')
   }
 

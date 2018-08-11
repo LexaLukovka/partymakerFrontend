@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as createParty from 'src/redux/party/create/action'
-import * as headerActions from '../../redux/header/action'
+import * as headerActions from '../../../redux/header/action'
 
 const initMapStateToProps = store => ({
   user: store.authReducer.user,

@@ -40,7 +40,7 @@ class IndexScene extends React.Component {
       <div className={classes.root}>
         <BannerJumbotron />
         <div>
-          <Link to="/party/create">
+          <Link to="/parties/create">
             <Button
               className={classes.button}
               fullWidth

@@ -6,7 +6,7 @@ export const LOAD_PARTY_REJECTED = 'LOAD_PARTY_REJECTED'
 export const LOAD_PARTY_FULFILLED = 'LOAD_PARTY_FULFILLED'
 
 // noinspection JSUnusedGlobalSymbols
-export const showParty = (id) => ({
+export const show = (id) => ({
   type: LOAD_PARTY,
   payload: Party.find(id),
 })

@@ -3,7 +3,7 @@ import { object, func, bool } from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { Button, Grid, Typography, TextField } from '@material-ui/core'
-import Geosuggest from '../../Geosuggest'
+import Geosuggest from 'components/Geosuggest'
 import formik from './formik'
 import connector from '../connector'
 
@@ -45,7 +45,7 @@ class GeneralForm extends React.Component {
     const { actions, party, history } = this.props
 
     if (!party.form.type) {
-      history.push('/party/create/step/1')
+      history.push('/parties/create/step/1')
     }
 
     actions.party.update({ step: 2 })
@@ -191,7 +191,7 @@ class GeneralForm extends React.Component {
           />
         </div>
         <Grid container justify="space-between" className={classes.buttonGroup}>
-          <Link to="/party/create/step/1">
+          <Link to="/parties/create/step/1">
             <Button
               size="large"
               disabled={isSubmitting}
