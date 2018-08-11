@@ -21,10 +21,12 @@ const styles = theme => ({
 
 class EmailScene extends React.Component {
   componentDidMount() {
+    this.props.actions.header.setIcon('back')
     this.props.actions.header.setTitle('Email')
   }
 
   componentWillUnmount() {
+    this.props.actions.header.setIcon('menu')
     this.props.actions.header.resetTitle()
   }
 

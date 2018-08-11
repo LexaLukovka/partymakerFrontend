@@ -6,8 +6,6 @@ import { ListItem } from '@material-ui/core'
 
 const styles = {
   root: {
-    paddingTop: 15,
-    paddingBottom: 15,
   },
 }
 
