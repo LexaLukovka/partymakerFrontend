@@ -91,9 +91,10 @@ class RegisterForm extends React.Component {
         <Typography variant="subheading" align="center" className={classes.title}>РЕГИСТРАЦИЯ</Typography>
         <CardContent className={classes.inputGroup}>
           <div className={classes.input}>
+            <Typography variant="subheading">Имя и фамилия</Typography>
             <TextField
               fullWidth
-              label="Имя и фамилия"
+              placeholder="Александр Александрович"
               error={this.hasError('name')}
               helperText={this.showHelperError('name')}
               type="text"
@@ -104,9 +105,10 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Email</Typography>
             <TextField
               fullWidth
-              label="Email"
+              placeholder="email@example.com"
               error={this.hasError('email')}
               helperText={this.showHelperError('email')}
               type="email"
@@ -117,10 +119,11 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Номер телефона</Typography>
             <TextField
               fullWidth
               name="phone"
-              label="Номер телефона"
+              placeholder="380990123456"
               error={this.hasError('phone')}
               helperText={this.showHelperError('phone')}
               type="tel"
@@ -130,10 +133,11 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Пароль</Typography>
             <TextField
               fullWidth
               name="password"
-              label="Пароль"
+              placeholder="******"
               error={this.hasError('password')}
               helperText={this.showHelperError('password')}
               type={this.state.showPassword ? 'text' : 'password'}
@@ -157,10 +161,11 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Повторите пароль</Typography>
             <TextField
               fullWidth
               name="repeatPassword"
-              label="Повторите пароль"
+              placeholder="******"
               error={this.hasError('repeatPassword')}
               helperText={this.showHelperError('repeatPassword')}
               type={this.state.showRepeatPassword ? 'text' : 'password'}
