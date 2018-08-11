@@ -7,13 +7,10 @@ import {
   REGISTER_USER_REJECTED,
   LOAD_SAVED_USER,
   LOGOUT_USER,
-} from './action'
-
-import {
   CHANGE_SETTINGS_FULFILLED,
   CHANGE_SETTINGS_PENDING,
   CHANGE_SETTINGS_REJECTED,
-} from 'src/redux/settings/action'
+} from './action'
 
 const initialState = {
   user: null,
