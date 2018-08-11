@@ -22,6 +22,9 @@ module.exports = {
     'babel-polyfill',
     path.resolve(__dirname, 'src/index.js'),
   ],
+  stats: {
+    warnings: false,
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
@@ -29,25 +32,6 @@ module.exports = {
   },
   target: 'web',
 
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        parallel: true,
-        cache: true,
-        sourceMap: true,
-        uglifyOptions: {
-          ecma: 6,
-          warnings: true,
-          mangle: false,
-          keep_fnames: true,
-          output: {
-            beautify: true,
-            comments: true,
-          },
-        },
-      }),
-    ],
-  },
   module: {
     rules: [
       {
@@ -123,7 +107,7 @@ module.exports = {
   plugins: [
     new BundleAnalyzerPlugin(),
     new ExtractTextPlugin({ filename: 'styles.css', allChunks: true }),
-    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({

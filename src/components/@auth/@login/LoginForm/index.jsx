@@ -13,8 +13,8 @@ import {
   InputAdornment,
   IconButton,
 } from '@material-ui/core'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from 'mdi-react/VisibilityOffIcon'
+import Visibility from 'mdi-react/VisibilityIcon'
 import formik from './formik'
 import connector from '../../connector'
 

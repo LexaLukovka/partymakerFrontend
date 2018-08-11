@@ -2,7 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { Snackbar, IconButton } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
+import CloseIcon from 'mdi-react/CloseIcon'
 import connector from './connector'
 
 const styles = {

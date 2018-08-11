@@ -4,9 +4,9 @@ import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { CardActions, FormControlLabel, Checkbox, IconButton, Button } from '@material-ui/core'
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
-import Favorite from '@material-ui/icons/Favorite'
-import Share from '@material-ui/icons/Share'
+import FavoriteBorder from 'mdi-react/FavoriteBorderIcon'
+import Favorite from 'mdi-react/FavoriteIcon'
+import Share from 'mdi-react/ShareIcon'
 
 
 const styles = {
