@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/es/Typography/Typography'
+import { Typography } from '@material-ui/core'
 
 const Errors = ({ children }) =>
   <Typography align="center" variant="caption" color="error">

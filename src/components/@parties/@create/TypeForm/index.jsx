@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles/index'
-import Typography from '@material-ui/core/es/Typography/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
 import connector from '../connector'
 import TagList from './TagList'
 

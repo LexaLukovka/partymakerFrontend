@@ -1,9 +1,8 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
-import Snackbar from '@material-ui/core/es/Snackbar/Snackbar'
+import { Snackbar, IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
-import IconButton from '@material-ui/core/es/IconButton/IconButton'
 import connector from './connector'
 
 const styles = {

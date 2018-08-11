@@ -4,7 +4,8 @@ import { object, number, string, array, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import ReactStars from 'react-stars'
 import { Typography, Button } from '@material-ui/core'
-import { AddIcon, LocationIcon } from 'mdi-react'
+import AddIcon from 'mdi-react/AddIcon'
+import LocationIcon from 'mdi-react/LocationIcon'
 
 const styles = theme => ({
   root: {

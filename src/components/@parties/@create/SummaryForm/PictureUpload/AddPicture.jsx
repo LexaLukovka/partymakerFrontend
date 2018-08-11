@@ -1,8 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
-import Icon from '@material-ui/core/es/Icon/Icon'
-import Avatar from '@material-ui/core/es/Avatar/Avatar'
+import { Icon, Avatar } from '@material-ui/core'
 
 const styles = {
   root: {

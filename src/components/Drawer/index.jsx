@@ -1,5 +1,5 @@
 import React from 'react'
-import { SwipeableDrawer } from '@material-ui/core/es/index'
+import { SwipeableDrawer } from '@material-ui/core'
 import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import DrawerMenu from './DrawerMenu'

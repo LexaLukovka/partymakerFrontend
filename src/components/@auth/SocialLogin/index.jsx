@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles/index'
-import Button from '@material-ui/core/es/Button/Button'
-import { FacebookBoxIcon, GoogleIcon } from 'mdi-react'
+import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button/Button'
+import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
+import GoogleIcon from 'mdi-react/GoogleIcon'
 
 const styles = {
 

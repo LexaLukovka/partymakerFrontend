@@ -1,6 +1,6 @@
 import React from 'react'
 import { array, func } from 'prop-types'
-import Grid from '@material-ui/core/es/Grid/Grid'
+import { Grid } from '@material-ui/core'
 import PartiesCard from './PartiesCard/index'
 
 const PartiesList = ({ parties, onLike }) =>

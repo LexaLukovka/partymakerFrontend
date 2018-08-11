@@ -1,19 +1,20 @@
 /* eslint-disable react/sort-comp,padded-blocks,no-console */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles/index'
-import { withRouter } from 'react-router-dom'
-import Grid from '@material-ui/core/es/Grid/Grid'
-import Link from 'react-router-dom/es/Link'
-import TextField from '@material-ui/core/es/TextField/TextField'
-import CardActions from '@material-ui/core/es/CardActions/CardActions'
-import CardContent from '@material-ui/core/es/CardContent/CardContent'
-import Button from '@material-ui/core/es/Button/Button'
-import Typography from '@material-ui/core/es/Typography/Typography'
-import InputAdornment from '@material-ui/core/es/InputAdornment/InputAdornment'
-import IconButton from '@material-ui/core/es/IconButton/IconButton'
-import VisibilityOff from '@material-ui/icons/es/VisibilityOff'
-import Visibility from '@material-ui/icons/es/Visibility'
+import { withStyles } from '@material-ui/core/styles'
+import { withRouter, Link } from 'react-router-dom'
+import {
+  Grid,
+  TextField,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+  InputAdornment,
+  IconButton,
+} from '@material-ui/core'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import Visibility from '@material-ui/icons/Visibility'
 import formik from './formik'
 import connector from '../../connector'
 
