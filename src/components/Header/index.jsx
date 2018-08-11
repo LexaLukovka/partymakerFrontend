@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import { bool, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -29,20 +30,28 @@ class Header extends React.Component {
   goBack = () =>
     this.props.history.goBack()
 
-  openDrawer = () =>
+  openDrawer = () => {
     this.props.actions.drawer.open()
+  }
 
   renderIcon = (icon) => {
-    switch (icon) {
-      case 'menu':
-        return <MenuIcon onClick={this.openDrawer} />
-
-      case 'back':
-        return <ArrowBack onClick={this.goBack} />
-
-      default:
-        return <MenuIcon onClick={this.openDrawer} />
+    if (icon === 'back') {
+      return (
+        <a onClick={this.goBack}>
+          <IconButton color="inherit">
+            <ArrowBack />
+          </IconButton>
+        </a>
+      )
     }
+
+    return (
+      <a onClick={this.openDrawer}>
+        <IconButton color="inherit">
+          <MenuIcon />
+        </IconButton>
+      </a>
+    )
   }
 
   render() {
@@ -51,9 +60,9 @@ class Header extends React.Component {
       <header className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <IconButton color="inherit">
-              {this.renderIcon(header.icon)}
-            </IconButton>
+
+            {this.renderIcon(header.icon)}
+
             <Typography variant="title" color="inherit" align="center" className={classes.flex}>
               {shortTitle(header.title)}
             </Typography>
