@@ -9,7 +9,7 @@ import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import connector from './connector'
 import PartyCard from './PartyCard'
-import Carousel from './Carousel'
+import Carousel from 'components/Carousel'
 
 import './style.css'
 

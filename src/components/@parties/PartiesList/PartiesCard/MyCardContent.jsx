@@ -1,17 +1,44 @@
 import React from 'react'
-import { object, number, string, shape } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { number, object, shape, string } from 'prop-types'
+import { Link } from 'react-router-dom'
+import { withStyles, CardContent, Avatar, Typography } from '@material-ui/core'
+import isEmpty from 'lodash/isEmpty'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 
 const styles = {
-  root: {},
+  cardContent: {
+    paddingTop: 0,
+  },
+  picture: {
+    width: '100%',
+    height: 200,
+    paddingBottom: 20,
+    borderRadius: 5,
+  },
+  title: {
+    paddingTop: 10,
+  },
 }
 
-const PartiesCardDescription = ({ classes, party }) =>
-  <div className={classes.root}>
+const url = 'http://localhost:3333/images/parties.jpg'
+
+const MyCardContent = ({ classes, party }) =>
+  <CardContent className={classes.cardContent}>
+    <Link to={`/parties/${party.id}`}>
+      <Avatar
+        src={isEmpty(party.primary_picture) ? url : party.primary_picture}
+        className={classes.picture}
+      />
+    </Link>
+    <Link to={`/parties/${party.id}`}>
+      <Typography align="center" variant="title" color="primary" className={classes.title}>
+        {party.title}
+      </Typography>
+    </Link>
+
     <List>
       <ListItem>
         <ListItemText primary="Собирается" />
@@ -38,16 +65,18 @@ const PartiesCardDescription = ({ classes, party }) =>
         <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
     </List>
-  </div>
+  </CardContent>
 
-PartiesCardDescription.propTypes = {
+MyCardContent.propTypes = {
   classes: object.isRequired,
   party: shape({
+    id: number,
     amount: string,
+    primary_picture: string,
     people_max: number.isRequired,
     address: object.isRequired,
     description: string.isRequired,
   }).isRequired,
 }
 
-export default withStyles(styles)(PartiesCardDescription)
+export default withStyles(styles)(MyCardContent)

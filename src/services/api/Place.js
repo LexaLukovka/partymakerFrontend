@@ -1,9 +1,10 @@
 /* eslint-disable class-methods-use-this */
 import Http from 'services/Http'
+import qs from 'querystring'
 
 class Place {
-  all() {
-    return Http.get('/places')
+  all(searchParams) {
+    return Http.get(`/places?${qs.stringify(searchParams)}`)
   }
 
   find(id) {

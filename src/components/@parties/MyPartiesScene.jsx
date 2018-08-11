@@ -1,7 +1,7 @@
 import React from 'react'
 import { array, object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import PartiesCard from './PartiesCard'
+import PartiesList from './PartiesList'
 import isEmpty from 'lodash/isEmpty'
 import Loading from '../Loading'
 import NotFound from '../NotFound'
@@ -20,6 +20,10 @@ class MyPartiesScene extends React.Component {
     if (isEmpty(parties)) actions.parties.userLoad(this.props.match.params.id)
   }
 
+  like = (id) => {
+    this.props.actions.like.like(id)
+  }
+
   render() {
     const { classes, loading, parties } = this.props
     if (loading) return <Loading />
@@ -27,7 +31,7 @@ class MyPartiesScene extends React.Component {
 
     return (
       <div className={classes.root}>
-        <PartiesCard />
+        <PartiesList onLike={this.like} parties={parties} />
       </div>
     )
   }
@@ -35,13 +39,9 @@ class MyPartiesScene extends React.Component {
 
 MyPartiesScene.propTypes = {
   classes: object.isRequired,
-  parties: array,
+  parties: array.isRequired,
   loading: bool.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
-}
-
-MyPartiesScene.defaultProps = {
-  parties: [],
 }
 export default withStyles(styles)(connector(MyPartiesScene))

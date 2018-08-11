@@ -4,7 +4,6 @@ import { withStyles, Card } from '@material-ui/core'
 import CardHeader from './MyCardHeader'
 import CardContent from './MyCardContent'
 import CardActions from './MyCardActions'
-import connector from '../../connector'
 
 const styles = {
   root: {
@@ -17,9 +16,8 @@ const styles = {
 }
 
 class PartiesCard extends React.Component {
-  handleLikeClick = (id) => {
-    this.props.actions.like.like(id)
-  }
+  like = (id) => this.props.onLike(id)
+
 
   render() {
     const { classes, party } = this.props
@@ -27,7 +25,7 @@ class PartiesCard extends React.Component {
       <Card className={classes.root}>
         <CardHeader party={party} />
         <CardContent party={party} />
-        <CardActions party={party} onLike={() => this.handleLikeClick(party.id)} />
+        <CardActions party={party} onLike={this.like} />
       </Card>
     )
   }
@@ -36,7 +34,11 @@ class PartiesCard extends React.Component {
 PartiesCard.propTypes = {
   classes: object.isRequired,
   party: object.isRequired,
-  actions: object.isRequired,
+  onLike: func,
 }
 
-export default withStyles(styles)(connector(PartiesCard))
+PartiesCard.defaultProps = {
+  onLike: () => {},
+}
+
+export default withStyles(styles)(PartiesCard)

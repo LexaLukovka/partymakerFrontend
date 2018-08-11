@@ -12,9 +12,9 @@ export const USER_LOAD_PARTIES_FULFILLED = 'USER_LOAD_PARTIES_FULFILLED'
 
 
 // noinspection JSUnusedGlobalSymbols
-export const load = () => ({
+export const load = (searchParams) => ({
   type: LOAD_PARTIES,
-  payload: Party.all(),
+  payload: Party.all(searchParams),
 })
 
 // noinspection JSUnusedGlobalSymbols
