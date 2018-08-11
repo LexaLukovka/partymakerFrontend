@@ -22,11 +22,15 @@ const styles = theme => ({
 
 class AvatarScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setTitle('Аватар')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Аватар')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.resetTitle()
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
 
   handleUpload = (name, value) => {
@@ -48,7 +52,6 @@ class AvatarScene extends React.Component {
     )
   }
 }
-
 
 AvatarScene.propTypes = {
   classes: object.isRequired,

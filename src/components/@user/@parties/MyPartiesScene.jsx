@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import PartiesList from 'components/@parties/PartiesScene/PartiesList'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
-import NotFound from 'components/NotFound'
+import NotFound from 'components/NotFound/MyParties'
 import connector from '../connector'
 
 const styles = {

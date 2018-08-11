@@ -21,11 +21,15 @@ const styles = theme => ({
 
 class NameScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setTitle('Имя и фамилия')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Имя и фамилия')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.resetTitle()
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
 
   hasError = (fieldName) => {

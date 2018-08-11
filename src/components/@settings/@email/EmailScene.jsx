@@ -21,12 +21,17 @@ const styles = theme => ({
 
 class EmailScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setTitle('Email')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Email')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.resetTitle()
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
+
 
   hasError = (fieldName) => {
     const { errors, touched } = this.props
