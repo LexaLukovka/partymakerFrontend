@@ -1,9 +1,15 @@
 {
   "presets": [
-    "env",
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ],
     "react"
   ],
   "plugins": [
+    "lodash",
     "transform-class-properties",
     "transform-object-rest-spread",
     "transform-decorators-legacy",

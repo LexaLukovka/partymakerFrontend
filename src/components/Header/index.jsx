@@ -6,7 +6,7 @@ import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
 import connector from './connector'
 import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
-import ArrowBack from '@material-ui/icons/ArrowBack'
+import ArrowBack from 'mdi-react/ArrowBackIcon'
 import MenuIcon from 'mdi-react/MenuIcon'
 
 const styles = theme => ({
