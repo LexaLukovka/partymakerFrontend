@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
 import { arrayOf, bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -12,6 +12,8 @@ import PartyCard from './PartyCard'
 import Carousel from 'components/Carousel'
 
 import './style.css'
+import Typography from '@material-ui/core/Typography/Typography'
+import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
   root: {
@@ -36,6 +38,10 @@ const styles = (theme) => ({
     marginLeft: 9,
     marginRight: 9,
   },
+
+  loginLink: {
+    color: theme.palette.primary.main,
+  },
   container: {
     display: 'flex',
   },
@@ -56,9 +62,10 @@ class PartyScene extends React.Component {
   }
 
   componentDidMount() {
-    const { actions, match } = this.props
-    actions.parties.show(match.params.id)
+    const { actions } = this.props
     actions.header.setIcon('back')
+    this.loadParty()
+    this.checkIsPartyMember()
   }
 
   componentWillUnmount() {
@@ -66,27 +73,69 @@ class PartyScene extends React.Component {
     actions.header.setIcon('menu')
   }
 
+  loadParty = () => {
+    const { actions, match, party } = this.props
+    if (isEmpty(party) && party.id !== match.params.id) {
+      actions.parties.show(match.params.id)
+    }
+  }
+
+  checkIsPartyMember = () => {
+    const { actions, match, party, isMember, auth } = this.props
+    if (!auth.user) return false
+    if (isMember === null && party.id !== match.params.id) {
+      actions.members.isMember(match.params.id)
+    }
+    return true
+  }
+
+
   handleClick = (check) => {
     this.setState({
       checked: check === this.state.checked && !check,
     })
   }
 
+  toggleJoinParty = () => {
+    const { actions, match, isMember } = this.props
+
+    if (!isMember) {
+      actions.members.join(match.params.id)
+    } else {
+      actions.members.leave(match.params.id)
+    }
+  }
+
   render() {
-    const { classes, loading, party } = this.props
+    const { classes, loading, memberLoading, party, isMember, auth } = this.props
     if (loading) return <Loading />
     if (isEmpty(party)) return <NotFound />
     const { checked } = this.state
 
     return (
       <div className={classes.root}>
-        <div onClick={() => this.handleClick(checked)}>
+        <div role="link" onClick={() => this.handleClick(checked)}>
           <Carousel pictures={party.pictures} />
         </div>
         <CSSTransition in={checked} timeout={500} classNames="star">
           <div className={!checked ? classes.papers : classes.paperse}>
             <PartyCard party={party} />
-            <Button variant="raised" size="large" fullWidth color="primary">Я ПОЙДУ</Button>
+            {auth.user ?
+              <Button
+                variant="raised"
+                size="large"
+                fullWidth
+                color="primary"
+                disabled={memberLoading}
+                onClick={this.toggleJoinParty}
+              >{isMember ? 'ПОКИНУТЬ' : 'Я ПОЙДУ'}
+              </Button>
+              :
+              <Typography align="center" gutterBottom>
+                <Link to="/auth/login" className={classes.loginLink}>Войдите</Link> что бы принять участие в вечеринке
+              </Typography>
+            }
+
           </div>
         </CSSTransition>
       </div>
@@ -98,8 +147,16 @@ PartyScene.propTypes = {
   classes: object.isRequired,
   party: object.isRequired,
   loading: bool.isRequired,
+  memberLoading: bool.isRequired,
   actions: object.isRequired,
+  isMember: bool,
   match: object.isRequired,
+  auth: object.isRequired,
 }
+
+PartyScene.defaultProps = {
+  isMember: null,
+}
+
 
 export default withStyles(styles)(connector(PartyScene))

@@ -24,10 +24,8 @@ const formik = withFormik({
   }),
 
   handleSubmit: (form, { props, setSubmitting }) => {
-    if (form.password === form.repeatPassword) {
-      props.actions.auth.register(form)
-      setSubmitting(false)
-    }
+    props.actions.auth.register(form)
+    setSubmitting(false)
   },
   displayName: 'RegisterForm',
 })

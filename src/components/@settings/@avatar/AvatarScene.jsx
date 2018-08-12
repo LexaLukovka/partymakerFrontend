@@ -22,10 +22,12 @@ const styles = theme => ({
 
 class AvatarScene extends React.Component {
   componentDidMount() {
+    this.props.actions.header.setIcon('back')
     this.props.actions.header.setTitle('Аватар')
   }
 
   componentWillUnmount() {
+    this.props.actions.header.setIcon('menu')
     this.props.actions.header.resetTitle()
   }
 

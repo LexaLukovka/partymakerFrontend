@@ -18,6 +18,12 @@ class MyPartiesScene extends React.Component {
   componentWillMount() {
     const { auth, actions } = this.props
     actions.parties.load({ admin_id: auth.user.id })
+    actions.header.title('Мои вечеринки')
+  }
+
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.header.resetTitle()
   }
 
   render() {

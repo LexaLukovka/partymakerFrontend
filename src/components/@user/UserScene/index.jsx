@@ -1,19 +1,36 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-
+import connector from './connector'
 
 const styles = () => ({
   root: {},
 })
 
-const UserScene = ({ classes }) =>
-  <div className={classes.root}>
-    User profile
-  </div>
+class UserScene extends Component {
+  componentDidMount() {
+    const { actions } = this.props
+    actions.header.title('Мои профиль')
+  }
 
-UserScene.propTypes = {
-  classes: PropTypes.object.isRequired,
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.header.resetTitle()
+  }
+
+  render() {
+    const { classes } = this.props
+    return (
+      <div className={classes.root}>
+        User profile
+      </div>
+    )
+  }
 }
 
-export default withStyles(styles)(UserScene)
+UserScene.propTypes = {
+  classes: object.isRequired,
+  actions: object.isRequired,
+}
+
+export default withStyles(styles)(connector(UserScene))

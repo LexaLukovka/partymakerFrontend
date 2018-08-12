@@ -23,10 +23,12 @@ const styles = theme => ({
 class PasswordScene extends React.Component {
   componentDidMount() {
     this.props.actions.header.setTitle('Пароль')
+    this.props.actions.header.setIcon('back')
   }
 
   componentWillUnmount() {
     this.props.actions.header.resetTitle()
+    this.props.actions.header.setIcon('menu')
   }
 
   hasError = (fieldName) => {

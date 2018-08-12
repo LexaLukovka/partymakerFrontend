@@ -1,4 +1,4 @@
-/* eslint-disable dot-notation */
+/* eslint-disable dot-notation,class-methods-use-this */
 import axios from 'axios'
 import to from 'util-to'
 import store from '../store'
@@ -12,6 +12,15 @@ class Http {
     })
   }
 
+  handleError(err) {
+    if (err) {
+      if (!err.response) {
+        throw err.response.data
+      }
+      throw err.response
+    }
+  }
+
   refreshToken() {
     const { user } = store.getState().authReducer
     if (user) {
@@ -19,43 +28,28 @@ class Http {
     }
   }
 
-  async get(url, params) {
+  async request(method, url, params) {
     this.refreshToken()
-    const [err, response] = await to(this.instance.get(url, params))
-    if (err) {
-      if (!err.response) {
-        throw err.response.data
-      }
-      throw err.response
-    }
+    const [err, response] = await to(this.instance[method](url, params))
+    this.handleError(err)
 
     return response.data
   }
 
-  async post(url, params) {
-    this.refreshToken()
-    const [err, response] = await to(this.instance.post(url, params))
-    if (err) {
-      if (!err.response) {
-        throw err.response.data
-      }
-      throw err.response
-    }
-
-    return response.data
+  get(url, params) {
+    return this.request('get', url, params)
   }
 
-  async put(url, params) {
-    this.refreshToken()
-    const [err, response] = await to(this.instance.put(url, params))
-    if (err) {
-      if (!err.response) {
-        throw err.response.data
-      }
-      throw err.response
-    }
+  post(url, params) {
+    return this.request('post', url, params)
+  }
 
-    return response.data
+  put(url, params) {
+    return this.request('put', url, params)
+  }
+
+  delete(url, params) {
+    return this.request('delete', url, params)
   }
 }
 

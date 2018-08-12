@@ -37,18 +37,23 @@ const styles = theme => ({
   },
   buttonGroup: {
     marginTop: theme.spacing.size4,
+    marginBottom: theme.spacing.size3,
   },
 })
 
-class GeneralForm extends React.Component {
+class GeneralScene extends React.Component {
   componentDidMount() {
     const { actions, party, history } = this.props
 
-    if (!party.form.type) {
-      history.push('/parties/create/step/1')
-    }
+    if (!party.form.type) history.push('/parties/create/step/1')
 
     actions.party.update({ step: 2 })
+    actions.header.back('/parties/create/step/1')
+  }
+
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.header.menu()
   }
 
   hasError = (fieldName) => {
@@ -215,7 +220,7 @@ class GeneralForm extends React.Component {
   }
 }
 
-GeneralForm.propTypes = {
+GeneralScene.propTypes = {
   history: object.isRequired,
   party: object.isRequired,
   actions: object.isRequired,
@@ -231,7 +236,7 @@ GeneralForm.propTypes = {
   isSubmitting: bool.isRequired,
 }
 
-const router = withRouter(GeneralForm)
+const router = withRouter(GeneralScene)
 const style = withStyles(styles)(router)
 const redux = connector(style)
 

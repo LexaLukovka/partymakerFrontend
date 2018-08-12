@@ -6,7 +6,11 @@ import connector from './connector'
 class Background extends Component {
   componentDidUpdate() {
     const { layout } = this.props
-    document.body.style.backgroundImage = `url(${layout.background})`
+    if (layout.background) {
+      document.body.style.backgroundImage = `url(${layout.background})`
+    } else {
+      document.body.style.backgroundImage = ''
+    }
   }
 
   render() {

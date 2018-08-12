@@ -1,17 +1,17 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from 'src/redux/auth/action'
+import * as authActions from 'src/redux/auth/action'
 import * as headerActions from 'src/redux/header/action'
 
 const initMapStateToProps = store => ({
-  user: store.authReducer.user,
+  auth: store.authReducer,
+  header: store.headerReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    auth: bindActionCreators(actions, dispatch),
+    auth: bindActionCreators(authActions, dispatch),
     header: bindActionCreators(headerActions, dispatch),
-    settings: bindActionCreators(actions, dispatch),
   },
 })
 

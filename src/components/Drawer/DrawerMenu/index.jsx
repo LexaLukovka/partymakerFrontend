@@ -49,7 +49,7 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <Search />
         <ListItemText>Искать места</ListItemText>
       </ListItem>
-      <ListItem button component={Link} to="/parties">
+      <ListItem button divider component={Link} to="/parties">
         <Search />
         <ListItemText>Искать вечеринки</ListItemText>
       </ListItem>
@@ -57,16 +57,26 @@ const DrawerMenu = ({ classes, actions, auth }) =>
       <ListItem button component={Link} to="/user/parties">
         <Person />
         <ListItemText>Мои вечеринки</ListItemText>
-      </ListItem>
-      }
-      <ListItem button component={Link} to="/settings">
+      </ListItem>}
+
+      {auth.user &&
+      <ListItem button component={Link} to="/user">
+        <Person />
+        <ListItemText>Мой профиль</ListItemText>
+      </ListItem>}
+
+      {auth.user &&
+      <ListItem button divider component={Link} to="/settings">
         <SettingsApplications />
         <ListItemText>Настройки</ListItemText>
-      </ListItem>
+      </ListItem>}
+
+      {auth.user &&
       <ListItem button onClick={() => actions.auth.logout()}>
         <ExitToApp />
         <ListItemText>Выйти</ListItemText>
-      </ListItem>
+      </ListItem>}
+
     </List>
   </Background>
 

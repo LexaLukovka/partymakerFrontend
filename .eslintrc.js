@@ -20,6 +20,7 @@ module.exports = {
     'object-curly-newline': 0,
     'no-unused-vars': 0,
     'no-plusplus': 0,
+    'camelcase': 0,
     // disable rules from base configurations
     'jsx-a11y/tabindex-no-positive': 'off',
     'react/jsx-wrap-multilines': 0,

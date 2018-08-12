@@ -84,7 +84,7 @@ class RegisterForm extends React.Component {
   }
 
   render() {
-    const { classes, values, errors, handleChange, handleBlur, isSubmitting } = this.props
+    const { classes, values, handleChange, handleBlur, isSubmitting } = this.props
     return (
       <form onSubmit={this.handleSubmit}>
         <Typography variant="subheading" align="center" className={classes.title}>РЕГИСТРАЦИЯ</Typography>
@@ -159,7 +159,7 @@ class RegisterForm extends React.Component {
         <CardActions disableActionSpacing className={classes.cardActions}>
           <div className={classes.link}>
             <Link to="/auth/login">
-              <Button color="default" disabled={isSubmitting}>
+              <Button color="default">
                 Войти
               </Button>
             </Link>

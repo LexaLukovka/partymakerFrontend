@@ -5,8 +5,10 @@ import { CircularProgress } from '@material-ui/core'
 
 const styles = {
   root: {
-    marginTop: 20,
-    textAlign: 'center',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }
 

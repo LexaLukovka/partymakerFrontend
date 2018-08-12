@@ -22,10 +22,12 @@ const styles = theme => ({
 class PhoneScene extends React.Component {
   componentDidMount() {
     this.props.actions.header.setTitle('Телефон')
+    this.props.actions.header.setIcon('back')
   }
 
   componentWillUnmount() {
     this.props.actions.header.resetTitle()
+    this.props.actions.header.setIcon('menu')
   }
 
   hasError = (fieldName) => {
