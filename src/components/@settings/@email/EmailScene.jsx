@@ -32,7 +32,6 @@ class EmailScene extends React.Component {
     actions.header.resetTitle()
   }
 
-
   hasError = (fieldName) => {
     const { errors, touched } = this.props
     return (!!errors[fieldName] && touched[fieldName])

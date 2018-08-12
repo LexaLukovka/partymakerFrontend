@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles/index'
 import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
 import connector from '../connector'
-import PictureUpload from './PictureUpload'
+import PictureUpload from './PictureUpload/index'
 
 const styles = theme => ({
   root: {
@@ -40,6 +40,7 @@ class SummaryForm extends React.Component {
     this.checkRequiredFields()
 
     actions.party.update({ step: 3 })
+    actions.header.back('/parties/create/step/2')
   }
 
   componentDidUpdate() {
@@ -51,6 +52,11 @@ class SummaryForm extends React.Component {
     if (party.error) {
       actions.party.reset()
     }
+  }
+
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.header.menu()
   }
 
   checkRequiredFields = () => {

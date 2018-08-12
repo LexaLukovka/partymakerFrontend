@@ -53,6 +53,7 @@ class AvatarScene extends React.Component {
   }
 }
 
+
 AvatarScene.propTypes = {
   classes: object.isRequired,
   user: object.isRequired,

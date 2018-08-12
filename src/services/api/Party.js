@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+/* eslint-disable class-methods-use-this,camelcase */
 import Http from 'services/Http'
 import qs from 'querystring'
 import flatten from 'lodash/flattenDeep'
@@ -12,15 +12,32 @@ class Party {
     return Http.get('/user/parties')
   }
 
-  find(id) {
-    return Http.get(`/party/${id}`)
+  find(party_id) {
+    return Http.get(`/party/${party_id}`)
   }
 
-  change(id, settings) {
-    return Http.put(`/user/parties/${id}/edit`, settings)
+  isMember(party_id) {
+    return Http.get(`/party/${party_id}/users/isMember`)
   }
-  changeAddress(id, settings) {
-    return Http.put(`/user/parties/${id}/edit/address`, settings)
+
+  users(party_id) {
+    return Http.get(`/party/${party_id}/users`)
+  }
+
+  join(party_id) {
+    return Http.post(`/party/${party_id}/users`)
+  }
+
+  leave(party_id) {
+    return Http.delete(`/party/${party_id}/users/delete`)
+  }
+
+  change(party_id, settings) {
+    return Http.put(`/user/parties/${party_id}/edit`, settings)
+  }
+
+  changeAddress(party_id, settings) {
+    return Http.put(`/user/parties/${party_id}/edit/address`, settings)
   }
 
   create(form) {

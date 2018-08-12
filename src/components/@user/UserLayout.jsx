@@ -9,7 +9,6 @@ import PartyScene from './@parties/@party/PartyScene'
 import EditLayout from './@parties/@party/PartyCard/@edit/EditLayout'
 
 import UserScene from './UserScene'
-import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -31,4 +30,4 @@ UserLayout.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(connector(UserLayout))
+export default withStyles(styles)(UserLayout)

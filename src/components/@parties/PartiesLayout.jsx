@@ -5,10 +5,11 @@ import { Route, Switch } from 'react-router-dom'
 import PartiesScene from './PartiesScene'
 import PartyScene from './@party/PartyScene'
 import CreateLayout from './@create/CreateLayout'
+import MembersScene from './@users/MembersScene'
 
 const styles = () => ({
   root: {
-    height: '100%',
+    height: '97%',
   },
 })
 
@@ -18,6 +19,7 @@ const PartiesLayout = ({ classes }) =>
       <Route exact path="/parties" component={PartiesScene} />
       <Route path="/parties/create" component={CreateLayout} />
       <Route exact path="/parties/:id" component={PartyScene} />
+      <Route exact path="/parties/:id/users" component={MembersScene} />
     </Switch>
   </div>
 

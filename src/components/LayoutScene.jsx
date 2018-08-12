@@ -29,8 +29,8 @@ const LayoutScene = () =>
           <AuthRoute path="/user" component={UserLayout} />
         </Switch>
       </Container>
-      <Drawer />
-      <Alert />
     </Background>
+    <Drawer />
+    <Alert />
   </div>
 export default withTheme(LayoutScene)
