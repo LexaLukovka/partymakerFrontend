@@ -2,9 +2,12 @@ import React from 'react'
 import { object, shape } from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
+import AuthRoute from 'components/AuthRoute'
+
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@parties/@party/PartyScene'
-import DistrictScene from './@parties/@party/PartyCard/Edit/@district/DistrictScene'
+import EditLayout from './@parties/@party/PartyCard/@edit/EditLayout'
+
 import UserScene from './UserScene'
 import connector from './connector'
 
@@ -33,7 +36,7 @@ class UserLayout extends React.Component {
           <Route exact path="/user" component={UserScene} />
           <Route exact path="/user/parties" component={PartiesScene} />
           <Route exact path="/user/parties/:id" component={PartyScene} />
-          <Route exact path="/user/parties/:id/district" component={DistrictScene} />
+          <AuthRoute path="/user/parties/:id/edit" component={EditLayout} />
         </Switch>
       </div>
     )

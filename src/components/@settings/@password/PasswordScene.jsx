@@ -8,11 +8,10 @@ import connector from '../connector'
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
   },
   input: {
     paddingLeft: 10,
+    paddingRight: 10,
     marginBottom: theme.spacing.size3,
   },
   button: {

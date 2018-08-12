@@ -30,7 +30,6 @@ function SettingsLayout(props) {
   )
 }
 
-
 SettingsLayout.propTypes = {
   classes: object.isRequired,
 }

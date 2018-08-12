@@ -34,7 +34,6 @@ class SettingsScene extends React.Component {
           <ListItemText primary="Сменить аватар" />
         </ListItem>
       </List>
-
     )
   }
 }

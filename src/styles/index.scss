@@ -3,6 +3,8 @@ $dark: #09091A;
 @import "scss/index";
 
 html, body {
+  background-position: center;
+  background-size: cover;
   height: 100%;
   font-family: Roboto, sans-serif;
   margin: 0;

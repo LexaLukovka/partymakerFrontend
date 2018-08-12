@@ -2,7 +2,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
-import Avatar from '@material-ui/core'
+import { Avatar } from '@material-ui/core'
 
 const styles = {
   photo: {

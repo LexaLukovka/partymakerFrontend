@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core'
 
 const styles = theme => ({
   root: {
-    padding: '30px 0',
+    padding: '10px 0',
     display: 'flex',
     color: 'white',
   },

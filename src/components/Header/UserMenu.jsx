@@ -3,7 +3,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import AccountCircle from '@material-ui/icons/AccountCircle'
+import AccountCircle from 'mdi-react/AccountCircleIcon'
 import { MenuItem, Menu, IconButton } from '@material-ui/core'
 import connector from './connector'
 

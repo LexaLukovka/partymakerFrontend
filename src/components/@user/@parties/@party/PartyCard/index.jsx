@@ -1,8 +1,19 @@
 import React from 'react'
-import { object, number, string, array, shape } from 'prop-types'
+import { object, number, string, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
+import {
+  Paper,
+  ListItemSecondaryAction,
+  ListItem,
+  ListItemText,
+  List,
+  Typography,
+  Button,
+  IconButton,
+  Grid,
+} from '@material-ui/core'
+import Create from 'mdi-react/CreateIcon'
 import shortTitle from 'utils/shortTitle'
 import moment from 'moment'
 import connector from '../connector'
@@ -24,11 +35,29 @@ const styles = theme => ({
     background: theme.palette.primary.main,
     borderRadius: '50%',
   },
+  head: {
+    display: 'flex',
+  },
+  icon: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+  },
 })
 
 const PartyCard = ({ classes, party }) =>
   <Paper className={classes.root}>
-    <Typography variant="title">{party.title}</Typography>
+    <div className={classes.head}>
+      <Grid container justify="center" alignItems="center">
+        <Typography align="center" variant="title">{party.title}</Typography>
+      </Grid>
+      <div className={classes.icon}>
+        <Link to={`/user/parties/${party.id}/edit`}>
+          <IconButton>
+            <Create />
+          </IconButton>
+        </Link>
+      </div>
+    </div>
     <List>
       <ListItem disableGutters>
         <div className={classes.status} />
@@ -53,7 +82,6 @@ const PartyCard = ({ classes, party }) =>
         </ListItemSecondaryAction>
       </ListItem>
       <Link to="/user/">
-        <Button color="primary" size="small">Редактировать</Button>
       </Link>
       <ListItem disableGutters>
         <ListItemText primary="Адрес" secondary={shortTitle(party.address.address)} />
@@ -63,21 +91,18 @@ const PartyCard = ({ classes, party }) =>
           </a>
         </ListItemSecondaryAction>
       </ListItem>
-      <Button color="primary" size="small">Редактировать</Button>
       <ListItem disableGutters>
         <ListItemText
           primary="Приходить"
           secondary={moment(party.start_time)
             .fromNow()}
         />
-        <Button color="primary" size="small">Редактировать</Button>
       </ListItem>
       <ListItem disableGutters>
         <ListItemText
           primary="Собирается"
           secondary={`от ${party.people_min} до ${party.people_max} человек`}
         />
-        <Button color="primary" size="small">Редактировать</Button>
       </ListItem>
       {
         party.table &&
@@ -90,7 +115,6 @@ const PartyCard = ({ classes, party }) =>
       }
       <ListItem disableGutters>
         <ListItemText primary="Описание" secondary={party.description} />
-        <Button color="primary" size="small">Редактировать</Button>
       </ListItem>
       <ListItem disableGutters>
         <ListItemText

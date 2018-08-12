@@ -8,8 +8,8 @@ import connector from '../connector'
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   avatar: {
     width: 100,

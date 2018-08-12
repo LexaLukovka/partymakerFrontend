@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { TextField, CardActions, CardContent, Button, Typography, InputAdornment, IconButton } from '@material-ui/core'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from 'mdi-react/VisibilityOffIcon'
+import Visibility from 'mdi-react/VisibilityIcon'
 import formik from './formik'
 import connector from '../../connector'
 import Errors from '../Errors'
@@ -23,6 +23,10 @@ const styles = theme => ({
   link: {
     textAlign: 'center',
     margin: '0.6rem',
+  },
+
+  cardActions: {
+    justifyContent: 'flex-end',
   },
 })
 
@@ -188,14 +192,16 @@ class RegisterForm extends React.Component {
               }}
             />
           </div>
-          {
-            !errors.repeatPassword && values.password !== values.repeatPassword &&
-            <Errors> Пароли не совпадают </Errors>
-          }
         </CardContent>
-        <CardActions>
+        <CardActions disableActionSpacing className={classes.cardActions}>
+          <div className={classes.link}>
+            <Link to="/auth/login">
+              <Button color="default" disabled={isSubmitting}>
+                Войти
+              </Button>
+            </Link>
+          </div>
           <Button
-            fullWidth
             variant="raised"
             type="submit"
             color="primary"
@@ -204,11 +210,6 @@ class RegisterForm extends React.Component {
             Зарегистрироваться
           </Button>
         </CardActions>
-        <div className={classes.link}>
-          <Link to="/auth/login">
-            <Typography> Уже есть аккаунт? Войти </Typography>
-          </Link>
-        </div>
       </form>
     )
   }

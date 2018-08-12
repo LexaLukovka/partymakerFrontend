@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { CardHeader, IconButton, Avatar, withStyles } from '@material-ui/core'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import MoreVertIcon from 'mdi-react/MoreVertIcon'
 import initialsFromUsername from 'utils/initialsFromUsername'
 import moment from 'moment'
 

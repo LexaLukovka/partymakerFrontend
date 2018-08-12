@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import connector from '../../../connector'
 
 const initValues = (form) => ({
-  district: form.district || '',
+  district: form.address.district || '',
 })
 
 const rules = Yup.object()
