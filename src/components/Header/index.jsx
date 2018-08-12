@@ -27,17 +27,22 @@ const styles = theme => ({
 })
 
 class Header extends React.Component {
-  goBack = () =>
-    this.props.history.goBack()
+  goBack = (url) => () => {
+    const { history } = this.props
+    if (url) return history.push(url)
+    return history.goBack()
+  }
+
 
   openDrawer = () => {
     this.props.actions.drawer.open()
   }
 
-  renderIcon = (icon) => {
-    if (icon === 'back') {
+  renderIcon = () => {
+    const { header } = this.props
+    if (header.icon === 'back') {
       return (
-        <a onClick={this.goBack}>
+        <a onClick={this.goBack(header.url)}>
           <IconButton color="inherit">
             <ArrowBack />
           </IconButton>
@@ -61,7 +66,7 @@ class Header extends React.Component {
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
 
-            {this.renderIcon(header.icon)}
+            {this.renderIcon()}
 
             <Typography variant="title" color="inherit" align="center" className={classes.flex}>
               {shortTitle(header.title)}

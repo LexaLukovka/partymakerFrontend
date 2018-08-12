@@ -9,7 +9,7 @@ import MembersScene from './@users/MembersScene'
 
 const styles = () => ({
   root: {
-    height: '100%',
+    height: '97%',
   },
 })
 

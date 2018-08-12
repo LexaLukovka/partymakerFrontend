@@ -7,6 +7,7 @@ import {
 const initialState = {
   title: 'Partymaker',
   icon: 'menu',
+  url: null,
 }
 
 const headerReducer = (state = initialState, { type, payload }) => {
@@ -14,13 +15,14 @@ const headerReducer = (state = initialState, { type, payload }) => {
     case SET_HEADER_ICON:
       return {
         ...state,
-        icon: payload,
+        url: payload.url,
+        icon: payload.icon,
       }
 
     case SET_HEADER_TITLE:
       return {
         ...state,
-        title: payload,
+        title: payload.title,
       }
 
     case RESET_HEADER_TITLE:
