@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, bool } from 'prop-types'
+import { object, bool, shape } from 'prop-types'
 import { List, ListItemText } from '@material-ui/core'
 import ListItem from './ListItem'
 import connector from 'components/@user/@parties/@party/connector'
@@ -44,6 +44,9 @@ class EditScene extends React.Component {
             secondary={`от ${party.people_min} до ${party.people_max} человек`}
           />
         </ListItem>
+        <ListItem to={`/user/parties/${party.id}/edit/description`}>
+          <ListItemText primary="Описание" secondary={party.description} />
+        </ListItem>
       </List>
     )
   }
@@ -51,7 +54,9 @@ class EditScene extends React.Component {
 
 EditScene.propTypes = {
   party: object.isRequired,
-  actions: object.isRequired,
+  actions: shape({
+    header: object,
+  }).isRequired,
   match: object.isRequired,
   loading: bool.isRequired,
 }
