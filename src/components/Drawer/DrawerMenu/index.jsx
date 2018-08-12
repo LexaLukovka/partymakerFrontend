@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import initialsFromUsername from 'utils/initialsFromUsername'
 import { Link, withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import { List, ListItem, ListItemText, Typography, Grid } from '@material-ui/core'
+import { Avatar, List, ListItem, ListItemText, Typography, Grid } from '@material-ui/core'
+import SettingsApplications from 'mdi-react/SettingsApplicationsIcon'
 import MoveToInbox from 'mdi-react/MoveToInboxIcon'
 import ExitToApp from 'mdi-react/ExitToAppIcon'
-import SettingsApplications from 'mdi-react/SettingsApplicationsIcon'
 import Search from 'mdi-react/SearchIcon'
 import Person from 'mdi-react/PersonIcon'
 import Background from './Background'
@@ -16,15 +17,16 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   user: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    height: 200,
+    padding: 10,
     color: 'white',
-    paddingTop: 143,
-    paddingLeft: 20,
-    '@media only screen and (max-width: 640px)': {
-      paddingTop: 152,
-    },
   },
-  list: {
-    paddingTop: 192,
+  avatar: {
+    width: 60,
+    height: 60,
+    marginBottom: 5,
   },
 })
 
@@ -32,12 +34,19 @@ const DrawerMenu = ({ classes, actions, auth }) =>
   <Background className={classes.root}>
     {auth.user &&
     <Grid className={classes.user}>
-      <Typography color="inherit">
-        {auth.user.name}
-      </Typography>
-      <Typography color="inherit">
-        {auth.user.email}
-      </Typography>
+      <div className={classes.name}>
+        <Avatar className={classes.avatar} src={auth.user.avatar_url}>
+          {auth.user.avatar_url ? null : initialsFromUsername(auth.user.name)}
+        </Avatar>
+        <div>
+          <Typography color="inherit">
+            {auth.user.name}
+          </Typography>
+          <Typography color="inherit">
+            {auth.user.email}
+          </Typography>
+        </div>
+      </div>
     </Grid>}
     {!auth.user && <div className={classes.list} />}
     <List component="nav">
