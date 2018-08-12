@@ -27,7 +27,7 @@ const styles = theme => ({
   },
   link: {
     textAlign: 'center',
-    margin: '0.6rem',
+    margin: '0.3rem',
   },
 })
 

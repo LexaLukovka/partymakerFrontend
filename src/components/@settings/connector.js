@@ -10,8 +10,8 @@ const initMapStateToProps = store => ({
 const initMapDispatchToProps = dispatch => ({
   actions: {
     auth: bindActionCreators(actions, dispatch),
-    header: bindActionCreators(headerActions, dispatch),
     settings: bindActionCreators(actions, dispatch),
+    header: bindActionCreators(headerActions, dispatch),
   },
 })
 

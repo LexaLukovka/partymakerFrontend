@@ -8,6 +8,10 @@ class Party {
     return Http.get(`/party?${qs.stringify(searchParams)}`)
   }
 
+  userParty() {
+    return Http.get('/user/parties')
+  }
+
   find(party_id) {
     return Http.get(`/party/${party_id}`)
   }
@@ -26,6 +30,14 @@ class Party {
 
   leave(party_id) {
     return Http.delete(`/party/${party_id}/users/delete`)
+  }
+
+  change(party_id, settings) {
+    return Http.put(`/user/parties/${party_id}/edit`, settings)
+  }
+
+  changeAddress(party_id, settings) {
+    return Http.put(`/user/parties/${party_id}/edit/address`, settings)
   }
 
   create(form) {

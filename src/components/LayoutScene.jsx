@@ -15,7 +15,6 @@ import PartiesLayout from './@parties/PartiesLayout'
 import UserLayout from 'components/@user/UserLayout'
 import Background from 'components/Background'
 
-
 const LayoutScene = () =>
   <div>
     <Background>
@@ -34,5 +33,4 @@ const LayoutScene = () =>
     <Drawer />
     <Alert />
   </div>
-
 export default withTheme(LayoutScene)

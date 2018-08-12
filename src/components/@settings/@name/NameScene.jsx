@@ -8,8 +8,8 @@ import formik from './formik'
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   input: {
     marginBottom: theme.spacing.size3,
@@ -21,13 +21,15 @@ const styles = theme => ({
 
 class NameScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setTitle('Имя и фамилия')
-    this.props.actions.header.setIcon('back')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Имя и фамилия')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.resetTitle()
-    this.props.actions.header.setIcon('menu')
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
 
   hasError = (fieldName) => {

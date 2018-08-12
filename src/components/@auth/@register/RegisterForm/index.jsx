@@ -21,11 +21,7 @@ const styles = theme => ({
   },
   link: {
     textAlign: 'center',
-    margin: '0.6rem',
-  },
-
-  cardActions: {
-    justifyContent: 'flex-end',
+    margin: '0.1rem',
   },
 })
 
@@ -36,6 +32,7 @@ class RegisterForm extends React.Component {
 
     handleSubmit(e)
   }
+
   serverError = (fieldName) => {
     const { auth } = this.props
     const serverErrors = {}
@@ -61,6 +58,7 @@ class RegisterForm extends React.Component {
 
     return (touched[fieldName] && errors[fieldName]) || this.serverError(fieldName)
   }
+
   handleMouseDownPassword = event => {
     event.preventDefault()
   }
@@ -90,9 +88,10 @@ class RegisterForm extends React.Component {
         <Typography variant="subheading" align="center" className={classes.title}>РЕГИСТРАЦИЯ</Typography>
         <CardContent className={classes.inputGroup}>
           <div className={classes.input}>
+            <Typography variant="subheading">Имя и фамилия</Typography>
             <TextField
               fullWidth
-              label="Имя и фамилия"
+              placeholder="Александр Александрович"
               error={this.hasError('name')}
               helperText={this.showHelperError('name')}
               type="text"
@@ -103,9 +102,10 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Email</Typography>
             <TextField
               fullWidth
-              label="Email"
+              placeholder="email@example.com"
               error={this.hasError('email')}
               helperText={this.showHelperError('email')}
               type="email"
@@ -116,10 +116,11 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Номер телефона</Typography>
             <TextField
               fullWidth
               name="phone"
-              label="Номер телефона"
+              placeholder="380990123456"
               error={this.hasError('phone')}
               helperText={this.showHelperError('phone')}
               type="tel"
@@ -129,10 +130,11 @@ class RegisterForm extends React.Component {
             />
           </div>
           <div className={classes.input}>
+            <Typography variant="subheading">Пароль</Typography>
             <TextField
               fullWidth
               name="password"
-              label="Пароль"
+              placeholder="******"
               error={this.hasError('password')}
               helperText={this.showHelperError('password')}
               type={this.state.showPassword ? 'text' : 'password'}
@@ -156,15 +158,9 @@ class RegisterForm extends React.Component {
             />
           </div>
         </CardContent>
-        <CardActions disableActionSpacing className={classes.cardActions}>
-          <div className={classes.link}>
-            <Link to="/auth/login">
-              <Button color="default">
-                Войти
-              </Button>
-            </Link>
-          </div>
+        <CardActions disableActionSpacing>
           <Button
+            fullWidth
             variant="raised"
             type="submit"
             color="primary"
@@ -173,6 +169,11 @@ class RegisterForm extends React.Component {
             Зарегистрироваться
           </Button>
         </CardActions>
+        <div className={classes.link}>
+          <Link to="/auth/login">
+            <Typography> Уже есть аккаунт? Войти </Typography>
+          </Link>
+        </div>
       </form>
     )
   }

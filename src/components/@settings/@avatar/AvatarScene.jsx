@@ -8,8 +8,8 @@ import connector from '../connector'
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   avatar: {
     width: 100,
@@ -22,13 +22,15 @@ const styles = theme => ({
 
 class AvatarScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setIcon('back')
-    this.props.actions.header.setTitle('Аватар')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Аватар')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.setIcon('menu')
-    this.props.actions.header.resetTitle()
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
 
   handleUpload = (name, value) => {

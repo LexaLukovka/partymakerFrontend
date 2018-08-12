@@ -1,4 +1,5 @@
 import React from 'react'
+import { object, number, string, shape } from 'prop-types'
 import { object, number, string, array, shape } from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
@@ -28,7 +29,7 @@ const styles = theme => ({
 
 const PartyCard = ({ classes, party }) =>
   <Paper className={classes.root}>
-    <Typography variant="title">{party.title}</Typography>
+    <Typography align="center" variant="title">{party.title}</Typography>
     <List>
       <ListItem disableGutters>
         <div className={classes.status} />
@@ -112,7 +113,7 @@ PartyCard.propTypes = {
     address: shape({
       address: string.isRequired,
     }).isRequired,
-    start_time: number.isRequired,
+    start_time: string.isRequired,
     telegram_url: string.isRequired,
     description: string.isRequired,
   }).isRequired,

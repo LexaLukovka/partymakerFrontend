@@ -8,11 +8,10 @@ import connector from '../connector'
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
   },
   input: {
     paddingLeft: 10,
+    paddingRight: 10,
     marginBottom: theme.spacing.size3,
   },
   button: {
@@ -22,13 +21,15 @@ const styles = theme => ({
 
 class PasswordScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setTitle('Пароль')
-    this.props.actions.header.setIcon('back')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Пароль')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.resetTitle()
-    this.props.actions.header.setIcon('menu')
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
 
   hasError = (fieldName) => {

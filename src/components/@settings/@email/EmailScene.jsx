@@ -8,8 +8,8 @@ import formik from './formik'
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   input: {
     marginBottom: theme.spacing.size3,
@@ -21,13 +21,15 @@ const styles = theme => ({
 
 class EmailScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setIcon('back')
-    this.props.actions.header.setTitle('Email')
+    const { actions } = this.props
+    actions.header.setIcon('back')
+    actions.header.setTitle('Email')
   }
 
   componentWillUnmount() {
-    this.props.actions.header.setIcon('menu')
-    this.props.actions.header.resetTitle()
+    const { actions } = this.props
+    actions.header.setIcon('menu')
+    actions.header.resetTitle()
   }
 
   hasError = (fieldName) => {
