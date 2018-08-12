@@ -19,6 +19,9 @@ class Party {
   change(id, settings) {
     return Http.put(`/user/parties/${id}/edit`, settings)
   }
+  changeAddress(id, settings) {
+    return Http.put(`/user/parties/${id}/edit/address`, settings)
+  }
 
   create(form) {
     const party = {

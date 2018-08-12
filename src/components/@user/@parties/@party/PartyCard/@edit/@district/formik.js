@@ -15,7 +15,7 @@ const rules = Yup.object()
   })
 
 const handleSubmit = props => (formValues, methods) => {
-  props.actions.parties.change(props.match.params.id, formValues)
+  props.actions.parties.changeAddress(props.match.params.id, formValues)
 
   methods.setSubmitting(false)
 }

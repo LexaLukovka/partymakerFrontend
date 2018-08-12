@@ -5,8 +5,8 @@ import { Formik } from 'formik'
 import connector from '../../../connector'
 
 const initValues = (form) => ({
-  people_min: form.people_min || 5,
-  people_max: form.people_max || 10,
+  people_min: form.people_min || '',
+  people_max: form.people_max || '',
 })
 
 const rules = Yup.object()

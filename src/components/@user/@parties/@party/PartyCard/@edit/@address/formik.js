@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import connector from '../../../connector'
 
 const initValues = (form) => ({
-  address: form.address.address || '',
+  address: form.address || '',
 })
 
 const rules = Yup.object()
@@ -15,7 +15,14 @@ const rules = Yup.object()
   })
 
 const handleSubmit = props => (formValues, methods) => {
-  props.actions.parties.change(props.match.params.id, formValues)
+  const address = {
+    address: formValues.address.formatted_address,
+    lng: formValues.address.geometry.location.lng(),
+    lat: formValues.address.geometry.location.lat(),
+    placeId: formValues.address.place_id,
+  }
+
+  props.actions.parties.changeAddress(props.match.params.id, address)
 
   methods.setSubmitting(false)
 }

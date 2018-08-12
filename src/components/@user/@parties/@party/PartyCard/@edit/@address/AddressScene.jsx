@@ -45,7 +45,7 @@ class AddressScene extends React.Component {
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">Ваш адрес</Typography>
-          <Typography>{values.address}</Typography>
+          <Typography>{values.address.address ? values.address.address : values.address.formatted_address}</Typography>
           <Typography variant="subheading">Изменить</Typography>
           <Geosuggest
             fullWidth
