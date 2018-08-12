@@ -1,5 +1,5 @@
 import React from 'react'
-import { array, object, bool } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import PartiesList from './PartiesList'
 import isEmpty from 'lodash/isEmpty'
@@ -16,8 +16,8 @@ const styles = {
 
 class PartiesScene extends React.Component {
   componentWillMount() {
-    const { auth, actions } = this.props
-    actions.parties.userLoad(auth.user.id)
+    const { actions } = this.props
+    actions.parties.userLoad()
   }
 
   like = (id) => {
@@ -39,7 +39,6 @@ class PartiesScene extends React.Component {
 PartiesScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
-  auth: object.isRequired,
   parties: object,
 }
 

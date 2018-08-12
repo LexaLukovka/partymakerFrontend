@@ -7,12 +7,17 @@ class Party {
   all(searchParams) {
     return Http.get(`/party?${qs.stringify(searchParams)}`)
   }
-  userParty(id) {
-    return Http.get(`/user/${id}/parties`)
+
+  userParty() {
+    return Http.get('/user/parties')
   }
 
   find(id) {
     return Http.get(`/party/${id}`)
+  }
+
+  change(id, settings) {
+    return Http.put(`/user/parties/${id}/edit`, settings)
   }
 
   create(form) {

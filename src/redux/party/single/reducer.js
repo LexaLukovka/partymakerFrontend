@@ -1,4 +1,12 @@
-import { LOAD_PARTY_PENDING, LOAD_PARTY_FULFILLED, LOAD_PARTY_REJECTED } from './action'
+import {
+  LOAD_PARTY_PENDING,
+  LOAD_PARTY_FULFILLED,
+  LOAD_PARTY_REJECTED,
+
+  CHANGE_PARTY_PENDING,
+  CHANGE_PARTY_FULFILLED,
+  CHANGE_PARTY_REJECTED,
+} from './action'
 
 const initialState = {
   loading: false,
@@ -22,6 +30,27 @@ const singleReducer = (state = initialState, { type, payload }) => {
       }
     }
     case LOAD_PARTY_FULFILLED: {
+      return {
+        ...state,
+        loading: false,
+        party: payload.data,
+      }
+    }
+
+    case CHANGE_PARTY_PENDING: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case CHANGE_PARTY_REJECTED: {
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      }
+    }
+    case CHANGE_PARTY_FULFILLED: {
       return {
         ...state,
         loading: false,
