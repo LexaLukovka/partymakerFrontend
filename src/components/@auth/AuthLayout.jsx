@@ -14,7 +14,19 @@ const styles = () => ({
     padding: '0 5px',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-around',
+  },
+  scene: {
+    flexGrow: 3,
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
+  },
+  devider: {
+    flexGrow: 1,
+  },
+  social: {
+    flexGrow: 2,
   },
 })
 
@@ -33,13 +45,19 @@ class AuthLayout extends React.Component {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <Switch>
-          <Route exact path="/auth/register" component={RegisterScene} />
-          <Route exact path="/auth/login" component={LoginScene} />
-          <Redirect to="/auth/login" />
-        </Switch>
-        <AuthDevider />
-        <SocialLogin />
+        <div className={classes.scene}>
+          <Switch>
+            <Route exact path="/auth/register" component={RegisterScene} />
+            <Route exact path="/auth/login" component={LoginScene} />
+            <Redirect to="/auth/login" />
+          </Switch>
+        </div>
+        <div className={classes.devider}>
+          <AuthDevider />
+        </div>
+        <div className={classes.social}>
+          <SocialLogin />
+        </div>
       </div>
     )
   }

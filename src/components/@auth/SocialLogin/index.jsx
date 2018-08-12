@@ -7,17 +7,22 @@ import GoogleIcon from 'mdi-react/GoogleIcon'
 
 const styles = {
 
+  root: {
+    display: 'flex',
+  },
   googleButton: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginRight: 5,
   },
 
   facebookButton: {
-    marginTop: '10px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginLeft: 5,
+
   },
   text: {
     flex: 1,

@@ -1,4 +1,6 @@
 import Auth from 'services/api/Auth'
+import Settings from 'services/api/Settings'
+
 import * as alert from 'src/redux/alert/action'
 import store from 'src/store'
 
@@ -15,6 +17,11 @@ export const LOGIN_USER_REJECTED = 'LOGIN_USER_REJECTED'
 export const LOGOUT_USER = 'LOGIN_USER'
 
 export const LOAD_SAVED_USER = 'LOAD_SAVED_USER'
+
+export const CHANGE_SETTINGS = 'CHANGE_SETTINGS'
+export const CHANGE_SETTINGS_PENDING = 'CHANGE_SETTINGS_PENDING'
+export const CHANGE_SETTINGS_REJECTED = 'CHANGE_SETTINGS_REJECTED'
+export const CHANGE_SETTINGS_FULFILLED = 'CHANGE_SETTINGS_FULFILLED'
 
 export const register = (form) => ({
   type: REGISTER_USER,
@@ -40,3 +47,9 @@ export const logout = () => dispatch => {
 
   dispatch(alert.show('Logged out'))
 }
+
+// noinspection JSUnusedGlobalSymbols
+export const change = (settings) => ({
+  type: CHANGE_SETTINGS,
+  payload: Settings.change(settings),
+})
