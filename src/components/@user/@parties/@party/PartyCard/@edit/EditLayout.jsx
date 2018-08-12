@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
 import EditScene from './EditScene'
 import DistrictScene from './@district/DistrictScene'
+import AddressScene from './@address/AddressScene'
 import connector from '../../connector'
 
 const styles = () => ({
@@ -30,6 +31,7 @@ class EditLayout extends React.Component {
         <Switch>
           <Route exact path="/user/parties/:id/edit" component={EditScene} />
           <Route exact path="/user/parties/:id/edit/district" component={DistrictScene} />
+          <Route exact path="/user/parties/:id/edit/address" component={AddressScene} />
         </Switch>
       </div>
     )

@@ -1,8 +1,9 @@
 import React from 'react'
 import { func, object } from 'prop-types'
-import { withStyles, Typography, TextField, Button } from '@material-ui/core'
-import connector from '../../../connector'
+import { withStyles, Typography, Button } from '@material-ui/core'
+import Geosuggest from 'components/Geosuggest'
 import formik from './formik'
+import connector from '../../../connector'
 
 const styles = theme => ({
   root: {
@@ -15,11 +16,11 @@ const styles = theme => ({
   },
 })
 
-class DistrictScene extends React.Component {
+class AddressScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Район')
+    actions.header.setTitle('Адрес')
   }
 
   componentWillUnmount() {
@@ -39,20 +40,22 @@ class DistrictScene extends React.Component {
   }
 
   render() {
-    const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
+    const { classes, values, handleSubmit, setFieldValue, setFieldTouched } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Район</Typography>
-          <TextField
+          <Typography variant="subheading">Ваш адрес</Typography>
+          <Typography>{values.address}</Typography>
+          <Typography variant="subheading">Изменить</Typography>
+          <Geosuggest
             fullWidth
-            name="district"
-            placeholder="Шевченковский"
-            value={values.district}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('district')}
-            helperText={this.showHelperError('district')}
+            name="address"
+            placeholder="Адрес"
+            value={values.address}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+            error={this.hasError('address')}
+            helperText={this.showHelperError('address')}
           />
         </div>
         <Button variant="raised" color="primary" type="submit">
@@ -63,15 +66,15 @@ class DistrictScene extends React.Component {
   }
 }
 
-DistrictScene.propTypes = {
+AddressScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
   errors: object.isRequired,
   touched: object.isRequired,
   handleSubmit: func.isRequired,
-  handleChange: func.isRequired,
-  handleBlur: func.isRequired,
+  setFieldValue: func.isRequired,
+  setFieldTouched: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(DistrictScene)))
+export default formik(connector(withStyles(styles)(AddressScene)))

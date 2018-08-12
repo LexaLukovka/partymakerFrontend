@@ -32,6 +32,9 @@ class EditScene extends React.Component {
         <ListItem to={`/user/parties/${party.id}/edit/district`}>
           <ListItemText primary="Район" secondary={party.address.district} />
         </ListItem>
+        <ListItem to={`/user/parties/${party.id}/edit/address`}>
+          <ListItemText primary="Район" secondary={party.address.address} />
+        </ListItem>
       </List>
     )
   }
