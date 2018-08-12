@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core'
 import EditScene from './EditScene'
 import DistrictScene from './@district/DistrictScene'
 import AddressScene from './@address/AddressScene'
+import StartTimeScene from './@startTime/StartTimeScene'
 import connector from '../../connector'
 
 const styles = () => ({
@@ -32,6 +33,7 @@ class EditLayout extends React.Component {
           <Route exact path="/user/parties/:id/edit" component={EditScene} />
           <Route exact path="/user/parties/:id/edit/district" component={DistrictScene} />
           <Route exact path="/user/parties/:id/edit/address" component={AddressScene} />
+          <Route exact path="/user/parties/:id/edit/startTime" component={StartTimeScene} />
         </Switch>
       </div>
     )

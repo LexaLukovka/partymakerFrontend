@@ -30,10 +30,13 @@ class EditScene extends React.Component {
     return (
       <List>
         <ListItem to={`/user/parties/${party.id}/edit/district`}>
-          <ListItemText primary="Район" secondary={party.address.district} />
+          <ListItemText primary="Район" secondary={party && party.address.district} />
         </ListItem>
         <ListItem to={`/user/parties/${party.id}/edit/address`}>
-          <ListItemText primary="Район" secondary={party.address.address} />
+          <ListItemText primary="Адрес" secondary={party.address.address} />
+        </ListItem>
+        <ListItem to={`/user/parties/${party.id}/edit/startTime`}>
+          <ListItemText primary="Приходить на" secondary={party.start_time} />
         </ListItem>
       </List>
     )

@@ -81,8 +81,6 @@ const PartyCard = ({ classes, party }) =>
           {party.address.district}
         </ListItemSecondaryAction>
       </ListItem>
-      <Link to="/user/">
-      </Link>
       <ListItem disableGutters>
         <ListItemText primary="Адрес" secondary={shortTitle(party.address.address)} />
         <ListItemSecondaryAction>
@@ -94,8 +92,8 @@ const PartyCard = ({ classes, party }) =>
       <ListItem disableGutters>
         <ListItemText
           primary="Приходить"
-          secondary={moment(party.start_time)
-            .fromNow()}
+          secondary={party.start_time}
+          // secondary={moment(party.start_time).fromNow()}
         />
       </ListItem>
       <ListItem disableGutters>
