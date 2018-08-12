@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React from 'react'
-import { bool, object, string } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router'
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'

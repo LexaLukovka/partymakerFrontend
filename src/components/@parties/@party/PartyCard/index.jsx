@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, number, string, array, shape } from 'prop-types'
+import { object, number, string, shape } from 'prop-types'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
@@ -27,7 +27,7 @@ const styles = theme => ({
 
 const PartyCard = ({ classes, party }) =>
   <Paper className={classes.root}>
-    <Typography variant="title">{party.title}</Typography>
+    <Typography align="center" variant="title">{party.title}</Typography>
     <List>
       <ListItem disableGutters>
         <div className={classes.status} />

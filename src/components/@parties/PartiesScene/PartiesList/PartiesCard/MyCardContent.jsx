@@ -34,7 +34,7 @@ const MyCardContent = ({ classes, party }) =>
       />
     </Link>
     <Link to={`/parties/${party.id}`}>
-      <Typography variant="title" className={classes.title}>
+      <Typography align="center" variant="title" className={classes.title}>
         {party.title}
       </Typography>
     </Link>

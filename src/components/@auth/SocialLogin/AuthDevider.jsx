@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
 
-const styles = theme => ({
+const styles = {
   root: {
     padding: '10px 0',
     display: 'flex',
@@ -14,7 +14,8 @@ const styles = theme => ({
     flex: 1,
     padding: '0 10px',
   },
-})
+}
+
 const AuthDevider = ({ classes }) =>
   <div className={classes.root}>
     <div className={classes.takeAllSpace}>

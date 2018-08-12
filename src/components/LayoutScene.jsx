@@ -15,22 +15,22 @@ import PartiesLayout from './@parties/PartiesLayout'
 import UserLayout from 'components/@user/UserLayout'
 import Background from 'components/Background'
 
-
 const LayoutScene = () =>
-  <Background>
-    <Header />
-    <Container>
-      <Switch>
-        <Route exact path="/" component={IndexScene} />
-        <Route path="/parties" component={PartiesLayout} />
-        <Route path="/places" component={PlacesLayout} />
-        <Route path="/auth" component={AuthLayout} />
-        <AuthRoute path="/settings" component={SettingsLayout} />
-        <AuthRoute path="/user" component={UserLayout} />
-      </Switch>
-    </Container>
-    <Drawer />
-    <Alert />
-  </Background>
-
+  <div>
+    <Background>
+      <Header />
+      <Container>
+        <Switch>
+          <Route exact path="/" component={IndexScene} />
+          <Route path="/parties" component={PartiesLayout} />
+          <Route path="/places" component={PlacesLayout} />
+          <Route path="/auth" component={AuthLayout} />
+          <AuthRoute path="/settings" component={SettingsLayout} />
+          <AuthRoute path="/user" component={UserLayout} />
+        </Switch>
+      </Container>
+      <Drawer />
+      <Alert />
+    </Background>
+  </div>
 export default withTheme(LayoutScene)

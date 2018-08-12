@@ -8,7 +8,6 @@ import VisibilityOff from 'mdi-react/VisibilityOffIcon'
 import Visibility from 'mdi-react/VisibilityIcon'
 import formik from './formik'
 import connector from '../../connector'
-import Errors from '../Errors'
 
 const styles = theme => ({
   title: {
@@ -22,11 +21,7 @@ const styles = theme => ({
   },
   link: {
     textAlign: 'center',
-    margin: '0.6rem',
-  },
-
-  cardActions: {
-    justifyContent: 'flex-end',
+    margin: '0.1rem',
   },
 })
 
@@ -37,6 +32,7 @@ class RegisterForm extends React.Component {
 
     handleSubmit(e)
   }
+
   serverError = (fieldName) => {
     const { auth } = this.props
     const serverErrors = {}
@@ -62,14 +58,12 @@ class RegisterForm extends React.Component {
 
     return (touched[fieldName] && errors[fieldName]) || this.serverError(fieldName)
   }
+
   handleMouseDownPassword = event => {
     event.preventDefault()
   }
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword })
-  }
-  handleClickShowReapedPassword = () => {
-    this.setState({ showRepeatPassword: !this.state.showRepeatPassword })
   }
 
   constructor(props) {
@@ -78,7 +72,6 @@ class RegisterForm extends React.Component {
     this.state = {
       isSubmited: false,
       showPassword: false,
-      showRepeatPassword: false,
     }
   }
 
@@ -89,7 +82,7 @@ class RegisterForm extends React.Component {
   }
 
   render() {
-    const { classes, values, errors, handleChange, handleBlur, isSubmitting } = this.props
+    const { classes, values, handleChange, handleBlur, isSubmitting } = this.props
     return (
       <form onSubmit={this.handleSubmit}>
         <Typography variant="subheading" align="center" className={classes.title}>РЕГИСТРАЦИЯ</Typography>
@@ -164,44 +157,10 @@ class RegisterForm extends React.Component {
               }}
             />
           </div>
-          <div className={classes.input}>
-            <Typography variant="subheading">Повторите пароль</Typography>
-            <TextField
-              fullWidth
-              name="repeatPassword"
-              placeholder="******"
-              error={this.hasError('repeatPassword')}
-              helperText={this.showHelperError('repeatPassword')}
-              type={this.state.showRepeatPassword ? 'text' : 'password'}
-              autoComplete="current-password"
-              value={values.repeatPassword}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="Toggle password visibility"
-                      onClick={this.handleClickShowReapedPassword}
-                      onMouseDown={this.handleMouseDownPassword}
-                    >
-                      {this.state.showRepeatPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
         </CardContent>
-        <CardActions disableActionSpacing className={classes.cardActions}>
-          <div className={classes.link}>
-            <Link to="/auth/login">
-              <Button color="default" disabled={isSubmitting}>
-                Войти
-              </Button>
-            </Link>
-          </div>
+        <CardActions disableActionSpacing>
           <Button
+            fullWidth
             variant="raised"
             type="submit"
             color="primary"
@@ -210,6 +169,11 @@ class RegisterForm extends React.Component {
             Зарегистрироваться
           </Button>
         </CardActions>
+        <div className={classes.link}>
+          <Link to="/auth/login">
+            <Typography> Уже есть аккаунт? Войти </Typography>
+          </Link>
+        </div>
       </form>
     )
   }
