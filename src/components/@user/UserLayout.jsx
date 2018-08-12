@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
 import PartiesScene from './@parties/PartiesScene'
 import PartyScene from './@parties/@party/PartyScene'
+import DistrictScene from './@parties/@party/PartyCard/Edit/@district/DistrictScene'
 import UserScene from './UserScene'
 import connector from './connector'
 
@@ -32,12 +33,12 @@ class UserLayout extends React.Component {
           <Route exact path="/user" component={UserScene} />
           <Route exact path="/user/parties" component={PartiesScene} />
           <Route exact path="/user/parties/:id" component={PartyScene} />
+          <Route exact path="/user/parties/:id/district" component={DistrictScene} />
         </Switch>
       </div>
     )
   }
 }
-
 
 UserLayout.propTypes = {
   classes: object.isRequired,
