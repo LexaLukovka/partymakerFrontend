@@ -8,10 +8,6 @@ class Party {
     return Http.get(`/party?${qs.stringify(searchParams)}`)
   }
 
-  userParty() {
-    return Http.get('/user/parties')
-  }
-
   find(party_id) {
     return Http.get(`/party/${party_id}`)
   }
@@ -33,11 +29,25 @@ class Party {
   }
 
   change(party_id, settings) {
-    return Http.put(`/user/parties/${party_id}/edit`, settings)
-  }
-
-  changeAddress(party_id, settings) {
-    return Http.put(`/user/parties/${party_id}/edit/address`, settings)
+    const shape = {
+      title: undefined,
+      type: undefined,
+      address: {
+        address: undefined,
+        lng: undefined,
+        lat: undefined,
+        placeId: undefined,
+      },
+      district: undefined,
+      pictures: undefined,
+      telegram_url: undefined,
+      description: undefined,
+      people_max: undefined,
+      people_min: undefined,
+      start_time: undefined,
+      private_party: undefined,
+    }
+    return Http.put(`/party/${party_id}`, settings)
   }
 
   create(form) {

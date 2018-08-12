@@ -2,20 +2,20 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
-import connector from '../../../connector'
+import connector from '../connector'
 
 const initValues = (form) => ({
-  start_time: form.start_time || '20:00',
+  title: form.title || '',
 })
 
 const rules = Yup.object()
   .shape({
-    start_time: Yup.string()
+    title: Yup.string()
       .required('Это поле является обязательным'),
   })
 
-const handleSubmit = props => (formValues, methods) => {
-  props.actions.parties.change(props.match.params.id, formValues)
+const handleSubmit = ({ actions, match }) => ({ title }, methods) => {
+  actions.parties.change(match.params.id, { title })
 
   methods.setSubmitting(false)
 }

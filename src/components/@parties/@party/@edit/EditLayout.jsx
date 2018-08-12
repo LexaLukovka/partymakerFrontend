@@ -8,7 +8,7 @@ import AddressScene from './@address/AddressScene'
 import StartTimeScene from './@startTime/StartTimeScene'
 import PeopleScene from './@people/PeopleScene'
 import DescriptionScene from './@description/DescriptionScene'
-import connector from '../../connector'
+import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -19,12 +19,12 @@ const styles = () => ({
 class EditLayout extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
+    actions.header.back()
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
   }
 
   render() {
@@ -32,12 +32,12 @@ class EditLayout extends React.Component {
     return (
       <div className={classes.root}>
         <Switch>
-          <Route exact path="/user/parties/:id/edit" component={EditScene} />
-          <Route exact path="/user/parties/:id/edit/district" component={DistrictScene} />
-          <Route exact path="/user/parties/:id/edit/address" component={AddressScene} />
-          <Route exact path="/user/parties/:id/edit/startTime" component={StartTimeScene} />
-          <Route exact path="/user/parties/:id/edit/people" component={PeopleScene} />
-          <Route exact path="/user/parties/:id/edit/description" component={DescriptionScene} />
+          <Route exact path="/parties/:id/edit" component={EditScene} />
+          <Route exact path="/parties/:id/edit/district" component={DistrictScene} />
+          <Route exact path="/parties/:id/edit/address" component={AddressScene} />
+          <Route exact path="/parties/:id/edit/startTime" component={StartTimeScene} />
+          <Route exact path="/parties/:id/edit/people" component={PeopleScene} />
+          <Route exact path="/parties/:id/edit/description" component={DescriptionScene} />
         </Switch>
       </div>
     )

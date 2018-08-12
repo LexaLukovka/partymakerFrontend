@@ -1,7 +1,7 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button, Grid } from '@material-ui/core'
-import connector from '../../../connector'
+import connector from '../connector'
 import formik from './formik'
 
 const styles = theme => ({
