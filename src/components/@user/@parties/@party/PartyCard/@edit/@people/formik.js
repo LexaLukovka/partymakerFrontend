@@ -11,14 +11,14 @@ const initValues = (form) => ({
 
 const rules = Yup.object()
   .shape({
-    peopleMin: Yup.string()
+    people_min: Yup.string()
       .required('Это поле является обязательным'),
-    peopleMax: Yup.string()
+    people_max: Yup.string()
       .required('Это поле является обязательным'),
   })
 
 const handleSubmit = props => (formValues, methods) => {
-  props.actions.settings.change(formValues)
+  props.actions.parties.change(props.match.params.id, formValues)
 
   methods.setSubmitting(false)
 }
