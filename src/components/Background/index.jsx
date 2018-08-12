@@ -8,6 +8,8 @@ class Background extends Component {
     const { layout } = this.props
     if (layout.background) {
       document.body.style.backgroundImage = `url(${layout.background})`
+    } else {
+      document.body.style.backgroundImage = ''
     }
   }
 

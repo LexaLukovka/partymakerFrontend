@@ -5,7 +5,6 @@ import {
   REGISTER_USER_PENDING,
   REGISTER_USER_FULFILLED,
   REGISTER_USER_REJECTED,
-  LOAD_SAVED_USER,
   LOGOUT_USER,
   CHANGE_SETTINGS_FULFILLED,
   CHANGE_SETTINGS_PENDING,
@@ -41,13 +40,6 @@ const authReducer = (state = initialState, { type, payload }) => {
         errors: payload,
         loading: false,
 
-      }
-    }
-
-    case LOAD_SAVED_USER: {
-      return {
-        ...state,
-        user: payload,
       }
     }
 

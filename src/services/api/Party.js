@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+/* eslint-disable class-methods-use-this,camelcase */
 import Http from 'services/Http'
 import qs from 'querystring'
 import flatten from 'lodash/flattenDeep'
@@ -8,8 +8,24 @@ class Party {
     return Http.get(`/party?${qs.stringify(searchParams)}`)
   }
 
-  find(id) {
-    return Http.get(`/party/${id}`)
+  find(party_id) {
+    return Http.get(`/party/${party_id}`)
+  }
+
+  isMember(party_id) {
+    return Http.get(`/party/${party_id}/users/isMember`)
+  }
+
+  users(party_id) {
+    return Http.get(`/party/${party_id}/users`)
+  }
+
+  join(party_id) {
+    return Http.post(`/party/${party_id}/users`)
+  }
+
+  leave(party_id) {
+    return Http.delete(`/party/${party_id}/users/delete`)
   }
 
   create(form) {

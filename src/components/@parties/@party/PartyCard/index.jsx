@@ -1,5 +1,6 @@
 import React from 'react'
 import { object, number, string, array, shape } from 'prop-types'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
 import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
@@ -33,7 +34,9 @@ const PartyCard = ({ classes, party }) =>
         <div className={classes.status} />
         <ListItemText primary={party.status} />
         <ListItemSecondaryAction className={classes.amount}>
-          {party.admin.name}
+          <Link to={`/users/${party.admin.id}`}>
+            {party.admin.name}
+          </Link>
         </ListItemSecondaryAction>
       </ListItem>
       {
@@ -55,7 +58,7 @@ const PartyCard = ({ classes, party }) =>
         <ListItemText primary="Адрес" secondary={shortTitle(party.address.address)} />
         <ListItemSecondaryAction>
           <a href={`http://www.google.com/maps/?q=${party.address.address}`}>
-            <Button variant="contained" size="small" color="primary">Показать на карте</Button>
+            <Button size="small" color="primary">на карте</Button>
           </a>
         </ListItemSecondaryAction>
       </ListItem>
@@ -71,6 +74,11 @@ const PartyCard = ({ classes, party }) =>
           primary="Собирается"
           secondary={`от ${party.people_min} до ${party.people_max} человек`}
         />
+        <ListItemSecondaryAction>
+          <Link to={`/parties/${party.id}/users`}>
+            <Button size="small" color="primary">участники</Button>
+          </Link>
+        </ListItemSecondaryAction>
       </ListItem>
       {
         party.table &&

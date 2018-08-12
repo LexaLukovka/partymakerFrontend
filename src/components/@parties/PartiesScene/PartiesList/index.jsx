@@ -1,7 +1,7 @@
 import React from 'react'
 import { array, func } from 'prop-types'
 import { Grid } from '@material-ui/core'
-import PartiesCard from './PartiesCard/index'
+import PartiesCard from './PartiesCard'
 
 const PartiesList = ({ parties, onLike }) =>
   <Grid container justify="center">
