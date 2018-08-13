@@ -4,7 +4,7 @@ import * as authActions from 'src/redux/auth/action'
 import * as headerActions from 'src/redux/header/action'
 
 const initMapStateToProps = store => ({
-  auth: store.authReducer,
+  ...store.authReducer,
   header: store.headerReducer,
 })
 

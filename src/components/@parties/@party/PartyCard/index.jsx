@@ -22,13 +22,11 @@ const styles = theme => ({
     marginBottom: 15,
     padding: 15,
   },
-
   title: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-
   amount: {
     color: theme.palette.primary.main,
     width: '45%',
