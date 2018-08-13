@@ -9,6 +9,7 @@ import AddressScene from './@address/AddressScene'
 import StartTimeScene from './@startTime/StartTimeScene'
 import PeopleScene from './@people/PeopleScene'
 import DescriptionScene from './@description/DescriptionScene'
+import ImageScene from './@image/ImageScene'
 import connector from './connector'
 
 const styles = () => ({
@@ -40,6 +41,7 @@ class EditLayout extends React.Component {
           <Route exact path="/parties/:id/edit/startTime" component={StartTimeScene} />
           <Route exact path="/parties/:id/edit/people" component={PeopleScene} />
           <Route exact path="/parties/:id/edit/description" component={DescriptionScene} />
+          <Route exact path="/parties/:id/edit/image" component={ImageScene} />
         </Switch>
       </div>
     )

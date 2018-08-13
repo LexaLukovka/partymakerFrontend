@@ -63,14 +63,14 @@ class PartyScene extends React.Component {
 
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
+    actions.header.back()
     this.loadParty()
     this.checkIsPartyMember()
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
   }
 
   loadParty = () => {

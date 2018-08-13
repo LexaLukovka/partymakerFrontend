@@ -53,6 +53,9 @@ class EditScene extends React.Component {
         <ListItem to={`/parties/${party.id}/edit/description`}>
           <ListItemText primary="Описание" secondary={party.description} />
         </ListItem>
+        <ListItem to={`/parties/${party.id}/edit/image`}>
+          <ListItemText primary="Сменить фото вечеринки" />
+        </ListItem>
       </List>
     )
   }
