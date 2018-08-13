@@ -1,7 +1,7 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
-import connector from '../../../connector'
+import connector from '../connector'
 import formik from './formik'
 
 const styles = theme => ({
@@ -15,11 +15,11 @@ const styles = theme => ({
   },
 })
 
-class DistrictScene extends React.Component {
+class DescriptionScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Район')
+    actions.header.setTitle('Описание')
   }
 
   componentWillUnmount() {
@@ -43,16 +43,19 @@ class DistrictScene extends React.Component {
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Район</Typography>
+          <Typography variant="subheading">Описание</Typography>
           <TextField
             fullWidth
-            name="district"
-            placeholder="Шевченковский"
-            value={values.district}
+            multiline
+            rows={2}
+            rowsMax={3}
+            name="description"
+            placeholder="Описание"
+            value={values.description}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={this.hasError('district')}
-            helperText={this.showHelperError('district')}
+            error={this.hasError('description')}
+            helperText={this.showHelperError('description')}
           />
         </div>
         <Button variant="raised" color="primary" type="submit">
@@ -63,7 +66,7 @@ class DistrictScene extends React.Component {
   }
 }
 
-DistrictScene.propTypes = {
+DescriptionScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
@@ -74,4 +77,4 @@ DistrictScene.propTypes = {
   handleBlur: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(DistrictScene)))
+export default formik(connector(withStyles(styles)(DescriptionScene)))

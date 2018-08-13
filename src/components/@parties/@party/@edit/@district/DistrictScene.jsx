@@ -1,8 +1,9 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
-import connector from '../../../connector'
+import connector from '../connector'
 import formik from './formik'
+import { withRouter } from 'react-router'
 
 const styles = theme => ({
   root: {
@@ -15,17 +16,16 @@ const styles = theme => ({
   },
 })
 
-class StartTimeScene extends React.Component {
-  componentDidMount() {
-    const { actions } = this.props
-    actions.header.setIcon('back')
-    actions.header.setTitle('Дата и время')
+class DistrictScene extends React.Component {
+  componentWillMount() {
+    const { actions, match } = this.props
+    actions.parties.show(match.params.id)
   }
 
-  componentWillUnmount() {
-    const { actions } = this.props
-    actions.header.setIcon('menu')
-    actions.header.resetTitle()
+  componentDidMount() {
+    const { actions, match } = this.props
+    actions.header.back(`/parties/${match.params.id}/edit`)
+    actions.header.title('Район')
   }
 
   hasError = (fieldName) => {
@@ -42,18 +42,17 @@ class StartTimeScene extends React.Component {
     const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
-        <div className={classes.input}>
-          <Typography variant="subheading">Приходить на</Typography>
+        <div className="{classes.input}">
+          <Typography variant="subheading">Район</Typography>
           <TextField
             fullWidth
-            name="start_time"
-            type="time"
-            placeholder="Дата и время"
-            value={values.start_time}
+            name="district"
+            placeholder="Шевченковский"
+            value={values.district}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={this.hasError('start_time')}
-            helperText={this.showHelperError('start_time')}
+            error={this.hasError('district')}
+            helperText={this.showHelperError('district')}
           />
         </div>
         <Button variant="raised" color="primary" type="submit">
@@ -64,7 +63,7 @@ class StartTimeScene extends React.Component {
   }
 }
 
-StartTimeScene.propTypes = {
+DistrictScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
@@ -73,6 +72,7 @@ StartTimeScene.propTypes = {
   handleSubmit: func.isRequired,
   handleChange: func.isRequired,
   handleBlur: func.isRequired,
+  match: object.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(StartTimeScene)))
+export default formik(connector(withStyles(styles)(withRouter(DistrictScene))))

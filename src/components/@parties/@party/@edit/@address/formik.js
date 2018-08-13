@@ -2,7 +2,7 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
-import connector from '../../../connector'
+import connector from '../connector'
 
 const initValues = (form) => ({
   address: form.address || '',
@@ -14,7 +14,7 @@ const rules = Yup.object()
       .required('Это поле является обязательным'),
   })
 
-const handleSubmit = props => (formValues, methods) => {
+const handleSubmit = ({ actions, match }) => (formValues, methods) => {
   const address = {
     address: formValues.address.formatted_address,
     lng: formValues.address.geometry.location.lng(),
@@ -22,7 +22,7 @@ const handleSubmit = props => (formValues, methods) => {
     placeId: formValues.address.place_id,
   }
 
-  props.actions.parties.changeAddress(props.match.params.id, address)
+  actions.parties.change(match.params.id, { address })
 
   methods.setSubmitting(false)
 }

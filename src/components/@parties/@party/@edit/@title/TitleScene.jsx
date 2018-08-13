@@ -1,7 +1,7 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
-import connector from '../../../connector'
+import connector from '../connector'
 import formik from './formik'
 
 const styles = theme => ({
@@ -15,7 +15,7 @@ const styles = theme => ({
   },
 })
 
-class DistrictScene extends React.Component {
+class TitleScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
@@ -43,16 +43,16 @@ class DistrictScene extends React.Component {
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Район</Typography>
+          <Typography variant="subheading">Навание</Typography>
           <TextField
             fullWidth
-            name="district"
+            name="title"
             placeholder="Шевченковский"
-            value={values.district}
+            value={values.title}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={this.hasError('district')}
-            helperText={this.showHelperError('district')}
+            error={this.hasError('title')}
+            helperText={this.showHelperError('title')}
           />
         </div>
         <Button variant="raised" color="primary" type="submit">
@@ -63,7 +63,7 @@ class DistrictScene extends React.Component {
   }
 }
 
-DistrictScene.propTypes = {
+TitleScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
@@ -74,4 +74,4 @@ DistrictScene.propTypes = {
   handleBlur: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(DistrictScene)))
+export default formik(connector(withStyles(styles)(TitleScene)))

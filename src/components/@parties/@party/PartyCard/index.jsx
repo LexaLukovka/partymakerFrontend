@@ -1,17 +1,32 @@
 import React from 'react'
 import { object, number, string, shape } from 'prop-types'
-import { object, number, string, array, shape } from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
+import {
+  Paper,
+  ListItemSecondaryAction,
+  ListItem,
+  ListItemText,
+  List,
+  Typography,
+  Button,
+  IconButton,
+} from '@material-ui/core'
 import connector from '../connector'
 import shortTitle from 'utils/shortTitle'
+import Create from 'mdi-react/CreateIcon'
 
 const styles = theme => ({
   root: {
     marginBottom: 15,
     padding: 15,
+  },
+
+  title: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   amount: {
@@ -27,9 +42,20 @@ const styles = theme => ({
   },
 })
 
-const PartyCard = ({ classes, party }) =>
+const PartyCard = ({ classes, party, auth }) =>
   <Paper className={classes.root}>
-    <Typography align="center" variant="title">{party.title}</Typography>
+    <div className={classes.title}>
+      <Typography align="center" variant="title">{party.title}</Typography>
+      <div className={classes.icon}>
+        {auth.user.id === party.admin_id &&
+        <Link to={`/parties/${party.id}/edit`}>
+          <IconButton>
+            <Create />
+          </IconButton>
+        </Link>
+        }
+      </div>
+    </div>
     <List>
       <ListItem disableGutters>
         <div className={classes.status} />
@@ -104,6 +130,7 @@ const PartyCard = ({ classes, party }) =>
 
 PartyCard.propTypes = {
   classes: object.isRequired,
+  auth: object.isRequired,
   party: shape({
     admin: object.isRequired,
     title: string.isRequired,

@@ -1,26 +1,25 @@
 import React from 'react'
 import { func, object } from 'prop-types'
-import { withStyles, Typography, Button } from '@material-ui/core'
-import Geosuggest from 'components/Geosuggest'
+import { withStyles, Typography, TextField, Button } from '@material-ui/core'
+import connector from '../connector'
 import formik from './formik'
-import connector from '../../../connector'
 
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 10,
-    paddingLeft: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   input: {
     marginBottom: theme.spacing.size3,
   },
 })
 
-class AddressScene extends React.Component {
+class StartTimeScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Адрес')
+    actions.header.setTitle('Дата и время')
   }
 
   componentWillUnmount() {
@@ -40,22 +39,21 @@ class AddressScene extends React.Component {
   }
 
   render() {
-    const { classes, values, handleSubmit, setFieldValue, setFieldTouched } = this.props
+    const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Ваш адрес</Typography>
-          <Typography>{values.address.address ? values.address.address : values.address.formatted_address}</Typography>
-          <Typography variant="subheading">Изменить</Typography>
-          <Geosuggest
+          <Typography variant="subheading">Приходить на</Typography>
+          <TextField
             fullWidth
-            name="address"
-            placeholder="Адрес"
-            value={values.address}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-            error={this.hasError('address')}
-            helperText={this.showHelperError('address')}
+            name="start_time"
+            type="time"
+            placeholder="Дата и время"
+            value={values.start_time}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={this.hasError('start_time')}
+            helperText={this.showHelperError('start_time')}
           />
         </div>
         <Button variant="raised" color="primary" type="submit">
@@ -66,15 +64,15 @@ class AddressScene extends React.Component {
   }
 }
 
-AddressScene.propTypes = {
+StartTimeScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
   errors: object.isRequired,
   touched: object.isRequired,
   handleSubmit: func.isRequired,
-  setFieldValue: func.isRequired,
-  setFieldTouched: func.isRequired,
+  handleChange: func.isRequired,
+  handleBlur: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(AddressScene)))
+export default formik(connector(withStyles(styles)(StartTimeScene)))
