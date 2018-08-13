@@ -18,13 +18,13 @@ const styles = theme => ({
 class DescriptionScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
-    actions.header.setTitle('Описание')
+    actions.header.back()
+    actions.header.title('Описание')
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
     actions.header.resetTitle()
   }
 

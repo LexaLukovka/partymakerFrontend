@@ -42,7 +42,7 @@ class DistrictScene extends React.Component {
     const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
-        <div className="{classes.input}">
+        <div className={classes.input}>
           <Typography variant="subheading">Район</Typography>
           <TextField
             fullWidth

@@ -23,6 +23,12 @@ class AddressScene extends React.Component {
     actions.header.title('Адрес')
   }
 
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.header.menu()
+    actions.header.resetTitle()
+  }
+
   hasError = (fieldName) => {
     const { errors, touched } = this.props
     return (!!errors[fieldName] && touched[fieldName])
@@ -34,12 +40,12 @@ class AddressScene extends React.Component {
   }
 
   render() {
-    const { classes, values, handleSubmit, setFieldValue, setFieldTouched } = this.props
+    const { classes, values, party, handleSubmit, setFieldValue, setFieldTouched } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">Ваш адрес</Typography>
-          <Typography>{values.address.address ? values.address.address : values.address.formatted_address}</Typography>
+          <Typography>{party ? party.address.address : ''}</Typography>
           <Typography variant="subheading">Изменить</Typography>
           <Geosuggest
             fullWidth
@@ -64,6 +70,7 @@ AddressScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
+  party: object.isRequired,
   errors: object.isRequired,
   touched: object.isRequired,
   handleSubmit: func.isRequired,

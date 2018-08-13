@@ -27,13 +27,13 @@ const styles = theme => ({
 class PeopleScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
-    actions.header.setTitle('Кол-во людей')
+    actions.header.back()
+    actions.header.title('Кол-во людей')
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
     actions.header.resetTitle()
   }
 

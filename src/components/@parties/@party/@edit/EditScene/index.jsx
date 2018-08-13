@@ -14,15 +14,15 @@ class EditScene extends React.Component {
   }
 
   componentDidMount() {
-    const { actions } = this.props
+    const { actions, party } = this.props
+    actions.header.back(`/parties/${party.id}`)
     actions.header.title('Редактирование')
-    actions.header.back()
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.resetTitle()
     actions.header.menu()
+    actions.header.resetTitle()
   }
 
   render() {
@@ -32,6 +32,9 @@ class EditScene extends React.Component {
 
     return (
       <List>
+        <ListItem to={`/parties/${party.id}/edit/title`}>
+          <ListItemText primary="Название вечеринки" secondary={party.title} />
+        </ListItem>
         <ListItem to={`/parties/${party.id}/edit/district`}>
           <ListItemText primary="Район" secondary={party.address.district} />
         </ListItem>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
-import { arrayOf, bool, object } from 'prop-types'
+import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from '@material-ui/core'
@@ -75,9 +75,9 @@ class PartyScene extends React.Component {
 
   loadParty = () => {
     const { actions, match, party } = this.props
-    if (isEmpty(party) && party.id !== match.params.id) {
-      actions.parties.show(match.params.id)
-    }
+    // if (isEmpty(party) && party.id !== match.params.id) {
+    actions.parties.show(match.params.id)
+    // }
   }
 
   checkIsPartyMember = () => {
@@ -88,7 +88,6 @@ class PartyScene extends React.Component {
     }
     return true
   }
-
 
   handleClick = (check) => {
     this.setState({
@@ -158,6 +157,5 @@ PartyScene.propTypes = {
 PartyScene.defaultProps = {
   isMember: null,
 }
-
 
 export default withStyles(styles)(connector(PartyScene))

@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import connector from '../connector'
 
 const initValues = (form) => ({
-  district: form.address.district || '',
+  district: form ? form.address.district : '',
 })
 
 const rules = Yup.object()
@@ -14,8 +14,9 @@ const rules = Yup.object()
       .required('Это поле является обязательным'),
   })
 
-const handleSubmit = ({ actions, match }) => ({ district }, methods) => {
-  actions.parties.change(match.params.id, { district })
+const handleSubmit = ({ actions, match }) => async ({ district }, methods) => {
+  await actions.parties.change(match.params.id, { district })
+  await actions.parties.show(match.params.id)
 
   methods.setSubmitting(false)
 }

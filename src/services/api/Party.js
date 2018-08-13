@@ -29,24 +29,6 @@ class Party {
   }
 
   change(party_id, settings) {
-    const shape = {
-      title: undefined,
-      type: undefined,
-      address: {
-        address: undefined,
-        lng: undefined,
-        lat: undefined,
-        placeId: undefined,
-      },
-      district: undefined,
-      pictures: undefined,
-      telegram_url: undefined,
-      description: undefined,
-      people_max: undefined,
-      people_min: undefined,
-      start_time: undefined,
-      private_party: undefined,
-    }
     return Http.put(`/party/${party_id}`, settings)
   }
 
