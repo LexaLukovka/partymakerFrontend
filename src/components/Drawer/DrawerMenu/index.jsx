@@ -31,6 +31,9 @@ const styles = theme => ({
     height: 60,
     marginBottom: 5,
   },
+  rotate: {
+    transform: 'rotate(180deg)',
+  },
 })
 
 const DrawerMenu = ({ classes, actions, auth }) =>
@@ -59,7 +62,7 @@ const DrawerMenu = ({ classes, actions, auth }) =>
     </Grid>}
     {!auth.user && <div className={classes.list} />}
     <List component="nav">
-      <ListItem button divider component={Link} to="/parties/create">
+      <ListItem button divider component={Link} to={auth.user ? '/parties/create' : 'auth/login'}>
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
@@ -83,11 +86,23 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <ListItemText>Настройки</ListItemText>
       </ListItem>}
 
-      {auth.user &&
-      <ListItem button onClick={() => actions.auth.logout()}>
-        <ExitToApp />
-        <ListItemText>Выйти</ListItemText>
-      </ListItem>}
+      {auth.user ?
+        <ListItem button onClick={() => actions.auth.logout()}>
+          <ExitToApp />
+          <ListItemText>Выйти</ListItemText>
+        </ListItem>
+        :
+        <React.Fragment>
+          <ListItem button component={Link} to="/auth/login">
+            <ExitToApp className={classes.rotate} />
+            <ListItemText>Войти</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/auth/register">
+            <ExitToApp className={classes.rotate} />
+            <ListItemText>Зарегистрироваться</ListItemText>
+          </ListItem>
+        </React.Fragment>
+      }
 
     </List>
   </Background>

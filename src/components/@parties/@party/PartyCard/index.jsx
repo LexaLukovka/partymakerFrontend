@@ -45,12 +45,12 @@ const PartyCard = ({ classes, party, auth }) =>
     <div className={classes.title}>
       <Typography align="center" variant="title">{party.title}</Typography>
       <div className={classes.icon}>
-        {auth.user.id === party.admin_id &&
-        <Link to={`/parties/${party.id}/edit`}>
-          <IconButton>
-            <Create />
-          </IconButton>
-        </Link>
+        {auth.user && auth.user.id === party.admin_id &&
+          <Link to={`/parties/${party.id}/edit`}>
+            <IconButton>
+              <Create />
+            </IconButton>
+          </Link>
         }
       </div>
     </div>
