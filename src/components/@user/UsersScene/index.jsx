@@ -1,41 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Avatar, Typography, Grid, IconButton } from '@material-ui/core'
-import Create from 'mdi-react/CreateIcon'
-import PartiesScene from '../@parties/PartiesScene'
+import UserForm from '../UserForm'
 import Loading from 'components/Loading'
-import NotFound from 'components/NotFound'
 import isEmpty from 'lodash/isEmpty'
+import NotFound from 'components/NotFound'
 import connector from './connector'
-import initialsFromUsername from 'utils/initialsFromUsername'
 
-const styles = theme => ({
-  root: {
-    padding: 15,
-  },
-  flex: {
-    display: 'flex',
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    fontSize: 32,
-    backgroundColor: theme.palette.primary.main,
-  },
-  icon: {
-    alignSelf: 'center',
-  },
+const styles = () => ({
+  root: {},
 })
 
-class UsersScene extends Component {
-  componentWillMount() {
+class UsersScene extends React.Component {
+  componentDidMount() {
     const { actions, match } = this.props
     actions.user.find(match.params.id)
-  }
-
-  componentDidMount() {
-    const { actions } = this.props
     actions.header.back()
     actions.header.title('Профиль')
   }
@@ -47,35 +26,23 @@ class UsersScene extends Component {
   }
 
   render() {
-    const { classes, loading, user, match } = this.props
+    const { user, loading, match } = this.props
     if (loading) return <Loading />
     if (isEmpty(user)) return <NotFound />
-    return (
-      <div>
-        <div className={classes.root}>
-          <div className={classes.flex}>
-            <Avatar className={classes.avatar} src={user.user.avatar_url}>
-              {user.user.avatar_url ? null : initialsFromUsername(user.user.name)}
-            </Avatar>
-            <Grid container justify="center">
-              <Typography align="left" variant="title">{user.user.name}</Typography>
-              <Typography align="left" variant="subheading">{user.user.email}</Typography>
-              <Typography align="left" variant="subheading">{user.user.phone}</Typography>
-            </Grid>
-          </div>
-        </div>
-        <PartiesScene id={match.params.id} />
-      </div>
-    )
+
+    return <UserForm loading={loading} user={user && user.user} id={match.params.id} />
   }
 }
 
 UsersScene.propTypes = {
-  classes: object.isRequired,
-  actions: object.isRequired,
   loading: bool.isRequired,
-  user: object.isRequired,
+  user: object,
+  actions: object.isRequired,
   match: object.isRequired,
+}
+
+UsersScene.defaultProps = {
+  user: {},
 }
 
 export default withStyles(styles)(connector(UsersScene))
