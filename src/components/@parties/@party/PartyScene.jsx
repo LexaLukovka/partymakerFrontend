@@ -75,9 +75,9 @@ class PartyScene extends React.Component {
 
   loadParty = () => {
     const { actions, match, party } = this.props
-    // if (isEmpty(party) && party.id !== match.params.id) {
-    actions.parties.show(match.params.id)
-    // }
+    if (isEmpty(party) || party.id !== match.params.id) {
+      actions.parties.show(match.params.id)
+    }
   }
 
   checkIsPartyMember = () => {
