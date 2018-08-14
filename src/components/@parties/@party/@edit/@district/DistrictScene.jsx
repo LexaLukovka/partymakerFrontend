@@ -3,7 +3,6 @@ import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
 import connector from '../connector'
 import formik from './formik'
-import { withRouter } from 'react-router'
 
 const styles = theme => ({
   root: {
@@ -17,14 +16,9 @@ const styles = theme => ({
 })
 
 class DistrictScene extends React.Component {
-  componentWillMount() {
-    const { actions, match } = this.props
-    actions.parties.show(match.params.id)
-  }
-
   componentDidMount() {
-    const { actions, match } = this.props
-    actions.header.back(`/parties/${match.params.id}/edit`)
+    const { actions } = this.props
+    actions.header.back()
     actions.header.title('Район')
   }
 
@@ -42,7 +36,7 @@ class DistrictScene extends React.Component {
     const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
-        <div className="{classes.input}">
+        <div className={classes.input}>
           <Typography variant="subheading">Район</Typography>
           <TextField
             fullWidth
@@ -72,7 +66,6 @@ DistrictScene.propTypes = {
   handleSubmit: func.isRequired,
   handleChange: func.isRequired,
   handleBlur: func.isRequired,
-  match: object.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(withRouter(DistrictScene))))
+export default formik(connector(withStyles(styles)(DistrictScene)))

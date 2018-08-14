@@ -18,13 +18,13 @@ const styles = theme => ({
 class TitleScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
-    actions.header.setTitle('Район')
+    actions.header.back()
+    actions.header.title('Название')
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
     actions.header.resetTitle()
   }
 
@@ -43,11 +43,11 @@ class TitleScene extends React.Component {
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Навание</Typography>
+          <Typography variant="subheading">Навание вечеринки</Typography>
           <TextField
             fullWidth
             name="title"
-            placeholder="Шевченковский"
+            placeholder="Название"
             value={values.title}
             onChange={handleChange}
             onBlur={handleBlur}

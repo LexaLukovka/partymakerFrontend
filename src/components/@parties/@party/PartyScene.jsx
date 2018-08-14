@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
-import { arrayOf, bool, object } from 'prop-types'
+import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
-import connector from './connector'
-import PartyCard from './PartyCard'
 import Carousel from 'components/Carousel'
+import PartyCard from './PartyCard'
+import connector from './connector'
 
 import './style.css'
 import Typography from '@material-ui/core/Typography/Typography'
@@ -63,19 +63,19 @@ class PartyScene extends React.Component {
 
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
+    actions.header.back()
     this.loadParty()
     this.checkIsPartyMember()
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
   }
 
   loadParty = () => {
     const { actions, match, party } = this.props
-    if (isEmpty(party) && party.id !== match.params.id) {
+    if (isEmpty(party) || party.id !== match.params.id) {
       actions.parties.show(match.params.id)
     }
   }
@@ -88,7 +88,6 @@ class PartyScene extends React.Component {
     }
     return true
   }
-
 
   handleClick = (check) => {
     this.setState({
@@ -132,7 +131,7 @@ class PartyScene extends React.Component {
               </Button>
               :
               <Typography align="center" gutterBottom>
-                <Link to="/auth/login" className={classes.loginLink}>Войдите</Link>
+                <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
                 что бы принять участие в вечеринке
               </Typography>
             }
@@ -158,6 +157,5 @@ PartyScene.propTypes = {
 PartyScene.defaultProps = {
   isMember: null,
 }
-
 
 export default withStyles(styles)(connector(PartyScene))

@@ -18,13 +18,13 @@ const styles = theme => ({
 class StartTimeScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.header.setIcon('back')
-    actions.header.setTitle('Дата и время')
+    actions.header.back()
+    actions.header.title('Дата и время')
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
     actions.header.resetTitle()
   }
 

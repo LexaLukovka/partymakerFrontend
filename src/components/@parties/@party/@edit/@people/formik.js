@@ -5,8 +5,8 @@ import { Formik } from 'formik'
 import connector from '../connector'
 
 const initValues = (form) => ({
-  people_min: form.people_min || '',
-  people_max: form.people_max || '',
+  people_min: form ? form.people_min : '',
+  people_max: form ? form.people_max : '',
 })
 
 const rules = Yup.object()
@@ -17,11 +17,13 @@ const rules = Yup.object()
       .required('Это поле является обязательным'),
   })
 
-const handleSubmit = ({ actions, match }) => ({ people_min, people_max }, methods) => {
-  actions.parties.change(match.params.id, {
+const handleSubmit = ({ actions, match }) => async ({ people_min, people_max }, methods) => {
+  await actions.party.change(match.params.id, {
     people_min,
     people_max,
   })
+  await actions.party.show(match.params.id)
+  await actions.parties.load()
 
   methods.setSubmitting(false)
 }

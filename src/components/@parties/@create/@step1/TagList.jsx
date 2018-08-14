@@ -1,6 +1,6 @@
 /* eslint-disable function-paren-newline */
 import React from 'react'
-import { object, func } from 'prop-types'
+import { func } from 'prop-types'
 import TypeTag from './TypeTag'
 import partyTypes from 'src/mock/partyTypes.json'
 

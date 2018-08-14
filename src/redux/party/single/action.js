@@ -21,9 +21,3 @@ export const change = (id, settings) => ({
   type: CHANGE_PARTY,
   payload: Party.change(id, settings),
 })
-
-// noinspection JSUnusedGlobalSymbols
-export const changeAddress = (id, settings) => ({
-  type: CHANGE_PARTY,
-  payload: Party.changeAddress(id, settings),
-})

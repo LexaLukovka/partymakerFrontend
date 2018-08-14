@@ -22,13 +22,11 @@ const styles = theme => ({
     marginBottom: 15,
     padding: 15,
   },
-
   title: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-
   amount: {
     color: theme.palette.primary.main,
     width: '45%',
@@ -47,12 +45,12 @@ const PartyCard = ({ classes, party, auth }) =>
     <div className={classes.title}>
       <Typography align="center" variant="title">{party.title}</Typography>
       <div className={classes.icon}>
-        {auth.user.id === party.admin_id &&
-        <Link to={`/parties/${party.id}/edit`}>
-          <IconButton>
-            <Create />
-          </IconButton>
-        </Link>
+        {auth.user && auth.user.id === party.admin_id &&
+          <Link to={`/parties/${party.id}/edit`}>
+            <IconButton>
+              <Create />
+            </IconButton>
+          </Link>
         }
       </div>
     </div>
