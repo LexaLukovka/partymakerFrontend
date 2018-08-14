@@ -3,7 +3,6 @@ import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
 import connector from '../connector'
 import formik from './formik'
-import { withRouter } from 'react-router'
 
 const styles = theme => ({
   root: {
@@ -69,4 +68,4 @@ DistrictScene.propTypes = {
   handleBlur: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(withRouter(DistrictScene))))
+export default formik(connector(withStyles(styles)(DistrictScene)))
