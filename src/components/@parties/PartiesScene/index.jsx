@@ -17,9 +17,9 @@ const styles = {
 class PartiesScene extends React.Component {
   componentWillMount() {
     const { actions, parties } = this.props
-    if (isEmpty(parties)) {
-      actions.parties.load()
-    }
+    // if (isEmpty(parties)) {
+    actions.parties.load()
+    // }
   }
 
   like = (id) => {

@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core'
 import PartiesScene from './@parties/PartiesScene'
 
 import UserScene from './UserScene'
+import UsersScene from './UsersScene'
 
 const styles = () => ({
   root: {
@@ -16,6 +17,7 @@ const UserLayout = ({ classes }) =>
   <div className={classes.root}>
     <Switch>
       <Route exact path="/user" component={UserScene} />
+      <Route exact path="/user/:id" component={UsersScene} />
       <Route exact path="/user/parties" component={PartiesScene} />
     </Switch>
   </div>

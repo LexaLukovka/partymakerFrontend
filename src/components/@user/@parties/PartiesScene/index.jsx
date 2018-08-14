@@ -1,5 +1,5 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
@@ -16,15 +16,14 @@ const styles = {
 
 class PartiesScene extends React.Component {
   componentWillMount() {
-    const { actions, auth } = this.props
-    actions.parties.load({ admin_id: auth.user.id })
+    const { actions, auth, id } = this.props
+    actions.parties.load({ admin_id: id || auth.user.id })
   }
 
   render() {
     const { classes, parties } = this.props
     if (parties.loading) return <Loading />
     if (isEmpty(parties.parties)) return <NotFound />
-
     return (
       <div className={classes.root}>
         <PartiesList parties={parties.parties} />
@@ -38,5 +37,11 @@ PartiesScene.propTypes = {
   actions: object.isRequired,
   parties: object.isRequired,
   auth: object.isRequired,
+  id: string,
 }
+
+PartiesScene.defaultProps = {
+  id: '',
+}
+
 export default withStyles(styles)(connector(PartiesScene))
