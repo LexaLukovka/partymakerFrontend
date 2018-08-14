@@ -16,6 +16,9 @@ const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
+  list: {
+    paddingTop: 192,
+  },
   user: {
     display: 'flex',
     alignItems: 'flex-end',
@@ -34,17 +37,23 @@ const DrawerMenu = ({ classes, actions, auth }) =>
   <Background className={classes.root}>
     {auth.user &&
     <Grid className={classes.user}>
-      <div className={classes.name}>
-        <Avatar className={classes.avatar} src={auth.user.avatar_url}>
-          {auth.user.avatar_url ? null : initialsFromUsername(auth.user.name)}
-        </Avatar>
+      <div>
+        <Link to="/user">
+          <Avatar className={classes.avatar} src={auth.user.avatar_url}>
+            {auth.user.avatar_url ? null : initialsFromUsername(auth.user.name)}
+          </Avatar>
+        </Link>
         <div>
-          <Typography color="inherit">
-            {auth.user.name}
-          </Typography>
-          <Typography color="inherit">
-            {auth.user.email}
-          </Typography>
+          <Link to="/user">
+            <Typography color="inherit">
+              {auth.user.name}
+            </Typography>
+          </Link>
+          <Link to="/user">
+            <Typography color="inherit">
+              {auth.user.email}
+            </Typography>
+          </Link>
         </div>
       </div>
     </Grid>}
@@ -56,18 +65,12 @@ const DrawerMenu = ({ classes, actions, auth }) =>
       </ListItem>
       <ListItem button component={Link} to="/places">
         <Search />
-        <ListItemText>Искать места</ListItemText>
+        <ListItemText>Куда пойти погулять?</ListItemText>
       </ListItem>
       <ListItem button divider component={Link} to="/parties">
         <Search />
         <ListItemText>Искать вечеринки</ListItemText>
       </ListItem>
-      {auth.user &&
-      <ListItem button component={Link} to="/user/parties">
-        <Person />
-        <ListItemText>Мои вечеринки</ListItemText>
-      </ListItem>}
-
       {auth.user &&
       <ListItem button component={Link} to="/user">
         <Person />

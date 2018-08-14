@@ -41,7 +41,7 @@ class UserMenu extends React.Component {
   }
 
   render() {
-    const { classes, auth } = this.props
+    const { classes } = this.props
     const { anchorEl } = this.state
 
     return (
@@ -53,14 +53,10 @@ class UserMenu extends React.Component {
 
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <div className={classes.menuItem} onClick={this.handleClose}>
-            {auth.user ?
-              <MenuItem onClick={this.logout}>Выйти</MenuItem>
-              :
-              <React.Fragment>
-                <MenuItem component={Link} to="/auth/login">Войти</MenuItem>
-                <MenuItem component={Link} to="/auth/register">Зарегистрироваться</MenuItem>
-              </React.Fragment>
-            }
+            <React.Fragment>
+              <MenuItem component={Link} to="/auth/login">Войти</MenuItem>
+              <MenuItem component={Link} to="/auth/register">Зарегистрироваться</MenuItem>
+            </React.Fragment>
           </div>
         </Menu>
 
@@ -71,7 +67,6 @@ class UserMenu extends React.Component {
 
 UserMenu.propTypes = {
   classes: object.isRequired,
-  auth: object.isRequired,
   actions: object.isRequired,
 }
 

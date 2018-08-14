@@ -9,6 +9,8 @@ import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
 import ArrowBack from 'mdi-react/ArrowBackIcon'
 import MenuIcon from 'mdi-react/MenuIcon'
+import Add from 'mdi-react/AddIcon'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -32,7 +34,6 @@ class Header extends React.Component {
     if (url) return history.push(url)
     return history.goBack()
   }
-
 
   openDrawer = () => {
     this.props.actions.drawer.open()
@@ -60,7 +61,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { classes, header } = this.props
+    const { classes, header, auth } = this.props
     return (
       <header className={classes.root}>
         <AppBar className={classes.appBar}>
@@ -71,7 +72,15 @@ class Header extends React.Component {
             <Typography variant="title" color="inherit" align="center" className={classes.flex}>
               {shortTitle(header.title)}
             </Typography>
-            <UserMenu />
+            {auth.user ?
+              <Link to="/parties/create">
+                <IconButton color="inherit">
+                  <Add />
+                </IconButton>
+              </Link>
+              :
+              <UserMenu />
+            }
           </Toolbar>
         </AppBar>
       </header>
@@ -81,6 +90,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   classes: object.isRequired,
+  auth: object.isRequired,
   header: object.isRequired,
   actions: object.isRequired,
   history: object.isRequired,
