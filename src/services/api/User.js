@@ -2,8 +2,12 @@
 import Http from 'src/services/Http'
 
 class User {
-  parties() {
-    return Http.get('/user/parties')
+  find(id) {
+    return Http.get(`/user/${id}`)
+  }
+
+  parties(user_id) {
+    return Http.get(`/user/${user_id}/parties`)
   }
 }
 

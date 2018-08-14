@@ -11,30 +11,38 @@ const styles = () => ({
   root: {},
 })
 
-class UserScene extends React.Component {
+class UsersScene extends React.Component {
   componentDidMount() {
-    const { actions } = this.props
-    actions.header.title('Мой профиль')
+    const { actions, match } = this.props
+    actions.user.find(match.params.id)
+    actions.header.back()
+    actions.header.title('Профиль')
   }
 
   componentWillUnmount() {
     const { actions } = this.props
+    actions.header.menu()
     actions.header.resetTitle()
   }
 
   render() {
-    const { user, loading } = this.props
+    const { user, loading, match } = this.props
     if (loading) return <Loading />
     if (isEmpty(user)) return <NotFound />
 
-    return <UserForm loading={loading} user={user} />
+    return <UserForm loading={loading} user={user && user.user} id={match.params.id} />
   }
 }
 
-UserScene.propTypes = {
-  user: object.isRequired,
+UsersScene.propTypes = {
   loading: bool.isRequired,
+  user: object,
   actions: object.isRequired,
+  match: object.isRequired,
 }
 
-export default withStyles(styles)(connector(UserScene))
+UsersScene.defaultProps = {
+  user: {},
+}
+
+export default withStyles(styles)(connector(UsersScene))

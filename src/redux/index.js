@@ -6,6 +6,7 @@ import party from './party'
 import place from './place'
 
 import authReducer from './auth/reducer'
+import userReducer from './user/reducer'
 import layoutReducer from './layout/reducer'
 import drawerReducer from './drawer/reducer'
 import headerReducer from './header/reducer'
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   party,
   place,
   authReducer,
+  userReducer,
   layoutReducer,
   drawerReducer,
   headerReducer,
