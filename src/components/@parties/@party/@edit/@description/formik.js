@@ -15,8 +15,9 @@ const rules = Yup.object()
   })
 
 const handleSubmit = ({ actions, match }) => async ({ description }, methods) => {
-  await actions.parties.change(match.params.id, { description })
-  await actions.parties.show(match.params.id)
+  await actions.party.change(match.params.id, { description })
+  await actions.party.show(match.params.id)
+  await actions.parties.load()
 
   methods.setSubmitting(false)
 }

@@ -17,14 +17,9 @@ const styles = theme => ({
 })
 
 class DistrictScene extends React.Component {
-  componentWillMount() {
-    const { actions, match } = this.props
-    actions.parties.show(match.params.id)
-  }
-
   componentDidMount() {
-    const { actions, match } = this.props
-    actions.header.back(`/parties/${match.params.id}/edit`)
+    const { actions } = this.props
+    actions.header.back()
     actions.header.title('Район')
   }
 
@@ -72,7 +67,6 @@ DistrictScene.propTypes = {
   handleSubmit: func.isRequired,
   handleChange: func.isRequired,
   handleBlur: func.isRequired,
-  match: object.isRequired,
 }
 
 export default formik(connector(withStyles(styles)(withRouter(DistrictScene))))

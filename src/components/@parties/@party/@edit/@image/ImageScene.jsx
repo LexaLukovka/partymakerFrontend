@@ -41,7 +41,7 @@ class ImageScene extends React.Component {
 
   handleUpload = (name, value) => {
     const { actions, match } = this.props
-    actions.parties.change(match.params.id, { pictures: value })
+    actions.party.change(match.params.id, { pictures: value })
   }
 
   render() {

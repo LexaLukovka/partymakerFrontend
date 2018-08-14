@@ -70,12 +70,16 @@ AddressScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
-  party: object.isRequired,
+  party: object,
   errors: object.isRequired,
   touched: object.isRequired,
   handleSubmit: func.isRequired,
   setFieldValue: func.isRequired,
   setFieldTouched: func.isRequired,
+}
+
+AddressScene.defaultProps = {
+  party: {},
 }
 
 export default formik(connector(withStyles(styles)(AddressScene)))

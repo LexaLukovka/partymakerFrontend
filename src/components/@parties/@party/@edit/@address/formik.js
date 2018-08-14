@@ -22,8 +22,9 @@ const handleSubmit = ({ actions, match }) => async (formValues, methods) => {
     placeId: formValues.address.place_id,
   }
 
-  await actions.parties.change(match.params.id, { address })
-  await actions.parties.show(match.params.id)
+  await actions.party.change(match.params.id, { address })
+  await actions.party.show(match.params.id)
+  await actions.parties.load()
 
   methods.setSubmitting(false)
 }

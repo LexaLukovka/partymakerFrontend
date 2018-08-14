@@ -10,7 +10,7 @@ import connector from '../connector'
 class EditScene extends React.Component {
   componentWillMount() {
     const { actions, match } = this.props
-    actions.parties.show(match.params.id)
+    actions.party.show(match.params.id)
   }
 
   componentDidMount() {
