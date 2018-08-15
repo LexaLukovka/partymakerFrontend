@@ -1,13 +1,25 @@
 import React from 'react'
 import { object, bool, shape } from 'prop-types'
-import { List, ListItemText } from '@material-ui/core'
+import { withStyles, List, ListItemText, Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core'
+import ListDeleteItem from '@material-ui/core/ListItem'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import isEmpty from 'lodash/isEmpty'
 import ListItem from './ListItem'
 import connector from '../connector'
 
+const styles = {
+  delete: {
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+}
+
 class EditScene extends React.Component {
+  state = {
+    open: false,
+  }
+
   componentWillMount() {
     const { actions, match } = this.props
     actions.party.show(match.params.id)
@@ -25,8 +37,20 @@ class EditScene extends React.Component {
     actions.header.resetTitle()
   }
 
+  handleDelete = () => {
+
+  }
+
+  handleClickOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
   render() {
-    const { loading, party } = this.props
+    const { loading, party, classes } = this.props
     if (loading) return <Loading />
     if (isEmpty(party)) return <NotFound />
 
@@ -56,12 +80,32 @@ class EditScene extends React.Component {
         <ListItem to={`/parties/${party.id}/edit/image`}>
           <ListItemText primary="Сменить фото вечеринки" />
         </ListItem>
+        <ListDeleteItem divider button className={classes.delete}>
+          <ListItemText primary="Удалить вечеринку" onClick={this.handleClickOpen} />
+        </ListDeleteItem>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Вы уверены что хотите удалить вечеринку?</DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleClose}>
+              Удалить
+            </Button>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+              Отмена
+            </Button>
+          </DialogActions>
+        </Dialog>
       </List>
     )
   }
 }
 
 EditScene.propTypes = {
+  classes: object.isRequired,
   party: object.isRequired,
   actions: shape({
     header: object,
@@ -70,4 +114,4 @@ EditScene.propTypes = {
   loading: bool.isRequired,
 }
 
-export default connector(EditScene)
+export default connector(withStyles(styles)(EditScene))

@@ -59,7 +59,7 @@ const PartyCard = ({ classes, party, auth }) =>
         <div className={classes.status} />
         <ListItemText primary={party.status} />
         <ListItemSecondaryAction className={classes.amount}>
-          <Link to={`/users/${party.admin.id}`}>
+          <Link to={`/user/${party.admin.id}`}>
             {party.admin.name}
           </Link>
         </ListItemSecondaryAction>
