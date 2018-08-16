@@ -6,6 +6,7 @@ import { Avatar, Typography, Grid, IconButton } from '@material-ui/core'
 import Create from 'mdi-react/CreateIcon'
 import PartiesScene from '../@parties/PartiesScene'
 import initialsFromUsername from 'utils/initialsFromUsername'
+import connector from '../connector'
 
 const styles = (theme) => ({
   root: {
@@ -28,36 +29,46 @@ const styles = (theme) => ({
   },
 })
 
-const UserForm = ({ classes, user, id }) =>
-  <div>
-    <div className={classes.root}>
-      <div className={classes.flex}>
-        <Avatar className={classes.avatar} src={user.avatar_url}>
-          {user.avatar_url ? null : initialsFromUsername(user.name)}
-        </Avatar>
-        <Grid container justify="center">
-          <div>
-            <Typography align="center" variant="title" className={classes.user}>{user.name}</Typography>
-            <Typography align="center" variant="subheading" className={classes.user}>{user.email}</Typography>
-            <Typography align="center" variant="subheading" className={classes.user}>{user.phone}</Typography>
+const UserForm = ({ classes, user, id, auth }) => {
+  let users = user
+  if (!user) {
+    users = auth.user
+  }
+  return (
+    <React.Fragment>
+      <div>
+        <div className={classes.root}>
+          <div className={classes.flex}>
+            <Avatar className={classes.avatar} src={users.avatar_url}>
+              {users.avatar_url ? null : initialsFromUsername(users.name)}
+            </Avatar>
+            <Grid container justify="center">
+              <div>
+                <Typography align="center" variant="title" className={classes.user}>{users.name}</Typography>
+                <Typography align="center" variant="subheading" className={classes.user}>{users.email}</Typography>
+                <Typography align="center" variant="subheading" className={classes.user}>{users.phone}</Typography>
+              </div>
+            </Grid>
+            {!id &&
+            <div className={classes.icon}>
+              <Link to="/settings">
+                <IconButton>
+                  <Create />
+                </IconButton>
+              </Link>
+            </div>
+            }
           </div>
-        </Grid>
-        {!id &&
-        <div className={classes.icon}>
-          <Link to="/settings">
-            <IconButton>
-              <Create />
-            </IconButton>
-          </Link>
         </div>
-        }
+        <PartiesScene id={id && id} />
       </div>
-    </div>
-    <PartiesScene id={id && id} />
-  </div>
+    </React.Fragment>
+  )
+}
 
 UserForm.propTypes = {
   classes: object.isRequired,
+  auth: object.isRequired,
   user: object.isRequired,
   id: string,
 }
@@ -66,4 +77,4 @@ UserForm.defaultProps = {
   id: '',
 }
 
-export default withStyles(styles)(UserForm)
+export default withStyles(styles)(connector(UserForm))

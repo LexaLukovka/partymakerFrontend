@@ -1,6 +1,16 @@
 import React from 'react'
-import { object, bool, shape } from 'prop-types'
-import { withStyles, List, ListItemText, Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core'
+import { shape, object, bool } from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import {
+  withStyles,
+  List,
+  ListItemText,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Typography,
+} from '@material-ui/core'
 import ListDeleteItem from '@material-ui/core/ListItem'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
@@ -37,8 +47,12 @@ class EditScene extends React.Component {
     actions.header.resetTitle()
   }
 
-  handleDelete = () => {
+  handleDelete = (id) => {
+    const { actions, history } = this.props
+    actions.deleteParty.deleteParty(id)
 
+    this.handleClose()
+    history.push('/user')
   }
 
   handleClickOpen = () => {
@@ -89,9 +103,11 @@ class EditScene extends React.Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Вы уверены что хотите удалить вечеринку?</DialogTitle>
+          <DialogContent>
+            <Typography align="center" variant="subheading">Вы уверены что хотите удалить вечеринку?</Typography>
+          </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose}>
+            <Button onClick={() => this.handleDelete(party.id)}>
               Удалить
             </Button>
             <Button onClick={this.handleClose} color="primary" autoFocus>
@@ -106,12 +122,13 @@ class EditScene extends React.Component {
 
 EditScene.propTypes = {
   classes: object.isRequired,
+  loading: bool.isRequired,
   party: object.isRequired,
   actions: shape({
     header: object,
   }).isRequired,
   match: object.isRequired,
-  loading: bool.isRequired,
+  history: object.isRequired,
 }
 
-export default connector(withStyles(styles)(EditScene))
+export default connector(withStyles(styles)(withRouter(EditScene)))

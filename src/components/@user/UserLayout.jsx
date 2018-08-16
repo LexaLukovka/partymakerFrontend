@@ -2,7 +2,6 @@ import React from 'react'
 import { object } from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
-import PartiesScene from './@parties/PartiesScene'
 
 import UserScene from './UserScene'
 import UsersScene from './UsersScene'
@@ -18,7 +17,6 @@ const UserLayout = ({ classes }) =>
     <Switch>
       <Route exact path="/user" component={UserScene} />
       <Route exact path="/user/:id" component={UsersScene} />
-      <Route exact path="/user/parties" component={PartiesScene} />
     </Switch>
   </div>
 
