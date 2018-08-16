@@ -136,7 +136,6 @@ class PartyScene extends React.Component {
                 что бы принять участие в вечеринке
               </Typography>
             }
-
           </div>
         </CSSTransition>
       </div>

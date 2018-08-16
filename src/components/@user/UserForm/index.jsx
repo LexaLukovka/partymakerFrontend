@@ -23,6 +23,10 @@ const styles = (theme) => ({
     height: 100,
     fontSize: 42,
     backgroundColor: theme.palette.primary.main,
+    '@media only screen and (max-width: 1280px)': {
+      width: 80,
+      height: 80,
+    },
   },
   icon: {
     alignSelf: 'center',
