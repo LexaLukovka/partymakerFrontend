@@ -120,6 +120,7 @@ class PartyScene extends React.Component {
           <div className={!checked ? classes.papers : classes.paperse}>
             <PartyCard party={party} />
             {auth.user ?
+              auth.user.id !== party.admin_id &&
               <Button
                 variant="raised"
                 size="large"
