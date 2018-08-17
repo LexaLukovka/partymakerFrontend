@@ -1,5 +1,7 @@
 import Party from 'src/services/api/Party'
 
+import * as alert from 'src/redux/alert/action'
+
 export const LOAD_PARTY = 'LOAD_PARTY'
 export const LOAD_PARTY_PENDING = 'LOAD_PARTY_PENDING'
 export const LOAD_PARTY_REJECTED = 'LOAD_PARTY_REJECTED'
@@ -17,7 +19,11 @@ export const show = (id) => ({
 })
 
 // noinspection JSUnusedGlobalSymbols
-export const change = (id, settings) => ({
-  type: CHANGE_PARTY,
-  payload: Party.change(id, settings),
-})
+export const change = (id, settings) => async dispatch => {
+  await dispatch({
+    type: CHANGE_PARTY,
+    payload: Party.change(id, settings),
+  })
+
+  dispatch(alert.show('Вечеринка изменина'))
+}

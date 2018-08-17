@@ -62,7 +62,7 @@ const DrawerMenu = ({ classes, actions, auth }) =>
     </Grid>}
     {!auth.user && <div className={classes.list} />}
     <List component="nav">
-      <ListItem button divider component={Link} to={auth.user ? '/parties/create' : 'auth/login'}>
+      <ListItem button divider component={Link} to="/parties/create">
         <MoveToInbox />
         <ListItemText>Новая вечеринка</ListItemText>
       </ListItem>
