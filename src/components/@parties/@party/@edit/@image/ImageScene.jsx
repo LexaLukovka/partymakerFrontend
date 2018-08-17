@@ -12,12 +12,20 @@ const styles = theme => ({
     paddingRight: 15,
     paddingLeft: 15,
   },
-  avatar: {
-    width: 100,
-    height: 100,
-  },
   button: {
     marginTop: theme.spacing.size3,
+  },
+  avatar: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  photo: {
+    width: 70,
+    height: 70,
+    borderRadius: '5%',
+    margin: 2,
   },
 })
 
@@ -50,7 +58,13 @@ class ImageScene extends React.Component {
       <div className={classes.root}>
         <div>
           <Typography variant="subheading">Изменить фотографии вечеринки</Typography>
-          {!isEmpty(party) && party.pictures.map(img => <Avatar src={img} className={classes.avatar} />)}
+          <Typography variant="subheading">Ваши ранние фото</Typography>
+          <div className={classes.avatar}>
+            {!isEmpty(party) &&
+            party.pictures.map((img, index) => <Avatar key={index} src={img.url} className={classes.photo} />)
+            }
+          </div>
+          <Typography variant="subheading">Ваши новые фото</Typography>
           <PictureUpload
             name="pictures"
             onChange={this.handleUpload}
