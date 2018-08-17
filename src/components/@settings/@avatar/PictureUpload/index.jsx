@@ -9,10 +9,8 @@ import PictureList from './PictureList'
 import Http from '../../../../services/Http'
 import AddPicture from './AddPicture'
 
-const styles = theme => ({
-  root: {
-    marginBottom: theme.spacing.size4,
-  },
+const styles = () => ({
+  root: {},
   fileInput: {
     opacity: 0,
     position: 'absolute',
