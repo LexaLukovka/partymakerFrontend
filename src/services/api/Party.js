@@ -32,6 +32,10 @@ class Party {
     return Http.put(`/party/${party_id}`, settings)
   }
 
+  delete(party_id) {
+    return Http.delete(`/party/${party_id}`)
+  }
+
   create(form) {
     const party = {
       title: form.title,
