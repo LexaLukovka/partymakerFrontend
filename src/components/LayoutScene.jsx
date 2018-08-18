@@ -6,6 +6,7 @@ import Alert from 'components/Alert'
 import Drawer from 'components/Drawer'
 import Container from 'components/Container'
 import AuthRoute from 'components/AuthRoute'
+import ActionButton from 'components/ActionButton'
 
 import IndexScene from './@index/IndexScene'
 import SettingsLayout from './@settings/SettingsLayout'
@@ -30,6 +31,7 @@ const LayoutScene = () =>
         </Switch>
       </Container>
     </Background>
+    <ActionButton />
     <Drawer />
     <Alert />
   </div>

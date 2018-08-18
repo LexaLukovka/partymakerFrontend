@@ -35,7 +35,7 @@ const UserForm = ({ classes, user, id }) =>
         <Avatar className={classes.avatar} src={user.avatar_url}>
           {user.avatar_url ? null : initialsFromUsername(user.name)}
         </Avatar>
-        <Grid container justify="center">
+        <Grid container justify="center" alignItems="center" alignContent="center">
           <div>
             <Typography align="center" variant="title" className={classes.user}>{user.name}</Typography>
             <Typography align="center" variant="subheading" className={classes.user}>{user.email}</Typography>
