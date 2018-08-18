@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import RegisterScene from './@register/RegisterScene'
 import LoginScene from './@login/LoginScene'
-import AuthDevider from './SocialLogin/AuthDevider'
+import AuthDevider from 'components/AndDevider'
 import SocialLogin from './SocialLogin'
 import connector from './connector'
 

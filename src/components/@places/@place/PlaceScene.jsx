@@ -10,7 +10,7 @@ import Carousel from 'components/Carousel'
 import connector from './connector'
 import PlaceCard from './PlaceCard'
 import Parties from './Parties'
-
+import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
   root: {
@@ -36,7 +36,6 @@ const styles = (theme) => ({
     strokeWidth: 1,
   },
 
-
   create: {
     padding: 20,
     textAlign: 'center',
@@ -50,14 +49,13 @@ class PlaceScene extends React.Component {
     actions.place.show(place_id)
     actions.parties.load({ place_id })
 
-    actions.header.setIcon('back')
+    actions.header.back()
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.setIcon('menu')
+    actions.header.menu()
   }
-
 
   render() {
     const { classes, place, parties } = this.props
@@ -69,7 +67,9 @@ class PlaceScene extends React.Component {
         <Carousel pictures={place.place.pictures} />
         <PlaceCard place={place.place} />
         <div className={classes.create}>
-          <Button color="primary">Создать здесь свою вечеринку</Button>
+          <Link to={`/parties/create?place_id=${place.place.id}`}>
+            <Button color="primary">Создать здесь свою вечеринку</Button>
+          </Link>
         </div>
         <Parties parties={parties} />
       </div>

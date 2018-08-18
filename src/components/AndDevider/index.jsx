@@ -16,7 +16,7 @@ const styles = {
   },
 }
 
-const AuthDevider = ({ classes }) =>
+const AndDevider = ({ classes }) =>
   <div className={classes.root}>
     <div className={classes.takeAllSpace}>
       <hr />
@@ -27,8 +27,8 @@ const AuthDevider = ({ classes }) =>
     </div>
   </div>
 
-AuthDevider.propTypes = {
+AndDevider.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(AuthDevider)
+export default withStyles(styles)(AndDevider)
