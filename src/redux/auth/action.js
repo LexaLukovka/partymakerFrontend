@@ -2,7 +2,6 @@ import Auth from 'services/api/Auth'
 import Settings from 'services/api/Settings'
 
 import * as alert from 'src/redux/alert/action'
-import store from 'src/store'
 
 export const REGISTER_USER = 'REGISTER_USER'
 export const REGISTER_USER_PENDING = 'REGISTER_USER_PENDING'
@@ -32,9 +31,7 @@ export const login = (form) => async dispatch => {
     payload: Auth.login(form),
   })
 
-  const { error } = store.getState().authReducer
-
-  dispatch(alert.show(error || 'Вы вошли'))
+  dispatch(alert.show('Вы вошли'))
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -43,11 +40,15 @@ export const logout = () => dispatch => {
     type: LOGOUT_USER,
   })
 
-  dispatch(alert.show('Logged out'))
+  dispatch(alert.show('Вы вышли'))
 }
 
 // noinspection JSUnusedGlobalSymbols
-export const change = (settings) => ({
-  type: CHANGE_SETTINGS,
-  payload: Settings.change(settings),
-})
+export const change = (settings) => async dispatch => {
+  await dispatch({
+    type: CHANGE_SETTINGS,
+    payload: Settings.change(settings),
+  })
+
+  dispatch(alert.show('Ваш профиль изменен'))
+}

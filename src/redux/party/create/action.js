@@ -1,6 +1,8 @@
 /* eslint-disable object-shorthand */
 import Party from 'services/api/Party'
 
+import * as alert from 'src/redux/alert/action'
+
 export const CREATE_PARTY = 'CREATE_PARTY'
 export const CREATE_PARTY_PENDING = 'CREATE_PARTY_PENDING'
 export const CREATE_PARTY_FULFILLED = 'CREATE_PARTY_FULFILLED'
@@ -21,10 +23,13 @@ export const reset = () => ({
   type: RESET_PARTY_FORM,
 })
 
-
 // noinspection JSUnusedGlobalSymbols
-export const create = form => ({
-  type: CREATE_PARTY,
-  payload: Party.create(form),
-})
+export const create = form => async dispatch => {
+  await dispatch({
+    type: CREATE_PARTY,
+    payload: Party.create(form),
+  })
+
+  dispatch(alert.show('Вечеринка создана'))
+}
 

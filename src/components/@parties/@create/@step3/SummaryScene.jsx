@@ -3,8 +3,8 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
 import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
+import PictureUpload from './PictureUpload'
 import connector from '../connector'
-import PictureUpload from './PictureUpload/index'
 
 const styles = theme => ({
   root: {
@@ -47,7 +47,7 @@ class SummaryForm extends React.Component {
     const { party, history, actions } = this.props
     if (party.success) {
       actions.party.reset()
-      history.push('/user/parties')
+      history.push('/user')
     }
     if (party.error) {
       actions.party.reset()
@@ -153,8 +153,8 @@ class SummaryForm extends React.Component {
 }
 
 SummaryForm.propTypes = {
-  history: object.isRequired,
   classes: object.isRequired,
+  history: object.isRequired,
   actions: object.isRequired,
   party: object.isRequired,
 }

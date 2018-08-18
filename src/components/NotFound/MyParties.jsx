@@ -14,7 +14,7 @@ const styles = {
 const MyParties = ({ classes }) =>
   <React.Fragment>
     <Typography className={classes.root} align="center" variant="headline">У вас пока что нет вечеринок...</Typography>
-    <Link to="/parties/create"><Typography align="center" variant="headline">СОЗДАТЬ</Typography></Link>
+    <Link to="/parties/create"><Typography align="center" color="primary" variant="headline">СОЗДАТЬ</Typography></Link>
   </React.Fragment>
 MyParties.propTypes = {
   classes: object.isRequired,

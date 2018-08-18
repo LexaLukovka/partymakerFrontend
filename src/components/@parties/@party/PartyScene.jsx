@@ -136,7 +136,6 @@ class PartyScene extends React.Component {
                 что бы принять участие в вечеринке
               </Typography>
             }
-
           </div>
         </CSSTransition>
       </div>
@@ -146,7 +145,7 @@ class PartyScene extends React.Component {
 
 PartyScene.propTypes = {
   classes: object.isRequired,
-  party: object.isRequired,
+  party: object,
   loading: bool.isRequired,
   memberLoading: bool.isRequired,
   actions: object.isRequired,
@@ -156,6 +155,7 @@ PartyScene.propTypes = {
 }
 
 PartyScene.defaultProps = {
+  party: {},
   isMember: null,
 }
 
