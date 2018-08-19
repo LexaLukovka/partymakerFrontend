@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import moment from 'moment'
 import * as Yup from 'yup'
 import connector from '../connector'
-
+import isEmpty from 'lodash/isEmpty'
 
 const initValues = (form) => ({
   title: form.title || '',
@@ -19,8 +19,8 @@ const initValues = (form) => ({
 
 const rules = Yup.object().shape({
   title: Yup.string().required('Это поле является обязательным'),
-  district: Yup.string().required('Это поле является обязательным'),
-  address: Yup.string().required('Это поле является обязательным для заполнения!'),
+  district: Yup.string(),
+  address: Yup.string(),
   startDay: Yup.string().required('Это поле является обязательным'),
   startTime: Yup.string().required('Это поле является обязательным'),
   peopleMin: Yup.number().required('Это поле является обязательным'),
@@ -29,13 +29,22 @@ const rules = Yup.object().shape({
 })
 
 const handleSubmit = props => (formValues, methods) => {
-  const { actions, history } = props
+  const { actions, history, place } = props
+  let values = formValues
 
-  if (formValues.address.formatted_address === '') {
+  if (!isEmpty(place)) {
+    values = { ...values, district: place.address.district, address: place.address.address }
+  }
+
+  if (values.district === '') {
+    methods.setError('district', 'Пожалуйста укажите район')
+  }
+
+  if (values.address === '') {
     methods.setError('address', 'Пожалуйста выберите из списка')
   }
 
-  actions.party.update(formValues)
+  actions.party.update(values)
   history.push('/parties/create/step/3')
 
   methods.setSubmitting(false)

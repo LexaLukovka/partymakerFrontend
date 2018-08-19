@@ -27,7 +27,7 @@ const AddressInput = ({ classes, values, setFieldValue, setFieldTouched, errors,
 AddressInput.propTypes = {
   classes: object.isRequired,
   values: shape({
-    address: string,
+    address: object,
   }).isRequired,
   setFieldValue: func.isRequired,
   setFieldTouched: func.isRequired,

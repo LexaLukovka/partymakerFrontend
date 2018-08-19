@@ -41,7 +41,7 @@ class GeneralScene extends React.Component {
     if (!party.form.type) history.push('/parties/create/step/1')
 
     actions.party.update({ step: 2 })
-    actions.header.back('/parties/create/step/1')
+    actions.header.back()
   }
 
   componentWillUnmount() {

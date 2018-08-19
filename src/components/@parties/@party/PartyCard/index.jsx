@@ -46,11 +46,11 @@ const PartyCard = ({ classes, party, auth }) =>
       <Typography align="center" variant="title">{party.title}</Typography>
       <div className={classes.icon}>
         {auth.user && auth.user.id === party.admin_id &&
-          <Link to={`/parties/${party.id}/edit`}>
-            <IconButton>
-              <Create />
-            </IconButton>
-          </Link>
+        <Link to={`/parties/${party.id}/edit`}>
+          <IconButton>
+            <Create />
+          </IconButton>
+        </Link>
         }
       </div>
     </div>
@@ -73,20 +73,32 @@ const PartyCard = ({ classes, party, auth }) =>
           </ListItemSecondaryAction>
         </ListItem>
       }
-      <ListItem disableGutters>
-        <ListItemText primary="Район" />
-        <ListItemSecondaryAction>
-          {party.address.district}
-        </ListItemSecondaryAction>
-      </ListItem>
-      <ListItem disableGutters>
-        <ListItemText primary="Адрес" secondary={shortTitle(party.address.address)} />
-        <ListItemSecondaryAction>
-          <a href={`http://www.google.com/maps/?q=${party.address.address}`}>
-            <Button size="small" color="primary">на карте</Button>
-          </a>
-        </ListItemSecondaryAction>
-      </ListItem>
+
+      {party.place ?
+        <ListItem disableGutters>
+          <ListItemText primary="Место" />
+          <ListItemSecondaryAction>
+            {party.place.title}
+          </ListItemSecondaryAction>
+        </ListItem>
+        :
+        <React.Fragment>
+          <ListItem disableGutters>
+            <ListItemText primary="Район" />
+            <ListItemSecondaryAction>
+              {party.address.district}
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem disableGutters>
+            <ListItemText primary="Адрес" secondary={shortTitle(party.address.address)} />
+            <ListItemSecondaryAction>
+              <a href={`http://www.google.com/maps/?q=${party.address.address}`}>
+                <Button size="small" color="primary">на карте</Button>
+              </a>
+            </ListItemSecondaryAction>
+          </ListItem>
+        </React.Fragment>
+      }
       <ListItem disableGutters>
         <ListItemText
           primary="Приходить"
@@ -135,9 +147,8 @@ PartyCard.propTypes = {
     status: string.isRequired,
     people_min: number.isRequired,
     people_max: number.isRequired,
-    address: shape({
-      address: string.isRequired,
-    }).isRequired,
+    address: object,
+    place: object.isRequired,
     start_time: string.isRequired,
     telegram_url: string.isRequired,
     description: string.isRequired,

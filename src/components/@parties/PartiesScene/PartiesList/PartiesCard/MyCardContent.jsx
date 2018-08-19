@@ -55,12 +55,21 @@ const MyCardContent = ({ classes, party }) =>
           </ListItemSecondaryAction>
         </ListItem>
       }
-      <ListItem disableGutters>
-        <ListItemText primary="Район" />
-        <ListItemSecondaryAction>
-          {party.address.district}
-        </ListItemSecondaryAction>
-      </ListItem>
+      {party.place ?
+        <ListItem disableGutters>
+          <ListItemText primary="Место" />
+          <ListItemSecondaryAction>
+            {party.place.title}
+          </ListItemSecondaryAction>
+        </ListItem>
+        :
+        <ListItem disableGutters>
+          <ListItemText primary="Район" />
+          <ListItemSecondaryAction>
+            {party.address.district}
+          </ListItemSecondaryAction>
+        </ListItem>
+      }
       <ListItem disableGutters>
         <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
@@ -74,7 +83,8 @@ MyCardContent.propTypes = {
     amount: string,
     primary_picture: string,
     people_max: number.isRequired,
-    address: object.isRequired,
+    address: object,
+    place: object,
     description: string.isRequired,
   }).isRequired,
 }

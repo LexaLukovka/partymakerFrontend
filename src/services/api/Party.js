@@ -1,7 +1,8 @@
-/* eslint-disable class-methods-use-this,camelcase */
+/* eslint-disable class-methods-use-this,camelcase,object-shorthand */
 import Http from 'services/Http'
 import qs from 'querystring'
 import flatten from 'lodash/flattenDeep'
+import isEmpty from 'lodash/isEmpty'
 
 class Party {
   all(searchParams) {
@@ -37,16 +38,19 @@ class Party {
   }
 
   create(form) {
+    const place_id = isEmpty(form.place) ? null : form.place.id
+
     const party = {
       title: form.title,
       type: form.type,
-      address: {
+      place_id: place_id,
+      address: place_id ? null : {
         address: form.address.formatted_address,
-        lng: form.address.geometry.location.lng(),
-        lat: form.address.geometry.location.lat(),
+        lng: form.address.geometry.location.lng,
+        lat: form.address.geometry.location.lat,
+        district: form.district,
         placeId: form.address.place_id,
       },
-      district: form.district,
       pictures: flatten(form.pictures),
       telegram_url: form.telegram_url,
       description: form.description,
