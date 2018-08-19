@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { number, object, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import qs from 'querystring'
 import TypeScene from './@step1/TypeScene'
 import GeneralScene from './@step2/GeneralScene'
 import SummaryScene from './@step3/SummaryScene'
@@ -18,10 +19,12 @@ const styles = () => ({
 
 class CreateLayout extends Component {
   componentDidMount() {
-    const { place, actions, history } = this.props
-    if (!isEmpty(place) && place.type) {
+    const { place, actions, history, location: { search } } = this.props
+    const { place_id } = qs.parse(search.replace('?', ''))
+
+    if (!isEmpty(place) && place.type && place_id) {
       actions.partyTypes.select(place.type)
-      actions.party.update({ type: place.type })
+      actions.party.update({ place, type: place.type })
       history.push('/parties/create/step/2')
     }
   }
@@ -47,6 +50,7 @@ CreateLayout.propTypes = {
   place: object.isRequired,
   actions: object.isRequired,
   history: object.isRequired,
+  location: object.isRequired,
   party: shape({
     activeStep: number,
   }).isRequired,
