@@ -11,6 +11,7 @@ const initialState = {
   success: false,
   activeStep: 0,
   form: {
+    place: {},
     private: false,
     pictures: [],
     telegram_url: 'https://t.me/joinchat/FzgsKUzTAHO691HAN1qTvQ',
@@ -31,7 +32,8 @@ const createParty = (state = initialState, { type, payload, step }) => {
       return { ...state, loading: true }
 
     case CREATE_PARTY_FULFILLED:
-      return { ...state,
+      return {
+        ...state,
         success: true,
         loading: false,
         form: initialState.form,

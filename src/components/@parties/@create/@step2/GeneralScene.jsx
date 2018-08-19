@@ -1,9 +1,17 @@
 import React from 'react'
 import { object, func, bool } from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
+import isEmpty from 'lodash/isEmpty'
 import { withStyles } from '@material-ui/core/styles'
-import { Button, Grid, Typography, TextField } from '@material-ui/core'
-import Geosuggest from 'components/Geosuggest'
+import { Button, Grid } from '@material-ui/core'
+import PlaceInput from './PlaceInput'
+import DistrictInput from './DistrictInput'
+import AddressInput from './AddressInput'
+import TitleInput from './TitleInput'
+import DayInput from './DayInput'
+import TimeInput from './TimeInput'
+import PeopleInput from './PeopleInput'
+import DescriptionInput from './DescriptionInput'
 import formik from './formik'
 import connector from '../connector'
 
@@ -15,26 +23,15 @@ const styles = theme => ({
       marginTop: 0,
     },
   },
-  input: {
-    marginBottom: theme.spacing.size3,
-    '@media only screen and (max-width: 320px)': {
-      marginBottom: theme.spacing.size1,
-    },
-  },
-  inputNumber: {
-    marginLeft: theme.spacing.size3,
-    maxWidth: 70,
-  },
+
   button: {
-    // background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
     marginRight: theme.spacing.size4,
   },
-  flex: {
-    display: 'flex',
-  },
+
   checked: {
     height: 25,
   },
+
   buttonGroup: {
     marginTop: theme.spacing.size4,
     marginBottom: theme.spacing.size3,
@@ -52,7 +49,7 @@ class GeneralScene extends React.Component {
     if (!party.form.type) history.push('/parties/create/step/1')
 
     actions.party.update({ step: 2 })
-    actions.header.back('/parties/create/step/1')
+    actions.header.back()
   }
 
   componentWillUnmount() {
@@ -60,153 +57,34 @@ class GeneralScene extends React.Component {
     actions.header.menu()
   }
 
-  hasError = (fieldName) => {
-    const { errors, touched } = this.props
-    return (!!errors[fieldName] && touched[fieldName])
-  }
-
-  showHelperError = (fieldName) => {
-    const { errors, touched } = this.props
-    return (touched[fieldName] && errors[fieldName])
+  removePlace = () => {
+    const { actions } = this.props
+    actions.place.reset()
   }
 
   render() {
-    const { classes, ...formHOC } = this.props
-
-    const {
-      values,
-      isSubmitting,
-      handleChange,
-      handleSubmit,
-      handleBlur,
-      setFieldValue,
-      setFieldTouched,
-    } = formHOC
+    const { classes, place, ...formHOC } = this.props
+    const { isSubmitting, handleSubmit } = formHOC
 
     return (
       <form className={classes.root}>
-        <div className={classes.input}>
-          <Typography variant="subheading">Название вечеринки</Typography>
-          <TextField
-            fullWidth
-            name="title"
-            placeholder="Название"
-            value={values.title}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('title')}
-            helperText={this.showHelperError('title')}
-          />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">В каком районе будет вечеринка?</Typography>
-          <TextField
-            fullWidth
-            name="district"
-            placeholder="Район"
-            value={values.district}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('district')}
-            helperText={this.showHelperError('district')}
-          />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">По какому адресу?</Typography>
-          <Geosuggest
-            fullWidth
-            name="address"
-            placeholder="Адрес"
-            value={values.address}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-            error={this.hasError('address')}
-            helperText={this.showHelperError('address')}
-          />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Когда состоится?</Typography>
-          <TextField
-            fullWidth
-            type="date"
-            name="startDay"
-            placeholder="Дата"
-            value={values.startDay}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('startDay')}
-            helperText={this.showHelperError('startDay')}
-          />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Во сколько начало?</Typography>
-          <TextField
-            fullWidth
-            type="time"
-            name="startTime"
-            placeholder="Время"
-            value={values.startTime}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('startTime')}
-            helperText={this.showHelperError('startTime')}
-          />
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Сколько людей нужно?</Typography>
-          <Grid className={classes.flex}>
-            <Grid item container justify="flex-start">
-              <Typography variant="subheading">от</Typography>
-              <TextField
-                type="number"
-                className={classes.inputNumber}
-                name="peopleMin"
-                value={values.peopleMin}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={this.hasError('peopleMin')}
-                helperText={this.showHelperError('peopleMin')}
-              />
-            </Grid>
-            <Grid item container justify="flex-end">
-              <Typography variant="subheading">до</Typography>
-              <TextField
-                type="number"
-                className={classes.inputNumber}
-                name="peopleMax"
-                value={values.peopleMax}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={this.hasError('peopleMax')}
-                helperText={this.showHelperError('peopleMax')}
-              />
-            </Grid>
-          </Grid>
-        </div>
-        <div className={classes.input}>
-          <Typography variant="subheading">Описание</Typography>
-          <TextField
-            fullWidth
-            multiline
-            rows={2}
-            rowsMax={3}
-            name="description"
-            placeholder="Описание"
-            value={values.description}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('description')}
-            helperText={this.showHelperError('description')}
-          />
-        </div>
+        {isEmpty(place) ?
+          <div>
+            <DistrictInput {...formHOC} />
+            <AddressInput {...formHOC} />
+          </div> :
+          <PlaceInput place={place} onCancel={this.removePlace} />
+        }
+
+        <TitleInput {...formHOC} />
+        <DayInput {...formHOC} />
+        <TimeInput {...formHOC} />
+        <PeopleInput {...formHOC} />
+        <DescriptionInput {...formHOC} />
+
         <Grid container justify="space-between" className={classes.buttonGroup}>
           <Link to="/parties/create/step/1">
-            <Button
-              size="large"
-              disabled={isSubmitting}
-            >
-              Назад
-            </Button>
+            <Button size="large" disabled={isSubmitting}>Назад</Button>
           </Link>
           <Button
             className={classes.button}
@@ -226,16 +104,10 @@ class GeneralScene extends React.Component {
 
 GeneralScene.propTypes = {
   history: object.isRequired,
+  place: object.isRequired,
   party: object.isRequired,
   actions: object.isRequired,
   classes: object.isRequired,
-  errors: object.isRequired,
-  touched: object.isRequired,
-  values: object.isRequired,
-  setFieldValue: func.isRequired,
-  setFieldTouched: func.isRequired,
-  handleChange: func.isRequired,
-  handleBlur: func.isRequired,
   handleSubmit: func.isRequired,
   isSubmitting: bool.isRequired,
 }

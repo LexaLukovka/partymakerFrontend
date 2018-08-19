@@ -5,6 +5,7 @@ import createReducer from './create/reducer'
 import listReducer from './list/reducer'
 import singleReducer from './single/reducer'
 import memberReducer from './member/reducer'
+import typesReducer from './types/reducer'
 
 const persistConfig = {
   key: 'create-party',
@@ -16,4 +17,5 @@ export default combineReducers({
   memberReducer,
   listReducer,
   singleReducer,
+  typesReducer,
 })

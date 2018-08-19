@@ -1,4 +1,4 @@
-import { LOAD_PLACE_PENDING, LOAD_PLACE_FULFILLED, LOAD_PLACE_REJECTED } from './action'
+import { LOAD_PLACE_PENDING, LOAD_PLACE_FULFILLED, LOAD_PLACE_REJECTED, RESET_PLACE } from './action'
 
 const initialState = {
   loading: false,
@@ -26,6 +26,13 @@ const singleReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         place: payload.data,
+      }
+    }
+
+    case RESET_PLACE: {
+      return {
+        ...state,
+        ...initialState,
       }
     }
 

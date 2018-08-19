@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 import React from 'react'
-import { object, number, string, array, shape } from 'prop-types'
+import { object, string, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import ReactStars from 'react-stars'
 import { Typography, Button } from '@material-ui/core'
 import AddIcon from 'mdi-react/AddIcon'
 import LocationIcon from 'mdi-react/LocationIcon'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -41,12 +42,18 @@ const ratingChanged = (newRating) => {
   console.log(newRating)
 }
 
-
 const PlaceCard = ({ classes, place }) =>
   <section className={classes.root}>
-    <Button variant="fab" color="default" className={classes.floatingButton} aria-label="Add">
-      <AddIcon />
-    </Button>
+    <Link to={`/parties/create?place_id=${place.id}`}>
+      <Button
+        variant="fab"
+        color="default"
+        className={classes.floatingButton}
+        aria-label="Add"
+      >
+        <AddIcon />
+      </Button>
+    </Link>
     <div className={classes.location}>
       <LocationIcon />
       <Typography color="inherit" variant="subheading">
@@ -73,9 +80,7 @@ const PlaceCard = ({ classes, place }) =>
     </div>
 
     <Typography color="inherit">
-      Очень хорошее место что бы бесплатно отдохнуть на природе.
-      Пожарить шашлыков, весело провести время на майские
-      праздники.
+      {place.description}
     </Typography>
   </section>
 
