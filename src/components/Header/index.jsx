@@ -72,15 +72,7 @@ class Header extends React.Component {
             <Typography variant="title" color="inherit" align="center" className={classes.flex}>
               {shortTitle(header.title)}
             </Typography>
-            {auth.user ?
-              <Link to="/parties/create">
-                <IconButton color="inherit">
-                  <Add />
-                </IconButton>
-              </Link>
-              :
-              <UserMenu />
-            }
+            <UserMenu />
           </Toolbar>
         </AppBar>
       </header>

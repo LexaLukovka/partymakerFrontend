@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Typography, Icon } from '@material-ui/core'
 
 const styles = {
-  inline: {
+  root: {
     display: 'inline-block',
     width: 120,
     height: 120,
@@ -19,6 +19,10 @@ const styles = {
       width: 100,
       height: 100,
     },
+  },
+  selected: {
+    background: '#D404DC',
+    color: 'white',
   },
   click: {
     background: '#AC07B2',
@@ -52,8 +56,8 @@ const styles = {
   },
 }
 
-const TypeTag = ({ classes, onClick, icon, children }) =>
-  <div onClick={onClick} className={classes.inline}>
+const TypeTag = ({ classes, onClick, icon, children, selected }) =>
+  <div onClick={onClick} className={`${classes.root} ${selected && classes.selected}`}>
     <div className={classes.circle}>
       <div className={classes.input}>
         <Icon className={classes.icon} color="primary">
@@ -67,6 +71,7 @@ const TypeTag = ({ classes, onClick, icon, children }) =>
 TypeTag.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func,
+  selected: PropTypes.bool,
   icon: PropTypes.string,
   children: PropTypes.string,
 }
@@ -75,6 +80,7 @@ TypeTag.defaultProps = {
   onClick: () => {},
   icon: 'home',
   children: 'No name',
+  selected: false,
 }
 
 export default withStyles(styles)(TypeTag)

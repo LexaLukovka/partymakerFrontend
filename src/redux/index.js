@@ -11,6 +11,7 @@ import layoutReducer from './layout/reducer'
 import drawerReducer from './drawer/reducer'
 import headerReducer from './header/reducer'
 import alertReducer from './alert/reducer'
+import actionButtonReducer from './actionButton/reducer'
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   drawerReducer,
   headerReducer,
   alertReducer,
+  actionButtonReducer,
 })
 
 export default persistReducer(persistConfig, reducers)

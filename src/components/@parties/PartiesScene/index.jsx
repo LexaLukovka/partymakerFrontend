@@ -16,10 +16,14 @@ const styles = {
 
 class PartiesScene extends React.Component {
   componentWillMount() {
-    const { actions, parties } = this.props
-    // if (isEmpty(parties)) {
+    const { actions } = this.props
+    actions.actionButton.show()
     actions.parties.load()
-    // }
+  }
+
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.actionButton.hide()
   }
 
   like = (id) => {
