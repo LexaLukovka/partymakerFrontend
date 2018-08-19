@@ -1,10 +1,9 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
-
-import UserScene from './UserScene'
 import UsersScene from './UsersScene'
+import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -12,16 +11,17 @@ const styles = () => ({
   },
 })
 
-const UserLayout = ({ classes }) =>
+const UserLayout = ({ classes, auth }) =>
   <div className={classes.root}>
     <Switch>
-      <Route exact path="/user" component={UserScene} />
-      <Route exact path="/user/:id" component={UsersScene} />
+      <Route exact path="/users/:id" component={UsersScene} />
+      <Redirect to={`/users/${auth.user.id}`} />
     </Switch>
   </div>
 
 UserLayout.propTypes = {
   classes: object.isRequired,
+  auth: object.isRequired,
 }
 
-export default withStyles(styles)(UserLayout)
+export default withStyles(styles)(connector(UserLayout))
