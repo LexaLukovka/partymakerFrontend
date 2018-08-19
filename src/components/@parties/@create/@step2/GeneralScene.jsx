@@ -3,8 +3,7 @@ import { object, func, bool } from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
 import { withStyles } from '@material-ui/core/styles'
-import { Button, Grid, Typography } from '@material-ui/core'
-import AndDevider from 'components/AndDevider'
+import { Button, Grid } from '@material-ui/core'
 import PlaceInput from './PlaceInput'
 import DistrictInput from './DistrictInput'
 import AddressInput from './AddressInput'
@@ -20,18 +19,15 @@ const styles = theme => ({
   root: {
     padding: '0 15px',
   },
-  devider: {
-    color: 'black',
-  },
 
   button: {
-    // background: 'linear-gradient(#BE05C5 30%, #9306BC 90%)',
     marginRight: theme.spacing.size4,
   },
 
   checked: {
     height: 25,
   },
+
   buttonGroup: {
     marginTop: theme.spacing.size4,
     marginBottom: theme.spacing.size3,
@@ -59,7 +55,7 @@ class GeneralScene extends React.Component {
   }
 
   render() {
-    const { classes, place: { place }, ...formHOC } = this.props
+    const { classes, place, ...formHOC } = this.props
     const { isSubmitting, handleSubmit } = formHOC
 
     return (
@@ -104,13 +100,6 @@ GeneralScene.propTypes = {
   party: object.isRequired,
   actions: object.isRequired,
   classes: object.isRequired,
-  errors: object.isRequired,
-  touched: object.isRequired,
-  values: object.isRequired,
-  setFieldValue: func.isRequired,
-  setFieldTouched: func.isRequired,
-  handleChange: func.isRequired,
-  handleBlur: func.isRequired,
   handleSubmit: func.isRequired,
   isSubmitting: bool.isRequired,
 }

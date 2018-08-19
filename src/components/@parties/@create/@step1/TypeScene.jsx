@@ -19,16 +19,21 @@ class TypeForm extends React.Component {
 
   handleSelect = (type) => {
     const { actions, history } = this.props
+    actions.partyTypes.select(type)
     actions.party.update({ type })
     history.push('/parties/create/step/2')
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, partyTypes } = this.props
     return (
       <form className={classes.root}>
         <Typography variant="subheading">Выберите тип вашей вечеринки</Typography>
-        <TagList onSelect={this.handleSelect} />
+        <TagList
+          onSelect={this.handleSelect}
+          partyTypes={partyTypes.types}
+          selected={partyTypes.selected}
+        />
       </form>
     )
   }
@@ -37,6 +42,7 @@ class TypeForm extends React.Component {
 TypeForm.propTypes = {
   classes: object.isRequired,
   history: object.isRequired,
+  partyTypes: object.isRequired,
   actions: object.isRequired,
 }
 
