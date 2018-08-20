@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
@@ -15,17 +14,16 @@ module.exports = {
       src: path.resolve(__dirname, './src/'),
     },
   },
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
-    './src/utils/webpack-public-path',
-    'react-hot-loader/patch',
-    'babel-polyfill',
-    path.resolve(__dirname, 'src/index.js'),
-  ],
+  entry: {
+    hot: 'react-hot-loader/patch',
+    app: path.resolve(__dirname, 'src/index.js'),
+    sw: path.resolve(__dirname, 'src/sw.js'),
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].js',
+    globalObject: 'this',
   },
   target: 'web',
 

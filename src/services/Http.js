@@ -14,10 +14,11 @@ class Http {
 
   handleError(err) {
     if (err) {
-      if (!err.response) {
+      if (err.response) {
         throw err.response.data
+      } else {
+        throw err
       }
-      throw err.response
     }
   }
 

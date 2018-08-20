@@ -25,4 +25,4 @@ app.use(methodOverride())
 
 app.use('/', express.static(`${__dirname}/public`, options))
 app.use('*', express.static(`${__dirname}/public`, options))
-app.listen(8080, () => console.log('Listening on port 8080!'))
+app.listen(8080, '0.0.0.0', () => console.log('Listening on port 8080!'))

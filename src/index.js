@@ -8,7 +8,6 @@ import store, { persistor } from './store'
 import LayoutScene from 'components/LayoutScene'
 import Loading from 'components/Loading'
 import 'moment/locale/ru.js'
-import './styles/index.scss'
 
 const render = Component => {
   ReactDOM.render(

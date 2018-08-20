@@ -1,12 +1,53 @@
 <!DOCTYPE html>
-<!--suppress ALL -->
 <html lang="en">
 <head>
   <title>Partymaker</title>
   <meta charset="utf-8">
   <meta content="width=device-width, minimum-scale=1, shrink-to-fit=no" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    html, body {
+      background-position: center;
+      background-size: cover;
+      height: 100%;
+      font-family: Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 16pt;
+    }
 
+    @media only screen and (max-width: 1280px) {
+      html, body {
+        font-size: 15pt;
+      }
+    }
+
+    @media only screen and (max-width: 640px) {
+      html, body {
+        font-size: 13pt;
+      }
+    }
+
+    @media only screen and (max-width: 320px) {
+      html, body {
+        font-size: 12pt;
+      }
+    }
+
+    #root {
+      height: 100%;
+    }
+
+    #root > div {
+      height: 100%;
+    }
+
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
   <base href="/" />
   <!--<link rel="stylesheet" href="styles.css">-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
@@ -17,6 +58,18 @@
 <body>
 
 <div id="root"></div>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function (response) {
+        // Service worker registration done
+        console.log('Registration Successful', response)
+      }, function (error) {
+        // Service worker registration failed
+        console.log('Registration Failed', error)
+      })
+  }
+</script>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0E-RRtQWldjEQLFkAOWDgMSj295C0Lo&libraries=places,visualization&language=ru-RU"></script>
 </body>
