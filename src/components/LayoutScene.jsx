@@ -1,5 +1,6 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { object } from 'prop-types'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import withTheme from 'utils/withTheme'
 import Header from 'components/Header'
 import Alert from 'components/Alert'
@@ -13,10 +14,11 @@ import SettingsLayout from './@settings/SettingsLayout'
 import AuthLayout from './@auth/AuthLayout'
 import PlacesLayout from './@places/PlacesLayout'
 import PartiesLayout from './@parties/PartiesLayout'
-import UserLayout from 'components/@user/UserLayout'
+import UserLayout from 'components/@users/UserLayout'
 import Background from 'components/Background'
+import connector from './connector'
 
-const LayoutScene = () =>
+const LayoutScene = ({ auth }) =>
   <div>
     <Background>
       <Header />
@@ -25,9 +27,10 @@ const LayoutScene = () =>
           <Route exact path="/" component={IndexScene} />
           <Route path="/parties" component={PartiesLayout} />
           <Route path="/places" component={PlacesLayout} />
+          <Route exact path="/user" render={() => <Redirect to={`/users/${auth.user.id}`} />} />
+          <Route path="/users" component={UserLayout} />
           <Route path="/auth" component={AuthLayout} />
           <AuthRoute path="/settings" component={SettingsLayout} />
-          <AuthRoute path="/user" component={UserLayout} />
         </Switch>
       </Container>
     </Background>
@@ -35,4 +38,8 @@ const LayoutScene = () =>
     <Drawer />
     <Alert />
   </div>
-export default withTheme(LayoutScene)
+
+LayoutScene.propTypes = {
+  auth: object.isRequired,
+}
+export default withTheme(connector(LayoutScene))

@@ -30,7 +30,7 @@ const userReducer = (state = initialState, { type, payload }) => {
     case FIND_USER_FULFILLED: {
       return {
         ...state,
-        user: payload,
+        user: payload.user,
         loading: false,
       }
     }
