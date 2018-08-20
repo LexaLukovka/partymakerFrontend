@@ -36,7 +36,6 @@ TimeInput.propTypes = {
     startTime: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(TimeInput)

@@ -35,7 +35,6 @@ TitleInput.propTypes = {
     title: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(TitleInput)

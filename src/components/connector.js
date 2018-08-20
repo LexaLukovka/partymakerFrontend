@@ -4,6 +4,7 @@ import * as actions from 'src/redux/layout/action'
 
 const initMapStateToProps = store => ({
   layout: store.layoutReducer,
+  auth: store.authReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({

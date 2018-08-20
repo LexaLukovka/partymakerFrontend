@@ -36,7 +36,6 @@ DayInput.propTypes = {
     startDay: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(DayInput)

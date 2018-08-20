@@ -38,7 +38,6 @@ DescriptionInput.propTypes = {
     description: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(DescriptionInput)

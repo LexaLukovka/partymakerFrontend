@@ -62,7 +62,6 @@ PeopleInput.propTypes = {
     peopleMax: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(PeopleInput)
