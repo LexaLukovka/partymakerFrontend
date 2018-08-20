@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, number, string, array, shape, func, bool } from 'prop-types'
+import { object, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { IconButton } from '@material-ui/core'
@@ -9,7 +9,7 @@ const styles = {
   root: {},
 }
 
-const ProfileEdit = ({ classes, visible }) => visible ?
+const ProfileEdit = ({ classes, visible }) => (visible ?
   <div className={classes.root}>
     <Link to="/settings">
       <IconButton>
@@ -20,7 +20,7 @@ const ProfileEdit = ({ classes, visible }) => visible ?
   :
   <div>
     &nbsp;
-  </div>
+  </div>)
 
 ProfileEdit.propTypes = {
   classes: object.isRequired,
