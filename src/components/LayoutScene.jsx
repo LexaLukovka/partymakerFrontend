@@ -28,7 +28,7 @@ const LayoutScene = ({ auth }) =>
           <Route path="/parties" component={PartiesLayout} />
           <Route path="/places" component={PlacesLayout} />
           <Route exact path="/user" render={() => <Redirect to={`/users/${auth.user.id}`} />} />
-          <Route path="/users" component={UserLayout} />
+          <AuthRoute path="/users" component={UserLayout} />
           <Route path="/auth" component={AuthLayout} />
           <AuthRoute path="/settings" component={SettingsLayout} />
         </Switch>

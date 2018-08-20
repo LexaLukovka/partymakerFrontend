@@ -63,8 +63,10 @@ class GeneralScene extends React.Component {
   }
 
   render() {
-    const { classes, place, ...formHOC } = this.props
+    const { classes, party, ...formHOC } = this.props
     const { isSubmitting, handleSubmit } = formHOC
+
+    const { place } = party.form
 
     return (
       <form className={classes.root}>

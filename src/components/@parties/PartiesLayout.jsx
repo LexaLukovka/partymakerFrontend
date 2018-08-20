@@ -19,7 +19,7 @@ const PartiesLayout = ({ classes }) =>
   <div className={classes.root}>
     <Switch>
       <Route exact path="/parties" component={PartiesScene} />
-      <Route path="/parties/create" component={CreateLayout} />
+      <AuthRoute path="/parties/create" component={CreateLayout} />
       <Route exact path="/parties/:id" component={PartyScene} />
       <Route exact path="/parties/:id/users" component={MembersScene} />
       <AuthRoute path="/parties/:id/edit" component={EditLayout} />

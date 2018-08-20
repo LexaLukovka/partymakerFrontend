@@ -46,8 +46,8 @@ class Party {
       place_id: place_id,
       address: place_id ? null : {
         address: form.address.formatted_address,
-        lng: form.address.geometry.location.lng,
-        lat: form.address.geometry.location.lat,
+        lng: form.address.geometry.location.lng() || form.address.geometry.location.lng,
+        lat: form.address.geometry.location.lat() || form.address.geometry.location.lat,
         district: form.district,
         placeId: form.address.place_id,
       },
