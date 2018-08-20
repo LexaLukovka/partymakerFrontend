@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, bool } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Loading from 'components/Loading'
 import isEmpty from 'lodash/isEmpty'

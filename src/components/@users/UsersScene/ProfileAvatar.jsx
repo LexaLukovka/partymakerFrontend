@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, number, string, array, shape, func } from 'prop-types'
+import { object, string, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Avatar } from '@material-ui/core'
 import initialsFromUsername from 'utils/initialsFromUsername'

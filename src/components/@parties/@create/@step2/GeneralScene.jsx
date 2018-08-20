@@ -18,6 +18,10 @@ import connector from '../connector'
 const styles = theme => ({
   root: {
     padding: '0 15px',
+    marginTop: theme.spacing.size4,
+    '@media only screen and (max-width: 320px)': {
+      marginTop: 0,
+    },
   },
 
   button: {
@@ -31,6 +35,10 @@ const styles = theme => ({
   buttonGroup: {
     marginTop: theme.spacing.size4,
     marginBottom: theme.spacing.size3,
+    '@media only screen and (max-width: 320px)': {
+      marginTop: theme.spacing.size1,
+      marginBottom: 0,
+    },
   },
 })
 

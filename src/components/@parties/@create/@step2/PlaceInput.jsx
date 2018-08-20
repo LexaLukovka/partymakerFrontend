@@ -1,12 +1,12 @@
 import React from 'react'
-import { object, number, string, array, shape, func } from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import CloseCircleIcon from 'mdi-react/CloseCircleIcon'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     padding: '5px 0',
   },

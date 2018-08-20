@@ -8,6 +8,9 @@ const styles = {
     marginTop: 15,
     padding: 5,
     background: 'inherit',
+    '@media only screen and (max-width: 320px)': {
+      paddingBottom: 0,
+    },
   },
 }
 

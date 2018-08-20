@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, string, shape, func, bool, number } from 'prop-types'
+import { object, string, shape, func, number } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Grid, TextField, Typography } from '@material-ui/core'
 
@@ -62,7 +62,6 @@ PeopleInput.propTypes = {
     peopleMax: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(PeopleInput)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { array, object, bool, number } from 'prop-types'
+import { object, bool, number } from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFoundMyParties from 'components/NotFound/MyParties'

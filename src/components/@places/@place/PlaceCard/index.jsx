@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
-import { object, number, string, array, shape } from 'prop-types'
+import { object, string, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import ReactStars from 'react-stars'
 import { Typography, Button } from '@material-ui/core'

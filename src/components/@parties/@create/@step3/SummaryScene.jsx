@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles/index'
 import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
 import PictureUpload from './PictureUpload'
+import isEmpty from 'lodash/isEmpty'
 import connector from '../connector'
 
 const styles = theme => ({
@@ -94,7 +95,7 @@ class SummaryForm extends React.Component {
     return (
       <form className={classes.root}>
         <Typography gutterBottom color="error">
-          {party.error && `${party.error.status} ошибка создания вечеринки ${party.error.data.error.message}`}
+          {!isEmpty(party.error) && `${party.error.status} ошибка создания вечеринки ${party.error.data.error.message}`}
         </Typography>
         <FormControlLabel
           className={classes.checked}

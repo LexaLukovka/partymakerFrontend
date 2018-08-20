@@ -1,7 +1,6 @@
 import React from 'react'
-import { object, string, shape, func, bool } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import { TextField, Typography } from '@material-ui/core'
+import { object, string, shape, func } from 'prop-types'
+import { withStyles, Typography } from '@material-ui/core'
 import Geosuggest from 'components/Geosuggest'
 
 const styles = {

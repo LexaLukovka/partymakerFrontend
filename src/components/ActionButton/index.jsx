@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, number, string, array, shape } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'

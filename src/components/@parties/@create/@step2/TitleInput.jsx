@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, string, shape, func, bool } from 'prop-types'
+import { object, string, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { TextField, Typography } from '@material-ui/core'
 
@@ -35,7 +35,6 @@ TitleInput.propTypes = {
     title: string,
   }).isRequired,
   touched: object.isRequired,
-
 }
 
 export default withStyles(styles)(TitleInput)

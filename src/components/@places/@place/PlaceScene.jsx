@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { arrayOf, bool, object } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button/Button'
 import isEmpty from 'lodash/isEmpty'

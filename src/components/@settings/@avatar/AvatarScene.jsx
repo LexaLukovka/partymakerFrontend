@@ -1,19 +1,30 @@
 import React from 'react'
-import { func, object } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Avatar } from '@material-ui/core'
 import PictureUpload from './PictureUpload'
 import connector from '../connector'
+import { ArrowForwardIcon } from 'mdi-react'
 
 const styles = theme => ({
   root: {
     paddingTop: 25,
-    paddingRight: 15,
-    paddingLeft: 15,
   },
   avatar: {
-    width: 100,
-    height: 100,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  photo: {
+    width: 70,
+    height: 70,
+  },
+  arrow: {
+    alignSelf: 'center',
+  },
+  upload: {
+    marginTop: 10,
   },
   button: {
     marginTop: theme.spacing.size3,
@@ -42,17 +53,19 @@ class AvatarScene extends React.Component {
     const { classes, user } = this.props
     return (
       <div className={classes.root}>
-        <Typography variant="subheading">Сменить фото</Typography>
-        {user.avatar_url && <Avatar src={user.avatar_url} className={classes.avatar} />}
-        <PictureUpload
-          name="picture"
-          onChange={this.handleUpload}
-        />
+        <Typography align="center" variant="title">Сменить фото</Typography>
+        <div className={classes.avatar}>
+          {user.avatar_url && <Avatar src={user.avatar_url} className={classes.photo} />}
+          <ArrowForwardIcon className={classes.arrow} />
+          <PictureUpload
+            name="picture"
+            onChange={this.handleUpload}
+          />
+        </div>
       </div>
     )
   }
 }
-
 
 AvatarScene.propTypes = {
   classes: object.isRequired,
