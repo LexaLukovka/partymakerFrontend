@@ -9,11 +9,9 @@ import NotFound from 'components/NotFound'
 import connector from './connector'
 import initialsFromUsername from 'utils/initialsFromUsername'
 
-
 const styles = () => ({
   root: {},
 })
-
 
 class MembersScene extends Component {
   componentDidMount() {
@@ -21,6 +19,7 @@ class MembersScene extends Component {
     actions.members.load(match.params.id)
     this.props.actions.header.setIcon('back')
     this.props.actions.header.setTitle('Участники')
+    document.title = 'Участники'
   }
 
   componentWillUnmount() {

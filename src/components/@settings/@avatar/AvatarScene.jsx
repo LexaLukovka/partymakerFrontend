@@ -36,6 +36,7 @@ class AvatarScene extends React.Component {
     const { actions } = this.props
     actions.header.setIcon('back')
     actions.header.setTitle('Аватар')
+    document.title = 'Изменить аватар'
   }
 
   componentWillUnmount() {

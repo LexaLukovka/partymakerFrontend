@@ -68,6 +68,11 @@ class PartyScene extends React.Component {
     this.checkIsPartyMember()
   }
 
+  componentDidUpdate() {
+    const { party } = this.props
+    if (!isEmpty(party)) document.title = party.title
+  }
+
   componentWillUnmount() {
     const { actions } = this.props
     actions.header.menu()

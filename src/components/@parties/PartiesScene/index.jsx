@@ -19,6 +19,7 @@ class PartiesScene extends React.Component {
     const { actions } = this.props
     actions.actionButton.show()
     actions.parties.load()
+    document.title = 'Вечеринки в Запорожье'
   }
 
   componentWillUnmount() {

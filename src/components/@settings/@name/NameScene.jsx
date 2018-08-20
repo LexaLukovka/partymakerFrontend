@@ -24,6 +24,7 @@ class NameScene extends React.Component {
     const { actions } = this.props
     actions.header.setIcon('back')
     actions.header.setTitle('Имя и фамилия')
+    document.title = 'Изменить имя'
   }
 
   componentWillUnmount() {

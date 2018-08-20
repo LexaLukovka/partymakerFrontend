@@ -24,6 +24,7 @@ class EmailScene extends React.Component {
     const { actions } = this.props
     actions.header.setIcon('back')
     actions.header.setTitle('Email')
+    document.title = 'Изменить email'
   }
 
   componentWillUnmount() {
@@ -41,7 +42,6 @@ class EmailScene extends React.Component {
     const { errors, touched } = this.props
     return (touched[fieldName] && errors[fieldName])
   }
-
 
   render() {
     const { classes, values, handleSubmit, handleChange, handleBlur } = this.props

@@ -7,8 +7,7 @@ import NotFound from 'components/NotFound'
 import PlacesList from './PlacesList'
 import connector from '../connector'
 
-
-const styles = theme => ({
+const styles = () => ({
   root: {},
 })
 
@@ -16,16 +15,17 @@ class PlacesScene extends Component {
   componentWillMount() {
     const { actions, places } = this.props
     if (!places.places) actions.places.load()
+    document.title = 'Места где погулять в Запорожье'
   }
 
   render() {
-    const { places, classes } = this.props
-    if (places.loading) return <Loading />
-    if (isEmpty(places.places)) return <NotFound />
+    const { places: { loading, places }, classes } = this.props
+    if (loading) return <Loading />
+    if (isEmpty(places)) return <NotFound />
 
     return (
       <div className={classes.root}>
-        <PlacesList places={places.places} />
+        <PlacesList places={places} />
       </div>
     )
   }
