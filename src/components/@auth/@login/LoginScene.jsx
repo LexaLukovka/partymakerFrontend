@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Card } from '@material-ui/core'
@@ -11,11 +11,21 @@ const styles = theme => ({
   },
 })
 
-const LoginScene = ({ classes }) =>
-  <Card>
-    <Typography variant="subheading" align="center" className={classes.title}>ВОЙТИ</Typography>
-    <LoginForm />
-  </Card>
+class LoginScene extends Component {
+  componentWillMount() {
+    document.title = 'Войти'
+  }
+
+  render() {
+    const { classes } = this.props
+    return (
+      <Card>
+        <Typography variant="subheading" align="center" className={classes.title}>ВОЙТИ</Typography>
+        <LoginForm />
+      </Card>
+    )
+  }
+}
 
 LoginScene.propTypes = {
   classes: PropTypes.object.isRequired,

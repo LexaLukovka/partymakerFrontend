@@ -95,7 +95,7 @@ class SummaryForm extends React.Component {
     return (
       <form className={classes.root}>
         <Typography gutterBottom color="error">
-          {!isEmpty(party.error) && `${party.error.status} ошибка создания вечеринки ${party.error.data.error.message}`}
+          {!isEmpty(party.error) && `${party.error.status} ошибка создания вечеринки ${party.error.error.message}`}
         </Typography>
         <FormControlLabel
           className={classes.checked}

@@ -24,6 +24,7 @@ class PhoneScene extends React.Component {
     const { actions } = this.props
     actions.header.setIcon('back')
     actions.header.setTitle('Телефон')
+    document.title = 'Изменить номер телефона'
   }
 
   componentWillUnmount() {

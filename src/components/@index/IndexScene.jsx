@@ -27,6 +27,7 @@ class IndexScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.layout.background('http://localhost:3333/images/summer.jpg')
+    document.title = 'Partymaker'
   }
 
   componentWillUnmount() {

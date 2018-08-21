@@ -4,10 +4,10 @@ import { List, ListItemText } from '@material-ui/core'
 import ListItem from './ListItem'
 import connector from '../connector'
 
-
 class SettingsScene extends React.Component {
   componentDidMount() {
     this.props.actions.header.setTitle('Настройки')
+    document.title = 'Настройки'
   }
 
   componentWillUnmount() {
@@ -37,7 +37,6 @@ class SettingsScene extends React.Component {
     )
   }
 }
-
 
 SettingsScene.propTypes = {
   user: object.isRequired,

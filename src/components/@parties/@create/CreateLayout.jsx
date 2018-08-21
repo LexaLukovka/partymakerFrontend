@@ -22,7 +22,7 @@ class CreateLayout extends Component {
     const { place, actions, history, location: { search } } = this.props
     const { place_id } = qs.parse(search.replace('?', ''))
 
-    if (!isEmpty(place) && place.type && place_id) {
+    if (!isEmpty(place) && place_id) {
       actions.partyTypes.select(place.type)
       actions.party.update({ place, type: place.type })
       history.push('/parties/create/step/2')
