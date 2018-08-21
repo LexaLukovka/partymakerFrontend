@@ -20,10 +20,13 @@ export const CHANGE_SETTINGS_PENDING = 'CHANGE_SETTINGS_PENDING'
 export const CHANGE_SETTINGS_REJECTED = 'CHANGE_SETTINGS_REJECTED'
 export const CHANGE_SETTINGS_FULFILLED = 'CHANGE_SETTINGS_FULFILLED'
 
-export const register = (form) => ({
-  type: REGISTER_USER,
-  payload: Auth.register(form),
-})
+export const register = (form) => async dispatch => {
+  await dispatch({
+    type: REGISTER_USER,
+    payload: Auth.register(form),
+  })
+  dispatch(alert.show('Вы вошли'))
+}
 
 export const login = (form) => async dispatch => {
   await dispatch({

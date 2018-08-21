@@ -10,7 +10,6 @@ import connector from './connector'
 const styles = {
   root: {
     marginTop: 15,
-    margin: 10,
   },
 }
 

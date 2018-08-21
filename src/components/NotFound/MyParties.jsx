@@ -25,7 +25,7 @@ const MyParties = ({ classes }) =>
         вечеринок...
       </Typography>
       <div className={classes.link}>
-        <Link to="/parties/create"><Button color="primary">СОЗДАТЬ</Button></Link>
+        <Link to="/parties/create"><Button color="primary" size="large">СОЗДАТЬ</Button></Link>
       </div>
     </div>
   </div>

@@ -8,10 +8,7 @@ import CardActions from './MyCardActions'
 const styles = {
   root: {
     marginBottom: 15,
-    width: '100%',
-    '@media only screen and (max-width: 320px)': {
-      width: '95%',
-    },
+    width: '95%',
   },
 }
 

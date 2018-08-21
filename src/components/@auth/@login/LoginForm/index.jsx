@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core'
 import VisibilityOff from 'mdi-react/VisibilityOffIcon'
 import Visibility from 'mdi-react/VisibilityIcon'
+import isEmpty from 'lodash/isEmpty'
 import formik from './formik'
 import connector from '../../connector'
 
@@ -42,14 +43,10 @@ class LoginForm extends React.Component {
   serverError = (fieldName) => {
     const { auth } = this.props
     const serverErrors = {}
-    if (auth.errors.length !== 0) {
-      if (auth.errors.data !== undefined) {
-        auth.errors.data.forEach(error => {
-          serverErrors[error.field] = error.message
-        })
-      } else {
-        console.log(auth.errors)
-      }
+    if (!isEmpty(auth.errors[0])) {
+      serverErrors[auth.errors[0].field] = auth.errors[0].message
+    } else {
+      console.log(auth.errors[0])
     }
     return serverErrors[fieldName]
   }
