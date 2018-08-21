@@ -52,22 +52,27 @@ class PlaceScene extends React.Component {
     actions.header.back()
   }
 
+  componentDidUpdate() {
+    const { place: { place } } = this.props
+    if (!isEmpty(place)) document.title = place.title
+  }
+
   componentWillUnmount() {
     const { actions } = this.props
     actions.header.menu()
   }
 
   render() {
-    const { classes, place, parties } = this.props
-    if (place.loading) return <Loading />
-    if (isEmpty(place.place)) return <NotFound />
+    const { classes, place: { loading, place }, parties } = this.props
+    if (loading) return <Loading />
+    if (isEmpty(place)) return <NotFound />
 
     return (
       <div className={classes.root}>
-        <Carousel pictures={place.place.pictures} />
-        <PlaceCard place={place.place} />
+        <Carousel pictures={place.pictures} />
+        <PlaceCard place={place} />
         <div className={classes.create}>
-          <Link to={`/parties/create?place_id=${place.place.id}`}>
+          <Link to={`/parties/create?place_id=${place.id}`}>
             <Button color="primary">Создать здесь свою вечеринку</Button>
           </Link>
         </div>

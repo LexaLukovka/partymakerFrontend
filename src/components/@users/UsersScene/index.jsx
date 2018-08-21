@@ -30,6 +30,13 @@ class UsersScene extends React.Component {
     actions.header.back()
   }
 
+  componentDidUpdate() {
+    const { user: { user } } = this.props
+    if (!isEmpty(user)) {
+      document.title = user.name
+    }
+  }
+
   componentWillUnmount() {
     const { actions } = this.props
     actions.header.menu()
