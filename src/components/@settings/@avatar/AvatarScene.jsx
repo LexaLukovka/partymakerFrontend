@@ -3,8 +3,8 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Avatar } from '@material-ui/core'
 import PictureUpload from './PictureUpload'
+import ArrowForwardIcon from 'mdi-react/ArrowForwardIcon'
 import connector from '../connector'
-import { ArrowForwardIcon } from 'mdi-react'
 
 const styles = theme => ({
   root: {

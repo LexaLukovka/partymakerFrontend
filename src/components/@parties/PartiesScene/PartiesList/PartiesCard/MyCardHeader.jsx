@@ -1,5 +1,6 @@
 import React from 'react'
 import { object } from 'prop-types'
+import { Link } from 'react-router-dom'
 import { CardHeader, IconButton, Avatar, withStyles } from '@material-ui/core'
 import MoreVertIcon from 'mdi-react/MoreVertIcon'
 import initialsFromUsername from 'utils/initialsFromUsername'
@@ -13,11 +14,13 @@ const styles = theme => ({
 
 const MyCardHeader = ({ classes, party }) =>
   <CardHeader
-    avatar={party.admin.avatar_url
-      ? <Avatar src={party.admin.avatar_url} />
-      : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>}
+    avatar={<Link to={`/users/${party.admin.id}`}>
+      {party.admin.avatar_url
+        ? <Avatar src={party.admin.avatar_url} />
+        : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>}
+    </Link>}
     action={<IconButton><MoreVertIcon /></IconButton>}
-    title={party.admin.name}
+    title={<Link to={`/users/${party.admin.id}`}>{party.admin.name}</Link>}
     subheader={moment(party.updated_at)
       .fromNow()}
   />
