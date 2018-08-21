@@ -27,7 +27,6 @@ class UsersScene extends React.Component {
     const { actions, match } = this.props
     actions.user.find(match.params.id)
     actions.parties.load({ admin_id: match.params.id })
-    actions.header.back()
   }
 
   componentDidUpdate() {
@@ -39,7 +38,6 @@ class UsersScene extends React.Component {
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.header.menu()
     actions.header.resetTitle()
   }
 

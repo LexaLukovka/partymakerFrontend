@@ -78,11 +78,13 @@ class PartyScene extends React.Component {
     actions.header.menu()
   }
 
-  loadParty = () => {
+  loadParty = async () => {
     const { actions, match, party } = this.props
+
     if (isEmpty(party) || party.id !== match.params.id) {
-      actions.parties.show(match.params.id)
+      await actions.parties.show(match.params.id)
     }
+    actions.place.show(party.place.id)
   }
 
   checkIsPartyMember = () => {
@@ -111,7 +113,7 @@ class PartyScene extends React.Component {
   }
 
   render() {
-    const { classes, loading, memberLoading, party, isMember, auth } = this.props
+    const { classes, auth, loading, memberLoading, party, place, isMember } = this.props
     if (loading) return <Loading />
     if (isEmpty(party)) return <NotFound />
     const { checked } = this.state
@@ -123,7 +125,7 @@ class PartyScene extends React.Component {
         </div>
         <CSSTransition in={checked} timeout={500} classNames="star">
           <div className={!checked ? classes.papers : classes.paperse}>
-            <PartyCard party={party} />
+            <PartyCard party={party} place={place} />
             {auth.user ?
               auth.user.id !== party.admin_id &&
               <Button
@@ -151,6 +153,7 @@ class PartyScene extends React.Component {
 PartyScene.propTypes = {
   classes: object.isRequired,
   party: object,
+  place: object,
   loading: bool.isRequired,
   memberLoading: bool.isRequired,
   actions: object.isRequired,
@@ -161,6 +164,7 @@ PartyScene.propTypes = {
 
 PartyScene.defaultProps = {
   party: {},
+  place: {},
   isMember: null,
 }
 

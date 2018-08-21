@@ -1,4 +1,4 @@
-import Place from 'services/api/Place'
+import Place from 'src/services/api/Place'
 
 export const LOAD_PLACE = 'LOAD_PLACE'
 export const LOAD_PLACE_PENDING = 'LOAD_PLACE_PENDING'

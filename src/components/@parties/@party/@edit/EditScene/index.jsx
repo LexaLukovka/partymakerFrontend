@@ -73,12 +73,16 @@ class EditScene extends React.Component {
         <ListItem to={`/parties/${party.id}/edit/title`}>
           <ListItemText primary="Название вечеринки" secondary={party.title} />
         </ListItem>
-        <ListItem to={`/parties/${party.id}/edit/district`}>
-          <ListItemText primary="Район" secondary={party.address.district} />
-        </ListItem>
-        <ListItem to={`/parties/${party.id}/edit/address`}>
-          <ListItemText primary="Адрес" secondary={party.address.address} />
-        </ListItem>
+        {!party.place &&
+        <React.Fragment>
+          <ListItem to={`/parties/${party.id}/edit/district`}>
+            <ListItemText primary="Район" secondary={party.address.district} />
+          </ListItem>
+          <ListItem to={`/parties/${party.id}/edit/address`}>
+            <ListItemText primary="Адрес" secondary={party.address.address} />
+          </ListItem>
+        </React.Fragment>
+        }
         <ListItem to={`/parties/${party.id}/edit/startTime`}>
           <ListItemText primary="Приходить на" secondary={party.start_time} />
         </ListItem>
