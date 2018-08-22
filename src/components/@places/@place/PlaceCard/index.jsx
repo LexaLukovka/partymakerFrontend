@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
-import { object, string, shape } from 'prop-types'
+import { object, string, shape, func, bool, number } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import ReactStars from 'react-stars'
 import { Typography, Button } from '@material-ui/core'
@@ -38,54 +38,57 @@ const styles = theme => ({
   },
 })
 
-const ratingChanged = (newRating) => {
-  console.log(newRating)
-}
+const PlaceCard = ({ classes, place, onVote, vote }) => {
+  let voteNumber = vote || parseFloat(place.rating)
+  voteNumber = voteNumber ? voteNumber.toFixed(1) : null
 
-const PlaceCard = ({ classes, place }) =>
-  <section className={classes.root}>
-    <Link to={`/parties/create?place_id=${place.id}`}>
-      <Button
-        variant="fab"
-        color="default"
-        className={classes.floatingButton}
-        aria-label="Add"
+  return (
+    <section className={classes.root}>
+      <Link to={`/parties/create?place_id=${place.id}`}>
+        <Button
+          variant="fab"
+          color="default"
+          className={classes.floatingButton}
+          aria-label="Add"
+        >
+          <AddIcon />
+        </Button>
+      </Link>
+      <div className={classes.location}>
+        <LocationIcon />
+        <Typography color="inherit" variant="subheading">
+          {place.address.address}
+        </Typography>
+      </div>
+      <Typography
+        color="inherit"
+        variant="title"
+        className={classes.title}
       >
-        <AddIcon />
-      </Button>
-    </Link>
-    <div className={classes.location}>
-      <LocationIcon />
-      <Typography color="inherit" variant="subheading">
-        {place.address.address}
+        {place.title}
       </Typography>
-    </div>
-    <Typography
-      color="inherit"
-      variant="title"
-      className={classes.title}
-    >
-      {place.title}
-    </Typography>
 
-    <div className={classes.rating}>
-      <Typography color="inherit" className={classes.rating_number}> 3.7 </Typography>
-      <ReactStars
-        count={5}
-        value={3.7}
-        onChange={ratingChanged}
-        size={32}
-        color2="#ffd700"
-      />
-    </div>
+      <div className={classes.rating}>
+        <Typography color="inherit" className={classes.rating_number}> {voteNumber} </Typography>
+        <ReactStars
+          count={5}
+          value={parseFloat(voteNumber)}
+          onChange={onVote}
+          size={32}
+          color2={vote ? '#689f38' : '#ffd700'}
+        />
+      </div>
 
-    <Typography color="inherit">
-      {place.description}
-    </Typography>
-  </section>
+      <Typography color="inherit">
+        {place.description}
+      </Typography>
+    </section>
+  )
+}
 
 PlaceCard.propTypes = {
   classes: object.isRequired,
+  vote: number,
   place: shape({
     admin: object.isRequired,
     title: string.isRequired,
@@ -95,6 +98,11 @@ PlaceCard.propTypes = {
     telegram_url: string.isRequired,
     description: string.isRequired,
   }).isRequired,
+  onVote: func.isRequired,
+}
+
+PlaceCard.defaultProps = {
+  vote: null,
 }
 
 export default withStyles(styles)(PlaceCard)
