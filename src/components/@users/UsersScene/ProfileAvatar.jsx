@@ -4,12 +4,13 @@ import { withStyles } from '@material-ui/core/styles'
 import { Avatar } from '@material-ui/core'
 import initialsFromUsername from 'utils/initialsFromUsername'
 
-const styles = {
+const styles = () => ({
   root: {
     width: 80,
     height: 80,
+    fontSize: 40,
   },
-}
+})
 
 const ProfileAvatar = ({ classes, user }) =>
   <Avatar className={classes.root} src={user.avatar_url}>

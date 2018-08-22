@@ -33,7 +33,7 @@ const handleSubmit = props => (formValues, methods) => {
   let values = formValues
 
   if (!isEmpty(place)) {
-    values = { ...values, district: place.address.district, address: place.address.address }
+    values = { district: place.address.district, address: place.address.address, ...values }
   }
 
   if (values.district === '') {

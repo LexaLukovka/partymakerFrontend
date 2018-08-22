@@ -2,11 +2,11 @@
 import React from 'react'
 import { object, string, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
 import { Typography, Button } from '@material-ui/core'
 import AddIcon from 'mdi-react/AddIcon'
 import LocationIcon from 'mdi-react/LocationIcon'
-import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {

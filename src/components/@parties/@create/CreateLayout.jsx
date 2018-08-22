@@ -24,7 +24,7 @@ class CreateLayout extends Component {
 
     if (!isEmpty(place) && place_id) {
       actions.partyTypes.select(place.type)
-      actions.party.update({ place, type: place.type })
+      actions.party.update({ place, type: place.type, address: place.address })
       history.push('/parties/create/step/2')
     }
   }

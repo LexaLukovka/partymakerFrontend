@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func, string, bool } from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
 import Helper from '../Helper'
 import connector from '../connector'

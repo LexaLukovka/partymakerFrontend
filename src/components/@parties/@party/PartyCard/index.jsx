@@ -40,7 +40,7 @@ const styles = theme => ({
   },
 })
 
-const PartyCard = ({ classes, party, auth }) =>
+const PartyCard = ({ classes, auth, party, place }) =>
   <Paper className={classes.root}>
     <div className={classes.title}>
       <Typography align="center" variant="title">{party.title}</Typography>
@@ -59,7 +59,7 @@ const PartyCard = ({ classes, party, auth }) =>
         <div className={classes.status} />
         <ListItemText primary={party.status} />
         <ListItemSecondaryAction className={classes.amount}>
-          <Link to={`/user/${party.admin.id}`}>
+          <Link to={`/users/${party.admin.id}`}>
             {party.admin.name}
           </Link>
         </ListItemSecondaryAction>
@@ -73,12 +73,13 @@ const PartyCard = ({ classes, party, auth }) =>
           </ListItemSecondaryAction>
         </ListItem>
       }
-
       {party.place ?
         <ListItem disableGutters>
           <ListItemText primary="Место" />
           <ListItemSecondaryAction>
-            {party.place.title}
+            <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+              <Button color="primary">{party.place.title}</Button>
+            </a>
           </ListItemSecondaryAction>
         </ListItem>
         :
@@ -141,6 +142,7 @@ const PartyCard = ({ classes, party, auth }) =>
 PartyCard.propTypes = {
   classes: object.isRequired,
   auth: object.isRequired,
+  place: object.isRequired,
   party: shape({
     admin: object.isRequired,
     title: string.isRequired,

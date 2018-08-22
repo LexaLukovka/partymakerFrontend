@@ -36,7 +36,7 @@ class MembersScene extends Component {
       <div className={classes.root}>
         <List>
           {users.map(user =>
-            <ListItem component={Link} to={`/user/${user.id}`} button key={user.id}>
+            <ListItem component={Link} to={`/users/${user.id}`} button key={user.id}>
               <Avatar src={user.avatar_url}>{user.avatar_url ? null : initialsFromUsername(user.name)}</Avatar>
               <ListItemText
                 primary={user.name}
