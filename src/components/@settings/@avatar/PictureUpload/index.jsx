@@ -25,24 +25,11 @@ class PictureUpload extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pictures: [],
       percent: 0,
       saved: uniq(flatten(props.value)),
     }
 
     this.handleClickInput = this.handleClickInput.bind(this)
-  }
-
-  add = (image) => {
-    if (image.type.match(/image.*/)) {
-      const reader = new FileReader()
-      reader.onload = () => {
-        const { pictures } = this.state
-        pictures.push(reader.result)
-        this.setState({ pictures: uniq(pictures) })
-      }
-      reader.readAsDataURL(image)
-    }
   }
 
   upload = async (image) => {
@@ -60,9 +47,8 @@ class PictureUpload extends React.Component {
     const formData = new FormData()
     formData.append('image', image, config)
     const response = await Http.post(this.props.url, formData)
-    const { saved } = this.state
-    saved.push(response.url)
-    this.setState({ percent: 100, saved })
+
+    this.setState({ percent: 100, saved: [response.url] })
 
     this.timeout = setTimeout(() => this.setState({ percent: 0 }), 300)
   }
@@ -70,7 +56,6 @@ class PictureUpload extends React.Component {
   handleChange = async (e) => {
     const image = e.target.files[0]
     await this.upload(image)
-    this.add(image)
     this.props.onChange(this.props.name, flatten(this.state.saved))
   }
 
@@ -83,11 +68,11 @@ class PictureUpload extends React.Component {
   }
 
   render() {
-    const { classes, name, helperText } = this.props
+    const { classes, name, user, helperText } = this.props
     return (
       <FormControl className={classes.root}>
         <div className={classes.pictureList}>
-          <PictureList pictures={this.state.pictures} />
+          <PictureList user={user} />
           <AddPicture onClick={this.handleClickInput} />
         </div>
         <input
@@ -107,8 +92,9 @@ class PictureUpload extends React.Component {
 }
 
 PictureUpload.propTypes = {
-  url: string,
   classes: object.isRequired,
+  user: object.isRequired,
+  url: string,
   value: string,
   name: string.isRequired,
   onChange: func.isRequired,

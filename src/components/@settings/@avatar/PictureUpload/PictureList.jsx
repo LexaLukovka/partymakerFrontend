@@ -1,8 +1,8 @@
-/* eslint-disable function-paren-newline */
 import React from 'react'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
 import { Avatar } from '@material-ui/core'
+import initialsFromUsername from 'utils/initialsFromUsername'
 
 const styles = {
   photo: {
@@ -13,14 +13,14 @@ const styles = {
   },
 }
 
-const PictureList = ({ classes, pictures }) =>
-  pictures.map((img, index) =>
-    <Avatar key={index} className={classes.photo} src={img} />,
-  )
+const PictureList = ({ classes, user }) =>
+  <Avatar className={classes.photo} src={user.avatar_url}>
+    {user.avatar_url ? null : initialsFromUsername(user.name)}
+  </Avatar>
 
 PictureList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  pictures: PropTypes.array.isRequired,
+  classes: object.isRequired,
+  user: object.isRequired,
 }
 
 export default withStyles(styles)(PictureList)

@@ -1,10 +1,8 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Typography, Avatar } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import PictureUpload from './PictureUpload'
-import ArrowForwardIcon from 'mdi-react/ArrowForwardIcon'
-import initialsFromUsername from '../../../utils/initialsFromUsername'
 import connector from '../connector'
 
 const styles = theme => ({
@@ -14,7 +12,6 @@ const styles = theme => ({
   avatar: {
     display: 'flex',
     justifyContent: 'space-around',
-    alignItems: 'center',
     marginTop: 15,
   },
   photo: {
@@ -58,12 +55,9 @@ class AvatarScene extends React.Component {
       <div className={classes.root}>
         <Typography align="center" variant="title">Сменить фото</Typography>
         <div className={classes.avatar}>
-          <Avatar className={classes.photo} src={user.avatar_url}>
-            {user.avatar_url ? null : initialsFromUsername(user.name)}
-          </Avatar>
-          <ArrowForwardIcon className={classes.arrow} />
           <PictureUpload
             name="picture"
+            user={user}
             onChange={this.handleUpload}
           />
         </div>
