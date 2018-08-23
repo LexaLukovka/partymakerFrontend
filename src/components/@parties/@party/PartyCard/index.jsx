@@ -21,6 +21,8 @@ const styles = theme => ({
   root: {
     marginBottom: 15,
     padding: 15,
+    margin: '0 auto',
+    maxWidth: 500,
   },
   title: {
     display: 'flex',

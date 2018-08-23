@@ -9,6 +9,8 @@ import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
 import ArrowBack from 'mdi-react/ArrowBackIcon'
 import MenuIcon from 'mdi-react/MenuIcon'
+import Button from '@material-ui/core/Button/Button'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -23,6 +25,16 @@ const styles = theme => ({
   },
   flex: {
     flex: 1,
+  },
+  actionButtons: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  iconButton: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
 })
 
@@ -64,12 +76,19 @@ class Header extends React.Component {
       <header className={classes.root}>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
+            <div className={classes.iconButton}>
+              {this.renderIcon()}
+            </div>
 
-            {this.renderIcon()}
-
-            <Typography variant="title" color="inherit" align="center" className={classes.flex}>
-              {shortTitle(header.title)}
+            <Typography variant="title" color="inherit" align="left" className={classes.flex}>
+              <Link to={header.link}>{shortTitle(header.title)}   </Link>
             </Typography>
+
+            <div className={classes.actionButtons}>
+              <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
+              <Link to="/parties"><Button color="inherit">Найти компанию погулять</Button></Link>
+              <Link to="/parties/create"><Button color="inherit">Собрать свою компанию</Button></Link>
+            </div>
             <UserMenu />
           </Toolbar>
         </AppBar>

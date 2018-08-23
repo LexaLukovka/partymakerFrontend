@@ -6,11 +6,7 @@ const styles = {
   root: {
     paddingTop: 55,
     height: '100%',
-    margin: '0 auto',
-    maxWidth: 600,
-    '@media only screen and (max-width: 1280px)': {
-      minWidth: '100%',
-    },
+    width: '100%',
   },
 }
 

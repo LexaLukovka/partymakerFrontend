@@ -54,6 +54,11 @@ const styles = (theme) => ({
     stroke: theme.palette.divider,
     strokeWidth: 1,
   },
+  amInButton: {
+    margin: '0 auto',
+    maxWidth: 500,
+    display: 'block',
+  },
 })
 
 class PartyScene extends React.Component {
@@ -132,6 +137,7 @@ class PartyScene extends React.Component {
                 variant="raised"
                 size="large"
                 fullWidth
+                className={classes.amInButton}
                 color="primary"
                 disabled={memberLoading}
                 onClick={this.toggleJoinParty}

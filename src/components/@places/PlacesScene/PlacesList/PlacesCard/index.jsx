@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 const styles = () => ({
   root: {
+    maxWidth: 400,
     margin: '10px 10px',
   },
   media: {

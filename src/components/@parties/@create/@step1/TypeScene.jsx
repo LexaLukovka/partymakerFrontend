@@ -8,6 +8,8 @@ import TagList from './TagList'
 const styles = {
   root: {
     textAlign: 'center',
+    margin: '0 auto',
+    maxWidth: 400,
   },
 }
 
