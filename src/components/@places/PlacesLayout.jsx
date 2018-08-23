@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import PlacesScene from './PlacesScene'
 import PlaceScene from './@place/PlaceScene'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     height: '100%',
   },

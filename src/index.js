@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store, { persistor } from './store'
+import { ConnectedRouter } from 'connected-react-router'
+import store, { persistor, history } from './store'
 import LayoutScene from 'components/LayoutScene'
 import Loading from 'components/Loading'
 import 'moment/locale/ru.js'
@@ -20,14 +21,16 @@ const render = Component => {
 
 render(() =>
   <Provider store={store}>
-    <PersistGate loading={<Loading />} persistor={persistor}>
-      <Router>
-        <Switch>
-          <Route path="/" component={LayoutScene} />
-        </Switch>
-      </Router>
-    </PersistGate>
-  </Provider>
+    <ConnectedRouter history={history}>
+      <PersistGate loading={<Loading />} persistor={persistor}>
+        <Router>
+          <Switch>
+            <Route path="/" component={LayoutScene} />
+          </Switch>
+        </Router>
+      </PersistGate>
+    </ConnectedRouter>
+  </Provider>,
 )
 
 if (module.hot) {

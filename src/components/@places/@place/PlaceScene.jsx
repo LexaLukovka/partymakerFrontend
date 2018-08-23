@@ -48,7 +48,7 @@ class PlaceScene extends React.Component {
     const place_id = match.params.id
     actions.place.show(place_id)
     actions.parties.load({ place_id })
-
+    actions.placeVotes.isUserVoted(place_id)
     actions.header.back()
   }
 
@@ -60,17 +60,27 @@ class PlaceScene extends React.Component {
   componentWillUnmount() {
     const { actions } = this.props
     actions.header.menu()
+    actions.placeVotes.reset()
+  }
+
+  handleVote = rating => {
+    const { actions, place: { place } } = this.props
+    actions.placeVotes.vote(place.id, rating)
   }
 
   render() {
-    const { classes, place: { loading, place }, parties } = this.props
+    const { classes, place: { loading, place }, placeVotes: { vote }, parties } = this.props
     if (loading) return <Loading />
     if (isEmpty(place)) return <NotFound />
 
     return (
       <div className={classes.root}>
         <Carousel pictures={place.pictures} />
-        <PlaceCard place={place} />
+        <PlaceCard
+          place={place}
+          onVote={this.handleVote}
+          vote={vote}
+        />
         <div className={classes.create}>
           <Link to={`/parties/create?place_id=${place.id}`}>
             <Button color="primary">Создать здесь свою вечеринку</Button>
@@ -85,6 +95,7 @@ class PlaceScene extends React.Component {
 PlaceScene.propTypes = {
   classes: object.isRequired,
   place: object.isRequired,
+  placeVotes: object.isRequired,
   parties: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,

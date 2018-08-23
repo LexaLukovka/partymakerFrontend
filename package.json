@@ -19,6 +19,7 @@
     "body-parser": "latest",
     "classnames": "^2.2.6",
     "compression": "latest",
+    "connected-react-router": "^4.4.1",
     "express": "^4.16.3",
     "formik": "^1.0.2-0",
     "jwt-decode": "^2.2.0",
@@ -44,7 +45,8 @@
     "redux-thunk": "^2.2.0",
     "slick-carousel": "^1.8.1",
     "util-to": "^1.0.2",
-    "yup": "0.24.1"
+    "yup": "0.24.1",
+    "history": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.1",
