@@ -8,7 +8,13 @@ import PlacesList from './PlacesList'
 import connector from '../connector'
 
 const styles = () => ({
-  root: {},
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    paddingTop: 10,
+    maxWidth: 1300,
+    margin: '0 auto',
+  },
 })
 
 class PlacesScene extends Component {

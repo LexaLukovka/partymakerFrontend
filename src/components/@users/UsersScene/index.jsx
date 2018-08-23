@@ -16,6 +16,8 @@ const styles = () => ({
   },
   profile: {
     padding: 15,
+    maxWidth: 500,
+    margin: '15px auto',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -14,6 +14,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'space-around',
     height: '100%',
+    maxWidth: 600,
+    margin: '0 auto',
     paddingLeft: 15,
     paddingRight: 15,
   },

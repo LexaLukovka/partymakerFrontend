@@ -9,7 +9,11 @@ import connector from './connector'
 
 const styles = {
   root: {
-    marginTop: 15,
+    display: 'flex',
+    flexWrap: 'wrap',
+    paddingTop: 15,
+    maxWidth: 1300,
+    margin: '0 auto',
   },
 }
 

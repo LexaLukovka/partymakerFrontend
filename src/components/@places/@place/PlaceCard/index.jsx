@@ -10,13 +10,17 @@ import LocationIcon from 'mdi-react/LocationIcon'
 
 const styles = theme => ({
   root: {
-    position: 'relative',
-    padding: 15,
-    paddingTop: 25,
+
     background: theme.palette.primary.main,
     color: 'white',
   },
-
+  content: {
+    padding: 15,
+    paddingTop: 25,
+    position: 'relative',
+    maxWidth: 800,
+    margin: '0 auto',
+  },
   rating: {
     display: 'flex',
     alignItems: 'center',
@@ -44,44 +48,46 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
 
   return (
     <section className={classes.root}>
-      <Link to={`/parties/create?place_id=${place.id}`}>
-        <Button
-          variant="fab"
-          color="default"
-          className={classes.floatingButton}
-          aria-label="Add"
+      <div className={classes.content}>
+        <Link to={`/parties/create?place_id=${place.id}`}>
+          <Button
+            variant="fab"
+            color="default"
+            className={classes.floatingButton}
+            aria-label="Add"
+          >
+            <AddIcon />
+          </Button>
+        </Link>
+        <div className={classes.location}>
+          <LocationIcon />
+          <Typography color="inherit" variant="subheading">
+            {place.address.address}
+          </Typography>
+        </div>
+        <Typography
+          color="inherit"
+          variant="title"
+          className={classes.title}
         >
-          <AddIcon />
-        </Button>
-      </Link>
-      <div className={classes.location}>
-        <LocationIcon />
-        <Typography color="inherit" variant="subheading">
-          {place.address.address}
+          {place.title}
+        </Typography>
+
+        <div className={classes.rating}>
+          <Typography color="inherit" className={classes.rating_number}> {voteNumber} </Typography>
+          <ReactStars
+            count={5}
+            value={parseFloat(voteNumber)}
+            onChange={onVote}
+            size={32}
+            color2={vote ? '#689f38' : '#ffd700'}
+          />
+        </div>
+
+        <Typography color="inherit">
+          {place.description}
         </Typography>
       </div>
-      <Typography
-        color="inherit"
-        variant="title"
-        className={classes.title}
-      >
-        {place.title}
-      </Typography>
-
-      <div className={classes.rating}>
-        <Typography color="inherit" className={classes.rating_number}> {voteNumber} </Typography>
-        <ReactStars
-          count={5}
-          value={parseFloat(voteNumber)}
-          onChange={onVote}
-          size={32}
-          color2={vote ? '#689f38' : '#ffd700'}
-        />
-      </div>
-
-      <Typography color="inherit">
-        {place.description}
-      </Typography>
     </section>
   )
 }

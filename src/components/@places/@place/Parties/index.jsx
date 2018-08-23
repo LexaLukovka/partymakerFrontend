@@ -7,7 +7,9 @@ import Typography from '@material-ui/core/Typography/Typography'
 import PartiesList from 'components/@parties/PartiesScene/PartiesList'
 
 const styles = () => ({
-  root: {},
+  root: {
+
+  },
   foundText: {
     padding: 30,
     paddingTop: 0,
@@ -16,6 +18,12 @@ const styles = () => ({
     fontStyle: 'italic',
   },
   cards: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    paddingTop: 15,
+    maxWidth: 1300,
+    margin: '0 auto',
     padding: '10px 5px',
   },
 })

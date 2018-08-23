@@ -1,19 +1,14 @@
 import React from 'react'
 import { array, func } from 'prop-types'
-import { Grid } from '@material-ui/core'
 import PartiesCard from './PartiesCard'
 
 const PartiesList = ({ parties, onLike }) =>
-  <Grid container justify="center">
-    {
-      parties.map(party =>
-        <PartiesCard
-          key={party.id}
-          party={party}
-          onLike={onLike}
-        />)
-    }
-  </Grid>
+  parties.map(party =>
+    <PartiesCard
+      key={party.id}
+      party={party}
+      onLike={onLike}
+    />)
 
 PartiesList.propTypes = {
   parties: array.isRequired,

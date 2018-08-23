@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   title: 'Partymaker',
+  link: '/',
   icon: 'menu',
   url: null,
 }

@@ -5,12 +5,16 @@ import CardHeader from './MyCardHeader'
 import CardContent from './MyCardContent'
 import CardActions from './MyCardActions'
 
-const styles = {
+const styles = theme => ({
   root: {
-    marginBottom: 15,
     width: '95%',
+    maxWidth: 400,
+    margin: 5,
+    [theme.breakpoints.up('sm')]: {
+      margin: 15,
+    },
   },
-}
+})
 
 class PartiesCard extends React.Component {
   like = (id) => this.props.onLike(id)
