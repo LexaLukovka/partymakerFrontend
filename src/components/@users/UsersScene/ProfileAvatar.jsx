@@ -38,6 +38,8 @@ class ProfileAvatar extends React.Component {
   }
 
   upload = async (image) => {
+    const { actions, match } = this.props
+
     clearTimeout(this.timeout)
     this.setState({ percent: 0 })
 
@@ -53,7 +55,8 @@ class ProfileAvatar extends React.Component {
     formData.append('image', image, config)
     const response = await Http.post(this.props.url, formData)
 
-    this.props.actions.settings.change({ avatar_url: response.url })
+    await actions.settings.change({ avatar_url: response.url })
+    actions.user.find(match.params.id)
 
     this.setState({ percent: 100 })
 
@@ -99,6 +102,7 @@ class ProfileAvatar extends React.Component {
 ProfileAvatar.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
+  match: object.isRequired,
   url: string,
   name: string,
   user: shape({
