@@ -8,37 +8,20 @@ const initialState = {
 
 const singleReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case LOAD_PLACE_PENDING: {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-    case LOAD_PLACE_REJECTED: {
-      return {
-        ...state,
-        loading: false,
-        error: payload,
-      }
-    }
-    case LOAD_PLACE_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        place: payload.data,
-      }
-    }
+    case LOAD_PLACE_PENDING:
+      return { ...state, loading: true }
 
-    case RESET_PLACE: {
-      return {
-        ...state,
-        ...initialState,
-      }
-    }
+    case LOAD_PLACE_REJECTED:
+      return { ...state, loading: false, error: payload }
 
-    default: {
+    case LOAD_PLACE_FULFILLED:
+      return { ...state, loading: false, place: payload.data }
+
+    case RESET_PLACE:
+      return { ...state, ...initialState }
+
+    default:
       return state
-    }
   }
 }
 

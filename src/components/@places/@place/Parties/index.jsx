@@ -6,13 +6,13 @@ import isEmpty from 'lodash/isEmpty'
 import Typography from '@material-ui/core/Typography/Typography'
 import PartiesList from 'components/@parties/PartiesScene/PartiesList'
 
-
 const styles = () => ({
   root: {},
   foundText: {
     padding: 30,
     paddingTop: 0,
     paddingBottom: 15,
+    textAlign: 'center',
     fontStyle: 'italic',
   },
   cards: {

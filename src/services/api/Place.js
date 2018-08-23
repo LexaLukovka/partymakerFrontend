@@ -7,6 +7,14 @@ class Place {
     return Http.get(`/places?${qs.stringify(searchParams)}`)
   }
 
+  vote(id, rating) {
+    return Http.post(`/places/${id}/votes`, { rating })
+  }
+
+  isUserVoted(id) {
+    return Http.get(`/places/${id}/votes`)
+  }
+
   find(id) {
     return Http.get(`/places/${id}`)
   }
