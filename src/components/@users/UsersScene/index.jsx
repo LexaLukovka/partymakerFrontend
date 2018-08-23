@@ -44,14 +44,14 @@ class UsersScene extends React.Component {
   }
 
   render() {
-    const { classes, user: { user, loading }, auth } = this.props
+    const { classes, auth, user: { user, loading }, actions } = this.props
     if (loading) return <Loading />
     if (isEmpty(user)) return <NotFound />
 
     return (
       <div className={classes.root}>
         <div className={classes.profile}>
-          <ProfileAvatar user={user} />
+          <ProfileAvatar user={user} actions={actions} />
           <div>
             <Typography align="center" variant="title" className={classes.user}>{user.name}</Typography>
             <Typography align="center" variant="subheading" className={classes.user}>{user.email}</Typography>
