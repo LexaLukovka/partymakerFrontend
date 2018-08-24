@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
-import { object, string, shape, func, bool, number } from 'prop-types'
+import { object, string, shape, func, number } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
@@ -10,7 +10,6 @@ import LocationIcon from 'mdi-react/LocationIcon'
 
 const styles = theme => ({
   root: {
-
     background: theme.palette.primary.main,
     color: 'white',
   },
@@ -33,12 +32,19 @@ const styles = theme => ({
   location: {
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: 10,
+    paddingTop: 5,
   },
   floatingButton: {
     position: 'absolute',
     top: -27,
     right: 15,
+  },
+  title: {
+    marginLeft: 5,
+    marginBottom: 5,
+  },
+  locationIcon: {
+    marginRight: 5,
   },
 })
 
@@ -59,19 +65,18 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
             <AddIcon />
           </Button>
         </Link>
+
+        <Typography color="inherit" variant="title" className={classes.title}> {place.title} </Typography>
         <div className={classes.location}>
-          <LocationIcon />
+          <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+            <LocationIcon className={classes.locationIcon} />
+          </a>
           <Typography color="inherit" variant="subheading">
-            {place.address.address}
+            <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+              {place.address.address}
+            </a>
           </Typography>
         </div>
-        <Typography
-          color="inherit"
-          variant="title"
-          className={classes.title}
-        >
-          {place.title}
-        </Typography>
 
         <div className={classes.rating}>
           <Typography color="inherit" className={classes.rating_number}> {voteNumber} </Typography>
