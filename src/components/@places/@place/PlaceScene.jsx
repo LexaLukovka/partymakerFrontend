@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button/Button'
+import { Button, Grid, withStyles } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
@@ -12,43 +11,31 @@ import PlaceCard from './PlaceCard'
 import Parties from './Parties'
 import { Link } from 'react-router-dom'
 
-const styles = (theme) => ({
+const styles = () => ({
   root: {
     overflowX: 'hidden',
     position: 'relative',
     height: '100%',
-    background: theme.palette.common.white,
-  },
-  loading: {
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  container: {
-    display: 'flex',
-  },
-  svg: {
-    width: 100,
-    height: 100,
-  },
-  polygon: {
-    fill: theme.palette.common.white,
-    stroke: theme.palette.divider,
-    strokeWidth: 1,
+    background: 'white',
   },
 
   create: {
     padding: 20,
     textAlign: 'center',
   },
+  info: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 })
 
 class PlaceScene extends React.Component {
   componentDidMount() {
-    const { actions, match } = this.props
+    const { actions, match, auth } = this.props
     const place_id = match.params.id
     actions.place.show(place_id)
     actions.parties.load({ place_id })
-    actions.placeVotes.isUserVoted(place_id)
+    if (auth.user) actions.placeVotes.isUserVoted(place_id)
     actions.header.back()
   }
 
@@ -74,20 +61,24 @@ class PlaceScene extends React.Component {
     if (isEmpty(place)) return <NotFound />
 
     return (
-      <div className={classes.root}>
-        <Carousel pictures={place.pictures} />
-        <PlaceCard
-          place={place}
-          onVote={this.handleVote}
-          vote={vote}
-        />
-        <div className={classes.create}>
-          <Link to={`/parties/create?place_id=${place.id}`}>
-            <Button color="primary">Создать здесь свою вечеринку</Button>
-          </Link>
-        </div>
-        <Parties parties={parties} />
-      </div>
+      <Grid container className={classes.root} alignItems="stretch">
+        <Grid item sm={12} md={5} lg={4} xl={3} className={classes.info}>
+          <Carousel pictures={place.pictures} />
+          <PlaceCard
+            place={place}
+            onVote={this.handleVote}
+            vote={vote}
+          />
+        </Grid>
+        <Grid item sm={12} md={7} lg={8} xl={9}>
+          <div className={classes.create}>
+            <Link to={`/parties/create?place_id=${place.id}`}>
+              <Button color="primary">Создать здесь свою вечеринку</Button>
+            </Link>
+          </div>
+          <Parties parties={parties} />
+        </Grid>
+      </Grid>
     )
   }
 }
@@ -99,6 +90,7 @@ PlaceScene.propTypes = {
   parties: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
+  auth: object.isRequired,
 }
 
 export default withStyles(styles)(connector(PlaceScene))

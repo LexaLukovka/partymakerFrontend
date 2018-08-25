@@ -7,13 +7,17 @@ import NotFound from 'components/NotFound'
 import PlacesList from './PlacesList'
 import connector from '../connector'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    paddingTop: 10,
+    paddingTop: 20,
+    justifyContent: 'center',
     maxWidth: 1300,
     margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'flex-start',
+    },
   },
 })
 

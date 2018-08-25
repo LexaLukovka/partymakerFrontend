@@ -9,6 +9,7 @@ const initMapStateToProps = store => ({
   place: store.place.singleReducer,
   placeVotes: store.place.votesReducer,
   parties: store.party.listReducer,
+  auth: store.authReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({

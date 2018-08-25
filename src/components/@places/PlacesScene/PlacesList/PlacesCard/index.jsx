@@ -3,7 +3,7 @@ import { object, shape, string } from 'prop-types'
 import { Card, Typography, CardMedia, CardContent, CardActions, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-
+import truncate from 'lodash/truncate'
 
 const styles = () => ({
   root: {
@@ -20,7 +20,7 @@ const PlacesCard = ({ classes, place }) =>
     <Link to={`/places/${place.id}`}>
       <CardMedia
         className={classes.media}
-        image={place.primary_picture}
+        image={place.pictures[0].url}
         title={place.title}
       />
     </Link>
@@ -31,7 +31,7 @@ const PlacesCard = ({ classes, place }) =>
         </Typography>
       </Link>
       <Typography component="p">
-        {place.description}
+        {truncate(place.description, { length: 200 })}
       </Typography>
     </CardContent>
     <CardActions>
