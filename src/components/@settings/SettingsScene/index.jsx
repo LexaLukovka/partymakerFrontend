@@ -30,9 +30,6 @@ class SettingsScene extends React.Component {
         <ListItem to="/settings/password">
           <ListItemText primary="Сменить пароль" />
         </ListItem>
-        <ListItem to="/settings/avatar">
-          <ListItemText primary="Сменить аватар" />
-        </ListItem>
       </List>
     )
   }

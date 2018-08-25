@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
-import { object, string, shape, func, bool, number } from 'prop-types'
+import { object, string, shape, func, number } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
@@ -40,11 +40,19 @@ const styles = theme => ({
   locationIcon: {
     fontSize: 16,
     paddingRight: 10,
+
   },
   floatingButton: {
     position: 'absolute',
     top: -27,
     right: 15,
+  },
+  title: {
+    marginLeft: 5,
+    marginBottom: 5,
+  },
+  locationIcon: {
+    marginRight: 5,
   },
 })
 
@@ -65,21 +73,21 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
             <AddIcon />
           </Button>
         </Link>
-        <div className={classes.location}>
-          <Typography color="inherit" variant="subheading" className={classes.locationIcon}>
-            <LocationIcon />
-          </Typography>
-          <Typography color="inherit" variant="subheading">
-            {place.address.address}
-          </Typography>
-        </div>
-        <Typography
-          color="inherit"
-          variant="title"
-          className={classes.title}
-        >
-          {place.title}
-        </Typography>
+
+        <Typography color="inherit" variant="title" className={classes.title}> {place.title} </Typography>
+        <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+          <div className={classes.location}>
+            <Typography color="inherit" variant="subheading" className={classes.locationIcon}>
+              <LocationIcon />
+            </Typography>
+
+            <Typography color="inherit" variant="subheading">
+              <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+                {place.address.address}
+              </a>
+            </Typography>
+          </div>
+        </a>
 
         <div className={classes.rating}>
           <Typography color="inherit" className={classes.rating_number}> {voteNumber} </Typography>
