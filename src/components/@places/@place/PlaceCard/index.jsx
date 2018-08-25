@@ -51,9 +51,6 @@ const styles = theme => ({
     marginLeft: 5,
     marginBottom: 5,
   },
-  locationIcon: {
-    marginRight: 5,
-  },
 })
 
 const PlaceCard = ({ classes, place, onVote, vote }) => {
