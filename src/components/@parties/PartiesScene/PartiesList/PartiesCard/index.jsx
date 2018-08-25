@@ -1,6 +1,8 @@
 import React from 'react'
-import { object, func } from 'prop-types'
-import { withStyles, Card } from '@material-ui/core'
+import { func, object } from 'prop-types'
+import { Card, withStyles } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import CardMediaContainer from './CardMediaContainer'
 import CardHeader from './MyCardHeader'
 import CardContent from './MyCardContent'
 import CardActions from './MyCardActions'
@@ -16,30 +18,19 @@ const styles = theme => ({
   },
 })
 
-class PartiesCard extends React.Component {
-  like = (id) => this.props.onLike(id)
-
-
-  render() {
-    const { classes, party } = this.props
-    return (
-      <Card className={classes.root}>
-        <CardHeader party={party} />
-        <CardContent party={party} />
-        <CardActions party={party} onLike={this.like} />
-      </Card>
-    )
-  }
-}
+const PartiesCard = ({ classes, party }) =>
+  <Card className={classes.root}>
+    <CardHeader party={party} />
+    <Link to={`/parties/${party.id}`}>
+      <CardMediaContainer party={party} />
+    </Link>
+    <CardContent party={party} />
+    <CardActions party={party} />
+  </Card>
 
 PartiesCard.propTypes = {
   classes: object.isRequired,
   party: object.isRequired,
-  onLike: func,
-}
-
-PartiesCard.defaultProps = {
-  onLike: () => {},
 }
 
 export default withStyles(styles)(PartiesCard)

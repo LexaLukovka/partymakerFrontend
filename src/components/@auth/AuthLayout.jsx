@@ -7,11 +7,14 @@ import LoginScene from './@login/LoginScene'
 import AuthDevider from 'components/AndDevider'
 import SocialLogin from './SocialLogin'
 import connector from './connector'
+import { BACKEND_URL } from 'services/constants'
 
 const styles = () => ({
   root: {
     height: '100%',
     padding: '0 5px',
+    maxWidth: 500,
+    margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -33,7 +36,7 @@ const styles = () => ({
 class AuthLayout extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.layout.background('http://localhost:3333/images/summer.jpg')
+    actions.layout.background(`${BACKEND_URL}/images/summer.jpg`)
   }
 
   componentWillUnmount() {
