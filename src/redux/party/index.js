@@ -8,14 +8,18 @@ import memberReducer from './member/reducer'
 import typesReducer from './types/reducer'
 
 const persistConfig = {
-  key: 'create-party',
+  key: 'party',
   storage,
+  whitelist: ['createReducer', 'singleReducer'],
 }
 
-export default combineReducers({
-  createReducer: persistReducer(persistConfig, createReducer),
+const party = combineReducers({
+  createReducer,
   memberReducer,
   listReducer,
   singleReducer,
   typesReducer,
 })
+
+export default persistReducer(persistConfig, party)
+// : persistReducer(persistConfig, createReducer)
