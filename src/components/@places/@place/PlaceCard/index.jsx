@@ -10,15 +10,17 @@ import LocationIcon from 'mdi-react/LocationIcon'
 
 const styles = theme => ({
   root: {
+    flexGrow: 1,
+    marginTop: -5,
     background: theme.palette.primary.main,
     color: 'white',
   },
   content: {
     padding: 15,
-    paddingTop: 25,
     position: 'relative',
-    maxWidth: 800,
-    margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      padding: 30,
+    },
   },
   rating: {
     display: 'flex',
@@ -32,7 +34,13 @@ const styles = theme => ({
   location: {
     display: 'flex',
     alignItems: 'center',
-    paddingTop: 5,
+    paddingTop: 20,
+    paddingBottom: 30,
+  },
+  locationIcon: {
+    fontSize: 16,
+    paddingRight: 10,
+
   },
   floatingButton: {
     position: 'absolute',
@@ -42,9 +50,6 @@ const styles = theme => ({
   title: {
     marginLeft: 5,
     marginBottom: 5,
-  },
-  locationIcon: {
-    marginRight: 5,
   },
 })
 
@@ -67,16 +72,19 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
         </Link>
 
         <Typography color="inherit" variant="title" className={classes.title}> {place.title} </Typography>
-        <div className={classes.location}>
-          <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
-            <LocationIcon className={classes.locationIcon} />
-          </a>
-          <Typography color="inherit" variant="subheading">
-            <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
-              {place.address.address}
-            </a>
-          </Typography>
-        </div>
+        <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+          <div className={classes.location}>
+            <Typography color="inherit" variant="subheading" className={classes.locationIcon}>
+              <LocationIcon />
+            </Typography>
+
+            <Typography color="inherit" variant="subheading">
+              <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
+                {place.address.address}
+              </a>
+            </Typography>
+          </div>
+        </a>
 
         <div className={classes.rating}>
           <Typography color="inherit" className={classes.rating_number}> {voteNumber} </Typography>

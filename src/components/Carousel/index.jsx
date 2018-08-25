@@ -10,7 +10,6 @@ import isEmpty from 'lodash/isEmpty'
 
 const styles = {
   root: {
-    margin: '-10px',
   },
   picture: {
     width: '100%',
