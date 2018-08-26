@@ -4,6 +4,7 @@ import {
   CREATE_PARTY_FULFILLED,
   UPDATE_PARTY_FORM,
   RESET_PARTY_FORM,
+  RESET_PARTY_PLACE_FORM,
 } from './action'
 
 const initialState = {
@@ -50,6 +51,16 @@ const createParty = (state = initialState, { type, payload, step }) => {
         loading: false,
         form: initialState.form,
       }
+
+    case RESET_PARTY_PLACE_FORM: {
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          place: {},
+        },
+      }
+    }
     default:
       return state
   }

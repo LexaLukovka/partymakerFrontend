@@ -3,6 +3,8 @@ import Party from 'services/api/Party'
 
 import * as alert from 'src/redux/alert/action'
 
+export const RESET_PARTY_PLACE_FORM = 'RESET_PARTY_PLACE_FORM'
+
 export const CREATE_PARTY = 'CREATE_PARTY'
 export const CREATE_PARTY_PENDING = 'CREATE_PARTY_PENDING'
 export const CREATE_PARTY_FULFILLED = 'CREATE_PARTY_FULFILLED'
@@ -21,6 +23,11 @@ export const update = ({ step, ...form }) => ({
 // noinspection JSUnusedGlobalSymbols
 export const reset = () => ({
   type: RESET_PARTY_FORM,
+})
+
+// noinspection JSUnusedGlobalSymbols
+export const resetPlace = () => ({
+  type: RESET_PARTY_PLACE_FORM,
 })
 
 // noinspection JSUnusedGlobalSymbols

@@ -61,7 +61,7 @@ class GeneralScene extends React.Component {
 
   removePlace = () => {
     const { actions } = this.props
-    actions.place.reset()
+    actions.party.resetPlace()
   }
 
   render() {
