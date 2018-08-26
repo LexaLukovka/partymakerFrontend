@@ -37,6 +37,11 @@ class Party {
     return Http.delete(`/party/${party_id}`)
   }
 
+  deleteImg(image) {
+    return Http.delete(`/pictures/${image}`)
+    // return Http.delete('/pictures/1535275897638.jpeg')
+  }
+
   create(form) {
     const place_id = isEmpty(form.place) ? null : form.place.id
 

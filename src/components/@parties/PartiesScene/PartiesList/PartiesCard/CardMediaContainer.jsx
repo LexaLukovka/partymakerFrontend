@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, number, string, array, shape, func } from 'prop-types'
+import { object } from 'prop-types'
 import { Typography, CardMedia, withStyles } from '@material-ui/core'
 
 const styles = {

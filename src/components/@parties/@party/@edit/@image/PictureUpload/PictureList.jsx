@@ -54,6 +54,12 @@ class PictureList extends React.Component {
     })
   }
 
+  delete = (name) => {
+    const { actions, match } = this.props
+    actions.party.deleteImg(name.split('uploads/')[1])
+    actions.party.show(match.params.id)
+  }
+
   render() {
     const { classes, image, pictures } = this.props
     const { isDelete, indexDelete } = this.state
@@ -68,7 +74,10 @@ class PictureList extends React.Component {
           >
             <Avatar className={classes.photo} src={img.url} />
             {index === indexDelete &&
-            <DeleteForeverIcon className={isDelete ? classes.deleteT : classes.deleteF} />
+            <DeleteForeverIcon
+              onClick={() => this.delete(img.url)}
+              className={isDelete ? classes.deleteT : classes.deleteF}
+            />
             }
           </div>,
         )}
@@ -82,6 +91,8 @@ class PictureList extends React.Component {
 
 PictureList.propTypes = {
   classes: object.isRequired,
+  actions: object.isRequired,
+  match: object.isRequired,
   pictures: array.isRequired,
   image: array,
 }

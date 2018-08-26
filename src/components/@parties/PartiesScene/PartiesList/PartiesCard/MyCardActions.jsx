@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-curly-spacing */
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import { CardActions, IconButton, Button } from '@material-ui/core'

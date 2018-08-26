@@ -1,5 +1,5 @@
 import React from 'react'
-import { func, object } from 'prop-types'
+import { object } from 'prop-types'
 import { Card, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import CardMediaContainer from './CardMediaContainer'

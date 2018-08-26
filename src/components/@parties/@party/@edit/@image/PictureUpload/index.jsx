@@ -85,11 +85,11 @@ class PictureUpload extends React.Component {
   }
 
   render() {
-    const { classes, name, helperText, image } = this.props
+    const { classes, actions, match, name, helperText, image } = this.props
     return (
       <FormControl className={classes.root}>
         <div className={classes.pictureList}>
-          <PictureList image={image} pictures={this.state.pictures} />
+          <PictureList actions={actions} image={image} match={match} pictures={this.state.pictures} />
           <AddPicture onClick={this.handleClickInput} />
         </div>
         <input
@@ -111,6 +111,8 @@ class PictureUpload extends React.Component {
 PictureUpload.propTypes = {
   url: string,
   classes: object.isRequired,
+  actions: object.isRequired,
+  match: object.isRequired,
   value: array,
   image: array,
   name: string.isRequired,

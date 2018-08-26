@@ -32,7 +32,7 @@ class ImageScene extends React.Component {
 
   handleClick = () => {
     const { actions, match } = this.props
-    actions.parties.show(match.params.id)
+    actions.party.show(match.params.id)
   }
 
   handleUpload = (name, value) => {
@@ -41,13 +41,15 @@ class ImageScene extends React.Component {
   }
 
   render() {
-    const { classes, party } = this.props
+    const { classes, party, actions, match } = this.props
     return (
       <div className={classes.root}>
         <Typography variant="subheading">Изменить фотографии вечеринки</Typography>
         <PictureUpload
           image={!isEmpty(party) && party.pictures}
           name="pictures"
+          actions={actions}
+          match={match}
           onChange={this.handleUpload}
         />
         <Button variant="raised" color="primary" type="submit" onClick={this.handleClick}>
@@ -65,4 +67,4 @@ ImageScene.propTypes = {
   match: object.isRequired,
 }
 
-export default connector(withStyles(styles)(ImageScene))
+export default withStyles(styles)(connector(ImageScene))
