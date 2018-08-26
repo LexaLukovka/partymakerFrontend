@@ -21,8 +21,12 @@ const styles = theme => ({
   toolbar: {
     display: 'flex',
   },
-  flex: {
+  title: {
     flex: 1,
+    textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'left',
+    },
   },
   actionButtons: {
     [theme.breakpoints.down('sm')]: {
@@ -78,8 +82,8 @@ class Header extends React.Component {
               {this.renderIcon()}
             </div>
 
-            <Typography variant="title" color="inherit" align="center" className={classes.flex}>
-              <Link to={header.link}>{shortTitle(header.title)}   </Link>
+            <Typography variant="title" color="inherit" className={classes.title}>
+              <Link to={header.link}>{shortTitle(header.title)}</Link>
             </Typography>
 
             <div className={classes.actionButtons}>
