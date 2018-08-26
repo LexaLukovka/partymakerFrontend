@@ -1,17 +1,22 @@
 import {
   LOAD_PARTY_PENDING,
-  LOAD_PARTY_FULFILLED,
   LOAD_PARTY_REJECTED,
+  LOAD_PARTY_FULFILLED,
 
   CHANGE_PARTY_PENDING,
-  CHANGE_PARTY_FULFILLED,
   CHANGE_PARTY_REJECTED,
+  CHANGE_PARTY_FULFILLED,
+
+  DELETE_PARTIES_PENDING,
+  DELETE_PARTIES_REJECTED,
+  DELETE_PARTIES_FULFILLED,
 } from './action'
 
 const initialState = {
   loading: false,
-  party: {},
   error: null,
+  message: null,
+  party: {},
 }
 
 const singleReducer = (state = initialState, { type, payload }) => {
@@ -55,6 +60,27 @@ const singleReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         party: payload.data,
+      }
+    }
+
+    case DELETE_PARTIES_PENDING: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case DELETE_PARTIES_REJECTED: {
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      }
+    }
+    case DELETE_PARTIES_FULFILLED: {
+      return {
+        ...state,
+        loading: false,
+        message: payload.message,
       }
     }
 

@@ -134,7 +134,7 @@ PartyCard.propTypes = {
     people_min: number.isRequired,
     people_max: number.isRequired,
     address: object,
-    place: object.isRequired,
+    place: object,
     start_time: string.isRequired,
     telegram_url: string.isRequired,
     description: string.isRequired,

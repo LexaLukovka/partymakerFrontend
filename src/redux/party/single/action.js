@@ -12,6 +12,11 @@ export const CHANGE_PARTY_PENDING = 'CHANGE_PARTY_PENDING'
 export const CHANGE_PARTY_REJECTED = 'CHANGE_PARTY_REJECTED'
 export const CHANGE_PARTY_FULFILLED = 'CHANGE_PARTY_FULFILLED'
 
+export const DELETE_PARTIES = 'DELETE_PARTIES'
+export const DELETE_PARTIES_PENDING = 'DELETE_PARTIES_PENDING'
+export const DELETE_PARTIES_REJECTED = 'DELETE_PARTIES_REJECTED'
+export const DELETE_PARTIES_FULFILLED = 'DELETE_PARTIES_FULFILLED'
+
 // noinspection JSUnusedGlobalSymbols
 export const show = (id) => ({
   type: LOAD_PARTY,
@@ -27,3 +32,9 @@ export const change = (id, settings) => async dispatch => {
 
   dispatch(alert.show('Вечеринка изменина'))
 }
+
+// noinspection JSUnusedGlobalSymbols
+export const deleteImg = (image) => ({
+  type: DELETE_PARTIES,
+  payload: Party.deleteImg(image),
+})

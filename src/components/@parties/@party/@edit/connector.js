@@ -9,10 +9,10 @@ const initMapStateToProps = store => store.party.singleReducer
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
+    header: bindActionCreators(headerActions, dispatch),
     party: bindActionCreators(partyActions, dispatch),
     parties: bindActionCreators(partiesActions, dispatch),
     deleteParty: bindActionCreators(deleteActions, dispatch),
-    header: bindActionCreators(headerActions, dispatch),
   },
 })
 

@@ -1,6 +1,6 @@
 /* eslint-disable function-paren-newline,react/prefer-stateless-function,no-return-assign */
 import React from 'react'
-import PropTypes from 'prop-types'
+import { func, object, string, array } from 'prop-types'
 import { LinearProgress, FormControl, FormHelperText } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import uniq from 'lodash/uniq'
@@ -85,11 +85,11 @@ class PictureUpload extends React.Component {
   }
 
   render() {
-    const { classes, name, helperText } = this.props
+    const { classes, actions, match, name, helperText, image } = this.props
     return (
       <FormControl className={classes.root}>
         <div className={classes.pictureList}>
-          <PictureList pictures={this.state.pictures} />
+          <PictureList actions={actions} image={image} match={match} pictures={this.state.pictures} />
           <AddPicture onClick={this.handleClickInput} />
         </div>
         <input
@@ -109,17 +109,21 @@ class PictureUpload extends React.Component {
 }
 
 PictureUpload.propTypes = {
-  url: PropTypes.string,
-  classes: PropTypes.object.isRequired,
-  value: PropTypes.array,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
-  helperText: PropTypes.string,
+  url: string,
+  classes: object.isRequired,
+  actions: object.isRequired,
+  match: object.isRequired,
+  value: array,
+  image: array,
+  name: string.isRequired,
+  onChange: func.isRequired,
+  onBlur: func,
+  helperText: string,
 }
 PictureUpload.defaultProps = {
   url: '/upload',
   value: [],
+  image: [],
   helperText: '',
   onBlur: () => {},
 }
