@@ -7,6 +7,10 @@ import {
   CHANGE_PARTY_REJECTED,
   CHANGE_PARTY_FULFILLED,
 
+  ADD_PARTIES_PENDING,
+  ADD_PARTIES_REJECTED,
+  ADD_PARTIES_FULFILLED,
+
   DELETE_PARTIES_PENDING,
   DELETE_PARTIES_REJECTED,
   DELETE_PARTIES_FULFILLED,
@@ -60,6 +64,27 @@ const singleReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         party: payload.data,
+      }
+    }
+
+    case ADD_PARTIES_PENDING: {
+      return {
+        ...state,
+        loading: true,
+      }
+    }
+    case ADD_PARTIES_REJECTED: {
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      }
+    }
+    case ADD_PARTIES_FULFILLED: {
+      return {
+        ...state,
+        loading: false,
+        message: payload.message,
       }
     }
 

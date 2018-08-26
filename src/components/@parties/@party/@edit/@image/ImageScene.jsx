@@ -18,6 +18,10 @@ const styles = theme => ({
 })
 
 class ImageScene extends React.Component {
+  state = {
+    pictures: [],
+  }
+
   componentDidMount() {
     const { actions } = this.props
     actions.header.back()
@@ -32,27 +36,31 @@ class ImageScene extends React.Component {
 
   handleClick = () => {
     const { actions, match } = this.props
-    actions.party.show(match.params.id)
+    const { pictures } = this.state
+    actions.party.addImg(match.params.id, { pictures })
   }
 
   handleUpload = (name, value) => {
-    const { actions, match } = this.props
-    actions.party.change(match.params.id, { pictures: value })
+    this.setState({
+      pictures: value,
+    })
   }
 
   render() {
     const { classes, party, actions, match } = this.props
     return (
       <div className={classes.root}>
-        <Typography variant="subheading">Изменить фотографии вечеринки</Typography>
-        <PictureUpload
-          image={!isEmpty(party) && party.pictures}
-          name="pictures"
-          actions={actions}
-          match={match}
-          onChange={this.handleUpload}
-        />
-        <Button variant="raised" color="primary" type="submit" onClick={this.handleClick}>
+        <div>
+          <Typography variant="subheading">Изменить фотографии вечеринки</Typography>
+          <PictureUpload
+            image={!isEmpty(party) && party.pictures}
+            name="pictures"
+            actions={actions}
+            match={match}
+            onChange={this.handleUpload}
+          />
+        </div>
+        <Button variant="raised" color="primary" onClick={this.handleClick}>
           Сохранить
         </Button>
       </div>
