@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import Slider from 'react-slick'
-import { arrayOf, string, object } from 'prop-types'
+import { arrayOf, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'

@@ -1,8 +1,8 @@
 import React from 'react'
 import { object, shape, string } from 'prop-types'
-import { Card, Typography, CardMedia, CardContent, CardActions, Button } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles, Card, Typography, CardMedia, CardContent, CardActions, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import isEmpty from 'lodash/isEmpty'
 import truncate from 'lodash/truncate'
 
 const styles = () => ({
@@ -20,7 +20,7 @@ const PlacesCard = ({ classes, place }) =>
     <Link to={`/places/${place.id}`}>
       <CardMedia
         className={classes.media}
-        image={place.pictures[0].url}
+        image={!isEmpty(place.pictures) && place.pictures[0].url}
         title={place.title}
       />
     </Link>
