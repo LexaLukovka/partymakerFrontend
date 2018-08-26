@@ -7,13 +7,13 @@ import {
   CHANGE_PARTY_REJECTED,
   CHANGE_PARTY_FULFILLED,
 
-  ADD_PARTIES_PENDING,
-  ADD_PARTIES_REJECTED,
-  ADD_PARTIES_FULFILLED,
+  ADD_PARTY_PICTURE_PENDING,
+  ADD_PARTY_PICTURE_REJECTED,
+  ADD_PARTY_PICTURE_FULFILLED,
 
-  DELETE_PARTIES_PENDING,
-  DELETE_PARTIES_REJECTED,
-  DELETE_PARTIES_FULFILLED,
+  DELETE_PARTY_PICTURE_PENDING,
+  DELETE_PARTY_PICTURE_REJECTED,
+  DELETE_PARTY_PICTURE_FULFILLED,
 } from './action'
 
 const initialState = {
@@ -67,20 +67,20 @@ const singleReducer = (state = initialState, { type, payload }) => {
       }
     }
 
-    case ADD_PARTIES_PENDING: {
+    case ADD_PARTY_PICTURE_PENDING: {
       return {
         ...state,
         loading: true,
       }
     }
-    case ADD_PARTIES_REJECTED: {
+    case ADD_PARTY_PICTURE_REJECTED: {
       return {
         ...state,
         loading: false,
         error: payload,
       }
     }
-    case ADD_PARTIES_FULFILLED: {
+    case ADD_PARTY_PICTURE_FULFILLED: {
       return {
         ...state,
         loading: false,
@@ -88,20 +88,20 @@ const singleReducer = (state = initialState, { type, payload }) => {
       }
     }
 
-    case DELETE_PARTIES_PENDING: {
+    case DELETE_PARTY_PICTURE_PENDING: {
       return {
         ...state,
         loading: true,
       }
     }
-    case DELETE_PARTIES_REJECTED: {
+    case DELETE_PARTY_PICTURE_REJECTED: {
       return {
         ...state,
         loading: false,
         error: payload,
       }
     }
-    case DELETE_PARTIES_FULFILLED: {
+    case DELETE_PARTY_PICTURE_FULFILLED: {
       return {
         ...state,
         loading: false,
