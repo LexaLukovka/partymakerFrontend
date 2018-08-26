@@ -1,12 +1,7 @@
 import React from 'react'
 import { number, object, shape, string } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { withStyles, CardContent, Avatar, Typography } from '@material-ui/core'
-import isEmpty from 'lodash/isEmpty'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import { withStyles, CardContent, Typography, ListItemSecondaryAction, List, ListItem } from '@material-ui/core'
 
 const styles = {
   cardContent: {
@@ -18,30 +13,22 @@ const styles = {
     paddingBottom: 20,
     borderRadius: 5,
   },
-  title: {
-    paddingTop: 10,
+  list: {
+    marginTop: 5,
+    marginBottom: 5,
+    fontSize: '14pt',
+  },
+  listPrimary: {
+    fontSize: '14pt',
+    lineHeight: '1rem',
   },
 }
 
-const url = 'http://localhost:3333/images/parties.jpg'
-
 const MyCardContent = ({ classes, party }) =>
   <CardContent className={classes.cardContent}>
-    <Link to={`/parties/${party.id}`}>
-      <Avatar
-        src={isEmpty(party.primary_picture) ? url : party.primary_picture}
-        className={classes.picture}
-      />
-    </Link>
-    <Link to={`/parties/${party.id}`}>
-      <Typography align="center" variant="title" className={classes.title}>
-        {party.title}
-      </Typography>
-    </Link>
-
-    <List>
+    <List className={classes.list}>
       <ListItem disableGutters>
-        <ListItemText primary="Собирается" />
+        <Typography variant="subheading"> Собирается:</Typography>
         <ListItemSecondaryAction>
           {`до ${party.people_max} человек`}
         </ListItemSecondaryAction>
@@ -49,7 +36,7 @@ const MyCardContent = ({ classes, party }) =>
       {
         party.amount &&
         <ListItem disableGutters>
-          <ListItemText primary="Скидываться" />
+          <Typography variant="subheading">Скидываться:</Typography>
           <ListItemSecondaryAction>
             {`${party.amount} грн`}
           </ListItemSecondaryAction>
@@ -57,23 +44,27 @@ const MyCardContent = ({ classes, party }) =>
       }
       {party.place ?
         <ListItem disableGutters>
-          <ListItemText primary="Место" />
+          <Typography variant="subheading">Место:</Typography>
           <ListItemSecondaryAction>
-            {party.place.title}
+            <Link to={`/places/${party.place.id}`}>
+              <Typography variant="subheading" color="primary">{party.place.title}</Typography>
+            </Link>
           </ListItemSecondaryAction>
         </ListItem>
         :
         <ListItem disableGutters>
-          <ListItemText primary="Район" />
+          <Typography variant="subheading">Район:</Typography>
           <ListItemSecondaryAction>
             {party.address.district}
           </ListItemSecondaryAction>
         </ListItem>
       }
-      <ListItem disableGutters>
-        <ListItemText primary="Описание" secondary={party.description} />
-      </ListItem>
     </List>
+
+    <Typography paragraph>
+      {party.description}
+    </Typography>
+
   </CardContent>
 
 MyCardContent.propTypes = {

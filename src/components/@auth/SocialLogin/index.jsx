@@ -1,32 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button/Button'
+import { withStyles, Button } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
 
 const styles = {
-
   root: {
     display: 'flex',
   },
   googleButton: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     marginRight: 5,
   },
 
   facebookButton: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 5,
-
   },
   text: {
-    flex: 1,
-    marginLeft: -24,
+    flexGrow: 1,
+    paddingLeft: 5,
+    textAlign: 'center',
   },
 }
 

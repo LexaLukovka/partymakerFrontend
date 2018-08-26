@@ -79,9 +79,7 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
             </Typography>
 
             <Typography color="inherit" variant="subheading">
-              <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
-                {place.address.address}
-              </a>
+              {place.address.address}
             </Typography>
           </div>
         </a>

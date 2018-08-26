@@ -7,15 +7,19 @@ import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import connector from './connector'
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     paddingTop: 15,
     maxWidth: 1300,
     margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'flex-start',
+    },
   },
-}
+})
 
 class PartiesScene extends React.Component {
   componentWillMount() {
