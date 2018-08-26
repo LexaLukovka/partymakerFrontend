@@ -1,25 +1,25 @@
 /* eslint-disable no-console */
 import React from 'react'
 import { object, string, shape, func, number } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 import ReactStars from 'react-stars'
-import { Typography, Button } from '@material-ui/core'
-import AddIcon from 'mdi-react/AddIcon'
+import { Button, Typography, withStyles } from '@material-ui/core'
 import LocationIcon from 'mdi-react/LocationIcon'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
+    height: '100%',
     flexGrow: 1,
-    marginTop: -5,
     background: theme.palette.primary.main,
     color: 'white',
   },
   content: {
     padding: 15,
     position: 'relative',
+    paddingTop: 30,
     [theme.breakpoints.up('md')]: {
       padding: 30,
+      paddingTop: 40,
     },
   },
   rating: {
@@ -51,6 +51,14 @@ const styles = theme => ({
     marginLeft: 5,
     marginBottom: 5,
   },
+  actionButtonContainer: {
+    marginTop: 40,
+    marginBottom: 40,
+
+  },
+  actionButton: {
+    borderColor: 'white',
+  },
 })
 
 const PlaceCard = ({ classes, place, onVote, vote }) => {
@@ -60,17 +68,6 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
   return (
     <section className={classes.root}>
       <div className={classes.content}>
-        <Link to={`/parties/create?place_id=${place.id}`}>
-          <Button
-            variant="fab"
-            color="default"
-            className={classes.floatingButton}
-            aria-label="Add"
-          >
-            <AddIcon />
-          </Button>
-        </Link>
-
         <Typography color="inherit" variant="title" className={classes.title}> {place.title} </Typography>
         <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
           <div className={classes.location}>
@@ -98,6 +95,16 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
         <Typography color="inherit">
           {place.description}
         </Typography>
+        <div className={classes.actionButtonContainer}>
+          <Link to={`/parties/create?place_id=${place.id}`}>
+            <Button
+              variant="outlined"
+              className={classes.actionButton}
+              color="secondary"
+            >Создать здесь свою вечеринку
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   )

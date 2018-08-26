@@ -1,15 +1,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router'
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
+import { withStyles, AppBar, Toolbar, Typography, IconButton, Button } from '@material-ui/core'
 import connector from './connector'
 import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
 import ArrowBack from 'mdi-react/ArrowBackIcon'
 import MenuIcon from 'mdi-react/MenuIcon'
-import Button from '@material-ui/core/Button/Button'
 import { Link } from 'react-router-dom'
 
 const styles = theme => ({

@@ -14,7 +14,7 @@ const styles = {
   },
 }
 
-const ActionButton = ({ classes, actionButton }) => actionButton.isVisible &&
+const ActionButton = ({ classes, actionButton }) => actionButton.isOpen &&
   <div className={classes.root}>
     <Link to={actionButton.to}>
       <Button
