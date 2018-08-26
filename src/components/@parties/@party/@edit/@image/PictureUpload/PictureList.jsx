@@ -2,8 +2,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React from 'react'
 import { object, array } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import { Avatar } from '@material-ui/core'
+import { withStyles, Avatar } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import DeleteForeverIcon from 'mdi-react/DeleteForeverIcon'
 

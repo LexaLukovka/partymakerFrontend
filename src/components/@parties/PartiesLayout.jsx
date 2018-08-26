@@ -11,7 +11,7 @@ import EditLayout from './@party/@edit/EditLayout'
 
 const styles = () => ({
   root: {
-    height: '97%',
+    height: '96%',
   },
 })
 
