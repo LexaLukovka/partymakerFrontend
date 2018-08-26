@@ -27,9 +27,8 @@ class PictureUpload extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pictures: [],
+      pictures: props.pictures,
       percent: 0,
-      saved: uniq(flatten(props.value)),
     }
 
     this.handleClickInput = this.handleClickInput.bind(this)
@@ -51,20 +50,17 @@ class PictureUpload extends React.Component {
     clearTimeout(this.timeout)
     this.setState({ percent: 0 })
 
-    // noinspection JSUnusedGlobalSymbols
-    const config = {
+    const formData = new FormData()
+    formData.append('image', image, {
       onUploadProgress: (progressEvent) => {
         const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total)
         this.setState({ percent })
       },
-    }
+    })
 
-    const formData = new FormData()
-    formData.append('image', image, config)
     const response = await Http.post(this.props.url, formData)
-    const { saved } = this.state
-    saved.push(response.url)
-    this.setState({ percent: 100, saved })
+
+    this.setState({ percent: 100 })
 
     this.timeout = setTimeout(() => this.setState({ percent: 0 }), 300)
   }
@@ -73,11 +69,18 @@ class PictureUpload extends React.Component {
     const image = e.target.files[0]
     await this.upload(image)
     this.add(image)
-    this.props.onChange(this.props.name, flatten(this.state.saved))
+
+    const { onChange, name, pictures } = this.props
+
+    onChange(name, pictures)
   }
 
   handleBlur = () => {
     this.props.onBlur(this.props.name, true)
+  }
+
+  handleDelete = (picture_url) => {
+    this.setState({ pictures: this.state.pictures.filter(picture => picture !== picture_url) })
   }
 
   handleClickInput() {
@@ -85,13 +88,15 @@ class PictureUpload extends React.Component {
   }
 
   render() {
-    const { classes, actions, match, name, helperText, image } = this.props
+    const { classes, name, helperText } = this.props
+    debugger
     return (
       <FormControl className={classes.root}>
         <div className={classes.pictureList}>
-          <PictureList actions={actions} image={image} match={match} pictures={this.state.pictures} />
+          <PictureList pictures={this.state.pictures} onDelete={this.handleDelete} />
           <AddPicture onClick={this.handleClickInput} />
         </div>
+
         <input
           className={classes.fileInput}
           ref={input => this.fileInput = input}
@@ -100,6 +105,7 @@ class PictureUpload extends React.Component {
           name={name}
           type="file"
         />
+
         {this.state.percent ?
           <LinearProgress color="secondary" variant="determinate" value={this.state.percent} /> : null}
         {helperText ? <FormHelperText id="name-error-text">{helperText}</FormHelperText> : null}
@@ -111,20 +117,17 @@ class PictureUpload extends React.Component {
 PictureUpload.propTypes = {
   url: string,
   classes: object.isRequired,
-  actions: object.isRequired,
-  match: object.isRequired,
-  value: array,
-  image: array,
+  pictures: array,
   name: string.isRequired,
-  onChange: func.isRequired,
-  onBlur: func,
   helperText: string,
+  onChange: func,
+  onBlur: func,
 }
 PictureUpload.defaultProps = {
   url: '/upload',
-  value: [],
-  image: [],
+  pictures: [],
   helperText: '',
+  onChange: () => {},
   onBlur: () => {},
 }
 

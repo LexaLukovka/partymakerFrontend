@@ -35,7 +35,7 @@ export const change = (id, settings) => async dispatch => {
     payload: Party.change(id, settings),
   })
 
-  dispatch(alert.show('Вечеринка изменина'))
+  dispatch(alert.show('Вечеринка изменена'))
 }
 
 // noinspection JSUnusedGlobalSymbols

@@ -3,23 +3,23 @@ import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { Icon, Avatar } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   root: {
     margin: 2,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     width: 70,
-    color: 'black',
+    color: 'rgba(0,0,0,0.8)',
     backgroundColor: 'transparent',
     height: 70,
-    border: '2px solid black',
+    border: '2px solid rgba(0,0,0,0.8)',
     borderRadius: 3,
     '&:hover': {
       backgroundColor: 'rgba(0,0,0,0.1)',
     },
   },
-}
+})
 
 const AddPicture = ({ classes, ...props }) =>
   <Avatar {...props} className={classes.root}>
