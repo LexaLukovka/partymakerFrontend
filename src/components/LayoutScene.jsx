@@ -7,6 +7,7 @@ import Alert from 'components/Alert'
 import Drawer from 'components/Drawer'
 import Container from 'components/Container'
 import AuthRoute from 'components/AuthRoute'
+import PictureModal from 'components/PictureModal'
 import ActionButton from 'components/ActionButton'
 
 import IndexScene from './@index/IndexScene'
@@ -37,6 +38,7 @@ const LayoutScene = ({ auth }) =>
     <ActionButton />
     <Drawer />
     <Alert />
+    <PictureModal />
   </div>
 
 LayoutScene.propTypes = {

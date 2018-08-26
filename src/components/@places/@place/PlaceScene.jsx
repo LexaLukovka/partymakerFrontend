@@ -1,15 +1,15 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { object } from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Button, Grid, withStyles } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
-import Carousel from 'components/Carousel'
 import connector from './connector'
 import PlaceCard from './PlaceCard'
 import Parties from './Parties'
-import { Link } from 'react-router-dom'
+import PictureGrid from './PictureGrid'
 
 const styles = () => ({
   root: {
@@ -26,6 +26,10 @@ const styles = () => ({
   info: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  article: {
+    margin: '0 auto',
+    maxWidth: 800,
   },
 })
 
@@ -54,6 +58,10 @@ class PlaceScene extends React.Component {
     const { actions, place: { place } } = this.props
     actions.placeVotes.vote(place.id, rating)
   }
+  openModal = (picture_url) => {
+    const { actions } = this.props
+    actions.pictureModal.show(picture_url)
+  }
 
   render() {
     const { classes, place: { loading, place }, placeVotes: { vote }, parties } = this.props
@@ -62,15 +70,19 @@ class PlaceScene extends React.Component {
 
     return (
       <Grid container className={classes.root} alignItems="stretch">
-        <Grid item sm={12} md={5} lg={4} xl={3} className={classes.info}>
-          <Carousel pictures={place.pictures} />
+        <Grid item sm={12} md={5} lg={4} xl={4} className={classes.info}>
           <PlaceCard
             place={place}
             onVote={this.handleVote}
             vote={vote}
           />
+
         </Grid>
-        <Grid item sm={12} md={7} lg={8} xl={9}>
+        <Grid item sm={12} md={7} lg={5} xl={5} style={{ overflow: 'auto' }}>
+          <PictureGrid pictures={place.pictures.map(picture => picture.url)} onClick={this.openModal} />
+
+        </Grid>
+        <Grid item lg={3} style={{ overflow: 'auto' }}>
           <div className={classes.create}>
             <Link to={`/parties/create?place_id=${place.id}`}>
               <Button color="primary">Создать здесь свою вечеринку</Button>

@@ -1,7 +1,7 @@
 import { SHOW_ACTION_BUTTON, HIDE_ACTION_BUTTON } from './action'
 
 const initialState = {
-  isVisible: false,
+  isOpen: false,
   to: '/parties/create',
 }
 
@@ -10,14 +10,14 @@ const actionButtonReducer = (state = initialState, { type, payload }) => {
     case SHOW_ACTION_BUTTON:
       return {
         ...state,
-        isVisible: true,
+        isOpen: true,
         to: payload || initialState.to,
       }
 
     case HIDE_ACTION_BUTTON:
       return {
         ...state,
-        isVisible: false,
+        isOpen: false,
         to: initialState.to,
       }
 

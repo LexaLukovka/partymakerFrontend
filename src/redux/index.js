@@ -12,6 +12,7 @@ import drawerReducer from './drawer/reducer'
 import headerReducer from './header/reducer'
 import alertReducer from './alert/reducer'
 import actionButtonReducer from './actionButton/reducer'
+import pictureModalReducer from './pictureModal/reducer'
 
 const persistConfig = {
   key: 'root',
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   drawerReducer,
   headerReducer,
   alertReducer,
+  pictureModalReducer,
   actionButtonReducer,
 })
 
