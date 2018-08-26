@@ -1,8 +1,9 @@
 /* eslint-disable react/forbid-prop-types,max-len */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { BACKEND_URL } from 'services/constants'
 
-const url = 'http://localhost:3333/images/Gec.jpg'
+const url = `${BACKEND_URL}/images/Gec.jpg`
 const style = {
   backgroundImage: `url(${url})`,
   backgroundSize: 'cover',

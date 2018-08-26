@@ -26,7 +26,7 @@ const PlaceInput = ({ classes, place, onCancel }) =>
     <Typography variant="subheading">Место:</Typography>
     <Paper
       className={classes.place}
-      style={{ backgroundImage: `url('${place.primary_picture}')` }}
+      style={{ backgroundImage: `url('${place.pictures[0].url}')` }}
     >
       <Link to={`/places/${place.id}`}>
         <Typography color="inherit" variant="title">

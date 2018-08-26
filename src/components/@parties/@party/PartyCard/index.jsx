@@ -3,19 +3,10 @@ import { object, number, string, shape } from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { withStyles } from '@material-ui/core/styles'
-import {
-  Paper,
-  ListItemSecondaryAction,
-  ListItem,
-  ListItemText,
-  List,
-  Typography,
-  Button,
-  IconButton,
-} from '@material-ui/core'
+import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
 import connector from '../connector'
 import shortTitle from 'utils/shortTitle'
-import Create from 'mdi-react/CreateIcon'
+import EditIcon from './EditIcon'
 
 const styles = theme => ({
   root: {
@@ -46,15 +37,7 @@ const PartyCard = ({ classes, auth, party, place }) =>
   <Paper className={classes.root}>
     <div className={classes.title}>
       <Typography align="center" variant="title">{party.title}</Typography>
-      <div className={classes.icon}>
-        {auth.user && auth.user.id === party.admin_id &&
-        <Link to={`/parties/${party.id}/edit`}>
-          <IconButton>
-            <Create />
-          </IconButton>
-        </Link>
-        }
-      </div>
+      <EditIcon visible={auth.user && auth.user.id === party.admin_id} party={party} />
     </div>
     <List>
       <ListItem disableGutters>
@@ -79,9 +62,9 @@ const PartyCard = ({ classes, auth, party, place }) =>
         <ListItem disableGutters>
           <ListItemText primary="Место" />
           <ListItemSecondaryAction>
-            <a href={`http://www.google.com/maps/?q=${place.address.address}`}>
-              <Button color="primary">{party.place.title}</Button>
-            </a>
+            <Link to={`/places/${place.id}`}>
+              <Typography color="primary">{party.place.title}</Typography>
+            </Link>
           </ListItemSecondaryAction>
         </ListItem>
         :
@@ -105,8 +88,7 @@ const PartyCard = ({ classes, auth, party, place }) =>
       <ListItem disableGutters>
         <ListItemText
           primary="Приходить"
-          secondary={moment(party.start_time)
-            .fromNow()}
+          secondary={moment(new Date(party.start_time)).fromNow()}
         />
       </ListItem>
       <ListItem disableGutters>

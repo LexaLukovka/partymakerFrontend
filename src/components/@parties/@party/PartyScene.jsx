@@ -83,13 +83,16 @@ class PartyScene extends React.Component {
     actions.header.menu()
   }
 
-  loadParty = async () => {
+  loadParty = () => {
     const { actions, match, party } = this.props
 
     if (isEmpty(party) || party.id !== match.params.id) {
-      await actions.parties.show(match.params.id)
+      actions.parties.show(match.params.id)
     }
-    actions.place.show(party.place.id)
+
+    if (!isEmpty(party.place)) {
+      actions.place.show(party.place.id)
+    }
   }
 
   checkIsPartyMember = () => {

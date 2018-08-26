@@ -2,12 +2,12 @@
 import axios from 'axios'
 import to from 'util-to'
 import store from '../store'
+import { BACKEND_URL } from 'services/constants'
 
 class Http {
   constructor() {
     this.instance = axios.create({
-      baseURL: 'http://localhost:3333',
-      // baseURL: 'http://94.237.84.15',
+      baseURL: BACKEND_URL,
       timeout: 10000,
     })
   }
