@@ -78,7 +78,7 @@ class Header extends React.Component {
               {this.renderIcon()}
             </div>
 
-            <Typography variant="title" color="inherit" align="left" className={classes.flex}>
+            <Typography variant="title" color="inherit" align="center" className={classes.flex}>
               <Link to={header.link}>{shortTitle(header.title)}   </Link>
             </Typography>
 

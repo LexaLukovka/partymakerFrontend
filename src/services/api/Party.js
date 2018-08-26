@@ -37,9 +37,12 @@ class Party {
     return Http.delete(`/party/${party_id}`)
   }
 
+  addImg(party_id, pictures) {
+    return Http.post(`party/${party_id}/pictures`, pictures)
+  }
+
   deleteImg(image) {
     return Http.delete(`/pictures/${image}`)
-    // return Http.delete('/pictures/1535275897638.jpeg')
   }
 
   create(form) {
