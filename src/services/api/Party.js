@@ -37,14 +37,6 @@ class Party {
     return Http.delete(`/party/${party_id}`)
   }
 
-  addImg(party_id, pictures) {
-    return Http.post(`party/${party_id}/pictures`, pictures)
-  }
-
-  deleteImg(image) {
-    return Http.delete(`/pictures/${image}`)
-  }
-
   create(form) {
     const place_id = isEmpty(form.place) ? null : form.place.id
 
@@ -66,6 +58,7 @@ class Party {
       people_min: form.peopleMin,
       start_time: form.startTime,
       private_party: form.private,
+      invite_url: form.invite_url,
     }
 
     return Http.post('/party', party)

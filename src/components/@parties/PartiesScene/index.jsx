@@ -25,7 +25,7 @@ class PartiesScene extends React.Component {
   componentWillMount() {
     const { actions } = this.props
     actions.actionButton.show()
-    actions.parties.load()
+    actions.parties.load({ private_party: 0 })
     document.title = 'Вечеринки в Запорожье'
   }
 

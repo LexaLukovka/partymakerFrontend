@@ -8,6 +8,7 @@ import isEmpty from 'lodash/isEmpty'
 
 const initValues = (form) => ({
   title: form.title || '',
+  telegram_url: form.telegram_url || '',
   district: form.district || 'Шевчик',
   address: form.address,
   startDay: form.startDay || moment(new Date()).format('YYYY-MM-DD'),
@@ -19,6 +20,7 @@ const initValues = (form) => ({
 
 const rules = Yup.object().shape({
   title: Yup.string().required('Это поле является обязательным'),
+  telegram_url: Yup.string(),
   district: Yup.string(),
   address: Yup.string(),
   startDay: Yup.string().required('Это поле является обязательным'),

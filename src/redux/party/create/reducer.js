@@ -1,3 +1,5 @@
+import uid from 'uid'
+import { HOST_URL } from 'services/constants'
 import {
   CREATE_PARTY_PENDING,
   CREATE_PARTY_REJECTED,
@@ -15,8 +17,7 @@ const initialState = {
     place: {},
     private: false,
     pictures: [],
-    telegram_url: 'https://t.me/joinchat/FzgsKUzTAHO691HAN1qTvQ',
-    invite_url: 'https://localhost:3333/O691HAN1qTv/invite',
+    invite_url: `${HOST_URL}/${uid(10)}/invite`,
   },
 }
 

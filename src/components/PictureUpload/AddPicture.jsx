@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { Icon, Avatar, CircularProgress } from '@material-ui/core'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     margin: 2,
     display: 'flex',
