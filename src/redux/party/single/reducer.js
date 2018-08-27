@@ -7,13 +7,6 @@ import {
   CHANGE_PARTY_REJECTED,
   CHANGE_PARTY_FULFILLED,
 
-  ADD_PARTY_PICTURE_PENDING,
-  ADD_PARTY_PICTURE_REJECTED,
-  ADD_PARTY_PICTURE_FULFILLED,
-
-  DELETE_PARTY_PICTURE_PENDING,
-  DELETE_PARTY_PICTURE_REJECTED,
-  DELETE_PARTY_PICTURE_FULFILLED,
 } from './action'
 
 const initialState = {
@@ -25,89 +18,45 @@ const initialState = {
 
 const singleReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case LOAD_PARTY_PENDING: {
+    case LOAD_PARTY_PENDING:
       return {
         ...state,
         loading: true,
       }
-    }
-    case LOAD_PARTY_REJECTED: {
-      return {
-        ...state,
-        loading: false,
-        error: payload,
-      }
-    }
-    case LOAD_PARTY_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        party: payload.data,
-      }
-    }
 
-    case CHANGE_PARTY_PENDING: {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-    case CHANGE_PARTY_REJECTED: {
+    case LOAD_PARTY_REJECTED:
       return {
         ...state,
         loading: false,
         error: payload,
       }
-    }
-    case CHANGE_PARTY_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        party: payload.data,
-      }
-    }
 
-    case ADD_PARTY_PICTURE_PENDING: {
+    case LOAD_PARTY_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        party: payload.data || {},
+      }
+
+    case CHANGE_PARTY_PENDING:
       return {
         ...state,
         loading: true,
       }
-    }
-    case ADD_PARTY_PICTURE_REJECTED: {
+
+    case CHANGE_PARTY_REJECTED:
       return {
         ...state,
         loading: false,
         error: payload,
       }
-    }
-    case ADD_PARTY_PICTURE_FULFILLED: {
+
+    case CHANGE_PARTY_FULFILLED:
       return {
         ...state,
         loading: false,
         message: payload.message,
       }
-    }
-
-    case DELETE_PARTY_PICTURE_PENDING: {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-    case DELETE_PARTY_PICTURE_REJECTED: {
-      return {
-        ...state,
-        loading: false,
-        error: payload,
-      }
-    }
-    case DELETE_PARTY_PICTURE_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        message: payload.message,
-      }
-    }
 
     default: {
       return state

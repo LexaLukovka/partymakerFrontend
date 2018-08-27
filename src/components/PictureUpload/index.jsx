@@ -1,12 +1,7 @@
 /* eslint-disable function-paren-newline,react/prefer-stateless-function,no-return-assign */
 import React from 'react'
 import { func, object, string, array } from 'prop-types'
-import {
-  FormControl,
-  FormHelperText,
-  withStyles,
-} from '@material-ui/core'
-import uniq from 'lodash/uniq'
+import { FormControl, FormHelperText, withStyles } from '@material-ui/core'
 import PictureList from './PictureList'
 import Http from 'services/Http'
 import AddPicture from './AddPicture'
@@ -48,9 +43,6 @@ class PictureUpload extends React.Component {
   }
 
   upload = async (image) => {
-    clearTimeout(this.timeout)
-    this.setState({ percent: 0 })
-
     const formData = new FormData()
     formData.append('image', image)
     const response = await Http.post(this.props.url, formData, {
@@ -62,20 +54,16 @@ class PictureUpload extends React.Component {
 
     const { pictures } = this.state
     pictures.push(response.url)
-    this.setState({ pictures: uniq(pictures) })
-
-    this.setState({ percent: 100 })
-
-    this.timeout = setTimeout(() => this.setState({ percent: 0 }), 300)
+    this.setState({ pictures, percent: 0 })
   }
 
-  handleChange = async (e) => {
+  handleAdd = async (e) => {
+    const { onChange, name } = this.props
     const image = e.target.files[0]
     this.add(image)
     await this.upload(image)
 
-    const { onChange, name, pictures } = this.props
-    onChange(name, pictures)
+    onChange(name, this.state.pictures)
   }
 
   handleBlur = () => {
@@ -83,7 +71,11 @@ class PictureUpload extends React.Component {
   }
 
   handleDelete = (picture_url) => {
-    this.setState({ pictures: this.state.pictures.filter(picture => picture !== picture_url) })
+    const { onChange, name } = this.props
+    const pictures = this.state.pictures.filter(picture => picture !== picture_url)
+    this.setState({ pictures })
+
+    onChange(name, pictures)
   }
 
   handleClickInput() {
@@ -106,7 +98,7 @@ class PictureUpload extends React.Component {
         <input
           className={classes.fileInput}
           ref={input => this.fileInput = input}
-          onChange={this.handleChange}
+          onChange={this.handleAdd}
           onBlur={this.handleBlur}
           name={name}
           type="file"
