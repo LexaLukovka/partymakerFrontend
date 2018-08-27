@@ -76,11 +76,16 @@ class ProfileAvatar extends React.Component {
     this.fileInput.click()
   }
 
+  showFullAvatar = (avatar_url) => () => {
+    const { actions } = this.props
+    actions.pictureModal.show(avatar_url)
+  }
+
   render() {
     const { classes, user, name } = this.props
     return (
       <FormControl>
-        <Avatar className={classes.root} src={user.avatar_url} onClick={this.handleClickInput}>
+        <Avatar className={classes.root} src={user.avatar_url} onClick={this.showFullAvatar(user.avatar_url)}>
           {user.avatar_url ? null : initialsFromUsername(user.name)}
         </Avatar>
         <AddIcon className={classes.add} onClick={this.handleClickInput} />
