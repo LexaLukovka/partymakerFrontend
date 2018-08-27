@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles/index'
 import { Link } from 'react-router-dom'
 import { Typography, FormControlLabel, Switch, Button, TextField, Grid } from '@material-ui/core'
-import PictureUpload from './PictureUpload'
+import PictureUpload from 'components/PictureUpload'
 import isEmpty from 'lodash/isEmpty'
 import connector from '../connector'
 
