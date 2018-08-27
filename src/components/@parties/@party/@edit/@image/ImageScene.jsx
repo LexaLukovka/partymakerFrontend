@@ -1,6 +1,5 @@
 import React from 'react'
 import { object } from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Button } from '@material-ui/core'
 import PictureUpload from 'components/PictureUpload'

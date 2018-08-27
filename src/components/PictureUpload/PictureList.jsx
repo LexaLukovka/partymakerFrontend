@@ -7,6 +7,7 @@ import Thumbnail from './Thumbnail'
 const styles = () => ({
   root: {
     display: 'flex',
+    flexWrap: 'wrap',
   },
 })
 

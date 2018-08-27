@@ -1,10 +1,12 @@
 /* eslint-disable function-paren-newline,react/prefer-stateless-function,no-return-assign */
 import React from 'react'
 import { func, object, string, array } from 'prop-types'
-import { LinearProgress, FormControl, FormHelperText } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
+import {
+  FormControl,
+  FormHelperText,
+  withStyles,
+} from '@material-ui/core'
 import uniq from 'lodash/uniq'
-import flatten from 'lodash/flattenDeep'
 import PictureList from './PictureList'
 import Http from 'services/Http'
 import AddPicture from './AddPicture'
@@ -28,6 +30,7 @@ class PictureUpload extends React.Component {
     super(props)
     this.state = {
       pictures: props.pictures,
+      loadingPicture: '',
       percent: 0,
     }
 
@@ -38,9 +41,7 @@ class PictureUpload extends React.Component {
     if (image.type.match(/image.*/)) {
       const reader = new FileReader()
       reader.onload = () => {
-        const { pictures } = this.state
-        pictures.push(reader.result)
-        this.setState({ pictures: uniq(pictures) })
+        this.setState({ loadingPicture: reader.result })
       }
       reader.readAsDataURL(image)
     }
@@ -51,14 +52,17 @@ class PictureUpload extends React.Component {
     this.setState({ percent: 0 })
 
     const formData = new FormData()
-    formData.append('image', image, {
+    formData.append('image', image)
+    const response = await Http.post(this.props.url, formData, {
       onUploadProgress: (progressEvent) => {
         const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total)
         this.setState({ percent })
       },
     })
 
-    const response = await Http.post(this.props.url, formData)
+    const { pictures } = this.state
+    pictures.push(response.url)
+    this.setState({ pictures: uniq(pictures) })
 
     this.setState({ percent: 100 })
 
@@ -67,11 +71,10 @@ class PictureUpload extends React.Component {
 
   handleChange = async (e) => {
     const image = e.target.files[0]
-    await this.upload(image)
     this.add(image)
+    await this.upload(image)
 
     const { onChange, name, pictures } = this.props
-
     onChange(name, pictures)
   }
 
@@ -89,12 +92,15 @@ class PictureUpload extends React.Component {
 
   render() {
     const { classes, name, helperText } = this.props
-    debugger
     return (
       <FormControl className={classes.root}>
         <div className={classes.pictureList}>
           <PictureList pictures={this.state.pictures} onDelete={this.handleDelete} />
-          <AddPicture onClick={this.handleClickInput} />
+          <AddPicture
+            loadingPicture={this.state.loadingPicture}
+            percent={this.state.percent}
+            onClick={this.handleClickInput}
+          />
         </div>
 
         <input
@@ -106,9 +112,7 @@ class PictureUpload extends React.Component {
           type="file"
         />
 
-        {this.state.percent ?
-          <LinearProgress color="secondary" variant="determinate" value={this.state.percent} /> : null}
-        {helperText ? <FormHelperText id="name-error-text">{helperText}</FormHelperText> : null}
+        {helperText && <FormHelperText id="name-error-text">{helperText}</FormHelperText>}
       </FormControl>
     )
   }
