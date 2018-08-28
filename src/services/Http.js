@@ -30,9 +30,9 @@ class Http {
     }
   }
 
-  async request(method, url, params) {
+  async request(method, url, params, config) {
     this.refreshToken()
-    const [err, response] = await to(this.instance[method](url, params))
+    const [err, response] = await to(this.instance[method](url, params, config))
     this.handleError(err)
 
     return response.data
@@ -42,8 +42,8 @@ class Http {
     return this.request('get', url, params)
   }
 
-  post(url, params) {
-    return this.request('post', url, params)
+  post(url, params, config) {
+    return this.request('post', url, params, config)
   }
 
   put(url, params) {

@@ -97,7 +97,7 @@ class PartyScene extends React.Component {
   checkIsPartyMember = () => {
     const { actions, match, party, isMember, auth } = this.props
     if (!auth.user) return false
-    if (isMember === null && party.id !== match.params.id) {
+    if (isMember !== null && party.id !== match.params.id) {
       actions.members.isMember(match.params.id)
     }
     return true

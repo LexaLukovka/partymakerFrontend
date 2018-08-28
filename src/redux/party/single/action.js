@@ -1,4 +1,4 @@
-import Party from 'src/services/api/Party'
+import Party from 'services/api/Party'
 
 import * as alert from 'src/redux/alert/action'
 
@@ -12,15 +12,6 @@ export const CHANGE_PARTY_PENDING = 'CHANGE_PARTY_PENDING'
 export const CHANGE_PARTY_REJECTED = 'CHANGE_PARTY_REJECTED'
 export const CHANGE_PARTY_FULFILLED = 'CHANGE_PARTY_FULFILLED'
 
-export const DELETE_PARTIES = 'DELETE_PARTIES'
-export const DELETE_PARTIES_PENDING = 'DELETE_PARTIES_PENDING'
-export const DELETE_PARTIES_REJECTED = 'DELETE_PARTIES_REJECTED'
-export const DELETE_PARTIES_FULFILLED = 'DELETE_PARTIES_FULFILLED'
-
-export const ADD_PARTIES = 'ADD_PARTIES'
-export const ADD_PARTIES_PENDING = 'ADD_PARTIES_PENDING'
-export const ADD_PARTIES_REJECTED = 'ADD_PARTIES_REJECTED'
-export const ADD_PARTIES_FULFILLED = 'ADD_PARTIES_FULFILLED'
 
 // noinspection JSUnusedGlobalSymbols
 export const show = (id) => ({
@@ -35,17 +26,5 @@ export const change = (id, settings) => async dispatch => {
     payload: Party.change(id, settings),
   })
 
-  dispatch(alert.show('Вечеринка изменина'))
+  dispatch(alert.show('Вечеринка изменена'))
 }
-
-// noinspection JSUnusedGlobalSymbols
-export const addImg = (id, image) => ({
-  type: ADD_PARTIES,
-  payload: Party.addImg(id, image),
-})
-
-// noinspection JSUnusedGlobalSymbols
-export const deleteImg = (image) => ({
-  type: DELETE_PARTIES,
-  payload: Party.deleteImg(image),
-})

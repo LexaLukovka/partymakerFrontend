@@ -7,13 +7,6 @@ import {
   CHANGE_PARTY_REJECTED,
   CHANGE_PARTY_FULFILLED,
 
-  ADD_PARTIES_PENDING,
-  ADD_PARTIES_REJECTED,
-  ADD_PARTIES_FULFILLED,
-
-  DELETE_PARTIES_PENDING,
-  DELETE_PARTIES_REJECTED,
-  DELETE_PARTIES_FULFILLED,
 } from './action'
 
 const initialState = {
@@ -25,89 +18,45 @@ const initialState = {
 
 const singleReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case LOAD_PARTY_PENDING: {
+    case LOAD_PARTY_PENDING:
       return {
         ...state,
         loading: true,
       }
-    }
-    case LOAD_PARTY_REJECTED: {
-      return {
-        ...state,
-        loading: false,
-        error: payload,
-      }
-    }
-    case LOAD_PARTY_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        party: payload.data,
-      }
-    }
 
-    case CHANGE_PARTY_PENDING: {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-    case CHANGE_PARTY_REJECTED: {
+    case LOAD_PARTY_REJECTED:
       return {
         ...state,
         loading: false,
         error: payload,
       }
-    }
-    case CHANGE_PARTY_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        party: payload.data,
-      }
-    }
 
-    case ADD_PARTIES_PENDING: {
+    case LOAD_PARTY_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        party: payload.data || {},
+      }
+
+    case CHANGE_PARTY_PENDING:
       return {
         ...state,
         loading: true,
       }
-    }
-    case ADD_PARTIES_REJECTED: {
+
+    case CHANGE_PARTY_REJECTED:
       return {
         ...state,
         loading: false,
         error: payload,
       }
-    }
-    case ADD_PARTIES_FULFILLED: {
+
+    case CHANGE_PARTY_FULFILLED:
       return {
         ...state,
         loading: false,
         message: payload.message,
       }
-    }
-
-    case DELETE_PARTIES_PENDING: {
-      return {
-        ...state,
-        loading: true,
-      }
-    }
-    case DELETE_PARTIES_REJECTED: {
-      return {
-        ...state,
-        loading: false,
-        error: payload,
-      }
-    }
-    case DELETE_PARTIES_FULFILLED: {
-      return {
-        ...state,
-        loading: false,
-        message: payload.message,
-      }
-    }
 
     default: {
       return state

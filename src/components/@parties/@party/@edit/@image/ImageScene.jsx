@@ -1,10 +1,10 @@
 import React from 'react'
 import { object } from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
-import { withStyles } from '@material-ui/core/styles'
-import { Typography, Button } from '@material-ui/core'
-import PictureUpload from './PictureUpload'
+import { withStyles, Typography, Button } from '@material-ui/core'
+import PictureUpload from 'components/PictureUpload'
 import connector from '../connector'
+import NotFound from 'components/NotFound'
 
 const styles = theme => ({
   root: {
@@ -23,7 +23,8 @@ class ImageScene extends React.Component {
   }
 
   componentDidMount() {
-    const { actions } = this.props
+    const { actions, match, party } = this.props
+    if (isEmpty(party)) actions.party.show(match.params.id)
     actions.header.back()
     actions.header.title('Фото')
   }
@@ -34,10 +35,11 @@ class ImageScene extends React.Component {
     actions.header.resetTitle()
   }
 
-  handleClick = () => {
+  handleClick = async () => {
     const { actions, match } = this.props
     const { pictures } = this.state
-    actions.party.addImg(match.params.id, { pictures })
+    await actions.party.change(match.params.id, { pictures })
+    actions.party.show(match.params.id)
   }
 
   handleUpload = (name, value) => {
@@ -47,16 +49,15 @@ class ImageScene extends React.Component {
   }
 
   render() {
-    const { classes, party, actions, match } = this.props
+    const { classes, party } = this.props
+    if (isEmpty(party)) return <NotFound />
     return (
       <div className={classes.root}>
         <div>
           <Typography variant="subheading">Изменить фотографии вечеринки</Typography>
           <PictureUpload
-            image={!isEmpty(party) && party.pictures}
+            pictures={party.pictures.map(picture => picture.url)}
             name="pictures"
-            actions={actions}
-            match={match}
             onChange={this.handleUpload}
           />
         </div>
