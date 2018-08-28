@@ -10,7 +10,7 @@ const styles = theme => ({
   root: {
     height: '100%',
     flexGrow: 1,
-    overflow: 'hidden',
+    overflow: 'auto',
     background: theme.palette.primary.main,
     color: 'white',
   },

@@ -70,7 +70,7 @@ class PlaceScene extends React.Component {
 
     return (
       <Grid container className={classes.root} alignItems="stretch">
-        <Grid item sm={12} md={5} lg={4} xl={4} className={classes.info}>
+        <Grid item sm={12} md={5} lg={3} xl={3} className={classes.info}>
           <PlaceCard
             place={place}
             onVote={this.handleVote}
@@ -78,7 +78,7 @@ class PlaceScene extends React.Component {
           />
 
         </Grid>
-        <Grid item sm={12} md={7} lg={5} xl={5} style={{ overflow: 'auto' }}>
+        <Grid item sm={12} md={7} lg={6} xl={6} style={{ overflow: 'auto' }}>
           <PictureGrid pictures={place.pictures.map(picture => picture.url)} onClick={this.openModal} />
 
         </Grid>

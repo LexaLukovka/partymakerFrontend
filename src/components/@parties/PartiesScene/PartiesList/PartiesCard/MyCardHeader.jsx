@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-curly-spacing */
 import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { CardHeader, IconButton, Avatar, withStyles } from '@material-ui/core'
+import { CardHeader, IconButton, Avatar, withStyles, Chip } from '@material-ui/core'
 import MoreVertIcon from 'mdi-react/MoreVertIcon'
 import initialsFromUsername from 'utils/initialsFromUsername'
 import moment from 'moment'
@@ -14,12 +15,19 @@ const styles = theme => ({
 
 const MyCardHeader = ({ classes, party }) =>
   <CardHeader
-    avatar={<Link to={`/users/${party.admin.id}`}>
-      {party.admin.avatar_url
-        ? <Avatar src={party.admin.avatar_url} />
-        : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>}
-    </Link>}
-    action={<IconButton><MoreVertIcon /></IconButton>}
+    avatar={
+      <Link to={`/users/${party.admin.id}`}>
+        {party.admin.avatar_url
+          ? <Avatar src={party.admin.avatar_url} />
+          : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>}
+      </Link>
+    }
+    action={
+      <span>
+        {party.private_party === 1 && <Chip label="private" className={classes.chip} />}
+        <IconButton><MoreVertIcon /></IconButton>
+      </span>
+    }
     title={<Link to={`/users/${party.admin.id}`}>{party.admin.name}</Link>}
     subheader={moment(party.updated_at)
       .fromNow()}

@@ -2,12 +2,12 @@ import React from 'react'
 import { object, func, bool } from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
-import { withStyles } from '@material-ui/core/styles'
-import { Button, Grid } from '@material-ui/core'
+import { withStyles, Button, Grid } from '@material-ui/core'
 import PlaceInput from './PlaceInput'
 import DistrictInput from './DistrictInput'
 import AddressInput from './AddressInput'
 import TitleInput from './TitleInput'
+import TelegramInput from './TelegramInput'
 import DayInput from './DayInput'
 import TimeInput from './TimeInput'
 import PeopleInput from './PeopleInput'
@@ -84,6 +84,7 @@ class GeneralScene extends React.Component {
         <DayInput {...formHOC} />
         <TimeInput {...formHOC} />
         <PeopleInput {...formHOC} />
+        <TelegramInput {...formHOC} />
         <DescriptionInput {...formHOC} />
 
         <Grid container justify="space-between" className={classes.buttonGroup}>

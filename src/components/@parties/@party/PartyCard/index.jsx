@@ -2,8 +2,17 @@ import React from 'react'
 import { object, number, string, shape } from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { withStyles } from '@material-ui/core/styles'
-import { Paper, ListItemSecondaryAction, ListItem, ListItemText, List, Typography, Button } from '@material-ui/core'
+import {
+  withStyles,
+  Paper,
+  ListItemSecondaryAction,
+  ListItem,
+  ListItemText,
+  List,
+  Typography,
+  Button,
+  Chip,
+} from '@material-ui/core'
 import connector from '../connector'
 import shortTitle from 'utils/shortTitle'
 import EditIcon from './EditIcon'
@@ -25,6 +34,15 @@ const styles = theme => ({
     width: '45%',
     textAlign: 'right',
   },
+  flex: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  chip: {
+    background: theme.palette.primary.main,
+    color: 'white',
+    marginLeft: 10,
+  },
   status: {
     width: 17,
     height: 17,
@@ -36,7 +54,10 @@ const styles = theme => ({
 const PartyCard = ({ classes, auth, party, place }) =>
   <Paper className={classes.root}>
     <div className={classes.title}>
-      <Typography align="center" variant="title">{party.title}</Typography>
+      <div className={classes.flex}>
+        <Typography align="center" variant="title">{party.title}</Typography>
+        {party.private_party === 1 && <Chip label="private" className={classes.chip} />}
+      </div>
       <EditIcon visible={auth.user && auth.user.id === party.admin_id} party={party} />
     </div>
     <List>
@@ -114,12 +135,15 @@ const PartyCard = ({ classes, auth, party, place }) =>
       <ListItem disableGutters>
         <ListItemText primary="Описание" secondary={party.description} />
       </ListItem>
-      <ListItem disableGutters>
-        <ListItemText
-          primary="Telegram"
-          secondary={<a href={party.telegram_url}>{`${party.telegram_url.substring(0, 40)}...`}</a>}
-        />
-      </ListItem>
+      {
+        party.telegram_url &&
+        <ListItem disableGutters>
+          <ListItemText
+            primary="Telegram"
+            secondary={<a href={party.telegram_url}>{`${party.telegram_url.substring(0, 40)}...`}</a>}
+          />
+        </ListItem>
+      }
     </List>
   </Paper>
 
