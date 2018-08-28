@@ -1,5 +1,6 @@
 /* eslint-disable react/sort-comp,no-console */
 import React from 'react'
+import NumberFormat from 'react-number-format'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
@@ -26,13 +27,21 @@ const styles = theme => ({
 })
 
 class RegisterForm extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isSubmited: false,
+      showPassword: false,
+    }
+  }
+
   handleSubmit = (e) => {
     const { handleSubmit } = this.props
     this.setState({ isSubmited: true })
 
     handleSubmit(e)
   }
-
   serverError = (fieldName) => {
     const { auth } = this.props
     const serverErrors = {}
@@ -58,21 +67,11 @@ class RegisterForm extends React.Component {
 
     return (touched[fieldName] && errors[fieldName]) || this.serverError(fieldName)
   }
-
   handleMouseDownPassword = event => {
     event.preventDefault()
   }
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword })
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isSubmited: false,
-      showPassword: false,
-    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -117,10 +116,13 @@ class RegisterForm extends React.Component {
           </div>
           <div className={classes.input}>
             <Typography variant="subheading">Номер телефона</Typography>
-            <TextField
+            <NumberFormat
+              customInput={TextField}
+              format="+38 (###) ###-####"
+              mask="_"
               fullWidth
               name="phone"
-              placeholder="380990123456"
+              placeholder="+38 (068) 318-8524"
               error={this.hasError('phone')}
               helperText={this.showHelperError('phone')}
               type="tel"
