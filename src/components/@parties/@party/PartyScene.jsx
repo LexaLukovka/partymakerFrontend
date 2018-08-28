@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
 import { bool, object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles, Typography } from '@material-ui/core'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
+import { Link } from 'react-router-dom'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import Carousel from 'components/Carousel'
@@ -12,8 +13,6 @@ import PartyCard from './PartyCard'
 import connector from './connector'
 
 import './style.css'
-import Typography from '@material-ui/core/Typography/Typography'
-import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
   root: {
@@ -90,7 +89,7 @@ class PartyScene extends React.Component {
       actions.parties.show(match.params.id)
     }
 
-    if (!isEmpty(party.place)) {
+    if (!isEmpty(party) && !isEmpty(party.place)) {
       actions.place.show(party.place.id)
     }
   }
