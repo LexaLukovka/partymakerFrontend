@@ -3,36 +3,38 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+dependencies:
+  pre:
+  - cp ./.ssh/* ~/.ssh
+  - chmod 600 ~/.ssh/id_rsa*
+
 jobs:
   build:
     docker:
-    # specify the version you desire here
     - image: circleci/node:10.6
-
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
-    # - image: circleci/mongo:3.4.4
-
     working_directory: ~/repo
-
     steps:
-    - checkout
+    #    - checkout
 
-    # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "package.json" }}
-        # fallback to using the latest cache if no exact match is found
-        - v1-dependencies-
+    - add_ssh_keys:
+        fingerprints:
+        - "31:95:f7:38:49:bc:b8:8d:f0:f9:5d:78:02:19:87:7c"
+    #
+    #    - restore_cache:
+    #        keys:
+    #        - v1-dependencies-{{ checksum "package.json" }}
+    #        - v1-dependencies-
+    #
+    #    - run: yarn install
+    #
+    #    - save_cache:
+    #        paths:
+    #        - node_modules
+    #        key: v1-dependencies-{{ checksum "package.json" }}
+    #
+    #    - run: yarn build
 
-    - run: yarn install
-
-    - save_cache:
-        paths:
-        - node_modules
-        key: v1-dependencies-{{ checksum "package.json" }}
-
-    # run build!
-    - run: yarn build
-
+    - deploy:
+        name: digital-ocean
+        command: ssh -v -o "StrictHostKeyChecking no" dev@138.68.76.55 "cd ~/home/dev/partymaker/frontend; git pull origin master; docker-compose down; docker-compose up --build "$@""

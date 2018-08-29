@@ -1,4 +1,4 @@
-import partyTypes from 'src/mock/partyTypes'
+import partyTypes from './partyTypes'
 import { RESET_PARTY_TYPE, SELECT_PARTY_TYPE } from './action'
 
 const initialState = {
