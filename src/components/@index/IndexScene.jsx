@@ -1,12 +1,10 @@
-import { Button } from '@material-ui/core'
-
-/* eslint-disable spaced-comment */
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles, Button } from '@material-ui/core'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import connector from './connector'
 import BannerJumbotron from './Jumbotron'
+import { BACKEND_URL } from 'services/constants'
 
 const styles = {
   root: {
@@ -28,7 +26,7 @@ const styles = {
 class IndexScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.layout.background('http://localhost:3333/images/summer.jpg')
+    actions.layout.background(`${BACKEND_URL}/images/summer.jpg`)
     document.title = 'Partymaker'
   }
 
