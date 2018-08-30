@@ -4,8 +4,9 @@ COPY package.json /opt/app
 
 
 RUN npm install
-RUN npm run build
+COPY . /opt/app
 
+RUN npm run build
 COPY . /opt/app
 
 CMD node server.js
