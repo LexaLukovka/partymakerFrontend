@@ -10,9 +10,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
-    "analyze": "webpack --config webpack.analyze.js"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js --env.production",
+    "analyze": "webpack --config webpack.analyze.js --env.production"
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
@@ -21,6 +21,7 @@
     "classnames": "^2.2.6",
     "compression": "latest",
     "connected-react-router": "^4.4.1",
+    "cross-env": "^5.2.0",
     "express": "^4.16.3",
     "formik": "^1.0.2-0",
     "history": "latest",
