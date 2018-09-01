@@ -1,7 +1,7 @@
 
 const urls = {
-  frontend: 'http://partymaker.cf',
-  backend: 'http://partymaker.cf:3333',
+  frontend: 'http://partymaker.zp.ua',
+  backend: 'http://partymaker.zp.ua:81',
 
 }
 if (process.env.NODE_ENV === 'development') {
