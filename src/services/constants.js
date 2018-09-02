@@ -5,7 +5,7 @@ const urls = {
 
 }
 if (process.env.NODE_ENV === 'development') {
-  urls.backend = 'http://localhost:3333'
+  urls.backend = 'http://192.168.0.103:3333'
   urls.frontend = 'http://localhost:2000'
 }
 

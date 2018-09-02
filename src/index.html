@@ -5,6 +5,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, minimum-scale=1, shrink-to-fit=no" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#9306bc">
+  <meta name="msapplication-TileColor" content="#9f00a7">
+  <meta name="theme-color" content="#9306bc">
   <style>
     html, body {
       background-position: center;
@@ -59,16 +66,16 @@
 
 <div id="root"></div>
 <script>
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker.register('/sw.js')
-  //     .then(function (response) {
-  //       // Service worker registration done
-  //       console.log('Registration Successful', response)
-  //     }, function (error) {
-  //       // Service worker registration failed
-  //       console.log('Registration Failed', error)
-  //     })
-  // }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function (response) {
+        // Service worker registration done
+        console.log('Registration Successful', response)
+      }, function (error) {
+        // Service worker registration failed
+        console.log('Registration Failed', error)
+      })
+  }
 </script>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0E-RRtQWldjEQLFkAOWDgMSj295C0Lo&libraries=places,visualization&language=ru-RU"></script>

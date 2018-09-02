@@ -2,12 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
+      assets: path.resolve('./src/assets'),
       components: path.resolve(__dirname, './src/components/'),
       services: path.resolve(__dirname, './src/services/'),
       'redux-persist': path.resolve(__dirname, './modules/redux-persist/'),
@@ -116,6 +118,7 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: {
