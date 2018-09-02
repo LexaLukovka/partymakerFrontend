@@ -1,8 +1,10 @@
+/* eslint-disable max-len */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles, Button } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
+import { BACKEND_URL } from 'services/constants'
 
 const styles = {
   root: {
@@ -34,10 +36,12 @@ const SocialLogin = ({ classes }) =>
       <GoogleIcon />
       <div className={classes.text}>Google</div>
     </Button>
-    <Button fullWidth className={classes.facebookButton} variant="raised" color="primary">
-      <FacebookBoxIcon />
-      <div className={classes.text}>Facebook</div>
-    </Button>
+    <a href={`https://graph.facebook.com/v2.1/oauth/authorize?redirect_uri=${BACKEND_URL}/authenticated/facebook&scope=email&response_type=code&client_id=2175525285996959`}>
+      <Button fullWidth className={classes.facebookButton} variant="raised" color="primary">
+        <FacebookBoxIcon />
+        <div className={classes.text}>Facebook</div>
+      </Button>
+    </a>
   </div>
 
 SocialLogin.propTypes = {
