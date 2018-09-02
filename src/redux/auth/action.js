@@ -13,6 +13,10 @@ export const LOGIN_USER_PENDING = 'LOGIN_USER_PENDING'
 export const LOGIN_USER_FULFILLED = 'LOGIN_USER_FULFILLED'
 export const LOGIN_USER_REJECTED = 'LOGIN_USER_REJECTED'
 
+export const LOGIN_FACEBOOK_USER = 'LOGIN_FACEBOOK_USER'
+export const LOGIN_FACEBOOK_USER_PENDING = 'LOGIN_FACEBOOK_USER_PENDING'
+export const LOGIN_FACEBOOK_USER_FULFILLED = 'LOGIN_FACEBOOK_USER_FULFILLED'
+export const LOGIN_FACEBOOK_USER_REJECTED = 'LOGIN_FACEBOOK_USER_REJECTED'
 export const LOGOUT_USER = 'LOGIN_USER'
 
 export const CHANGE_SETTINGS = 'CHANGE_SETTINGS'
@@ -25,6 +29,15 @@ export const register = (form) => async dispatch => {
     type: REGISTER_USER,
     payload: Auth.register(form),
   })
+  dispatch(alert.show('Вы вошли'))
+}
+
+export const facebookLogin = () => async dispatch => {
+  await dispatch({
+    type: LOGIN_FACEBOOK_USER,
+    payload: Auth.facebook(),
+  })
+
   dispatch(alert.show('Вы вошли'))
 }
 
