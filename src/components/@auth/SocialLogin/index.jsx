@@ -33,16 +33,16 @@ const styles = {
 }
 
 class SocialLogin extends Component {
-  loginFacebook = () => {
-    this.props.actions.auth.facebookLogin()
+  loginFacebook = (...login) => {
+    debugger
   }
 
   componentClicked(click) {
     console.log(click)
   }
 
-  loginGoogle = () => {
-    this.props.actions.auth.facebookLogin()
+  loginGoogle = (...login) => {
+    debugger
   }
 
   render() {
@@ -62,7 +62,6 @@ class SocialLogin extends Component {
               className={classes.facebookButton}
               variant="raised"
               color="primary"
-              onClick={this.loginFacebook}
             >
               <FacebookBoxIcon />
               <div className={classes.text}>Facebook</div>
@@ -83,7 +82,6 @@ class SocialLogin extends Component {
               className={classes.googleButton}
               variant="raised"
               color="primary"
-              onClick={this.loginFacebook}
             >
               <GoogleIcon />
               <div className={classes.text}>Google</div>
