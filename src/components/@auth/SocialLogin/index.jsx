@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import GoogleLogin from 'react-google-login'
 import { withStyles, Button } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
@@ -35,6 +37,10 @@ class SocialLogin extends Component {
     this.props.actions.auth.facebookLogin()
   }
 
+  componentClicked(click) {
+    console.log(click)
+  }
+
   loginGoogle = () => {
     this.props.actions.auth.facebookLogin()
   }
@@ -43,26 +49,47 @@ class SocialLogin extends Component {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <Button
-          fullWidth
-          className={classes.googleButton}
-          variant="raised"
-          color="primary"
-          onClick={this.loginGoogle}
-        >
-          <GoogleIcon />
-          <div className={classes.text}>Google</div>
-        </Button>
-        <Button
-          fullWidth
-          className={classes.facebookButton}
-          variant="raised"
-          color="primary"
-          onClick={this.loginFacebook}
-        >
-          <FacebookBoxIcon />
-          <div className={classes.text}>Facebook</div>
-        </Button>
+        <FacebookLogin
+          appId="2175525285996959"
+          autoLoad={true}
+          fields="name,email,picture"
+          onClick={this.componentClicked}
+          callback={this.loginGoogle}
+          render={props => (
+            <Button
+              {...props}
+              fullWidth
+              className={classes.facebookButton}
+              variant="raised"
+              color="primary"
+              onClick={this.loginFacebook}
+            >
+              <FacebookBoxIcon />
+              <div className={classes.text}>Facebook</div>
+            </Button>
+          )}
+        />
+        <GoogleLogin
+          clientId="860110060796-1oa17isdultt097medmjdslaovs204o9.apps.googleusercontent.com"
+          autoLoad={true}
+          fields="name,email,picture"
+          onClick={this.componentClicked}
+          onSuccess={this.loginGoogle}
+          onFailure={this.loginGoogle}
+          render={props => (
+            <Button
+              {...props}
+              fullWidth
+              className={classes.googleButton}
+              variant="raised"
+              color="primary"
+              onClick={this.loginFacebook}
+            >
+              <GoogleIcon />
+              <div className={classes.text}>Google</div>
+            </Button>
+          )}
+        />
       </div>
     )
   }
