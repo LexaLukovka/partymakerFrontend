@@ -10,7 +10,7 @@ import AuthRoute from 'components/AuthRoute'
 import PictureModal from 'components/PictureModal'
 import ActionButton from 'components/ActionButton'
 
-import IndexScene from './@index/IndexScene'
+import IndexScene from './IndexScene/IndexScene'
 import SettingsLayout from './@settings/SettingsLayout'
 import AuthLayout from './@auth/AuthLayout'
 import PlacesLayout from './@places/PlacesLayout'

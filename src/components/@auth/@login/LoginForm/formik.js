@@ -1,12 +1,10 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
-import store from 'src/store'
-import * as auth from 'src/redux/auth/action'
+import transformValidationApi from 'utils/transformValidationApi'
 
 const formik = withFormik({
   validationSchema: Yup.object()
     .shape({
-
       email: Yup.string()
         .email('Неправильный email адрес!')
         .required('Это поле является обязательным'),
@@ -21,10 +19,11 @@ const formik = withFormik({
     password: '',
   }),
 
-  handleSubmit: (values, { setSubmitting }) => {
-    // eslint-disable-next-line no-console
-    store.dispatch(auth.login(values))
-    setSubmitting(false)
+  handleSubmit: (values, { props: { history, actions }, setErrors, setSubmitting }) => {
+    actions.auth.login(values)
+      .then(() => history.push('/'))
+      .catch(errors => setErrors(transformValidationApi(errors)))
+      .finally(() => setSubmitting(false))
   },
   displayName: 'LoginForm',
 })

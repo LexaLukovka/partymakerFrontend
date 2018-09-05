@@ -1,13 +1,12 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
+import transformValidationApi from 'utils/transformValidationApi'
 
 const formik = withFormik({
   validationSchema: Yup.object()
     .shape({
-      name: Yup.string()
-        .required('Это поле является обязательным'),
-      phone: Yup.string()
-        .required('Это поле является обязательным'),
+      name: Yup.string().required('Это поле является обязательным'),
+      phone: Yup.string().required('Это поле является обязательным'),
       email: Yup.string()
         .email('Неправильный email адрес!')
         .required('Это поле является обязательным'),
@@ -23,9 +22,11 @@ const formik = withFormik({
     repeatPassword: '',
   }),
 
-  handleSubmit: (form, { props, setSubmitting }) => {
-    props.actions.auth.register(form)
-    setSubmitting(false)
+  handleSubmit: (form, { props: { actions, history }, setErrors, setSubmitting }) => {
+    actions.auth.register(form)
+      .then(() => history.push('/'))
+      .catch(errors => setErrors(transformValidationApi(errors)))
+      .finally(() => setSubmitting(false))
   },
   displayName: 'RegisterForm',
 })

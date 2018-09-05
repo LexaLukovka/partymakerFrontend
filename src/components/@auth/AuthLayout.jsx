@@ -13,7 +13,7 @@ const styles = () => ({
   root: {
     height: '100%',
     padding: '0 5px',
-    minHeight: 600,
+    minHeight: 550,
     maxWidth: 500,
     margin: '0 auto',
     display: 'flex',
