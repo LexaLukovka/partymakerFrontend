@@ -33,16 +33,18 @@ const styles = {
 }
 
 class SocialLogin extends Component {
-  loginFacebook = (...login) => {
-    debugger
+
+  componentClicked = () => {
+
+  }
+  loginFacebook = (FBuser) => {
+    const { actions } = this.props
+    actions.auth.facebook(FBuser)
   }
 
-  componentClicked(click) {
-    console.log(click)
-  }
-
-  loginGoogle = (...login) => {
-    debugger
+  loginGoogle = (Guser) => {
+    const { actions } = this.props
+    actions.auth.google(Guser)
   }
 
   render() {
@@ -51,10 +53,9 @@ class SocialLogin extends Component {
       <div className={classes.root}>
         <FacebookLogin
           appId="2175525285996959"
-          autoLoad={true}
           fields="name,email,picture"
           onClick={this.componentClicked}
-          callback={this.loginGoogle}
+          callback={this.loginFacebook}
           render={props => (
             <Button
               {...props}
@@ -70,11 +71,7 @@ class SocialLogin extends Component {
         />
         <GoogleLogin
           clientId="860110060796-1oa17isdultt097medmjdslaovs204o9.apps.googleusercontent.com"
-          autoLoad={true}
           fields="name,email,picture"
-          onClick={this.componentClicked}
-          onSuccess={this.loginGoogle}
-          onFailure={this.loginGoogle}
           render={props => (
             <Button
               {...props}
@@ -87,6 +84,8 @@ class SocialLogin extends Component {
               <div className={classes.text}>Google</div>
             </Button>
           )}
+          onFailure={this.loginGoogle}
+          onSuccess={this.loginGoogle}
         />
       </div>
     )

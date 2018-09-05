@@ -14,7 +14,9 @@ import {
   CHANGE_SETTINGS_FULFILLED,
   CHANGE_SETTINGS_PENDING,
   CHANGE_SETTINGS_REJECTED,
-
+  LOGIN_GOOGLE_USER_PENDING,
+  LOGIN_GOOGLE_USER_FULFILLED,
+  LOGIN_GOOGLE_USER_REJECTED,
   LOGOUT_USER,
 } from './action'
 
@@ -29,6 +31,7 @@ const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case CHANGE_SETTINGS_PENDING:
     case LOGIN_FACEBOOK_USER_PENDING:
+    case LOGIN_GOOGLE_USER_PENDING:
     case REGISTER_USER_PENDING:
     case LOGIN_USER_PENDING:
       return {
@@ -38,6 +41,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 
     case CHANGE_SETTINGS_FULFILLED:
     case REGISTER_USER_FULFILLED:
+    case LOGIN_GOOGLE_USER_FULFILLED:
     case LOGIN_FACEBOOK_USER_FULFILLED:
     case LOGIN_USER_FULFILLED:
       return {
@@ -47,6 +51,7 @@ const authReducer = (state = initialState, { type, payload }) => {
       }
     case CHANGE_SETTINGS_REJECTED:
     case REGISTER_USER_REJECTED:
+    case LOGIN_GOOGLE_USER_REJECTED:
     case LOGIN_FACEBOOK_USER_REJECTED:
     case LOGIN_USER_REJECTED:
       return {

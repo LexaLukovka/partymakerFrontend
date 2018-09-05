@@ -45,8 +45,6 @@ class LoginForm extends React.Component {
     const serverErrors = {}
     if (!isEmpty(auth.errors[0])) {
       serverErrors[auth.errors[0].field] = auth.errors[0].message
-    } else {
-      console.log(auth.errors[0])
     }
     return serverErrors[fieldName]
   }

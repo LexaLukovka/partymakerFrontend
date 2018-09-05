@@ -17,6 +17,11 @@ export const LOGIN_FACEBOOK_USER = 'LOGIN_FACEBOOK_USER'
 export const LOGIN_FACEBOOK_USER_PENDING = 'LOGIN_FACEBOOK_USER_PENDING'
 export const LOGIN_FACEBOOK_USER_FULFILLED = 'LOGIN_FACEBOOK_USER_FULFILLED'
 export const LOGIN_FACEBOOK_USER_REJECTED = 'LOGIN_FACEBOOK_USER_REJECTED'
+
+export const LOGIN_GOOGLE_USER = 'LOGIN_GOOGLE_USER'
+export const LOGIN_GOOGLE_USER_PENDING = 'LOGIN_GOOGLE_USER_PENDING'
+export const LOGIN_GOOGLE_USER_FULFILLED = 'LOGIN_GOOGLE_USER_FULFILLED'
+export const LOGIN_GOOGLE_USER_REJECTED = 'LOGIN_GOOGLE_USER_REJECTED'
 export const LOGOUT_USER = 'LOGIN_USER'
 
 export const CHANGE_SETTINGS = 'CHANGE_SETTINGS'
@@ -32,15 +37,27 @@ export const register = (form) => async dispatch => {
   dispatch(alert.show('Вы вошли'))
 }
 
-export const facebookLogin = () => async dispatch => {
+// noinspection JSUnusedGlobalSymbols
+export const facebook = (FBUser) => async dispatch => {
   await dispatch({
     type: LOGIN_FACEBOOK_USER,
-    payload: Auth.facebook(),
+    payload: Auth.facebook(FBUser),
   })
 
   dispatch(alert.show('Вы вошли'))
 }
 
+// noinspection JSUnusedGlobalSymbols
+export const google = (Guser) => async dispatch => {
+  await dispatch({
+    type: LOGIN_GOOGLE_USER,
+    payload: Auth.google(Guser),
+  })
+
+  dispatch(alert.show('Вы вошли'))
+}
+
+// noinspection JSUnusedGlobalSymbols
 export const login = (form) => async dispatch => {
   await dispatch({
     type: LOGIN_USER,
