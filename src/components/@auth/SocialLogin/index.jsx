@@ -16,14 +16,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 5,
+    marginLeft: 5,
   },
 
   facebookButton: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 5,
+    marginRight: 5,
   },
   text: {
     flexGrow: 1,
@@ -33,7 +33,6 @@ const styles = {
 }
 
 class SocialLogin extends Component {
-
   componentClicked = () => {
 
   }
