@@ -24,7 +24,7 @@ class Http {
 
   refreshToken() {
     const { user } = store.getState().authReducer
-    if (user) {
+    if (user && user.token) {
       const { headers } = this.instance.defaults
       headers.common['Authorization'] = `Bearer ${user.token.replace(/^"(.*)"$/, '$1')}`
     }
