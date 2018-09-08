@@ -101,6 +101,7 @@ class PictureUpload extends React.Component {
           onChange={this.handleAdd}
           onBlur={this.handleBlur}
           name={name}
+          accept="image/*"
           type="file"
         />
 

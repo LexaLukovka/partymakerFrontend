@@ -24,9 +24,14 @@ const formik = withFormik({
 
   handleSubmit: (form, { props: { actions, history }, setErrors, setSubmitting }) => {
     actions.auth.register(form)
-      .then(() => history.push('/'))
-      .catch(errors => setErrors(transformValidationApi(errors)))
-      .finally(() => setSubmitting(false))
+      .then(() => {
+        setSubmitting(false)
+        history.push('/')
+      })
+      .catch(errors => {
+        setSubmitting(false)
+        setErrors(transformValidationApi(errors))
+      })
   },
   displayName: 'RegisterForm',
 })

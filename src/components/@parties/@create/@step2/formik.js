@@ -47,9 +47,8 @@ const handleSubmit = props => (formValues, methods) => {
   }
 
   actions.party.update(values)
-  history.push('/parties/create/step/3')
-
   methods.setSubmitting(false)
+  history.push('/parties/create/step/3')
 }
 
 const FormikHOC = Form => connector(props =>
