@@ -39,4 +39,4 @@ jobs:
 
     - deploy:
         name: digital-ocean
-        command: ssh -v -o "StrictHostKeyChecking no" dev@partymaker.zp.ua "cd ~/partymaker/frontend; ./build.sh"
+        command: ssh -o "StrictHostKeyChecking no" dev@partymaker.zp.ua "cd ~/partymaker/frontend; ./build.sh"
