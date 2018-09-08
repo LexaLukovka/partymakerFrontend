@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Redirect, Route } from 'react-router-dom'
 import connector from './connector'
 
-const AuthRoute = ({ auth, ...rest }) => {
+const SignedInRoute = ({ auth, ...rest }) => {
   if (auth.user) {
     return <Route {...rest} />
   }
@@ -11,8 +11,8 @@ const AuthRoute = ({ auth, ...rest }) => {
   return <Redirect to="/auth/login" />
 }
 
-AuthRoute.propTypes = {
+SignedInRoute.propTypes = {
   auth: PropTypes.object.isRequired,
 }
 
-export default connector(AuthRoute)
+export default connector(SignedInRoute)

@@ -6,7 +6,7 @@ import Header from 'components/Header'
 import Alert from 'components/Alert'
 import Drawer from 'components/Drawer'
 import Container from 'components/Container'
-import AuthRoute from 'components/AuthRoute'
+import SignedInRoute from 'components/routes/SignedInRoute'
 import PictureModal from 'components/PictureModal'
 import ActionButton from 'components/ActionButton'
 
@@ -29,9 +29,9 @@ const LayoutScene = ({ auth }) =>
           <Route path="/parties" component={PartiesLayout} />
           <Route path="/places" component={PlacesLayout} />
           <Route exact path="/user" render={() => <Redirect to={`/users/${auth.user.id}`} />} />
-          <AuthRoute path="/users" component={UserLayout} />
+          <SignedInRoute path="/users" component={UserLayout} />
           <Route path="/auth" component={AuthLayout} />
-          <AuthRoute path="/settings" component={SettingsLayout} />
+          <SignedInRoute path="/settings" component={SettingsLayout} />
         </Switch>
       </Container>
     </Background>

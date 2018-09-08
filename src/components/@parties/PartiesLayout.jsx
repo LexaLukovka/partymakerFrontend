@@ -6,7 +6,7 @@ import PartiesScene from './PartiesScene'
 import PartyScene from './@party/PartyScene'
 import CreateLayout from './@create/CreateLayout'
 import MembersScene from './@users/MembersScene'
-import AuthRoute from 'components/AuthRoute'
+import SignedInRoute from 'components/routes/SignedInRoute'
 import EditLayout from './@party/@edit/EditLayout'
 
 const styles = () => ({
@@ -19,10 +19,10 @@ const PartiesLayout = ({ classes }) =>
   <div className={classes.root}>
     <Switch>
       <Route exact path="/parties" component={PartiesScene} />
-      <AuthRoute path="/parties/create" component={CreateLayout} />
+      <SignedInRoute path="/parties/create" component={CreateLayout} />
       <Route exact path="/parties/:id" component={PartyScene} />
       <Route exact path="/parties/:id/users" component={MembersScene} />
-      <AuthRoute path="/parties/:id/edit" component={EditLayout} />
+      <SignedInRoute path="/parties/:id/edit" component={EditLayout} />
     </Switch>
   </div>
 
