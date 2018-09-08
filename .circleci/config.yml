@@ -37,4 +37,4 @@ jobs:
 
     - deploy:
         name: digital-ocean
-        command: ssh -v -o "StrictHostKeyChecking no" dev@138.68.76.55 "cd ~/home/dev/partymaker/frontend; git pull origin master; docker-compose down; docker-compose up --build "$@""
+        command: ssh -v -o "StrictHostKeyChecking no" dev@partymaker.zp.ua "cd ~/home/dev/partymaker/frontend; ./build.sh"
