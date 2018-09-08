@@ -3,6 +3,7 @@ import axios from 'axios'
 import to from 'util-to'
 import store from '../store'
 import { BACKEND_URL } from 'services/constants'
+import { logout } from 'src/redux/auth/action'
 
 class Http {
   constructor() {
@@ -15,6 +16,9 @@ class Http {
   handleError(err) {
     if (err) {
       if (err.response) {
+        if (err.response.status === 401) {
+          store.dispatch(logout())
+        }
         throw err.response.data
       } else {
         throw err

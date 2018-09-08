@@ -21,9 +21,14 @@ const formik = withFormik({
 
   handleSubmit: (values, { props: { history, actions }, setErrors, setSubmitting }) => {
     actions.auth.login(values)
-      .then(() => history.push('/'))
-      .catch(errors => setErrors(transformValidationApi(errors)))
-      .finally(() => setSubmitting(false))
+      .then(() => {
+        setSubmitting(false)
+        history.push('/')
+      })
+      .catch(errors => {
+        setSubmitting(false)
+        setErrors(transformValidationApi(errors))
+      })
   },
   displayName: 'LoginForm',
 })

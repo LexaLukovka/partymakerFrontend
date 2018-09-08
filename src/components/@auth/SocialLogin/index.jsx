@@ -7,6 +7,7 @@ import { withStyles, Button } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
 import connector from '../connector'
+import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -36,14 +37,16 @@ class SocialLogin extends Component {
   componentClicked = () => {
 
   }
-  loginFacebook = (FBuser) => {
-    const { actions } = this.props
-    actions.auth.facebook(FBuser)
+  loginFacebook = async FBuser => {
+    const { actions, history } = this.props
+    await actions.auth.facebook(FBuser)
+    history.push('/')
   }
 
-  loginGoogle = (Guser) => {
-    const { actions } = this.props
+  loginGoogle = Guser => {
+    const { actions, history } = this.props
     actions.auth.google(Guser)
+    history.push('/')
   }
 
   render() {
@@ -57,8 +60,8 @@ class SocialLogin extends Component {
           callback={this.loginFacebook}
           render={props => (
             <Button
-              {...props}
               fullWidth
+              onClick={props.onClick}
               className={classes.facebookButton}
               variant="raised"
               color="primary"
@@ -73,7 +76,7 @@ class SocialLogin extends Component {
           fields="name,email,picture"
           render={props => (
             <Button
-              {...props}
+              onClick={props.onClick}
               fullWidth
               className={classes.googleButton}
               variant="raised"
@@ -94,6 +97,7 @@ class SocialLogin extends Component {
 SocialLogin.propTypes = {
   classes: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(connector(SocialLogin))
+export default withStyles(styles)(connector(withRouter(SocialLogin)))

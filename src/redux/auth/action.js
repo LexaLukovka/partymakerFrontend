@@ -1,5 +1,4 @@
 import Auth from 'services/api/Auth'
-import Settings from 'services/api/Settings'
 
 import * as alert from 'src/redux/alert/action'
 
@@ -80,7 +79,7 @@ export const logout = () => dispatch => {
 export const change = (settings) => async dispatch => {
   await dispatch({
     type: CHANGE_SETTINGS,
-    payload: Settings.change(settings),
+    payload: Auth.change(settings),
   })
 
   dispatch(alert.show('Ваш профиль изменен'))

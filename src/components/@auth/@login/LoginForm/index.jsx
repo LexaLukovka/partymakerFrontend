@@ -41,4 +41,4 @@ LoginForm.propTypes = {
   isSubmitting: PropTypes.bool.isRequired,
 }
 
-export default connector(formik(withRouter(LoginForm)))
+export default connector(withRouter(formik(LoginForm)))
