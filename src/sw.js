@@ -1,13 +1,30 @@
 /* eslint-disable */
 import ServiceWorker from './sw/ServiceWorker'
 
-const version = 'v1::'
+const version = 'v2::'
 const serviceWorker = new ServiceWorker(self)
-
+const CACHE = [
+  '/',
+  '/styles.css',
+  '/app.js',
+  '/index.css',
+  '/images/Gec.jpg',
+  '/images/summer.jpg',
+  '/images/parties.jpg',
+  '/favicons/android-chrome-512x512.png',
+  '/favicons/apple-touch-icon.png',
+  '/favicons/favicon-16x16.png',
+  '/favicons/favicon-32x32.png',
+  '/favicons/logo_big.png',
+  '/favicons/mstile-150x150.png',
+  '/favicons/safari-pinned-tab.svg',
+  '/favicons/android-chrome-192x192.png',
+  '/favicon.ico',
+]
 serviceWorker.on('install', event => {
   console.log('WORKER: install event in progress.')
   event.waitUntil(caches.open(version + 'fundamentals')
-    .then(cache => cache.addAll(['/', '/styles.css', '/app.js']))
+    .then(cache => cache.addAll(CACHE))
     .then(() => console.log('WORKER: install completed')),
   )
 })
@@ -25,10 +42,10 @@ serviceWorker.on('fetch', event => {
   if (event.request.method !== 'GET') {
     return
   }
-
   event.respondWith(caches.match(event.request)
     .then((cached) => {
-      console.log('WORKER: from cache.', event.url)
+      if (cached) console.info('WORKER: from cache:', cached.url)
+
       const networked = fetch(event.request)
         .then(fetchedFromNetwork, unableToResolve)
         .catch(unableToResolve)
@@ -36,12 +53,9 @@ serviceWorker.on('fetch', event => {
       return cached || networked
 
       function fetchedFromNetwork(response) {
-        if(!(event.request.url.indexOf('http') === 0)){
-          return response
-        }
         const cacheCopy = response.clone()
 
-        console.log('WORKER: from network.', event.request.url)
+        console.info('WORKER: from network:', event.request.url)
 
         caches.open(version + 'pages')
           .then(cache => cache.put(event.request, cacheCopy))
