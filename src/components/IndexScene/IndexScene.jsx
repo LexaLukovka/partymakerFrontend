@@ -4,7 +4,6 @@ import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import connector from './connector'
 import BannerJumbotron from './Jumbotron'
-import { BACKEND_URL } from 'services/constants'
 
 const styles = {
   root: {
@@ -26,7 +25,7 @@ const styles = {
 class IndexScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
-    actions.layout.background(`${BACKEND_URL}/images/summer.jpg`)
+    actions.layout.background('/images/summer.jpg')
     document.title = 'Partymaker'
   }
 

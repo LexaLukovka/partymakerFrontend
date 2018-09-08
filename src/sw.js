@@ -7,7 +7,7 @@ const serviceWorker = new ServiceWorker(self)
 serviceWorker.on('install', event => {
   console.log('WORKER: install event in progress.')
   event.waitUntil(caches.open(version + 'fundamentals')
-    .then(cache => cache.addAll(['/', '/styles.css', '/main.js']))
+    .then(cache => cache.addAll(['/', '/styles.css', '/app.js']))
     .then(() => console.log('WORKER: install completed')),
   )
 })
@@ -25,8 +25,10 @@ serviceWorker.on('fetch', event => {
   if (event.request.method !== 'GET') {
     return
   }
+
   event.respondWith(caches.match(event.request)
     .then((cached) => {
+      console.log('WORKER: from cache.', event.url)
       const networked = fetch(event.request)
         .then(fetchedFromNetwork, unableToResolve)
         .catch(unableToResolve)
@@ -34,9 +36,12 @@ serviceWorker.on('fetch', event => {
       return cached || networked
 
       function fetchedFromNetwork(response) {
+        if(!(event.request.url.indexOf('http') === 0)){
+          return response
+        }
         const cacheCopy = response.clone()
 
-        console.log('WORKER: fetch response from network.', event.request.url)
+        console.log('WORKER: from network.', event.request.url)
 
         caches.open(version + 'pages')
           .then(cache => cache.put(event.request, cacheCopy))

@@ -7,7 +7,6 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Avatar } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
-import { BACKEND_URL } from 'services/constants'
 
 const styles = {
   root: {},
@@ -29,7 +28,7 @@ class Carousel extends React.Component {
 
   render() {
     const { classes, pictures } = this.props
-    const url = `${BACKEND_URL}/images/parties.jpg`
+    const url = '/images/parties.jpg'
     return (
       <div className={classes.root}>
         <Slider {...this.settings}>
