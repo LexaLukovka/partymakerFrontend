@@ -1,6 +1,6 @@
 /* eslint-disable no-return-assign */
 import React from 'react'
-import { func, object, shape, string } from 'prop-types'
+import { bool, func, object, shape, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import UserAvatar from 'components/UserAvatar'
 import AvatarUploadIcon from './AvatarUploadIcon'
@@ -19,18 +19,21 @@ const styles = () => ({
   },
 })
 
-const ProfileAvatar = ({ classes, user, onChangeAvatar }) =>
+const ProfileAvatar = ({ classes, user, visible, onChangeAvatar }) =>
   <div className={classes.root}>
     <UserAvatar user={user} />
+    {visible &&
     <AvatarUploadIcon
       className={classes.add}
       onChange={onChangeAvatar}
     />
+    }
   </div>
 
 ProfileAvatar.propTypes = {
   classes: object.isRequired,
   onChangeAvatar: func.isRequired,
+  visible: bool.isRequired,
   user: shape({
     avatar_url: string,
     name: string,

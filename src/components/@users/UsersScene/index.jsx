@@ -57,7 +57,7 @@ class UsersScene extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.profile}>
-          <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} />
+          <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
           <div>
             <Typography align="center" variant="title" className={classes.user}>{user.name}</Typography>
             <Typography align="center" variant="subheading" className={classes.user}>{user.email}</Typography>
