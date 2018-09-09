@@ -7,7 +7,7 @@ import connector from './connector'
 
 const styles = () => ({
   root: {
-    height: '98%',
+    height: '97%',
   },
 })
 

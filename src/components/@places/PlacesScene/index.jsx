@@ -11,7 +11,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    paddingTop: 20,
+    paddingTop: 5,
     justifyContent: 'center',
     maxWidth: 1300,
     margin: '0 auto',

@@ -5,8 +5,9 @@ import { withStyles } from '@material-ui/core'
 import UserAvatar from 'components/UserAvatar'
 import AvatarUploadIcon from './AvatarUploadIcon'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
+    marginRight: 15,
     display: 'flex',
     alignItems: 'center',
     position: 'relative',
