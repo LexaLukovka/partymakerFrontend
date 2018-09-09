@@ -4,6 +4,7 @@ import { withStyles, Typography, TextField, Button } from '@material-ui/core'
 import Helper from '../Helper'
 import connector from '../connector'
 import formik from './formik'
+import NumberFormat from 'react-number-format'
 
 const styles = theme => ({
   root: {
@@ -49,11 +50,14 @@ class PhoneScene extends React.Component {
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">Номер телефона</Typography>
-          <TextField
+          <NumberFormat
             fullWidth
             name="phone"
+            format="+38 (###) ###-####"
+            mask="_"
+            placeholder="+38 (068) 318-8524"
             type="tel"
-            placeholder="Телефон"
+            customInput={TextField}
             value={values.phone}
             onChange={handleChange}
             onBlur={handleBlur}
