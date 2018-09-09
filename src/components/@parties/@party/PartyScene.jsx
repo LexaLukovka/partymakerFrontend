@@ -2,7 +2,6 @@
 import React from 'react'
 import { bool, object } from 'prop-types'
 import { withStyles, Typography } from '@material-ui/core'
-import { CSSTransition } from 'react-transition-group'
 import { Button } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import { Link } from 'react-router-dom'
@@ -27,17 +26,11 @@ const styles = (theme) => ({
   },
   papers: {
     position: 'absolute',
-    top: 200,
+    top: 260,
     left: 0,
     right: 0,
     margin: 9,
   },
-  paperse: {
-    marginTop: 20,
-    marginLeft: 9,
-    marginRight: 9,
-  },
-
   loginLink: {
     color: theme.palette.primary.main,
   },
@@ -61,10 +54,6 @@ const styles = (theme) => ({
 })
 
 class PartyScene extends React.Component {
-  state = {
-    checked: false,
-  }
-
   componentDidMount() {
     const { actions } = this.props
     actions.header.back()
@@ -103,12 +92,6 @@ class PartyScene extends React.Component {
     return true
   }
 
-  handleClick = (check) => {
-    this.setState({
-      checked: check === this.state.checked && !check,
-    })
-  }
-
   toggleJoinParty = () => {
     const { actions, match, isMember } = this.props
 
@@ -123,36 +106,30 @@ class PartyScene extends React.Component {
     const { classes, auth, loading, memberLoading, party, place, isMember } = this.props
     if (loading) return <Loading />
     if (isEmpty(party)) return <NotFound />
-    const { checked } = this.state
-
     return (
       <div className={classes.root}>
-        <div role="link" onClick={() => this.handleClick(checked)}>
-          <Carousel pictures={party.pictures} />
+        <Carousel pictures={party.pictures} />
+        <div className={classes.papers}>
+          <PartyCard party={party} place={place} />
+          {auth.user ?
+            auth.user.id !== party.admin_id &&
+            <Button
+              variant="raised"
+              size="large"
+              fullWidth
+              className={classes.amInButton}
+              color="primary"
+              disabled={memberLoading}
+              onClick={this.toggleJoinParty}
+            >{isMember ? 'ПОКИНУТЬ' : 'Я ПОЙДУ'}
+            </Button>
+            :
+            <Typography align="center" gutterBottom>
+              <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
+              что бы принять участие в вечеринке
+            </Typography>
+          }
         </div>
-        <CSSTransition in={checked} timeout={500} classNames="star">
-          <div className={!checked ? classes.papers : classes.paperse}>
-            <PartyCard party={party} place={place} />
-            {auth.user ?
-              auth.user.id !== party.admin_id &&
-              <Button
-                variant="raised"
-                size="large"
-                fullWidth
-                className={classes.amInButton}
-                color="primary"
-                disabled={memberLoading}
-                onClick={this.toggleJoinParty}
-              >{isMember ? 'ПОКИНУТЬ' : 'Я ПОЙДУ'}
-              </Button>
-              :
-              <Typography align="center" gutterBottom>
-                <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
-                что бы принять участие в вечеринке
-              </Typography>
-            }
-          </div>
-        </CSSTransition>
       </div>
     )
   }
