@@ -5,7 +5,7 @@ import { Stepper, Step, StepLabel } from '@material-ui/core'
 
 const styles = {
   root: {
-    marginTop: 35,
+    marginTop: 20,
     padding: 5,
     background: 'inherit',
     '@media only screen and (max-width: 320px)': {

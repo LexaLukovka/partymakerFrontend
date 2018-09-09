@@ -2,10 +2,10 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { CardHeader, IconButton, Avatar, withStyles, Chip } from '@material-ui/core'
-import MoreVertIcon from 'mdi-react/MoreVertIcon'
-import initialsFromUsername from 'utils/initialsFromUsername'
 import moment from 'moment'
+import { CardHeader, IconButton, withStyles, Chip } from '@material-ui/core'
+import MoreVertIcon from 'mdi-react/MoreVertIcon'
+import UserAvatar from 'components/UserAvatar'
 
 const styles = theme => ({
   avatarInitials: {
@@ -17,9 +17,7 @@ const MyCardHeader = ({ classes, party }) =>
   <CardHeader
     avatar={
       <Link to={`/users/${party.admin.id}`}>
-        {party.admin.avatar_url
-          ? <Avatar src={party.admin.avatar_url} />
-          : <Avatar className={classes.avatarInitials}>{initialsFromUsername(party.admin.name)}</Avatar>}
+        <UserAvatar small user={party.admin} />
       </Link>
     }
     action={

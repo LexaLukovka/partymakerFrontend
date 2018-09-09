@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { object, shape, string } from 'prop-types'
+import { object, shape, string, bool } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
+import classNames from 'classnames'
 import initialsFromUsername from 'utils/initialsFromUsername'
 import connector from './connector'
 
@@ -9,6 +10,12 @@ const styles = {
     width: 60,
     height: 60,
   },
+  small: {
+    width: 40,
+    fontSize: 14,
+    height: 40,
+  },
+
 }
 
 class UserAvatar extends Component {
@@ -19,10 +26,18 @@ class UserAvatar extends Component {
     }
   }
 
+  overrides = () => {
+    const { classes, small } = this.props
+    return classNames({
+      [classes.root]: true,
+      [classes.small]: small,
+    })
+  }
+
   render() {
-    const { classes, user } = this.props
+    const { user } = this.props
     return (
-      <Avatar className={classes.root} src={user.avatar_url} onClick={this.showFullAvatar}>
+      <Avatar className={this.overrides()} src={user.avatar_url} onClick={this.showFullAvatar}>
         {user.avatar_url ? null : initialsFromUsername(user.name)}
       </Avatar>
     )
@@ -32,10 +47,15 @@ class UserAvatar extends Component {
 UserAvatar.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
+  small: bool,
   user: shape({
     avatar_url: string,
     name: string,
   }).isRequired,
+}
+
+UserAvatar.defaultProps = {
+  small: false,
 }
 
 export default withStyles(styles)(connector(UserAvatar))
