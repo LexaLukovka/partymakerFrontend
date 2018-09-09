@@ -11,39 +11,32 @@ module.exports = {
     'import/no-named-as-default-member': 0,
     'max-len': [2, 120],
     'import/first': 0,
+    'radix': 0,
+    'object-curly-newline': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/interactive-supports-focus': 0,
     'linebreak-style': 0,
+    'react/forbid-prop-types': 0,
     'no-extra-semi': 2,
     'arrow-parens': 0,
     'no-param-reassign': ['error', { 'props': false }],
     'semi': [2, 'never'],
-    'react/forbid-prop-types': 0,
-    'object-curly-newline': 0,
     'no-unused-vars': 0,
-    'no-plusplus': 0,
     'camelcase': 0,
     // disable rules from base configurations
     'jsx-a11y/tabindex-no-positive': 'off',
     'react/jsx-wrap-multilines': 0,
     'react/jsx-curly-spacing': [2, { 'when': 'never', 'allowMultiline': false }],
-    // 'jsx-a11y/anchor-is-valid': [ 'error', {
-    //   'components': [ 'Link' ],
-    //   'specialLink': [ 'to', 'hrefLeft', 'hrefRight' ],
-    //   'aspects': [ 'noHref', 'invalidHref', 'preferButton' ]
-    // } ],
     'jsx-a11y/anchor-is-valid': 0,
     'react/no-array-index-key': 0,
     'react/jsx-no-undef': ['warn', { 'allowGlobals': true }],
 
   },
-  'settings': {
-    'import/resolver': {
-      'babel-module': {}
-    }
-  },
+  'settings': {},
   'env': {
     'jasmine': true,
     'jest': true,
     'browser': true,
-    'node': true
-  }
+    'node': true,
+  },
 }
