@@ -6,7 +6,7 @@ import DrawerMenu from './DrawerMenu'
 import connector from './connector'
 
 const styles = {
-  paperAnchorLeft: {
+  paperAnchor: {
     width: '80%',
   },
 }
@@ -19,11 +19,16 @@ class MyDrawer extends React.Component {
     this.props.actions.drawer.open()
   }
 
-
   render() {
-    const { classes: { paperAnchorLeft }, isOpen } = this.props
+    const { classes: { paperAnchor }, isOpen } = this.props
     return (
-      <SwipeableDrawer open={isOpen} onOpen={this.handleOpen} onClose={this.handleClose} classes={{ paperAnchorLeft }}>
+      <SwipeableDrawer
+        anchor="right"
+        open={isOpen}
+        onOpen={this.handleOpen}
+        onClose={this.handleClose}
+        classes={{ paperAnchor }}
+      >
         <div
           tabIndex={0}
           role="button"

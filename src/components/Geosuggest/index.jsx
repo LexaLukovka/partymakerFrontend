@@ -23,7 +23,7 @@ class Geosuggest extends Component {
 
   isGoogleAvailable = () => typeof window.google !== 'undefined' && typeof window.google.maps !== 'undefined'
 
-  handleChange = event => {
+  handleChange = () => {
     this.props.onChange(this.props.name, this.apiObj.getPlace())
   }
 
@@ -36,9 +36,11 @@ class Geosuggest extends Component {
       helperText,
       value,
       fullWidth,
+      label,
       name,
       error,
       placeholder,
+      formik,
     } = this.props
 
     const helper = helperText || ''
@@ -49,7 +51,9 @@ class Geosuggest extends Component {
         error={error}
         fullWidth={fullWidth}
         helperText={helper}
+        label={label}
         placeholder={placeholder}
+        InputLabelProps={{ shrink: formik && true }}
         defaultValue={value.formatted_address || ''}
         onBlur={this.handleBlur}
       />
@@ -60,8 +64,10 @@ class Geosuggest extends Component {
 Geosuggest.propTypes = {
   fullWidth: PropTypes.bool,
   error: PropTypes.bool,
+  formik: PropTypes.bool,
   name: PropTypes.string,
   placeholder: PropTypes.string,
+  label: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onBlur: PropTypes.func,
@@ -72,7 +78,9 @@ Geosuggest.propTypes = {
 Geosuggest.defaultProps = {
   fullWidth: false,
   error: false,
+  formik: false,
   name: 'geosuggest',
+  label: '',
   placeholder: '',
   helperText: '',
   value: '',
