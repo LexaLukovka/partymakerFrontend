@@ -40,6 +40,7 @@ class Geosuggest extends Component {
       name,
       error,
       placeholder,
+      disabled,
       formik,
     } = this.props
 
@@ -56,6 +57,7 @@ class Geosuggest extends Component {
         InputLabelProps={{ shrink: formik && true }}
         defaultValue={value.formatted_address || ''}
         onBlur={this.handleBlur}
+        disabled={disabled}
       />
     )
   }
@@ -64,6 +66,7 @@ class Geosuggest extends Component {
 Geosuggest.propTypes = {
   fullWidth: PropTypes.bool,
   error: PropTypes.bool,
+  disabled: PropTypes.bool,
   formik: PropTypes.bool,
   name: PropTypes.string,
   placeholder: PropTypes.string,
@@ -79,6 +82,7 @@ Geosuggest.defaultProps = {
   fullWidth: false,
   error: false,
   formik: false,
+  disabled: false,
   name: 'geosuggest',
   label: '',
   placeholder: '',

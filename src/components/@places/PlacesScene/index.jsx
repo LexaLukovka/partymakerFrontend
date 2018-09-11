@@ -42,9 +42,9 @@ class PlacesScene extends Component {
 }
 
 PlacesScene.propTypes = {
+  classes: object.isRequired,
   places: object.isRequired,
   actions: object.isRequired,
-  classes: object.isRequired,
 }
 
 export default withStyles(styles)(connector(PlacesScene))

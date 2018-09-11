@@ -23,7 +23,6 @@ class MyDrawer extends React.Component {
     const { classes: { paperAnchor }, isOpen } = this.props
     return (
       <SwipeableDrawer
-        anchor="right"
         open={isOpen}
         onOpen={this.handleOpen}
         onClose={this.handleClose}

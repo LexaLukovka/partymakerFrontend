@@ -3,14 +3,12 @@ import { bool, func, object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Button, Grid, withStyles } from '@material-ui/core'
 
-import PlaceInput from './PlaceInput'
+import PlaceForm from './PlaceForm'
 
-import isEmpty from 'lodash/isEmpty'
 import { Field } from 'formik'
 import FormikText from './formik/FormikText'
-import FormikAddress from './formik/FormikAddress'
 
-import formik from './formik'
+import formik from './formik/formik'
 import connector from './connector'
 
 const styles = theme => ({
@@ -42,6 +40,7 @@ class CreateScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.back()
+    document.title = 'Создание компании'
   }
 
   componentWillUnmount() {
@@ -49,31 +48,13 @@ class CreateScene extends React.Component {
     actions.header.menu()
   }
 
-  removePlace = () => {
-    const { actions } = this.props
-    actions.party.resetPlace()
-  }
-
   render() {
-    const { classes, party, ...formHOC } = this.props
+    const { classes, ...formHOC } = this.props
     const { isSubmitting, handleSubmit } = formHOC
-
-    const { place } = party.form
 
     return (
       <form className={classes.root}>
-        {isEmpty(place) ?
-          <div>
-            <Field
-              label="Место встречи"
-              component={FormikAddress}
-              name="address"
-              type="name"
-              placeholder="Адрес"
-            />
-          </div> :
-          <PlaceInput place={place} onCancel={this.removePlace} />
-        }
+        <PlaceForm />
 
         <Field
           label="Что будет?"
