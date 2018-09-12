@@ -3,8 +3,13 @@ import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router'
 import { FormControlLabel, Radio, RadioGroup, Typography, withStyles } from '@material-ui/core'
+
 import FormikAddress from './formik/FormikAddress'
+import PlaceInput from './PlaceInput'
+
+import isEmpty from 'lodash/isEmpty'
 import { Field } from 'formik'
+import connector from './connector'
 
 const styles = () => ({
   radio: {
@@ -15,52 +20,59 @@ const styles = () => ({
 
 class PlaceForm extends React.Component {
   state = {
-    value: 'place',
+    value: '',
   }
 
   handleChange = event => {
     this.setState({ value: event.target.value })
   }
 
+  removePlace = () => {
+    const { actions } = this.props
+    actions.party.resetPlace()
+  }
+
   handleClickOpen = () => {
     const { actions, history } = this.props
-
-    //сделать появление кнопки (выбрать) в /places и дальше работа с местом
-
+    actions.group.hideCreateGroup()
     history.push('/places')
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, party } = this.props
+    const { place } = party.form
     const { value } = this.state
     return (
       <div>
-        <RadioGroup
-          aria-label="Gender"
-          name="gender1"
-          className={classes.group}
-          value={value}
-          onChange={this.handleChange}
-        >
-          <FormControlLabel
-            onClick={this.handleClickOpen}
-            value="place"
-            control={<Radio color="primary" />}
-            label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
-          />
-          <FormControlLabel
-            value="address"
-            control={<Radio color="primary" />}
-            label={
-              <Field
-                component={FormikAddress}
-                name="address"
-                type="name"
-                placeholder="Адрес"
-                disabled={value !== 'address'}
-              />}
-          />
-        </RadioGroup>
+        {isEmpty(place) ?
+          <RadioGroup
+            aria-label="Gender"
+            name="gender1"
+            className={classes.group}
+            value={value}
+            onChange={this.handleChange}
+          >
+            <FormControlLabel
+              onClick={this.handleClickOpen}
+              value="place"
+              control={<Radio color="primary" />}
+              label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
+            />
+            <FormControlLabel
+              value="address"
+              control={<Radio color="primary" />}
+              label={
+                <Field
+                  component={FormikAddress}
+                  name="address"
+                  type="name"
+                  placeholder="Адрес"
+                  disabled={value !== 'address'}
+                />}
+            />
+          </RadioGroup>
+          :
+          <PlaceInput place={place} onCancel={this.removePlace} />}
       </div>
     )
   }
@@ -68,7 +80,9 @@ class PlaceForm extends React.Component {
 
 PlaceForm.propTypes = {
   classes: object.isRequired,
+  actions: object.isRequired,
   history: object.isRequired,
+  party: object.isRequired,
 }
 
-export default withStyles(styles)(withRouter(PlaceForm))
+export default withStyles(styles)(withRouter(connector(PlaceForm)))

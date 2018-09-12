@@ -5,6 +5,8 @@ import { Button, Grid, withStyles } from '@material-ui/core'
 
 import PlaceForm from './PlaceForm'
 
+import isEmpty from 'lodash/isEmpty'
+import qs from 'querystring'
 import { Field } from 'formik'
 import FormikText from './formik/FormikText'
 
@@ -37,8 +39,28 @@ const styles = theme => ({
 })
 
 class CreateScene extends React.Component {
-  componentDidMount() {
-    const { actions } = this.props
+  // componentDidMount() {
+  //   const { actions, place, location: { search } } = this.props
+  //   const { place_id } = qs.parse(search.replace('?', ''))
+  //   console.log(place)
+  //   if (!isEmpty(place) && place_id) {
+  //     actions.partyTypes.select(place.type)
+  //     actions.party.update({ place, type: place.type, address: place.address })
+  //   }
+  //
+  //   actions.header.back()
+  //   document.title = 'Создание компании'
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    const { actions, place, location: { search } } = this.props
+    const { place_id } = qs.parse(search.replace('?', ''))
+    if (place !== nextProps.place) {
+      if (!isEmpty(nextProps.place) && place_id) {
+        actions.partyTypes.select(nextProps.place.type)
+        actions.party.update({ place: nextProps.place, type: nextProps.place.type, address: nextProps.place.address })
+      }
+    }
     actions.header.back()
     document.title = 'Создание компании'
   }
@@ -113,6 +135,7 @@ CreateScene.propTypes = {
   classes: object.isRequired,
   handleSubmit: func.isRequired,
   isSubmitting: bool.isRequired,
+  location: object.isRequired,
 }
 
 const router = withRouter(CreateScene)

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import * as createParty from 'src/redux/party/create/action'
 import * as header from 'src/redux/header/action'
 import * as place from 'src/redux/place/single/action'
-import * as group from 'src/redux/group/buttonCreate/action'
 import * as types from 'src/redux/party/types/action'
 
 const initMapStateToProps = store => ({
@@ -16,7 +15,6 @@ const initMapDispatchToProps = dispatch => ({
   actions: {
     place: bindActionCreators(place, dispatch),
     party: bindActionCreators(createParty, dispatch),
-    group: bindActionCreators(group, dispatch),
     header: bindActionCreators(header, dispatch),
     partyTypes: bindActionCreators(types, dispatch),
   },

@@ -3,6 +3,10 @@ import Http from 'services/Http'
 import qs from 'querystring'
 
 class Place {
+  find(id) {
+    return Http.get(`/places/${id}`)
+  }
+
   all(searchParams) {
     return Http.get(`/places?${qs.stringify(searchParams)}`)
   }
@@ -13,10 +17,6 @@ class Place {
 
   isUserVoted(id) {
     return Http.get(`/places/${id}/votes`)
-  }
-
-  find(id) {
-    return Http.get(`/places/${id}`)
   }
 }
 

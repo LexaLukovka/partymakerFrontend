@@ -97,12 +97,12 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
           {place.description}
         </Typography>
         <div className={classes.actionButtonContainer}>
-          <Link to={`/parties/create?place_id=${place.id}`}>
+          <Link to={`/group/create?place_id=${place.id}`}>
             <Button
               variant="outlined"
               className={classes.actionButton}
               color="secondary"
-            >Создать здесь свою вечеринку
+            >Создать здесь свою компанию
             </Button>
           </Link>
         </div>

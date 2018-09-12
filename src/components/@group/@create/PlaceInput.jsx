@@ -22,7 +22,6 @@ const styles = () => ({
 
 const PlaceInput = ({ classes, place, onCancel }) =>
   <div className={classes.root}>
-    <Typography variant="subheading">Место:</Typography>
     <Paper
       className={classes.place}
       style={{ backgroundImage: `url('${place.pictures[0].url}')` }}

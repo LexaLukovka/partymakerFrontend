@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react'
-import { Formik } from 'src/components/@group/@create/formik/formik'
+import { Formik } from 'formik'
 import moment from 'moment'
 import * as Yup from 'yup'
 import connector from '../connector'
@@ -23,7 +23,7 @@ const rules = Yup.object().shape({
 })
 
 const handleSubmit = props => (formValues, methods) => {
-  const { actions, history, place } = props
+  const { actions, party, history, place } = props
   let values = formValues
 
   if (!isEmpty(place)) {
@@ -39,6 +39,8 @@ const handleSubmit = props => (formValues, methods) => {
   }
 
   actions.party.update(values)
+
+  actions.party.create(party.form)
   methods.setSubmitting(false)
 }
 
