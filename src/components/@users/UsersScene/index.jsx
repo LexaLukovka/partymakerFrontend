@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import Loading from 'components/Loading'
 import isEmpty from 'lodash/isEmpty'
 import NotFound from 'components/NotFound/MyParties'
-import connector from './connector'
 import { Typography } from '@material-ui/core'
 import ProfileEdit from './ProfileEdit'
 import ProfileAvatar from './ProfileAvatar'
 import Parties from './Parties'
+import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -28,7 +28,7 @@ class UsersScene extends React.Component {
   componentDidMount() {
     const { actions, match } = this.props
     actions.user.find(match.params.id)
-    actions.parties.load({ admin_id: match.params.id })
+    actions.group.load({ admin_id: match.params.id })
   }
 
   componentDidUpdate() {

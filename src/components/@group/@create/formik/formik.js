@@ -23,30 +23,26 @@ const rules = Yup.object().shape({
 })
 
 const handleSubmit = props => (formValues, methods) => {
-  const { actions, party, history, place } = props
+  const { actions, group, history, place } = props
   let values = formValues
-
+console.log(values)
   if (!isEmpty(place)) {
-    values = { district: place.address.district, address: place.address.address, ...values }
-  }
-
-  if (values.district === '') {
-    methods.setError('district', 'Пожалуйста укажите район')
+    values = { address: place.address.address, ...values }
   }
 
   if (values.address === '') {
-    methods.setError('address', 'Пожалуйста выберите из списка')
+    methods.setError('address', 'Пожалуйста укажите адрес')
   }
 
-  actions.party.update(values)
+  actions.group.update(values)
 
-  actions.party.create(party.form)
+  // actions.group.create(group.form)
   methods.setSubmitting(false)
 }
 
 const FormikHOC = Form => connector(props =>
   <Formik
-    initialValues={initValues(props.party.form)}
+    initialValues={initValues(props.group.form)}
     validationSchema={rules}
     enableReinitialize
     onSubmit={handleSubmit(props)}

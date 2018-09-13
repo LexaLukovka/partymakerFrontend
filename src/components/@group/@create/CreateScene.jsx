@@ -58,7 +58,7 @@ class CreateScene extends React.Component {
     if (place !== nextProps.place) {
       if (!isEmpty(nextProps.place) && place_id) {
         actions.partyTypes.select(nextProps.place.type)
-        actions.party.update({ place: nextProps.place, type: nextProps.place.type, address: nextProps.place.address })
+        actions.party.update({ place: nextProps.place, address: nextProps.place.address })
       }
     }
     actions.header.back()
@@ -76,7 +76,7 @@ class CreateScene extends React.Component {
 
     return (
       <form className={classes.root}>
-        <PlaceForm />
+        <PlaceForm {...formHOC} />
 
         <Field
           label="Что будет?"

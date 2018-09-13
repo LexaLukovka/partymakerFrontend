@@ -7,7 +7,6 @@ const FormikAddress = ({ field, form, disabled, ...props }) =>
   <Geosuggest
     {...props}
     {...field}
-    formik={true}
     fullWidth
     margin="dense"
     disabled={disabled}

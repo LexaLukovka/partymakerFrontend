@@ -34,14 +34,14 @@ class PlaceForm extends React.Component {
 
   handleClickOpen = () => {
     const { actions, history } = this.props
-    actions.group.hideCreateGroup()
+    actions.button.hideCreateGroup()
     history.push('/places')
   }
 
   render() {
-    const { classes, party } = this.props
-    const { place } = party.form
+    const { classes, group } = this.props
     const { value } = this.state
+    const { place } = group.form
     return (
       <div>
         {isEmpty(place) ?
@@ -82,7 +82,7 @@ PlaceForm.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   history: object.isRequired,
-  party: object.isRequired,
+  group: object.isRequired,
 }
 
 export default withStyles(styles)(withRouter(connector(PlaceForm)))
