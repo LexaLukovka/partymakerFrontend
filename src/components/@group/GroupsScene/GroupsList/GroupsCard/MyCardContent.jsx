@@ -2,6 +2,7 @@ import React from 'react'
 import { number, object, shape, string } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles, CardContent, Typography, ListItemSecondaryAction, List, ListItem } from '@material-ui/core'
+import shortTitle from 'utils/shortTitle'
 
 const styles = {
   cardContent: {
@@ -40,7 +41,7 @@ const MyCardContent = ({ classes, group }) =>
         <ListItem disableGutters>
           <Typography variant="subheading">Адрес:</Typography>
           <ListItemSecondaryAction>
-            {group.address.address}
+            {shortTitle(group.address.address)}
           </ListItemSecondaryAction>
         </ListItem>
       }

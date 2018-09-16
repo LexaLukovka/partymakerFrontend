@@ -18,6 +18,7 @@ class Group {
 
   create(form) {
     const place_id = isEmpty(form.place) ? null : form.place.id
+
     const group = {
       title: form.title,
       place_id,

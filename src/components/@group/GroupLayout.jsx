@@ -3,6 +3,8 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { Route, Switch } from 'react-router-dom'
 import CreateScene from './@create/CreateScene'
+import GroupScene from 'components/@group/@group/GroupScene'
+
 import qs from 'querystring'
 import connector from './connector'
 
@@ -25,6 +27,7 @@ class GroupLayout extends React.Component {
       <div className={classes.root}>
         <Switch>
           <Route path="/group/create" exact component={CreateScene} />
+          <Route exact path="/group/:id" component={GroupScene} />
         </Switch>
       </div>
     )
