@@ -1,13 +1,15 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { Typography, withStyles } from '@material-ui/core'
+
 import Loading from 'components/Loading'
-import isEmpty from 'lodash/isEmpty'
 import NotFound from 'components/NotFound/MyParties'
-import { Typography } from '@material-ui/core'
+
 import ProfileEdit from './ProfileEdit'
 import ProfileAvatar from './ProfileAvatar'
-import Parties from './Parties'
+import Groups from './Groups'
+
+import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
 
 const styles = () => ({
@@ -49,6 +51,7 @@ class UsersScene extends React.Component {
     actions.user.find(match.params.id)
   }
 
+
   render() {
     const { classes, auth, user: { user, loading } } = this.props
     if (loading) return <Loading />
@@ -65,7 +68,7 @@ class UsersScene extends React.Component {
           </div>
           <ProfileEdit visible={auth.user.id === user.id} />
         </div>
-        <Parties currentUser={auth.user.id === user.id} admin_id={user.id} />
+        <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
       </div>
     )
   }

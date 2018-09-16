@@ -25,7 +25,7 @@ const rules = Yup.object().shape({
 const handleSubmit = props => (formValues, methods) => {
   const { actions, group, history, place } = props
   let values = formValues
-console.log(values)
+
   if (!isEmpty(place)) {
     values = { address: place.address.address, ...values }
   }
@@ -36,7 +36,7 @@ console.log(values)
 
   actions.group.update(values)
 
-  // actions.group.create(group.form)
+  actions.group.create(group.form)
   methods.setSubmitting(false)
 }
 

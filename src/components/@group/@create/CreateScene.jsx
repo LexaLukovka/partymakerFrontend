@@ -44,8 +44,7 @@ class CreateScene extends React.Component {
   //   const { place_id } = qs.parse(search.replace('?', ''))
   //   console.log(place)
   //   if (!isEmpty(place) && place_id) {
-  //     actions.partyTypes.select(place.type)
-  //     actions.party.update({ place, type: place.type, address: place.address })
+  //     actions.group.update({ place, address: place.address })
   //   }
   //
   //   actions.header.back()
@@ -57,8 +56,7 @@ class CreateScene extends React.Component {
     const { place_id } = qs.parse(search.replace('?', ''))
     if (place !== nextProps.place) {
       if (!isEmpty(nextProps.place) && place_id) {
-        actions.partyTypes.select(nextProps.place.type)
-        actions.party.update({ place: nextProps.place, address: nextProps.place.address })
+        actions.group.update({ place: nextProps.place, address: nextProps.place.address })
       }
     }
     actions.header.back()

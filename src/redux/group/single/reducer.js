@@ -1,19 +1,17 @@
 import {
-  LOAD_GROUP_PENDING,
-  LOAD_GROUP_REJECTED,
-  LOAD_GROUP_FULFILLED,
-
+  CHANGE_GROUP_FULFILLED,
   CHANGE_GROUP_PENDING,
   CHANGE_GROUP_REJECTED,
-  CHANGE_GROUP_FULFILLED,
-
+  LOAD_GROUP_FULFILLED,
+  LOAD_GROUP_PENDING,
+  LOAD_GROUP_REJECTED,
 } from './action'
 
 const initialState = {
   loading: false,
   error: null,
   message: null,
-  party: {},
+  group: {},
 }
 
 const singleReducer = (state = initialState, { type, payload }) => {
@@ -35,7 +33,7 @@ const singleReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        party: payload.data || {},
+        group: payload.data || {},
       }
 
     case CHANGE_GROUP_PENDING:

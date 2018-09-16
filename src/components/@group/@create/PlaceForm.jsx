@@ -1,15 +1,13 @@
 /* eslint-disable react/jsx-curly-spacing */
 import React from 'react'
-import { object } from 'prop-types'
+import { func, object, shape, string } from 'prop-types'
 import { withRouter } from 'react-router'
 import { FormControlLabel, Radio, RadioGroup, Typography, withStyles } from '@material-ui/core'
-
-import FormikAddress from './formik/FormikAddress'
 import PlaceInput from './PlaceInput'
 
 import isEmpty from 'lodash/isEmpty'
-import { Field } from 'formik'
 import connector from './connector'
+import Geosuggest from 'components/Geosuggest'
 
 const styles = () => ({
   radio: {
@@ -29,7 +27,7 @@ class PlaceForm extends React.Component {
 
   removePlace = () => {
     const { actions } = this.props
-    actions.party.resetPlace()
+    actions.group.resetPlace()
   }
 
   handleClickOpen = () => {
@@ -39,7 +37,7 @@ class PlaceForm extends React.Component {
   }
 
   render() {
-    const { classes, group } = this.props
+    const { classes, group, values, setFieldValue, setFieldTouched, errors, touched } = this.props
     const { value } = this.state
     const { place } = group.form
     return (
@@ -62,11 +60,15 @@ class PlaceForm extends React.Component {
               value="address"
               control={<Radio color="primary" />}
               label={
-                <Field
-                  component={FormikAddress}
+                <Geosuggest
+                  fullWidth
                   name="address"
-                  type="name"
                   placeholder="Адрес"
+                  value={values.address}
+                  onChange={setFieldValue}
+                  onBlur={setFieldTouched}
+                  error={!!errors.address && touched.address}
+                  helperText={errors.address}
                   disabled={value !== 'address'}
                 />}
             />
@@ -83,6 +85,15 @@ PlaceForm.propTypes = {
   actions: object.isRequired,
   history: object.isRequired,
   group: object.isRequired,
+  values: shape({
+    address: object,
+  }).isRequired,
+  setFieldValue: func.isRequired,
+  setFieldTouched: func.isRequired,
+  errors: shape({
+    address: string,
+  }).isRequired,
+  touched: object.isRequired,
 }
 
 export default withStyles(styles)(withRouter(connector(PlaceForm)))

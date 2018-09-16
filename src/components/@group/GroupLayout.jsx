@@ -3,8 +3,8 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { Route, Switch } from 'react-router-dom'
 import CreateScene from './@create/CreateScene'
-import connector from './connector'
 import qs from 'querystring'
+import connector from './connector'
 
 const styles = () => ({
   root: {

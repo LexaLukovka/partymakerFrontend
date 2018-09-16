@@ -12,6 +12,10 @@ class Group {
     return Http.get(`/group/${group_id}`)
   }
 
+  change(party_id, settings) {
+    return Http.put(`/party/${party_id}`, settings)
+  }
+
   create(form) {
     const place_id = isEmpty(form.place) ? null : form.place.id
     const group = {

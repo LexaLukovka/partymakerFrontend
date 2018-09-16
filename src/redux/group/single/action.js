@@ -1,4 +1,4 @@
-import Party from 'services/api/Party'
+import Group from 'services/api/Group'
 
 import * as alert from 'src/redux/alert/action'
 
@@ -16,14 +16,14 @@ export const CHANGE_GROUP_FULFILLED = 'CHANGE_GROUP_FULFILLED'
 // noinspection JSUnusedGlobalSymbols
 export const show = (id) => ({
   type: LOAD_GROUP,
-  payload: Party.find(id),
+  payload: Group.find(id),
 })
 
 // noinspection JSUnusedGlobalSymbols
 export const change = (id, settings) => async dispatch => {
   await dispatch({
     type: CHANGE_GROUP,
-    payload: Party.change(id, settings),
+    payload: Group.change(id, settings),
   })
 
   dispatch(alert.show('Вечеринка изменена'))
