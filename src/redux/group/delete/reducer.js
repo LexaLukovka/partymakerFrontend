@@ -1,5 +1,5 @@
 import {
-  DELETE_PARTIES_PENDING,
+  DELETE_GROUP_PENDING,
   DELETE_PARTIES_REJECTED,
   DELETE_PARTIES_FULFILLED,
 } from './action'
@@ -12,7 +12,7 @@ const initialState = {
 
 const deleteReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case DELETE_PARTIES_PENDING: {
+    case DELETE_GROUP_PENDING: {
       return {
         ...state,
         loading: true,

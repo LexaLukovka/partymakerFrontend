@@ -101,7 +101,7 @@ const GroupCard = ({ classes, auth, group, place }) =>
           secondary="уже 10 человек"
         />
         <ListItemSecondaryAction>
-          <Link to={`/parties/${group.id}/users`}>
+          <Link to={`/group/${group.id}/users`}>
             <Button size="small" color="primary">участники</Button>
           </Link>
         </ListItemSecondaryAction>
