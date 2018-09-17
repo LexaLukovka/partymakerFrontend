@@ -56,7 +56,7 @@ const GroupCard = ({ classes, auth, group, place }) =>
       <div className={classes.flex}>
         <Typography align="center" variant="title">{group.title}</Typography>
       </div>
-      <EditIcon visible={auth.user && auth.user.id === group.admin_id} party={group} />
+      <EditIcon visible={auth.user && auth.user.id === group.admin_id} group={group} />
     </div>
     <List>
       <ListItem disableGutters>

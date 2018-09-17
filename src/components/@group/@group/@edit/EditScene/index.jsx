@@ -1,15 +1,15 @@
 import React from 'react'
-import { shape, object, bool } from 'prop-types'
+import { bool, object, shape } from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import {
-  withStyles,
-  List,
-  ListItemText,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
+  List,
+  ListItemText,
   Typography,
+  withStyles,
 } from '@material-ui/core'
 import ListDeleteItem from '@material-ui/core/ListItem'
 import Loading from 'components/Loading'
@@ -32,12 +32,12 @@ class EditScene extends React.Component {
 
   componentWillMount() {
     const { actions, match } = this.props
-    actions.party.show(match.params.id)
+    actions.group.show(match.params.id)
   }
 
   componentDidMount() {
-    const { actions, party } = this.props
-    actions.header.back(`/parties/${party.id}`)
+    const { actions, group } = this.props
+    actions.header.back(`/group/${group.id}`)
     actions.header.title('Редактирование')
   }
 
@@ -54,49 +54,36 @@ class EditScene extends React.Component {
     this.handleClose()
     history.push('/user')
   }
-
   handleClickOpen = () => {
     this.setState({ open: true })
   }
-
   handleClose = () => {
     this.setState({ open: false })
   }
 
+
   render() {
-    const { loading, party, classes } = this.props
+    const { loading, group, classes } = this.props
     if (loading) return <Loading />
-    if (isEmpty(party)) return <NotFound />
+    if (isEmpty(group)) return <NotFound />
 
     return (
       <List>
-        <ListItem to={`/parties/${party.id}/edit/title`}>
-          <ListItemText primary="Название вечеринки" secondary={party.title} />
+        <ListItem to={`/group/${group.id}/edit/title`}>
+          <ListItemText primary="Название вечеринки" secondary={group.title} />
         </ListItem>
-        {!party.place &&
+        {!group.place &&
         <React.Fragment>
-          <ListItem to={`/parties/${party.id}/edit/district`}>
-            <ListItemText primary="Район" secondary={party.address.district} />
-          </ListItem>
-          <ListItem to={`/parties/${party.id}/edit/address`}>
-            <ListItemText primary="Адрес" secondary={party.address.address} />
+          <ListItem to={`/group/${group.id}/edit/address`}>
+            <ListItemText primary="Адрес" secondary={group.address.address} />
           </ListItem>
         </React.Fragment>
         }
-        <ListItem to={`/parties/${party.id}/edit/startTime`}>
-          <ListItemText primary="Приходить на" secondary={party.start_time} />
+        <ListItem to={`/group/${group.id}/edit/startTime`}>
+          <ListItemText primary="Приходить на" secondary={group.start_time} />
         </ListItem>
-        <ListItem to={`/parties/${party.id}/edit/people`}>
-          <ListItemText
-            primary="Собирается"
-            secondary={`от ${party.people_min} до ${party.people_max} человек`}
-          />
-        </ListItem>
-        <ListItem to={`/parties/${party.id}/edit/description`}>
-          <ListItemText primary="Описание" secondary={party.description} />
-        </ListItem>
-        <ListItem to={`/parties/${party.id}/edit/image`}>
-          <ListItemText primary="Сменить фото вечеринки" />
+        <ListItem to={`/group/${group.id}/edit/description`}>
+          <ListItemText primary="Описание" secondary={group.description} />
         </ListItem>
         <ListDeleteItem divider button className={classes.delete}>
           <ListItemText primary="Удалить вечеринку" onClick={this.handleClickOpen} />
@@ -111,7 +98,7 @@ class EditScene extends React.Component {
             <Typography align="center" variant="subheading">Вы уверены что хотите удалить вечеринку?</Typography>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => this.handleDelete(party.id)}>
+            <Button onClick={() => this.handleDelete(group.id)}>
               Удалить
             </Button>
             <Button onClick={this.handleClose} color="primary" autoFocus>
@@ -127,7 +114,7 @@ class EditScene extends React.Component {
 EditScene.propTypes = {
   classes: object.isRequired,
   loading: bool.isRequired,
-  party: object.isRequired,
+  group: object.isRequired,
   actions: shape({
     header: object,
   }).isRequired,
