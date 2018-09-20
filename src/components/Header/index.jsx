@@ -2,7 +2,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router'
-import { withStyles, AppBar, Toolbar, Typography, IconButton, Button } from '@material-ui/core'
+import { AppBar, Button, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core'
 import connector from './connector'
 import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
@@ -89,7 +89,6 @@ class Header extends React.Component {
             <div className={classes.actionButtons}>
               <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
               <Link to="/group/create"><Button color="inherit">Собрать свою компанию</Button></Link>
-              <Link to="/parties"><Button color="inherit">Найти компанию погулять</Button></Link>
             </div>
             <UserMenu />
           </Toolbar>

@@ -12,7 +12,7 @@ const initMapDispatchToProps = dispatch => ({
     header: bindActionCreators(headerActions, dispatch),
     group: bindActionCreators(groupActions, dispatch),
     groups: bindActionCreators(groupsActions, dispatch),
-    deleteParty: bindActionCreators(deleteActions, dispatch),
+    delete: bindActionCreators(deleteActions, dispatch),
   },
 })
 

@@ -38,6 +38,8 @@ const handleSubmit = props => (formValues, methods) => {
 
   actions.group.create(group.form)
   methods.setSubmitting(false)
+
+  history.push('/user')
 }
 
 const FormikHOC = Form => connector(props =>

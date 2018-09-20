@@ -128,7 +128,6 @@ class CreateScene extends React.Component {
 CreateScene.propTypes = {
   history: object.isRequired,
   place: object.isRequired,
-  party: object.isRequired,
   actions: object.isRequired,
   classes: object.isRequired,
   handleSubmit: func.isRequired,

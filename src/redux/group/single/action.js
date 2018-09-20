@@ -25,5 +25,5 @@ export const change = (group_id, settings) => async dispatch => {
     payload: Group.change(group_id, settings),
   })
 
-  dispatch(alert.show('Вечеринка изменена'))
+  dispatch(alert.show('Компания изменена'))
 }

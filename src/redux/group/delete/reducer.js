@@ -1,7 +1,7 @@
 import {
   DELETE_GROUP_PENDING,
-  DELETE_PARTIES_REJECTED,
-  DELETE_PARTIES_FULFILLED,
+  DELETE_GROUPS_REJECTED,
+  DELETE_GROUPS_FULFILLED,
 } from './action'
 
 const initialState = {
@@ -18,14 +18,14 @@ const deleteReducer = (state = initialState, { type, payload }) => {
         loading: true,
       }
     }
-    case DELETE_PARTIES_REJECTED: {
+    case DELETE_GROUPS_REJECTED: {
       return {
         ...state,
         loading: false,
         error: payload,
       }
     }
-    case DELETE_PARTIES_FULFILLED: {
+    case DELETE_GROUPS_FULFILLED: {
       return {
         ...state,
         loading: false,

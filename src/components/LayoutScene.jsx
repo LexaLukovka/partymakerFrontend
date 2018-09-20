@@ -15,7 +15,6 @@ import SettingsLayout from './@settings/SettingsLayout'
 import AuthLayout from './@auth/AuthLayout'
 import GroupLayout from './@group/GroupLayout'
 import PlacesLayout from './@places/PlacesLayout'
-import PartiesLayout from './@parties/PartiesLayout'
 import UserLayout from 'components/@users/UserLayout'
 import Background from 'components/Background'
 import connector from './connector'
@@ -28,7 +27,6 @@ const LayoutScene = ({ auth }) =>
         <Switch>
           <Route exact path="/" component={IndexScene} />
           <Route path="/group" component={GroupLayout} />
-          <Route path="/parties" component={PartiesLayout} />
           <Route path="/places" component={PlacesLayout} />
           <Route exact path="/user" render={() => <Redirect to={`/users/${auth.user.id}`} />} />
           <SignedInRoute path="/users" component={UserLayout} />
