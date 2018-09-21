@@ -88,7 +88,7 @@ class Header extends React.Component {
 
             <div className={classes.actionButtons}>
               <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
-              <Link to="/parties/create"><Button color="inherit">Собрать свою компанию</Button></Link>
+              <Link to="/group/create"><Button color="inherit">Собрать свою компанию</Button></Link>
               <Link to="/parties"><Button color="inherit">Найти компанию погулять</Button></Link>
             </div>
             <UserMenu />

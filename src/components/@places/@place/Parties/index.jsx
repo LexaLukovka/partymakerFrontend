@@ -1,15 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { object } from 'prop-types'
+import { Typography, withStyles } from '@material-ui/core'
 import Loading from 'components/Loading'
 import isEmpty from 'lodash/isEmpty'
-import Typography from '@material-ui/core/Typography/Typography'
-import PartiesList from 'components/@parties/PartiesScene/PartiesList'
+import GroupsList from 'components/@group/GroupsScene/GroupsList'
 
 const styles = () => ({
-  root: {
-
-  },
+  root: {},
   foundText: {
     padding: 30,
     paddingTop: 0,
@@ -28,12 +25,12 @@ const styles = () => ({
   },
 })
 
-const Parties = ({ classes, parties }) => {
-  if (parties.loading) return <Loading />
-  if (isEmpty(parties.parties)) {
+const Parties = ({ classes, groups: { group, loading } }) => {
+  if (loading) return <Loading />
+  if (isEmpty(group)) {
     return (
       <Typography gutterBottom className={classes.foundText}>
-        Никто не проводит вечеринку в этом месте...
+        Никто не собрался в этом месте...
       </Typography>
     )
   }
@@ -44,15 +41,15 @@ const Parties = ({ classes, parties }) => {
         месте...
       </Typography>
       <div className={classes.cards}>
-        <PartiesList parties={parties.parties} />
+        <GroupsList groups={group} />
       </div>
     </React.Fragment>
   )
 }
 
 Parties.propTypes = {
-  classes: PropTypes.object.isRequired,
-  parties: PropTypes.object.isRequired,
+  classes: object.isRequired,
+  groups: object.isRequired,
 
 }
 

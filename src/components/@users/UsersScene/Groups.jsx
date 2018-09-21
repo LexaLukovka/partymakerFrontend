@@ -1,12 +1,12 @@
 import React from 'react'
 import { object, bool, number } from 'prop-types'
-import isEmpty from 'lodash/isEmpty'
-import Loading from 'components/Loading'
+import { withStyles } from '@material-ui/core'
 import NotFoundMyParties from 'components/NotFound/MyParties'
 import NotFoundUserParties from 'components/NotFound/UserParties'
-import { withStyles } from '@material-ui/core'
+import GroupsList from 'components/@group/GroupsScene/GroupsList'
+import isEmpty from 'lodash/isEmpty'
+import Loading from 'components/Loading'
 import connector from './connector'
-import PartiesList from 'components/@parties/PartiesScene/PartiesList'
 
 const styles = {
   root: {
@@ -19,11 +19,11 @@ const styles = {
   },
 }
 
-class Parties extends React.Component {
+class Groups extends React.Component {
   componentWillMount() {
     const { actions, admin_id } = this.props
     actions.actionButton.show()
-    actions.parties.load({ admin_id })
+    actions.group.load({ admin_id })
   }
 
   componentWillUnmount() {
@@ -32,24 +32,24 @@ class Parties extends React.Component {
   }
 
   render() {
-    const { classes, parties: { parties, loading }, currentUser } = this.props
+    const { classes, group: { group, loading }, currentUser } = this.props
     if (loading) return <Loading />
-    if (isEmpty(parties)) return currentUser ? <NotFoundMyParties /> : <NotFoundUserParties />
+    if (isEmpty(group)) return currentUser ? <NotFoundMyParties /> : <NotFoundUserParties />
 
     return (
       <div className={classes.root}>
-        <PartiesList parties={parties} />
+        <GroupsList groups={group} />
       </div>
     )
   }
 }
 
-Parties.propTypes = {
+Groups.propTypes = {
   classes: object.isRequired,
-  parties: object.isRequired,
+  group: object.isRequired,
   actions: object.isRequired,
   admin_id: number.isRequired,
   currentUser: bool.isRequired,
 }
 
-export default connector(withStyles(styles)(Parties))
+export default connector(withStyles(styles)(Groups))

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Route, Switch } from 'react-router-dom'
 import PartiesScene from './PartiesScene'
@@ -27,7 +27,7 @@ const PartiesLayout = ({ classes }) =>
   </div>
 
 PartiesLayout.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: object.isRequired,
 }
 
 export default withStyles(styles)(PartiesLayout)

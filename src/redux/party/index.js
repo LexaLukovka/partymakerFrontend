@@ -22,4 +22,3 @@ const party = combineReducers({
 })
 
 export default persistReducer(persistConfig, party)
-// : persistReducer(persistConfig, createReducer)

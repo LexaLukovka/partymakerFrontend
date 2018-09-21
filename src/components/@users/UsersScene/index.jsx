@@ -1,14 +1,16 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { Typography, withStyles } from '@material-ui/core'
+
 import Loading from 'components/Loading'
-import isEmpty from 'lodash/isEmpty'
 import NotFound from 'components/NotFound/MyParties'
-import connector from './connector'
-import { Typography } from '@material-ui/core'
+
 import ProfileEdit from './ProfileEdit'
 import ProfileAvatar from './ProfileAvatar'
-import Parties from './Parties'
+import Groups from './Groups'
+
+import isEmpty from 'lodash/isEmpty'
+import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -28,7 +30,7 @@ class UsersScene extends React.Component {
   componentDidMount() {
     const { actions, match } = this.props
     actions.user.find(match.params.id)
-    actions.parties.load({ admin_id: match.params.id })
+    actions.group.load({ admin_id: match.params.id })
   }
 
   componentDidUpdate() {
@@ -49,6 +51,7 @@ class UsersScene extends React.Component {
     actions.user.find(match.params.id)
   }
 
+
   render() {
     const { classes, auth, user: { user, loading } } = this.props
     if (loading) return <Loading />
@@ -57,7 +60,7 @@ class UsersScene extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.profile}>
-          <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} />
+          <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
           <div>
             <Typography align="center" variant="title" className={classes.user}>{user.name}</Typography>
             <Typography align="center" variant="subheading" className={classes.user}>{user.email}</Typography>
@@ -65,7 +68,7 @@ class UsersScene extends React.Component {
           </div>
           <ProfileEdit visible={auth.user.id === user.id} />
         </div>
-        <Parties currentUser={auth.user.id === user.id} admin_id={user.id} />
+        <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
       </div>
     )
   }
