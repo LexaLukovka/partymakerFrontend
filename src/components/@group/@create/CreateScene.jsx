@@ -3,12 +3,13 @@ import { bool, func, object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Button, Grid, withStyles } from '@material-ui/core'
 
-import PlaceForm from './PlaceForm'
+import PlaceForm from './place/PlaceForm'
 
 import isEmpty from 'lodash/isEmpty'
 import qs from 'querystring'
 import { Field } from 'formik'
 import FormikText from './formik/FormikText'
+import FormikDateTime from './formik/FormikDateTime'
 
 import formik from './formik/formik'
 import connector from './connector'
@@ -84,18 +85,10 @@ class CreateScene extends React.Component {
           placeholder="Поход на бухич"
         />
         <Field
-          label="Когда состоится?"
-          component={FormikText}
-          name="startDay"
-          type="date"
-          placeholder="Дата"
-        />
-        <Field
-          label="Во сколько начало?"
-          component={FormikText}
+          label="Когда и во сколько состоится?"
+          component={FormikDateTime}
           name="startTime"
-          type="time"
-          placeholder="Время"
+          placeholder="Дата и время"
         />
         <Field
           component={FormikText}
@@ -128,7 +121,6 @@ class CreateScene extends React.Component {
 CreateScene.propTypes = {
   history: object.isRequired,
   place: object.isRequired,
-  party: object.isRequired,
   actions: object.isRequired,
   classes: object.isRequired,
   handleSubmit: func.isRequired,

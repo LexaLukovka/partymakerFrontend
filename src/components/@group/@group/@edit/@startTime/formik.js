@@ -3,9 +3,10 @@ import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import connector from '../connector'
+import moment from 'moment'
 
 const initValues = (form) => ({
-  start_time: form ? form.start_time : '20:00',
+  start_time: form.start_time || moment(new Date()).format('YYYY-MM-DDT20:00'),
 })
 
 const rules = Yup.object()
@@ -15,16 +16,16 @@ const rules = Yup.object()
   })
 
 const handleSubmit = ({ actions, match }) => async ({ start_time }, methods) => {
-  await actions.party.change(match.params.id, { start_time })
-  await actions.party.show(match.params.id)
-  await actions.parties.load()
+  await actions.group.change(match.params.id, { start_time })
+  await actions.group.show(match.params.id)
+  await actions.groups.load()
 
   methods.setSubmitting(false)
 }
 
 const FormikHOC = Form => connector(props =>
   <Formik
-    initialValues={initValues(props.party)}
+    initialValues={initValues(props.group)}
     validationSchema={rules}
     enableReinitialize
     onSubmit={handleSubmit(props)}

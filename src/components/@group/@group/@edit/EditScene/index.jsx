@@ -17,6 +17,7 @@ import NotFound from 'components/NotFound'
 import isEmpty from 'lodash/isEmpty'
 import ListItem from './ListItem'
 import connector from '../connector'
+import moment from 'moment'
 
 const styles = {
   delete: {
@@ -39,6 +40,7 @@ class EditScene extends React.Component {
     const { actions, group } = this.props
     actions.header.back(`/group/${group.id}`)
     actions.header.title('Редактирование')
+    document.title = 'Редактирование'
   }
 
   componentWillUnmount() {
@@ -49,7 +51,7 @@ class EditScene extends React.Component {
 
   handleDelete = (id) => {
     const { actions, history } = this.props
-    actions.deleteParty.deleteParty(id)
+    actions.delete.deleteGroup(id)
 
     this.handleClose()
     history.push('/user')
@@ -60,7 +62,6 @@ class EditScene extends React.Component {
   handleClose = () => {
     this.setState({ open: false })
   }
-
 
   render() {
     const { loading, group, classes } = this.props
@@ -80,7 +81,7 @@ class EditScene extends React.Component {
         </React.Fragment>
         }
         <ListItem to={`/group/${group.id}/edit/startTime`}>
-          <ListItemText primary="Приходить на" secondary={group.start_time} />
+          <ListItemText primary="Приходить на" secondary={moment(new Date(group.start_time)).fromNow()} />
         </ListItem>
         <ListItem to={`/group/${group.id}/edit/description`}>
           <ListItemText primary="Описание" secondary={group.description} />
@@ -95,7 +96,7 @@ class EditScene extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogContent>
-            <Typography align="center" variant="subheading">Вы уверены что хотите удалить вечеринку?</Typography>
+            <Typography align="center" variant="subheading">Вы уверены что хотите удалить компанию?</Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => this.handleDelete(group.id)}>

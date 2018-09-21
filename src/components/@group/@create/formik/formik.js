@@ -9,15 +9,13 @@ import isEmpty from 'lodash/isEmpty'
 const initValues = (form) => ({
   title: form.title || '',
   address: form.address,
-  startDay: form.startDay || moment(new Date()).format('YYYY-MM-DD'),
-  startTime: form.startTime || '20:00',
+  startTime: form.startTime || moment(new Date()).format('YYYY-MM-DDT20:00'),
   description: form.description || '',
 })
 
 const rules = Yup.object().shape({
   title: Yup.string().required('Это поле является обязательным'),
   address: Yup.string(),
-  startDay: Yup.string().required('Это поле является обязательным'),
   startTime: Yup.string().required('Это поле является обязательным'),
   description: Yup.string().required('Это поле является обязательным'),
 })
@@ -38,6 +36,8 @@ const handleSubmit = props => (formValues, methods) => {
 
   actions.group.create(group.form)
   methods.setSubmitting(false)
+
+  history.push('/user')
 }
 
 const FormikHOC = Form => connector(props =>

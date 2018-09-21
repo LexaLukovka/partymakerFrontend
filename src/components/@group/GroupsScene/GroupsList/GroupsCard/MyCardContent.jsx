@@ -1,7 +1,7 @@
 import React from 'react'
 import { number, object, shape, string } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { withStyles, CardContent, Typography, ListItemSecondaryAction, List, ListItem } from '@material-ui/core'
+import { CardContent, List, ListItem, ListItemSecondaryAction, Typography, withStyles } from '@material-ui/core'
 import shortTitle from 'utils/shortTitle'
 
 const styles = {
@@ -28,6 +28,16 @@ const styles = {
 const MyCardContent = ({ classes, group }) =>
   <CardContent className={classes.cardContent}>
     <List className={classes.list}>
+      <Link to={`/group/${group.id}`}>
+        <ListItem disableGutters>
+          <Typography variant="subheading">Что будет?</Typography>
+          <ListItemSecondaryAction>
+            <Typography variant="title">
+              {group.title}
+            </Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </Link>
       {group.place ?
         <ListItem disableGutters>
           <Typography variant="subheading">Место:</Typography>

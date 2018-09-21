@@ -15,16 +15,16 @@ const rules = Yup.object()
   })
 
 const handleSubmit = ({ actions, match }) => async ({ description }, methods) => {
-  await actions.party.change(match.params.id, { description })
-  await actions.party.show(match.params.id)
-  await actions.parties.load()
+  await actions.group.change(match.params.id, { description })
+  await actions.group.show(match.params.id)
+  await actions.groups.load()
 
   methods.setSubmitting(false)
 }
 
 const FormikHOC = Form => connector(props =>
   <Formik
-    initialValues={initValues(props.party)}
+    initialValues={initValues(props.group)}
     validationSchema={rules}
     enableReinitialize
     onSubmit={handleSubmit(props)}

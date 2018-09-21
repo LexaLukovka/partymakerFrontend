@@ -4,8 +4,8 @@ import * as alert from 'src/redux/alert/action'
 
 export const DELETE_GROUP = 'DELETE_GROUP'
 export const DELETE_GROUP_PENDING = 'DELETE_GROUP_PENDING'
-export const DELETE_PARTIES_REJECTED = 'DELETE_PARTIES_REJECTED'
-export const DELETE_PARTIES_FULFILLED = 'DELETE_PARTIES_FULFILLED'
+export const DELETE_GROUPS_REJECTED = 'DELETE_GROUPS_REJECTED'
+export const DELETE_GROUPS_FULFILLED = 'DELETE_GROUPS_FULFILLED'
 
 // noinspection JSUnusedGlobalSymbols
 export const deleteGroup = (group_id) => async dispatch => {

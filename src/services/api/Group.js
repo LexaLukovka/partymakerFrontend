@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+/* eslint-disable class-methods-use-this,camelcase,object-shorthand */
 import Http from 'services/Http'
 import isEmpty from 'lodash/isEmpty'
 import qs from 'querystring'

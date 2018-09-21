@@ -3,6 +3,7 @@ import { func, object } from 'prop-types'
 import { withStyles, Typography, TextField, Button } from '@material-ui/core'
 import connector from '../connector'
 import formik from './formik'
+import moment from 'moment'
 
 const styles = theme => ({
   root: {
@@ -47,9 +48,9 @@ class StartTimeScene extends React.Component {
           <TextField
             fullWidth
             name="start_time"
-            type="time"
+            type="datetime-local"
             placeholder="Дата и время"
-            value={values.start_time}
+            value={moment(values.start_time).format('YYYY-MM-DDT20:00')}
             onChange={handleChange}
             onBlur={handleBlur}
             error={this.hasError('start_time')}

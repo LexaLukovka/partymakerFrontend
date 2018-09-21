@@ -1,8 +1,8 @@
 import React from 'react'
 import { object, bool, number } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import NotFoundMyParties from 'components/NotFound/MyParties'
-import NotFoundUserParties from 'components/NotFound/UserParties'
+import NotFoundMyGroups from 'components/NotFound/MyGroups'
+import NotFoundUserGroups from 'components/NotFound/UserGroups'
 import GroupsList from 'components/@group/GroupsScene/GroupsList'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
@@ -34,7 +34,7 @@ class Groups extends React.Component {
   render() {
     const { classes, group: { group, loading }, currentUser } = this.props
     if (loading) return <Loading />
-    if (isEmpty(group)) return currentUser ? <NotFoundMyParties /> : <NotFoundUserParties />
+    if (isEmpty(group)) return currentUser ? <NotFoundMyGroups /> : <NotFoundUserGroups />
 
     return (
       <div className={classes.root}>
