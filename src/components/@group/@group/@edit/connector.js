@@ -1,17 +1,17 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as partyActions from 'src/redux/party/single/action'
-import * as partiesActions from 'src/redux/party/list/action'
-import * as deleteActions from 'src/redux/party/delete/action'
+import * as groupActions from 'src/redux/group/single/action'
+import * as groupsActions from 'src/redux/group/list/action'
+import * as deleteActions from 'src/redux/group/delete/action'
 import * as headerActions from 'src/redux/header/action'
 
-const initMapStateToProps = store => store.party.singleReducer
+const initMapStateToProps = store => store.group.singleReducer
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
     header: bindActionCreators(headerActions, dispatch),
-    party: bindActionCreators(partyActions, dispatch),
-    parties: bindActionCreators(partiesActions, dispatch),
+    group: bindActionCreators(groupActions, dispatch),
+    groups: bindActionCreators(groupsActions, dispatch),
     deleteParty: bindActionCreators(deleteActions, dispatch),
   },
 })

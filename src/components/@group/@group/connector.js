@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import * as groupActions from 'src/redux/group/single/action'
 import * as placeActions from 'src/redux/place/single/action'
 import * as headerActions from 'src/redux/header/action'
-import * as memberActions from 'src/redux/party/member/action'
+import * as memberActions from 'src/redux/group/member/action'
 import * as authActions from 'src/redux/auth/action'
 
 const initMapStateToProps = store => ({
   ...store.group.singleReducer,
   ...store.place.singleReducer,
-  isMember: store.party.memberReducer.isMember,
-  memberLoading: store.party.memberReducer.loading,
+  isMember: store.group.memberReducer.isMember,
+  memberLoading: store.group.memberReducer.loading,
   auth: store.authReducer,
 
 })

@@ -9,10 +9,10 @@ const styles = {
   root: {},
 }
 
-const EditIcon = ({ classes, visible, party }) =>
+const EditIcon = ({ classes, visible, group }) =>
   <div className={classes.icon}>
     {visible &&
-    <Link to={`/parties/${party.id}/edit`}>
+    <Link to={`/group/${group.id}/edit`}>
       <IconButton>
         <Create />
       </IconButton>
@@ -23,7 +23,7 @@ const EditIcon = ({ classes, visible, party }) =>
 EditIcon.propTypes = {
   classes: object.isRequired,
   visible: bool.isRequired,
-  party: shape({
+  group: shape({
     id: number,
   }).isRequired,
 }

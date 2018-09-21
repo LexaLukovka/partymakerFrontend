@@ -64,7 +64,7 @@ class PlaceScene extends React.Component {
   }
 
   render() {
-    const { classes, place: { loading, place }, placeVotes: { vote }, parties } = this.props
+    const { classes, place: { loading, place }, placeVotes: { vote }, groups } = this.props
     if (loading) return <Loading />
     if (isEmpty(place)) return <NotFound />
 
@@ -88,7 +88,7 @@ class PlaceScene extends React.Component {
               <Button color="primary">Создать здесь свою вечеринку</Button>
             </Link>
           </div>
-          <Parties parties={parties} />
+          <Parties groups={groups} />
         </Grid>
       </Grid>
     )
@@ -99,7 +99,7 @@ PlaceScene.propTypes = {
   classes: object.isRequired,
   place: object.isRequired,
   placeVotes: object.isRequired,
-  parties: object.isRequired,
+  groups: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
   auth: object.isRequired,

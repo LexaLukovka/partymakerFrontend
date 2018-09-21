@@ -12,8 +12,28 @@ class Group {
     return Http.get(`/group/${group_id}`)
   }
 
-  change(party_id, settings) {
-    return Http.put(`/party/${party_id}`, settings)
+  isMember(group_id) {
+    return Http.get(`/group/${group_id}/users/isMember`)
+  }
+
+  users(group_id) {
+    return Http.get(`/group/${group_id}/users`)
+  }
+
+  join(group_id) {
+    return Http.post(`/group/${group_id}/users`)
+  }
+
+  leave(group_id) {
+    return Http.delete(`/group/${group_id}/users/delete`)
+  }
+
+  change(group_id, settings) {
+    return Http.put(`/group/${group_id}`, settings)
+  }
+
+  delete(group_id) {
+    return Http.delete(`/group/${group_id}`)
   }
 
   create(form) {

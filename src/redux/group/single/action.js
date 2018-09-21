@@ -12,18 +12,17 @@ export const CHANGE_GROUP_PENDING = 'CHANGE_GROUP_PENDING'
 export const CHANGE_GROUP_REJECTED = 'CHANGE_GROUP_REJECTED'
 export const CHANGE_GROUP_FULFILLED = 'CHANGE_GROUP_FULFILLED'
 
-
 // noinspection JSUnusedGlobalSymbols
-export const show = (id) => ({
+export const show = (group_id) => ({
   type: LOAD_GROUP,
-  payload: Group.find(id),
+  payload: Group.find(group_id),
 })
 
 // noinspection JSUnusedGlobalSymbols
-export const change = (id, settings) => async dispatch => {
+export const change = (group_id, settings) => async dispatch => {
   await dispatch({
     type: CHANGE_GROUP,
-    payload: Group.change(id, settings),
+    payload: Group.change(group_id, settings),
   })
 
   dispatch(alert.show('Вечеринка изменена'))

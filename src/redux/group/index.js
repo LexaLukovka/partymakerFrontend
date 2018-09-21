@@ -5,6 +5,7 @@ import buttonReducer from './buttonCreate/reducer'
 import createReducer from './create/reducer'
 import listReducer from './list/reducer'
 import singleReducer from './single/reducer'
+import memberReducer from './member/reducer'
 
 const persistConfig = {
   key: 'party',
@@ -17,6 +18,7 @@ const group = combineReducers({
   createReducer,
   listReducer,
   singleReducer,
+  memberReducer,
 })
 
 export default persistReducer(persistConfig, group)
