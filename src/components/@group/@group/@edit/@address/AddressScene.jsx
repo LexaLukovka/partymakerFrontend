@@ -40,12 +40,12 @@ class AddressScene extends React.Component {
   }
 
   render() {
-    const { classes, values, party, handleSubmit, setFieldValue, setFieldTouched } = this.props
+    const { classes, values, group, handleSubmit, setFieldValue, setFieldTouched } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Typography variant="subheading">Ваш адрес</Typography>
-          <Typography>{party ? party.address.address : ''}</Typography>
+          <Typography>{group ? group.address.address : ''}</Typography>
           <Typography variant="subheading">Изменить</Typography>
           <Geosuggest
             fullWidth
@@ -70,7 +70,7 @@ AddressScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
-  party: object,
+  group: object,
   errors: object.isRequired,
   touched: object.isRequired,
   handleSubmit: func.isRequired,
@@ -79,7 +79,7 @@ AddressScene.propTypes = {
 }
 
 AddressScene.defaultProps = {
-  party: {},
+  group: {},
 }
 
 export default formik(connector(withStyles(styles)(AddressScene)))

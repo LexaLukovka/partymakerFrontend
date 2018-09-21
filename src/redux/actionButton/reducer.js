@@ -2,7 +2,7 @@ import { SHOW_ACTION_BUTTON, HIDE_ACTION_BUTTON } from './action'
 
 const initialState = {
   isOpen: false,
-  to: '/parties/create',
+  to: '/group/create',
 }
 
 const actionButtonReducer = (state = initialState, { type, payload }) => {

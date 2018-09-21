@@ -6,7 +6,7 @@ import { FormControlLabel, Radio, RadioGroup, Typography, withStyles } from '@ma
 import PlaceInput from './PlaceInput'
 
 import isEmpty from 'lodash/isEmpty'
-import connector from './connector'
+import connector from '../connector'
 import Geosuggest from 'components/Geosuggest'
 
 const styles = () => ({

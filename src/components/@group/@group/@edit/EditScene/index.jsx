@@ -17,6 +17,7 @@ import NotFound from 'components/NotFound'
 import isEmpty from 'lodash/isEmpty'
 import ListItem from './ListItem'
 import connector from '../connector'
+import moment from 'moment'
 
 const styles = {
   delete: {
@@ -80,7 +81,7 @@ class EditScene extends React.Component {
         </React.Fragment>
         }
         <ListItem to={`/group/${group.id}/edit/startTime`}>
-          <ListItemText primary="Приходить на" secondary={group.start_time} />
+          <ListItemText primary="Приходить на" secondary={moment(new Date(group.start_time)).fromNow()} />
         </ListItem>
         <ListItem to={`/group/${group.id}/edit/description`}>
           <ListItemText primary="Описание" secondary={group.description} />

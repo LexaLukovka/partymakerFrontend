@@ -8,7 +8,6 @@ import * as pictureModal from 'src/redux/pictureModal/action'
 const initMapStateToProps = store => ({
   place: store.place.singleReducer,
   placeVotes: store.place.votesReducer,
-  groups: store.group.listReducer,
   auth: store.authReducer,
 })
 

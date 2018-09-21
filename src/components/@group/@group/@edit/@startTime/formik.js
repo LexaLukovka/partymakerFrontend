@@ -3,9 +3,10 @@ import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import connector from '../connector'
+import moment from 'moment'
 
 const initValues = (form) => ({
-  start_time: form ? form.start_time : '20:00',
+  start_time: form.start_time || moment(new Date()).format('YYYY-MM-DDT20:00'),
 })
 
 const rules = Yup.object()

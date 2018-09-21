@@ -1,14 +1,12 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { Button, Grid, withStyles } from '@material-ui/core'
+import { Grid, withStyles } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import connector from './connector'
 import PlaceCard from './PlaceCard'
-import Parties from './Parties'
 import PictureGrid from './PictureGrid'
 
 const styles = () => ({
@@ -38,7 +36,6 @@ class PlaceScene extends React.Component {
     const { actions, match, auth } = this.props
     const place_id = match.params.id
     actions.place.show(place_id)
-    actions.parties.load({ place_id })
     if (auth.user) actions.placeVotes.isUserVoted(place_id)
     actions.header.back()
   }
@@ -64,7 +61,7 @@ class PlaceScene extends React.Component {
   }
 
   render() {
-    const { classes, place: { loading, place }, placeVotes: { vote }, groups } = this.props
+    const { classes, place: { loading, place }, placeVotes: { vote } } = this.props
     if (loading) return <Loading />
     if (isEmpty(place)) return <NotFound />
 
@@ -76,19 +73,9 @@ class PlaceScene extends React.Component {
             onVote={this.handleVote}
             vote={vote}
           />
-
         </Grid>
         <Grid item sm={12} md={7} lg={6} xl={6} style={{ overflow: 'auto' }}>
           <PictureGrid pictures={place.pictures.map(picture => picture.url)} onClick={this.openModal} />
-
-        </Grid>
-        <Grid item lg={3} style={{ overflow: 'auto' }}>
-          <div className={classes.create}>
-            <Link to={`/parties/create?place_id=${place.id}`}>
-              <Button color="primary">Создать здесь свою вечеринку</Button>
-            </Link>
-          </div>
-          <Parties groups={groups} />
         </Grid>
       </Grid>
     )
@@ -99,7 +86,6 @@ PlaceScene.propTypes = {
   classes: object.isRequired,
   place: object.isRequired,
   placeVotes: object.isRequired,
-  groups: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
   auth: object.isRequired,

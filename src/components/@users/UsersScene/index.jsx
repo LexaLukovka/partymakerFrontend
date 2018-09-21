@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 
 import Loading from 'components/Loading'
-import NotFound from 'components/NotFound/MyParties'
+import NotFound from 'components/NotFound/MyGroups'
 
 import ProfileEdit from './ProfileEdit'
 import ProfileAvatar from './ProfileAvatar'
