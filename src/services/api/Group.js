@@ -5,35 +5,35 @@ import qs from 'querystring'
 
 class Group {
   all(searchParams) {
-    return Http.get(`/group?${qs.stringify(searchParams)}`)
+    return Http.get(`/groups?${qs.stringify(searchParams)}`)
   }
 
   find(group_id) {
-    return Http.get(`/group/${group_id}`)
+    return Http.get(`/groups/${group_id}`)
   }
 
   isMember(group_id) {
-    return Http.get(`/group/${group_id}/users/isMember`)
+    return Http.get(`/groups/${group_id}/users/isMember`)
   }
 
   users(group_id) {
-    return Http.get(`/group/${group_id}/users`)
+    return Http.get(`/groups/${group_id}/users`)
   }
 
   join(group_id) {
-    return Http.post(`/group/${group_id}/users`)
+    return Http.post(`/groups/${group_id}/users`)
   }
 
   leave(group_id) {
-    return Http.delete(`/group/${group_id}/users/delete`)
+    return Http.delete(`/groups/${group_id}/users/delete`)
   }
 
   change(group_id, settings) {
-    return Http.put(`/group/${group_id}`, settings)
+    return Http.put(`/groups/${group_id}`, settings)
   }
 
   delete(group_id) {
-    return Http.delete(`/group/${group_id}`)
+    return Http.delete(`/groups/${group_id}`)
   }
 
   create(form) {
@@ -49,12 +49,12 @@ class Group {
         placeId: form.address.place_id,
       },
       description: form.description,
-      start_time: form.startTime,
+      date: form.date,
       private_party: form.private,
       invite_url: form.invite_url,
     }
 
-    return Http.post('/group', group)
+    return Http.post('/groups', group)
   }
 }
 

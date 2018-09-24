@@ -92,7 +92,7 @@ const GroupCard = ({ classes, auth, group, place }) =>
       <ListItem disableGutters>
         <ListItemText
           primary="Приходить"
-          secondary={moment(new Date(group.start_time)).fromNow()}
+          secondary={moment(new Date(group.date)).fromNow()}
         />
       </ListItem>
       <ListItem disableGutters>
@@ -121,7 +121,7 @@ GroupCard.propTypes = {
     title: string.isRequired,
     address: object,
     place: object,
-    start_time: string.isRequired,
+    date: string.isRequired,
     description: string.isRequired,
   }).isRequired,
 }

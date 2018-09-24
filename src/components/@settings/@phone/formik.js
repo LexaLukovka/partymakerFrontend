@@ -14,8 +14,8 @@ const rules = Yup.object()
       .required('Это поле является обязательным'),
   })
 
-const handleSubmit = props => (formValues, methods) => {
-  props.actions.settings.change(formValues)
+const handleSubmit = ({ actions, user }) => (formValues, methods) => {
+  actions.settings.change(user.id, formValues)
 
   methods.setSubmitting(false)
 }
