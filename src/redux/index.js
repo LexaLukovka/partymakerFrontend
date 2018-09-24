@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 
 import place from './place'
 import group from './group'
+import event from './event'
 
 import authReducer from './auth/reducer'
 import userReducer from './user/reducer'
@@ -23,6 +24,7 @@ const persistConfig = {
 const reducers = combineReducers({
   place,
   group,
+  event,
   authReducer,
   userReducer,
   layoutReducer,

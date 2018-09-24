@@ -18,6 +18,7 @@ import PlacesLayout from './@places/PlacesLayout'
 import UserLayout from 'components/@users/UserLayout'
 import Background from 'components/Background'
 import connector from './connector'
+import EventsLayout from 'components/@events/EventsLayout'
 
 const LayoutScene = ({ auth }) =>
   <div>
@@ -27,6 +28,7 @@ const LayoutScene = ({ auth }) =>
         <Switch>
           <Route exact path="/" component={IndexScene} />
           <Route path="/group" component={GroupLayout} />
+          <Route path="/events" component={EventsLayout} />
           <Route path="/places" component={PlacesLayout} />
           <Route exact path="/user" render={() => <Redirect to={`/users/${auth.user.id}`} />} />
           <SignedInRoute path="/users" component={UserLayout} />

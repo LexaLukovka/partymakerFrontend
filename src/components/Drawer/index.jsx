@@ -20,13 +20,12 @@ class MyDrawer extends React.Component {
   }
 
   render() {
-    const { classes: { paperAnchor }, isOpen } = this.props
+    const { classes, isOpen } = this.props
     return (
       <SwipeableDrawer
         open={isOpen}
         onOpen={this.handleOpen}
         onClose={this.handleClose}
-        classes={{ paperAnchor }}
       >
         <div
           tabIndex={0}
