@@ -120,7 +120,6 @@ PlaceCard.propTypes = {
     address: shape({
       address: string.isRequired,
     }).isRequired,
-    telegram_url: string.isRequired,
     description: string.isRequired,
   }).isRequired,
   onVote: func.isRequired,

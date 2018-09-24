@@ -33,7 +33,7 @@ const singleReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        group: payload.data || {},
+        group: payload || {},
       }
 
     case CHANGE_GROUP_PENDING:

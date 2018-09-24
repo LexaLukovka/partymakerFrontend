@@ -24,7 +24,7 @@ const formik = withFormik({
 
   handleSubmit: (form, { props, setSubmitting }) => {
     if (form.password === form.repeatPassword) {
-      props.actions.settings.change({ oldPassword: form.oldPassword, password: form.password })
+      props.actions.settings.change(props.user.id, { oldPassword: form.oldPassword, password: form.password })
 
       setSubmitting(false)
     }

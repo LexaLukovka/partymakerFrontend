@@ -16,7 +16,7 @@ const styles = theme => ({
   },
 })
 
-class StartTimeScene extends React.Component {
+class DateScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.back()
@@ -47,14 +47,14 @@ class StartTimeScene extends React.Component {
           <Typography variant="subheading">Приходить на</Typography>
           <TextField
             fullWidth
-            name="start_time"
+            name="date"
             type="datetime-local"
             placeholder="Дата и время"
-            value={moment(values.start_time).format('YYYY-MM-DDT20:00')}
+            value={moment(values.date).format('YYYY-MM-DDT20:00')}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={this.hasError('start_time')}
-            helperText={this.showHelperError('start_time')}
+            error={this.hasError('date')}
+            helperText={this.showHelperError('date')}
           />
         </div>
         <Button variant="raised" color="primary" type="submit">
@@ -65,7 +65,7 @@ class StartTimeScene extends React.Component {
   }
 }
 
-StartTimeScene.propTypes = {
+DateScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   values: object.isRequired,
@@ -76,4 +76,4 @@ StartTimeScene.propTypes = {
   handleBlur: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(StartTimeScene)))
+export default formik(connector(withStyles(styles)(DateScene)))

@@ -31,8 +31,8 @@ class Auth {
     return { token, refreshToken, ...user }
   }
 
-  async change(settings) {
-    const { token, refreshToken } = await Http.put('/settings', settings)
+  async change(id, settings) {
+    const { token, refreshToken } = await Http.put(`/users/${id}`, settings)
     const user = JWT(token).data
 
     return { token, refreshToken, ...user }

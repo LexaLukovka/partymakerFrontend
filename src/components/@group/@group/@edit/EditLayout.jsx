@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core'
 import EditScene from './EditScene'
 import TitleScene from './@title/TitleScene'
 import AddressScene from './@address/AddressScene'
-import StartTimeScene from './@startTime/StartTimeScene'
+import DateScene from './@date/DateScene'
 import DescriptionScene from './@description/DescriptionScene'
 import connector from './connector'
 
@@ -34,7 +34,7 @@ class EditLayout extends React.Component {
           <Route exact path="/group/:id/edit" component={EditScene} />
           <Route exact path="/group/:id/edit/title" component={TitleScene} />
           <Route exact path="/group/:id/edit/address" component={AddressScene} />
-          <Route exact path="/group/:id/edit/startTime" component={StartTimeScene} />
+          <Route exact path="/group/:id/edit/startTime" component={DateScene} />
           <Route exact path="/group/:id/edit/description" component={DescriptionScene} />
         </Switch>
       </div>

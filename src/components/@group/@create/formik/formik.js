@@ -9,14 +9,14 @@ import isEmpty from 'lodash/isEmpty'
 const initValues = (form) => ({
   title: form.title || '',
   address: form.address,
-  startTime: form.startTime || moment(new Date()).format('YYYY-MM-DDT20:00'),
+  date: form.date || moment(new Date()).format('YYYY-MM-DDT20:00'),
   description: form.description || '',
 })
 
 const rules = Yup.object().shape({
   title: Yup.string().required('Это поле является обязательным'),
   address: Yup.string(),
-  startTime: Yup.string().required('Это поле является обязательным'),
+  date: Yup.string().required('Это поле является обязательным'),
   description: Yup.string().required('Это поле является обязательным'),
 })
 
