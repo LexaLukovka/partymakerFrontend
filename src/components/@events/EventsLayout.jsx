@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Route, Switch } from 'react-router-dom'
 import EventsScene from './EventsScene'
-import EventScene from './@events:id/EventScene'
+import EventScene from './@events.id/EventScene'
 
 const styles = {
   root: {},
