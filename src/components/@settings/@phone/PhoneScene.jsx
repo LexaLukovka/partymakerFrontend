@@ -1,10 +1,13 @@
 import React from 'react'
 import { func, object } from 'prop-types'
-import { withStyles, Typography, TextField, Button } from '@material-ui/core'
+import { Button, withStyles } from '@material-ui/core'
 import Helper from '../Helper'
-import connector from '../connector'
+
 import formik from './formik'
-import NumberFormat from 'react-number-format'
+import { Field } from 'formik'
+import FormikPhone from '../formik/FormikPhone'
+
+import connector from '../connector'
 
 const styles = theme => ({
   root: {
@@ -34,35 +37,16 @@ class PhoneScene extends React.Component {
     actions.header.resetTitle()
   }
 
-  hasError = (fieldName) => {
-    const { errors, touched } = this.props
-    return (!!errors[fieldName] && touched[fieldName])
-  }
-
-  showHelperError = (fieldName) => {
-    const { errors, touched } = this.props
-    return (touched[fieldName] && errors[fieldName])
-  }
-
   render() {
-    const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
+    const { classes, handleSubmit } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Номер телефона</Typography>
-          <NumberFormat
-            fullWidth
+          <Field
+            label="Номер телефона"
             name="phone"
-            format="+38 (###) ###-####"
-            mask="_"
-            placeholder="+38 (068) 318-8524"
-            type="tel"
-            customInput={TextField}
-            value={values.phone}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('phone')}
-            helperText={this.showHelperError('phone')}
+            component={FormikPhone}
+            placeholder="*******"
           />
         </div>
         <Helper>Ваш номер телефона будет виден всем людям на вашей вечеринке</Helper>
@@ -77,12 +61,7 @@ class PhoneScene extends React.Component {
 PhoneScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
-  values: object.isRequired,
-  errors: object.isRequired,
-  touched: object.isRequired,
   handleSubmit: func.isRequired,
-  handleChange: func.isRequired,
-  handleBlur: func.isRequired,
 }
 
 export default formik(connector(withStyles(styles)(PhoneScene)))
