@@ -1,17 +1,20 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { bool, object } from 'prop-types'
+import { Link } from 'react-router-dom'
 import {
+  Avatar,
   Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
+  Grid,
   Typography,
   withStyles,
 } from '@material-ui/core'
 
-import { Link } from 'react-router-dom'
+import shortDescriptions from 'utils/shortDescriptions'
+import moment from 'moment'
 
 const styles = {
   root: {
@@ -19,7 +22,8 @@ const styles = {
   },
   media: {
     width: '100%',
-    height: 300,
+    height: '100%',
+    borderRadius: 0,
   },
   container: {
     display: 'flex',
@@ -28,22 +32,21 @@ const styles = {
   },
 }
 
-const EventCard = ({ classes, event }) =>
+const EventCard = ({ classes, event, isChoose }) =>
   <Card className={classes.root}>
-    <CardHeader
-      title={event.title}
-      subheader={event.address.address}
-    />
-    <CardMedia
-      className={classes.media}
-      image={event.pictures[0].url}
-      title={event.title}
-    />
+    <Link to={`/events/${event.id}`}>
+      <CardHeader
+        title={event.title}
+        subheader={<Typography variant="subheading">{event.address.address}</Typography>}
+      />
+      <Avatar className={classes.media} alt={event.title} src={event.pictures[0].url} />
+    </Link>
+
     <CardContent>
       <div className={classes.container}>
         <div>
           <Typography variant="subheading">Когда?</Typography>
-          <Typography color="textSecondary">{event.date}</Typography>
+          <Typography color="textSecondary">{moment(new Date(event.date)).format('Do MMMM в h:mm')}</Typography>
         </div>
         <div>
           <Typography variant="subheading">Сколько стоит?</Typography>
@@ -52,17 +55,35 @@ const EventCard = ({ classes, event }) =>
       </div>
 
       <Typography component="p">
-        {event.description}
+        {shortDescriptions(event.description)}
       </Typography>
     </CardContent>
     <CardActions>
-      <Link to={`/events/${event.id}`}><Button color="primary">Смотреть</Button></Link>
+      <Link to={`/events/${event.id}`}>
+        <Button color="primary">
+          Смотреть
+        </Button>
+      </Link>
+      <Grid container justify="flex-end">
+        <Link to={`/group/create?event_id=${event.id}`}>
+          {isChoose ?
+            <Button color="primary">
+              Выбрать
+            </Button>
+            :
+            <Button color="primary">
+              Собрать компанию
+            </Button>
+          }
+        </Link>
+      </Grid>
     </CardActions>
   </Card>
 
 EventCard.propTypes = {
   classes: object.isRequired,
   event: object.isRequired,
+  isChoose: bool.isRequired,
 }
 
 export default withStyles(styles)(EventCard)
