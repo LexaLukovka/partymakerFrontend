@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-closing-tag-location,padded-blocks */
 import React, { Component } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import { object } from 'prop-types'
+import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import connector from './connector'
 import EventCard from './EventCard'
@@ -31,7 +31,7 @@ class EvenetsScene extends Component {
   }
 
   render() {
-    const { events: { loading, events }, classes } = this.props
+    const { events: { loading, events }, isChoose, classes } = this.props
     if (loading) return <Loading />
     if (isEmpty(events)) return <NotFound />
 
@@ -43,7 +43,7 @@ class EvenetsScene extends Component {
         hasMore={this.hasMore()}
         loader={<Loading />}
       >
-        {events.map(event => <EventCard key={event.id} event={event} />)}
+        {events.map(event => <EventCard isChoose={isChoose} key={event.id} event={event} />)}
       </InfiniteScroll>
     </div>
   }
@@ -53,7 +53,7 @@ EvenetsScene.propTypes = {
   classes: object.isRequired,
   events: object.isRequired,
   actions: object.isRequired,
-
+  isChoose: bool.isRequired,
 }
 
 export default withStyles(styles)(connector(EvenetsScene))

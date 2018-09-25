@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { object, array, bool } from 'prop-types'
+import { array, bool, object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
 import { withStyles } from '@material-ui/core/styles'
-import { List, Avatar, ListItemText, ListItem } from '@material-ui/core'
+import { Avatar, List, ListItem, ListItemText } from '@material-ui/core'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import connector from './connector'
@@ -28,7 +28,7 @@ class MembersScene extends Component {
   }
 
   render() {
-    const { classes, loading, users, admin } = this.props
+    const { classes, loading, users, auth } = this.props
     if (loading) return <Loading />
     if (isEmpty(users)) return <NotFound />
 
@@ -40,7 +40,7 @@ class MembersScene extends Component {
               <Avatar src={user.avatar_url}>{user.avatar_url ? null : initialsFromUsername(user.name)}</Avatar>
               <ListItemText
                 primary={user.name}
-                secondary={(user.id === admin.id) ? 'Организатор' : 'Участник'}
+                secondary={(user.id === auth.id) ? 'Организатор' : 'Участник'}
               />
             </ListItem>)
           }
@@ -53,14 +53,10 @@ class MembersScene extends Component {
 MembersScene.propTypes = {
   classes: object.isRequired,
   users: array.isRequired,
-  admin: object,
+  auth: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
   loading: bool.isRequired,
-}
-
-MembersScene.defaultProps = {
-  admin: null,
 }
 
 export default withStyles(styles)(connector(MembersScene))

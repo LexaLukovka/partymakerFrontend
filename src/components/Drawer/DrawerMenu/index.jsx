@@ -70,6 +70,10 @@ const DrawerMenu = ({ classes, actions, auth }) =>
         <Search />
         <ListItemText>Куда пойти погулять?</ListItemText>
       </ListItem>
+      <ListItem button component={Link} to="/events">
+        <Search />
+        <ListItemText>Искать события</ListItemText>
+      </ListItem>
       {auth.user &&
       <ListItem button component={Link} to="/user">
         <Person />

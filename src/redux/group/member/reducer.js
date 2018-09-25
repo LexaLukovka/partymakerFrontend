@@ -51,7 +51,7 @@ const memberReducer = (state = initialState, { type, user, payload }) => {
         ...state,
         loading: false,
         admin: payload.admin,
-        users: payload.data,
+        users: payload,
       }
 
     case JOIN_GROUP_PENDING:

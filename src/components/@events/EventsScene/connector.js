@@ -4,6 +4,7 @@ import * as events from 'src/redux/event/list/action'
 
 const initMapStateToProps = store => ({
   events: store.event.listReducer,
+  isChoose: store.event.buttonReducer.isChoose,
 })
 
 const initMapDispatchToProps = dispatch => ({

@@ -17,7 +17,7 @@ class Group {
   }
 
   users(group_id) {
-    return Http.get(`/groups/${group_id}/users`)
+    return Http.get(`/groups/${group_id}/members`)
   }
 
   join(group_id) {

@@ -114,7 +114,7 @@ class GroupScene extends React.Component {
             :
             <Typography align="center" gutterBottom>
               <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
-              что бы принять участие в вечеринке
+              что бы принять участие в компании
             </Typography>
           }
         </div>
