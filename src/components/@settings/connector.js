@@ -4,7 +4,7 @@ import * as actions from 'src/redux/auth/action'
 import * as headerActions from 'src/redux/header/action'
 
 const initMapStateToProps = store => ({
-  user: store.authReducer.user,
+  ...store.authReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({

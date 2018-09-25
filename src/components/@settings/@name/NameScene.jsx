@@ -1,9 +1,13 @@
 import React from 'react'
-import { object, func } from 'prop-types'
-import { withStyles, Typography, TextField, Button } from '@material-ui/core'
+import { func, object } from 'prop-types'
+import { Button, withStyles } from '@material-ui/core'
 import Helper from '../Helper'
-import connector from '../connector'
+
 import formik from './formik'
+import FormikText from '../formik/FormikText'
+import { Field } from 'formik'
+
+import connector from '../connector'
 
 const styles = theme => ({
   root: {
@@ -33,31 +37,16 @@ class NameScene extends React.Component {
     actions.header.resetTitle()
   }
 
-  hasError = (fieldName) => {
-    const { errors, touched } = this.props
-    return (!!errors[fieldName] && touched[fieldName])
-  }
-
-  showHelperError = (fieldName) => {
-    const { errors, touched } = this.props
-    return (touched[fieldName] && errors[fieldName])
-  }
-
   render() {
-    const { classes, values, handleSubmit, handleChange, handleBlur } = this.props
+    const { classes, handleSubmit } = this.props
     return (
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
-          <Typography variant="subheading">Имя и фамилия</Typography>
-          <TextField
-            fullWidth
+          <Field
+            label="Имя и фамилия"
+            component={FormikText}
             name="name"
-            placeholder="Имя и фамилия"
-            value={values.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={this.hasError('name')}
-            helperText={this.showHelperError('name')}
+            placeholder="Вася Пупкин"
           />
         </div>
         <Helper>Ваше имя и фамилия будут видны всем пользователям</Helper>
@@ -72,12 +61,7 @@ class NameScene extends React.Component {
 NameScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
-  values: object.isRequired,
-  errors: object.isRequired,
-  touched: object.isRequired,
   handleSubmit: func.isRequired,
-  handleChange: func.isRequired,
-  handleBlur: func.isRequired,
 }
 
 export default formik(connector(withStyles(styles)(NameScene)))
