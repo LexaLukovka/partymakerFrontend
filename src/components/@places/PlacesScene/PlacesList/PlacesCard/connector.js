@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as group from 'src/redux/group/buttonCreate/action'
 
 const initMapStateToProps = store => ({
-  isChoose: store.group.buttonReducer.isChoose,
+  isChoose: store.place.buttonReducer.isChoose,
 })
 
 const initMapDispatchToProps = dispatch => ({

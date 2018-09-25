@@ -3,11 +3,11 @@ import React from 'react'
 import { func, object, shape, string } from 'prop-types'
 import { withRouter } from 'react-router'
 import { FormControlLabel, Radio, RadioGroup, Typography, withStyles } from '@material-ui/core'
+import Geosuggest from 'components/Geosuggest'
 import PlaceInput from './PlaceInput'
 
 import isEmpty from 'lodash/isEmpty'
 import connector from '../connector'
-import Geosuggest from 'components/Geosuggest'
 
 const styles = () => ({
   radio: {
@@ -30,10 +30,16 @@ class PlaceForm extends React.Component {
     actions.group.resetPlace()
   }
 
-  handleClickOpen = () => {
+  handleClickOpenPlace = () => {
     const { actions, history } = this.props
-    actions.button.hideCreateGroup()
+    actions.buttonPlace.hideCreateGroup()
     history.push('/places')
+  }
+
+  handleClickOpenEvent = () => {
+    const { actions, history } = this.props
+    actions.buttonEvent.hideCreateGroup()
+    history.push('/events')
   }
 
   render() {
@@ -51,10 +57,16 @@ class PlaceForm extends React.Component {
             onChange={this.handleChange}
           >
             <FormControlLabel
-              onClick={this.handleClickOpen}
+              onClick={this.handleClickOpenPlace}
               value="place"
               control={<Radio color="primary" />}
-              label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
+              label={<Typography color="primary" variant="subheading">Выберите место</Typography>}
+            />
+            <FormControlLabel
+              onClick={this.handleClickOpenEvent}
+              value="event"
+              control={<Radio color="primary" />}
+              label={<Typography color="primary" variant="subheading">Выберите событие</Typography>}
             />
             <FormControlLabel
               value="address"
