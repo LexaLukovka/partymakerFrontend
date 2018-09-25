@@ -6,9 +6,24 @@ import connector from '../connector'
 
 class SettingsScene extends React.Component {
   componentDidMount() {
-    this.props.actions.header.setTitle('Настройки')
+    const { actions } = this.props
+
+
+    actions.header.setTitle('Настройки')
     document.title = 'Настройки'
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   const { actions, place, location: { search } } = this.props
+  //   const { place_id } = qs.parse(search.replace('?', ''))
+  //   if (place !== nextProps.place) {
+  //     if (!isEmpty(nextProps.place) && place_id) {
+  //       actions.group.update({ place: nextProps.place, address: nextProps.place.address })
+  //     }
+  //   }
+  //   actions.header.back()
+  //   document.title = 'Создание компании'
+  // }
 
   componentWillUnmount() {
     this.props.actions.header.resetTitle()

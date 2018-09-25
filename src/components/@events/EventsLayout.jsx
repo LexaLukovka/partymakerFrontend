@@ -6,7 +6,9 @@ import EventsScene from './EventsScene'
 import EventScene from './@events.id/EventScene'
 
 const styles = {
-  root: {},
+  root: {
+    height: '100%',
+  },
 }
 
 const EventsLayout = ({ classes }) =>

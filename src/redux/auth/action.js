@@ -76,11 +76,10 @@ export const logout = () => dispatch => {
 }
 
 // noinspection JSUnusedGlobalSymbols
-export const change = (id, settings) => async dispatch => {
+export const change = (user_id, settings) => async dispatch => {
   await dispatch({
     type: CHANGE_SETTINGS,
-    payload: Auth.change(id, settings),
+    payload: Auth.change(user_id, settings),
   })
-
   dispatch(alert.show('Ваш профиль изменен'))
 }

@@ -34,7 +34,7 @@ class EditLayout extends React.Component {
           <Route exact path="/group/:id/edit" component={EditScene} />
           <Route exact path="/group/:id/edit/title" component={TitleScene} />
           <Route exact path="/group/:id/edit/address" component={AddressScene} />
-          <Route exact path="/group/:id/edit/startTime" component={DateScene} />
+          <Route exact path="/group/:id/edit/date" component={DateScene} />
           <Route exact path="/group/:id/edit/description" component={DescriptionScene} />
         </Switch>
       </div>

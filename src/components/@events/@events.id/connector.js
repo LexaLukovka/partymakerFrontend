@@ -1,14 +1,16 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as events from 'src/redux/event/list/action'
+import * as events from 'src/redux/event/single/action'
+import * as headerActions from 'src/redux/header/action'
 
 const initMapStateToProps = store => ({
-  events: store.event.listReducer,
+  ...store.event.singleReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    events: bindActionCreators(events, dispatch),
+    event: bindActionCreators(events, dispatch),
+    header: bindActionCreators(headerActions, dispatch),
   },
 })
 

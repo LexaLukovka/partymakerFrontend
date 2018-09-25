@@ -80,8 +80,8 @@ class EditScene extends React.Component {
           </ListItem>
         </React.Fragment>
         }
-        <ListItem to={`/group/${group.id}/edit/startTime`}>
-          <ListItemText primary="Приходить на" secondary={moment(new Date(group.start_time)).fromNow()} />
+        <ListItem to={`/group/${group.id}/edit/date`}>
+          <ListItemText primary="Приходить на" secondary={moment(new Date(group.date)).fromNow()} />
         </ListItem>
         <ListItem to={`/group/${group.id}/edit/description`}>
           <ListItemText primary="Описание" secondary={group.description} />

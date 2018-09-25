@@ -87,7 +87,7 @@ class CreateScene extends React.Component {
         <Field
           label="Когда и во сколько состоится?"
           component={FormikDateTime}
-          name="date"
+          name="startTime"
           placeholder="Дата и время"
         />
         <Field

@@ -46,10 +46,11 @@ class UsersScene extends React.Component {
   }
 
   handleUpload = async url => {
-    const { actions, match, user } = this.props
-    await actions.settings.change(user.id, { avatar_url: url })
+    const { actions, match } = this.props
+    await actions.settings.change({ avatar_url: url })
     actions.user.find(match.params.id)
   }
+
 
   render() {
     const { classes, auth, user: { user, loading } } = this.props
