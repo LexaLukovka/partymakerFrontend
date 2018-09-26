@@ -14,9 +14,13 @@ const styles = {
 }
 
 class EvenetsScene extends Component {
-
   componentDidMount() {
     this.load(1)
+  }
+
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.buttonEvent.hideChoose()
   }
 
   load = (page) => {

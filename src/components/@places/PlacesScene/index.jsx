@@ -28,6 +28,11 @@ class PlacesScene extends Component {
     document.title = 'Места где погулять в Запорожье'
   }
 
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.buttonPlace.hideChoose()
+  }
+
   render() {
     const { places: { loading, places }, classes } = this.props
     if (loading) return <Loading />
