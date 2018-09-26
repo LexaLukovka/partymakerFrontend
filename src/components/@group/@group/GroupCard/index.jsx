@@ -50,7 +50,7 @@ const styles = theme => ({
   },
 })
 
-const GroupCard = ({ classes, auth, group, place }) =>
+const GroupCard = ({ classes, auth, group }) =>
   <Paper className={classes.root}>
     <div className={classes.title}>
       <div className={classes.flex}>
@@ -68,16 +68,27 @@ const GroupCard = ({ classes, auth, group, place }) =>
           </Link>
         </ListItemSecondaryAction>
       </ListItem>
-      {group.place ?
+      {group.place &&
         <ListItem disableGutters>
           <ListItemText primary="Место" />
           <ListItemSecondaryAction>
-            <Link to={`/places/${place.id}`}>
+            <Link to={`/places/${group.place.id}`}>
               <Typography color="primary">{group.place.title}</Typography>
             </Link>
           </ListItemSecondaryAction>
         </ListItem>
-        :
+      }
+      {group.event &&
+        <ListItem disableGutters>
+          <ListItemText primary="Событие" />
+          <ListItemSecondaryAction>
+            <Link to={`/events/${group.event.id}`}>
+              <Typography color="primary">{group.event.title}</Typography>
+            </Link>
+          </ListItemSecondaryAction>
+        </ListItem>
+      }
+      {group.address &&
         <React.Fragment>
           <ListItem disableGutters>
             <ListItemText primary="Адрес" secondary={shortTitle(group.address.address)} />
@@ -115,12 +126,12 @@ const GroupCard = ({ classes, auth, group, place }) =>
 GroupCard.propTypes = {
   classes: object.isRequired,
   auth: object.isRequired,
-  place: object.isRequired,
   group: shape({
     admin: object.isRequired,
     title: string.isRequired,
     address: object,
     place: object,
+    event: object,
     date: string.isRequired,
     description: string.isRequired,
   }).isRequired,
