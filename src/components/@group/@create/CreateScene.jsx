@@ -40,28 +40,37 @@ const styles = theme => ({
 })
 
 class CreateScene extends React.Component {
-  // componentDidMount() {
-  //   const { actions, place, location: { search } } = this.props
-  //   const { place_id } = qs.parse(search.replace('?', ''))
-  //   console.log(place)
-  //   if (!isEmpty(place) && place_id) {
-  //     actions.group.update({ place, address: place.address })
-  //   }
-  //
-  //   actions.header.back()
-  //   document.title = 'Создание компании'
-  // }
+  componentDidMount() {
+    const { actions, location: { search } } = this.props
+    const id = qs.parse(search.replace('?', ''))
+
+    if (id.place_id !== undefined) {
+      actions.group.resetEvent()
+      actions.place.show(id.place_id)
+    }
+    if (id.event_id !== undefined) {
+      actions.group.resetPlace()
+      actions.event.find(id.event_id)
+    }
+
+    actions.header.back()
+    document.title = 'Создание компании'
+  }
 
   componentWillReceiveProps(nextProps) {
-    const { actions, place, location: { search } } = this.props
-    const { place_id } = qs.parse(search.replace('?', ''))
+    const { actions, place, event, location: { search } } = this.props
+    const id = qs.parse(search.replace('?', ''))
+
     if (place !== nextProps.place) {
-      if (!isEmpty(nextProps.place) && place_id) {
+      if (!isEmpty(nextProps.place) && id.place_id) {
         actions.group.update({ place: nextProps.place, address: nextProps.place.address })
       }
     }
-    actions.header.back()
-    document.title = 'Создание компании'
+    if (event !== nextProps.event) {
+      if (!isEmpty(nextProps.event) && id.event_id) {
+        actions.group.update({ event: nextProps.event, address: nextProps.event.address })
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -72,7 +81,6 @@ class CreateScene extends React.Component {
   render() {
     const { classes, ...formHOC } = this.props
     const { isSubmitting, handleSubmit } = formHOC
-
     return (
       <form className={classes.root}>
         <PlaceForm {...formHOC} />
@@ -121,6 +129,7 @@ class CreateScene extends React.Component {
 CreateScene.propTypes = {
   history: object.isRequired,
   place: object.isRequired,
+  event: object.isRequired,
   actions: object.isRequired,
   classes: object.isRequired,
   handleSubmit: func.isRequired,

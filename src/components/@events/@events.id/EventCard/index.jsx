@@ -54,7 +54,7 @@ const EventCard = ({ classes, event }) =>
       </Typography>
     </div>
     <div className={classes.description}>
-      <Link to="/group/create">
+      <Link to={`/group/create?event_id=${event.id}`}>
         <Button color="primary" fullWidth variant="contained">Собрать компанию</Button>
       </Link>
     </div>

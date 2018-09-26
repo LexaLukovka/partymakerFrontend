@@ -4,9 +4,11 @@ import {
   CREATE_GROUP_PENDING,
   CREATE_GROUP_REJECTED,
   CREATE_GROUP_FULFILLED,
+
   UPDATE_GROUP_FORM,
   RESET_GROUP_FORM,
   RESET_GROUP_PLACE_FORM,
+  RESET_GROUP_EVENT_FORM,
 } from './action'
 
 const initialState = {
@@ -60,6 +62,16 @@ const createGroup = (state = initialState, { type, payload }) => {
         },
       }
     }
+    case RESET_GROUP_EVENT_FORM: {
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          event: {},
+        },
+      }
+    }
+
     default:
       return state
   }
