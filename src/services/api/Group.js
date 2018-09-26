@@ -1,6 +1,5 @@
 /* eslint-disable class-methods-use-this,camelcase,object-shorthand */
 import Http from 'services/Http'
-import isEmpty from 'lodash/isEmpty'
 import qs from 'querystring'
 
 class Group {
@@ -37,24 +36,7 @@ class Group {
   }
 
   create(form) {
-    const place_id = isEmpty(form.place) ? null : form.place.id
-
-    const group = {
-      title: form.title,
-      place_id,
-      address: place_id ? null : {
-        address: form.address.formatted_address,
-        lng: place_id ? form.address.geometry.location.lng : form.address.geometry.location.lng(),
-        lat: place_id ? form.address.geometry.location.lat : form.address.geometry.location.lat(),
-        placeId: form.address.place_id,
-      },
-      description: form.description,
-      date: form.date,
-      private_party: form.private,
-      invite_url: form.invite_url,
-    }
-
-    return Http.post('/groups', group)
+    return Http.post('/groups', form)
   }
 }
 
