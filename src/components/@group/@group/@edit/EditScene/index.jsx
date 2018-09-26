@@ -15,7 +15,7 @@ import ListDeleteItem from '@material-ui/core/ListItem'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import isEmpty from 'lodash/isEmpty'
-import ListItem from './ListItem'
+import ListItem from './List/ListItem'
 import connector from '../connector'
 import moment from 'moment'
 
@@ -73,7 +73,7 @@ class EditScene extends React.Component {
         <ListItem to={`/group/${group.id}/edit/title`}>
           <ListItemText primary="Название вечеринки" secondary={group.title} />
         </ListItem>
-        {!group.place &&
+        {group.address &&
         <React.Fragment>
           <ListItem to={`/group/${group.id}/edit/address`}>
             <ListItemText primary="Адрес" secondary={group.address.address} />

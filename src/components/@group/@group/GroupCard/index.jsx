@@ -69,42 +69,42 @@ const GroupCard = ({ classes, auth, group }) =>
         </ListItemSecondaryAction>
       </ListItem>
       {group.place &&
-        <ListItem disableGutters>
-          <ListItemText primary="Место" />
-          <ListItemSecondaryAction>
-            <Link to={`/places/${group.place.id}`}>
-              <Typography color="primary">{group.place.title}</Typography>
-            </Link>
-          </ListItemSecondaryAction>
-        </ListItem>
+      <ListItem disableGutters>
+        <ListItemText primary="Место" />
+        <ListItemSecondaryAction>
+          <Link to={`/places/${group.place.id}`}>
+            <Typography variant="subheading" color="primary">{group.place.title}</Typography>
+          </Link>
+        </ListItemSecondaryAction>
+      </ListItem>
       }
       {group.event &&
-        <ListItem disableGutters>
-          <ListItemText primary="Событие" />
-          <ListItemSecondaryAction>
-            <Link to={`/events/${group.event.id}`}>
-              <Typography color="primary">{group.event.title}</Typography>
-            </Link>
-          </ListItemSecondaryAction>
-        </ListItem>
+      <ListItem disableGutters>
+        <ListItemText primary="Событие" />
+        <ListItemSecondaryAction>
+          <Link to={`/events/${group.event.id}`}>
+            <Typography variant="subheading" color="primary">{group.event.title}</Typography>
+          </Link>
+        </ListItemSecondaryAction>
+      </ListItem>
       }
       {group.address &&
-        <React.Fragment>
-          <ListItem disableGutters>
-            <ListItemText primary="Адрес" secondary={shortTitle(group.address.address)} />
-            <ListItemSecondaryAction>
-              <a href={`http://www.google.com/maps/?q=${group.address.address}`}>
-                <Button size="small" color="primary">на карте</Button>
-              </a>
-            </ListItemSecondaryAction>
-          </ListItem>
-        </React.Fragment>
+      <React.Fragment>
+        <ListItem disableGutters>
+          <ListItemText primary="Адрес" secondary={shortTitle(group.address.address)} />
+          <ListItemSecondaryAction>
+            <a href={`http://www.google.com/maps/?q=${group.address.address}`}>
+              <Button size="small" color="primary">на карте</Button>
+            </a>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </React.Fragment>
       }
       <ListItem disableGutters>
-        <ListItemText
-          primary="Приходить"
-          secondary={moment(new Date(group.date)).fromNow()}
-        />
+        <ListItemText primary="Начало" />
+        <ListItemSecondaryAction>
+          <Typography variant="subheading">{moment(new Date(group.date)).format('LLL')}</Typography>
+        </ListItemSecondaryAction>
       </ListItem>
       <ListItem disableGutters>
         <ListItemText
