@@ -25,9 +25,11 @@ class PlaceForm extends React.Component {
     this.setState({ value: event.target.value })
   }
 
-  removePlace = () => {
+  removePlace = (isPlace) => {
     const { actions } = this.props
-    actions.group.resetPlace()
+
+    if (isPlace) actions.group.resetEvent()
+    else actions.group.resetPlace()
   }
 
   handleClickOpenPlace = () => {
@@ -45,10 +47,11 @@ class PlaceForm extends React.Component {
   render() {
     const { classes, group, values, setFieldValue, setFieldTouched, errors, touched } = this.props
     const { value } = this.state
-    const { place } = group.form
+    const { place, event } = group.form
+
     return (
       <div>
-        {isEmpty(place) ?
+        {isEmpty(place) && isEmpty(event) ?
           <RadioGroup
             aria-label="Gender"
             name="gender1"
@@ -86,7 +89,11 @@ class PlaceForm extends React.Component {
             />
           </RadioGroup>
           :
-          <PlaceInput place={place} onCancel={this.removePlace} />}
+          <PlaceInput
+            place={isEmpty(place) ? event : place}
+            onCancel={() => this.removePlace(isEmpty(place))}
+          />
+        }
       </div>
     )
   }

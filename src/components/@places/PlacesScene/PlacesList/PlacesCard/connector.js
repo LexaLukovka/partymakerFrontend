@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as group from 'src/redux/group/buttonCreate/action'
+import * as buttonPlace from 'src/redux/place/buttonCreate/action'
 
 const initMapStateToProps = store => ({
   isChoose: store.place.buttonReducer.isChoose,
@@ -8,7 +8,7 @@ const initMapStateToProps = store => ({
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    group: bindActionCreators(group, dispatch),
+    buttonPlace: bindActionCreators(buttonPlace, dispatch),
   },
 })
 
