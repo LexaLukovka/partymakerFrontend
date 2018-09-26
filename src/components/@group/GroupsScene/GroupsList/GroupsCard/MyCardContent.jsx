@@ -38,22 +38,33 @@ const MyCardContent = ({ classes, group }) =>
           </ListItemSecondaryAction>
         </ListItem>
       </Link>
-      {group.place ?
-        <ListItem disableGutters>
-          <Typography variant="subheading">Место:</Typography>
-          <ListItemSecondaryAction>
-            <Link to={`/places/${group.place.id}`}>
-              <Typography variant="subheading" color="primary">{group.place.title}</Typography>
-            </Link>
-          </ListItemSecondaryAction>
-        </ListItem>
-        :
-        <ListItem disableGutters>
-          <Typography variant="subheading">Адрес:</Typography>
-          <ListItemSecondaryAction>
-            {shortTitle(group.address.address)}
-          </ListItemSecondaryAction>
-        </ListItem>
+      {group.place &&
+      <ListItem disableGutters>
+        <Typography variant="subheading">Место:</Typography>
+        <ListItemSecondaryAction>
+          <Link to={`/places/${group.place.id}`}>
+            <Typography variant="subheading" color="primary">{group.place.title}</Typography>
+          </Link>
+        </ListItemSecondaryAction>
+      </ListItem>
+      }
+      {group.event &&
+      <ListItem disableGutters>
+        <Typography variant="subheading">Событие:</Typography>
+        <ListItemSecondaryAction>
+          <Link to={`/events/${group.event.id}`}>
+            <Typography variant="subheading" color="primary">{group.event.title}</Typography>
+          </Link>
+        </ListItemSecondaryAction>
+      </ListItem>
+      }
+      {group.address &&
+      <ListItem disableGutters>
+        <Typography variant="subheading">Адрес:</Typography>
+        <ListItemSecondaryAction>
+          {shortTitle(group.address.address)}
+        </ListItemSecondaryAction>
+      </ListItem>
       }
     </List>
 
