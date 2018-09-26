@@ -3,10 +3,9 @@ import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import { CardActions, IconButton, Button } from '@material-ui/core'
+import { Button, CardActions, IconButton } from '@material-ui/core'
 
 import Share from 'mdi-react/ShareIcon'
-
 
 const styles = {
   actions: {

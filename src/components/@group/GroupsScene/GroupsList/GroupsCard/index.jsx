@@ -1,9 +1,8 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Card, withStyles } from '@material-ui/core'
-import CardHeader from './MyCardHeader'
-import CardContent from './MyCardContent'
-import CardActions from './MyCardActions'
+import CardContent from './MyCard/MyCardContent'
+import CardActions from './MyCard/MyCardActions'
 
 const styles = theme => ({
   root: {
@@ -18,7 +17,6 @@ const styles = theme => ({
 
 const PartiesCard = ({ classes, group }) =>
   <Card className={classes.root}>
-    <CardHeader group={group} />
     <CardContent group={group} />
     <CardActions group={group} />
   </Card>

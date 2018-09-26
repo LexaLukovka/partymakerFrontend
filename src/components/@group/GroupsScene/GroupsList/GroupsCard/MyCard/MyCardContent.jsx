@@ -1,12 +1,21 @@
 import React from 'react'
 import { number, object, shape, string } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { CardContent, List, ListItem, ListItemSecondaryAction, Typography, withStyles } from '@material-ui/core'
+import { CardContent, List, ListItemSecondaryAction, Typography, withStyles } from '@material-ui/core'
+import ListItem from './List/ListItem'
 import shortTitle from 'utils/shortTitle'
+import moment from 'moment'
 
 const styles = {
   cardContent: {
     paddingTop: 0,
+    marginTop: -15,
+  },
+  title: {
+    paddingTop: 20,
+  },
+  create: {
+    paddingBottom: 10,
   },
   picture: {
     width: '100%',
@@ -29,17 +38,15 @@ const MyCardContent = ({ classes, group }) =>
   <CardContent className={classes.cardContent}>
     <List className={classes.list}>
       <Link to={`/group/${group.id}`}>
-        <ListItem disableGutters>
-          <Typography variant="subheading">Что будет?</Typography>
-          <ListItemSecondaryAction>
-            <Typography variant="title">
-              {group.title}
-            </Typography>
-          </ListItemSecondaryAction>
+        <Typography variant="headline" className={classes.title}>
+          {group.title}
+        </Typography>
+        <ListItem>
+          <Typography variant="caption" className={classes.create}>{moment(group.updated_at).fromNow()}</Typography>
         </ListItem>
       </Link>
       {group.place &&
-      <ListItem disableGutters>
+      <ListItem>
         <Typography variant="subheading">Место:</Typography>
         <ListItemSecondaryAction>
           <Link to={`/places/${group.place.id}`}>
@@ -49,7 +56,7 @@ const MyCardContent = ({ classes, group }) =>
       </ListItem>
       }
       {group.event &&
-      <ListItem disableGutters>
+      <ListItem>
         <Typography variant="subheading">Событие:</Typography>
         <ListItemSecondaryAction>
           <Link to={`/events/${group.event.id}`}>
@@ -59,13 +66,19 @@ const MyCardContent = ({ classes, group }) =>
       </ListItem>
       }
       {group.address &&
-      <ListItem disableGutters>
+      <ListItem>
         <Typography variant="subheading">Адрес:</Typography>
         <ListItemSecondaryAction>
-          {shortTitle(group.address.address)}
+          <Typography variant="subheading">{shortTitle(group.address.address)}</Typography>
         </ListItemSecondaryAction>
       </ListItem>
       }
+      <ListItem>
+        <Typography variant="subheading">Приходить:</Typography>
+        <ListItemSecondaryAction>
+          <Typography variant="subheading">{moment(new Date(group.date)).fromNow()}</Typography>
+        </ListItemSecondaryAction>
+      </ListItem>
     </List>
 
     <Typography paragraph>

@@ -27,8 +27,7 @@ const MyCardHeader = ({ classes, group }) =>
       </span>
     }
     title={<Link to={`/users/${group.admin.id}`}>{group.admin.name}</Link>}
-    subheader={moment(group.updated_at)
-      .fromNow()}
+    subheader={moment(group.updated_at).fromNow()}
   />
 
 MyCardHeader.propTypes = {
