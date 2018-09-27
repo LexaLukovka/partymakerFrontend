@@ -26,7 +26,7 @@ const Member = ({ classes, auth, group, memberLoading, isMember, toggleJoinParty
     </Button>
     :
     <Typography align="center" gutterBottom>
-      <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
+      <Link to="/auth/login" className={classes.loginLink}>Войдите</Link>
       что бы принять участие в компании
     </Typography>
 
