@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core'
 import connector from '../connector'
 import shortTitle from 'utils/shortTitle'
-import EditIcon from './EditIcon'
+import MoreIcon from './SettingsIcon/MoreIcon'
 
 const styles = theme => ({
   root: {
@@ -56,7 +56,7 @@ const GroupCard = ({ classes, auth, group }) =>
       <div className={classes.flex}>
         <Typography align="center" variant="headline">{group.title}</Typography>
       </div>
-      <EditIcon visible={auth.user && auth.user.id === group.admin_id} group={group} />
+      <MoreIcon visible={auth.user && auth.user.id === group.admin_id} group={group} />
     </div>
     <List>
       <ListItem disableGutters>

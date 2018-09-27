@@ -1,10 +1,14 @@
 import {
+  OPEN_DELETE,
+  CLOSE_DELETE,
+
   DELETE_GROUP_PENDING,
-  DELETE_GROUPS_REJECTED,
   DELETE_GROUPS_FULFILLED,
+  DELETE_GROUPS_REJECTED,
 } from './action'
 
 const initialState = {
+  isOpen: false,
   loading: false,
   error: null,
   message: null,
@@ -12,6 +16,19 @@ const initialState = {
 
 const deleteReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case OPEN_DELETE: {
+      return {
+        ...state,
+        isOpen: true,
+      }
+    }
+    case CLOSE_DELETE: {
+      return {
+        ...state,
+        isOpen: false,
+      }
+    }
+
     case DELETE_GROUP_PENDING: {
       return {
         ...state,
