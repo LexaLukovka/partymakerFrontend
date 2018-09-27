@@ -54,7 +54,7 @@ const GroupCard = ({ classes, auth, group }) =>
   <Paper className={classes.root}>
     <div className={classes.title}>
       <div className={classes.flex}>
-        <Typography align="center" variant="title">{group.title}</Typography>
+        <Typography align="center" variant="headline">{group.title}</Typography>
       </div>
       <EditIcon visible={auth.user && auth.user.id === group.admin_id} group={group} />
     </div>
@@ -103,18 +103,7 @@ const GroupCard = ({ classes, auth, group }) =>
       <ListItem disableGutters>
         <ListItemText primary="Начало" />
         <ListItemSecondaryAction>
-          <Typography variant="subheading">{moment(new Date(group.date)).format('LLL')}</Typography>
-        </ListItemSecondaryAction>
-      </ListItem>
-      <ListItem disableGutters>
-        <ListItemText
-          primary="Собирается"
-          secondary="уже 10 человек"
-        />
-        <ListItemSecondaryAction>
-          <Link to={`/group/${group.id}/users`}>
-            <Button size="small" color="primary">участники</Button>
-          </Link>
+          <Typography variant="subheading">{moment(new Date(group.date)).format('Do MMMM в hh:mm')}</Typography>
         </ListItemSecondaryAction>
       </ListItem>
       <ListItem disableGutters>

@@ -21,14 +21,14 @@ const rules = Yup.object().shape({
 })
 
 const handleSubmit = props => (formValues, methods) => {
-  const { actions, group, history, place } = props
+  const { actions, group, history, place, event } = props
 
   const place_id = isEmpty(group.form.place) ? null : group.form.place.id
   const event_id = isEmpty(group.form.event) ? null : group.form.event.id
 
   let values = formValues
 
-  if (!isEmpty(place)) {
+  if (!isEmpty(place) || !isEmpty(event)) {
     values = { address: place.address.address, ...values }
   }
 

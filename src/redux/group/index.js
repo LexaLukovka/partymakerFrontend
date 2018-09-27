@@ -7,7 +7,7 @@ import singleReducer from './single/reducer'
 import memberReducer from './member/reducer'
 
 const persistConfig = {
-  key: 'party',
+  key: 'group',
   storage,
   whitelist: ['createReducer', 'singleReducer'],
 }

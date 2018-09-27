@@ -1,39 +1,30 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
 import { bool, object } from 'prop-types'
-import { Avatar, Button, Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
-import { Link } from 'react-router-dom'
+
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import GroupCard from './GroupCard'
-import connector from './connector'
+import Member from 'components/@group/@group/GroupCard/Member'
+import InviteUrl from 'components/@group/@group/GroupCard/InviteUrl'
 
-const styles = (theme) => ({
+import connector from './connector'
+import MembersScene from 'components/@group/@group/GroupCard/MembersScene'
+
+const styles = () => ({
   root: {
     overflowX: 'hidden',
     position: 'relative',
     height: '100%',
-    background: theme.palette.common.white,
   },
   loading: {
     marginTop: 20,
     textAlign: 'center',
   },
   papers: {
-    position: 'absolute',
-    top: 260,
-    left: 0,
-    right: 0,
     margin: 9,
-  },
-  loginLink: {
-    color: theme.palette.primary.main,
-  },
-  amInButton: {
-    margin: '0 auto',
-    maxWidth: 500,
-    display: 'block',
   },
   picture: {
     width: '100%',
@@ -72,7 +63,8 @@ class GroupScene extends React.Component {
     }
   }
   checkIsPartyMember = () => {
-    const { actions, match, group, isMember, auth } = this.props
+    const { actions, match, group, member: { isMember }, auth } = this.props
+    actions.members.load(match.params.id)
     if (!auth.user) return false
     if (isMember !== null && group.id !== match.params.id) {
       actions.members.isMember(match.params.id)
@@ -80,7 +72,7 @@ class GroupScene extends React.Component {
     return true
   }
   toggleJoinParty = () => {
-    const { actions, match, isMember } = this.props
+    const { actions, match, member: { isMember } } = this.props
 
     if (!isMember) {
       actions.members.join(match.params.id)
@@ -90,33 +82,17 @@ class GroupScene extends React.Component {
   }
 
   render() {
-    const { classes, auth, loading, memberLoading, group, place, isMember } = this.props
-    const url = '/images/parties.jpg'
+    const { classes, auth, loading, memberLoading, group, place, member: { isMember, users } } = this.props
     if (loading) return <Loading />
     if (isEmpty(group)) return <NotFound />
+
     return (
       <div className={classes.root}>
-        <Avatar className={classes.picture} src={url} />
         <div className={classes.papers}>
+          <InviteUrl group={group} />
           <GroupCard group={group} place={place} />
-          {auth.user ?
-            auth.user.id !== group.admin_id &&
-            <Button
-              variant="raised"
-              size="large"
-              fullWidth
-              className={classes.amInButton}
-              color="primary"
-              disabled={memberLoading}
-              onClick={this.toggleJoinParty}
-            >{isMember ? 'ПОКИНУТЬ' : 'Я ПОЙДУ'}
-            </Button>
-            :
-            <Typography align="center" gutterBottom>
-              <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
-              что бы принять участие в компании
-            </Typography>
-          }
+          <Member group={group} auth={auth} memberLoading={memberLoading} isMember={isMember} />
+          <MembersScene auth={auth.user} users={users} />
         </div>
       </div>
     )
@@ -125,20 +101,19 @@ class GroupScene extends React.Component {
 
 GroupScene.propTypes = {
   classes: object.isRequired,
-  group: object,
-  place: object,
-  loading: bool.isRequired,
-  memberLoading: bool.isRequired,
   actions: object.isRequired,
-  isMember: bool,
   match: object.isRequired,
   auth: object.isRequired,
+  loading: bool.isRequired,
+  member: object.isRequired,
+  memberLoading: bool.isRequired,
+  group: object,
+  place: object,
 }
 
 GroupScene.defaultProps = {
   group: {},
   place: {},
-  isMember: null,
 }
 
 export default withStyles(styles)(connector(GroupScene))
