@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
 import { bool, object } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { Button, withStyles } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import GroupCard from './GroupCard'
-import Member from 'components/@group/@group/GroupCard/Member'
 import InviteUrl from 'components/@group/@group/GroupCard/InviteUrl'
+import Member from 'components/@group/@group/GroupCard/Member'
+import Users from 'components/@group/@group/GroupCard/Users'
 
 import connector from './connector'
-import MembersScene from 'components/@group/@group/GroupCard/MembersScene'
 
 const styles = () => ({
   root: {
@@ -26,10 +26,9 @@ const styles = () => ({
   papers: {
     margin: 9,
   },
-  picture: {
-    width: '100%',
-    height: 300,
-    borderRadius: '3px',
+  flex: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 })
 
@@ -71,14 +70,16 @@ class GroupScene extends React.Component {
     }
     return true
   }
-  toggleJoinParty = () => {
-    const { actions, match, member: { isMember } } = this.props
+  toggleJoinParty = async () => {
+    const { actions, match, auth: { user }, member: { isMember } } = this.props
 
     if (!isMember) {
-      actions.members.join(match.params.id)
+      await actions.members.join(match.params.id, user.id)
     } else {
-      actions.members.leave(match.params.id)
+      await actions.members.leave(match.params.id, user.id)
     }
+
+    await actions.members.load(match.params.id)
   }
 
   render() {
@@ -91,8 +92,17 @@ class GroupScene extends React.Component {
         <div className={classes.papers}>
           <InviteUrl group={group} />
           <GroupCard group={group} place={place} />
-          <Member group={group} auth={auth} memberLoading={memberLoading} isMember={isMember} />
-          <MembersScene auth={auth.user} users={users} />
+          <div className={classes.flex}>
+            <Button color="primary"> Смотреть чат </Button>
+            <Member
+              group={group}
+              auth={auth}
+              memberLoading={memberLoading}
+              isMember={isMember}
+              toggleJoinParty={this.toggleJoinParty}
+            />
+          </div>
+          <Users users={users} />
         </div>
       </div>
     )
