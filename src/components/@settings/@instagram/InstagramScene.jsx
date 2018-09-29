@@ -1,11 +1,10 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
-import Helper from '../Helper'
 
+import FormikInstTelega from '../formik/FormikInstTelega'
 import formik from './formik'
 import { Field } from 'formik'
-import FormikPhone from '../formik/FormikPhone'
 
 import connector from '../connector'
 
@@ -23,12 +22,12 @@ const styles = theme => ({
   },
 })
 
-class PhoneScene extends React.Component {
+class InstagramScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Телефон')
-    document.title = 'Изменить номер телефона'
+    actions.header.setTitle('Instagram')
+    document.title = 'Изменить instagram'
   }
 
   componentWillUnmount() {
@@ -43,12 +42,12 @@ class PhoneScene extends React.Component {
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Field
-            label="Номер телефона"
-            name="phone"
-            component={FormikPhone}
+            label="Instagram"
+            component={FormikInstTelega}
+            name="instagram"
+            placeholder="example"
           />
         </div>
-        <Helper>Ваш номер телефона будет виден всем людям на вашей вечеринке</Helper>
         <Button variant="raised" color="primary" className={classes.button} type="submit">
           Сохранить
         </Button>
@@ -57,10 +56,10 @@ class PhoneScene extends React.Component {
   }
 }
 
-PhoneScene.propTypes = {
+InstagramScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   handleSubmit: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(PhoneScene)))
+export default formik(connector(withStyles(styles)(InstagramScene)))
