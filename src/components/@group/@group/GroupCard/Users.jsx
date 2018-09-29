@@ -11,26 +11,25 @@ const styles = () => ({
   },
 })
 
-const MembersScene = ({ classes, users, auth }) =>
+const Users = ({ classes, users }) =>
   <div>
     <List>
       <Typography variant="subheading" className={classes.users}>УЧАСТНИКИ:</Typography>
-      {users.map(user =>
+      {users.map((user, index) =>
         <ListItem component={Link} to={`/users/${user.id}`} button key={user.id}>
           <Avatar src={user.avatar_url}>{user.avatar_url ? null : initialsFromUsername(user.name)}</Avatar>
           <ListItemText
             primary={user.name}
-            secondary={(user.id === auth.id) ? 'Организатор' : 'Участник'}
+            secondary={(index === users.length - 1) ? 'Организатор' : 'Участник'}
           />
         </ListItem>)
       }
     </List>
   </div>
 
-MembersScene.propTypes = {
+Users.propTypes = {
   classes: object.isRequired,
   users: array.isRequired,
-  auth: object.isRequired,
 }
 
-export default withStyles(styles)(MembersScene)
+export default withStyles(styles)(Users)

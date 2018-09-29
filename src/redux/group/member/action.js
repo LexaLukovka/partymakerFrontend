@@ -40,7 +40,7 @@ export const join = (group_id) => ({
 })
 
 // noinspection JSUnusedGlobalSymbols
-export const leave = (group_id) => ({
+export const leave = (group_id, user_id) => ({
   type: LEAVE_GROUP,
-  payload: Group.leave(group_id),
+  payload: Group.leave(group_id, user_id),
 })

@@ -20,11 +20,11 @@ class Group {
   }
 
   join(group_id) {
-    return Http.post(`/groups/${group_id}/users`)
+    return Http.post(`/groups/${group_id}/members`)
   }
 
-  leave(group_id) {
-    return Http.delete(`/groups/${group_id}/users/delete`)
+  leave(group_id, user_id) {
+    return Http.delete(`/groups/${group_id}/members/${user_id}`)
   }
 
   change(group_id, settings) {
