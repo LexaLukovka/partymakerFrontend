@@ -17,9 +17,6 @@ const styles = theme => ({
   input: {
     marginBottom: theme.spacing.size3,
   },
-  button: {
-    marginTop: theme.spacing.size3,
-  },
 })
 
 class InstagramScene extends React.Component {
@@ -48,7 +45,7 @@ class InstagramScene extends React.Component {
             placeholder="example"
           />
         </div>
-        <Button variant="raised" color="primary" className={classes.button} type="submit">
+        <Button variant="raised" color="primary" type="submit">
           Сохранить
         </Button>
       </form>

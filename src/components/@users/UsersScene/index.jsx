@@ -1,6 +1,6 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound/MyGroups'
@@ -11,6 +11,7 @@ import Groups from './Groups'
 
 import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
+import UserInfo from '../../UserInfo'
 
 const styles = () => ({
   root: {
@@ -19,9 +20,7 @@ const styles = () => ({
   profile: {
     padding: 15,
     maxWidth: 500,
-    margin: '15px auto',
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'space-between',
   },
 })
@@ -51,7 +50,6 @@ class UsersScene extends React.Component {
     actions.user.find(match.params.id)
   }
 
-
   render() {
     const { classes, auth, user: { user, loading } } = this.props
     if (loading) return <Loading />
@@ -61,11 +59,7 @@ class UsersScene extends React.Component {
       <div className={classes.root}>
         <div className={classes.profile}>
           <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
-          <div>
-            <Typography align="center" variant="title" className={classes.user}>{user.name}</Typography>
-            <Typography align="center" variant="subheading" className={classes.user}>{user.email}</Typography>
-            <Typography align="center" variant="subheading" className={classes.user}>{user.phone}</Typography>
-          </div>
+          <UserInfo user={user} />
           <ProfileEdit visible={auth.user.id === user.id} />
         </div>
         <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
