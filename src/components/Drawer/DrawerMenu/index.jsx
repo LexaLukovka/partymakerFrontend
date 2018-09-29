@@ -52,11 +52,6 @@ const DrawerMenu = ({ classes, actions, auth }) =>
               {auth.user.name}
             </Typography>
           </Link>
-          <Link to="/user">
-            <Typography color="inherit">
-              {auth.user.email}
-            </Typography>
-          </Link>
         </div>
       </div>
     </Grid>}

@@ -4,9 +4,10 @@ import { withStyles } from '@material-ui/core/styles'
 import isEmpty from 'lodash/isEmpty'
 import EventCard from './EventCard'
 
-import connector from './connector'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
+
+import connector from './connector'
 
 const styles = theme => ({
   root: {
@@ -28,12 +29,16 @@ class EventScene extends React.Component {
   }
 
   componentDidUpdate() {
-    const { event } = this.props
-    if (!isEmpty(event)) document.title = event.title
+    const { actions, event } = this.props
+    if (!isEmpty(event)) {
+      actions.header.setTitle(event.title)
+      document.title = event.title
+    }
   }
 
   componentWillUnmount() {
     const { actions } = this.props
+    this.props.actions.header.resetTitle()
     actions.header.menu()
   }
 
