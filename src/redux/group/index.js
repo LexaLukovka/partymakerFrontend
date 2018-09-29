@@ -4,10 +4,11 @@ import { combineReducers } from 'redux'
 import createReducer from './create/reducer'
 import listReducer from './list/reducer'
 import singleReducer from './single/reducer'
+import deleteReducer from './delete/reducer'
 import memberReducer from './member/reducer'
 
 const persistConfig = {
-  key: 'party',
+  key: 'group',
   storage,
   whitelist: ['createReducer', 'singleReducer'],
 }
@@ -16,6 +17,7 @@ const group = combineReducers({
   createReducer,
   listReducer,
   singleReducer,
+  deleteReducer,
   memberReducer,
 })
 

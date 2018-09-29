@@ -4,7 +4,7 @@ import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import AccountCircle from 'mdi-react/AccountCircleIcon'
-import { MenuItem, Menu, IconButton } from '@material-ui/core'
+import { IconButton, Menu, MenuItem } from '@material-ui/core'
 import connector from './connector'
 
 const styles = {
