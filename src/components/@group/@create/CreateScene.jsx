@@ -89,7 +89,6 @@ class CreateScene extends React.Component {
           label="Что будет?"
           component={FormikText}
           name="title"
-          type="name"
           placeholder="Поход на бухич"
         />
         <Field
@@ -100,14 +99,13 @@ class CreateScene extends React.Component {
         />
         <Field
           component={FormikText}
-          type="time"
           name="description"
           label="Описание"
           placeholder="Описание встречи"
+          multiline
           rows={2}
           rowsMax={3}
         />
-
 
         <Grid container justify="center" className={classes.buttonGroup}>
           <Button

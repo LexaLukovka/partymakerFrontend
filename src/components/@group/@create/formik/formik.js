@@ -28,7 +28,7 @@ const handleSubmit = props => (formValues, methods) => {
 
   let values = formValues
 
-  if (!isEmpty(place) || !isEmpty(event)) {
+  if (!isEmpty(place) && !isEmpty(event)) {
     values = { address: place.address.address, ...values }
   }
 
