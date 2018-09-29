@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
 import { bool, object } from 'prop-types'
-import { Button, withStyles } from '@material-ui/core'
+import { Button, Typography, withStyles } from '@material-ui/core'
 import isEmpty from 'lodash/isEmpty'
 
 import Loading from 'components/Loading'
@@ -12,8 +12,9 @@ import Member from 'components/@group/@group/GroupCard/Member'
 import Users from 'components/@group/@group/GroupCard/Users'
 
 import connector from './connector'
+import { Link } from 'react-router-dom'
 
-const styles = () => ({
+const styles = (theme) => ({
   root: {
     overflowX: 'hidden',
     position: 'relative',
@@ -29,6 +30,9 @@ const styles = () => ({
   flex: {
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  loginLink: {
+    color: theme.palette.primary.main,
   },
 })
 
@@ -92,17 +96,27 @@ class GroupScene extends React.Component {
         <div className={classes.papers}>
           <InviteUrl group={group} />
           <GroupCard group={group} place={place} />
-          <div className={classes.flex}>
-            <Button color="primary"> Смотреть чат </Button>
-            <Member
-              group={group}
-              auth={auth}
-              memberLoading={memberLoading}
-              isMember={isMember}
-              toggleJoinParty={this.toggleJoinParty}
-            />
-          </div>
-          <Users users={users} />
+          {
+            auth.user ?
+              <React.Fragment>
+                <div className={classes.flex}>
+                  <Button color="primary"> Смотреть чат </Button>
+                  <Member
+                    auth={auth}
+                    group={group}
+                    memberLoading={memberLoading}
+                    isMember={isMember}
+                    toggleJoinParty={this.toggleJoinParty}
+                  />
+                </div>
+                <Users users={users} />
+              </React.Fragment>
+              :
+              <Typography align="center" gutterBottom>
+                <Link to="/auth/login" className={classes.loginLink}>Войдите </Link>
+                что бы принять участие в компании
+              </Typography>
+          }
         </div>
       </div>
     )

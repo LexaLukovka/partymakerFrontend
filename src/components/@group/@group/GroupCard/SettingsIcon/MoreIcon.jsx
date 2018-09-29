@@ -80,10 +80,14 @@ class MoreIcon extends React.Component {
 MoreIcon.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
-  visible: bool.isRequired,
+  visible: bool,
   group: shape({
     id: number,
   }).isRequired,
+}
+
+MoreIcon.defaultProps = {
+  visible: null,
 }
 
 export default withStyles(styles)(connector(MoreIcon))
