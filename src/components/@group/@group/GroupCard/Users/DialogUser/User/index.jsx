@@ -1,27 +1,25 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Avatar, Grid, Typography, withStyles } from '@material-ui/core'
+import { Avatar, Grid, withStyles } from '@material-ui/core'
 import initialsFromUsername from 'utils/initialsFromUsername'
+import UserInfo from 'components/UserInfo'
 
 const styles = () => ({
   avatar: {
     alignItems: 'center',
     width: 70,
     height: 70,
+    marginBottom: 10,
   },
 })
 
 const User = ({ classes, user }) =>
-  <React.Fragment>
-    <Grid container justify="center">
-      <Avatar src={user.avatar_url} className={classes.avatar}>
-        {user.avatar_url ? null : initialsFromUsername(user.name)}
-      </Avatar>
-    </Grid>
-    <Typography align="center" variant="headline">{user.name}</Typography>
-    <Typography align="center" variant="subheading">{user.email}</Typography>
-    <Typography align="center" variant="subheading">{user.phone}</Typography>
-  </React.Fragment>
+  <Grid container justify="center">
+    <Avatar src={user.avatar_url} className={classes.avatar}>
+      {user.avatar_url ? null : initialsFromUsername(user.name)}
+    </Avatar>
+    <UserInfo user={user} />
+  </Grid>
 
 User.propTypes = {
   classes: object.isRequired,

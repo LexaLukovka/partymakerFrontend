@@ -14,7 +14,7 @@ const styles = () => ({
   },
   add: {
     position: 'absolute',
-    bottom: -5,
+    bottom: 20,
     right: -5,
   },
 })
