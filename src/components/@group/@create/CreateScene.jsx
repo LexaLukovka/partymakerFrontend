@@ -53,6 +53,7 @@ class CreateScene extends React.Component {
       actions.event.find(id.event_id)
     }
 
+    actions.header.setTitle('Создание')
     actions.header.back()
     document.title = 'Создание компании'
   }
@@ -75,6 +76,7 @@ class CreateScene extends React.Component {
 
   componentWillUnmount() {
     const { actions } = this.props
+    this.props.actions.header.resetTitle()
     actions.header.menu()
   }
 

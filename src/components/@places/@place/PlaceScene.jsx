@@ -41,12 +41,16 @@ class PlaceScene extends React.Component {
   }
 
   componentDidUpdate() {
-    const { place: { place } } = this.props
-    if (!isEmpty(place)) document.title = place.title
+    const { actions, place: { place } } = this.props
+    if (!isEmpty(place)) {
+      actions.header.setTitle(place.title)
+      document.title = place.title
+    }
   }
 
   componentWillUnmount() {
     const { actions } = this.props
+    this.props.actions.header.resetTitle()
     actions.header.menu()
     actions.placeVotes.reset()
   }
