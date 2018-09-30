@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this,function-paren-newline */
 import React, { Component } from 'react'
-import { object, number, string, array, shape, func } from 'prop-types'
+import { object, array, func } from 'prop-types'
 import { withStyles, Avatar } from '@material-ui/core'
 
 const styles = {

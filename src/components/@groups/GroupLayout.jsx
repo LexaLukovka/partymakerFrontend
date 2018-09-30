@@ -6,8 +6,8 @@ import { Route, Switch } from 'react-router-dom'
 import SignedInRoute from 'components/routes/SignedInRoute'
 
 import CreateScene from './@create/CreateScene'
-import GroupScene from 'components/@group/@group/GroupScene'
-import EditLayout from 'components/@group/@group/@edit/EditLayout'
+import GroupScene from 'components/@groups/@groups.id/GroupScene'
+import EditLayout from 'components/@groups/@groups.id/@edit/EditLayout'
 
 const styles = () => ({
   root: {
