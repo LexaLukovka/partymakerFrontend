@@ -1,7 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as groupActions from 'src/redux/group/single/action'
-import * as placeActions from 'src/redux/place/single/action'
 import * as headerActions from 'src/redux/header/action'
 import * as memberActions from 'src/redux/group/member/action'
 import * as authActions from 'src/redux/auth/action'
@@ -17,7 +16,6 @@ const initMapStateToProps = store => ({
 const initMapDispatchToProps = dispatch => ({
   actions: {
     groups: bindActionCreators(groupActions, dispatch),
-    place: bindActionCreators(placeActions, dispatch),
     members: bindActionCreators(memberActions, dispatch),
     header: bindActionCreators(headerActions, dispatch),
     auth: bindActionCreators(authActions, dispatch),

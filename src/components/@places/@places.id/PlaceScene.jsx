@@ -1,20 +1,36 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { object } from 'prop-types'
-import { Grid, withStyles } from '@material-ui/core'
-import isEmpty from 'lodash/isEmpty'
+import { withStyles } from '@material-ui/core'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import connector from './connector'
-import PlaceCard from './PlaceCard'
+import PlacePanel from './PlacePanel'
 import PictureGrid from './PictureGrid'
+import isEmpty from 'lodash/isEmpty'
 
-const styles = () => ({
+const styles = (theme) => ({
   root: {
+    display: 'flex',
     overflowX: 'hidden',
     position: 'relative',
-    height: '100%',
     background: 'white',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column-reverse',
+    },
+  },
+
+  placeContainer: {
+    height: '100%',
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 500,
+      flexBasis: '25%',
+    },
+  },
+  pictureGridContainer: {
+    flexGrow: 1,
+    height: '100%',
+    overflowY: 'auto',
   },
 
   create: {
@@ -32,56 +48,57 @@ const styles = () => ({
 })
 
 class PlaceScene extends React.Component {
-  componentDidMount() {
-    const { actions, match, auth } = this.props
-    const place_id = match.params.id
-    actions.place.show(place_id)
-    if (auth.user) actions.placeVotes.isUserVoted(place_id)
+  componentWillMount() {
+    const { actions, match } = this.props
+    this.openPlace(match.params.id)
     actions.header.back()
-  }
-
-  componentDidUpdate() {
-    const { actions, place: { place } } = this.props
-    if (!isEmpty(place)) {
-      actions.header.setTitle(place.title)
-      document.title = place.title
-    }
   }
 
   componentWillUnmount() {
     const { actions } = this.props
     this.props.actions.header.resetTitle()
     actions.header.menu()
-    actions.placeVotes.reset()
+  }
+
+  openPlace = (place_id) => {
+    const { actions, place } = this.props
+    if (isEmpty(place)) {
+      actions.place.load(place_id).then(() => {
+        actions.place.open(place_id)
+      })
+    } else {
+      actions.place.open(place_id)
+    }
   }
 
   handleVote = rating => {
-    const { actions, place: { place } } = this.props
-    actions.placeVotes.vote(place.id, rating)
+    const { actions } = this.props
+    actions.place.vote(rating)
   }
+
   openModal = (picture_url) => {
     const { actions } = this.props
     actions.pictureModal.show(picture_url)
   }
 
   render() {
-    const { classes, place: { loading, place }, placeVotes: { vote } } = this.props
-    if (loading) return <Loading />
-    if (isEmpty(place)) return <NotFound />
+    const { classes, place } = this.props
+    if (isEmpty(place)) return <Loading />
+    if (place.error) return <NotFound />
 
     return (
-      <Grid container className={classes.root} alignItems="stretch">
-        <Grid item sm={12} md={5} lg={3} xl={3} className={classes.info}>
-          <PlaceCard
+      <div className={classes.root}>
+        <div className={classes.placeContainer}>
+          <PlacePanel
             place={place}
             onVote={this.handleVote}
-            vote={vote}
+            vote={4}
           />
-        </Grid>
-        <Grid item sm={12} md={7} lg={6} xl={6} style={{ overflow: 'auto' }}>
-          <PictureGrid pictures={place.pictures.map(picture => picture.url)} onClick={this.openModal} />
-        </Grid>
-      </Grid>
+        </div>
+        <div className={classes.pictureGridContainer}>
+          <PictureGrid pictures={place.pictures} onClick={this.openModal} />
+        </div>
+      </div>
     )
   }
 }
@@ -89,10 +106,8 @@ class PlaceScene extends React.Component {
 PlaceScene.propTypes = {
   classes: object.isRequired,
   place: object.isRequired,
-  placeVotes: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
-  auth: object.isRequired,
 }
 
 export default withStyles(styles)(connector(PlaceScene))
