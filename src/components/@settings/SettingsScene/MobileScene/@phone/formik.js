@@ -2,15 +2,16 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
-import connector from '../connector'
+import connector from '../../../connector'
 
 const initValues = (form) => ({
-  instagram: form.instagram || '',
+  phone: form.phone || '',
 })
 
 const rules = Yup.object()
   .shape({
-    instagram: Yup.string(),
+    phone: Yup.string()
+      .required('Это поле является обязательным'),
   })
 
 const handleSubmit = ({ actions, user }) => (formValues, methods) => {

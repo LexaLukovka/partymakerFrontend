@@ -1,12 +1,13 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
+import Helper from '../Helper'
 
-import FormikInstTelega from '../formik/FormikInstTelega'
 import formik from './formik'
 import { Field } from 'formik'
+import FormikPhone from '../formik/FormikPhone'
 
-import connector from '../connector'
+import connector from '../../../connector'
 
 const styles = theme => ({
   root: {
@@ -17,14 +18,17 @@ const styles = theme => ({
   input: {
     marginBottom: theme.spacing.size3,
   },
+  button: {
+    marginTop: theme.spacing.size3,
+  },
 })
 
-class TelegramScene extends React.Component {
+class PhoneScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Telegram')
-    document.title = 'Изменить telegram'
+    actions.header.setTitle('Телефон')
+    document.title = 'Изменить номер телефона'
   }
 
   componentWillUnmount() {
@@ -39,13 +43,13 @@ class TelegramScene extends React.Component {
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Field
-            label="Telegram"
-            component={FormikInstTelega}
-            name="telegram"
-            placeholder="example"
+            label="Номер телефона"
+            name="phone"
+            component={FormikPhone}
           />
         </div>
-        <Button variant="raised" color="primary" type="submit">
+        <Helper>Ваш номер телефона будет виден всем людям на вашей вечеринке</Helper>
+        <Button variant="raised" color="primary" className={classes.button} type="submit">
           Сохранить
         </Button>
       </form>
@@ -53,10 +57,10 @@ class TelegramScene extends React.Component {
   }
 }
 
-TelegramScene.propTypes = {
+PhoneScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   handleSubmit: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(TelegramScene)))
+export default formik(connector(withStyles(styles)(PhoneScene)))

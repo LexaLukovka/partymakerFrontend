@@ -8,8 +8,8 @@ import connector from './connector'
 const styles = theme => ({
   root: {
     alignSelf: 'center',
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     [theme.breakpoints.up('sm')]: {
       width: 120,
       height: 120,
