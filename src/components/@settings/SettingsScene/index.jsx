@@ -1,8 +1,23 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { List, ListItemText } from '@material-ui/core'
-import ListItem from './ListItem'
+import DesctopScene from 'components/@settings/SettingsScene/DesctopScene'
+import MobileScene from 'components/@settings/SettingsScene/MobileScene'
 import connector from '../connector'
+import { withStyles } from '@material-ui/core'
+
+const styles = theme => ({
+  desktop: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  mobile: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+    },
+  },
+})
 
 class SettingsScene extends React.Component {
   componentDidMount() {
@@ -17,35 +32,24 @@ class SettingsScene extends React.Component {
   }
 
   render() {
-    const { user } = this.props
+    const { classes, user } = this.props
     return (
-      <List>
-        <ListItem to="/settings/name">
-          <ListItemText primary="Имя и фамилия" secondary={user.name} />
-        </ListItem>
-        <ListItem to="/settings/email">
-          <ListItemText primary="Email" secondary={user.email} />
-        </ListItem>
-        <ListItem to="/settings/phone">
-          <ListItemText primary="Номер телефона" secondary={user.phone} />
-        </ListItem>
-        <ListItem to="/settings/instagram">
-          <ListItemText primary="Instagram" secondary={user.instagram} />
-        </ListItem>
-        <ListItem to="/settings/telegram">
-          <ListItemText primary="Telegram" secondary={user.telegram} />
-        </ListItem>
-        <ListItem to="/settings/password">
-          <ListItemText primary="Сменить пароль" />
-        </ListItem>
-      </List>
+      <React.Fragment>
+        <div className={classes.desktop}>
+          <DesctopScene user={user} />
+        </div>
+        <div className={classes.mobile}>
+          <MobileScene user={user} />
+        </div>
+      </React.Fragment>
     )
   }
 }
 
 SettingsScene.propTypes = {
-  user: object.isRequired,
+  classes: object.isRequired,
   actions: object.isRequired,
+  user: object.isRequired,
 }
 
-export default connector(SettingsScene)
+export default connector(withStyles(styles)(SettingsScene))

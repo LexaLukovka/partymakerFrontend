@@ -1,13 +1,12 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
-import Helper from '../Helper'
 
-import FormikText from '../formik/FormikText'
+import FormikInstTelega from '../formik/FormikInstTelega'
 import formik from './formik'
 import { Field } from 'formik'
 
-import connector from '../connector'
+import connector from '../../../connector'
 
 const styles = theme => ({
   root: {
@@ -18,17 +17,14 @@ const styles = theme => ({
   input: {
     marginBottom: theme.spacing.size3,
   },
-  button: {
-    marginTop: theme.spacing.size3,
-  },
 })
 
-class EmailScene extends React.Component {
+class TelegramScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Email')
-    document.title = 'Изменить email'
+    actions.header.setTitle('Telegram')
+    document.title = 'Изменить telegram'
   }
 
   componentWillUnmount() {
@@ -43,15 +39,13 @@ class EmailScene extends React.Component {
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Field
-            label="Email"
-            component={FormikText}
-            name="email"
-            type="email"
-            placeholder="email@example.com"
+            label="Telegram"
+            component={FormikInstTelega}
+            name="telegram"
+            placeholder="example"
           />
         </div>
-        <Helper>Ваша почта будет видна всем всем людям на вашей вечеринке</Helper>
-        <Button variant="raised" color="primary" className={classes.button} type="submit">
+        <Button variant="raised" color="primary" type="submit">
           Сохранить
         </Button>
       </form>
@@ -59,10 +53,10 @@ class EmailScene extends React.Component {
   }
 }
 
-EmailScene.propTypes = {
+TelegramScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   handleSubmit: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(EmailScene)))
+export default formik(connector(withStyles(styles)(TelegramScene)))

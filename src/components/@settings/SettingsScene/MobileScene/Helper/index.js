@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react'
-import { object, node } from 'prop-types'
-import { withStyles, Typography } from '@material-ui/core'
+import { node, object } from 'prop-types'
+import { Typography, withStyles } from '@material-ui/core'
 
 const styles = {
   root: {
@@ -10,7 +11,6 @@ const styles = {
 
 const Helper = ({ classes, children }) =>
   <Typography variant="caption" className={classes.root}>{children}</Typography>
-
 
 Helper.propTypes = {
   classes: object.isRequired,

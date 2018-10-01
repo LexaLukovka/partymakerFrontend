@@ -4,12 +4,12 @@ import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
 
 import SettingsScene from './SettingsScene'
-import NameScene from './@name/NameScene'
-import EmailScene from './@email/EmailScene'
-import PhoneScene from './@phone/PhoneScene'
-import InstagramScene from './@instagram/InstagramScene'
-import TelegramScene from './@telegram/TelegramScene'
-import PasswordScene from './@password/PasswordScene'
+import NameScene from './SettingsScene/MobileScene/@name/NameScene'
+import EmailScene from './SettingsScene/MobileScene/@email/EmailScene'
+import PhoneScene from './SettingsScene/MobileScene/@phone/PhoneScene'
+import InstagramScene from './SettingsScene/MobileScene/@instagram/InstagramScene'
+import TelegramScene from './SettingsScene/MobileScene/@telegram/TelegramScene'
+import PasswordScene from './SettingsScene/MobileScene/@password/PasswordScene'
 
 const styles = {
   root: {},

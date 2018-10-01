@@ -1,12 +1,13 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
+import Helper from '../Helper'
 
-import FormikInstTelega from '../formik/FormikInstTelega'
 import formik from './formik'
+import FormikText from '../formik/FormikText'
 import { Field } from 'formik'
 
-import connector from '../connector'
+import connector from '../../../connector'
 
 const styles = theme => ({
   root: {
@@ -17,14 +18,17 @@ const styles = theme => ({
   input: {
     marginBottom: theme.spacing.size3,
   },
+  button: {
+    marginTop: theme.spacing.size3,
+  },
 })
 
-class InstagramScene extends React.Component {
+class NameScene extends React.Component {
   componentDidMount() {
     const { actions } = this.props
     actions.header.setIcon('back')
-    actions.header.setTitle('Instagram')
-    document.title = 'Изменить instagram'
+    actions.header.setTitle('Имя и фамилия')
+    document.title = 'Изменить имя'
   }
 
   componentWillUnmount() {
@@ -39,13 +43,14 @@ class InstagramScene extends React.Component {
       <form onSubmit={handleSubmit} className={classes.root}>
         <div className={classes.input}>
           <Field
-            label="Instagram"
-            component={FormikInstTelega}
-            name="instagram"
-            placeholder="example"
+            label="Имя и фамилия"
+            component={FormikText}
+            name="name"
+            placeholder="Вася Пупкин"
           />
         </div>
-        <Button variant="raised" color="primary" type="submit">
+        <Helper>Ваше имя и фамилия будут видны всем пользователям</Helper>
+        <Button variant="raised" color="primary" className={classes.button} type="submit">
           Сохранить
         </Button>
       </form>
@@ -53,10 +58,10 @@ class InstagramScene extends React.Component {
   }
 }
 
-InstagramScene.propTypes = {
+NameScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   handleSubmit: func.isRequired,
 }
 
-export default formik(connector(withStyles(styles)(InstagramScene)))
+export default formik(connector(withStyles(styles)(NameScene)))
