@@ -1,16 +1,21 @@
 /* eslint-disable class-methods-use-this,function-paren-newline */
 import React, { Component } from 'react'
-import { object, number, string, array, shape, func } from 'prop-types'
-import { withStyles, Avatar } from '@material-ui/core'
+import { array, func, object } from 'prop-types'
+import { Avatar, withStyles } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   root: {
     margin: '5px',
     display: 'grid',
     gridAutoFlow: 'dense',
-    gridAutoColumns: '1fr',
-    gridAutoRows: '300px',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gridTemplateRows: '250px',
     gridGap: '5px',
+
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '1fr 1fr',
+      margin: '0',
+    },
   },
   gridPicture: {
     borderRadius: 0,
@@ -19,22 +24,53 @@ const styles = {
   },
   wide: {
     gridColumn: 'span 2',
+    [theme.breakpoints.down('sm')]: {
+      gridColumn: 'span 4',
+    },
   },
-}
+  large: {
+    gridColumn: 'span 2',
+    gridRow: 'span 2',
+  },
+  superLarge: {
+    gridColumn: 'span 4',
+    gridRow: 'span 4',
+  },
+})
 
 class PictureGrid extends Component {
-  componentDidUpdate() {
-    const { classes } = this.props
-    const avatars = document.querySelectorAll('.grid-picture')
+  componentDidMount() {
+    this.loadGrid()
+  }
 
-    avatars.forEach(avatar => {
-      const picture = avatar.querySelector('img')
+  componentDidUpdate() {
+    this.loadGrid()
+  }
+
+  loadGrid = () => {
+    const { classes } = this.props
+
+    const avatars = document.querySelectorAll('.grid-picture')
+    avatars.forEach(async avatar => {
+      if (avatars.length === 1) {
+        avatar.classList.add(classes.superLarge)
+      }
+      const picture = await this.primisifyPicture(avatar.querySelector('img'))
       if (picture.naturalHeight) {
         const ratio = picture.naturalWidth / picture.naturalHeight
-        if (ratio > (16 / 9)) avatar.classList.add(classes.wide)
+        if (ratio > (16 / 9)) {
+          avatar.classList.add(classes.large)
+        }
       }
     })
   }
+
+  primisifyPicture = (picture) =>
+    new Promise((resolve) => {
+      picture.onload = (e) => {
+        resolve(e.target)
+      }
+    })
 
   handleClick = (picture_url) => () => {
     this.props.onClick(picture_url)

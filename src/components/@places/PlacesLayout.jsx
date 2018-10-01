@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Route, Switch } from 'react-router-dom'
 import PlacesScene from './PlacesScene'
-import PlaceScene from './@place/PlaceScene'
+import PlaceScene from './@places.id/PlaceScene'
 
 const styles = () => ({
   root: {

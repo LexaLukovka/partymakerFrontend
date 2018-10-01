@@ -1,8 +1,7 @@
 import React from 'react'
-import { bool, object, shape, string } from 'prop-types'
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, withStyles } from '@material-ui/core'
+import { object, shape, string } from 'prop-types'
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import isEmpty from 'lodash/isEmpty'
 import truncate from 'lodash/truncate'
 import connector from './connector'
 
@@ -16,12 +15,12 @@ const styles = () => ({
   },
 })
 
-const PlacesCard = ({ classes, place, isChoose }) =>
+const PlacesCard = ({ classes, place }) =>
   <Card className={classes.root}>
     <Link to={`/places/${place.id}`}>
       <CardMedia
         className={classes.media}
-        image={!isEmpty(place.pictures) && place.pictures[0].url}
+        image={place.pictures[0]}
         title={place.title}
       />
     </Link>
@@ -41,25 +40,11 @@ const PlacesCard = ({ classes, place, isChoose }) =>
           Смотреть
         </Button>
       </Link>
-      <Grid container justify="flex-end">
-        <Link to={`/group/create?place_id=${place.id}`}>
-          {isChoose ?
-            <Button color="primary">
-              Выбрать
-            </Button>
-            :
-            <Button color="primary">
-              Собрать компанию
-            </Button>
-          }
-        </Link>
-      </Grid>
     </CardActions>
   </Card>
 
 PlacesCard.propTypes = {
   classes: object.isRequired,
-  isChoose: bool.isRequired,
   place: shape({
     title: string,
     primary_picture: string,

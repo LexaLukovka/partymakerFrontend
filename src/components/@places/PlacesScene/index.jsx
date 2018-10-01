@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Loading from 'components/Loading'
 import isEmpty from 'lodash/isEmpty'
 import NotFound from 'components/NotFound'
-import PlacesList from './PlacesList'
 import connector from '../connector'
+import PlacesCard from './PlacesCard'
 
 const styles = theme => ({
   root: {
@@ -24,13 +24,9 @@ const styles = theme => ({
 class PlacesScene extends Component {
   componentWillMount() {
     const { actions, places } = this.props
-    if (!places.places) actions.places.load()
-    document.title = 'Места где погулять в Запорожье'
-  }
+    if (!places.allLoaded) actions.places.load()
 
-  componentWillUnmount() {
-    const { actions } = this.props
-    actions.buttonPlace.hideChoose()
+    document.title = 'Места где погулять в Запорожье'
   }
 
   render() {
@@ -40,7 +36,7 @@ class PlacesScene extends Component {
 
     return (
       <div className={classes.root}>
-        <PlacesList places={places} />
+        {Object.values(places).map(place => <PlacesCard key={place.id} place={place} />)}
       </div>
     )
   }

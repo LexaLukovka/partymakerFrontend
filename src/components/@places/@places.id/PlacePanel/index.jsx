@@ -11,8 +11,8 @@ const styles = theme => ({
     height: '100%',
     flexGrow: 1,
     overflow: 'auto',
-    background: theme.palette.primary.main,
-    color: 'white',
+    // background: theme.palette.primary.main,
+    // color: 'white',
   },
   content: {
     padding: 15,
@@ -26,7 +26,7 @@ const styles = theme => ({
   rating: {
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: 10,
+    paddingBottom: 30,
   },
   rating_number: {
     fontSize: '18px',
@@ -37,6 +37,7 @@ const styles = theme => ({
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 30,
+    color: '#5B0175',
   },
   locationIcon: {
     fontSize: 16,
@@ -49,16 +50,22 @@ const styles = theme => ({
     right: 15,
   },
   title: {
+    fontWeight: 'normal',
     marginLeft: 5,
     marginBottom: 5,
   },
   actionButtonContainer: {
-    marginTop: 40,
-    marginBottom: 40,
+    marginTop: 30,
+    marginBottom: 30,
 
   },
   actionButton: {
     borderColor: 'white',
+  },
+  whenPriceContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: 30,
   },
 })
 
@@ -76,7 +83,7 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
               <LocationIcon />
             </Typography>
 
-            <Typography color="inherit" variant="subheading">
+            <Typography color="inherit" variant="body1">
               {place.address.address}
             </Typography>
           </div>
@@ -92,17 +99,28 @@ const PlaceCard = ({ classes, place, onVote, vote }) => {
             color2={vote ? '#689f38' : '#ffd700'}
           />
         </div>
-
-        <Typography color="inherit">
+        <div className={classes.whenPriceContainer}>
+          <div>
+            <Typography>Когда?</Typography>
+            <Typography variant="caption">{place.working_hours}</Typography>
+          </div>
+          <div>
+            <Typography>Сколько стоит?</Typography>
+            <Typography variant="caption">{place.price}</Typography>
+          </div>
+        </div>
+        <Typography color="inherit" align="justify">
           {place.description}
         </Typography>
         <div className={classes.actionButtonContainer}>
           <Link to={`/group/create?place_id=${place.id}`}>
             <Button
-              variant="outlined"
+              variant="raised"
+              fullWidth
               className={classes.actionButton}
-              color="secondary"
-            >Создать здесь свою компанию
+              color="primary"
+            >
+              Создать здесь свою компанию
             </Button>
           </Link>
         </div>

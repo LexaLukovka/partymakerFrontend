@@ -1,7 +1,11 @@
 import {
   VOTE_PLACE, RESET_VOTED_PLACE,
-  SEND_VOTE_PLACE_PENDING, SEND_VOTE_PLACE_REJECTED, SEND_VOTE_PLACE_FULFILLED,
-  CHECK_USER_VOTED_PLACE_PENDING, CHECK_USER_VOTED_PLACE_REJECTED, CHECK_USER_VOTED_PLACE_FULFILLED,
+  VOTE_PLACE_PENDING,
+  VOTE_PLACE_REJECTED,
+  VOTE_PLACE_FULFILLED,
+  IS_VOTED_PLACE_PENDING,
+  IS_VOTED_PLACE_REJECTED,
+  IS_VOTED_PLACE_FULFILLED,
 } from './action'
 
 const initialState = {
@@ -18,22 +22,22 @@ const votesReducer = (state = initialState, { type, payload }) => {
     case RESET_VOTED_PLACE:
       return { ...state, ...initialState }
 
-    case SEND_VOTE_PLACE_PENDING:
+    case VOTE_PLACE_PENDING:
       return { ...state, loading: true }
 
-    case SEND_VOTE_PLACE_REJECTED:
+    case VOTE_PLACE_REJECTED:
       return { ...state, loading: false, error: payload }
 
-    case SEND_VOTE_PLACE_FULFILLED:
+    case VOTE_PLACE_FULFILLED:
       return { ...state, loading: false }
 
-    case CHECK_USER_VOTED_PLACE_PENDING:
+    case IS_VOTED_PLACE_PENDING:
       return { ...state, loading: true }
 
-    case CHECK_USER_VOTED_PLACE_REJECTED:
+    case IS_VOTED_PLACE_REJECTED:
       return { ...state, loading: false, error: payload }
 
-    case CHECK_USER_VOTED_PLACE_FULFILLED:
+    case IS_VOTED_PLACE_FULFILLED:
       return { ...state, loading: false, vote: payload.data }
 
     default:

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import place from './place'
+import placesReducer from './places/reducer'
 import group from './group'
 import event from './event'
 
@@ -22,7 +22,7 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-  place,
+  placesReducer,
   group,
   event,
   authReducer,
