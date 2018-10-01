@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, bool, number } from 'prop-types'
+import { bool, number, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import NotFoundMyGroups from 'components/NotFound/MyGroups'
 import NotFoundUserGroups from 'components/NotFound/UserGroups'
@@ -8,16 +8,25 @@ import isEmpty from 'lodash/isEmpty'
 import Loading from 'components/Loading'
 import connector from './connector'
 
-const styles = {
+const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '1fr 1fr 1fr',
+    },
+
     paddingTop: 15,
     maxWidth: 1300,
     margin: '0 auto',
   },
-}
+})
 
 class Groups extends React.Component {
   componentWillMount() {

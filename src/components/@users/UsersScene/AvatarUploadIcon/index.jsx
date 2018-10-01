@@ -14,6 +14,10 @@ const styles = theme => ({
     color: 'white',
     backgroundColor: theme.palette.primary.main,
     borderRadius: '50%',
+    [theme.breakpoints.up('sm')]: {
+      width: 30,
+      height: 30,
+    },
   },
 })
 

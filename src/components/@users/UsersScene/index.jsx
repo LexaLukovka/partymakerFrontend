@@ -5,21 +5,23 @@ import { withStyles } from '@material-ui/core'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound/MyGroups'
 
+import UserInfo from 'components/User/UserInfo'
 import ProfileEdit from './ProfileEdit'
 import ProfileAvatar from './ProfileAvatar'
 import Groups from './Groups'
 
 import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
-import UserInfo from '../../UserInfo'
 
 const styles = () => ({
-  root: {
-    height: '100%',
+  root: {},
+  div: {
+    display: 'flex',
+    justifyContent: 'center',
   },
   profile: {
     padding: 15,
-    maxWidth: 500,
+    width: 500,
     display: 'flex',
     justifyContent: 'space-between',
   },
@@ -57,10 +59,12 @@ class UsersScene extends React.Component {
 
     return (
       <div className={classes.root}>
-        <div className={classes.profile}>
-          <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
-          <UserInfo user={user} />
-          <ProfileEdit visible={auth.user.id === user.id} />
+        <div className={classes.div}>
+          <div className={classes.profile}>
+            <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
+            <UserInfo user={user} />
+            <ProfileEdit visible={auth.user.id === user.id} />
+          </div>
         </div>
         <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
       </div>

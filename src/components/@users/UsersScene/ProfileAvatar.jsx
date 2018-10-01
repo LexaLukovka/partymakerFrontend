@@ -2,10 +2,10 @@
 import React from 'react'
 import { bool, func, object, shape, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import UserAvatar from 'components/UserAvatar'
+import UserAvatar from 'components/User/UserAvatar'
 import AvatarUploadIcon from './AvatarUploadIcon'
 
-const styles = () => ({
+const styles = (theme) => ({
   root: {
     marginRight: 15,
     display: 'flex',
@@ -14,8 +14,11 @@ const styles = () => ({
   },
   add: {
     position: 'absolute',
-    bottom: 20,
-    right: -5,
+    bottom: 10,
+    right: 0,
+    [theme.breakpoints.up('sm')]: {
+      bottom: 15,
+    },
   },
 })
 
