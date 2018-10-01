@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
-import { object, shape, string, bool } from 'prop-types'
+import { bool, object, shape, string } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import initialsFromUsername from 'utils/initialsFromUsername'
 import connector from './connector'
 
-const styles = {
+const styles = theme => ({
   root: {
-    width: 60,
-    height: 60,
+    alignSelf: 'center',
+    width: 100,
+    height: 100,
+    [theme.breakpoints.up('sm')]: {
+      width: 120,
+      height: 120,
+    },
   },
   small: {
     width: 40,
     fontSize: 14,
     height: 40,
   },
-
-}
+})
 
 class UserAvatar extends Component {
   showFullAvatar = () => {
