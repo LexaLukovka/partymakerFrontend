@@ -7,7 +7,9 @@ import CardActions from './MyCard/MyCardActions'
 const styles = theme => ({
   root: {
     width: '95%',
-    maxWidth: 400,
+    maxWidth: 350,
+    alignSelf: 'center',
+    justifySelf: 'center',
     margin: 5,
     [theme.breakpoints.up('sm')]: {
       margin: 15,

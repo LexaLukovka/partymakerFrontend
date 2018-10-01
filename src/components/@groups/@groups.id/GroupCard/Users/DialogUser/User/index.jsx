@@ -1,8 +1,8 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Avatar, Grid, withStyles } from '@material-ui/core'
-import initialsFromUsername from 'utils/initialsFromUsername'
-import UserInfo from 'components/UserInfo'
+import { Grid, withStyles } from '@material-ui/core'
+import UserInfo from 'components/User/UserInfo'
+import UserAvatar from 'components/User/UserAvatar'
 
 const styles = () => ({
   avatar: {
@@ -15,9 +15,7 @@ const styles = () => ({
 
 const User = ({ classes, user }) =>
   <Grid container justify="center">
-    <Avatar src={user.avatar_url} className={classes.avatar}>
-      {user.avatar_url ? null : initialsFromUsername(user.name)}
-    </Avatar>
+    <UserAvatar user={user} />
     <UserInfo user={user} />
   </Grid>
 
