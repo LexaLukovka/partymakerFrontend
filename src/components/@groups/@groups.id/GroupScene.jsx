@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,no-shadow */
 import React from 'react'
 import { bool, object } from 'prop-types'
+import { Link } from 'react-router-dom'
 import { Button, Typography, withStyles } from '@material-ui/core'
-import isEmpty from 'lodash/isEmpty'
 
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
@@ -11,8 +11,8 @@ import InviteUrl from './GroupCard/InviteUrl'
 import Member from './GroupCard/Member'
 import Users from './GroupCard/Users'
 
+import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
-import { Link } from 'react-router-dom'
 
 const styles = (theme) => ({
   root: {
@@ -60,10 +60,6 @@ class GroupScene extends React.Component {
     if (isEmpty(group) || group.id !== match.params.id) {
       actions.groups.show(match.params.id)
     }
-
-    if (!isEmpty(group) && !isEmpty(group.place)) {
-      actions.place.show(group.place.id)
-    }
   }
   checkIsPartyMember = () => {
     const { actions, match, group, member: { isMember }, auth } = this.props
@@ -87,7 +83,7 @@ class GroupScene extends React.Component {
   }
 
   render() {
-    const { classes, auth, loading, memberLoading, group, place, member: { isMember, users } } = this.props
+    const { classes, auth, loading, memberLoading, group, member: { isMember, users } } = this.props
     if (loading) return <Loading />
     if (isEmpty(group)) return <NotFound />
 
@@ -95,7 +91,7 @@ class GroupScene extends React.Component {
       <div className={classes.root}>
         <div className={classes.papers}>
           <InviteUrl group={group} />
-          <GroupCard group={group} place={place} />
+          <GroupCard group={group} />
           {
             auth.user ?
               <React.Fragment>
@@ -132,12 +128,10 @@ GroupScene.propTypes = {
   member: object.isRequired,
   memberLoading: bool.isRequired,
   group: object,
-  place: object,
 }
 
 GroupScene.defaultProps = {
   group: {},
-  place: {},
 }
 
 export default withStyles(styles)(connector(GroupScene))
