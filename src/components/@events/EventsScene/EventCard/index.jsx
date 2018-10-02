@@ -18,7 +18,10 @@ import moment from 'moment'
 
 const styles = {
   root: {
-    margin: '15px 10px',
+    maxWidth: 400,
+    margin: '10px 10px',
+    alignSelf: 'center',
+    justifySelf: 'center',
   },
   media: {
     width: '100%',
@@ -37,7 +40,7 @@ const EventCard = ({ classes, event, isChoose }) =>
     <Link to={`/events/${event.id}`}>
       <CardHeader
         title={event.title}
-        subheader={<Typography variant="subheading">{event.address.address}</Typography>}
+        subheader={<Typography>{event.address.address}</Typography>}
       />
       <Avatar className={classes.media} alt={event.title} src={event.pictures[0].url} />
     </Link>
