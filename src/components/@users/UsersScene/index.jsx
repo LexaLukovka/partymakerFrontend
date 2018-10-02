@@ -1,6 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { Button, withStyles } from '@material-ui/core'
 
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound/MyGroups'
@@ -13,17 +14,26 @@ import Groups from './Groups'
 import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
 
-const styles = () => ({
+const styles = theme => ({
   root: {},
   div: {
     display: 'flex',
     justifyContent: 'center',
   },
-  profile: {
-    padding: 15,
+  block: {
     width: 500,
+  },
+  profile: {
+    padding: 10,
+    paddingTop: 20,
+    paddingBottom: 30,
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  button: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 })
 
@@ -60,10 +70,15 @@ class UsersScene extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.div}>
-          <div className={classes.profile}>
-            <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
-            <UserInfo user={user} />
-            <ProfileEdit visible={auth.user.id === user.id} />
+          <div className={classes.block}>
+            <div className={classes.profile}>
+              <ProfileAvatar user={user} onChangeAvatar={this.handleUpload} visible={auth.user.id === user.id} />
+              <UserInfo user={user} />
+              <ProfileEdit visible={auth.user.id === user.id} />
+            </div>
+            <Link to="/group/create">
+              <Button className={classes.button} color="primary">Собери свое мероприятие или компанию друзей</Button>
+            </Link>
           </div>
         </div>
         <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
