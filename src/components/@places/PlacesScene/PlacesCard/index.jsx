@@ -9,6 +9,8 @@ const styles = () => ({
   root: {
     maxWidth: 400,
     margin: '10px 10px',
+    alignSelf: 'center',
+    justifySelf: 'center',
   },
   media: {
     height: 250,

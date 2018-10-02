@@ -9,15 +9,20 @@ import PlacesCard from './PlacesCard'
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    paddingTop: 5,
-    justifyContent: 'center',
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '1fr 1fr 1fr',
+    },
+    paddingTop: 15,
     maxWidth: 1300,
     margin: '0 auto',
-    [theme.breakpoints.up('md')]: {
-      justifyContent: 'flex-start',
-    },
   },
 })
 
