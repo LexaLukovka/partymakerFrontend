@@ -7,7 +7,7 @@ import connector from './connector'
 
 const styles = () => ({
   root: {
-    maxWidth: 400,
+    maxWidth: 370,
     margin: '10px 10px',
     alignSelf: 'center',
     justifySelf: 'center',

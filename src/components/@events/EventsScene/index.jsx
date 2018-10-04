@@ -33,7 +33,7 @@ const styles = theme => ({
   search: {
     maxWidth: 1300,
     margin: '0 auto',
-    padding: 30,
+    padding: 40,
     paddingBottom: 0,
   },
 })
@@ -60,7 +60,7 @@ class EvenetsScene extends Component {
   }
 
   render() {
-    const { events: { loading, events }, isChoose, classes } = this.props
+    const { classes, events: { loading, events }, isChoose } = this.props
     if (loading) return <Loading />
     if (isEmpty(events)) return <NotFound />
 

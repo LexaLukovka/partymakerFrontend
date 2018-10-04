@@ -6,8 +6,16 @@ import isEmpty from 'lodash/isEmpty'
 import NotFound from 'components/NotFound'
 import connector from '../connector'
 import PlacesCard from './PlacesCard'
+import Search from 'components/Search'
+import Sort from 'components/Sort'
 
 const styles = theme => ({
+  search: {
+    maxWidth: 1300,
+    margin: '0 auto',
+    padding: 40,
+    paddingBottom: 0,
+  },
   root: {
     display: 'grid',
     gridTemplateColumns: '1fr',
@@ -40,9 +48,15 @@ class PlacesScene extends Component {
     if (isEmpty(places)) return <NotFound />
 
     return (
-      <div className={classes.root}>
-        {Object.values(places).map(place => <PlacesCard key={place.id} place={place} />)}
-      </div>
+      <React.Fragment>
+        <div className={classes.search}>
+          <Search />
+          <Sort />
+        </div>
+        <div className={classes.root}>
+          {Object.values(places).map(place => <PlacesCard key={place.id} place={place} />)}
+        </div>
+      </React.Fragment>
     )
   }
 }

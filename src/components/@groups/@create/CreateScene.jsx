@@ -1,10 +1,14 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { withStyles } from '@material-ui/core'
+import { Card, withStyles } from '@material-ui/core'
 
 import PlaceForm from './place/PlaceForm'
 import Form from './From'
+import EvenetsScene from '../../@events/EventsScene'
+import PlacesScene from '../../@places/PlacesScene'
+import Search from 'components/Search'
+import Sort from 'components/Sort'
 
 import isEmpty from 'lodash/isEmpty'
 import qs from 'querystring'
@@ -14,13 +18,21 @@ import connector from './connector'
 
 const styles = theme => ({
   root: {
-    padding: '0 15px',
-    margin: '0 auto',
-    maxWidth: 700,
+    display: 'flex',
+  },
+  card: {
+    padding: '20px 30px',
+    margin: '0 30px',
+    // margin: '0 auto',
+    maxWidth: 370,
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
       marginTop: 0,
     },
+  },
+  search: {
+    padding: 30,
+    paddingBottom: 0,
   },
 })
 
@@ -68,11 +80,22 @@ class CreateScene extends React.Component {
   render() {
     const { classes, ...formHOC } = this.props
     return (
-      <form className={classes.root}>
-        <PlaceForm {...formHOC} />
-        <Form {...formHOC} />
-
-      </form>
+      <div className={classes.root}>
+        <Card className={classes.card}>
+          <form>
+            <PlaceForm {...formHOC} />
+            <Form {...formHOC} />
+          </form>
+        </Card>
+        <div>
+          <div className={classes.search}>
+            <Search />
+            <Sort />
+          </div>
+          <EvenetsScene />
+          <PlacesScene />
+        </div>
+      </div>
     )
   }
 }

@@ -18,7 +18,7 @@ import moment from 'moment'
 
 const styles = {
   root: {
-    maxWidth: 400,
+    maxWidth: 370,
     margin: '10px 10px',
     alignSelf: 'center',
     justifySelf: 'center',
@@ -69,14 +69,10 @@ const EventCard = ({ classes, event, isChoose }) =>
       </Link>
       <Grid container justify="flex-end">
         <Link to={`/group/create?event_id=${event.id}`}>
-          {isChoose ?
-            <Button color="primary">
-              Выбрать
-            </Button>
-            :
-            <Button color="primary">
-              Собрать компанию
-            </Button>
+          {isChoose &&
+          <Button color="primary">
+            Выбрать
+          </Button>
           }
         </Link>
       </Grid>
