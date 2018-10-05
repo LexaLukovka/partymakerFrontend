@@ -5,10 +5,10 @@ import { Card, withStyles } from '@material-ui/core'
 
 import PlaceForm from './place/PlaceForm'
 import Form from './From'
-import InfiniteEvents from '../../@events/EventsScene/InfiniteEvents'
-import PlacesScene from '../../@places/PlacesScene'
 import Search from 'components/Search'
 import Sort from 'components/Sort'
+import InfiniteEvents from '../../@events/EventsScene/InfiniteEvents'
+import InfinitePlaces from '../../@places/PlacesScene/InfinitePlaces'
 
 import isEmpty from 'lodash/isEmpty'
 import qs from 'querystring'
@@ -93,7 +93,7 @@ class CreateScene extends React.Component {
             <Sort />
           </div>
           <InfiniteEvents />
-          <PlacesScene />
+          <InfinitePlaces />
         </div>
       </div>
     )
