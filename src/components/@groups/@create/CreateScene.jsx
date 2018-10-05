@@ -34,6 +34,11 @@ const styles = theme => ({
     padding: 30,
     paddingBottom: 0,
   },
+  place_event: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 })
 
 class CreateScene extends React.Component {
@@ -87,7 +92,7 @@ class CreateScene extends React.Component {
             <Form {...formHOC} />
           </form>
         </Card>
-        <div>
+        <div className={classes.place_event}>
           <div className={classes.search}>
             <Search />
             <Sort />
