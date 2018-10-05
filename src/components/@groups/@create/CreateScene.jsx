@@ -5,7 +5,7 @@ import { Card, withStyles } from '@material-ui/core'
 
 import PlaceForm from './place/PlaceForm'
 import Form from './From'
-import EvenetsScene from '../../@events/EventsScene'
+import InfiniteEvents from '../../@events/EventsScene/InfiniteEvents'
 import PlacesScene from '../../@places/PlacesScene'
 import Search from 'components/Search'
 import Sort from 'components/Sort'
@@ -92,7 +92,7 @@ class CreateScene extends React.Component {
             <Search />
             <Sort />
           </div>
-          <EvenetsScene />
+          <InfiniteEvents />
           <PlacesScene />
         </div>
       </div>
