@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { Card, withStyles } from '@material-ui/core'
+import { Card, Typography, withStyles } from '@material-ui/core'
 
 import PlaceForm from './place/PlaceForm'
 import Form from './From'
@@ -22,12 +22,14 @@ const styles = theme => ({
   },
   card: {
     padding: '20px 30px',
-    margin: '0 30px',
-    // margin: '0 auto',
+    margin: '0 auto',
     maxWidth: 370,
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
       marginTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      margin: '0 30px',
     },
   },
   search: {
@@ -97,7 +99,9 @@ class CreateScene extends React.Component {
             <Search />
             <Sort />
           </div>
+          <Typography>Хорошие места чтобы пойти...</Typography>
           <InfiniteEvents />
+          <Typography>Ближайшие события</Typography>
           <InfinitePlaces />
         </div>
       </div>
