@@ -1,5 +1,5 @@
 import React from 'react'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 // A theme with custom primary and secondary color.
@@ -9,6 +9,9 @@ const theme = createMuiTheme({
     fontSize: 13,
     title: {
       letterSpacing: '0',
+    },
+    headline: {
+      fontSize: '1.19rem',
     },
     body1: {
       fontSize: '0.77rem',

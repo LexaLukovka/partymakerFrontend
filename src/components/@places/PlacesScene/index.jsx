@@ -1,51 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Loading from 'components/Loading'
-import isEmpty from 'lodash/isEmpty'
-import NotFound from 'components/NotFound'
-import connector from '../connector'
-import PlacesCard from './PlacesCard'
+import Search from 'components/Search'
+import Sort from 'components/Sort'
+import InfinitePlaces from './InfinitePlaces'
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    paddingTop: 5,
-    justifyContent: 'center',
+const styles = () => ({
+  search: {
     maxWidth: 1300,
     margin: '0 auto',
-    [theme.breakpoints.up('md')]: {
-      justifyContent: 'flex-start',
-    },
+    padding: 40,
+    paddingBottom: 0,
   },
 })
 
-class PlacesScene extends Component {
-  componentWillMount() {
-    const { actions, places } = this.props
-    if (!places.allLoaded) actions.places.load()
-
-    document.title = 'Места где погулять в Запорожье'
-  }
-
-  render() {
-    const { places: { loading, places }, classes } = this.props
-    if (loading) return <Loading />
-    if (isEmpty(places)) return <NotFound />
-
-    return (
-      <div className={classes.root}>
-        {Object.values(places).map(place => <PlacesCard key={place.id} place={place} />)}
-      </div>
-    )
-  }
-}
+const PlacesScene = ({ classes }) =>
+  <React.Fragment>
+    <div className={classes.search}>
+      <Search />
+      <Sort />
+    </div>
+    <InfinitePlaces />
+  </React.Fragment>
 
 PlacesScene.propTypes = {
   classes: object.isRequired,
-  places: object.isRequired,
-  actions: object.isRequired,
 }
 
-export default withStyles(styles)(connector(PlacesScene))
+export default withStyles(styles)(PlacesScene)

@@ -6,15 +6,15 @@ import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import connector from './connector'
 import PlacePanel from './PlacePanel'
-import PictureGrid from './PictureGrid'
 import isEmpty from 'lodash/isEmpty'
+import PictureGrid from 'components/PictureGrid/PictureGrid'
 
 const styles = (theme) => ({
   root: {
     display: 'flex',
     overflowX: 'hidden',
     position: 'relative',
-    background: 'white',
+    background: theme.palette.common.white,
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column-reverse',
     },
@@ -31,19 +31,6 @@ const styles = (theme) => ({
     flexGrow: 1,
     height: '100%',
     overflowY: 'auto',
-  },
-
-  create: {
-    padding: 20,
-    textAlign: 'center',
-  },
-  info: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  article: {
-    margin: '0 auto',
-    maxWidth: 800,
   },
 })
 

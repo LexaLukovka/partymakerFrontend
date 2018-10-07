@@ -30,7 +30,7 @@ const Form = ({ classes, isSubmitting, handleSubmit }) =>
       placeholder="Поход на бухич"
     />
     <Field
-      label="Когда и во сколько состоится?"
+      label="Когда и во сколько?"
       component={FormikDateTime}
       name="date"
       placeholder="Дата и время"

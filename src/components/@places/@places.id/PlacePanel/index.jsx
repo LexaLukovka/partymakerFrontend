@@ -17,7 +17,7 @@ const styles = theme => ({
   content: {
     padding: 15,
     position: 'relative',
-    paddingTop: 30,
+    paddingTop: 20,
     [theme.breakpoints.up('md')]: {
       padding: 30,
       paddingTop: 40,

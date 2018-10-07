@@ -51,12 +51,13 @@ class IndexScene extends React.Component {
               Создать компанию
             </Button>
           </Link>
-          <Link to="/place">
+          <Link to="/places">
             <Button
               className={classes.button}
               fullWidth
               variant="contained"
               size="large"
+              color="primary"
             >
               Найти место где погулять
             </Button>
@@ -66,6 +67,7 @@ class IndexScene extends React.Component {
               fullWidth
               variant="contained"
               size="large"
+              color="primary"
             >
              Посмотреть события Запорожья
             </Button>

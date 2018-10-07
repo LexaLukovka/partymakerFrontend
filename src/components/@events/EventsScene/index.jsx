@@ -1,63 +1,31 @@
-/* eslint-disable react/jsx-closing-tag-location,padded-blocks */
-import React, { Component } from 'react'
-import InfiniteScroll from 'react-infinite-scroller'
-import { bool, object } from 'prop-types'
+import React from 'react'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import connector from './connector'
-import EventCard from './EventCard'
-import Loading from 'components/Loading'
-import isEmpty from 'lodash/isEmpty'
-import NotFound from 'components/NotFound'
 
-const styles = {
-  root: {},
-}
+import Search from 'components/Search'
+import Sort from 'components/Sort'
+import InfiniteEvents from './InfiniteEvents'
 
-class EvenetsScene extends Component {
-  componentDidMount() {
-    this.load(1)
-  }
+const styles = () => ({
+  search: {
+    maxWidth: 1300,
+    margin: '0 auto',
+    padding: 40,
+    paddingBottom: 0,
+  },
+})
 
-  componentWillUnmount() {
-    const { actions } = this.props
-    actions.buttonEvent.hideChoose()
-  }
-
-  load = (page) => {
-    const { actions } = this.props
-    actions.events.load({ page })
-  }
-
-  hasMore = () => {
-    const { events: { total, limit, page } } = this.props
-    const items = page * limit
-    return total >= items
-  }
-
-  render() {
-    const { events: { loading, events }, isChoose, classes } = this.props
-    if (loading) return <Loading />
-    if (isEmpty(events)) return <NotFound />
-
-    return <div className={classes.root}>
-      <InfiniteScroll
-        initialLoad
-        pageStart={0}
-        loadMore={this.load}
-        hasMore={this.hasMore()}
-        loader={<Loading />}
-      >
-        {events.map(event => <EventCard isChoose={isChoose} key={event.id} event={event} />)}
-      </InfiniteScroll>
+const EvenetsScene = ({ classes }) =>
+  <React.Fragment>
+    <div className={classes.search}>
+      <Search />
+      <Sort />
     </div>
-  }
-}
+    <InfiniteEvents />
+  </React.Fragment>
 
 EvenetsScene.propTypes = {
   classes: object.isRequired,
-  events: object.isRequired,
-  actions: object.isRequired,
-  isChoose: bool.isRequired,
 }
 
-export default withStyles(styles)(connector(EvenetsScene))
+export default withStyles(styles)(EvenetsScene)

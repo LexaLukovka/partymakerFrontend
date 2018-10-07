@@ -9,10 +9,21 @@ import PlaceInput from './PlaceInput'
 import isEmpty from 'lodash/isEmpty'
 import connector from '../connector'
 
-const styles = () => ({
+const styles = theme => ({
   radio: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  desktop: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  mobile: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+    },
   },
 })
 
@@ -33,8 +44,7 @@ class PlaceForm extends React.Component {
   }
 
   handleClickOpenPlace = () => {
-    const { actions, history } = this.props
-    actions.buttonPlace.hideCreateGroup()
+    const { history } = this.props
     history.push('/places')
   }
 
@@ -59,18 +69,28 @@ class PlaceForm extends React.Component {
             value={value}
             onChange={this.handleChange}
           >
-            <FormControlLabel
-              onClick={this.handleClickOpenPlace}
-              value="place"
-              control={<Radio color="primary" />}
-              label={<Typography color="primary" variant="subheading">Выберите место</Typography>}
-            />
-            <FormControlLabel
-              onClick={this.handleClickOpenEvent}
-              value="event"
-              control={<Radio color="primary" />}
-              label={<Typography color="primary" variant="subheading">Выберите событие</Typography>}
-            />
+            <div className={classes.mobile}>
+              <FormControlLabel
+                onClick={this.handleClickOpenPlace}
+                value="place"
+                control={<Radio color="primary" />}
+                label={<Typography color="primary" variant="subheading">Выберите место</Typography>}
+              />
+              <FormControlLabel
+                onClick={this.handleClickOpenEvent}
+                value="event"
+                control={<Radio color="primary" />}
+                label={<Typography color="primary" variant="subheading">Выберите событие</Typography>}
+              />
+            </div>
+            <div className={classes.desktop}>
+              <FormControlLabel
+                onClick={this.handleClickOpenPlace}
+                value="place_event"
+                control={<Radio color="primary" />}
+                label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
+              />
+            </div>
             <FormControlLabel
               value="address"
               control={<Radio color="primary" />}

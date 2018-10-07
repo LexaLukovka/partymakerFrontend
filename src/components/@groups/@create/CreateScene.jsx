@@ -1,10 +1,14 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { withStyles } from '@material-ui/core'
+import { Card, Typography, withStyles } from '@material-ui/core'
 
 import PlaceForm from './place/PlaceForm'
 import Form from './From'
+import Search from 'components/Search'
+import Sort from 'components/Sort'
+import InfiniteEvents from '../../@events/EventsScene/InfiniteEvents'
+import InfinitePlaces from '../../@places/PlacesScene/InfinitePlaces'
 
 import isEmpty from 'lodash/isEmpty'
 import qs from 'querystring'
@@ -14,12 +18,27 @@ import connector from './connector'
 
 const styles = theme => ({
   root: {
-    padding: '0 15px',
+    display: 'flex',
+  },
+  card: {
+    padding: '20px 30px',
     margin: '0 auto',
-    maxWidth: 700,
+    maxWidth: 370,
     marginTop: theme.spacing.size4,
     '@media only screen and (max-width: 320px)': {
       marginTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      margin: '0 30px',
+    },
+  },
+  search: {
+    padding: 30,
+    paddingBottom: 0,
+  },
+  place_event: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 })
@@ -68,11 +87,24 @@ class CreateScene extends React.Component {
   render() {
     const { classes, ...formHOC } = this.props
     return (
-      <form className={classes.root}>
-        <PlaceForm {...formHOC} />
-        <Form {...formHOC} />
-
-      </form>
+      <div className={classes.root}>
+        <Card className={classes.card}>
+          <form>
+            <PlaceForm {...formHOC} />
+            <Form {...formHOC} />
+          </form>
+        </Card>
+        <div className={classes.place_event}>
+          <div className={classes.search}>
+            <Search />
+            <Sort />
+          </div>
+          <Typography>Хорошие места чтобы пойти...</Typography>
+          <InfiniteEvents />
+          <Typography>Ближайшие события</Typography>
+          <InfinitePlaces />
+        </div>
+      </div>
     )
   }
 }
