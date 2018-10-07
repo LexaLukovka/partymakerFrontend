@@ -7,7 +7,6 @@ import * as authActions from 'src/redux/auth/action'
 
 const initMapStateToProps = store => ({
   ...store.group.singleReducer,
-  ...store.place.singleReducer,
   auth: store.authReducer,
   member: store.group.memberReducer,
   memberLoading: store.group.memberReducer.loading,
