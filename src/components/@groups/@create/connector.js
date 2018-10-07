@@ -4,6 +4,7 @@ import * as header from 'src/redux/header/action'
 import * as group from 'src/redux/group/create/action'
 import * as event from 'src/redux/event/single/action'
 import * as buttonEvent from 'src/redux/event/buttonCreate/action'
+import * as places from 'src/redux/places/action'
 
 const initMapStateToProps = store => ({
   group: store.group.createReducer,
@@ -17,6 +18,7 @@ const initMapDispatchToProps = dispatch => ({
     group: bindActionCreators(group, dispatch),
     event: bindActionCreators(event, dispatch),
     buttonEvent: bindActionCreators(buttonEvent, dispatch),
+    places: bindActionCreators(places, dispatch),
   },
 })
 

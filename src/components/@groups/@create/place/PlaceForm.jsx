@@ -54,6 +54,16 @@ class PlaceForm extends React.Component {
     history.push('/events')
   }
 
+  select = () => {
+    const { actions } = this.props
+    actions.places.canSelect(true)
+  }
+
+  unSelect = () => {
+    const { actions } = this.props
+    actions.places.canSelect(false)
+  }
+
   render() {
     const { classes, group, values, setFieldValue, setFieldTouched, errors, touched } = this.props
     const { value } = this.state
@@ -85,7 +95,7 @@ class PlaceForm extends React.Component {
             </div>
             <div className={classes.desktop}>
               <FormControlLabel
-                onClick={this.handleClickOpenPlace}
+                onClick={this.select}
                 value="place_event"
                 control={<Radio color="primary" />}
                 label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
@@ -94,6 +104,7 @@ class PlaceForm extends React.Component {
             <FormControlLabel
               value="address"
               control={<Radio color="primary" />}
+              onClick={this.unSelect}
               label={
                 <Geosuggest
                   fullWidth

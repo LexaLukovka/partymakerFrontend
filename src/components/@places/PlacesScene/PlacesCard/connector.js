@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-const initMapStateToProps = () => ({
-  // isChoose: store.place.buttonReducer.isChoose,
+const initMapStateToProps = (store) => ({
+  canSelect: store.placesReducer.canSelect,
 })
 
 export default connect(initMapStateToProps)

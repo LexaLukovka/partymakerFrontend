@@ -1,14 +1,4 @@
 import { LOAD_PLACE_FULFILLED, LOAD_PLACE_PENDING, LOAD_PLACE_REJECTED, SAVE_PLACE } from './action'
-import {
-  IS_VOTED_PLACE_FULFILLED,
-  IS_VOTED_PLACE_PENDING,
-  IS_VOTED_PLACE_REJECTED,
-  RESET_VOTED_PLACE,
-  VOTE_PLACE_FULFILLED,
-  VOTE_PLACE_PENDING,
-  VOTE_PLACE_REJECTED,
-  VOTE_PLACE,
-} from './votes/action'
 import votesReducer from './votes/reducer'
 
 const initialState = {
@@ -66,18 +56,8 @@ const placeReducer = (state = initialState, { type, payload }) => {
         error: true,
       }
 
-    case VOTE_PLACE:
-    case VOTE_PLACE_PENDING:
-    case VOTE_PLACE_REJECTED:
-    case VOTE_PLACE_FULFILLED:
-    case RESET_VOTED_PLACE:
-    case IS_VOTED_PLACE_PENDING:
-    case IS_VOTED_PLACE_REJECTED:
-    case IS_VOTED_PLACE_FULFILLED:
-      return { ...state, votes: votesReducer(state.votes, { type, payload }) }
-
     default:
-      return state
+      return { ...state, votes: votesReducer(state.votes, { type, payload }) }
   }
 }
 
