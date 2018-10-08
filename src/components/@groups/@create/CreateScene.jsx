@@ -22,14 +22,11 @@ const styles = theme => ({
   },
   card: {
     padding: '20px 30px',
-    margin: '0 auto',
-    maxWidth: 370,
-    marginTop: theme.spacing.size4,
-    '@media only screen and (max-width: 320px)': {
-      marginTop: 0,
-    },
+    margin: '20px auto',
+    height: '100%',
+    width: 370,
     [theme.breakpoints.up('sm')]: {
-      margin: '0 30px',
+      margin: '20px 30px',
     },
   },
   search: {
