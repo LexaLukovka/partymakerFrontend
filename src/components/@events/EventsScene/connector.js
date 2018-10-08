@@ -1,17 +1,15 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as events from 'src/redux/event/list/action'
-import * as buttonEvent from 'src/redux/event/buttonCreate/action'
+import * as events from 'src/redux/events/action'
 
 const initMapStateToProps = store => ({
-  events: store.event.listReducer,
-  isChoose: store.event.buttonReducer.isChoose,
+  events: store.eventsReducer,
+  canSelect: store.eventsReducer.canSelect,
 })
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
     events: bindActionCreators(events, dispatch),
-    buttonEvent: bindActionCreators(buttonEvent, dispatch),
   },
 })
 

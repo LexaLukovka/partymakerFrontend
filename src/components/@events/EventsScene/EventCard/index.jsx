@@ -35,14 +35,14 @@ const styles = {
   },
 }
 
-const EventCard = ({ classes, event, isChoose }) =>
+const EventCard = ({ classes, event, canSelect }) =>
   <Card className={classes.root}>
     <Link to={`/events/${event.id}`}>
       <CardHeader
         title={event.title}
         subheader={<Typography>{event.address.address}</Typography>}
       />
-      <Avatar className={classes.media} alt={event.title} src={event.pictures[0].url} />
+      <Avatar className={classes.media} alt={event.title} src={event.pictures[0]} />
     </Link>
 
     <CardContent>
@@ -67,22 +67,22 @@ const EventCard = ({ classes, event, isChoose }) =>
           Смотреть
         </Button>
       </Link>
+      {canSelect &&
       <Grid container justify="flex-end">
         <Link to={`/group/create?event_id=${event.id}`}>
-          {isChoose &&
           <Button color="primary">
             Выбрать
           </Button>
-          }
         </Link>
       </Grid>
+      }
     </CardActions>
   </Card>
 
 EventCard.propTypes = {
   classes: object.isRequired,
   event: object.isRequired,
-  isChoose: bool.isRequired,
+  canSelect: bool.isRequired,
 }
 
 export default withStyles(styles)(EventCard)
