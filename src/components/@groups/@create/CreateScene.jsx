@@ -18,14 +18,17 @@ import connector from './connector'
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: 'block',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
   },
   card: {
     padding: '20px 30px',
     margin: '20px auto',
     height: '100%',
     width: 370,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       margin: '20px 30px',
     },
   },
@@ -33,25 +36,41 @@ const styles = theme => ({
     padding: 30,
     paddingBottom: 0,
   },
+  typography: {
+    paddingTop: 20,
+  },
   place_event: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
     },
   },
 })
 
 class CreateScene extends React.Component {
   componentDidMount() {
-    const { actions, location: { search } } = this.props
+    const { actions, event, place, location: { search } } = this.props
     const id = qs.parse(search.replace('?', ''))
 
     if (id.place_id !== undefined) {
       actions.group.resetEvent()
-      actions.place.show(id.place_id)
+      if (isEmpty(place)) {
+        actions.place.load(id.place_id).then(() => {
+          actions.place.open(id.place_id)
+        })
+      } else {
+        actions.place.open(id.place_id)
+      }
     }
     if (id.event_id !== undefined) {
       actions.group.resetPlace()
-      actions.event.find(id.event_id)
+      if (isEmpty(event)) {
+        actions.event.load(id.event_id).then(() => {
+          actions.event.open(id.event_id)
+        })
+      } else {
+        actions.event.open(id.event_id)
+      }
     }
 
     actions.header.setTitle('Создание')
@@ -96,9 +115,9 @@ class CreateScene extends React.Component {
             <Search />
             <Sort />
           </div>
-          <Typography>Хорошие места чтобы пойти...</Typography>
+          <Typography variant="subheading" className={classes.typography}>Хорошие места чтобы пойти...</Typography>
           <InfiniteEvents />
-          <Typography>Ближайшие события</Typography>
+          <Typography variant="subheading" className={classes.typography}>Ближайшие события</Typography>
           <InfinitePlaces />
         </div>
       </div>

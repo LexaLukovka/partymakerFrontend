@@ -24,7 +24,7 @@ const PlaceInput = ({ classes, place, onCancel }) =>
   <div className={classes.root}>
     <Paper
       className={classes.place}
-      style={{ backgroundImage: `url('${place.pictures[0].url}')` }}
+      style={{ backgroundImage: `url('${place.pictures[0]}')` }}
     >
       <Link to={`/places/${place.id}`}>
         <Typography color="inherit" variant="title">

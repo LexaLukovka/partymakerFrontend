@@ -44,19 +44,21 @@ class PlaceForm extends React.Component {
   }
 
   handleClickOpenPlace = () => {
-    const { history } = this.props
+    const { actions, history } = this.props
+    actions.places.canSelect(true)
     history.push('/places')
   }
 
   handleClickOpenEvent = () => {
     const { actions, history } = this.props
-    actions.buttonEvent.hideCreateGroup()
+    actions.events.canSelect(true)
     history.push('/events')
   }
 
   select = () => {
     const { actions } = this.props
     actions.places.canSelect(true)
+    actions.events.canSelect(true)
   }
 
   unSelect = () => {
@@ -72,53 +74,80 @@ class PlaceForm extends React.Component {
     return (
       <div>
         {isEmpty(place) && isEmpty(event) ?
-          <RadioGroup
-            aria-label="Gender"
-            name="gender1"
-            className={classes.group}
-            value={value}
-            onChange={this.handleChange}
-          >
+          <React.Fragment>
             <div className={classes.mobile}>
-              <FormControlLabel
-                onClick={this.handleClickOpenPlace}
-                value="place"
-                control={<Radio color="primary" />}
-                label={<Typography color="primary" variant="subheading">Выберите место</Typography>}
-              />
-              <FormControlLabel
-                onClick={this.handleClickOpenEvent}
-                value="event"
-                control={<Radio color="primary" />}
-                label={<Typography color="primary" variant="subheading">Выберите событие</Typography>}
-              />
+              <RadioGroup
+                aria-label="Gender"
+                name="gender1"
+                className={classes.group}
+                value={value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  onClick={this.handleClickOpenPlace}
+                  value="place"
+                  control={<Radio color="primary" />}
+                  label={<Typography color="primary" variant="subheading">Выберите место</Typography>}
+                />
+                <FormControlLabel
+                  onClick={this.handleClickOpenEvent}
+                  value="event"
+                  control={<Radio color="primary" />}
+                  label={<Typography color="primary" variant="subheading">Выберите событие</Typography>}
+                />
+                <FormControlLabel
+                  value="address"
+                  control={<Radio color="primary" />}
+                  onClick={this.unSelect}
+                  label={
+                    <Geosuggest
+                      fullWidth
+                      name="address"
+                      placeholder="Адрес"
+                      value={values.address}
+                      onChange={setFieldValue}
+                      onBlur={setFieldTouched}
+                      error={!!errors.address && touched.address}
+                      helperText={errors.address}
+                      disabled={value !== 'address'}
+                    />}
+                />
+              </RadioGroup>
             </div>
             <div className={classes.desktop}>
-              <FormControlLabel
-                onClick={this.select}
-                value="place_event"
-                control={<Radio color="primary" />}
-                label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
-              />
+              <RadioGroup
+                aria-label="Gender"
+                name="gender1"
+                className={classes.group}
+                value={value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  onClick={this.select}
+                  value="place_event"
+                  control={<Radio color="primary" />}
+                  label={<Typography color="primary" variant="subheading">Выберите место или событие</Typography>}
+                />
+                <FormControlLabel
+                  value="address"
+                  control={<Radio color="primary" />}
+                  onClick={this.unSelect}
+                  label={
+                    <Geosuggest
+                      fullWidth
+                      name="address"
+                      placeholder="Адрес"
+                      value={values.address}
+                      onChange={setFieldValue}
+                      onBlur={setFieldTouched}
+                      error={!!errors.address && touched.address}
+                      helperText={errors.address}
+                      disabled={value !== 'address'}
+                    />}
+                />
+              </RadioGroup>
             </div>
-            <FormControlLabel
-              value="address"
-              control={<Radio color="primary" />}
-              onClick={this.unSelect}
-              label={
-                <Geosuggest
-                  fullWidth
-                  name="address"
-                  placeholder="Адрес"
-                  value={values.address}
-                  onChange={setFieldValue}
-                  onBlur={setFieldTouched}
-                  error={!!errors.address && touched.address}
-                  helperText={errors.address}
-                  disabled={value !== 'address'}
-                />}
-            />
-          </RadioGroup>
+          </React.Fragment>
           :
           <PlaceInput
             place={isEmpty(place) ? event : place}
