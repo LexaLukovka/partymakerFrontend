@@ -3,7 +3,6 @@ import { bool, object, shape, string } from 'prop-types'
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import truncate from 'lodash/truncate'
-import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -44,9 +43,11 @@ const PlacesCard = ({ classes, place, canSelect }) =>
       </Link>
       {canSelect &&
       <Grid container justify="flex-end">
-        <Button color="primary">
-          Выбрать
-        </Button>
+        <Link to={`/group/create?place_id=${place.id}`}>
+          <Button color="primary">
+            Выбрать
+          </Button>
+        </Link>
       </Grid>
       }
     </CardActions>
@@ -62,4 +63,4 @@ PlacesCard.propTypes = {
   }).isRequired,
 }
 
-export default withStyles(styles)(connector(PlacesCard))
+export default withStyles(styles)(PlacesCard)

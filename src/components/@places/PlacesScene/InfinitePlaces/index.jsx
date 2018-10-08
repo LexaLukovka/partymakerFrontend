@@ -1,5 +1,5 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import InfiniteScroll from 'react-infinite-scroller'
 
@@ -58,7 +58,7 @@ class InfinitePlaces extends React.Component {
   }
 
   render() {
-    const { places: { loading, places }, classes } = this.props
+    const { classes, places: { loading, places }, canSelect } = this.props
     if (loading) return <Loading />
     if (isEmpty(places)) return <NotFound />
     return <div className={classes.root}>
@@ -70,7 +70,7 @@ class InfinitePlaces extends React.Component {
         loader={<Loading />}
         className={classes.container}
       >
-        {Object.values(places).map(place => <PlacesCard key={place.id} place={place} />)}
+        {Object.values(places).map(place => <PlacesCard key={place.id} canSelect={canSelect} place={place} />)}
       </InfiniteScroll>
     </div>
   }
@@ -80,6 +80,7 @@ InfinitePlaces.propTypes = {
   classes: object.isRequired,
   places: object.isRequired,
   actions: object.isRequired,
+  canSelect: bool.isRequired,
 }
 
 export default withStyles(styles)(connector(InfinitePlaces))

@@ -6,6 +6,7 @@ import * as placesActions from 'src/redux/places/action'
 const initMapStateToProps = store => ({
   place: store.placesReducer.current,
   places: store.placesReducer,
+  canSelect: store.placesReducer.canSelect,
 })
 
 const initMapDispatchToProps = dispatch => ({
