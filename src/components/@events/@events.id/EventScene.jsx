@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, object } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import isEmpty from 'lodash/isEmpty'
 import EventCard from './EventCard'
@@ -36,13 +36,10 @@ const styles = theme => ({
 })
 
 class EventScene extends React.Component {
-  componentDidMount() {
-    const { actions, match, event } = this.props
+  componentWillMount() {
+    const { actions, match } = this.props
+    this.openEvent(match.params.id)
     actions.header.back()
-
-    if (isEmpty(event) || event.id !== match.params.id) {
-      actions.event.find(match.params.id)
-    }
   }
 
   componentDidUpdate() {
@@ -64,10 +61,21 @@ class EventScene extends React.Component {
     actions.pictureModal.show(picture_url)
   }
 
+  openEvent = (event_id) => {
+    const { actions, event } = this.props
+    if (isEmpty(event)) {
+      actions.event.load(event_id).then(() => {
+        actions.event.open(event_id)
+      })
+    } else {
+      actions.event.open(event_id)
+    }
+  }
+
   render() {
-    const { classes, loading, event } = this.props
-    if (loading) return <Loading />
-    if (isEmpty(event)) return <NotFound />
+    const { classes, event } = this.props
+    if (isEmpty(event)) return <Loading />
+    if (event.error) return <NotFound />
 
     return (
       <div className={classes.root}>
@@ -75,7 +83,7 @@ class EventScene extends React.Component {
           <EventCard event={event} />
         </div>
         <div className={classes.pictureGridContainer}>
-          <PictureGrid pictures={[event.pictures[0].url]} onClick={this.openModal} />
+          <PictureGrid pictures={event.pictures} onClick={this.openModal} />
         </div>
       </div>
     )
@@ -86,7 +94,6 @@ EventScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
-  loading: bool.isRequired,
   event: object.isRequired,
 }
 

@@ -31,12 +31,15 @@ const styles = theme => ({
 
 class InfiniteEvents extends React.Component {
   componentDidMount() {
-    this.load(1)
+    const { events } = this.props
+    if (!events.allLoaded) this.load(1)
+
+    document.title = 'События Запорожья'
   }
 
   componentWillUnmount() {
     const { actions } = this.props
-    actions.buttonEvent.hideChoose()
+    actions.events.canSelect(false)
   }
 
   load = (page) => {
@@ -51,7 +54,7 @@ class InfiniteEvents extends React.Component {
   }
 
   render() {
-    const { classes, events: { loading, events }, isChoose } = this.props
+    const { classes, events: { loading, events }, canSelect } = this.props
     if (loading) return <Loading />
     if (isEmpty(events)) return <NotFound />
 
@@ -63,7 +66,7 @@ class InfiniteEvents extends React.Component {
       loader={<Loading />}
       className={classes.root}
     >
-      {events.map(event => <EventCard key={event.id} isChoose={isChoose} event={event} />)}
+      {Object.values(events).map(event => <EventCard key={event.id} canSelect={canSelect} event={event} />)}
     </InfiniteScroll>
   }
 }
@@ -72,7 +75,7 @@ InfiniteEvents.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
   events: object.isRequired,
-  isChoose: bool.isRequired,
+  canSelect: bool.isRequired,
 }
 
 export default withStyles(styles)(connector(InfiniteEvents))
