@@ -2,12 +2,14 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
+
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
-import connector from './connector'
 import PlacePanel from './PlacePanel'
-import isEmpty from 'lodash/isEmpty'
 import PictureGrid from 'components/PictureGrid/PictureGrid'
+
+import isEmpty from 'lodash/isEmpty'
+import connector from './connector'
 
 const styles = (theme) => ({
   root: {
@@ -39,6 +41,14 @@ class PlaceScene extends React.Component {
     const { actions, match } = this.props
     this.openPlace(match.params.id)
     actions.header.back()
+  }
+
+  componentDidUpdate() {
+    const { actions, place } = this.props
+    if (!isEmpty(place)) {
+      actions.header.setTitle(place.title)
+      document.title = place.title
+    }
   }
 
   componentWillUnmount() {
