@@ -3,8 +3,8 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import placesReducer from './places/reducer'
+import eventsReducer from './events/reducer'
 import group from './group'
-import event from './event'
 
 import authReducer from './auth/reducer'
 import userReducer from './user/reducer'
@@ -23,8 +23,8 @@ const persistConfig = {
 
 const reducers = combineReducers({
   placesReducer,
+  eventsReducer,
   group,
-  event,
   authReducer,
   userReducer,
   layoutReducer,
