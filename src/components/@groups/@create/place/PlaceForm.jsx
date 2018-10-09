@@ -43,13 +43,13 @@ class PlaceForm extends React.Component {
     else actions.group.resetPlace()
   }
 
-  handleClickOpenPlace = () => {
+  selectPlace = () => {
     const { actions, history } = this.props
     actions.places.canSelect(true)
     history.push('/places')
   }
 
-  handleClickOpenEvent = () => {
+  selectEvent = () => {
     const { actions, history } = this.props
     actions.events.canSelect(true)
     history.push('/events')
@@ -84,13 +84,13 @@ class PlaceForm extends React.Component {
                 onChange={this.handleChange}
               >
                 <FormControlLabel
-                  onClick={this.handleClickOpenPlace}
+                  onClick={this.selectPlace}
                   value="place"
                   control={<Radio color="primary" />}
                   label={<Typography color="primary" variant="subheading">Выберите место</Typography>}
                 />
                 <FormControlLabel
-                  onClick={this.handleClickOpenEvent}
+                  onClick={this.selectEvent}
                   value="event"
                   control={<Radio color="primary" />}
                   label={<Typography color="primary" variant="subheading">Выберите событие</Typography>}

@@ -2,7 +2,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router'
-import { AppBar, Button, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core'
+import { AppBar, IconButton, Tab, Tabs, Toolbar, Typography, withStyles } from '@material-ui/core'
 import connector from './connector'
 import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
@@ -41,6 +41,14 @@ const styles = theme => ({
 })
 
 class Header extends React.Component {
+  state = {
+    value: 0,
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value })
+  }
+
   goBack = (url) => () => {
     const { history } = this.props
     if (url) return history.push(url)
@@ -87,11 +95,21 @@ class Header extends React.Component {
             </Typography>
 
             <div className={classes.actionButtons}>
-              <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
-              <Link to="/events"><Button color="inherit">События</Button></Link>
-              <Link to="/group/create"><Button color="inherit">Собрать свою компанию</Button></Link>
+              <Tabs
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="secondary"
+                textColor="inherit"
+                fullWidth
+              >
+                <Tab label={<Link to="/places">Куда пойти погулять?</Link>} />
+                <Tab label={<Link to="/events">События Запорожья</Link>} />
+                <Tab label={<Link to="/group/create">Собрать компанию</Link>} />
+                <Tab label={<Link to="/users">Мой профиль</Link>} />
+              </Tabs>
             </div>
             <UserMenu />
+
           </Toolbar>
         </AppBar>
       </header>

@@ -9,21 +9,21 @@ import * as settingsActions from 'src/redux/auth/action'
 import * as pictureModal from 'src/redux/pictureModal/action'
 
 const initMapStateToProps = store => ({
-  user: store.userReducer,
-  header: store.headerReducer,
   auth: store.authReducer,
+  user: store.userReducer,
   group: store.group.listReducer,
+  header: store.headerReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
     auth: bindActionCreators(authActions, dispatch),
-    header: bindActionCreators(headerActions, dispatch),
-    pictureModal: bindActionCreators(pictureModal, dispatch),
     user: bindActionCreators(userActions, dispatch),
     group: bindActionCreators(groupsActions, dispatch),
-    actionButton: bindActionCreators(actionButton, dispatch),
     settings: bindActionCreators(settingsActions, dispatch),
+    header: bindActionCreators(headerActions, dispatch),
+    pictureModal: bindActionCreators(pictureModal, dispatch),
+    actionButton: bindActionCreators(actionButton, dispatch),
   },
 })
 

@@ -31,12 +31,19 @@ class SettingsScene extends React.Component {
     this.props.actions.header.resetTitle()
   }
 
+  handleUpload = async url => {
+    const { actions, match } = this.props
+    await actions.settings.change({ avatar_url: url })
+    actions.user.find(match.params.id)
+  }
+
+
   render() {
     const { classes, user } = this.props
     return (
       <React.Fragment>
         <div className={classes.desktop}>
-          <DesctopScene user={user} />
+          <DesctopScene user={user} onChangeAvatar={this.handleUpload} />
         </div>
         <div className={classes.mobile}>
           <MobileScene user={user} />
@@ -52,4 +59,4 @@ SettingsScene.propTypes = {
   user: object.isRequired,
 }
 
-export default connector(withStyles(styles)(SettingsScene))
+export default withStyles(styles)(connector(SettingsScene))

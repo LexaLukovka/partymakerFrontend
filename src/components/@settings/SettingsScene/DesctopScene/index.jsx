@@ -1,5 +1,5 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { func, object } from 'prop-types'
 import { Card, Typography, withStyles } from '@material-ui/core'
 
 import UserAvatar from 'components/User/UserAvatar'
@@ -31,13 +31,20 @@ const styles = () => ({
   },
 })
 
-const DesctopScene = ({ classes, user }) =>
+const DesctopScene = ({ classes, user, onChangeAvatar }) =>
   <div className={classes.root}>
     <div>
       <div className={classes.profile}>
         <div>
           <UserAvatar user={user} />
-          <Typography className={classes.text} align="center" color="primary"> Сменить аватар</Typography>
+          <Typography
+            className={classes.text}
+            align="center"
+            color="primary"
+            onClick={onChangeAvatar}
+          >
+            Сменить аватар
+          </Typography>
         </div>
         <UserInfo user={user} />
       </div>
@@ -53,6 +60,7 @@ const DesctopScene = ({ classes, user }) =>
 DesctopScene.propTypes = {
   classes: object.isRequired,
   user: object.isRequired,
+  onChangeAvatar: func.isRequired,
 }
 
 export default withStyles(styles)(DesctopScene)

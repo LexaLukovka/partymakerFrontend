@@ -2,12 +2,12 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles'
+import { IconButton, Menu, MenuItem, Typography, withStyles } from '@material-ui/core'
 import AccountCircle from 'mdi-react/AccountCircleIcon'
-import { IconButton, Menu, MenuItem } from '@material-ui/core'
+import UserAvatar from 'components/User/UserAvatar'
 import connector from './connector'
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
   },
@@ -17,7 +17,23 @@ const styles = {
       outline: 'none',
     },
   },
-}
+  userName: {
+    alignSelf: 'center',
+    paddingLeft: 10,
+  },
+  desktop: {
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  mobile: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+    },
+  },
+})
 
 class UserMenu extends React.Component {
   handleMenu = event => {
@@ -45,15 +61,26 @@ class UserMenu extends React.Component {
     return (
       <div className={classes.root}>
 
-        <IconButton onClick={this.handleMenu} color="inherit">
-          <AccountCircle />
-        </IconButton>
+        <div className={classes.desktop} onClick={this.handleMenu}>
+          <UserAvatar small user={auth.user} />
+          <Typography className={classes.userName} variant="subheading" color="inherit">
+            {auth.user.name}
+          </Typography>
+        </div>
+
+        <div className={classes.mobile}>
+          <IconButton onClick={this.handleMenu} color="inherit">
+            <AccountCircle />
+          </IconButton>
+        </div>
 
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <div className={classes.menuItem} onClick={this.handleClose}>
             {auth.user ?
               <React.Fragment>
-                <MenuItem component={Link} to="/user">Мой профиль</MenuItem>
+                <div className={classes.mobile}>
+                  <MenuItem component={Link} to="/user">Мой профиль</MenuItem>
+                </div>
                 <MenuItem component={Link} to="/settings">Настройки</MenuItem>
                 <MenuItem onClick={this.logout}>Выйти</MenuItem>
               </React.Fragment>
