@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import { object } from 'prop-types'
+import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { AppBar, IconButton, Tab, Tabs, Toolbar, Typography, withStyles } from '@material-ui/core'
-import connector from './connector'
 import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
 import ArrowBack from 'mdi-react/ArrowBackIcon'
 import MenuIcon from 'mdi-react/MenuIcon'
-import { Link } from 'react-router-dom'
+import connector from './connector'
 
 const styles = theme => ({
   root: {
@@ -43,6 +43,32 @@ const styles = theme => ({
 class Header extends React.Component {
   state = {
     value: 0,
+  }
+
+  componentWillMount() {
+    this.handleChangeLocation(this.props.location.pathname)
+  }
+
+  componentDidUpdate(nextProps, nextStates, snapshot) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      const path = this.props.location.pathname
+      this.handleChangeLocation(path)
+    }
+  }
+
+  handleChangeLocation = (path) => {
+    switch (path) {
+      case ('/places'):
+        return this.setState({ value: 0 })
+      case ('/events'):
+        return this.setState({ value: 1 })
+      case ('/group/create'):
+        return this.setState({ value: 2 })
+      case (`/users/${this.props.auth.user.id}`):
+        return this.setState({ value: 3 })
+      default:
+        return this.setState({ value: 0 })
+    }
   }
 
   handleChange = (event, value) => {
@@ -119,6 +145,8 @@ class Header extends React.Component {
 
 Header.propTypes = {
   classes: object.isRequired,
+  location: object.isRequired,
+  auth: object.isRequired,
   header: object.isRequired,
   actions: object.isRequired,
   history: object.isRequired,

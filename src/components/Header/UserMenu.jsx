@@ -2,7 +2,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { IconButton, Menu, MenuItem, Typography, withStyles } from '@material-ui/core'
+import { Button, IconButton, Menu, MenuItem, Typography, withStyles } from '@material-ui/core'
 import AccountCircle from 'mdi-react/AccountCircleIcon'
 import UserAvatar from 'components/User/UserAvatar'
 import connector from './connector'
@@ -17,12 +17,7 @@ const styles = theme => ({
       outline: 'none',
     },
   },
-  userName: {
-    alignSelf: 'center',
-    paddingLeft: 10,
-  },
   desktop: {
-    display: 'flex',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -32,6 +27,13 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       display: 'block',
     },
+  },
+  flex: {
+    display: 'flex',
+  },
+  userName: {
+    alignSelf: 'center',
+    paddingLeft: 10,
   },
 })
 
@@ -61,11 +63,20 @@ class UserMenu extends React.Component {
     return (
       <div className={classes.root}>
 
-        <div className={classes.desktop} onClick={this.handleMenu}>
-          <UserAvatar small user={auth.user} />
-          <Typography className={classes.userName} variant="subheading" color="inherit">
-            {auth.user.name}
-          </Typography>
+        <div className={classes.desktop}>
+          {auth.user ?
+            <div className={classes.flex} onClick={this.handleMenu}>
+              <UserAvatar small user={auth.user} />
+              <Typography className={classes.userName} variant="subheading" color="inherit">
+                {auth.user.name}
+              </Typography>
+            </div>
+            :
+            <React.Fragment>
+              <Link to="/auth/login"><Button color="inherit">Войти</Button></Link>
+              <Link to="/auth/register"><Button color="inherit">Зарегистрироваться</Button></Link>
+            </React.Fragment>
+          }
         </div>
 
         <div className={classes.mobile}>
