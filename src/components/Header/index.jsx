@@ -134,6 +134,7 @@ class Header extends React.Component {
                 <Tab label={<Link to="/users">Мой профиль</Link>} />
               </Tabs>
             </div>
+
             <UserMenu />
 
           </Toolbar>
@@ -145,11 +146,11 @@ class Header extends React.Component {
 
 Header.propTypes = {
   classes: object.isRequired,
+  actions: object.isRequired,
+  history: object.isRequired,
   location: object.isRequired,
   auth: object.isRequired,
   header: object.isRequired,
-  actions: object.isRequired,
-  history: object.isRequired,
 }
 
 export default withStyles(styles)(connector(withRouter(Header)))

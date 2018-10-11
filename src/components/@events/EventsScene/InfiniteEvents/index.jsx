@@ -12,20 +12,24 @@ import connector from '../connector'
 
 const styles = theme => ({
   root: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  container: {
     display: 'grid',
-    gridTemplateColumns: '1fr',
-    [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '1fr 1fr',
-    },
-    [theme.breakpoints.up('sm')]: {
-      gridTemplateColumns: '1fr 1fr',
-    },
-    [theme.breakpoints.up('lg')]: {
-      gridTemplateColumns: '1fr 1fr 1fr',
-    },
     paddingTop: 15,
     maxWidth: 1300,
     margin: '0 auto',
+    gridGap: '30px',
+    gridTemplateColumns: '370px',
+
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '370px 370px',
+    },
+
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '370px 370px 370px',
+    },
   },
 })
 
@@ -58,16 +62,18 @@ class InfiniteEvents extends React.Component {
     if (loading) return <Loading />
     if (isEmpty(events)) return <NotFound />
 
-    return <InfiniteScroll
-      initialLoad
-      pageStart={0}
-      loadMore={this.load}
-      hasMore={this.hasMore()}
-      loader={<Loading />}
-      className={classes.root}
-    >
-      {Object.values(events).map(event => <EventCard key={event.id} canSelect={canSelect} event={event} />)}
-    </InfiniteScroll>
+    return <div className={classes.root}>
+      <InfiniteScroll
+        initialLoad
+        pageStart={0}
+        loadMore={this.load}
+        hasMore={this.hasMore()}
+        loader={<Loading />}
+        className={classes.container}
+      >
+        {Object.values(events).map(event => <EventCard key={event.id} canSelect={canSelect} event={event} />)}
+      </InfiniteScroll>
+    </div>
   }
 }
 

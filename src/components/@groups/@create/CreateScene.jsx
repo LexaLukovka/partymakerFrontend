@@ -127,11 +127,15 @@ class CreateScene extends React.Component {
 
 CreateScene.propTypes = {
   history: object.isRequired,
-  place: object.isRequired,
-  event: object.isRequired,
+  place: object,
+  event: object,
   actions: object.isRequired,
   classes: object.isRequired,
   location: object.isRequired,
+}
+CreateScene.defaultProps = {
+  place: {},
+  event: {},
 }
 
 const router = withRouter(CreateScene)
