@@ -35,6 +35,10 @@ const styles = theme => ({
       display: 'none',
     },
   },
+  group: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 })
 
 class UsersScene extends React.Component {
@@ -81,7 +85,9 @@ class UsersScene extends React.Component {
             </Link>
           </div>
         </div>
-        <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
+        <div className={classes.group}>
+          <Groups currentUser={auth.user.id === user.id} admin_id={user.id} />
+        </div>
       </div>
     )
   }

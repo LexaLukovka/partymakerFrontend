@@ -29,6 +29,7 @@ const styles = theme => ({
     },
   },
   actionButtons: {
+    marginRight: 10,
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -42,7 +43,7 @@ const styles = theme => ({
 
 class Header extends React.Component {
   state = {
-    value: 0,
+    value: '',
   }
 
   componentWillMount() {
@@ -67,7 +68,7 @@ class Header extends React.Component {
       case (`/users/${this.props.auth.user.id}`):
         return this.setState({ value: 3 })
       default:
-        return this.setState({ value: 0 })
+        return this.setState({ value: '' })
     }
   }
 

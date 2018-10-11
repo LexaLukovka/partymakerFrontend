@@ -10,21 +10,20 @@ import connector from './connector'
 
 const styles = theme => ({
   root: {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: '1fr 1fr',
-    },
-    [theme.breakpoints.up('sm')]: {
-      gridTemplateColumns: '1fr 1fr',
-    },
-    [theme.breakpoints.up('lg')]: {
-      gridTemplateColumns: '1fr 1fr 1fr',
-    },
-
     paddingTop: 15,
     maxWidth: 1300,
     margin: '0 auto',
+    display: 'grid',
+    gridGap: '30px',
+    gridTemplateColumns: '350px',
+
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: '350px 350px',
+    },
+
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '350px 350px 350px',
+    },
   },
 })
 

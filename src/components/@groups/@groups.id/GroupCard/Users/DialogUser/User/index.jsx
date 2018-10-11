@@ -4,18 +4,19 @@ import { Grid, withStyles } from '@material-ui/core'
 import UserInfo from 'components/User/UserInfo'
 import UserAvatar from 'components/User/UserAvatar'
 
-const styles = () => ({
+const styles = theme => ({
   avatar: {
-    alignItems: 'center',
-    width: 70,
-    height: 70,
-    marginBottom: 10,
+    [theme.breakpoints.up('md')]: {
+      marginRight: 10,
+    },
   },
 })
 
 const User = ({ classes, user }) =>
   <Grid container justify="center">
-    <UserAvatar user={user} />
+    <div className={classes.avatar}>
+      <UserAvatar user={user} />
+    </div>
     <UserInfo user={user} />
   </Grid>
 
