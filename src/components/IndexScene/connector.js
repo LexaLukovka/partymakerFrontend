@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from 'src/redux/layout/action'
+import layout from 'src/redux/layout/action'
 
 const initMapStateToProps = store => ({
   layout: store.layoutReducer,
@@ -8,7 +8,7 @@ const initMapStateToProps = store => ({
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
-    layout: bindActionCreators(actions, dispatch),
+    layout: bindActionCreators(layout, dispatch),
   },
 })
 

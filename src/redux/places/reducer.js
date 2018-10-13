@@ -1,6 +1,5 @@
 /* eslint-disable no-fallthrough */
-import { CAN_SELECT, LOAD_PLACES_FULFILLED, LOAD_PLACES_PENDING, LOAD_PLACES_REJECTED } from './action'
-import placeActions, { OPEN_PLACE } from './place/action'
+import { OPEN_PLACE, LOAD_PLACES_FULFILLED, LOAD_PLACES_PENDING, LOAD_PLACES_REJECTED } from './action'
 import placeReducer from './place/reducer'
 
 const initialState = {
@@ -9,7 +8,6 @@ const initialState = {
   error: null,
   current: undefined,
   places: {},
-  canSelect: false,
 }
 
 const placesReducer = (state = initialState, action) => {
@@ -30,10 +28,11 @@ const placesReducer = (state = initialState, action) => {
 
     case LOAD_PLACES_FULFILLED: {
       const places = action.payload.data
-      const placeReducers = {}
-      places.forEach(place => {
-        placeReducers[place.id] = placeReducer(undefined, placeActions.save(place))
-      })
+
+      const placeReducers = places.reduce((obj, place) => {
+        obj[place.id] = place
+        return obj
+      }, {})
 
       return {
         ...state,
@@ -49,21 +48,13 @@ const placesReducer = (state = initialState, action) => {
         current: state.places[action.payload],
       }
 
-    case CAN_SELECT:
-      return {
-        ...state,
-        canSelect: action.payload,
-      }
-
     default: {
       const places = { ...state.places }
       const place = placeReducer(state.current, action)
-      if (!place.id) places[place.id] = place
+      const place_id = place.id || (action.meta && action.meta.place_id)
+      if (place_id) places[place_id] = place
 
-      return {
-        ...state,
-        places,
-      }
+      return { ...state, places }
     }
   }
 }

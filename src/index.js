@@ -2,7 +2,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import store, { persistor, history } from './store'
@@ -24,9 +24,7 @@ render(() =>
     <ConnectedRouter history={history}>
       <PersistGate loading={<Loading />} persistor={persistor}>
         <Router>
-          <Switch>
-            <Route path="/" component={LayoutScene} />
-          </Switch>
+          <LayoutScene />
         </Router>
       </PersistGate>
     </ConnectedRouter>

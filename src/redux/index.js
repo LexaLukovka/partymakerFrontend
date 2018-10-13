@@ -3,36 +3,20 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import placesReducer from './places/reducer'
-import eventsReducer from './events/reducer'
-import group from './group'
-
-import authReducer from './auth/reducer'
-import userReducer from './user/reducer'
 import layoutReducer from './layout/reducer'
-import drawerReducer from './drawer/reducer'
 import headerReducer from './header/reducer'
-import alertReducer from './alert/reducer'
-import actionButtonReducer from './actionButton/reducer'
-import pictureModalReducer from './pictureModal/reducer'
+import modalReducer from './modal/reducer'
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['authReducer'],
 }
 
 const reducers = combineReducers({
   placesReducer,
-  eventsReducer,
-  group,
-  authReducer,
-  userReducer,
+  modalReducer,
   layoutReducer,
-  drawerReducer,
   headerReducer,
-  alertReducer,
-  pictureModalReducer,
-  actionButtonReducer,
 })
 
 export default persistReducer(persistConfig, reducers)

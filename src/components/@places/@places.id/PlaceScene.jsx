@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core'
 import Loading from 'components/Loading'
 import NotFound from 'components/NotFound'
 import PlacePanel from './PlacePanel'
-import PictureGrid from 'components/PictureGrid/PictureGrid'
+import PictureGrid from 'components/PictureGrid'
 
 import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
@@ -43,54 +43,35 @@ class PlaceScene extends React.Component {
     actions.header.back()
   }
 
-  componentDidUpdate() {
-    const { actions, place } = this.props
-    if (!isEmpty(place)) {
-      actions.header.setTitle(place.title)
-      document.title = place.title
-    }
-  }
-
   componentWillUnmount() {
     const { actions } = this.props
     this.props.actions.header.resetTitle()
     actions.header.menu()
   }
 
-  openPlace = (place_id) => {
+  openPlace = async (place_id) => {
     const { actions, place } = this.props
-    if (isEmpty(place)) {
-      actions.place.load(place_id).then(() => {
-        actions.place.open(place_id)
-      })
-    } else {
-      actions.place.open(place_id)
+    actions.places.open(place_id)
+    if (!place) {
+      await actions.place.load(place_id)
+      actions.places.open(place_id)
     }
-  }
-
-  handleVote = rating => {
-    const { actions } = this.props
-    actions.place.vote(rating)
   }
 
   openModal = (picture_url) => {
     const { actions } = this.props
-    actions.pictureModal.show(picture_url)
+    actions.modal.show({ picture: picture_url })
   }
 
   render() {
     const { classes, place } = this.props
-    if (isEmpty(place)) return <Loading />
-    if (place.error) return <NotFound />
+    if (isEmpty(place)) return <NotFound />
+    if (place.loading) return <Loading />
 
     return (
       <div className={classes.root}>
         <div className={classes.placeContainer}>
-          <PlacePanel
-            place={place}
-            onVote={this.handleVote}
-            vote={4}
-          />
+          <PlacePanel place={place} />
         </div>
         <div className={classes.pictureGridContainer}>
           <PictureGrid pictures={place.pictures} onClick={this.openModal} />
@@ -102,9 +83,13 @@ class PlaceScene extends React.Component {
 
 PlaceScene.propTypes = {
   classes: object.isRequired,
-  place: object.isRequired,
+  place: object,
   actions: object.isRequired,
   match: object.isRequired,
+}
+
+PlaceScene.defaultProps = {
+  place: null,
 }
 
 export default withStyles(styles)(connector(PlaceScene))

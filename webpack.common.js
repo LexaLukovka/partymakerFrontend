@@ -9,6 +9,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
+      formatters: path.resolve(__dirname, './src/formatters'),
       assets: path.resolve('./src/assets'),
       components: path.resolve(__dirname, './src/components/'),
       services: path.resolve(__dirname, './src/services/'),

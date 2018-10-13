@@ -1,6 +1,6 @@
 import React from 'react'
-import { bool, object, shape, string } from 'prop-types'
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography, withStyles } from '@material-ui/core'
+import { object, shape, string } from 'prop-types'
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import truncate from 'lodash/truncate'
 
@@ -16,7 +16,7 @@ const styles = () => ({
   },
 })
 
-const PlacesCard = ({ classes, place, canSelect }) =>
+const PlacesCard = ({ classes, place }) =>
   <Card className={classes.root}>
     <Link to={`/places/${place.id}`}>
       <CardMedia
@@ -41,21 +41,11 @@ const PlacesCard = ({ classes, place, canSelect }) =>
           Смотреть
         </Button>
       </Link>
-      {canSelect &&
-      <Grid container justify="flex-end">
-        <Link to={`/group/create?place_id=${place.id}`}>
-          <Button color="primary">
-            Выбрать
-          </Button>
-        </Link>
-      </Grid>
-      }
     </CardActions>
   </Card>
 
 PlacesCard.propTypes = {
   classes: object.isRequired,
-  canSelect: bool.isRequired,
   place: shape({
     title: string,
     primary_picture: string,

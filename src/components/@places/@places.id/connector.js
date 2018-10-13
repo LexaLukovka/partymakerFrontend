@@ -1,18 +1,20 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as place from 'src/redux/places/place/action'
-import * as header from 'src/redux/header/action'
-import * as pictureModal from 'src/redux/pictureModal/action'
+import places from 'src/redux/places/action'
+import place from 'src/redux/places/place/action'
+import header from 'src/redux/header/action'
+import modal from 'src/redux/modal/action'
 
 const initMapStateToProps = store => ({
   place: store.placesReducer.current,
-  auth: store.authReducer,
+  places: store.placesReducer,
 })
 
 const initMapDispatchToProps = dispatch => ({
   actions: {
+    places: bindActionCreators(places, dispatch),
     place: bindActionCreators(place, dispatch),
-    pictureModal: bindActionCreators(pictureModal, dispatch),
+    modal: bindActionCreators(modal, dispatch),
     header: bindActionCreators(header, dispatch),
   },
 })

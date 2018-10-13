@@ -3,23 +3,20 @@ export const SET_HEADER_ICON = 'SET_HEADER_ICON'
 export const SET_HEADER_TITLE = 'SET_HEADER_TITLE'
 export const RESET_HEADER_TITLE = 'RESET_HEADER_TITLE'
 
-// noinspection JSUnusedGlobalSymbols
-export const back = (url) => ({
+const back = (url) => ({
   type: SET_HEADER_ICON,
   payload: {
     icon: 'back', url,
   },
 })
 
-// noinspection JSUnusedGlobalSymbols
-export const menu = () => ({
+const menu = () => ({
   type: SET_HEADER_ICON,
   payload: {
     icon: 'menu',
   },
 })
 
-// noinspection JSUnusedGlobalSymbols
 export const setIcon = (icon) => ({
   type: SET_HEADER_ICON,
   payload: {
@@ -27,21 +24,20 @@ export const setIcon = (icon) => ({
   },
 })
 
-// noinspection JSUnusedGlobalSymbols
-export const title = title => ({
+const title = title => ({
   type: SET_HEADER_TITLE,
   payload: {
     title,
   },
 })
 
-// noinspection JSUnusedGlobalSymbols
-export const setTitle = title => ({
+const setTitle = title => ({
   type: SET_HEADER_TITLE,
   payload: { title },
 })
 
-// noinspection JSUnusedGlobalSymbols
-export const resetTitle = () => ({
+const resetTitle = () => ({
   type: RESET_HEADER_TITLE,
 })
+
+export default { back, menu, setIcon, title, setTitle, resetTitle }
