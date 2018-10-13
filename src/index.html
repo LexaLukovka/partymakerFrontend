@@ -41,19 +41,26 @@
 <div id="root"></div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function (response) {
-        // Service worker registration done
-        console.log('Registration Successful', response)
-      }, function (error) {
-        // Service worker registration failed
-        console.log('Registration Failed', error)
-      })
-  }
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register('/sw.js')
+  //     .then(function (response) {
+  //       // Service worker registration done
+  //       console.log('Registration Successful', response)
+  //     }, function (error) {
+  //       // Service worker registration failed
+  //       console.log('Registration Failed', error)
+  //     })
+  // }
 </script>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0E-RRtQWldjEQLFkAOWDgMSj295C0Lo&libraries=places,visualization&language=ru-RU">
+</script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: 'ca-pub-6481242615301024',
+    enable_page_level_ads: true
+  })
 </script>
 </body>
 </html>

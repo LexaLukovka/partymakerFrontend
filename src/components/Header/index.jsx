@@ -2,12 +2,10 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withRouter } from 'react-router'
-import { withStyles, AppBar, Toolbar, Typography, IconButton, Button } from '@material-ui/core'
+import { AppBar, Button, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core'
 import connector from './connector'
-import UserMenu from './UserMenu'
 import shortTitle from 'utils/shortTitle'
 import ArrowBack from 'mdi-react/ArrowBackIcon'
-import MenuIcon from 'mdi-react/MenuIcon'
 import { Link } from 'react-router-dom'
 
 const styles = theme => ({
@@ -47,10 +45,6 @@ class Header extends React.Component {
     return history.goBack()
   }
 
-  openDrawer = () => {
-    this.props.actions.drawer.open()
-  }
-
   renderIcon = () => {
     const { header } = this.props
     if (header.icon === 'back') {
@@ -62,14 +56,7 @@ class Header extends React.Component {
         </a>
       )
     }
-
-    return (
-      <a onClick={this.openDrawer}>
-        <IconButton color="inherit">
-          <MenuIcon />
-        </IconButton>
-      </a>
-    )
+    return null
   }
 
   render() {
@@ -88,10 +75,7 @@ class Header extends React.Component {
 
             <div className={classes.actionButtons}>
               <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
-              <Link to="/parties/create"><Button color="inherit">Собрать свою компанию</Button></Link>
-              <Link to="/parties"><Button color="inherit">Найти компанию погулять</Button></Link>
             </div>
-            <UserMenu />
           </Toolbar>
         </AppBar>
       </header>
@@ -102,7 +86,6 @@ class Header extends React.Component {
 Header.propTypes = {
   classes: object.isRequired,
   header: object.isRequired,
-  actions: object.isRequired,
   history: object.isRequired,
 }
 

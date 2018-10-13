@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles, Button } from '@material-ui/core'
+import { Button, withStyles } from '@material-ui/core'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import connector from './connector'
@@ -40,7 +40,7 @@ class IndexScene extends React.Component {
       <div className={classes.root}>
         <BannerJumbotron />
         <div>
-          <Link to="/parties/create">
+          <Link to="/places">
             <Button
               className={classes.button}
               fullWidth
@@ -48,17 +48,7 @@ class IndexScene extends React.Component {
               size="large"
               color="primary"
             >
-              Создать вечеринку
-            </Button>
-          </Link>
-          <Link to="/parties">
-            <Button
-              fullWidth
-              variant="contained"
-              size="large"
-              color="primary"
-            >
-              Найти вечеринку
+              Найти место где погулять
             </Button>
           </Link>
         </div>
