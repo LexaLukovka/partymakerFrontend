@@ -6,7 +6,6 @@ import truncate from 'lodash/truncate'
 
 const styles = () => ({
   root: {
-    maxWidth: 370,
     margin: '10px 10px',
     alignSelf: 'center',
     justifySelf: 'center',
