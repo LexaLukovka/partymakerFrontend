@@ -1,6 +1,8 @@
 import { LOAD_PLACE_FULFILLED, LOAD_PLACE_PENDING, LOAD_PLACE_REJECTED } from './action'
 
-const initPlace = (place) => ({
+const initPlace = (place = {}) => ({
+  loading: false,
+  error: false,
   id: place.id,
   title: place.title,
   admin: place.admin,
@@ -11,10 +13,7 @@ const initPlace = (place) => ({
   price: place.price,
 })
 
-const initialState = initPlace({
-  loading: false,
-  error: false,
-})
+const initialState = initPlace()
 
 const placeReducer = (state = initialState, { type, payload }) => {
   switch (type) {

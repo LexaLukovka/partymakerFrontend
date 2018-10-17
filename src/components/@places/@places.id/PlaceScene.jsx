@@ -74,7 +74,7 @@ class PlaceScene extends React.Component {
           <PlacePanel place={place} />
         </div>
         <div className={classes.pictureGridContainer}>
-          <PictureGrid pictures={place.pictures} onClick={this.openModal} />
+          <PictureGrid pictures={place.pictures} videos={place.videos} onClick={this.openModal} />
         </div>
       </div>
     )
