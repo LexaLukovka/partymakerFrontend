@@ -26,10 +26,11 @@ const styles = theme => ({
   gridVideo: {
     width: '100%',
     height: '100%',
+    minHeight: 240,
   },
   oneVideo: {
     gridColumn: 'span 2',
-    height: 400,
+    gridRow: 'span 2',
   },
   wide: {
     gridColumn: 'span 2',
@@ -59,24 +60,23 @@ class PictureGrid extends Component {
   loadGrid = () => {
     const { classes } = this.props
 
-    const avatars = document.querySelectorAll('.grid-video')
-    avatars.forEach(async avatar => {
-      if (avatars.length === 1) {
-        avatar.classList.add(classes.oneVideo)
+    const videos = document.querySelectorAll('.grid-video')
+    videos.forEach(async video => {
+      if (videos.length === 1) {
+        video.classList.add(classes.oneVideo)
       }
     })
 
     const pictures = document.querySelectorAll('.grid-picture')
     pictures.forEach(async avatar => {
-      if (pictures.length === 1) {
-        avatar.classList.add(classes.superLarge)
-      }
+
+      if (pictures.length === 1) avatar.classList.add(classes.large)
+      if (pictures.length === 1 && videos.length === 0) avatar.classList.add(classes.superLarge)
+
       const picture = await this.primisifyPicture(avatar.querySelector('img'))
       if (picture.naturalHeight) {
         const ratio = picture.naturalWidth / picture.naturalHeight
-        if (ratio > (16 / 9)) {
-          avatar.classList.add(classes.large)
-        }
+        if (ratio > (16 / 9)) avatar.classList.add(classes.large)
       }
     })
   }
@@ -94,20 +94,16 @@ class PictureGrid extends Component {
 
   idVideo = (url) =>
     `https://www.youtube.com/embed/${url}`
-  // console.log(url.split('/').reverse()[0]) // - пустая строка
-  // console.log(`https://www.youtube.com/embed/${url.split('=')[1].split('?')[0].split('&')[0]}`)
-  // `https://www.youtube.com/embed/${url.substr(url.lastIndexOf('/') + 1).split('?')[0]}`
-
 
   render() {
     const { classes, pictures, videos } = this.props
     return (
       <React.Fragment>
         <div className={classes.root}>
-          {!isEmpty(pictures) && pictures.map((picture, index) =>
+          {!isEmpty(pictures) && pictures.map(picture =>
             <Avatar
               alt="grid"
-              key={index}
+              key={picture}
               onClick={this.handleClick(picture)}
               src={picture}
               className={`${classes.gridPicture} grid-picture`}
