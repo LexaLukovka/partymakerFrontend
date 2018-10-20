@@ -36,12 +36,6 @@ const styles = theme => ({
       display: 'none',
     },
   },
-  nbsp: {
-    width: 48,
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
 })
 
 class Header extends React.Component {
@@ -82,9 +76,6 @@ class Header extends React.Component {
             <div className={classes.actionButtons}>
               <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
             </div>
-
-            <div className={classes.nbsp} />
-            {/* Удалить после добавления пользователей так как было сделано для центрирования title */}
           </Toolbar>
         </AppBar>
       </header>

@@ -20,12 +20,17 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       gridTemplateColumns: '1fr',
       margin: '0',
+      gridGap: 0,
+      gridRowGap: '5px',
     },
   },
   gridPicture: {
     borderRadius: 0,
     width: '100%',
     height: '100%',
+    [theme.breakpoints.down('sm')]: {
+      borderRadius: 5,
+    },
   },
   gridVideo: {
     width: '100%',

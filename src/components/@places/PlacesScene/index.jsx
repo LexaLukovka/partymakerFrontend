@@ -20,7 +20,11 @@ const styles = theme => ({
     maxWidth: 1300,
     margin: '0 auto',
     gridGap: '15px',
-    gridTemplateColumns: '370px',
+    gridTemplateColumns: '1fr',
+
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: '370px',
+    },
 
     [theme.breakpoints.up('md')]: {
       gridTemplateColumns: '370px 370px',
