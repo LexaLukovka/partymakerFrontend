@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { array, func, object } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
+import isEmpty from 'lodash/isEmpty'
 
 const styles = theme => ({
   root: {
@@ -12,15 +13,33 @@ const styles = theme => ({
     gridTemplateRows: '250px',
     gridGap: '5px',
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       gridTemplateColumns: '1fr 1fr',
       margin: '0',
+    },
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '1fr',
+      margin: '0',
+      gridGap: 0,
+      gridRowGap: '5px',
     },
   },
   gridPicture: {
     borderRadius: 0,
     width: '100%',
     height: '100%',
+    [theme.breakpoints.down('sm')]: {
+      borderRadius: 5,
+    },
+  },
+  gridVideo: {
+    width: '100%',
+    height: '100%',
+    minHeight: 240,
+  },
+  oneVideo: {
+    gridColumn: 'span 2',
+    gridRow: 'span 2',
   },
   wide: {
     gridColumn: 'span 2',
@@ -50,17 +69,23 @@ class PictureGrid extends Component {
   loadGrid = () => {
     const { classes } = this.props
 
-    const avatars = document.querySelectorAll('.grid-picture')
-    avatars.forEach(async avatar => {
-      if (avatars.length === 1) {
-        avatar.classList.add(classes.superLarge)
+    const videos = document.querySelectorAll('.grid-video')
+    videos.forEach(async video => {
+      if (videos.length === 1) {
+        video.classList.add(classes.oneVideo)
       }
+    })
+
+    const pictures = document.querySelectorAll('.grid-picture')
+    pictures.forEach(async avatar => {
+
+      if (pictures.length === 1) avatar.classList.add(classes.large)
+      if (pictures.length === 1 && videos.length === 0) avatar.classList.add(classes.superLarge)
+
       const picture = await this.primisifyPicture(avatar.querySelector('img'))
       if (picture.naturalHeight) {
         const ratio = picture.naturalWidth / picture.naturalHeight
-        if (ratio > (16 / 9)) {
-          avatar.classList.add(classes.large)
-        }
+        if (ratio > (16 / 9)) avatar.classList.add(classes.large)
       }
     })
   }
@@ -76,20 +101,35 @@ class PictureGrid extends Component {
     this.props.onClick(picture_url)
   }
 
+  idVideo = (url) =>
+    `https://www.youtube.com/embed/${url}`
+
   render() {
-    const { classes, pictures } = this.props
+    const { classes, pictures, videos } = this.props
     return (
-      <div className={classes.root}>
-        {pictures.map(picture =>
-          <Avatar
-            alt="grid"
-            key={picture}
-            onClick={this.handleClick(picture)}
-            src={picture}
-            className={`${classes.gridPicture} grid-picture`}
-          />,
-        )}
-      </div>
+      <React.Fragment>
+        <div className={classes.root}>
+          {!isEmpty(pictures) && pictures.map(picture =>
+            <Avatar
+              alt="grid"
+              key={picture}
+              onClick={this.handleClick(picture)}
+              src={picture}
+              className={`${classes.gridPicture} grid-picture`}
+            />,
+          )}
+          {!isEmpty(videos) && videos.map((video, index) =>
+            <iframe
+              key={index}
+              className={`${classes.gridVideo} grid-video`}
+              src={this.idVideo(video.url)}
+              frameBorder="0"
+              title="video"
+              allowFullScreen
+            />,
+          )}
+        </div>
+      </React.Fragment>
     )
   }
 }
@@ -97,6 +137,7 @@ class PictureGrid extends Component {
 PictureGrid.propTypes = {
   classes: object.isRequired,
   pictures: array.isRequired,
+  videos: array.isRequired,
   onClick: func.isRequired,
 }
 

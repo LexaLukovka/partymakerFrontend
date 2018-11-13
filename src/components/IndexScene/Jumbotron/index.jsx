@@ -30,7 +30,7 @@ const Jumbotron = ({ classes }) =>
   <div className={classes.root}>
     <div>
       <Typography align="center" className={classes.whiteText} variant="title">
-        Соберем вечеринку
+        Соберем компанию
       </Typography>
       <Typography align="center" className={classes.pinkText}>
         вместе

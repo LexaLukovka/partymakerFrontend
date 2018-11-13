@@ -1,6 +1,7 @@
 /* eslint-disable no-fallthrough */
 import { OPEN_PLACE, LOAD_PLACES_FULFILLED, LOAD_PLACES_PENDING, LOAD_PLACES_REJECTED } from './action'
 import placeReducer from './place/reducer'
+import arrayToObject from 'utils/arrayToObject'
 
 const initialState = {
   loading: false,
@@ -10,8 +11,14 @@ const initialState = {
   places: {},
 }
 
-const placesReducer = (state = initialState, action) => {
-  switch (action.type) {
+const placesReducer = (state = initialState, { type, payload, meta }) => {
+  switch (type) {
+
+    case OPEN_PLACE:
+      return {
+        ...state,
+        current: payload,
+      }
 
     case LOAD_PLACES_PENDING:
       return {
@@ -27,31 +34,18 @@ const placesReducer = (state = initialState, action) => {
       }
 
     case LOAD_PLACES_FULFILLED: {
-      const places = action.payload.data
-
-      const placeReducers = places.reduce((obj, place) => {
-        obj[place.id] = place
-        return obj
-      }, {})
-
       return {
         ...state,
         loading: false,
         allLoaded: true,
-        places: placeReducers,
+        places: arrayToObject(payload.data),
       }
     }
 
-    case OPEN_PLACE:
-      return {
-        ...state,
-        current: state.places[action.payload],
-      }
-
     default: {
       const places = { ...state.places }
-      const place = placeReducer(state.current, action)
-      const place_id = place.id || (action.meta && action.meta.place_id)
+      const place = placeReducer(places[state.current], { type, payload, meta })
+      const place_id = (place && place.id) || (meta && meta.place_id)
       if (place_id) places[place_id] = place
 
       return { ...state, places }

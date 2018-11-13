@@ -6,13 +6,16 @@ import truncate from 'lodash/truncate'
 
 const styles = () => ({
   root: {
-    maxWidth: 370,
+    display: 'grid',
     margin: '10px 10px',
-    alignSelf: 'center',
+    alignSelf: 'stretch',
     justifySelf: 'center',
   },
   media: {
     height: 250,
+  },
+  flexEnd: {
+    alignSelf: 'end',
   },
 })
 
@@ -35,7 +38,7 @@ const PlacesCard = ({ classes, place }) =>
         {truncate(place.description, { length: 200 })}
       </Typography>
     </CardContent>
-    <CardActions>
+    <CardActions className={classes.flexEnd}>
       <Link to={`/places/${place.id}`}>
         <Button color="primary">
           Смотреть
