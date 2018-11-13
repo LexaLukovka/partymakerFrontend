@@ -76,6 +76,7 @@ class Header extends React.Component {
             <div className={classes.actionButtons}>
               <Link to="/places"><Button color="inherit">Куда пойти погулять?</Button></Link>
             </div>
+            {header.icon === 'back' && (<div style={{ width: 48 }} />)}
           </Toolbar>
         </AppBar>
       </header>
