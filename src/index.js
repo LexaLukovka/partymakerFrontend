@@ -23,7 +23,7 @@ render(() =>
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <PersistGate loading={<Loading />} persistor={persistor}>
-        <Router>
+        <Router onUpdate={() => window.scrollTo(0, 0)}>
           <LayoutScene />
         </Router>
       </PersistGate>
