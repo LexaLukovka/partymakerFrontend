@@ -50,13 +50,11 @@ class PlaceScene extends React.Component {
     actions.header.menu()
   }
 
-  openPlace = async (place_id) => {
-    const { actions, place } = this.props
+  openPlace = (place_id) => {
+    const { actions, places: { places, current } } = this.props
+    const place = places[current]
     actions.places.open(place_id)
-    if (!place) {
-      await actions.place.load(place_id)
-      actions.places.open(place_id)
-    }
+    if (!place) actions.place.load(place_id)
   }
 
   openModal = (picture_url) => {
@@ -65,7 +63,9 @@ class PlaceScene extends React.Component {
   }
 
   render() {
-    const { classes, place } = this.props
+    const { classes, places: { places, current } } = this.props
+    const place = places[current]
+
     if (isEmpty(place)) return <NotFound />
     if (place.loading) return <Loading />
 
@@ -84,13 +84,9 @@ class PlaceScene extends React.Component {
 
 PlaceScene.propTypes = {
   classes: object.isRequired,
-  place: object,
+  places: object.isRequired,
   actions: object.isRequired,
   match: object.isRequired,
-}
-
-PlaceScene.defaultProps = {
-  place: null,
 }
 
 export default withStyles(styles)(connector(PlaceScene))

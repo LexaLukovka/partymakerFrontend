@@ -6,7 +6,6 @@ import header from 'src/redux/header/action'
 import modal from 'src/redux/modal/action'
 
 const initMapStateToProps = store => ({
-  place: store.placesReducer.current,
   places: store.placesReducer,
 })
 
