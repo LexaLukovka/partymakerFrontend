@@ -43,11 +43,15 @@ const styles = theme => ({
   },
   whenPriceContainer: {
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginBottom: 30,
   },
   description: {
     lineHeight: '1.7',
+  },
+  badge: {
+    minWidth: 100,
+    marginBottom: 30,
   },
 })
 
@@ -68,20 +72,11 @@ const PlacePanel = ({ classes, place }) =>
       </a>
 
       <div className={classes.whenPriceContainer}>
-        {place.working_day && (
-          <div>
-            <Typography>Рабочие дни</Typography>
-            <Typography variant="caption">{place.working_day}</Typography>
-          </div>
-        )}
-
-        {place.working_hours && (
-          <div>
-            <Typography>Время работы</Typography>
-            <Typography variant="caption">{place.working_hours}</Typography>
-          </div>
-        )
-        }
+        {place.details.map((detail, index) =>
+          <div key={index} className={classes.badge}>
+            <Typography>{detail.label}</Typography>
+            <Typography variant="caption">{detail.value}</Typography>
+          </div>)}
       </div>
       <Typography
         color="inherit"
