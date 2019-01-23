@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import { fetchCircuits } from './api'
+import { fetchCircuits } from '../api'
 
 export const initializeSession = () => ({
   type: 'INITIALIZE_SESSION',
@@ -37,5 +37,4 @@ const reducer = combineReducers({
   data: dataReducer,
 })
 
-export default (initialState) =>
-  createStore(reducer, initialState, applyMiddleware(thunkMiddleware));
+export default (initialState) => createStore(reducer, initialState, applyMiddleware(thunkMiddleware))

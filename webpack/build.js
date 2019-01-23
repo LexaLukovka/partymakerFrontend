@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
-const webpack = require('webpack')
 const merge = require('webpack-merge')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -32,13 +31,6 @@ module.exports = (env, argv) => merge(common(env, argv), {
   },
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-      'process.env.APP_DOMAIN': '"rely.powercode.pro"',
-      'process.env.BACKEND_URL': '"https://rely.powercode.pro"',
-      'process.env.SOCKETS_URL': '"https://rely.powercode.pro:7777"',
-    }),
-
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css',

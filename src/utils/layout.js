@@ -1,7 +1,7 @@
 export default (reactDom, reduxState, helmetData) =>
   `
   <!DOCTYPE html>
-  <html>
+  <html lang="ru">
   <head>
       <meta charset="utf-8">
       ${helmetData.title.toString()}
