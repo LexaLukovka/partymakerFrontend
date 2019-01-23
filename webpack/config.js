@@ -72,5 +72,9 @@ module.exports = {
     new DotEnv({ safe: true }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([{ from: path.resolve(__dirname, '../src/'), to: './' }]),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
 }

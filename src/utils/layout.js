@@ -1,20 +1,20 @@
-export default (reactDom, reduxState, helmetData) =>
+export default ({ DOM, state, helmet }) =>
   `
   <!DOCTYPE html>
   <html lang="ru">
   <head>
       <meta charset="utf-8">
-      ${helmetData.title.toString()}
-      ${helmetData.meta.toString()}
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
       <title>React SSR</title>
   </head>
   
   <body>
-      <div id="app">${reactDom}</div>
+      <div id="app">${DOM}</div>
       <script>
-          window.REDUX_DATA = ${JSON.stringify(reduxState)}
+          window.__STATE__ = ${JSON.stringify(state)}
       </script>
-      <script src="./app.bundle.js"></script>
+      <script src="app.js"></script>
   </body>
   </html>
   `

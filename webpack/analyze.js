@@ -1,17 +1,16 @@
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const common = require('./config.js')
+const build = require('./build.js')
 const merge = require('webpack-merge')
 
-module.exports = merge(common, {
+module.exports = merge(build, {
   mode: 'production',
   devtool: 'source-map',
   entry: {
     app: path.resolve(__dirname, 'src/index.js'),
-    sw: path.resolve(__dirname, 'src/sw.js')
   },
   target: 'web',
   plugins: [
-    new BundleAnalyzerPlugin()
-  ]
+    new BundleAnalyzerPlugin(),
+  ],
 })

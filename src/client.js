@@ -14,4 +14,4 @@ const App = (
   </Provider>
 )
 
-ReactDOM.hydrate(App, document.getElementById('content'))
+ReactDOM.hydrate(App, document.getElementById('app'))

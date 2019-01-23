@@ -20,7 +20,10 @@ export default (request, response) => {
       </StaticRouter>
     </Provider>,
   )
-  const HtmlLayout = layout(DOM, store.getState(), Helmet.renderStatic())
 
-  response.send(HtmlLayout)
+  response.send(layout({
+    DOM,
+    state: store.getState(),
+    helmet: Helmet.renderStatic(),
+  }))
 }
