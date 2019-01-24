@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DotEnv = require('dotenv-webpack')
@@ -35,6 +36,7 @@ module.exports = {
   },
 
   performance: {
+    maxEntrypointSize: 500000,
     hints: false,
   },
 
@@ -93,9 +95,8 @@ module.exports = {
   },
 
   plugins: [
-    new LoadablePlugin({
-      writeToDisk: true,
-    }),
+    new CleanWebpackPlugin('public'),
+    new LoadablePlugin({ writeToDisk: true }),
     new DotEnv({ safe: true }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([{ from: src('assets'), to: './' }]),
