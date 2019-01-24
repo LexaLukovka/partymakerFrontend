@@ -4,21 +4,28 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DotEnv = require('dotenv-webpack')
 
+const src = url => path.resolve(__dirname, `./src/${url}/`)
+
 module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
-      assets: path.resolve('../src/assets'),
-      components: path.resolve(__dirname, '../src/components/'),
-      services: path.resolve(__dirname, '../src/services/'),
-      styles: path.resolve(__dirname, '../src/styles/'),
-      utils: path.resolve(__dirname, '../src/utils/'),
-      src: path.resolve(__dirname, '../src/'),
+      assets: src('assets'),
+      components: src('components'),
+      services: src('services'),
+      styles: src('styles'),
+      utils: src('utils'),
+      src: src('src'),
     },
   },
+
+  performance: {
+    hints: false,
+  },
+
   entry: {
-    app: path.resolve(__dirname, '../src/client.js'),
+    app: src('client.js'),
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -71,7 +78,7 @@ module.exports = {
   plugins: [
     new DotEnv({ safe: true }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new CopyWebpackPlugin([{ from: path.resolve(__dirname, '../src/'), to: './' }]),
+    new CopyWebpackPlugin([{ from: src('assets'), to: './' }]),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',

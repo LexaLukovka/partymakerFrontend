@@ -1,9 +1,9 @@
 const merge = require('webpack-merge')
 const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const common = require('./config.js')
+const common = require('./webpack.config.js')
 
-module.exports = (env, argv) => merge(common(env, argv), {
+module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   target: 'web',

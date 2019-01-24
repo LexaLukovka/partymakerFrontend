@@ -1,37 +1,26 @@
+require('dotenv').config()
 require('@babel/register')
-
 require('@babel/polyfill')
-require('./src/server')
 
+const path = require('path')
 const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-
-const path = require('path')
 const webpack = require('webpack')
-const webpackDevConfig = require('./webpack/dev')
+const config = require('webpack.dev')
 const server = require('./src/server')
 const app = express()
+const { PORT } = process.env
+const { log } = console
 
-const compiler = webpack(webpackDevConfig)
+const root = (url) => path.resolve(__dirname, url)
 
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackDevConfig.output.publicPath,
-  contentBase: 'src',
-  stats: {
-    colors: true,
-    hash: false,
-    timings: true,
-    chunks: false,
-    chunkModules: false,
-    modules: false,
-  },
-}))
+const compiler = webpack(config)
+
+app.use(webpackDevMiddleware(compiler, config.middleware))
 
 app.use(webpackHotMiddleware(compiler))
-
-app.use(express.static(path.resolve(__dirname, './dist')))
-
+app.use(express.static(root('./public')))
 app.use(server.default)
 
-app.listen(3000)
+app.listen(PORT, () => log(`Listening on http://localhost:${PORT}`))
