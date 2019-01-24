@@ -8,7 +8,7 @@ import { SheetsRegistry } from 'jss'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
 import { ChunkExtractor } from '@loadable/server'
-import createStore, { initializeSession } from './redux/store'
+import createStore from './redux/store'
 import layout from './setup/layout'
 import Layout from './components/Layout'
 import theme from './styles/theme'
@@ -32,8 +32,6 @@ export default (request, response) => {
       </MuiThemeProvider>
     </JssProvider>,
   )
-
-  store.dispatch(initializeSession())
 
   const DOM = renderToString(jsx)
 

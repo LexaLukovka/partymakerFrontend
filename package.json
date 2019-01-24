@@ -14,6 +14,9 @@
     "prod": "node index.prod.js",
     "analyze": "node index.prod.js --analyze"
   },
+  "_moduleAliases": {
+    "src": "./src"
+  },
   "dependencies": {
     "@hot-loader/react-dom": "npm:react-dom",
     "@loadable/component": "^5.5.0",
@@ -24,6 +27,7 @@
     "history": "latest",
     "isomorphic-fetch": "latest",
     "jss": "latest",
+    "module-alias": "latest",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "latest",
     "react": "latest",
@@ -52,6 +56,7 @@
     "@loadable/webpack-plugin": "^5.5.0",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.5",
+    "babel-plugin-module-resolver": "^3.1.3",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.5.2",
     "css-hot-loader": "^1.3.9",

@@ -9,6 +9,7 @@ module.exports = {
     }],
     'jsx-quotes': ['error', 'prefer-double'],
     'comma-dangle': 0,
+    'newline-before-return': ['error'],
   },
   'settings': {},
   'env': {

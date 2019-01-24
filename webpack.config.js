@@ -17,12 +17,7 @@ export const common = {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
-      assets: src('assets'),
-      components: src('components'),
-      services: src('services'),
-      styles: src('styles'),
-      utils: src('utils'),
-      src: src('src'),
+      src: src(''),
     },
   },
 

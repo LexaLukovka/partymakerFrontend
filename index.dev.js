@@ -1,6 +1,7 @@
 require('dotenv').config()
 require('@babel/register')
 require('@babel/polyfill')
+require('module-alias/register')
 
 const path = require('path')
 const express = require('express')
