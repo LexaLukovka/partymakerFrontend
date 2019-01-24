@@ -49,6 +49,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
+    filename: `[name].[hash:3].js`,
   },
   target: 'web',
 

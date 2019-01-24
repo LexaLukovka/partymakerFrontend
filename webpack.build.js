@@ -8,6 +8,10 @@ module.exports = merge(common, {
   devtool: 'source-map',
   target: 'web',
 
+  output: {
+    filename: `[name].[chunkHash].js`,
+  },
+
   optimization: {
     minimizer: [
       new TerserPlugin({
