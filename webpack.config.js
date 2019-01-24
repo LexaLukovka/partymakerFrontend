@@ -25,7 +25,10 @@ module.exports = {
   },
 
   entry: {
-    app: src('client.js'),
+    app: [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      './src/client.js',
+    ],
   },
   output: {
     path: path.resolve(__dirname, 'public'),

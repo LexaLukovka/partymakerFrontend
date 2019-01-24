@@ -2,7 +2,7 @@ import React from 'react'
 
 const Index = () =>
   <div>
-    Home
+    asdad
   </div>
 
 export default Index

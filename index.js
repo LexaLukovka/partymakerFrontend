@@ -7,7 +7,7 @@ const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpack = require('webpack')
-const config = require('webpack.dev')
+const config = require('./webpack.dev')
 const server = require('./src/server')
 const app = express()
 const { PORT } = process.env
@@ -17,7 +17,7 @@ const root = (url) => path.resolve(__dirname, url)
 
 const compiler = webpack(config)
 
-app.use(webpackDevMiddleware(compiler, config.middleware))
+app.use(webpackDevMiddleware(compiler, config.devServer))
 
 app.use(webpackHotMiddleware(compiler))
 app.use(express.static(root('./public')))

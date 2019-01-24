@@ -8,10 +8,6 @@ module.exports = merge(common, {
   devtool: 'source-map',
   target: 'web',
 
-  output: {
-    filename: '[name].js',
-  },
-
   optimization: {
     minimizer: [
       new TerserPlugin({
