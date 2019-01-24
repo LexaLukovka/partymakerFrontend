@@ -6,14 +6,12 @@ import Header from 'src/components/Header'
 
 const AsyncScene = loadable(() => import('./@async/AsyncScene'))
 
-const AsyncRoute = () => <div><AsyncScene /></div>
-
 const Layout = () =>
   <div>
     <Header />
     <Switch>
       <Route exact path="/" component={IndexScene} />
-      <Route exact path="/async" component={AsyncRoute} />
+      <Route exact path="/async" component={() => <AsyncScene />} />
     </Switch>
   </div>
 
