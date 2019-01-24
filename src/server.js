@@ -9,7 +9,7 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
 import { ChunkExtractor } from '@loadable/server'
 import createStore, { initializeSession } from './redux/store'
-import layout from './utils/layout'
+import layout from './setup/layout'
 import Layout from './components/Layout'
 import theme from './styles/theme'
 
