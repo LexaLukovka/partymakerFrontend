@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DotEnv = require('dotenv-webpack')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const src = url => path.resolve(__dirname, `./src/${url}/`)
 
@@ -79,6 +80,9 @@ module.exports = {
   },
 
   plugins: [
+    new LoadablePlugin({
+      writeToDisk: true,
+    }),
     new DotEnv({ safe: true }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([{ from: src('assets'), to: './' }]),

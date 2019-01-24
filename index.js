@@ -17,6 +17,8 @@ const root = (url) => path.resolve(__dirname, url)
 
 const compiler = webpack(config)
 
+compiler.outputFileSystem = require('fs')
+
 app.use(webpackDevMiddleware(compiler, config.devServer))
 
 app.use(webpackHotMiddleware(compiler))

@@ -1,4 +1,4 @@
-export default ({ DOM, state, helmet }) =>
+export default ({ DOM, state, helmet, loadable }) =>
   `
   <!DOCTYPE html>
   <html lang="ru">
@@ -7,6 +7,7 @@ export default ({ DOM, state, helmet }) =>
       ${helmet.title.toString()}
       ${helmet.meta.toString()}
       <title>React SSR</title>
+      ${loadable.getStyleTags()}
   </head>
   
   <body>
@@ -14,7 +15,7 @@ export default ({ DOM, state, helmet }) =>
       <script>
           window.__STATE__ = ${JSON.stringify(state)}
       </script>
-      <script src="app.js"></script>
+      ${loadable.getScriptTags()}
   </body>
   </html>
   `
