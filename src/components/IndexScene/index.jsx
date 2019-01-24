@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Index = () =>
   <div>
-    asdad
+    <Link to="/async">async component</Link>
   </div>
 
 export default Index
