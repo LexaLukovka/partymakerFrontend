@@ -11,26 +11,19 @@ import { ChunkExtractor } from '@loadable/server'
 import createStore, { initializeSession } from './redux/store'
 import layout from './utils/layout'
 import Layout from './components/Layout'
+import theme from './styles/theme'
 
 export default (request, response) => {
   const sheetsRegistry = new SheetsRegistry()
   const sheetsManager = new Map()
-  const theme = createMuiTheme({
-    typography: {
-      useNextVariants: true,
-    },
-  })
-
-  const generateClassName = createGenerateClassName()
-
   const context = {}
   const store = createStore()
   const statsFile = path.resolve(__dirname, '../public/loadable-stats.json')
   const extractor = new ChunkExtractor({ statsFile, entrypoints: ['app'] })
 
   const jsx = extractor.collectChunks(
-    <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
-      <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
+    <JssProvider registry={sheetsRegistry} generateClassName={createGenerateClassName()}>
+      <MuiThemeProvider theme={createMuiTheme(theme)} sheetsManager={sheetsManager}>
         <Provider store={store}>
           <StaticRouter context={context} location={request.url}>
             <Layout />

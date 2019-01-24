@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
 import App from './App'
+import theme from './styles/theme'
 import './styles/index.css'
 
 class Client extends React.Component {
@@ -18,18 +19,9 @@ class Client extends React.Component {
   }
 }
 
-// Create a theme instance.
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-})
-
-const generateClassName = createGenerateClassName()
-
 ReactDOM.hydrate(
-  <JssProvider generateClassName={generateClassName}>
-    <MuiThemeProvider theme={theme}>
+  <JssProvider generateClassName={createGenerateClassName()}>
+    <MuiThemeProvider theme={createMuiTheme(theme)}>
       <Client />
     </MuiThemeProvider>
   </JssProvider>,
