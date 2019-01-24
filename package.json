@@ -7,18 +7,19 @@
   "engines": {
     "node": "*"
   },
-  "main": "index.js",
+  "main": "index.dev.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "build": "webpack --config webpack.build.js",
-    "analyze": "webpack --config webpack.analyze.js"
+    "start": "node index.dev.js",
+    "prod": "node index.prod.js",
+    "analyze": "node index.prod.js --analyze"
   },
   "dependencies": {
     "@hot-loader/react-dom": "npm:react-dom",
     "@loadable/component": "^5.5.0",
     "@loadable/server": "^5.5.0",
     "@material-ui/core": "latest",
+    "@material-ui/icons": "^3.0.2",
     "express": "latest",
     "history": "latest",
     "isomorphic-fetch": "latest",

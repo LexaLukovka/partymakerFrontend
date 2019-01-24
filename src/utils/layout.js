@@ -1,4 +1,4 @@
-export default ({ DOM, state, helmet, loadable }) =>
+export default ({ DOM, state, helmet, jss, loadable }) =>
   `
   <!DOCTYPE html>
   <html lang="ru">
