@@ -1,11 +1,47 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Header from './Header'
+import LandingHeader from './LandingHeader'
+import { withStyles, Typography } from '@material-ui/core'
+import { object } from 'prop-types'
 
-const Index = () =>
-  <div>
-    <Header />
-    <Link to="/async">asds</Link>
+const styles = {
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+  },
+  background: {
+    background: 'url(/images/summer.jpg)',
+    height: '100%',
+  },
+  center: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    flexGrow: 1,
+    height: '100%',
+    flexDirection: 'column',
+  },
+  headline: {
+    textAlign: 'center',
+    color: 'white',
+  }
+}
+const Index = ({ classes }) =>
+  <div className={classes.root}>
+    <div className={classes.background}>
+      <LandingHeader />
+      <div className={classes.center}>
+        <div className={classes.headline}>
+          <Typography color="inherit" variant="h4">Соберем вечерику</Typography>
+          <Typography color="inherit" variant="h1">ВМЕСТЕ</Typography>
+        </div>
+      </div>
+    </div>
   </div>
 
-export default Index
+Index.propTypes = {
+  classes: object.isRequired
+}
+export default withStyles(styles)(Index)
