@@ -1,4 +1,3 @@
-import root from '../../helpers/root'
 import Css from 'mini-css-extract-plugin'
 import Clean from 'clean-webpack-plugin'
 import Loadable from '@loadable/webpack-plugin'
@@ -6,6 +5,7 @@ import Env from 'dotenv-webpack'
 import webpack from 'webpack'
 import Copy from 'copy-webpack-plugin'
 import src from '../../helpers/src'
+import root from '../../helpers/root'
 
 export default {
   resolve: {
@@ -72,7 +72,6 @@ export default {
       {
         test: /\.css$/,
         use: [
-          'css-hot-loader',
           Css.loader,
           'css-loader',
         ],
