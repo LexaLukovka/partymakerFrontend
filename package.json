@@ -7,17 +7,19 @@
   "engines": {
     "node": "*"
   },
-  "main": "index.dev.js",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.dev.js",
-    "prod": "node index.prod.js",
-    "analyze": "node index.prod.js --analyze"
+    "start": "node index.js",
+    "prod": "node index.js --production",
+    "analyze": "node index.js --analyze"
   },
   "_moduleAliases": {
-    "src": "./src"
+    "src": "./src",
+    "helpers": "./helpers"
   },
   "dependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@loadable/component": "^5.5.0",
     "@loadable/server": "^5.5.0",
     "@material-ui/core": "latest",

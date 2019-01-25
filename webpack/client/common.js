@@ -1,18 +1,13 @@
-import path from 'path'
-import webpack from 'webpack'
-import merge from 'webpack-merge'
-import Clean from 'clean-webpack-plugin'
-import Copy from 'copy-webpack-plugin'
+import root from '../../helpers/root'
 import Css from 'mini-css-extract-plugin'
-import Env from 'dotenv-webpack'
+import Clean from 'clean-webpack-plugin'
 import Loadable from '@loadable/webpack-plugin'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
-import Terser from 'terser-webpack-plugin'
-import OptimizeCSSAssets from 'optimize-css-assets-webpack-plugin'
+import Env from 'dotenv-webpack'
+import webpack from 'webpack'
+import Copy from 'copy-webpack-plugin'
+import src from '../../helpers/src'
 
-const src = url => path.resolve(__dirname, `./src/${url}/`)
-
-export const common = {
+export default {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
@@ -34,6 +29,19 @@ export const common = {
     },
   },
 
+  devServer: {
+    publicPath: '/',
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    },
+  },
+
   performance: {
     maxEntrypointSize: 500000,
     hints: false,
@@ -42,12 +50,12 @@ export const common = {
   entry: {
     app: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      './src/client.js',
+      root('src/client.js'),
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'public'),
-    publicPath: '/',
+    path: root('public'),
+    publicPath: root(''),
     filename: `[name].[hash:3].js`,
   },
   target: 'web',
@@ -95,66 +103,14 @@ export const common = {
   },
 
   plugins: [
-    new Clean('public'),
+    new Clean(root('public')),
     new Loadable({ writeToDisk: true }),
     new Env({ safe: true }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new Copy([{ from: src('assets'), to: './' }]),
+    new Copy([{ from: src('assets'), to: root('./') }]),
     new Css({
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
   ],
 }
-
-export const dev = merge(common, {
-  mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
-
-  devServer: {
-    publicPath: common.output.publicPath,
-    contentBase: 'src',
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false,
-    },
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-})
-
-export const build = merge(common, {
-  mode: 'production',
-  devtool: 'source-map',
-  target: 'web',
-
-  output: {
-    filename: `[name].[chunkHash].js`,
-  },
-
-  optimization: {
-    minimizer: [
-      new Terser({
-        cache: true,
-        parallel: true,
-        sourceMap: true, // set to true if you want JS source maps
-      }),
-      new OptimizeCSSAssets({}),
-    ],
-  },
-})
-
-export const analyze = merge(build, {
-  devtool: 'source-map',
-  target: 'web',
-  plugins: [
-    new BundleAnalyzerPlugin(),
-  ],
-})
-
-export default common
