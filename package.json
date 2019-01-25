@@ -25,9 +25,11 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.2",
     "express": "latest",
+    "express-minify-html": "^0.12.0",
     "history": "latest",
     "isomorphic-fetch": "latest",
     "jss": "latest",
+    "mdi-react": "^5.2.0",
     "module-alias": "latest",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "latest",
@@ -41,7 +43,8 @@
     "redux": "latest",
     "redux-persist": "latest",
     "redux-thunk": "latest",
-    "serialize-javascript": "latest"
+    "serialize-javascript": "latest",
+    "yup": "^0.26.10"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

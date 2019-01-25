@@ -1,4 +1,25 @@
-body {
+html, body {
+    background-position: center;
+    background-size: cover;
+    height: 100%;
     margin: 0;
     padding: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+#app {
+    height: 100%;
+}
+
+#app > div {
+    height: 100%;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }

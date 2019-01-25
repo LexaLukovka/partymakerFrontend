@@ -8,7 +8,7 @@ export default ({ DOM, state, helmet, jss, loadable }) =>
       ${helmet.meta.toString()}
       <title>React SSR</title>
       ${loadable.getStyleTags()}
-      <link rel="stylesheet" href="/app.css">
+      <link rel="stylesheet" href="/index.css">
   </head>
   
   <body>

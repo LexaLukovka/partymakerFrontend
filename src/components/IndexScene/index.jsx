@@ -5,7 +5,7 @@ import Header from './Header'
 const Index = () =>
   <div>
     <Header />
-    <Link to="/async">async</Link>
+    <Link to="/async">asds</Link>
   </div>
 
 export default Index

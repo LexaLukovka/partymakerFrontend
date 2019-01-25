@@ -1,6 +1,4 @@
 import webpack from 'webpack'
-import wdm from 'webpack-dev-middleware'
-import whm from 'webpack-hot-middleware'
 import { common, build, dev, analyze } from './client'
 
 const config = (mode) => {
@@ -17,16 +15,20 @@ const config = (mode) => {
 }
 
 export default (app, mode = 'development') => {
-  const webpackConfig = config(mode)
+  return new Promise((resolve, reject) => {
+    const webpackConfig = config(mode)
+    const compiler = webpack(webpackConfig)
 
-  const compiler = webpack(webpackConfig)
-
-  if (mode === 'development') {
-    app.use(wdm(compiler, common.devServer))
-    app.use(whm(compiler))
-  } else {
-    compiler.run((err, stats) => {
-      console.log(err || stats.toString(common.devServer.stats))
-    })
-  }
+    if (mode === 'development') {
+      app.use(require('webpack-dev-middleware')(compiler, common.devServer))
+      app.use(require('webpack-hot-middleware')(compiler))
+    } else {
+      compiler.run((err, stats) => {
+        if (err) reject(err)
+        const statistics = stats.toString(common.devServer.stats)
+        console.log(statistics)
+        resolve(statistics)
+      })
+    }
+  })
 }

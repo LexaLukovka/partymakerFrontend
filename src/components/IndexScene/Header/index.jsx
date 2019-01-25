@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -29,9 +30,11 @@ const Header = ({ classes }) =>
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" className={classes.grow}>
-          Hello
+          Partymaker
         </Typography>
-        <Button color="inherit">Login</Button>
+
+        <Link to="/auth/register"><Button color="inherit">Регистрация</Button></Link>
+        <Link to="/auth/login"><Button color="inherit">Войти</Button></Link>
       </Toolbar>
     </AppBar>
   </div>

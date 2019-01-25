@@ -3,26 +3,44 @@ require('@babel/register')
 require('@babel/polyfill')
 
 const express = require('express')
-const runWebpack = require('./webpack/run')
-const server = require('./src/server')
-const root = require('./helpers/root')
+const runWebpack = require('./webpack/run').default
+const server = require('./src/server').default
+const path = require('path')
+const minifyHTML = require('express-minify-html')
 
 const app = express()
 const { PORT } = process.env
 
-const modes = (options) => {
-  if (options.includes('--analyze')) return 'analyze'
-  if (options.includes('---production')) return 'production'
-}
+const start = async () => {
+  const mode = (options) => {
+    if (options.includes('--analyze')) return 'analyze'
+    if (options.includes('--production')) return 'production'
+  }
 
-runWebpack.default(app, modes(process.argv))
+  app.use(minifyHTML({
+    override: true,
+    exception_url: false,
+    htmlMinifier: {
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeEmptyAttributes: true,
+      minifyJS: true
+    }
+  }))
 
-app.use(express.static(root.default('./public')))
+  runWebpack(app, mode(process.argv))
 
-app.use(server.default)
+  app.use(express.static(path.resolve(__dirname, './public')))
 
-app.listen(PORT, () => console.log(`
+  app.use(server)
+
+  app.listen(PORT, () => console.log(`
  \n--------------------------------------\n
 | Listening on http://localhost:${PORT} |
   \n--------------------------------------\n
 `))
+}
+
+start()

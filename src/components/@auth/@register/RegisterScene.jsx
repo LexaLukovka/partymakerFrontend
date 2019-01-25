@@ -6,13 +6,13 @@ const styles = {
   root: {},
 }
 
-const LoginScene = ({ classes }) =>
+const RegisterScene = ({ classes }) =>
   <div className={classes.root}>
-    Login Scene
+    Register
   </div>
 
-LoginScene.propTypes = {
+RegisterScene.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(LoginScene)
+export default withStyles(styles)(RegisterScene)

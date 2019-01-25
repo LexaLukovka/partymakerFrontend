@@ -72,6 +72,7 @@ export default {
       {
         test: /\.css$/,
         use: [
+          'css-hot-loader',
           Css.loader,
           'css-loader',
         ],
