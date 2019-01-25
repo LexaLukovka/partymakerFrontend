@@ -18,7 +18,6 @@
     "src": "./src"
   },
   "dependencies": {
-    "@hot-loader/react-dom": "npm:react-dom",
     "@loadable/component": "^5.5.0",
     "@loadable/server": "^5.5.0",
     "@material-ui/core": "latest",
@@ -31,7 +30,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "^16.7.0",
+    "react-dom": "16.7.0",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.6.3",
     "react-jss": "^8.6.1",
