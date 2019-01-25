@@ -16,10 +16,10 @@ const config = (mode) => {
   }
 }
 
-export default (app, mode) => {
-  const compiler = webpack(config(mode))
+export default (app, mode = 'development') => {
+  const webpackConfig = config(mode)
 
-  compiler.outputFileSystem = require('fs')
+  const compiler = webpack(webpackConfig)
 
   if (mode === 'development') {
     app.use(wdm(compiler, common.devServer))

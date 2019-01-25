@@ -2,7 +2,7 @@ import React from 'react'
 
 const AsyncScene = () =>
   <div>
-    Async scene
+    Async Scene
   </div>
 
 export default AsyncScene

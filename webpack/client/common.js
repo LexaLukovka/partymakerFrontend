@@ -16,6 +16,8 @@ export default {
     },
   },
 
+  context: root(''),
+
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -55,7 +57,7 @@ export default {
   },
   output: {
     path: root('public'),
-    publicPath: root(''),
+    publicPath: '/',
     filename: `[name].[hash:3].js`,
   },
   target: 'web',
@@ -103,11 +105,11 @@ export default {
   },
 
   plugins: [
-    new Clean(root('public')),
+    new Clean('public'),
     new Loadable({ writeToDisk: true }),
     new Env({ safe: true }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new Copy([{ from: src('assets'), to: root('./') }]),
+    new Copy([{ from: src('assets'), to: root('./public') }]),
     new Css({
       filename: '[name].css',
       chunkFilename: '[id].css',
