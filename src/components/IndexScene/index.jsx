@@ -10,6 +10,9 @@ const styles = {
     height: '100%',
   },
   background: {
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100%',
     background: 'url(/images/summer.jpg)',
     height: '100%',
   },
@@ -17,8 +20,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
+
     flexGrow: 1,
     height: '100%',
     flexDirection: 'column',

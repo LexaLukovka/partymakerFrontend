@@ -2,6 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 import { Switch, Route } from 'react-router-dom'
 import IndexScene from './IndexScene'
+import CalendarScene from './@calendar/CalendarScene'
 
 const AsyncScene = loadable(() => import('./@async/AsyncScene'))
 const AuthLayout = loadable(() => import('./@auth/AuthLayout'))
@@ -12,6 +13,8 @@ const Layout = () =>
       <Route exact path="/" component={IndexScene} />
       <Route path="/auth" component={props => <AuthLayout {...props} />} />
       <Route exact path="/async" component={() => <AsyncScene />} />
+      <Route exact path="/calendar" component={CalendarScene} />
+
     </Switch>
   </div>
 

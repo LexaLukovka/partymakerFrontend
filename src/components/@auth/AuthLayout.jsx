@@ -8,26 +8,8 @@ import RegisterScene from './@register/RegisterScene'
 const styles = () => ({
   root: {
     height: '100%',
-    padding: '0 5px',
-    minHeight: 500,
-    maxWidth: 500,
-    margin: '0 auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
   },
-  scene: {
-    flexGrow: 3,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  devider: {
-    flexGrow: 1,
-  },
-  social: {
-    flexGrow: 2,
-  },
+  scene: {},
 })
 
 class AuthLayout extends React.Component {

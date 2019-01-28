@@ -1,19 +1,23 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { Helmet } from 'react-helmet'
+import Day from './Day'
+import WeekSlider from './WeekSlider'
 
 const styles = {
-  root: {},
+  root: {
+    display: 'flex',
+    margin: 10,
+    border: '1px solid black',
+    padding: 10,
+  },
 }
 
 const LoginScene = ({ classes }) =>
   <div className={classes.root}>
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>Вход в аккаунт - Partymaker</title>
-    </Helmet>
-    Login Scene
+    <WeekSlider>
+      {date => <Day>{date.toISOString()}</Day>}
+    </WeekSlider>
   </div>
 LoginScene.propTypes = {
   classes: object.isRequired,
