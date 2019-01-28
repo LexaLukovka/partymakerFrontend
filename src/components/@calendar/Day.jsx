@@ -12,7 +12,9 @@ const styles = theme => ({
     height: 60,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: 100,
+    margin: '0 7.5px'
   },
   center: {
     textAlign: 'center',

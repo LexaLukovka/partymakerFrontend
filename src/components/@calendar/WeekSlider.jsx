@@ -6,6 +6,7 @@ import ArrowForwardIcon from 'mdi-react/ArrowForwardIcon'
 import classNames from 'classnames'
 import range from 'lodash/range'
 import moment from 'moment'
+import WeekTape from './WeekTape'
 
 const styles = {
   root: {
@@ -14,11 +15,11 @@ const styles = {
     justifyContent: 'center',
   },
   days: {
-    display: 'flex',
+    width: '820px',
+    overflowX: 'hidden'
   },
-  day: {
-    width: 100,
-    margin: '0 7.5px'
+  frame: {
+    display: 'flex',
   },
   navigate: {
     display: 'flex',
@@ -26,41 +27,59 @@ const styles = {
   }
 }
 
-const weekdays = days => moment()
-  .startOf('week')
-  .isoWeekday('Monday')
-  .add(7 * (days + 1), 'days')
-
 class WeekSlider extends Component {
   state = {
-    week: 0
+    week: 0,
+    tapes: []
   }
 
-  back = () => {
-    this.setState(({ week }) => ({
-      week: week - 1
-    }))
+  componentDidMount() {
+    this.setState({
+      tapes: [this.getTape(0)]
+    })
   }
 
   next = () => {
-    this.setState(({ week }) => ({
-      week: week + 1
-    }))
+    const { tapes, week } = this.state
+
+    const nextWeek = week + 1
+
+    tapes.push(this.getTape(nextWeek))
+
+    this.setState(({ week: nextWeek, tapes }))
+  }
+
+  back = () => {
+    const { tapes, week } = this.state
+
+    const prevWeek = week - 1
+
+    tapes.unshift(this.getTape(prevWeek))
+
+    this.setState(({ week: prevWeek, tapes }))
+  }
+
+  getTape = (week) => {
+    return <WeekTape key={week} week={week} />
   }
 
   render() {
-    const { className, classes, children } = this.props
-    const { week } = this.state
+    const { className, classes } = this.props
+    const { week, tapes } = this.state
 
     return (
       <div className={classNames(classes.root, className)}>
         <IconButton onClick={this.back}><ArrowBackIcon /></IconButton>
         <div className={classes.days}>
-          {range(1, 8).map((day) =>
-            <div key={day} className={classes.day}>
-              {children(weekdays(week).day(day))}
-            </div>
-          )}
+          <div
+            className={classes.frame}
+            style={{
+              transform: `translateX(${820 * -week}px)`,
+              transition: 'transform ease-out 5.45s'
+            }}
+          >
+            {tapes}
+          </div>
         </div>
         <IconButton onClick={this.next}><ArrowForwardIcon /></IconButton>
       </div>
@@ -70,7 +89,6 @@ class WeekSlider extends Component {
 
 WeekSlider.propTypes = {
   className: string,
-  children: func.isRequired,
   classes: object.isRequired,
 }
 

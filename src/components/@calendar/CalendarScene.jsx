@@ -1,7 +1,6 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import Day from './Day'
 import WeekSlider from './WeekSlider'
 
 const styles = {
@@ -15,9 +14,7 @@ const styles = {
 
 const LoginScene = ({ classes }) =>
   <div className={classes.root}>
-    <WeekSlider>
-      {date => <Day>{date.toISOString()}</Day>}
-    </WeekSlider>
+    <WeekSlider />
   </div>
 LoginScene.propTypes = {
   classes: object.isRequired,
