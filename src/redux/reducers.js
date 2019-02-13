@@ -1,17 +1,8 @@
-import { fetchCircuits } from '../api'
 import { combineReducers } from 'redux'
 
 export const initializeSession = () => ({
   type: 'INITIALIZE_SESSION',
 })
-
-const storeData = (data) => ({
-  type: 'STORE_DATA',
-  data,
-})
-
-export const fetchData = () => (dispatch) =>
-  fetchCircuits().then(res => dispatch(storeData(res)))
 
 const sessionReducer = (state = false, action) => {
   switch (action.type) {

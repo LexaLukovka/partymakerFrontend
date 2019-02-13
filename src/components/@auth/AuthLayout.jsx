@@ -9,7 +9,9 @@ const styles = () => ({
   root: {
     height: '100%',
   },
-  scene: {},
+  scene: {
+    height: '100%',
+  },
 })
 
 class AuthLayout extends React.Component {
