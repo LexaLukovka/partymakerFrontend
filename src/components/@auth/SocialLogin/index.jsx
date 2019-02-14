@@ -8,21 +8,24 @@ import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {
-    display: 'flex',
     color: 'white',
+    display: 'flex',
+    justifyContent: 'space-around',
   },
   button: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 5,
+    width: '40%',
+    borderWidth: 2,
+    border: 'solid',
     borderRadius: 25,
+    alignItems: 'center',
+    borderColor: 'inherit',
   },
 
   text: {
     flexGrow: 1,
-    paddingLeft: 5,
     textAlign: 'center',
+    fontWeight: 550,
+    fontSize: 15,
   },
 }
 
@@ -32,21 +35,11 @@ class SocialLogin extends Component {
 
     return (
       <div className={classes.root}>
-        <Button
-          fullWidth
-          color="primary"
-          variant="contained"
-          className={classes.button}
-        >
+        <Button color="inherit" className={classes.button}>
           <FacebookBoxIcon />
           <div className={classes.text}>Facebook</div>
         </Button>
-        <Button
-          fullWidth
-          color="primary"
-          variant="contained"
-          className={classes.button}
-        >
+        <Button color="inherit" className={classes.button}>
           <GoogleIcon />
           <div className={classes.text}>Google</div>
         </Button>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
+import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
@@ -22,13 +22,15 @@ const styles = {
 }
 
 const LandingHeader = ({ classes }) =>
-  <AppBar className={classes.root} color="default">
+  <AppBar className={classes.root} color="default" elevation={0}>
     <Toolbar>
       <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
         <MenuIcon />
       </IconButton>
       <Typography variant="h6" color="inherit" className={classes.grow}>
-        Partymaker
+        <Link to="/">
+          Partymaker
+        </Link>
       </Typography>
 
       <Link to="/auth/register"><Button color="inherit">Регистрация</Button></Link>

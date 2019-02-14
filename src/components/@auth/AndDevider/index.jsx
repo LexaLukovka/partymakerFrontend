@@ -21,7 +21,7 @@ const AndDevider = ({ classes }) =>
     <div className={classes.takeAllSpace}>
       <hr />
     </div>
-    <Typography variant="subheading" color="inherit">ИЛИ</Typography>
+    <Typography variant="subtitle1" color="inherit">ИЛИ</Typography>
     <div className={classes.takeAllSpace}>
       <hr />
     </div>

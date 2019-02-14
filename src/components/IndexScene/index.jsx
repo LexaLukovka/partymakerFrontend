@@ -1,5 +1,5 @@
 import React from 'react'
-import LandingHeader from './LandingHeader'
+import LandingHeader from 'src/components/LandingHeader'
 import { withStyles, Typography } from '@material-ui/core'
 import { object } from 'prop-types'
 

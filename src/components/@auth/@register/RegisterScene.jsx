@@ -1,60 +1,53 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/core'
-import { Helmet } from 'react-helmet'
+import { Card, CardHeader, withStyles } from '@material-ui/core'
 import RegisterForm from './RegisterForm'
-import AuthDevider from '../AndDevider'
-import SocialLogin from '../SocialLogin'
+import connector from '../connector'
 
 const styles = {
   root: {
-    width: '100%',
-    height: '100%',
-    backgroundSize: '100%',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    background: 'url(/images/register.jpg)',
+    width: 350,
+    padding: 20,
+    border: 'solid',
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: 'black',
   },
-  container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  align: {
-    maxWidth: 400,
-    minHeight: 550,
-    display: 'flex',
-    alignSelf: 'center',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-  },
-  additionally: {
-    background: 'yellow',
+  title: {
+    paddingBottom: 10,
+    textAlign: 'center',
   },
 }
 
-const RegisterScene = ({ classes }) =>
-  <div className={classes.root}>
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>Регистрация - Partymaker</title>
-    </Helmet>
+class RegisterScene extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props
 
-    <div className={classes.container}>
-      <div className={classes.align}>
+    document.title = 'Регистрация - Partymaker'
 
+    actions.layout.background('/images/register.jpg')
+  }
+
+  componentWillUnmount() {
+    const { actions } = this.props
+    actions.layout.removeBackground()
+  }
+
+  render() {
+    const { classes } = this.props
+
+    return (
+      <Card className={classes.root}>
+        <CardHeader className={classes.title} title="РЕГИСТРАЦИЯ" />
         <RegisterForm />
-
-        <AuthDevider />
-
-        <SocialLogin />
-      </div>
-    </div>
-  </div>
+      </Card>
+    )
+  }
+}
 
 RegisterScene.propTypes = {
   classes: object.isRequired,
+  actions: object.isRequired,
 }
 
-export default withStyles(styles)(RegisterScene)
+export default withStyles(styles)(connector(RegisterScene))

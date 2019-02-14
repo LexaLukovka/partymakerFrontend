@@ -1,20 +1,11 @@
 import React from 'react'
-import { object } from 'prop-types'
-import { Button, Card, CardActions, CardContent, withStyles } from '@material-ui/core'
+import { Button, CardActions, CardContent } from '@material-ui/core'
 import { Field } from 'formik'
 import FormikText from '../../formik/FormikText'
 import formik from './formik'
 
-const styles = {
-  root: {
-    padding: 20,
-    width: 350,
-    borderRadius: 8,
-  },
-}
-
-const RegisterForm = ({ classes }) =>
-  <Card className={classes.root}>
+const RegisterForm = () =>
+  <div>
     <CardContent>
       <Field
         name="name"
@@ -40,10 +31,8 @@ const RegisterForm = ({ classes }) =>
         Зарегистрироваться
       </Button>
     </CardActions>
-  </Card>
+  </div>
 
-RegisterForm.propTypes = {
-  classes: object.isRequired,
-}
+RegisterForm.propTypes = {}
 
-export default withStyles(styles)(formik(RegisterForm))
+export default formik(RegisterForm)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, number, string, shape, func } from 'prop-types'
+import { func, number, object, shape, string } from 'prop-types'
 import { TextField } from '@material-ui/core'
 
 const FormikText = ({ field, form, ...props }) =>
@@ -9,6 +9,7 @@ const FormikText = ({ field, form, ...props }) =>
     InputLabelProps={{ shrink: true }}
     fullWidth
     margin="dense"
+    style={{ marginBottom: 10 }}
     error={(form.submitCount > 0) && !!form.errors[field.name]}
     helperText={(form.submitCount > 0) && form.errors[field.name]}
   />
