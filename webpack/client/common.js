@@ -51,6 +51,7 @@ export default {
 
   entry: {
     app: [
+      '@babel/polyfill',
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
       root('src/client.js'),
     ],

@@ -1,5 +1,6 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
+import transformValidationApi from 'src/utils/transformValidationApi'
 
 const formik = withFormik({
   validationSchema: Yup.object()
@@ -18,8 +19,15 @@ const formik = withFormik({
     password: '',
   }),
 
-  handleSubmit: (form) => {
-    console.log(form)
+  handleSubmit: async (form, { props: { actions, history }, setErrors, setSubmitting }) => {
+    try {
+      console.log(actions)
+      console.log(form)
+    } catch (error) {
+      console.error(error)
+      setSubmitting(false)
+      setErrors(transformValidationApi(error))
+    }
   },
   displayName: 'RegisterForm',
 })

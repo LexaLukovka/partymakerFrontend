@@ -10,7 +10,7 @@ const styles = {
   root: {
     color: 'white',
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
   button: {
     width: '40%',

@@ -10,11 +10,14 @@
         "decoratorsBeforeExport": true
       }
     ],
-    "@babel/plugin-proposal-export-default-from",
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-syntax-dynamic-import",
+    "lodash",
     "@loadable/babel-plugin",
     "react-hot-loader/babel",
-    "lodash"
+    "transform-class-properties",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-async-generator-functions"
   ]
 }
