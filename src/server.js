@@ -8,7 +8,7 @@ import { SheetsRegistry } from 'jss'
 import JssProvider from 'react-jss/lib/JssProvider'
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
 import { ChunkExtractor } from '@loadable/server'
-import createStore from './redux/store'
+import store from './redux/store'
 import layout from './setup/layout'
 import Layout from './components/Layout'
 import theme from './styles/theme'
@@ -17,7 +17,6 @@ export default (request, response) => {
   const sheetsRegistry = new SheetsRegistry()
   const sheetsManager = new Map()
   const context = {}
-  const store = createStore()
   const statsFile = path.resolve(__dirname, '../public/loadable-stats.json')
   const extractor = new ChunkExtractor({ statsFile, entrypoints: ['app'] })
 

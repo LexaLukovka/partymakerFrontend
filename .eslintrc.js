@@ -7,6 +7,8 @@ module.exports = {
       'named': 'never',
       'asyncArrow': 'always',
     }],
+    'standard/object-curly-even-spacing': 0,
+    'generator-star-spacing': 0,
     'jsx-quotes': ['error', 'prefer-double'],
     'comma-dangle': 0,
     'newline-before-return': ['error'],
