@@ -15,4 +15,4 @@ function * api({ type, callable }) {
   }
 }
 
-export default { api }
+export default api
