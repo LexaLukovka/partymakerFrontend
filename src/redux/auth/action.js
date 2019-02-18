@@ -9,9 +9,9 @@ const register = form => ({
   payload: form,
 })
 
-const registerError = user => ({
+const registerError = error => ({
   type: REGISTER_USER_REJECTED,
-  payload: user,
+  payload: error,
 })
 
 const registerSuccess = user => ({
