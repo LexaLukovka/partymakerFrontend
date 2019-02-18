@@ -3,10 +3,8 @@ import Auth from 'src/api/Auth'
 import actions, { REGISTER_USER } from './action'
 
 function* register({ payload }) {
-  console.log(1)
   yield call(actions.register, payload)
   try {
-    console.log(payload)
     const data = yield call(Auth.register, payload)
     yield put(actions.registerSuccess(data))
   } catch (e) {
