@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import actions from 'src/redux/layout/action'
+import actions from 'src/redux/app/ui/layout/action'
 
 const initMapStateToProps = store => ({
   layout: store.layout,
