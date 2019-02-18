@@ -13,29 +13,9 @@ const register = form => ({
   payload: form,
 })
 
-const registerError = error => ({
-  type: REGISTER_USER_REJECTED,
-  payload: error,
-})
-
-const registerSuccess = user => ({
-  type: REGISTER_USER_FULFILLED,
-  payload: user,
-})
-
 const login = form => ({
   type: LOGIN_USER,
   payload: form,
-})
-
-const loginError = error => ({
-  type: LOGIN_USER_REJECTED,
-  payload: error,
-})
-
-const loginSuccess = user => ({
-  type: LOGIN_USER_FULFILLED,
-  payload: user,
 })
 
 const logout = () => ({
@@ -44,12 +24,6 @@ const logout = () => ({
 
 export default {
   register,
-  registerError,
-  registerSuccess,
-
   login,
-  loginError,
-  loginSuccess,
-
   logout,
 }
