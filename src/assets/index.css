@@ -25,3 +25,19 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+
+.flexAround {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flexEvenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+}
