@@ -5,7 +5,7 @@ import actions from 'app/actions'
 import { LOGIN_USER, REGISTER_USER } from 'app/auth/action'
 
 function* register({ payload }) {
-  yield call(actions.register, payload)
+  yield call(actions.auth.register, payload)
 
   const data = yield api({
     type: REGISTER_USER,

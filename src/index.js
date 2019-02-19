@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { hot } from 'react-hot-loader'
+import { hot } from 'react-hot-loader/root'
 import Layout from './components/Layout'
 import store from './redux/store'
 
@@ -13,4 +13,4 @@ const App = () => (
   </Provider>
 )
 
-export default hot(module)(App)
+export default hot(App)
