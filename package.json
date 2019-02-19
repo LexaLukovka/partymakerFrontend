@@ -23,6 +23,8 @@
     "components": "./src/components",
     "assets": "./src/assets",
     "utils": "./src/utils",
+    "selectors": "./src/redux/selectors",
+    "shapes": "./src/shapes",
     "helpers": "./helpers"
   },
   "dependencies": {
@@ -62,7 +64,8 @@
     "redux-thunk": "latest",
     "serialize-javascript": "latest",
     "util-to": "^1.0.2",
-    "yup": "^0.26.10"
+    "yup": "^0.26.10",
+    "reselect": "latest"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

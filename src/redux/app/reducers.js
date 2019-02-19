@@ -5,10 +5,10 @@ import users from 'app/entities/users/reducer'
 
 export default combineReducers({
   auth,
-  entities: {
+  entities: combineReducers({
     users,
-  },
-  ui: {
+  }),
+  ui: combineReducers({
     layout,
-  },
+  }),
 })
