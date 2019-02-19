@@ -1,7 +1,7 @@
-import { shape, string } from 'prop-types'
+import { number, shape, string } from 'prop-types'
 
 export default shape({
-  id: string.isRequired,
+  id: number.isRequired,
   name: string.isRequired,
   email: string.isRequired,
 })
