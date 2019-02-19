@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import JssProvider from 'react-jss/lib/JssProvider'
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
+import { createGenerateClassName, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import App from './index'
 import theme from './styles/theme'
 
