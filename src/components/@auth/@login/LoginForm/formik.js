@@ -17,7 +17,7 @@ const formik = withFormik({
     password: '',
   }),
 
-  handleSubmit: async (form, { props: { actions, history }, setErrors, setSubmitting }) => {
+  handleSubmit: async (form, { props: { actions }, setErrors, setSubmitting }) => {
     try {
       await actions.auth.login(form)
     } catch (error) {
@@ -26,7 +26,7 @@ const formik = withFormik({
       setErrors(transformValidationApi(error))
     }
   },
-  displayName: 'RegisterForm',
+  displayName: 'LoginForm',
 })
 
 export default formik

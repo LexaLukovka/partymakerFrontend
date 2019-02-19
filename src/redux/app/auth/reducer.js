@@ -9,10 +9,10 @@ import {
 } from './action'
 
 const initialState = {
-  user: null,
   errors: [],
   error: false,
   loading: false,
+  user_id: null,
 }
 
 const authReducer = (state = initialState, { type, payload }) => {
@@ -37,7 +37,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case LOGIN_USER_FULFILLED:
       return {
         ...state,
-        user_id: payload,
+        user_id: payload.id,
         loading: false,
       }
 

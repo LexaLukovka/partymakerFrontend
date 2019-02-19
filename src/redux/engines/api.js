@@ -1,8 +1,8 @@
 import { put } from 'redux-saga/effects'
 
-function * api({ type, callable }) {
+function* api({ type, callable }) {
+  const data = yield callable
   try {
-    const data = yield callable
     yield put({
       type: type + '_FULFILLED',
       payload: data,
@@ -13,6 +13,8 @@ function * api({ type, callable }) {
       payload: error,
     })
   }
+
+  return data
 }
 
 export default api

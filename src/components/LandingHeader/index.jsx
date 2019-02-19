@@ -33,6 +33,12 @@ const LandingHeader = ({ classes }) =>
         </Link>
       </Typography>
 
+      <Typography variant="h6" color="inherit" className={classes.grow}>
+        <Link to="/home">
+          Home
+        </Link>
+      </Typography>
+
       <Link to="/auth/register"><Button color="inherit">Регистрация</Button></Link>
       <Link to="/auth/login"><Button color="inherit">Войти</Button></Link>
     </Toolbar>

@@ -10,7 +10,7 @@ const styles = {
 
 const HomeScene = ({ classes, user }) =>
   <div className={classes.root}>
-    Привет {user.name}
+    Привет {user && user.name}
   </div>
 
 HomeScene.propTypes = {

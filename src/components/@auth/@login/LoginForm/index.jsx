@@ -1,11 +1,11 @@
 import React from 'react'
+import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Button, CardActions, CardContent, Typography, withStyles } from '@material-ui/core'
 import { Field, Form } from 'formik'
 import FormikText from '../../formik/FormikText'
 import formik from './formik'
 import connector from '../../connector'
-import { object } from 'prop-types'
 
 const styles = {
   root: {

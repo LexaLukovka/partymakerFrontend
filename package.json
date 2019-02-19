@@ -59,13 +59,13 @@
     "react-redux": "latest",
     "react-router-dom": "latest",
     "redux": "latest",
-    "redux-persist": "latest",
+    "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.1",
     "redux-thunk": "latest",
+    "reselect": "latest",
     "serialize-javascript": "latest",
     "util-to": "^1.0.2",
-    "yup": "^0.26.10",
-    "reselect": "latest"
+    "yup": "^0.26.10"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
