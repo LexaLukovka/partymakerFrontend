@@ -1,10 +1,13 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react'
 import { object } from 'prop-types'
+import { GoogleLogin } from 'react-google-login'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { withRouter } from 'react-router-dom'
 import { Button, withStyles } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
-import { withRouter } from 'react-router-dom'
+import connector from '../connector'
 
 const styles = {
   root: {
@@ -30,19 +33,56 @@ const styles = {
 }
 
 class SocialLogin extends Component {
+  loginFacebook = async FBuser => {
+    const { actions, history } = this.props
+    await actions.auth.facebook(FBuser)
+    history.push('/')
+  }
+
+  loginGoogle = async Guser => {
+    const { actions, history } = this.props
+    await actions.auth.google(Guser)
+    history.push('/')
+  }
+
   render() {
     const { classes } = this.props
 
     return (
       <div className={classes.root}>
-        <Button color="inherit" className={classes.button}>
-          <FacebookBoxIcon />
-          <div className={classes.text}>Facebook</div>
-        </Button>
-        <Button color="inherit" className={classes.button}>
-          <GoogleIcon />
-          <div className={classes.text}>Google</div>
-        </Button>
+        <FacebookLogin
+          autoLoad
+          appId="2175525285996959"
+          fields="name,email,picture"
+          callback={this.loginFacebook}
+          render={props => (
+            <Button
+              color="inherit"
+              onClick={props.onClick}
+              className={classes.button}
+            >
+              <FacebookBoxIcon />
+              <div className={classes.text}>Facebook</div>
+            </Button>
+          )}
+        />
+
+        <GoogleLogin
+          clientId="860110060796-1oa17isdultt097medmjdslaovs204o9.apps.googleusercontent.com"
+          fields="name,email,picture"
+          onFailure={this.loginGoogle}
+          onSuccess={this.loginGoogle}
+          render={props => (
+            <Button
+              color="inherit"
+              onClick={props.onClick}
+              className={classes.button}
+            >
+              <GoogleIcon />
+              <div className={classes.text}>Google</div>
+            </Button>
+          )}
+        />
       </div>
     )
   }
@@ -50,6 +90,8 @@ class SocialLogin extends Component {
 
 SocialLogin.propTypes = {
   classes: object.isRequired,
+  actions: object.isRequired,
+  history: object.isRequired,
 }
 
-export default withStyles(styles)(withRouter(SocialLogin))
+export default withStyles(styles)(withRouter(connector(SocialLogin)))

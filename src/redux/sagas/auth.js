@@ -2,33 +2,36 @@ import { all, call, put, takeEvery } from 'redux-saga/effects'
 import api from 'engines/api'
 import Auth from 'api/Auth'
 import actions from 'app/actions'
-import { LOGIN_USER, REGISTER_USER } from 'app/auth/action'
+import { LOGIN_FACEBOOK_USER, LOGIN_GOOGLE_USER, LOGIN_USER, REGISTER_USER, } from 'app/auth/action'
 
-function* register({ payload }) {
-  yield call(actions.auth.register, payload)
+function* authentication(auth, { type, payload }) {
+  console.log(payload)
+  yield call(actions.auth[auth], payload)
 
-  const data = yield api({
-    type: REGISTER_USER,
-    callable: call(Auth.register, payload),
-  })
+  try {
+    const data = yield api({
+      type,
+      callable: call(Auth[auth], payload),
+    })
 
-  yield put(actions.entities.users.add(data))
-}
-
-function* login({ payload }) {
-  yield call(actions.auth.login, payload)
-
-  const data = yield api({
-    type: LOGIN_USER,
-    callable: call(Auth.login, payload),
-  })
-
-  yield put(actions.entities.users.add(data))
+    try {
+      yield put(actions.entities.users.add(data))
+    } catch (e) {
+      console.log(e) // TODO: исправить console.log на что-то другое
+    }
+  } catch (error) {
+    yield put({
+      type: type + '_REJECTED',
+      payload: error,
+    })
+  }
 }
 
 export default function* auth() {
   yield all([
-    takeEvery(REGISTER_USER, register),
-    takeEvery(LOGIN_USER, login),
+    takeEvery(LOGIN_USER, authentication, 'login'),
+    takeEvery(REGISTER_USER, authentication, 'register'),
+    takeEvery(LOGIN_GOOGLE_USER, authentication, 'google'),
+    takeEvery(LOGIN_FACEBOOK_USER, authentication, 'facebook'),
   ])
 }
