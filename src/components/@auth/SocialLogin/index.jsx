@@ -33,15 +33,35 @@ const styles = {
 }
 
 class SocialLogin extends Component {
-  loginFacebook = async FBuser => {
+  loginFacebook = async FBuser => { // TODO: настроить приложение в Facebook
     const { actions, history } = this.props
-    await actions.auth.facebook(FBuser)
+
+    const userDetails = {
+      name: FBuser.name,
+      email: FBuser.email,
+      provider_token: FBuser.accessToken,
+      provider: 'facebook',
+      provider_id: FBuser.id,
+      avatar_url: FBuser.picture.data.url,
+    }
+
+    await actions.auth.facebook(userDetails)
     history.push('/')
   }
 
   loginGoogle = async Guser => {
     const { actions, history } = this.props
-    await actions.auth.google(Guser)
+
+    const userDetails = {
+      name: Guser.profileObj.name,
+      email: Guser.profileObj.email,
+      provider_token: Guser.accessToken,
+      provider: 'google',
+      provider_id: Guser.googleId,
+      avatar_url: Guser.profileObj.imageUrl,
+    }
+
+    await actions.auth.google(userDetails)
     history.push('/')
   }
 
