@@ -37,14 +37,14 @@ const authReducer = (state = initialState, { type, payload }) => {
     case LOGIN_USER_FULFILLED:
       return {
         ...state,
-        user: payload,
+        user_id: payload,
         loading: false,
       }
 
     case LOGOUT_USER:
       return {
         ...state,
-        user: null,
+        user_id: null,
       }
 
     default:

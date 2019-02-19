@@ -16,8 +16,7 @@
   },
   "_moduleAliases": {
     "src": "./src",
-    "entities": "./src/redux/app/entities",
-    "ui": "./src/redux/app/ui",
+    "app": "./src/redux/app",
     "api": "./src/api",
     "services": "./src/services",
     "engines": "./src/redux/engines",

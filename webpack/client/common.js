@@ -4,6 +4,7 @@ import Loadable from '@loadable/webpack-plugin'
 import Env from 'dotenv-webpack'
 import webpack from 'webpack'
 import Copy from 'copy-webpack-plugin'
+import webpackConfig from '../../webpack.config'
 import src from '../../helpers/src'
 import root from '../../helpers/root'
 
@@ -11,9 +12,7 @@ export default {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
-    alias: {
-      src: src(''),
-    },
+    alias: webpackConfig.resolve.alias
   },
 
   context: root(''),
@@ -34,6 +33,8 @@ export default {
   devServer: {
     publicPath: '/',
     contentBase: 'src',
+    serverSideRender: true,
+    index: false,
     stats: {
       colors: true,
       hash: false,
