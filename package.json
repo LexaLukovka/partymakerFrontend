@@ -16,6 +16,14 @@
   },
   "_moduleAliases": {
     "src": "./src",
+    "entities": "./src/redux/app/entities",
+    "ui": "./src/redux/app/ui",
+    "api": "./src/api",
+    "services": "./src/services",
+    "engines": "./src/redux/engines",
+    "components": "./src/components",
+    "assets": "./src/assets",
+    "utils": "./src/utils",
     "helpers": "./helpers"
   },
   "dependencies": {
