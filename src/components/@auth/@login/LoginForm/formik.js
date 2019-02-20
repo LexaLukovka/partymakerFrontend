@@ -19,7 +19,7 @@ const formik = withFormik({
 
   handleSubmit: async (form, { props: { actions }, setErrors, setSubmitting }) => {
     try {
-      await actions.auth.login(form)
+      await actions.login(form)
     } catch (error) {
       console.error(error)
       setSubmitting(false)

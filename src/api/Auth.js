@@ -2,18 +2,27 @@ import JWT from 'jwt-decode'
 import Http from 'src/api/Http'
 
 class Auth {
-  async register(credentials) {
-    const { token, refreshToken } = await Http.post('/auth/register', credentials)
+  static async authentication(path, credentials) {
+    const { token, refreshToken } = await Http.post(path, credentials)
     const user = JWT(token).data
 
     return { token, refreshToken, ...user }
   }
 
-  async login(credentials) {
-    const { token, refreshToken } = await Http.post('/auth/login', credentials)
-    const user = JWT(token).data
+  register(credentials) {
+    return Auth.authentication('/auth/register', credentials)
+  }
 
-    return { token, refreshToken, ...user }
+  login(credentials) {
+    return Auth.authentication('/auth/login', credentials)
+  }
+
+  google(Guser) {
+    return Auth.authentication('/auth/social', Guser)
+  }
+
+  facebook(FBuser) {
+    return Auth.authentication('/auth/social', FBuser)
   }
 }
 

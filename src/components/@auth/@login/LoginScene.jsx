@@ -2,7 +2,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { Card, CardHeader, withStyles } from '@material-ui/core'
 import LoginForm from './LoginForm'
-import connector from '../connector'
+import connector from './connector'
 
 const styles = {
   root: {

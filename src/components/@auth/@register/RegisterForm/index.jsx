@@ -5,7 +5,7 @@ import { Button, CardActions, CardContent, Typography, withStyles } from '@mater
 import { Field, Form } from 'formik'
 import FormikText from '../../formik/FormikText'
 import formik from './formik'
-import connector from '../../connector'
+import connector from '../connector'
 
 const styles = {
   root: {

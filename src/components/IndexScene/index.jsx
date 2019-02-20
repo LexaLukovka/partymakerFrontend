@@ -12,7 +12,6 @@ const styles = {
   background: {
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '100%',
     background: 'url(/images/summer.jpg)',
     height: '100%',
   },
