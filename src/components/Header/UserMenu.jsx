@@ -115,7 +115,7 @@ UserMenu.propTypes = {
   actions: object.isRequired,
 }
 
-UserAvatar.defaultProps = {
+UserMenu.defaultProps = {
   user: null,
 }
 
