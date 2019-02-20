@@ -1,6 +1,4 @@
-import {
-  ADD_USER,
-} from './action'
+import { ADD_USER } from './action'
 
 const usersReducer = (state = {}, { type, payload }) => {
   switch (type) {

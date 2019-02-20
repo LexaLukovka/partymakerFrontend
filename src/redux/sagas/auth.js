@@ -5,7 +5,6 @@ import actions from 'app/actions'
 import { LOGIN_FACEBOOK_USER, LOGIN_GOOGLE_USER, LOGIN_USER, REGISTER_USER, } from 'app/auth/action'
 
 function* authentication(auth, { type, payload }) {
-  console.log(payload)
   yield call(actions.auth[auth], payload)
 
   try {

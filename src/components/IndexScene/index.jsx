@@ -1,5 +1,5 @@
 import React from 'react'
-import LandingHeader from 'src/components/LandingHeader'
+import Header from 'src/components/Header'
 import { withStyles, Typography } from '@material-ui/core'
 import { object } from 'prop-types'
 
@@ -32,7 +32,7 @@ const styles = {
 const Index = ({ classes }) =>
   <div className={classes.root}>
     <div className={classes.background}>
-      <LandingHeader />
+      <Header />
       <div className={classes.center}>
         <div className={classes.headline}>
           <Typography color="inherit" variant="h4">Соберем вечерику</Typography>

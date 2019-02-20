@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
+import { AppBar, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+import UserMenu from 'src/components/Header/UserMenu'
 
 const styles = {
   root: {
@@ -16,12 +16,11 @@ const styles = {
     flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
     marginRight: 20,
   },
 }
 
-const LandingHeader = ({ classes }) =>
+const Header = ({ classes }) =>
   <AppBar className={classes.root} color="default" elevation={0}>
     <Toolbar>
       <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -33,19 +32,13 @@ const LandingHeader = ({ classes }) =>
         </Link>
       </Typography>
 
-      <Typography variant="h6" color="inherit" className={classes.grow}>
-        <Link to="/home">
-          Home
-        </Link>
-      </Typography>
+      <UserMenu />
 
-      <Link to="/auth/register"><Button color="inherit">Регистрация</Button></Link>
-      <Link to="/auth/login"><Button color="inherit">Войти</Button></Link>
     </Toolbar>
   </AppBar>
 
-LandingHeader.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(LandingHeader)
+export default withStyles(styles)(Header)
