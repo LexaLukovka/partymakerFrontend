@@ -14,7 +14,7 @@ export const LOGIN_USER = 'LOGIN_USER'
 export const LOGIN_USER_FULFILLED = 'LOGIN_USER_FULFILLED'
 export const LOGIN_USER_REJECTED = 'LOGIN_USER_REJECTED'
 
-export const LOGOUT_USER = 'LOGIN_USER'
+export const LOGOUT_USER = 'LOGOUT_USER'
 
 const register = form => ({
   type: REGISTER_USER,

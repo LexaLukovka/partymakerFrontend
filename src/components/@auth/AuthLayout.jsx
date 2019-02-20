@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import LoginScene from './@login/LoginScene'
 import RegisterScene from './@register/RegisterScene'
-import LandingHeader from '../LandingHeader'
+import Header from '../Header'
 import AuthDevider from './AndDevider'
 import SocialLogin from './SocialLogin'
 
@@ -35,7 +35,7 @@ class AuthLayout extends React.Component {
 
     return (
       <div className={classes.root}>
-        <LandingHeader />
+        <Header />
 
         <div className={classes.container}>
           <div className={classes.scene}>
