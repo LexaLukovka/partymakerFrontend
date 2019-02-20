@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 import { Button, withStyles } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
-import connector from '../connector'
+import connector from './connector'
 
 const styles = {
   root: {
@@ -45,7 +45,7 @@ class SocialLogin extends Component {
       avatar_url: FBuser.picture.data.url,
     }
 
-    await actions.auth.facebook(userDetails)
+    await actions.facebook(userDetails)
     history.push('/')
   }
 
@@ -61,7 +61,7 @@ class SocialLogin extends Component {
       avatar_url: Guser.profileObj.imageUrl,
     }
 
-    await actions.auth.google(userDetails)
+    await actions.google(userDetails)
     history.push('/')
   }
 
