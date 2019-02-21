@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,react/sort-comp */
 import React from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { Button, IconButton, Typography, withStyles } from '@material-ui/core'
+import { IconButton, withStyles } from '@material-ui/core'
 import AccountCircle from 'mdi-react/AccountCircleIcon'
-import UserAvatar from 'components/User/UserAvatar'
+import DesktopAuth from './DesktopAuth'
 import UserMenu from './UserMenu'
 import connector from './connector'
 
@@ -23,13 +22,6 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       display: 'block',
     },
-  },
-  flex: {
-    display: 'flex',
-  },
-  userName: {
-    alignSelf: 'center',
-    paddingLeft: 10,
   },
 })
 
@@ -69,18 +61,10 @@ class HeaderUser extends React.Component {
       <div className={classes.root}>
 
         <div className={classes.desktop}>
-          {user
-            ? <div className={classes.flex} onClick={this.handleMenu}>
-              <UserAvatar small user={user} />
-              <Typography className={classes.userName} variant="subtitle1" color="inherit">
-                {user.name}
-              </Typography>
-            </div>
-            : <React.Fragment>
-              <Link to="/auth/login"><Button color="inherit">Войти</Button></Link>
-              <Link to="/auth/register"><Button color="inherit">Зарегистрироваться</Button></Link>
-            </React.Fragment>
-          }
+          <DesktopAuth
+            user={user}
+            onOpenMeu={this.handleMenu}
+          />
         </div>
 
         <div className={classes.mobile}>
