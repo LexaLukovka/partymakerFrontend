@@ -1,9 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { AppBar, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
-import UserMenu from 'src/components/Header/UserMenu'
+import HeaderUser from './HeaderUser'
 
 const styles = {
   root: {
@@ -32,13 +32,13 @@ const Header = ({ classes }) =>
         </Link>
       </Typography>
 
-      <UserMenu />
+      <HeaderUser />
 
     </Toolbar>
   </AppBar>
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: object.isRequired,
 }
 
 export default withStyles(styles)(Header)
