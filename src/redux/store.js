@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore } from 'redux'
+import { persistStore } from 'redux-persist'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware, { END } from 'redux-saga'
 import rootSaga from 'src/redux/sagas'
@@ -42,5 +43,7 @@ if (module.hot) {
 }
 store.runSaga = sagaMiddleware.run
 store.close = () => store.dispatch(END)
+
+export const persistor = isClient && persistStore(store)
 
 export default store

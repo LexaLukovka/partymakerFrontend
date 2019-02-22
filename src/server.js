@@ -1,16 +1,18 @@
 import React from 'react'
 import { StaticRouter } from 'react-router-dom'
+import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import Helmet from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 import path from 'path'
 import { SheetsRegistry } from 'jss'
 import JssProvider from 'react-jss/lib/JssProvider'
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
+import { createGenerateClassName, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { ChunkExtractor } from '@loadable/server'
-import store from './redux/store'
 import layout from './setup/layout'
 import Layout from './components/Layout'
+import Loading from 'src/components/Loading'
+import store, { persistor } from './redux/store'
 import theme from './styles/theme'
 import sagas from 'src/redux/sagas'
 
@@ -27,9 +29,11 @@ export default async (request, response) => {
       <JssProvider registry={sheetsRegistry} generateClassName={createGenerateClassName()}>
         <MuiThemeProvider theme={createMuiTheme(theme)} sheetsManager={sheetsManager}>
           <Provider store={store}>
-            <StaticRouter context={context} location={request.url}>
-              <Layout />
-            </StaticRouter>
+            <PersistGate loading={<Loading />} persistor={persistor}>
+              <StaticRouter context={context} location={request.url}>
+                <Layout />
+              </StaticRouter>
+            </PersistGate>
           </Provider>
         </MuiThemeProvider>
       </JssProvider>,
