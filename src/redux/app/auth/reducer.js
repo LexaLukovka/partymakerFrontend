@@ -1,4 +1,7 @@
 import {
+  ACTIVATE_USER,
+  ACTIVATE_USER_FULFILLED,
+  ACTIVATE_USER_REJECTED,
   LOGIN_FACEBOOK_USER,
   LOGIN_FACEBOOK_USER_FULFILLED,
   LOGIN_FACEBOOK_USER_REJECTED,
@@ -25,6 +28,7 @@ const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case LOGIN_USER:
     case REGISTER_USER:
+    case ACTIVATE_USER:
     case LOGIN_GOOGLE_USER:
     case LOGIN_FACEBOOK_USER:
       return {
@@ -34,6 +38,7 @@ const authReducer = (state = initialState, { type, payload }) => {
 
     case LOGIN_USER_REJECTED:
     case REGISTER_USER_REJECTED:
+    case ACTIVATE_USER_REJECTED:
     case LOGIN_GOOGLE_USER_REJECTED:
     case LOGIN_FACEBOOK_USER_REJECTED:
       return {
@@ -50,6 +55,12 @@ const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user_id: payload.id,
+        loading: false,
+      }
+
+    case ACTIVATE_USER_FULFILLED:
+      return {
+        ...state,
         loading: false,
       }
 

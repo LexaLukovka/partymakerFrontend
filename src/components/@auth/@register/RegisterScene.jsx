@@ -25,7 +25,7 @@ class RegisterScene extends React.Component {
 
     document.title = 'Регистрация - Partymaker'
 
-    actions.layout.background('/images/login.jpg')
+    actions.layout.background('/images/register.jpg')
   }
 
   componentWillUnmount() {

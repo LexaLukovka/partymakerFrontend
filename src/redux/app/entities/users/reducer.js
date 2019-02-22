@@ -1,4 +1,4 @@
-import { ADD_USER } from './action'
+import { ACTIVATE_USERS, ADD_USER } from './action'
 
 const usersReducer = (state = {}, { type, payload }) => {
   switch (type) {
@@ -6,6 +6,15 @@ const usersReducer = (state = {}, { type, payload }) => {
       return {
         ...state,
         [payload.id]: payload,
+      }
+
+    case ACTIVATE_USERS:
+      return {
+        ...state,
+        [payload]: {
+          ...state[payload],
+          active: true,
+        },
       }
 
     default:
