@@ -1,3 +1,7 @@
+export const ACTIVATE_USER = 'ACTIVATE_USER'
+export const ACTIVATE_USER_FULFILLED = 'ACTIVATE_USER_FULFILLED'
+export const ACTIVATE_USER_REJECTED = 'ACTIVATE_USER_REJECTED'
+
 export const REGISTER_USER = 'REGISTER_USER'
 export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
 export const REGISTER_USER_REJECTED = 'REGISTER_USER_REJECTED'
@@ -26,6 +30,11 @@ const login = form => ({
   payload: form,
 })
 
+const activate = hash => ({
+  type: ACTIVATE_USER,
+  payload: hash,
+})
+
 const google = Guser => ({
   type: LOGIN_GOOGLE_USER,
   payload: Guser,
@@ -43,6 +52,7 @@ const logout = () => ({
 export default {
   register,
   login,
+  activate,
   google,
   facebook,
   logout,

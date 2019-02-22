@@ -9,5 +9,8 @@ export default {
       main: '#9306BC',
       dark: '#9306BC',
     },
+    error: {
+      main: '#D6000A',
+    },
   },
 }

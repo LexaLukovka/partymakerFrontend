@@ -1,5 +1,5 @@
 import JWT from 'jwt-decode'
-import Http from 'src/api/Http'
+import Http from 'src/services/Http'
 
 class Auth {
   static async authentication(path, credentials) {
@@ -23,6 +23,12 @@ class Auth {
 
   facebook(FBuser) {
     return Auth.authentication('/auth/social', FBuser)
+  }
+
+  async activate(hash) {
+    const data = await Http.get(`/auth/activate/${hash}`)
+
+    return data
   }
 }
 
