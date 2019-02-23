@@ -17,30 +17,31 @@ const styles = {
   },
 }
 
-const LoginForm = ({ classes }) =>
+const RestoreForm = ({ classes }) =>
   <div className={classes.root}>
     <Form>
       <CardContent>
         <Field
-          name="email"
-          label="Email"
-          placeholder="email@example.com"
+          type="password"
+          name="newPassword"
+          placeholder="*******"
+          label="Введите новый пароль"
           component={FormikText}
         />
         <Field
           type="password"
-          name="password"
-          label="Пароль"
+          name="repeatPassword"
           placeholder="*******"
+          label="Повторите новый пароль"
           component={FormikText}
         />
       </CardContent>
       <CardActions className="flexAround">
         <Button variant="contained" type="submit" color="primary">
-          Войти
+          Готово
         </Button>
-        <Link to="/auth/forgotPassword">
-          <Typography color="inherit">Забыли пароль?</Typography>
+        <Link to="/auth/login">
+          <Typography color="inherit">Войти</Typography>
         </Link>
       </CardActions>
       <Link to="/auth/register">
@@ -49,8 +50,8 @@ const LoginForm = ({ classes }) =>
     </Form>
   </div>
 
-LoginForm.propTypes = {
+RestoreForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(LoginForm)))
+export default withStyles(styles)(connector(formik(RestoreForm)))

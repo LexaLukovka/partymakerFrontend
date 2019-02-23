@@ -9,6 +9,7 @@ import {
   LOGIN_GOOGLE_USER,
   LOGIN_USER,
   REGISTER_USER,
+  RESTOR_PASSWORD,
 } from 'app/auth/action'
 import authUser from 'src/redux/selectors/authUser'
 import store from 'src/redux/store'
@@ -44,6 +45,7 @@ export default function* auth() {
     takeEvery(LOGIN_GOOGLE_USER, authentication, ({ authorization: 'google', usersAction: 'add' })),
     takeEvery(LOGIN_FACEBOOK_USER, authentication, ({ authorization: 'facebook', usersAction: 'add' })),
     takeEvery(ACTIVATE_USER, authentication, ({ authorization: 'activate', usersAction: 'activate' })),
+    takeEvery(RESTOR_PASSWORD, authentication, ({ authorization: 'restorePassword', usersAction: 'add' })),
     takeEvery(FORGOT_PASSWORD, authentication, ({ authorization: 'forgotPassword' })),
   ])
 }

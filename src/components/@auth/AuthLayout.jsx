@@ -7,6 +7,7 @@ import LoginScene from './@login/LoginScene'
 import RegisterScene from './@register/RegisterScene'
 import ActivateScene from './@activate/ActivateScene'
 import ForgotPasswordScene from './@forgotPassword/ForgotPasswordScene'
+import RestorePasswordScene from './@restorePassword/RestorePasswordScene'
 
 import Header from '../Header'
 import AuthDevider from './AndDevider'
@@ -49,6 +50,7 @@ class AuthLayout extends React.Component {
                 <Route exact path="/auth/login" component={LoginScene} />
                 <Route path="/auth/activate/:hash" component={ActivateScene} />
                 <Route path="/auth/forgotPassword" component={ForgotPasswordScene} />
+                <Route path="/auth/restorePassword/:hash" component={RestorePasswordScene} />
                 <Redirect to="/auth/login" />
               </Switch>
             </div>

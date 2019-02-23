@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Card, CardHeader, withStyles } from '@material-ui/core'
-import ForgotForm from './ForgotForm'
+import RestoreForm from './RestoreForm'
 import connector from './connector'
 
 const styles = {
@@ -19,9 +19,11 @@ const styles = {
   },
 }
 
-class ForgotPasswordScene extends React.Component {
+class RestorePasswordScene extends React.Component {
   componentDidMount() {
-    const { actions } = this.props
+    const { actions, match } = this.props
+
+    console.log(match.params.hash)
 
     document.title = 'Восстановление пароля - Partymaker'
 
@@ -34,20 +36,21 @@ class ForgotPasswordScene extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, match } = this.props
 
     return (
       <Card className={classes.root}>
         <CardHeader className={classes.title} title="Восстановление пароля" />
-        <ForgotForm />
+        <RestoreForm hash={match.params.hash} />
       </Card>
     )
   }
 }
 
-ForgotPasswordScene.propTypes = {
+RestorePasswordScene.propTypes = {
   classes: object.isRequired,
   actions: object.isRequired,
+  match: object.isRequired,
 }
 
-export default withStyles(styles)(connector(ForgotPasswordScene))
+export default withStyles(styles)(connector(RestorePasswordScene))
