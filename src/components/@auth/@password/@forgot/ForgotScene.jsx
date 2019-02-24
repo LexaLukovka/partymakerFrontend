@@ -2,7 +2,7 @@ import React from 'react'
 import AuthCard from 'src/components/@auth/Card/AuthCard'
 import ForgotForm from './ForgotForm'
 
-const ForgotPasswordScene = () =>
+const ForgotScene = () =>
   <AuthCard
     images="forgot.jpg"
     title="Восстановление пароля"
@@ -11,4 +11,4 @@ const ForgotPasswordScene = () =>
     <ForgotForm />
   </AuthCard>
 
-export default ForgotPasswordScene
+export default ForgotScene

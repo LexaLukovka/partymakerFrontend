@@ -6,8 +6,8 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import LoginScene from './@login/LoginScene'
 import RegisterScene from './@register/RegisterScene'
 import ActivateScene from './@activate/ActivateScene'
-import ForgotPasswordScene from './@forgotPassword/ForgotPasswordScene'
-import RestorePasswordScene from './@restorePassword/RestorePasswordScene'
+import ForgotScene from './@password/@forgot/ForgotScene'
+import RestoreScene from './@password/@restore/RestoreScene'
 
 import Header from '../Header'
 import AuthDevider from './AndDevider'
@@ -49,8 +49,8 @@ class AuthLayout extends React.Component {
                 <Route exact path="/auth/register" component={RegisterScene} />
                 <Route exact path="/auth/login" component={LoginScene} />
                 <Route path="/auth/activate/:hash" component={ActivateScene} />
-                <Route path="/auth/forgotPassword" component={ForgotPasswordScene} />
-                <Route path="/auth/restorePassword/:hash" component={RestorePasswordScene} />
+                <Route path="/auth/password/forgot" component={ForgotScene} />
+                <Route path="/auth/password/restore/:hash" component={RestoreScene} />
                 <Redirect to="/auth/login" />
               </Switch>
             </div>

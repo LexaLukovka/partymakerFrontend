@@ -3,10 +3,10 @@ import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { CardContent, Typography, withStyles } from '@material-ui/core'
 import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
+import FormikText from 'components/@auth/formik/FormikText'
 import { Field, Form } from 'formik'
-import FormikText from '../../formik/FormikText'
-import formik from './formik'
 import connector from './connector'
+import formik from './formik'
 
 const styles = {
   root: {
@@ -18,19 +18,27 @@ const styles = {
   },
 }
 
-const ForgotForm = ({ classes }) =>
+const RestoreForm = ({ classes }) =>
   <div className={classes.root}>
     <Form>
       <CardContent>
         <Field
-          name="email"
-          label="Email"
-          placeholder="email@example.com"
+          type="password"
+          name="newPassword"
+          placeholder="*******"
+          label="Введите новый пароль"
+          component={FormikText}
+        />
+        <Field
+          type="password"
+          name="repeatPassword"
+          placeholder="*******"
+          label="Повторите новый пароль"
           component={FormikText}
         />
       </CardContent>
       <AuthCardActions
-        textButton="Дальше"
+        textButton="Готово"
         linkTo="/auth/login"
         textLink="Войти"
       />
@@ -40,8 +48,8 @@ const ForgotForm = ({ classes }) =>
     </Form>
   </div>
 
-ForgotForm.propTypes = {
+RestoreForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(ForgotForm)))
+export default withStyles(styles)(connector(formik(RestoreForm)))

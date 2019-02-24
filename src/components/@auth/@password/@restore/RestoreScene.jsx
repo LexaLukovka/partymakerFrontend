@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import AuthCard from 'src/components/@auth/Card/AuthCard'
 import RestoreForm from './RestoreForm'
 
-const RestorePasswordScene = ({ match }) =>
+const RestoreScene = ({ match }) =>
   <AuthCard
     images="forgot.jpg"
     title="Восстановление пароля"
@@ -12,8 +12,8 @@ const RestorePasswordScene = ({ match }) =>
     <RestoreForm hash={match.params.hash} />
   </AuthCard>
 
-RestorePasswordScene.propTypes = {
+RestoreScene.propTypes = {
   match: object.isRequired,
 }
 
-export default RestorePasswordScene
+export default RestoreScene
