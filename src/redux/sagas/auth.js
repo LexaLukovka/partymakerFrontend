@@ -2,7 +2,14 @@ import { all, call, put, takeEvery } from 'redux-saga/effects'
 import api from 'engines/api'
 import Auth from 'api/Auth'
 import actions from 'app/actions'
-import { ACTIVATE_USER, LOGIN_FACEBOOK_USER, LOGIN_GOOGLE_USER, LOGIN_USER, REGISTER_USER, } from 'app/auth/action'
+import {
+  ACTIVATE_USER,
+  FORGOT_PASSWORD,
+  LOGIN_FACEBOOK_USER,
+  LOGIN_GOOGLE_USER,
+  LOGIN_USER,
+  REGISTER_USER,
+} from 'app/auth/action'
 import authUser from 'src/redux/selectors/authUser'
 import store from 'src/redux/store'
 
@@ -16,7 +23,9 @@ function* authentication({ authorization, usersAction }, { type, payload }) {
     })
 
     try {
-      yield put(actions.entities.users[usersAction || 'add'](usersAction ? authUser(store.getState()).id : data))
+      if (usersAction) {
+        yield put(actions.entities.users[usersAction](usersAction === 'activate' ? authUser(store.getState()).id : data))
+      }
     } catch (e) {
       console.log(e) // TODO: исправить console.log на что-то другое
     }
@@ -30,10 +39,11 @@ function* authentication({ authorization, usersAction }, { type, payload }) {
 
 export default function* auth() {
   yield all([
-    takeEvery(LOGIN_USER, authentication, ({ authorization: 'login' })),
-    takeEvery(REGISTER_USER, authentication, ({ authorization: 'register' })),
-    takeEvery(LOGIN_GOOGLE_USER, authentication, ({ authorization: 'google' })),
-    takeEvery(LOGIN_FACEBOOK_USER, authentication, ({ authorization: 'facebook' })),
+    takeEvery(LOGIN_USER, authentication, ({ authorization: 'login', usersAction: 'add' })),
+    takeEvery(REGISTER_USER, authentication, ({ authorization: 'register', usersAction: 'add' })),
+    takeEvery(LOGIN_GOOGLE_USER, authentication, ({ authorization: 'google', usersAction: 'add' })),
+    takeEvery(LOGIN_FACEBOOK_USER, authentication, ({ authorization: 'facebook', usersAction: 'add' })),
     takeEvery(ACTIVATE_USER, authentication, ({ authorization: 'activate', usersAction: 'activate' })),
+    takeEvery(FORGOT_PASSWORD, authentication, ({ authorization: 'forgotPassword' })),
   ])
 }

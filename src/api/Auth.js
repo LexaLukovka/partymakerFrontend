@@ -30,6 +30,13 @@ class Auth {
 
     return data
   }
+
+  async forgotPassword(credentials) {
+    console.log(credentials)
+    const data = await Http.post('/auth/forgotPassword', credentials)
+
+    return data
+  }
 }
 
 export default new Auth()

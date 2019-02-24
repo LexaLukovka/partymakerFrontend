@@ -6,6 +6,10 @@ export const REGISTER_USER = 'REGISTER_USER'
 export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
 export const REGISTER_USER_REJECTED = 'REGISTER_USER_REJECTED'
 
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
+export const FORGOT_PASSWORD_FULFILLED = 'FORGOT_PASSWORD_FULFILLED'
+export const FORGOT_PASSWORD_REJECTED = 'FORGOT_PASSWORD_REJECTED'
+
 export const LOGIN_GOOGLE_USER = 'LOGIN_GOOGLE_USER'
 export const LOGIN_GOOGLE_USER_FULFILLED = 'LOGIN_GOOGLE_USER_FULFILLED'
 export const LOGIN_GOOGLE_USER_REJECTED = 'LOGIN_GOOGLE_USER_REJECTED'
@@ -35,6 +39,11 @@ const activate = hash => ({
   payload: hash,
 })
 
+const forgotPassword = form => ({
+  type: FORGOT_PASSWORD,
+  payload: form,
+})
+
 const google = Guser => ({
   type: LOGIN_GOOGLE_USER,
   payload: Guser,
@@ -55,5 +64,6 @@ export default {
   activate,
   google,
   facebook,
+  forgotPassword,
   logout,
 }
