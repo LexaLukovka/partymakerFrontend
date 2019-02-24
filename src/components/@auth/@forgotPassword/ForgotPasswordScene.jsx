@@ -1,14 +1,14 @@
 import React from 'react'
+import AuthCard from 'src/components/@auth/Card/AuthCard'
 import ForgotForm from './ForgotForm'
-import CardAuth from 'src/components/@auth/CardAuth'
 
 const ForgotPasswordScene = () =>
-  <CardAuth
+  <AuthCard
     images="forgot.jpg"
     title="Восстановление пароля"
     documentTitle="Восстановление пароля - Partymaker"
   >
     <ForgotForm />
-  </CardAuth>
+  </AuthCard>
 
 export default ForgotPasswordScene

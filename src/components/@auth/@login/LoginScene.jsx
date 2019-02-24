@@ -1,14 +1,14 @@
 import React from 'react'
+import AuthCard from 'src/components/@auth/Card/AuthCard'
 import LoginForm from './LoginForm'
-import CardAuth from 'src/components/@auth/CardAuth'
 
 const LoginScene = () =>
-  <CardAuth
+  <AuthCard
     title="ВОЙТИ"
     images="login.jpg"
     documentTitle="Вход в аккаунт - Partymaker"
   >
     <LoginForm />
-  </CardAuth>
+  </AuthCard>
 
 export default LoginScene

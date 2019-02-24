@@ -18,7 +18,7 @@ const styles = {
   },
 }
 
-class CardAuth extends React.Component {
+class AuthCard extends React.Component {
   componentDidMount() {
     const { actions, images, documentTitle } = this.props
 
@@ -44,7 +44,7 @@ class CardAuth extends React.Component {
   }
 }
 
-CardAuth.propTypes = {
+AuthCard.propTypes = {
   title: node.isRequired,
   children: node.isRequired,
   images: string.isRequired,
@@ -53,4 +53,4 @@ CardAuth.propTypes = {
   documentTitle: string.isRequired,
 }
 
-export default withStyles(styles)(connector(CardAuth))
+export default withStyles(styles)(connector(AuthCard))

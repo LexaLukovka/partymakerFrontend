@@ -1,7 +1,8 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Button, CardActions, CardContent, Typography, withStyles } from '@material-ui/core'
+import { CardContent, Typography, withStyles } from '@material-ui/core'
+import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
 import FormikText from '../../formik/FormikText'
 import formik from './formik'
@@ -36,14 +37,11 @@ const RestoreForm = ({ classes }) =>
           component={FormikText}
         />
       </CardContent>
-      <CardActions className="flexAround">
-        <Button variant="contained" type="submit" color="primary">
-          Готово
-        </Button>
-        <Link to="/auth/login">
-          <Typography color="inherit">Войти</Typography>
-        </Link>
-      </CardActions>
+      <AuthCardActions
+        textButton="Готово"
+        linkTo="/auth/login"
+        textLink="Войти"
+      />
       <Link to="/auth/register">
         <Typography className={classes.link} color="inherit">Создать аккаунт</Typography>
       </Link>
