@@ -37,6 +37,10 @@ class Auth {
 
     return data
   }
+
+  restorePassword(credentials) {
+    return Auth.authentication(`/auth/restorePassword/${credentials.hash}`, credentials.form)
+  }
 }
 
 export default new Auth()

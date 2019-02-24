@@ -22,7 +22,7 @@ const formik = withFormik({
       setErrors(transformValidationApi(error))
     }
   },
-  displayName: 'LoginForm',
+  displayName: 'ForgotPasswordForm',
 })
 
 export default formik
