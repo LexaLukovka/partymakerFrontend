@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { Button, CardActions, CardContent, Typography, withStyles } from '@material-ui/core'
 import { Field, Form } from 'formik'
 import FormikText from '../../formik/FormikText'
+import connector from './connector'
 import formik from './formik'
-import connector from '../connector'
 
 const styles = {
   root: {

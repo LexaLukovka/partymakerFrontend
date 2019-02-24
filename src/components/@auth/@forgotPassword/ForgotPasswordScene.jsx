@@ -1,53 +1,14 @@
 import React from 'react'
-import { object } from 'prop-types'
-import { Card, CardHeader, withStyles } from '@material-ui/core'
 import ForgotForm from './ForgotForm'
-import connector from './connector'
+import CardAuth from 'src/components/@auth/CardAuth'
 
-const styles = {
-  root: {
-    width: 350,
-    padding: 20,
-    border: 'solid',
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-  title: {
-    paddingBottom: 10,
-    textAlign: 'center',
-  },
-}
+const ForgotPasswordScene = () =>
+  <CardAuth
+    images="forgot.jpg"
+    title="Восстановление пароля"
+    documentTitle="Восстановление пароля - Partymaker"
+  >
+    <ForgotForm />
+  </CardAuth>
 
-class ForgotPasswordScene extends React.Component {
-  componentDidMount() {
-    const { actions } = this.props
-
-    document.title = 'Восстановление пароля - Partymaker'
-
-    actions.layout.background('/images/forgot.jpg')
-  }
-
-  componentWillUnmount() {
-    const { actions } = this.props
-    actions.layout.removeBackground()
-  }
-
-  render() {
-    const { classes } = this.props
-
-    return (
-      <Card className={classes.root}>
-        <CardHeader className={classes.title} title="Восстановление пароля" />
-        <ForgotForm />
-      </Card>
-    )
-  }
-}
-
-ForgotPasswordScene.propTypes = {
-  classes: object.isRequired,
-  actions: object.isRequired,
-}
-
-export default withStyles(styles)(connector(ForgotPasswordScene))
+export default ForgotPasswordScene
