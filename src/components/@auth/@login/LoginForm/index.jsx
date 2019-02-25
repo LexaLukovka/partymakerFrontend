@@ -1,6 +1,6 @@
 import React from 'react'
-import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
+import { number, object } from 'prop-types'
+import { Link, withRouter } from 'react-router-dom'
 import { CardContent, Typography, withStyles } from '@material-ui/core'
 import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
@@ -18,13 +18,15 @@ const styles = {
   },
 }
 
-const LoginForm = ({ classes }) =>
+const LoginForm = ({ classes, auth: { errors }, submitCount }) =>
   <div className={classes.root}>
     <Form>
       <CardContent>
         <Field
           name="email"
           label="Email"
+          error={(submitCount > 0) && !!errors['email']}
+          helperText={(submitCount > 0) && errors['email']}
           placeholder="email@example.com"
           component={FormikText}
         />
@@ -32,6 +34,8 @@ const LoginForm = ({ classes }) =>
           type="password"
           name="password"
           label="Пароль"
+          error={(submitCount > 0) && !!errors['password']}
+          helperText={(submitCount > 0) && errors['password']}
           placeholder="*******"
           component={FormikText}
         />
@@ -49,6 +53,16 @@ const LoginForm = ({ classes }) =>
 
 LoginForm.propTypes = {
   classes: object.isRequired,
+  auth: object.isRequired,
+  submitCount: number.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(LoginForm)))
+export default withStyles(styles)(
+  withRouter(
+    connector(
+      formik(
+        LoginForm
+      )
+    )
+  )
+)

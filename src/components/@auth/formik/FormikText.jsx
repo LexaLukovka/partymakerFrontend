@@ -10,8 +10,6 @@ const FormikText = ({ field, form, ...props }) =>
     fullWidth
     margin="dense"
     style={{ marginBottom: 10 }}
-    error={(form.submitCount > 0) && !!form.errors[field.name]}
-    helperText={(form.submitCount > 0) && form.errors[field.name]}
   />
 
 FormikText.propTypes = {
