@@ -38,7 +38,7 @@ const LoginForm = ({ classes }) =>
       </CardContent>
       <AuthCardActions
         textButton="Войти"
-        linkTo="/auth/forgotPassword"
+        linkTo="/auth/password/forgot"
         textLink="Забыли пароль?"
       />
       <Link to="/auth/register">
