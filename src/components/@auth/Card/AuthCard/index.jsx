@@ -45,12 +45,16 @@ class AuthCard extends React.Component {
 }
 
 AuthCard.propTypes = {
+  children: node,
   title: node.isRequired,
-  children: node.isRequired,
   images: string.isRequired,
   classes: object.isRequired,
   actions: object.isRequired,
   documentTitle: string.isRequired,
+}
+
+AuthCard.defaultProps = {
+  children: null,
 }
 
 export default withStyles(styles)(connector(AuthCard))

@@ -32,7 +32,6 @@ class Auth {
   }
 
   async forgotPassword(credentials) {
-    console.log(credentials)
     const data = await Http.post('/auth/password/forgot', credentials)
 
     return data

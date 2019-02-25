@@ -14,7 +14,7 @@ import {
 import authUser from 'src/redux/selectors/authUser'
 import store from 'src/redux/store'
 
-function* authentication({ authorization, usersAction }, { type, payload }) {
+function* authentication({ authorization, usersAction, message }, { type, payload }) {
   yield call(actions.auth[authorization], payload)
 
   try {
@@ -24,6 +24,10 @@ function* authentication({ authorization, usersAction }, { type, payload }) {
     })
 
     try {
+      if (message) {
+        yield put(actions.ui.alert.show(message))
+      }
+
       if (usersAction) {
         yield put(actions.entities.users[usersAction](usersAction === 'activate' ? authUser(store.getState()).id : data))
       }
@@ -41,7 +45,11 @@ function* authentication({ authorization, usersAction }, { type, payload }) {
 export default function* auth() {
   yield all([
     takeEvery(LOGIN_USER, authentication, ({ authorization: 'login', usersAction: 'add' })),
-    takeEvery(REGISTER_USER, authentication, ({ authorization: 'register', usersAction: 'add' })),
+    takeEvery(REGISTER_USER, authentication, ({
+      authorization: 'register',
+      usersAction: 'add',
+      message: 'Для активации, пройдите на почту'
+    })),
     takeEvery(LOGIN_GOOGLE_USER, authentication, ({ authorization: 'google', usersAction: 'add' })),
     takeEvery(LOGIN_FACEBOOK_USER, authentication, ({ authorization: 'facebook', usersAction: 'add' })),
     takeEvery(ACTIVATE_USER, authentication, ({ authorization: 'activate', usersAction: 'activate' })),
