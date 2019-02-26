@@ -17,6 +17,8 @@ const app = express()
 
 config()
 
+app.set('view engine', 'ejs')
+
 const isProduction = process.argv.includes('--production')
 
 process.env.NODE_ENV = isProduction ? 'production' : 'development'

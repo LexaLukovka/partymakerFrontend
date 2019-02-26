@@ -11,6 +11,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
+    "dev": "webpack-dev-server --config config/webpack/dev/clientDevServer",
     "build:server": "webpack --config config/webpack/prod/server",
     "build:client": "webpack --config config/webpack/prod/client",
     "build": "npm run build:server && npm run build:client",
@@ -29,7 +30,7 @@
     "formik": "^1.5.0",
     "history": "^4.7.2",
     "isomorphic-fetch": "latest",
-    "jss": "latest",
+    "jss": "^9.8.7",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "mdi-react": "^5.2.0",
@@ -109,6 +110,7 @@
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-middleware": "^3.6.0",
+    "webpack-dev-server": "^3.2.1",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-hot-server-middleware": "^0.6.0",
     "webpack-merge": "^4.1.4"

@@ -3,7 +3,7 @@ import { hydrate } from 'react-dom'
 import WithTheme from './components/WithTheme'
 import WithRedux from './components/WithRedux'
 import { BrowserRouter } from 'react-router-dom'
-import App from 'src/index'
+import App from 'src/App'
 
 hydrate(
   <WithTheme>
