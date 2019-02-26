@@ -69,7 +69,8 @@ const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         user_id: payload.id,
         loading: false,
-        error: false,
+        error: false
+        errors: [],
       }
 
     case ACTIVATE_USER_FULFILLED:
