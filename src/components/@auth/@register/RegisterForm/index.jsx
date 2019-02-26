@@ -1,5 +1,6 @@
 import React from 'react'
 import { object } from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { CardContent, withStyles } from '@material-ui/core'
 import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
@@ -49,4 +50,12 @@ RegisterForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(RegisterForm)))
+export default withStyles(styles)(
+  connector(
+    withRouter(
+      formik(
+        RegisterForm
+      )
+    )
+  )
+)

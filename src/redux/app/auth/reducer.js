@@ -22,7 +22,6 @@ import {
   RESTOR_PASSWORD_FULFILLED,
   RESTOR_PASSWORD_REJECTED,
 } from './action'
-import transformValidationApi from 'src/utils/transformValidationApi'
 
 const initialState = {
   errors: [],
@@ -56,7 +55,7 @@ const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         error: true,
-        errors: transformValidationApi(payload),
+        errors: payload,
         loading: false,
       }
 
@@ -69,7 +68,7 @@ const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         user_id: payload.id,
         loading: false,
-        error: false
+        error: false,
         errors: [],
       }
 

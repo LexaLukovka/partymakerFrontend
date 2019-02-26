@@ -1,6 +1,6 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { CardContent, Typography, withStyles } from '@material-ui/core'
 import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
 import FormikText from 'components/@auth/formik/FormikText'
@@ -44,4 +44,12 @@ ForgotForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(ForgotForm)))
+export default withStyles(styles)(
+  connector(
+    withRouter(
+      formik(
+        ForgotForm
+      )
+    )
+  )
+)

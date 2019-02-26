@@ -17,13 +17,13 @@ class ActivateScene extends React.Component {
 
     if (loading) return <Loading />
 
-    if (user.active) history.push('/')
+    if (user && user.active) history.push('/')
 
     return (
       <AuthCard
         documentTitle="Активация - Partymaker"
         images="register.jpg"
-        title={user.active
+        title={user && user.active
           ? <Typography variant="h5" align="center">Активация прошла успешно</Typography>
           : <Typography variant="h5" align="center" color="error">Активация не успешна</Typography>}
       />

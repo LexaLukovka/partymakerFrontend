@@ -22,6 +22,7 @@ const formik = withFormik({
   handleSubmit: async (form, { props: { actions, history }, setErrors, setSubmitting }) => {
     try {
       await actions.register(form)
+      history.push('/')
     } catch (error) {
       console.error(error)
       setSubmitting(false)

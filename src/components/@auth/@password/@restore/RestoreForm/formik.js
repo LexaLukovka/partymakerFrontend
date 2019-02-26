@@ -17,10 +17,11 @@ const formik = withFormik({
     repeatPassword: '',
   }),
 
-  handleSubmit: async (form, { props: { actions, hash }, setErrors, setSubmitting }) => {
+  handleSubmit: async (form, { props: { actions, hash, history }, setErrors, setSubmitting }) => {
     try {
       if (form.newPassword === form.repeatPassword) {
         await actions.restorePassword({ hash, form })
+        history.push('/')
       } else {
         setSubmitting(false)
         setErrors({ repeatPassword: 'Пароли не совпадают' })

@@ -13,9 +13,10 @@ const formik = withFormik({
     email: '',
   }),
 
-  handleSubmit: async (form, { props: { actions }, setErrors, setSubmitting }) => {
+  handleSubmit: async (form, { props: { actions, history }, setErrors, setSubmitting }) => {
     try {
       await actions.forgotPassword(form)
+      history.push('/auth/password/confirm')
     } catch (error) {
       console.error(error)
       setSubmitting(false)
