@@ -6,6 +6,7 @@ import { hot } from 'react-hot-loader/root'
 import Layout from './components/Layout'
 import Loading from 'src/components/Loading'
 import store, { persistor } from './redux/store'
+import 'assets/index.css'
 
 const App = () => (
   <Provider store={store}>
