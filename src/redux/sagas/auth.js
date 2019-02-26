@@ -1,51 +1,31 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects'
-import api from 'engines/api'
-import Auth from 'api/Auth'
 import actions from 'app/actions'
-import {
-  ACTIVATE_USER,
-  FORGOT_PASSWORD,
-  LOGIN_FACEBOOK_USER,
-  LOGIN_GOOGLE_USER,
-  LOGIN_USER,
-  REGISTER_USER,
-  RESTOR_PASSWORD,
-} from 'app/auth/action'
-import authUser from 'src/redux/selectors/authUser'
 import store from 'src/redux/store'
+import authUser from 'src/redux/selectors/authUser'
+import { all, put, takeEvery } from 'redux-saga/effects'
+import {
+  ACTIVATE_USER_FULFILLED,
+  LOGIN_FACEBOOK_USER_FULFILLED,
+  LOGIN_GOOGLE_USER_FULFILLED,
+  LOGIN_USER_FULFILLED,
+  REGISTER_USER_FULFILLED,
+  RESTOR_PASSWORD_FULFILLED,
+} from 'app/auth/action'
 
-function* authentication({ authorization, usersAction }, { type, payload }) {
-  yield call(actions.auth[authorization], payload)
+function* addUser({ payload }) {
+  yield put(actions.entities.users.add(payload))
+}
 
-  try {
-    const data = yield api({
-      type,
-      callable: call(Auth[authorization], payload),
-    })
-
-    try {
-      if (usersAction) {
-        yield put(actions.entities.users[usersAction](usersAction === 'activate' ? authUser(store.getState()).id : data))
-      }
-    } catch (e) {
-      console.log(e) // TODO: исправить console.log на что-то другое
-    }
-  } catch (error) {
-    yield put({
-      type: type + '_REJECTED',
-      payload: error,
-    })
-  }
+function* activateUser() {
+  yield put(actions.entities.users.activate(authUser(store.getState()).id))
 }
 
 export default function* auth() {
   yield all([
-    takeEvery(LOGIN_USER, authentication, ({ authorization: 'login', usersAction: 'add' })),
-    takeEvery(REGISTER_USER, authentication, ({ authorization: 'register', usersAction: 'add' })),
-    takeEvery(LOGIN_GOOGLE_USER, authentication, ({ authorization: 'google', usersAction: 'add' })),
-    takeEvery(LOGIN_FACEBOOK_USER, authentication, ({ authorization: 'facebook', usersAction: 'add' })),
-    takeEvery(ACTIVATE_USER, authentication, ({ authorization: 'activate', usersAction: 'activate' })),
-    takeEvery(RESTOR_PASSWORD, authentication, ({ authorization: 'restorePassword', usersAction: 'add' })),
-    takeEvery(FORGOT_PASSWORD, authentication, ({ authorization: 'forgotPassword' })),
+    takeEvery(LOGIN_USER_FULFILLED, addUser),
+    takeEvery(REGISTER_USER_FULFILLED, addUser),
+    takeEvery(LOGIN_GOOGLE_USER_FULFILLED, addUser),
+    takeEvery(LOGIN_FACEBOOK_USER_FULFILLED, addUser),
+    takeEvery(RESTOR_PASSWORD_FULFILLED, addUser),
+    takeEvery(ACTIVATE_USER_FULFILLED, activateUser,),
   ])
 }

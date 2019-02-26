@@ -1,3 +1,5 @@
+import Auth from 'api/Auth'
+
 export const ACTIVATE_USER = 'ACTIVATE_USER'
 export const ACTIVATE_USER_FULFILLED = 'ACTIVATE_USER_FULFILLED'
 export const ACTIVATE_USER_REJECTED = 'ACTIVATE_USER_REJECTED'
@@ -30,37 +32,37 @@ export const LOGOUT_USER = 'LOGOUT_USER'
 
 const register = form => ({
   type: REGISTER_USER,
-  payload: form,
+  payload: Auth.register(form),
 })
 
 const login = form => ({
   type: LOGIN_USER,
-  payload: form,
+  payload: Auth.login(form),
 })
 
 const activate = hash => ({
   type: ACTIVATE_USER,
-  payload: hash,
+  payload: Auth.activate(hash),
 })
 
 const forgotPassword = form => ({
   type: FORGOT_PASSWORD,
-  payload: form,
+  payload: Auth.forgotPassword(form),
 })
 
 const restorePassword = form => ({
   type: RESTOR_PASSWORD,
-  payload: form,
+  payload: Auth.restorePassword(form),
 })
 
 const google = Guser => ({
   type: LOGIN_GOOGLE_USER,
-  payload: Guser,
+  payload: Auth.google(Guser),
 })
 
 const facebook = FBUser => ({
   type: LOGIN_FACEBOOK_USER,
-  payload: FBUser,
+  payload: Auth.facebook(FBUser),
 })
 
 const logout = () => ({
