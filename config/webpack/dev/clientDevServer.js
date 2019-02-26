@@ -28,7 +28,7 @@ module.exports = merge(config, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Invoice CRM',
+      title: 'Partymaker',
       filename: path.resolve(__dirname, '../../../build/public/index.html'),
       template: path.resolve(__dirname, '../../../setup/index.ejs'),
       inject: false,
