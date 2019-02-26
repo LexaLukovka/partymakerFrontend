@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import HomeScene from 'src/components/@home/HomeScene'
 import IndexScene from './IndexScene'
 import Background from './Background'
+import Alert from 'src/components/Alert'
 
 const AuthLayout = loadable(() => import('./@auth/AuthLayout'))
 
@@ -16,6 +17,8 @@ const Layout = () =>
         <Route path="/auth" component={props => <AuthLayout {...props} />} />
       </Switch>
     </Background>
+
+    <Alert />
   </div>
 
 export default Layout

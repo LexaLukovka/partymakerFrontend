@@ -1,14 +1,14 @@
 import React from 'react'
+import AuthCard from 'src/components/@auth/Card/AuthCard'
 import RegisterForm from './RegisterForm'
-import CardAuth from 'src/components/@auth/CardAuth'
 
 const RegisterScene = () =>
-  <CardAuth
+  <AuthCard
     title="РЕГИСТРАЦИЯ"
     images="register.jpg"
     documentTitle="Регистрация - Partymaker"
   >
     <RegisterForm />
-  </CardAuth>
+  </AuthCard>
 
 export default RegisterScene

@@ -1,9 +1,10 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Button, CardActions, CardContent, Typography, withStyles } from '@material-ui/core'
+import { CardContent, Typography, withStyles } from '@material-ui/core'
+import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
+import FormikText from 'components/@auth/formik/FormikText'
 import { Field, Form } from 'formik'
-import FormikText from '../../formik/FormikText'
 import formik from './formik'
 import connector from './connector'
 
@@ -28,14 +29,11 @@ const ForgotForm = ({ classes }) =>
           component={FormikText}
         />
       </CardContent>
-      <CardActions className="flexAround">
-        <Button variant="contained" type="submit" color="primary">
-          Дальше
-        </Button>
-        <Link to="/auth/login">
-          <Typography color="inherit">Войти</Typography>
-        </Link>
-      </CardActions>
+      <AuthCardActions
+        textButton="Дальше"
+        linkTo="/auth/login"
+        textLink="Войти"
+      />
       <Link to="/auth/register">
         <Typography className={classes.link} color="inherit">Создать аккаунт</Typography>
       </Link>

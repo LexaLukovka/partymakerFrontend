@@ -32,14 +32,13 @@ class Auth {
   }
 
   async forgotPassword(credentials) {
-    console.log(credentials)
-    const data = await Http.post('/auth/forgotPassword', credentials)
+    const data = await Http.post('/auth/password/forgot', credentials)
 
     return data
   }
 
   restorePassword(credentials) {
-    return Auth.authentication(`/auth/restorePassword/${credentials.hash}`, credentials.form)
+    return Auth.authentication(`/auth/password/restore/${credentials.hash}`, credentials.form)
   }
 }
 
