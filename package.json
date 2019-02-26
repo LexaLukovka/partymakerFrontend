@@ -19,23 +19,6 @@
     "serve": "node index.js --production",
     "analyze": "node index.js --analyze"
   },
-  "_moduleAliases": {
-    "src": "./src",
-    "app": "./src/redux/app",
-    "api": "./src/api",
-    "config": "./config",
-    "services": "./src/services",
-    "engines": "./src/redux/engines",
-    "entities": "./src/redux/app/entities",
-    "components": "./src/components",
-    "assets": "./src/assets",
-    "utils": "./src/utils",
-    "selectors": "./src/redux/selectors",
-    "setup": "./setup",
-    "shapes": "./src/shapes",
-    "constants": "./src/constants",
-    "helpers": "./helpers"
-  },
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.2",

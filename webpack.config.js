@@ -1,4 +1,4 @@
-const npmPackage = require('./package.json')
+const path = require('path')
 const Css = require('mini-css-extract-plugin')
 const Env = require('dotenv-webpack')
 const webpack = require('webpack')
@@ -13,8 +13,25 @@ module.exports = {
 
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
-    alias: npmPackage._moduleAliases || {},
     modules: ['node_modules'],
+    alias: {
+      src: path.resolve(__dirname, './src'),
+      api: path.resolve(__dirname, './src/api'),
+      app: path.resolve(__dirname, './src/redux/app'),
+      assets: path.resolve(__dirname, './src/assets'),
+      config: path.resolve(__dirname, './config'),
+      constants: path.resolve(__dirname, './src/constants'),
+      controls: path.resolve(__dirname, './src/components/controls'),
+      components: path.resolve(__dirname, './src/components'),
+      helpers: path.resolve(__dirname, './helpers'),
+      services: path.resolve(__dirname, './src/services'),
+      selectors: path.resolve(__dirname, './src/redux/selectors'),
+      engines: path.resolve(__dirname, './src/redux/engines'),
+      entities: path.resolve(__dirname, './src/redux/app/entities'),
+      setup: path.resolve(__dirname, './setup'),
+      shapes: path.resolve(__dirname, './src/shapes'),
+      utils: path.resolve(__dirname, './src/utils')
+    }
   },
 
   context: __dirname,
