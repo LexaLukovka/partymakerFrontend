@@ -2,9 +2,9 @@ import React from 'react'
 import { bool, object } from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
+import AuthCard from 'src/components/@auth/Card/AuthCard'
 import Loading from 'components/Loading'
 import connector from './connector'
-import CardAuth from 'src/components/@auth/CardAuth'
 
 class ActivateScene extends React.Component {
   componentDidMount() {
@@ -17,13 +17,13 @@ class ActivateScene extends React.Component {
 
     if (loading) return <Loading />
 
-    if (user.active) history.push('/')
+    if (user && user.active) history.push('/')
 
     return (
-      <CardAuth
+      <AuthCard
         documentTitle="Активация - Partymaker"
         images="register.jpg"
-        title={user.active
+        title={user && user.active
           ? <Typography variant="h5" align="center">Активация прошла успешно</Typography>
           : <Typography variant="h5" align="center" color="error">Активация не успешна</Typography>}
       />

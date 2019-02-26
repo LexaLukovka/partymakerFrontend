@@ -12,14 +12,16 @@ const formik = withFormik({
         .min(6, 'Пароль должен быть больше чем 6 символов')
         .required('Это поле является обязательным'),
     }),
+
   mapPropsToValues: () => ({
     email: '',
     password: '',
   }),
 
-  handleSubmit: async (form, { props: { actions }, setErrors, setSubmitting }) => {
+  handleSubmit: async (form, { props: { actions, history }, setErrors, setSubmitting }) => {
     try {
       await actions.login(form)
+      history.push('/')
     } catch (error) {
       console.error(error)
       setSubmitting(false)

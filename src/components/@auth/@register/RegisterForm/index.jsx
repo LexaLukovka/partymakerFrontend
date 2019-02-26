@@ -1,7 +1,8 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { Button, CardActions, CardContent, Typography, withStyles } from '@material-ui/core'
+import { withRouter } from 'react-router-dom'
+import { CardContent, withStyles } from '@material-ui/core'
+import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
 import FormikText from '../../formik/FormikText'
 import connector from './connector'
@@ -37,14 +38,11 @@ const RegisterForm = ({ classes }) =>
           component={FormikText}
         />
       </CardContent>
-      <CardActions className="flexAround">
-        <Button variant="contained" type="submit" color="primary">
-          Дальше
-        </Button>
-        <Link to="/auth/login">
-          <Typography color="inherit">Уже есть аккаунт?</Typography>
-        </Link>
-      </CardActions>
+      <AuthCardActions
+        textButton="Дальше"
+        linkTo="/auth/login"
+        textLink="Уже есть аккаунт?"
+      />
     </Form>
   </div>
 
@@ -52,4 +50,12 @@ RegisterForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(connector(formik(RegisterForm)))
+export default withStyles(styles)(
+  connector(
+    withRouter(
+      formik(
+        RegisterForm
+      )
+    )
+  )
+)

@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore } from 'redux'
+import promise from 'redux-promise-middleware'
 import { persistStore } from 'redux-persist'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware, { END } from 'redux-saga'
@@ -19,6 +20,7 @@ const store = createStore(
   initialState,
   composeWithDevTools(
     applyMiddleware(
+      promise,
       sagaMiddleware,
     ),
   ),

@@ -41,6 +41,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case LOGIN_FACEBOOK_USER:
       return {
         ...state,
+        error: false,
         loading: true,
       }
 
@@ -67,6 +68,8 @@ const authReducer = (state = initialState, { type, payload }) => {
         ...state,
         user_id: payload.id,
         loading: false,
+        error: false,
+        errors: [],
       }
 
     case ACTIVATE_USER_FULFILLED:
@@ -74,6 +77,7 @@ const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
+        error: false,
       }
 
     case LOGOUT_USER:
