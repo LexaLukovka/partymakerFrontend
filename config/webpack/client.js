@@ -13,13 +13,6 @@ const Loadable = require('@loadable/webpack-plugin')
 module.exports = merge(config, {
   name: 'client',
   target: 'web',
-  entry: {
-    client: [
-      '@babel/polyfill',
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      './setup/client.js',
-    ],
-  },
 
   /**
    * Don't know why it's here.
