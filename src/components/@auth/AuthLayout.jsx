@@ -44,7 +44,7 @@ class AuthLayout extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Header />
+        <Header transparent />
 
         <div className={classes.container}>
           <div className={classes.scene}>

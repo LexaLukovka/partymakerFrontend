@@ -7,6 +7,7 @@ import Background from './Background'
 import Alert from 'src/components/Alert'
 
 const AuthLayout = loadable(() => import('./@auth/AuthLayout'))
+const PlacesLayout = loadable(() => import('./@places/PlacesLayout'))
 
 const Layout = () =>
   <div>
@@ -15,6 +16,7 @@ const Layout = () =>
         <Route exact path="/" component={IndexScene} />
         <Route path="/home" component={HomeScene} />
         <Route path="/auth" component={props => <AuthLayout {...props} />} />
+        <Route path="/places" component={props => <PlacesLayout {...props} />} />
       </Switch>
     </Background>
 
