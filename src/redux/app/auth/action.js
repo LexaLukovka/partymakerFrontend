@@ -9,6 +9,7 @@ export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
 export const REGISTER_USER_REJECTED = 'REGISTER_USER_REJECTED'
 
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
+export const FORGOT_PASSWORD_PENDING = 'FORGOT_PASSWORD_PENDING'
 export const FORGOT_PASSWORD_FULFILLED = 'FORGOT_PASSWORD_FULFILLED'
 export const FORGOT_PASSWORD_REJECTED = 'FORGOT_PASSWORD_REJECTED'
 
@@ -48,6 +49,7 @@ const activate = hash => ({
 const forgotPassword = form => ({
   type: FORGOT_PASSWORD,
   payload: Auth.forgotPassword(form),
+  meta: form,
 })
 
 const restorePassword = form => ({
