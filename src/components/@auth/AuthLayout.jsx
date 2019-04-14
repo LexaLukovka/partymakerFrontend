@@ -33,6 +33,9 @@ const styles = () => ({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
+  divider: {
+    color: 'white',
+  }
 })
 
 class AuthLayout extends React.Component {
@@ -57,7 +60,9 @@ class AuthLayout extends React.Component {
               </Switch>
             </div>
 
-            <AuthDevider />
+            <div className={classes.divider}>
+              <AuthDevider />
+            </div>
 
             <SocialLogin />
           </div>

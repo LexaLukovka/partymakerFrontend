@@ -1,6 +1,7 @@
 import React from 'react'
 import { node, object, string } from 'prop-types'
 import { Card, CardHeader, withStyles } from '@material-ui/core'
+import { Helmet } from 'react-helmet'
 import connector from './connector'
 
 const styles = {
@@ -13,6 +14,8 @@ const styles = {
     borderColor: 'black',
   },
   title: {
+    paddingLeft: 0,
+    paddingRight: 0,
     paddingBottom: 10,
     textAlign: 'center',
   },
@@ -20,10 +23,7 @@ const styles = {
 
 class AuthCard extends React.Component {
   componentDidMount() {
-    const { actions, images, documentTitle } = this.props
-
-    document.title = documentTitle
-
+    const { actions, images } = this.props
     actions.layout.background(`/images/${images}`)
   }
 
@@ -33,13 +33,18 @@ class AuthCard extends React.Component {
   }
 
   render() {
-    const { classes, children, title } = this.props
+    const { classes, children, documentTitle, title } = this.props
 
     return (
-      <Card className={classes.root}>
-        <CardHeader className={classes.title} title={title} />
-        {children}
-      </Card>
+      <React.Fragment>
+        {documentTitle && <Helmet>
+          <title>{documentTitle}</title>
+        </Helmet>}
+        <Card className={classes.root}>
+          <CardHeader className={classes.title} title={title} />
+          {children}
+        </Card>
+      </React.Fragment>
     )
   }
 }

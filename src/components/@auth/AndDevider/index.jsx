@@ -6,7 +6,6 @@ const styles = {
   root: {
     padding: '10px 0',
     display: 'flex',
-    color: 'white',
   },
 
   takeAllSpace: {

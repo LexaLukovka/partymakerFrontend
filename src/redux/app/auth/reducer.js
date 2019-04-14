@@ -1,25 +1,25 @@
 import {
-  ACTIVATE_USER,
   ACTIVATE_USER_FULFILLED,
+  ACTIVATE_USER_PENDING,
   ACTIVATE_USER_REJECTED,
-  FORGOT_PASSWORD,
   FORGOT_PASSWORD_FULFILLED,
+  FORGOT_PASSWORD_PENDING,
   FORGOT_PASSWORD_REJECTED,
-  LOGIN_FACEBOOK_USER,
   LOGIN_FACEBOOK_USER_FULFILLED,
+  LOGIN_FACEBOOK_USER_PENDING,
   LOGIN_FACEBOOK_USER_REJECTED,
-  LOGIN_GOOGLE_USER,
   LOGIN_GOOGLE_USER_FULFILLED,
+  LOGIN_GOOGLE_USER_PENDING,
   LOGIN_GOOGLE_USER_REJECTED,
-  LOGIN_USER,
   LOGIN_USER_FULFILLED,
+  LOGIN_USER_PENDING,
   LOGIN_USER_REJECTED,
   LOGOUT_USER,
-  REGISTER_USER,
   REGISTER_USER_FULFILLED,
+  REGISTER_USER_PENDING,
   REGISTER_USER_REJECTED,
-  RESTOR_PASSWORD,
   RESTOR_PASSWORD_FULFILLED,
+  RESTOR_PASSWORD_PENDING,
   RESTOR_PASSWORD_REJECTED,
 } from './action'
 
@@ -28,17 +28,18 @@ const initialState = {
   error: false,
   loading: false,
   user_id: null,
+  email: null,
 }
 
-const authReducer = (state = initialState, { type, payload }) => {
+const authReducer = (state = initialState, { type, payload, meta }) => {
   switch (type) {
-    case LOGIN_USER:
-    case REGISTER_USER:
-    case ACTIVATE_USER:
-    case RESTOR_PASSWORD:
-    case FORGOT_PASSWORD:
-    case LOGIN_GOOGLE_USER:
-    case LOGIN_FACEBOOK_USER:
+    case LOGIN_USER_PENDING:
+    case REGISTER_USER_PENDING:
+    case ACTIVATE_USER_PENDING:
+    case FORGOT_PASSWORD_PENDING:
+    case RESTOR_PASSWORD_PENDING:
+    case LOGIN_GOOGLE_USER_PENDING:
+    case LOGIN_FACEBOOK_USER_PENDING:
       return {
         ...state,
         error: false,
@@ -76,6 +77,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case FORGOT_PASSWORD_FULFILLED:
       return {
         ...state,
+        email: meta?.email,
         loading: false,
         error: false,
       }
