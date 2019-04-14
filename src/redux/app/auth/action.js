@@ -12,9 +12,9 @@ export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
 export const FORGOT_PASSWORD_FULFILLED = 'FORGOT_PASSWORD_FULFILLED'
 export const FORGOT_PASSWORD_REJECTED = 'FORGOT_PASSWORD_REJECTED'
 
-export const RESTOR_PASSWORD = 'RESTOR_PASSWORD'
-export const RESTOR_PASSWORD_FULFILLED = 'RESTOR_PASSWORD_FULFILLED'
-export const RESTOR_PASSWORD_REJECTED = 'RESTOR_PASSWORD_REJECTED'
+export const RESET_PASSWORD = 'RESET_PASSWORD'
+export const RESET_PASSWORD_FULFILLED = 'RESET_PASSWORD_FULFILLED'
+export const RESET_PASSWORD_REJECTED = 'RESET_PASSWORD_REJECTED'
 
 export const LOGIN_GOOGLE_USER = 'LOGIN_GOOGLE_USER'
 export const LOGIN_GOOGLE_USER_FULFILLED = 'LOGIN_GOOGLE_USER_FULFILLED'
@@ -50,9 +50,9 @@ const forgotPassword = form => ({
   payload: Auth.forgotPassword(form),
 })
 
-const restorePassword = form => ({
-  type: RESTOR_PASSWORD,
-  payload: Auth.restorePassword(form),
+const setPassword = form => ({
+  type: RESET_PASSWORD,
+  payload: Auth.setPassword(form),
 })
 
 const google = Guser => ({
@@ -76,6 +76,6 @@ export default {
   google,
   facebook,
   forgotPassword,
-  restorePassword,
+  setPassword,
   logout,
 }

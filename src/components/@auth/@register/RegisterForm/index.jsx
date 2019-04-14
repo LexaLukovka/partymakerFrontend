@@ -1,11 +1,9 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { withRouter } from 'react-router-dom'
 import { CardContent, withStyles } from '@material-ui/core'
-import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
+import AuthCardActions from 'components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
-import FormikText from '../../formik/FormikText'
-import connector from './connector'
+import FormikTextField from 'components/formik/FormikTextField'
 import formik from './formik'
 
 const styles = {
@@ -22,20 +20,20 @@ const RegisterForm = ({ classes }) =>
           name="name"
           label="Имя и фамилия"
           placeholder="Вася Пупкин"
-          component={FormikText}
+          component={FormikTextField}
         />
         <Field
           name="email"
           label="Email"
           placeholder="email@example.com"
-          component={FormikText}
+          component={FormikTextField}
         />
         <Field
           type="password"
           name="password"
           label="Пароль"
           placeholder="*******"
-          component={FormikText}
+          component={FormikTextField}
         />
       </CardContent>
       <AuthCardActions
@@ -50,12 +48,4 @@ RegisterForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(
-  connector(
-    withRouter(
-      formik(
-        RegisterForm
-      )
-    )
-  )
-)
+export default withStyles(styles)(formik(RegisterForm))

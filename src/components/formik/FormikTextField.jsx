@@ -2,7 +2,7 @@ import React from 'react'
 import { func, number, object, shape, string } from 'prop-types'
 import { TextField } from '@material-ui/core'
 
-const FormikText = ({ field, form, ...props }) =>
+const FormikTextField = ({ field, form, ...props }) =>
   <TextField
     {...props}
     {...field}
@@ -14,7 +14,7 @@ const FormikText = ({ field, form, ...props }) =>
     helperText={(form.submitCount > 0) && form.errors[field.name]}
   />
 
-FormikText.propTypes = {
+FormikTextField.propTypes = {
   field: shape({
     name: string,
     value: string,
@@ -27,4 +27,4 @@ FormikText.propTypes = {
   }).isRequired,
 }
 
-export default FormikText
+export default FormikTextField

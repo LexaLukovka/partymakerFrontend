@@ -6,9 +6,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import LoginScene from './@login/LoginScene'
 import RegisterScene from './@register/RegisterScene'
 import ActivateScene from './@activate/ActivateScene'
-import ForgotScene from './@password/@forgot/ForgotScene'
-import ConfirmScene from './@password/@confirm/ConfirmScene'
-import RestoreScene from './@password/@restore/RestoreScene'
+import PasswordLayout from './@password/PasswordLayout'
 
 import Header from '../Header'
 import AuthDevider from './AndDevider'
@@ -35,37 +33,25 @@ const styles = () => ({
   },
 })
 
-class AuthLayout extends React.Component {
-  render() {
-    const { classes } = this.props
-
-    return (
-      <div className={classes.root}>
-        <Header />
-
-        <div className={classes.container}>
-          <div className={classes.scene}>
-            <div>
-              <Switch>
-                <Route exact path="/auth/register" component={RegisterScene} />
-                <Route exact path="/auth/login" component={LoginScene} />
-                <Route path="/auth/activate/:hash" component={ActivateScene} />
-                <Route path="/auth/password/forgot" component={ForgotScene} />
-                <Route path="/auth/password/confirm" component={ConfirmScene} />
-                <Route path="/auth/password/restore/:hash" component={RestoreScene} />
-                <Redirect to="/auth/login" />
-              </Switch>
-            </div>
-
-            <AuthDevider />
-
-            <SocialLogin />
-          </div>
+const AuthLayout = ({ classes }) =>
+  <div className={classes.root}>
+    <Header />
+    <div className={classes.container}>
+      <div className={classes.scene}>
+        <div>
+          <Switch>
+            <Route exact path="/auth/register" component={RegisterScene} />
+            <Route exact path="/auth/login" component={LoginScene} />
+            <Route exact path="/auth/activate/:hash" component={ActivateScene} />
+            <Route path="/auth/password" component={PasswordLayout} />
+            <Redirect to="/auth/login" />
+          </Switch>
         </div>
+        <AuthDevider />
+        <SocialLogin />
       </div>
-    )
-  }
-}
+    </div>
+  </div>
 
 AuthLayout.propTypes = {
   classes: object.isRequired,

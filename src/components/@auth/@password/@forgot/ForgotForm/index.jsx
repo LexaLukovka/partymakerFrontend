@@ -1,12 +1,11 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CardContent, Typography, withStyles } from '@material-ui/core'
-import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
-import FormikText from 'components/@auth/formik/FormikText'
+import AuthCardActions from 'components/@auth/Card/AuthCardActions'
+import FormikTextField from 'components/formik/FormikTextField'
 import { Field, Form } from 'formik'
 import formik from './formik'
-import connector from './connector'
 
 const styles = {
   root: {
@@ -26,7 +25,7 @@ const ForgotForm = ({ classes }) =>
           name="email"
           label="Email"
           placeholder="email@example.com"
-          component={FormikText}
+          component={FormikTextField}
         />
       </CardContent>
       <AuthCardActions
@@ -44,12 +43,4 @@ ForgotForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(
-  connector(
-    withRouter(
-      formik(
-        ForgotForm
-      )
-    )
-  )
-)
+export default withStyles(styles)(formik(ForgotForm))

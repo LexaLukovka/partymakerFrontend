@@ -1,6 +1,5 @@
 import React from 'react'
-import { bool, object } from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { bool, string, func, shape } from 'prop-types'
 import { Typography } from '@material-ui/core'
 import AuthCard from 'src/components/@auth/Card/AuthCard'
 import Loading from 'components/Loading'
@@ -8,22 +7,21 @@ import connector from './connector'
 
 class ActivateScene extends React.Component {
   componentDidMount() {
-    const { actions, match } = this.props
+    const { actions, isActive, match, history } = this.props
+    if (isActive) history.push('/home')
     actions.activate(match.params.hash)
   }
 
   render() {
-    const { loading, user, history } = this.props
+    const { isLoading, isActive } = this.props
 
-    if (loading) return <Loading />
-
-    if (user && user.active) history.push('/')
+    if (isLoading) return <Loading />
 
     return (
       <AuthCard
         documentTitle="Активация - Partymaker"
         images="register.jpg"
-        title={user && user.active
+        title={isActive
           ? <Typography variant="h5" align="center">Активация прошла успешно</Typography>
           : <Typography variant="h5" align="center" color="error">Активация не успешна</Typography>}
       />
@@ -32,11 +30,19 @@ class ActivateScene extends React.Component {
 }
 
 ActivateScene.propTypes = {
-  actions: object.isRequired,
-  history: object.isRequired,
-  match: object.isRequired,
-  loading: bool.isRequired,
-  user: object.isRequired,
+  isActive: bool.isRequired,
+  isLoading: bool.isRequired,
+  actions: shape({
+    activate: func.isRequired,
+  }).isRequired,
+  history: shape({
+    push: func.isRequired
+  }).isRequired,
+  match: shape({
+    params: shape({
+      hash: string,
+    })
+  }).isRequired,
 }
 
-export default connector(withRouter(ActivateScene))
+export default connector(ActivateScene)

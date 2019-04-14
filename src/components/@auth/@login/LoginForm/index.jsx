@@ -1,12 +1,11 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CardContent, Typography, withStyles } from '@material-ui/core'
-import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
+import AuthCardActions from 'components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
-import FormikText from '../../formik/FormikText'
+import FormikTextField from 'components/formik/FormikTextField'
 import formik from './formik'
-import connector from './connector'
 
 const styles = {
   root: {
@@ -26,14 +25,14 @@ const LoginForm = ({ classes }) =>
           name="email"
           label="Email"
           placeholder="email@example.com"
-          component={FormikText}
+          component={FormikTextField}
         />
         <Field
           type="password"
           name="password"
           label="Пароль"
           placeholder="*******"
-          component={FormikText}
+          component={FormikTextField}
         />
       </CardContent>
       <AuthCardActions
@@ -42,7 +41,9 @@ const LoginForm = ({ classes }) =>
         textLink="Забыли пароль?"
       />
       <Link to="/auth/register">
-        <Typography className={classes.link} color="inherit">Создать аккаунт</Typography>
+        <Typography className={classes.link} color="inherit">
+          Создать аккаунт
+        </Typography>
       </Link>
     </Form>
   </div>
@@ -51,12 +52,4 @@ LoginForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(
-  withRouter(
-    connector(
-      formik(
-        LoginForm
-      )
-    )
-  )
-)
+export default withStyles(styles)(formik(LoginForm))

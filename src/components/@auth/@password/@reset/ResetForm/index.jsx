@@ -1,11 +1,10 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CardContent, Typography, withStyles } from '@material-ui/core'
-import AuthCardActions from 'src/components/@auth/Card/AuthCardActions'
-import FormikText from 'components/@auth/formik/FormikText'
+import AuthCardActions from 'components/@auth/Card/AuthCardActions'
+import FormikTextField from 'components/formik/FormikTextField'
 import { Field, Form } from 'formik'
-import connector from './connector'
 import formik from './formik'
 
 const styles = {
@@ -18,23 +17,23 @@ const styles = {
   },
 }
 
-const RestoreForm = ({ classes }) =>
+const ResetForm = ({ classes }) =>
   <div className={classes.root}>
     <Form>
       <CardContent>
         <Field
           type="password"
-          name="newPassword"
+          name="passsword"
           placeholder="*******"
           label="Введите новый пароль"
-          component={FormikText}
+          component={FormikTextField}
         />
         <Field
           type="password"
-          name="repeatPassword"
+          name="password_repeat"
           placeholder="*******"
           label="Повторите новый пароль"
-          component={FormikText}
+          component={FormikTextField}
         />
       </CardContent>
       <AuthCardActions
@@ -43,21 +42,15 @@ const RestoreForm = ({ classes }) =>
         textLink="Войти"
       />
       <Link to="/auth/register">
-        <Typography className={classes.link} color="inherit">Создать аккаунт</Typography>
+        <Typography className={classes.link} color="inherit">
+          Создать аккаунт
+        </Typography>
       </Link>
     </Form>
   </div>
 
-RestoreForm.propTypes = {
+ResetForm.propTypes = {
   classes: object.isRequired,
 }
 
-export default withStyles(styles)(
-  connector(
-    withRouter(
-      formik(
-        RestoreForm
-      )
-    )
-  )
-)
+export default withStyles(styles)(formik(ResetForm))
