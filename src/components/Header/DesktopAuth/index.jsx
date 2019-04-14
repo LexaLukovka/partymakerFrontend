@@ -16,12 +16,15 @@ const styles = {
 
 const DesktopAuth = ({ classes, user, onOpenMeu }) =>
   user
-    ? <div className={classes.flex} onClick={onOpenMeu}>
-      <UserAvatar small user={user} />
-      <Typography className={classes.userName} variant="subtitle1" color="inherit">
-        {user.name}
-      </Typography>
-    </div>
+    ? <React.Fragment>
+      <div className={classes.flex} onClick={onOpenMeu}>
+        <UserAvatar small user={user} />
+        <Typography className={classes.userName} variant="subtitle1" color="inherit">
+          {user.name}
+        </Typography>
+      </div>
+      {!user.active && <Typography color="inherit">Вам необходимо подтвердить регистрацию</Typography>}
+    </React.Fragment>
     : <React.Fragment>
       <Link to="/auth/login"><Button color="inherit">Войти</Button></Link>
       <Link to="/auth/register"><Button color="inherit">Зарегистрироваться</Button></Link>

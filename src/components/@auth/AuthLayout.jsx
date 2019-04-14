@@ -31,6 +31,9 @@ const styles = () => ({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
   },
+  divider: {
+    color: 'white',
+  }
 })
 
 const AuthLayout = ({ classes }) =>
@@ -47,7 +50,9 @@ const AuthLayout = ({ classes }) =>
             <Redirect to="/auth/login" />
           </Switch>
         </div>
-        <AuthDevider />
+        <div className={classes.divider}>
+          <AuthDevider />
+        </div>
         <SocialLogin />
       </div>
     </div>
