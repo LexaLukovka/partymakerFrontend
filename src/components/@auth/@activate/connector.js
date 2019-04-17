@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import auth from 'src/redux/app/auth/action'
-import authUser from 'src/redux/selectors/authUser'
+import auth from 'src/redux/auth/action'
+import authUser from 'src/redux/selectors/currentUser'
 
 const mapStateToProps = store => ({
   loading: store.auth.loading,

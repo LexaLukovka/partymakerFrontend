@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import authUser from 'selectors/authUser'
-import auth from 'src/redux/app/auth/action'
+import currentUser from 'src/redux/selectors/currentUser'
+import auth from 'src/redux/auth/action'
 
 const mapStateToProps = state => ({
-  user: authUser(state),
+  user: currentUser(state),
 })
 
 const mapDispatchToProps = dispatch => ({

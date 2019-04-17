@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from 'src/components/Header'
 import { withStyles, Typography } from '@material-ui/core'
 import { object } from 'prop-types'
 
@@ -29,10 +28,9 @@ const styles = {
     color: 'white',
   }
 }
-const Index = ({ classes }) =>
+const LandingScene = ({ classes }) =>
   <div className={classes.root}>
     <div className={classes.background}>
-      <Header />
       <div className={classes.center}>
         <div className={classes.headline}>
           <Typography color="inherit" variant="h4">Соберем вечерику</Typography>
@@ -42,7 +40,7 @@ const Index = ({ classes }) =>
     </div>
   </div>
 
-Index.propTypes = {
+LandingScene.propTypes = {
   classes: object.isRequired
 }
-export default withStyles(styles)(Index)
+export default withStyles(styles)(LandingScene)

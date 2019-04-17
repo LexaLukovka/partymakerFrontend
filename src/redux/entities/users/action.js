@@ -1,14 +1,14 @@
 export const ADD_USER = 'ADD_USER'
-export const ACTIVATE_USERS = 'ACTIVATE_USERS'
+export const ACTIVATE_USER = 'ACTIVATE_USER'
 
 const add = user => ({
   type: ADD_USER,
   payload: user,
 })
 
-const activate = userId => ({
-  type: ACTIVATE_USERS,
-  payload: userId,
+const activate = user_id => ({
+  type: ACTIVATE_USER,
+  payload: user_id,
 })
 
 export default {

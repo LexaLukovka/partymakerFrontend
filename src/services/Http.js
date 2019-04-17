@@ -3,7 +3,7 @@ import axios from 'axios'
 import to from 'util-to'
 import store from '../redux/store'
 import { BACKEND_URL } from 'src/constants'
-import auth from 'src/redux/app/auth/action'
+import auth from 'src/redux/auth/action'
 
 class Http {
   constructor() {

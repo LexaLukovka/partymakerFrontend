@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect/lib/index'
 
 const authUser = (users, auth) => users[auth.user_id]
 

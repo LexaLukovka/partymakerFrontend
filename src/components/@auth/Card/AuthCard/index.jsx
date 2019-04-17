@@ -2,7 +2,6 @@ import React from 'react'
 import { node, object, string } from 'prop-types'
 import { Card, CardHeader, withStyles } from '@material-ui/core'
 import { Helmet } from 'react-helmet'
-import connector from './connector'
 
 const styles = {
   root: {
@@ -21,40 +20,21 @@ const styles = {
   },
 }
 
-class AuthCard extends React.Component {
-  componentDidMount() {
-    const { actions, images } = this.props
-    actions.layout.background(`/images/${images}`)
-  }
-
-  componentWillUnmount() {
-    const { actions } = this.props
-    actions.layout.removeBackground()
-  }
-
-  render() {
-    const { classes, children, documentTitle, title } = this.props
-
-    return (
-      <React.Fragment>
-        {documentTitle && <Helmet>
-          <title>{documentTitle}</title>
-        </Helmet>}
-        <Card className={classes.root}>
-          <CardHeader className={classes.title} title={title} />
-          {children}
-        </Card>
-      </React.Fragment>
-    )
-  }
-}
+const AuthCard = ({ classes, children, documentTitle, title }) =>
+  <React.Fragment>
+    {documentTitle && <Helmet>
+      <title>{documentTitle}</title>
+    </Helmet>}
+    <Card className={classes.root}>
+      <CardHeader className={classes.title} title={title} />
+      {children}
+    </Card>
+  </React.Fragment>
 
 AuthCard.propTypes = {
   children: node,
   title: node.isRequired,
-  images: string.isRequired,
   classes: object.isRequired,
-  actions: object.isRequired,
   documentTitle: string.isRequired,
 }
 
@@ -62,4 +42,4 @@ AuthCard.defaultProps = {
   children: null,
 }
 
-export default withStyles(styles)(connector(AuthCard))
+export default withStyles(styles)(AuthCard)

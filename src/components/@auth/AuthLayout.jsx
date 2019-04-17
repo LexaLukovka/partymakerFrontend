@@ -10,7 +10,7 @@ import ForgotScene from './@password/@forgot/ForgotScene'
 import ConfirmScene from './@password/@confirm/ConfirmScene'
 import RestoreScene from './@password/@restore/RestoreScene'
 
-import Header from '../Header'
+import Header from '../IndexScene/LandingHeader'
 import AuthDevider from './AndDevider'
 import SocialLogin from './SocialLogin'
 

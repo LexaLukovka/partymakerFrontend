@@ -12,6 +12,9 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-double'],
     'comma-dangle': 0,
     'newline-before-return': ['error'],
+    'padded-blocks': 0,
+    'no-trailing-spaces': 0,
+    'camelcase': 0,
   },
   'settings': {},
   'env': {

@@ -1,21 +1,19 @@
-import { ACTIVATE_USERS, ADD_USER } from './action'
-import { LOGIN_USER_FULFILLED } from 'app/auth/action'
+import { ACTIVATE_USER, ADD_USER } from './action'
 
 const usersReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case ADD_USER:
-    case LOGIN_USER_FULFILLED:
       return {
         ...state,
         [payload.id]: payload,
       }
 
-    case ACTIVATE_USERS:
+    case ACTIVATE_USER:
       return {
         ...state,
         [payload]: {
           ...state[payload],
-          active: true,
+          is_active: true,
         },
       }
 

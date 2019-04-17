@@ -1,12 +1,16 @@
 import { connect } from 'react-redux'
-import authUser from 'selectors/authUser'
+import { bindActionCreators } from 'redux'
+import currentUser from 'src/redux/selectors/currentUser'
+import action from 'src/redux/action'
 
 const mapStateToProps = state => ({
-  user: authUser(state),
+  user: currentUser(state),
 })
 
-const mapDispatchToProps = () => ({
-  actions: {},
+const mapDispatchToProps = (dispatch) => ({
+  actions: {
+    logout: bindActionCreators(action.auth.logout, dispatch)
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)

@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import actions from 'src/redux/app/ui/alert/action'
+import actions from 'src/redux/ui/alert/action'
 
 const mapStateToProps = store => store.ui.alert
 
