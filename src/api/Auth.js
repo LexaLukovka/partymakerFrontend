@@ -2,7 +2,7 @@ import JWT from 'jwt-decode'
 import Http from 'src/services/Http'
 
 class Auth {
-  static async authentication(path, credentials) {
+  async authenticate(path, credentials) {
     const { token, refreshToken } = await Http.post(path, credentials)
     const user = JWT(token).data
 
@@ -10,35 +10,31 @@ class Auth {
   }
 
   register(credentials) {
-    return Auth.authentication('/auth/register', credentials)
+    return this.authenticate('/auth/register', credentials)
   }
 
   login(credentials) {
-    return Auth.authentication('/auth/login', credentials)
+    return this.authenticate('/auth/login', credentials)
   }
 
   google(Guser) {
-    return Auth.authentication('/auth/social', Guser)
+    return this.authenticate('/auth/social', Guser)
   }
 
   facebook(FBuser) {
-    return Auth.authentication('/auth/social', FBuser)
+    return this.authenticate('/auth/social', FBuser)
   }
 
-  async activate(hash) {
-    const data = await Http.get(`/auth/activate/${hash}`)
-
-    return data
+  activate(hash) {
+    return Http.get(`/auth/activate/${hash}`)
   }
 
-  async forgotPassword(credentials) {
-    const data = await Http.post('/auth/password/forgot', credentials)
-
-    return data
+  forgotPassword(credentials) {
+    return Http.post('/auth/password/forgot', credentials)
   }
 
-  restorePassword(credentials) {
-    return Auth.authentication(`/auth/password/restore/${credentials.hash}`, credentials.form)
+  setPassword(credentials) {
+    return this.authenticate(`/auth/password/reset/${credentials.hash}`, credentials.form)
   }
 }
 

@@ -1,14 +1,14 @@
 import actions from 'src/redux/action'
 import store from 'src/redux/store'
-import authUser from 'src/redux/selectors/currentUser'
-import { all, put, takeEvery } from 'redux-saga/dist/redux-saga-effects-npm-proxy.esm'
+import authUser from 'selectors/currentUser'
+import { all, put, takeEvery } from 'redux-saga/effects'
 import {
   ACTIVATE_USER_FULFILLED,
   LOGIN_FACEBOOK_USER_FULFILLED,
   LOGIN_GOOGLE_USER_FULFILLED,
   LOGIN_USER_FULFILLED,
   REGISTER_USER_FULFILLED,
-  RESTOR_PASSWORD_FULFILLED,
+  RESET_PASSWORD_FULFILLED,
 } from 'src/redux/auth/action'
 
 function* addUser({ payload }) {
@@ -25,7 +25,7 @@ export default function* saga() {
     takeEvery(REGISTER_USER_FULFILLED, addUser),
     takeEvery(LOGIN_GOOGLE_USER_FULFILLED, addUser),
     takeEvery(LOGIN_FACEBOOK_USER_FULFILLED, addUser),
-    takeEvery(RESTOR_PASSWORD_FULFILLED, addUser),
+    takeEvery(RESET_PASSWORD_FULFILLED, addUser),
     takeEvery(ACTIVATE_USER_FULFILLED, activateUser,),
   ])
 }

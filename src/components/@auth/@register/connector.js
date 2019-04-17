@@ -1,4 +1,4 @@
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux/index'
 import { connect } from 'react-redux'
 import auth from 'src/redux/auth/action'
 

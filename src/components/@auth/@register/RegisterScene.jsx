@@ -1,14 +1,38 @@
-import React from 'react'
-import AuthCard from 'src/components/@auth/Card/AuthCard'
+import React, { Component } from 'react'
+import { shape, func } from 'prop-types'
+import AuthCard from 'components/@auth/Card/AuthCard'
 import RegisterForm from './RegisterForm'
+import connector from './connector'
 
-const RegisterScene = () =>
-  <AuthCard
-    title="РЕГИСТРАЦИЯ"
-    images="register.jpg"
-    documentTitle="Регистрация - Partymaker"
-  >
-    <RegisterForm />
-  </AuthCard>
+class RegisterScene extends Component {
 
-export default RegisterScene
+  register = async credentials => {
+    const { history, actions } = this.props
+
+    await actions.register(credentials)
+    history.push('/home')
+  }
+
+  render() {
+    return (
+      <AuthCard
+        title="РЕГИСТРАЦИЯ"
+        images="register.jpg"
+        documentTitle="Регистрация - Partymaker"
+      >
+        <RegisterForm onSubmit={this.register} />
+      </AuthCard>
+    )
+  }
+}
+
+RegisterScene.propTypes = {
+  actions: shape({
+    register: func.isRequired,
+  }),
+  history: shape({
+    push: func.isRequired
+  })
+}
+
+export default connector(RegisterScene)

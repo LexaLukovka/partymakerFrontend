@@ -4,8 +4,8 @@ import auth from 'src/redux/auth/action'
 import authUser from 'src/redux/selectors/currentUser'
 
 const mapStateToProps = store => ({
-  loading: store.auth.loading,
-  user: authUser(store),
+  loading: store.auth.isLoading,
+  isActive: authUser(store)?.isActive,
 })
 
 const mapDispatchToProps = dispatch => ({

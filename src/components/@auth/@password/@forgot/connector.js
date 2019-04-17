@@ -1,4 +1,4 @@
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux/index'
 import { connect } from 'react-redux'
 import auth from 'src/redux/auth/action'
 
@@ -6,7 +6,7 @@ const mapStateToProps = () => ({})
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    restorePassword: bindActionCreators(auth.restorePassword, dispatch),
+    forgotPassword: bindActionCreators(auth.forgotPassword, dispatch),
   },
 })
 

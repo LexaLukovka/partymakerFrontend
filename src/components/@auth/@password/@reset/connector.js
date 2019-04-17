@@ -6,7 +6,7 @@ const mapStateToProps = () => ({})
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    forgotPassword: bindActionCreators(auth.forgotPassword, dispatch),
+    setPassword: bindActionCreators(auth.setPassword, dispatch),
   },
 })
 
