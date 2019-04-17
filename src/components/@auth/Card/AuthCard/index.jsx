@@ -1,7 +1,6 @@
 import React from 'react'
-import { node, object, string } from 'prop-types'
+import { node, object } from 'prop-types'
 import { Card, CardHeader, withStyles } from '@material-ui/core'
-import { Helmet } from 'react-helmet'
 
 const styles = {
   root: {
@@ -20,22 +19,16 @@ const styles = {
   },
 }
 
-const AuthCard = ({ classes, children, documentTitle, title }) =>
-  <React.Fragment>
-    {documentTitle && <Helmet>
-      <title>{documentTitle}</title>
-    </Helmet>}
-    <Card className={classes.root}>
-      <CardHeader className={classes.title} title={title} />
-      {children}
-    </Card>
-  </React.Fragment>
+const AuthCard = ({ classes, children, title }) =>
+  <Card className={classes.root}>
+    <CardHeader className={classes.title} title={title} />
+    {children}
+  </Card>
 
 AuthCard.propTypes = {
   children: node,
   title: node.isRequired,
   classes: object.isRequired,
-  documentTitle: string.isRequired,
 }
 
 AuthCard.defaultProps = {

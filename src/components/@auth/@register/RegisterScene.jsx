@@ -3,6 +3,7 @@ import { shape, func } from 'prop-types'
 import AuthCard from 'components/@auth/Card/AuthCard'
 import RegisterForm from './RegisterForm'
 import connector from './connector'
+import { Helmet } from 'react-helmet'
 
 class RegisterScene extends Component {
 
@@ -15,11 +16,10 @@ class RegisterScene extends Component {
 
   render() {
     return (
-      <AuthCard
-        title="РЕГИСТРАЦИЯ"
-        images="register.jpg"
-        documentTitle="Регистрация - Partymaker"
-      >
+      <AuthCard title="РЕГИСТРАЦИЯ">
+        <Helmet>
+          <title>Регистрация - Partymaker</title>
+        </Helmet>
         <RegisterForm onSubmit={this.register} />
       </AuthCard>
     )
