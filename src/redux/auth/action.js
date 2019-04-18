@@ -1,41 +1,34 @@
 import Auth from 'api/Auth'
 
 export const ACTIVATE_USER = 'ACTIVATE_USER'
-export const ACTIVATE_USER_PENDING = 'ACTIVATE_USER_PENDING'
 export const ACTIVATE_USER_FULFILLED = 'ACTIVATE_USER_FULFILLED'
-export const ACTIVATE_USER_REJECTED = 'ACTIVATE_USER_REJECTED'
 
 export const REGISTER_USER = 'REGISTER_USER'
-export const REGISTER_USER_PENDING = 'REGISTER_USER_PENDING'
 export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
-export const REGISTER_USER_REJECTED = 'REGISTER_USER_REJECTED'
 
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
-export const FORGOT_PASSWORD_PENDING = 'FORGOT_PASSWORD_PENDING'
 export const FORGOT_PASSWORD_FULFILLED = 'FORGOT_PASSWORD_FULFILLED'
-export const FORGOT_PASSWORD_REJECTED = 'FORGOT_PASSWORD_REJECTED'
 
 export const RESET_PASSWORD = 'RESET_PASSWORD'
-export const RESET_PASSWORD_PENDING = 'RESET_PASSWORD_FULFILLED'
 export const RESET_PASSWORD_FULFILLED = 'RESET_PASSWORD_FULFILLED'
-export const RESET_PASSWORD_REJECTED = 'RESET_PASSWORD_REJECTED'
 
 export const LOGIN_GOOGLE_USER = 'LOGIN_GOOGLE_USER'
-export const LOGIN_GOOGLE_USER_PENDING = 'LOGIN_GOOGLE_USER_PENDING'
 export const LOGIN_GOOGLE_USER_FULFILLED = 'LOGIN_GOOGLE_USER_FULFILLED'
-export const LOGIN_GOOGLE_USER_REJECTED = 'LOGIN_GOOGLE_USER_REJECTED'
 
 export const LOGIN_FACEBOOK_USER = 'LOGIN_FACEBOOK_USER'
-export const LOGIN_FACEBOOK_USER_PENDING = 'LOGIN_FACEBOOK_USER_PENDING'
 export const LOGIN_FACEBOOK_USER_FULFILLED = 'LOGIN_FACEBOOK_USER_FULFILLED'
-export const LOGIN_FACEBOOK_USER_REJECTED = 'LOGIN_FACEBOOK_USER_REJECTED'
 
 export const LOGIN_USER = 'LOGIN_USER'
-export const LOGIN_USER_PENDING = 'LOGIN_USER_PENDING'
 export const LOGIN_USER_FULFILLED = 'LOGIN_USER_FULFILLED'
-export const LOGIN_USER_REJECTED = 'LOGIN_USER_REJECTED'
 
 export const LOGOUT_USER = 'LOGOUT_USER'
+
+export const SET_AUTH_USER = 'SET_AUTH_USER'
+export const SET_AUTH_EMAIL = 'SET_AUTH_EMAIL'
+
+/**
+ * Async actions. Making API requests
+ */
 
 const register = form => ({
   type: REGISTER_USER,
@@ -58,9 +51,9 @@ const forgotPassword = form => ({
   meta: form,
 })
 
-const setPassword = form => ({
+const resetPassword = form => ({
   type: RESET_PASSWORD,
-  payload: Auth.setPassword(form),
+  payload: Auth.resetPassword(form),
 })
 
 const google = Guser => ({
@@ -75,6 +68,21 @@ const facebook = FBUser => ({
 
 const logout = () => ({
   type: LOGOUT_USER,
+  payload: Auth.logout()
+})
+
+/**
+ * Sync actions. Updating store
+ */
+
+const setUser = (user) => ({
+  type: SET_AUTH_USER,
+  payload: user,
+})
+
+const setEmail = (email) => ({
+  type: SET_AUTH_EMAIL,
+  payload: email,
 })
 
 export default {
@@ -84,6 +92,8 @@ export default {
   google,
   facebook,
   forgotPassword,
-  setPassword,
+  resetPassword,
+  setUser,
+  setEmail,
   logout,
 }

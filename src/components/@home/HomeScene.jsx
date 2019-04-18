@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, shape, func } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import userShape from 'shapes/user'
 import Header from 'components/modules/Header'
@@ -11,11 +11,11 @@ const styles = {
 
 class HomeScene extends Component {
   render() {
-    const { classes, actions, user } = this.props
+    const { classes, user } = this.props
 
     return (
       <div className={classes.root}>
-        <Header user={user} onLogout={actions.logout} />
+        <Header user={user} />
       </div>
     )
   }
@@ -24,9 +24,6 @@ class HomeScene extends Component {
 HomeScene.propTypes = {
   classes: object.isRequired,
   user: userShape,
-  actions: shape({
-    logout: func.isRequired,
-  })
 }
 
 HomeScene.defaultProps = {

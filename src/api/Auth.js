@@ -1,28 +1,21 @@
-import JWT from 'jwt-decode'
 import Http from 'src/services/Http'
 
 class Auth {
-  async authenticate(path, credentials) {
-    const { token, refreshToken } = await Http.post(path, credentials)
-    const user = JWT(token).data
-
-    return { token, refreshToken, ...user }
-  }
 
   register(credentials) {
-    return this.authenticate('/auth/register', credentials)
+    return Http.post('/auth/register', credentials)
   }
 
   login(credentials) {
-    return this.authenticate('/auth/login', credentials)
+    return Http.post('/auth/login', credentials)
   }
 
   google(Guser) {
-    return this.authenticate('/auth/social', Guser)
+    return Http.post('/auth/social', Guser)
   }
 
   facebook(FBuser) {
-    return this.authenticate('/auth/social', FBuser)
+    return Http.post('/auth/social', FBuser)
   }
 
   activate(hash) {
@@ -33,8 +26,12 @@ class Auth {
     return Http.post('/auth/password/forgot', credentials)
   }
 
-  setPassword(credentials) {
-    return this.authenticate(`/auth/password/reset/${credentials.hash}`, credentials.form)
+  resetPassword(credentials) {
+    return Http.post(`/auth/password/reset/${credentials.hash}`, credentials.form)
+  }
+
+  logout() {
+    return Http.post('/auth/logout')
   }
 }
 

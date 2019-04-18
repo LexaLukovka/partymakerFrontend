@@ -17,8 +17,6 @@ const styles = {
   },
   button: {
     width: '40%',
-    borderWidth: 2,
-    border: 'solid',
     borderRadius: 25,
     alignItems: 'center',
     borderColor: 'inherit',
@@ -33,7 +31,7 @@ const styles = {
 }
 
 class SocialLogin extends Component {
-  loginFacebook = async FBuser => { // TODO: настроить приложение в Facebook
+  loginFacebook = async FBuser => {
     const { actions, history } = this.props
 
     const userDetails = {
@@ -71,12 +69,12 @@ class SocialLogin extends Component {
     return (
       <div className={classes.root}>
         <FacebookLogin
-          autoLoad
           appId="2175525285996959"
           fields="name,email,picture"
           callback={this.loginFacebook}
           render={props => (
             <Button
+              variant="outlined"
               color="inherit"
               onClick={props.onClick}
               className={classes.button}
@@ -94,6 +92,7 @@ class SocialLogin extends Component {
           onSuccess={this.loginGoogle}
           render={props => (
             <Button
+              variant="outlined"
               color="inherit"
               onClick={props.onClick}
               className={classes.button}

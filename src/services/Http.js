@@ -1,45 +1,47 @@
-'use strict'
 import axios from 'axios'
-import to from 'util-to'
-import store from '../redux/store'
+import Cookie from 'services/Cookie'
 import { BACKEND_URL } from 'src/constants'
-import auth from 'src/redux/auth/action'
 
 class Http {
   constructor() {
     this.instance = axios.create({
       baseURL: BACKEND_URL,
-      timeout: 10000,
+      timeout: 20000,
     })
   }
 
-  handleError(err) {
-    if (err) {
-      if (err.response) {
-        if (err.response.status === 401) {
-          store.dispatch(auth.logout())
-        }
-        throw err.response.data
-      } else {
-        throw err
-      }
+  logout() {
+    window.location.replace(`/auth/logout`)
+  }
+
+  authorize() {
+    const token = Cookie.get('token')
+    const { headers } = this.instance.defaults
+    if (token) {
+      headers.common.Authorization = `Bearer ${token}`
     }
   }
 
-  refreshToken() {
-    const { user } = store.getState().auth
-    if (user && user.token) {
-      const { headers } = this.instance.defaults
-      headers.common['Authorization'] = `Bearer ${user.token.replace(/^"(.*)"$/, '$1')}`
-    }
+  handleError(err) {
+    if (err?.response?.status === 401) this.logout()
+    if (err?.response?.status === 404) throw err
+    if (err?.response?.data) throw err.response.data
+    if (err?.response) throw err.response
+    if (err) throw err
   }
 
   async request(method, url, params, config) {
-    this.refreshToken()
-    const [err, response] = await to(this.instance[method](url, params, config))
-    this.handleError(err)
+    this.authorize()
+    try {
+      const { data } = await this.instance[method](url, params, config)
+      console.log(`${method.toUpperCase()}: ${url} FULFILLED`)
 
-    return response.data
+      return data
+    } catch (err) {
+      console.log(`${method.toUpperCase()}:${url} REJECTED`)
+
+      this.handleError(err)
+    }
   }
 
   get(url, params) {
@@ -56,6 +58,10 @@ class Http {
 
   delete(url, params) {
     return this.request('delete', url, params)
+  }
+
+  patch(url, params) {
+    return this.request('patch', url, params)
   }
 }
 

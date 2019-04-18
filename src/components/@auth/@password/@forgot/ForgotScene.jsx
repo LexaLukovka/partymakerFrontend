@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthCard from 'src/components/@auth/Card/AuthCard'
+import AuthCard from 'src/components/@auth/AuthCard'
 import ForgotForm from './ForgotForm'
 
 const ForgotScene = () =>

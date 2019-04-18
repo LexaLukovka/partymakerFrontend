@@ -2,20 +2,22 @@ import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { Redirect, Route, Switch } from 'react-router-dom'
-
+import Header from 'components/modules/Header'
+import AuthDevider from './AndDevider'
+import SocialLogin from './SocialLogin'
+import sparks from '../IndexScene/Banner/sparks.png'
+import LogoutScene from './@logout/LogoutScene'
 import LoginScene from './@login/LoginScene'
 import RegisterScene from './@register/RegisterScene'
 import ActivateScene from './@activate/ActivateScene'
 import PasswordLayout from './@password/PasswordLayout'
 
-import Header from 'components/modules/Header'
-import AuthDevider from './AndDevider'
-import SocialLogin from './SocialLogin'
-
 const styles = () => ({
   root: {
     height: '100%',
-    background: 'rgb(0,0,0,0.2)',
+    background: `url(${sparks})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   container: {
     maxWidth: 400,
@@ -33,12 +35,17 @@ const styles = () => ({
   },
   divider: {
     color: 'white',
+  },
+  headerRoot: {
+    position: 'absolute',
+    background: 'transparent',
+    boxShadow: 'none',
   }
 })
 
 const AuthLayout = ({ classes }) =>
   <div className={classes.root}>
-    <Header />
+    <Header classes={{ root: classes.headerRoot }} />
     <div className={classes.container}>
       <div className={classes.scene}>
         <div>
@@ -46,6 +53,7 @@ const AuthLayout = ({ classes }) =>
             <Route exact path="/auth/register" component={RegisterScene} />
             <Route exact path="/auth/login" component={LoginScene} />
             <Route exact path="/auth/activate/:hash" component={ActivateScene} />
+            <Route exact path="/auth/logout" component={LogoutScene} />
             <Route path="/auth/password" component={PasswordLayout} />
             <Redirect to="/auth/login" />
           </Switch>

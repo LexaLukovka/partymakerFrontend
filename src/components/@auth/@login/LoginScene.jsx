@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import AuthCard from 'src/components/@auth/Card/AuthCard'
+import AuthCard from 'src/components/@auth/AuthCard'
 import LoginForm from './LoginForm'
 import { func, shape } from 'prop-types'
+import connector from './connector'
 
 class LoginScene extends Component {
 
@@ -20,7 +21,7 @@ class LoginScene extends Component {
         images="login.jpg"
         documentTitle="Вход в аккаунт - Partymaker"
       >
-        <LoginForm />
+        <LoginForm onSubmit={this.login} />
       </AuthCard>
     )
   }
@@ -28,11 +29,11 @@ class LoginScene extends Component {
 
 LoginScene.propTypes = {
   actions: shape({
-    register: func.isRequired,
+    login: func.isRequired,
   }),
   history: shape({
     push: func.isRequired
   })
 }
 
-export default LoginScene
+export default connector(LoginScene)

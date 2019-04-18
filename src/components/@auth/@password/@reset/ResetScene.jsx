@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, string, func } from 'prop-types'
-import AuthCard from 'src/components/@auth/Card/AuthCard'
+import AuthCard from 'src/components/@auth/AuthCard'
 import ResetForm from './ResetForm'
 import connector from './connector'
 
@@ -9,7 +9,7 @@ class ResetScene extends Component {
   resetPassword = async ({ password }) => {
     const { match, actions } = this.props
 
-    await actions.setPassword({
+    await actions.resetPassword({
       hash: match.params.hash,
       password
     })
@@ -35,7 +35,7 @@ ResetScene.propTypes = {
     })
   }).isRequired,
   actions: shape({
-    setPassword: func.isRequired,
+    resetPassword: func.isRequired,
   })
 }
 

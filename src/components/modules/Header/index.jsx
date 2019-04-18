@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles, AppBar, Toolbar, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
@@ -11,15 +11,15 @@ const styles = {
   root: {}
 }
 
-const Header = ({ classes, user, onLogout }) =>
+const Header = ({ classes, user }) =>
   <AppBar classes={classes} position="static" color="primary">
     <Toolbar>
       <Link to="/"><Logo /></Link>
       <Navigation>
-        {user && <Button color="secondary">мои события</Button>}
+        {user && <Link to="/home"><Button color="secondary">мои события</Button></Link>}
       </Navigation>
       {user
-        ? <UserMenu user={user} onLogout={onLogout} />
+        ? <UserMenu user={user} />
         : <>
           <Link to="/auth/login">
             <Button color="secondary">войти</Button>
@@ -36,14 +36,10 @@ const Header = ({ classes, user, onLogout }) =>
 Header.propTypes = {
   classes: object.isRequired,
   user: userShape,
-  onLogout: func,
 }
 
 Header.defaultProps = {
   user: null,
-  onLogout: () => {}
 }
-
-export { UserMenu }
 
 export default withStyles(styles)(Header)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
-import AuthCard from 'components/@auth/Card/AuthCard'
+import AuthCard from 'components/@auth/AuthCard'
 import RegisterForm from './RegisterForm'
 import connector from './connector'
 import { Helmet } from 'react-helmet'

@@ -2,6 +2,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
 import sparks from './sparks.png'
+import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -69,9 +70,11 @@ const Banner = ({ classes }) =>
       </Typography>
 
       <div className={classes.action}>
-        <Button variant="outlined" color="secondary" size="large" className={classes.button}>
-          Начать
-        </Button>
+        <Link to="/auth/login">
+          <Button variant="outlined" color="secondary" size="large" className={classes.button}>
+            Начать
+          </Button>
+        </Link>
       </div>
     </div>
   </section>

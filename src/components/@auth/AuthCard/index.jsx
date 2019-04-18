@@ -6,10 +6,6 @@ const styles = {
   root: {
     width: 350,
     padding: 20,
-    border: 'solid',
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: 'black',
   },
   title: {
     paddingLeft: 0,

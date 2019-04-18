@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { CardContent, withStyles } from '@material-ui/core'
-import AuthCardActions from 'components/@auth/Card/AuthCardActions'
+import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
 import { Field, Form } from 'formik'
 import FormikTextField from 'components/formik/FormikTextField'
 import formik from './formik'

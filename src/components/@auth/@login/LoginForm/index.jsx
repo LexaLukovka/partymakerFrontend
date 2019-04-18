@@ -1,10 +1,10 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { CardContent, Typography, withStyles } from '@material-ui/core'
-import AuthCardActions from 'components/@auth/Card/AuthCardActions'
 import { Field, Form } from 'formik'
-import FormikTextField from 'components/formik/FormikTextField'
+import { CardContent, withStyles } from '@material-ui/core'
+import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
+import TextField from 'components/formik/FormikTextField'
+import ServerMessage from 'components/formik/ServerMessage'
 import formik from './formik'
 
 const styles = {
@@ -24,27 +24,29 @@ const LoginForm = ({ classes }) =>
         <Field
           name="email"
           label="Email"
+          autoComplete="email"
+          variant="outlined"
+          margin="normal"
           placeholder="email@example.com"
-          component={FormikTextField}
+          component={TextField}
         />
         <Field
           type="password"
           name="password"
           label="Пароль"
+          autoComplete="current-password"
+          margin="normal"
+          variant="outlined"
           placeholder="*******"
-          component={FormikTextField}
+          component={TextField}
         />
       </CardContent>
+      <ServerMessage color="error" name="non_field_error" />
       <AuthCardActions
         textButton="Войти"
         linkTo="/auth/password/forgot"
         textLink="Забыли пароль?"
       />
-      <Link to="/auth/register">
-        <Typography className={classes.link} color="inherit">
-          Создать аккаунт
-        </Typography>
-      </Link>
     </Form>
   </div>
 

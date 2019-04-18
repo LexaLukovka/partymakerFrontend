@@ -1,7 +1,7 @@
 import React from 'react'
 import { bool, string, func, shape } from 'prop-types'
 import { Typography } from '@material-ui/core'
-import AuthCard from 'src/components/@auth/Card/AuthCard'
+import AuthCard from 'src/components/@auth/AuthCard'
 import Loading from 'components/elements/Loading'
 import connector from './connector'
 

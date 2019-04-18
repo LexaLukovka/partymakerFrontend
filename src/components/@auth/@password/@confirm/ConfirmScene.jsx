@@ -2,7 +2,7 @@ import React from 'react'
 import { object, string } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Button, withStyles } from '@material-ui/core'
-import AuthCard from 'src/components/@auth/Card/AuthCard'
+import AuthCard from 'src/components/@auth/AuthCard'
 import AndDevider from 'src/components/@auth/AndDevider'
 import connector from './connector'
 
