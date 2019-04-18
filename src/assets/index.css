@@ -41,3 +41,18 @@ a {
     display: flex;
     justify-content: space-between;
 }
+
+
+@keyframes hide {
+    from {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.1;
+    }
+}

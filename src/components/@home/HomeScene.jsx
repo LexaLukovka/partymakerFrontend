@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import userShape from 'shapes/user'
+import Header from 'components/modules/Header'
 import connector from './connector'
-import HomeHeader from './HomeHeader'
-import UserMenu from './HomeHeader/UserMenu'
 
 const styles = {
   root: {},
@@ -16,9 +15,7 @@ class HomeScene extends Component {
 
     return (
       <div className={classes.root}>
-        <HomeHeader>
-          <UserMenu user={user} onLogout={actions.logout} />
-        </HomeHeader>
+        <Header user={user} onLogout={actions.logout} />
       </div>
     )
   }

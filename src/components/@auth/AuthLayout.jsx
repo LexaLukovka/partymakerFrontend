@@ -8,7 +8,7 @@ import RegisterScene from './@register/RegisterScene'
 import ActivateScene from './@activate/ActivateScene'
 import PasswordLayout from './@password/PasswordLayout'
 
-import Header from '../IndexScene/LandingHeader'
+import Header from 'components/modules/Header'
 import AuthDevider from './AndDevider'
 import SocialLogin from './SocialLogin'
 

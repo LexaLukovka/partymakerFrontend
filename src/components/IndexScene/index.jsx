@@ -1,6 +1,10 @@
-import React from 'react'
-import { withStyles, Typography } from '@material-ui/core'
-import { object } from 'prop-types'
+import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core'
+import userShape from 'shapes/user'
+import { object, func, shape } from 'prop-types'
+import Header from 'components/modules/Header'
+import Banner from './Banner'
+import connector from './connector'
 
 const styles = {
   root: {
@@ -8,39 +12,41 @@ const styles = {
     flexDirection: 'column',
     height: '100%',
   },
-  background: {
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    background: 'url(/images/summer.jpg)',
-    height: '100%',
-  },
-  center: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    flexGrow: 1,
-    height: '100%',
-    flexDirection: 'column',
-  },
-  headline: {
-    textAlign: 'center',
-    color: 'white',
+  headerRoot: {
+    position: 'absolute',
+    background: 'transparent',
+    boxShadow: 'none',
   }
 }
-const LandingScene = ({ classes }) =>
-  <div className={classes.root}>
-    <div className={classes.background}>
-      <div className={classes.center}>
-        <div className={classes.headline}>
-          <Typography color="inherit" variant="h4">Соберем вечерику</Typography>
-          <Typography color="inherit" variant="h1">ВМЕСТЕ</Typography>
-        </div>
+
+class LandingScene extends Component {
+
+  logout = () => {
+    const { actions } = this.props
+    actions.auth.logout()
+  }
+
+  render() {
+    const { classes, user } = this.props
+
+    return (
+      <div className={classes.root}>
+        <Header
+          classes={{ root: classes.headerRoot }}
+          user={user}
+          onLogout={this.logout}
+        />
+        <Banner />
       </div>
-    </div>
-  </div>
+    )
+  }
+}
 
 LandingScene.propTypes = {
-  classes: object.isRequired
+  classes: object.isRequired,
+  user: userShape,
+  actions: shape({
+    logout: func.isRequired,
+  })
 }
-export default withStyles(styles)(LandingScene)
+export default withStyles(styles)(connector(LandingScene))
