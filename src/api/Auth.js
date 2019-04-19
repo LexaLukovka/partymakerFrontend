@@ -27,7 +27,12 @@ class Auth {
   }
 
   resetPassword(credentials) {
-    return Http.post(`/auth/password/reset/${credentials.hash}`, credentials.form)
+    const { password } = credentials
+
+    return Http.post(`/auth/password/reset/${credentials.hash}`, {
+      password,
+      password_repeat: password
+    })
   }
 
   logout() {

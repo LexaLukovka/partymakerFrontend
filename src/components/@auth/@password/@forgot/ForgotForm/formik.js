@@ -15,9 +15,12 @@ const formik = withFormik({
   }),
 
   handleSubmit: async (form, { props: { onSubmit }, setErrors, setSubmitting }) => {
-    const [err] = await to(onSubmit(form))
+    const [err, response] = await to(onSubmit(form))
 
     if (err) setErrors(transformValidationApi(err))
+
+    if (response) setErrors({ message: response })
+
     setSubmitting(false)
   },
   displayName: 'ForgotPasswordForm',

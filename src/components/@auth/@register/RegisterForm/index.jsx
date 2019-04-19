@@ -19,18 +19,26 @@ const RegisterForm = ({ classes }) =>
         <Field
           name="name"
           label="Имя и фамилия"
+          margin="normal"
+          variant="outlined"
           placeholder="Вася Пупкин"
           component={FormikTextField}
         />
         <Field
           name="email"
           label="Email"
+          margin="normal"
+          autoComplete="email"
+          variant="outlined"
           placeholder="email@example.com"
           component={FormikTextField}
         />
         <Field
           type="password"
           name="password"
+          margin="normal"
+          autoComplete="current-password"
+          variant="outlined"
           label="Пароль"
           placeholder="*******"
           component={FormikTextField}

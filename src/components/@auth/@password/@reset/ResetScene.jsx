@@ -7,12 +7,14 @@ import connector from './connector'
 class ResetScene extends Component {
 
   resetPassword = async ({ password }) => {
-    const { match, actions } = this.props
+    const { match, actions, history } = this.props
 
     await actions.resetPassword({
       hash: match.params.hash,
       password
     })
+
+    history.push('/home')
   }
 
   render() {
@@ -29,6 +31,9 @@ class ResetScene extends Component {
 }
 
 ResetScene.propTypes = {
+  history: shape({
+    push: func.isRequired,
+  }),
   match: shape({
     params: shape({
       hash: string.isRequired,

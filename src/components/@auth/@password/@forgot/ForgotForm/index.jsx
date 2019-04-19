@@ -1,9 +1,9 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Link } from 'react-router-dom'
-import { CardContent, Typography, withStyles } from '@material-ui/core'
+import { CardContent, withStyles } from '@material-ui/core'
 import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
 import FormikTextField from 'components/formik/FormikTextField'
+import ServerMessage from 'components/formik/ServerMessage'
 import { Field, Form } from 'formik'
 import formik from './formik'
 
@@ -24,18 +24,18 @@ const ForgotForm = ({ classes }) =>
         <Field
           name="email"
           label="Email"
+          variant="outlined"
+          margin="normal"
           placeholder="email@example.com"
           component={FormikTextField}
         />
+        <ServerMessage variant="caption" color="primary" name="message" />
       </CardContent>
       <AuthCardActions
         textButton="Дальше"
-        linkTo="/auth/login"
-        textLink="Войти"
+        linkTo="/auth/register"
+        textLink="Создать аккаунт"
       />
-      <Link to="/auth/register">
-        <Typography className={classes.link} color="inherit">Создать аккаунт</Typography>
-      </Link>
     </Form>
   </div>
 

@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import { withFormik } from 'formik'
-import * as Yup from 'yup'
 import to from 'util-to'
+import * as Yup from 'yup'
 import transformValidationApi from 'src/utils/transformValidationApi'
 
 const formik = withFormik({
@@ -11,26 +12,33 @@ const formik = withFormik({
           !value
             ? Yup.string()
             : Yup.string()
-              .min(8, 'Пароль должен быть не менее 8 символов')
-              .required('Введите пароль'),
+              .min(8, 'Password must be at least 8 characters')
+              .required('Password is required'),
       ),
-      password_repeat: Yup.string()
-        .oneOf(
-          [Yup.ref('password')],
-          'Пароли не совпадают',
-        ),
+      password_repeat: Yup.string().oneOf(
+        [Yup.ref('password')],
+        'Passwords do not match',
+      ),
+
     }),
+
   mapPropsToValues: () => ({
     password: '',
     password_repeat: '',
   }),
 
-  handleSubmit: async (form, { props: { onSubmit }, setErrors, setSubmitting }) => {
-    const [err] = await to(onSubmit(form))
-    setErrors(transformValidationApi(err))
+  handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
+    const [err] = await to(props.onSubmit(values))
+    if (err) {
+      if (err.message === 'Network Error') {
+        setErrors({ non_field_errors: 'Something wrong with server response' })
+      } else {
+        setErrors(transformValidationApi(err))
+      }
+    }
     setSubmitting(false)
   },
-  displayName: 'ResetForm',
+  displayName: 'PasswordForm',
 })
 
 export default formik

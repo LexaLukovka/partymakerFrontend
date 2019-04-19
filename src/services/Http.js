@@ -1,6 +1,8 @@
 import axios from 'axios'
 import Cookie from 'services/Cookie'
 import { BACKEND_URL } from 'src/constants'
+import store from 'src/redux/store'
+import actions from 'src/redux/action'
 
 class Http {
   constructor() {
@@ -11,7 +13,7 @@ class Http {
   }
 
   logout() {
-    window.location.replace(`/auth/logout`)
+    store.dispatch(actions.auth.logout())
   }
 
   authorize() {
