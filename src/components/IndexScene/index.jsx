@@ -6,6 +6,7 @@ import Header from 'components/modules/Header'
 import Banner from './Banner'
 import Features from './Features'
 import Screenshots from './Screenshots'
+import StepByStep from './StepByStep'
 import connector from './connector'
 
 const styles = {
@@ -41,6 +42,7 @@ class LandingScene extends Component {
         <Banner />
         <Features />
         <Screenshots />
+        <StepByStep />
       </div>
     )
   }
