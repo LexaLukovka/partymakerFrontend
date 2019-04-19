@@ -4,7 +4,7 @@ import { Card, CardHeader, withStyles } from '@material-ui/core'
 
 const styles = {
   root: {
-    width: 355,
+    width: 400,
     padding: 20,
   },
   title: {
