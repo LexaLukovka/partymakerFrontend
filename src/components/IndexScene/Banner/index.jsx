@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 const styles = {
   root: {
+    position: 'relative',
     background: `url(${sparks}) no-repeat`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',

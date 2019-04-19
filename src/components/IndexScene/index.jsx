@@ -5,6 +5,7 @@ import { object, func, shape } from 'prop-types'
 import Header from 'components/modules/Header'
 import Banner from './Banner'
 import connector from './connector'
+import Features from './Features'
 
 const styles = {
   root: {
@@ -37,6 +38,7 @@ class LandingScene extends Component {
           onLogout={this.logout}
         />
         <Banner />
+        <Features />
       </div>
     )
   }

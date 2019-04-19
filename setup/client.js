@@ -5,9 +5,7 @@ import WithRedux from './components/WithRedux'
 import { BrowserRouter } from 'react-router-dom'
 import App from 'src/App'
 
-const renderMethod = module.hot ? render : hydrate
-
-renderMethod(
+render(
   <WithTheme>
     <WithRedux>
       <BrowserRouter>
