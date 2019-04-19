@@ -7,6 +7,8 @@ import Banner from './Banner'
 import Features from './Features'
 import Screenshots from './Screenshots'
 import StepByStep from './StepByStep'
+import ContactUs from './ContactUs'
+import Footer from './Footer'
 import connector from './connector'
 
 const styles = {
@@ -19,6 +21,10 @@ const styles = {
     position: 'absolute',
     background: 'transparent',
     boxShadow: 'none',
+  },
+  sections: {
+    margin: '0 auto',
+    maxWidth: 1280,
   }
 }
 
@@ -40,9 +46,13 @@ class LandingScene extends Component {
           onLogout={this.logout}
         />
         <Banner />
-        <Features />
-        <Screenshots />
-        <StepByStep />
+        <div className={classes.sections}>
+          <Features />
+          <Screenshots />
+          <StepByStep />
+          <ContactUs />
+          <Footer />
+        </div>
       </div>
     )
   }
