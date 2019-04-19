@@ -19,6 +19,9 @@ export default ({ content, extractor, state, sheetsRegistry }) => {
         <script>
             window.__STATE__ = ${JSON.stringify(state)}
         </script>
+        <script
+           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0E-RRtQWldjEQLFkAOWDgMSj295C0Lo&libraries=places,visualization&language=ru-RU">
+        </script>
         ${extractor.getScriptTags()}
         <script>
     </body>
