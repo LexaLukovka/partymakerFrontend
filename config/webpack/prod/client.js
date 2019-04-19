@@ -2,11 +2,19 @@ const merge = require('webpack-merge')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const webpack = require('webpack')
 const config = require('../client')
 
 module.exports = merge(config, {
 
   mode: 'production',
+
+  entry: {
+    client: [
+      '@babel/polyfill',
+      './setup/client.js',
+    ],
+  },
 
   /**
    * sets up chunk name with cache protection
@@ -30,7 +38,9 @@ module.exports = merge(config, {
   },
 
   plugins: [
-
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"',
+    }),
     /**
      * Minifies all global css styles with cache protection
      */

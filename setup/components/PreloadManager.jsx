@@ -7,6 +7,7 @@ export const PreloadProvider = PreloadContext.Provider
 export const PreloadConsumer = PreloadContext.Consumer
 
 class PreloadManager extends Component {
+
   render() {
     const { children, promises, request, store } = this.props
 

@@ -27,6 +27,9 @@ module.exports = merge(config, {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"',
+    }),
     new HtmlWebpackPlugin({
       title: 'Partymaker',
       filename: path.resolve(__dirname, '../../../build/public/index.html'),

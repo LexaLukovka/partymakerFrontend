@@ -1,7 +1,7 @@
 import React from 'react'
 import { node, object } from 'prop-types'
 import JssProvider from 'react-jss/lib/JssProvider'
-import { createGenerateClassName, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { createGenerateClassName, createMuiTheme, MuiThemeProvider, CssBaseline } from '@material-ui/core'
 import theme from 'config/theme'
 import RemoveServerStyles from './RemoveServerStyles'
 
@@ -18,6 +18,7 @@ const WithTheme = ({ children, sheetsRegistry }) => {
         theme={createMuiTheme(theme)}
         sheetsManager={sheetsManager}
       >
+        <CssBaseline />
         {isServer ? children : <RemoveServerStyles>{children}</RemoveServerStyles>}
       </MuiThemeProvider>
     </JssProvider>

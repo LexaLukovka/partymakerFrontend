@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthCard from 'src/components/@auth/AuthCard'
+import { Helmet } from 'react-helmet'
 import LoginForm from './LoginForm'
 import { func, shape } from 'prop-types'
 import connector from './connector'
@@ -16,11 +17,12 @@ class LoginScene extends Component {
 
   render() {
     return (
-      <AuthCard
-        title="ВОЙТИ"
-        images="login.jpg"
-        documentTitle="Вход в аккаунт - Partymaker"
-      >
+      <AuthCard title="ВОЙТИ">
+        <Helmet>
+          <title>
+            Вход в аккаунт - Partymaker
+          </title>
+        </Helmet>
         <LoginForm onSubmit={this.login} />
       </AuthCard>
     )

@@ -1,11 +1,11 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { hydrate } from 'react-dom'
 import WithTheme from './components/WithTheme'
 import WithRedux from './components/WithRedux'
 import { BrowserRouter } from 'react-router-dom'
 import App from 'src/App'
 
-render(
+hydrate(
   <WithTheme>
     <WithRedux>
       <BrowserRouter>
@@ -15,3 +15,5 @@ render(
   </WithTheme>,
   document.getElementById('root')
 )
+
+if (module.hot) module.hot.accept()
