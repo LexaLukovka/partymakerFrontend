@@ -4,11 +4,11 @@ import ForgotScene from './@forgot/ForgotScene'
 import ConfirmScene from './@confirm/ConfirmScene'
 import ResetScene from './@reset/ResetScene'
 
-const AuthLayout = () =>
+const PasswordLayout = () =>
   <Switch>
     <Route path="/auth/password/forgot" component={ForgotScene} />
     <Route path="/auth/password/confirm" component={ConfirmScene} />
     <Route path="/auth/password/reset/:hash" component={ResetScene} />
   </Switch>
 
-export default AuthLayout
+export default PasswordLayout

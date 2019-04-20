@@ -1,9 +1,11 @@
-import { createSelector } from 'reselect/lib/index'
+import { createSelector } from 'reselect'
 
-const authUser = (users, auth) => users[auth.user_id]
+const currentUser = (users, user_id) => {
+  return users[user_id]
+}
 
 export default createSelector(
   state => state.entities.users,
-  state => state.auth,
-  authUser,
+  state => state.auth.user_id,
+  currentUser,
 )

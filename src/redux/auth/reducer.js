@@ -1,8 +1,11 @@
 import { LOGOUT_USER, SET_AUTH_EMAIL, SET_AUTH_USER } from './action'
+import Auth from 'services/Auth'
+
+const user = Auth.user()
 
 const initialState = {
   isLoading: false,
-  user_id: null,
+  user_id: user?.id,
   email: null,
 }
 

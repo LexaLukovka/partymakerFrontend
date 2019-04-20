@@ -1,7 +1,6 @@
 import actions from 'src/redux/action'
 import { all, put, takeEvery } from 'redux-saga/effects'
-import JWT from 'jwt-decode'
-import Cookie from 'services/Cookie'
+import Auth from 'services/Auth'
 
 import {
   ACTIVATE_USER_FULFILLED,
@@ -13,8 +12,7 @@ import {
 } from 'src/redux/auth/action'
 
 function* setAuthUser({ payload: { token } }) {
-  Cookie.set('token', token)
-  const user = JWT(token).data
+  const user = Auth.user(token)
 
   yield put(actions.entities.users.add(user))
   yield put(actions.auth.setUser(user))
