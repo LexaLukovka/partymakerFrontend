@@ -17,6 +17,7 @@ import connector from './connector'
 const styles = {
   root: {
     display: 'flex',
+    flexGrow: 1,
   },
   guests: {
     width: 400,
@@ -46,6 +47,10 @@ class RoomScene extends Component {
     actions.loadRoomGuests(params.id)
   }
 
+  setPlace = () => {
+    console.log('set place')
+  }
+
   render() {
     const { classes, room } = this.props
 
@@ -64,7 +69,11 @@ class RoomScene extends Component {
           <Guests guests={room.guests} />
         </div>
         <Chat className={classes.chat}>
-          <ChatHeader title={room.title} place={room.place} />
+          <ChatHeader
+            title={room.title}
+            place_title={room.place?.title}
+            onSetPlace={this.setPlace}
+          />
           <ChatBody messages={room.messages} />
           <ChatForm />
         </Chat>

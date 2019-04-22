@@ -1,19 +1,21 @@
 import React from 'react'
-import { node, object } from 'prop-types'
+import { node, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
+import classNames from 'classnames'
 
 const styles = {
   root: {}
 }
 
-const Chat = ({ classes, children }) =>
-  <section className={classes.root}>
+const Chat = ({ classes, children, className, }) =>
+  <div className={classNames([classes.root, className])}>
     {children}
-  </section>
+  </div>
 
 Chat.propTypes = {
   classes: object.isRequired,
-  children: node.isRequired
+  children: node.isRequired,
+  className: string,
 }
 
 export default withStyles(styles)(Chat)
