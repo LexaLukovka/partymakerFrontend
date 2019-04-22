@@ -10,11 +10,16 @@ class Auth {
 
     if (token) this.save(token)
 
-    return JWT(token || this.token).data
+    try {
+      return JWT(token || this.token).data
+    } catch (e) {
+      return null
+    }
   }
 
   save(token) {
     this.token = token
+    Cookie.set('token', token)
   }
 
   logout() {

@@ -28,6 +28,7 @@ export const DESTROY_ROOM_REJECTED = 'DESTROY_ROOM_REJECTED'
 export const SET_ROOM = 'SET_ROOM'
 export const SET_ROOMS = 'SET_ROOMS'
 export const REMOVE_ROOM = 'REMOVE_ROOM'
+export const SET_CURRENT_ROOM = 'SET_CURRENT_ROOM'
 
 /**
  * Async actions. Making API requests
@@ -36,6 +37,11 @@ export const REMOVE_ROOM = 'REMOVE_ROOM'
 const list = () => ({
   type: LOAD_ROOMS,
   payload: Room.list()
+})
+
+const find = (id) => ({
+  type: LOAD_ROOM,
+  payload: Room.find(id)
 })
 
 const create = () => ({
@@ -68,6 +74,11 @@ const set = room => ({
   payload: room,
 })
 
+const setCurrent = room_id => ({
+  type: SET_CURRENT_ROOM,
+  payload: room_id,
+})
+
 const remove = room_id => ({
   type: REMOVE_ROOM,
   payload: room_id,
@@ -77,7 +88,9 @@ export default {
   list,
   create,
   update,
+  find,
   set,
+  setCurrent,
   setMany,
   destroy,
   remove,

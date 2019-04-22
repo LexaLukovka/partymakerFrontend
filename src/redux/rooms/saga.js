@@ -9,16 +9,22 @@ import {
   UPDATE_ROOM_FULFILLED
 } from './action'
 
+const createRoom = room => ({
+  ...room,
+  guests_ids: [],
+  messages_ids: []
+})
+
 function* setRoom({ payload: room }) {
-  yield put(actions.entities.rooms.set(room))
+  yield put(actions.rooms.set(createRoom(room)))
 }
 
 function* setRooms({ payload: { data: rooms } }) {
-  yield put(actions.entities.rooms.setMany(rooms))
+  yield put(actions.rooms.setMany(rooms.map(createRoom)))
 }
 
 function* removeRoom({ meta: { room_id } }) {
-  yield put(actions.entities.rooms.remove(room_id))
+  yield put(actions.rooms.remove(room_id))
 }
 
 export default function* saga() {

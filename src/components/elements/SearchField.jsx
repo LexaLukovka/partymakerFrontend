@@ -13,11 +13,6 @@ const styles = theme => ({
     color: 'black',
   },
   formControl: {
-    borderColor: theme.palette.secondary.light,
-    fontSize: 16,
-    '&::placeholder': {
-      color: theme.palette.secondary.main,
-    },
   },
 })
 

@@ -1,7 +1,7 @@
-import { SET_ROOM, SET_ROOMS, REMOVE_ROOM } from './action'
+import { SET_ROOM, SET_ROOMS, REMOVE_ROOM } from '../action'
 import arrayToObject from 'utils/arrayToObject'
 
-const roomsReducer = (state = {}, { type, payload }) => {
+export default (state = {}, { type, payload }) => {
   switch (type) {
     case SET_ROOMS:
       return {
@@ -26,5 +26,3 @@ const roomsReducer = (state = {}, { type, payload }) => {
       return state
   }
 }
-
-export default roomsReducer

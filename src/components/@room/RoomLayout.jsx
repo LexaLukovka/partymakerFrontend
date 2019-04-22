@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core'
 import { Route, Switch } from 'react-router-dom'
 import Header from 'components/modules/Header'
 import RoomScene from 'components/@room/@:id/RoomScene'
+import connector from './connector'
 
 const styles = () => ({
   root: {
@@ -33,4 +34,4 @@ RoomLayout.propTypes = {
   user: userShape.isRequired,
 }
 
-export default withStyles(styles)(RoomLayout)
+export default withStyles(styles)(connector(RoomLayout))

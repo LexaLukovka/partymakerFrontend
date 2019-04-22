@@ -1,8 +1,8 @@
 import axios from 'axios'
-import Cookie from 'services/Cookie'
 import { BACKEND_URL } from 'src/constants'
 import store from 'src/redux/store'
 import actions from 'src/redux/action'
+import Auth from 'services/Auth'
 
 class Http {
   constructor() {
@@ -17,7 +17,7 @@ class Http {
   }
 
   authorize() {
-    const token = Cookie.get('token')
+    const token = Auth.token
     const { headers } = this.instance.defaults
     if (token) {
       headers.common.Authorization = `Bearer ${token}`

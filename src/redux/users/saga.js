@@ -11,15 +11,15 @@ import {
 
 function* setUser({ payload: user }) {
 
-  yield put(actions.entities.users.set(user))
+  yield put(actions.users.set(user))
 }
 
 function* setUsers({ payload: { data: users } }) {
-  yield put(actions.entities.users.setMany(users))
+  yield put(actions.users.setMany(users))
 }
 
 function* removeUser({ meta: { user_id } }) {
-  yield put(actions.entities.users.remove(user_id))
+  yield put(actions.users.remove(user_id))
 }
 
 export default function* saga() {

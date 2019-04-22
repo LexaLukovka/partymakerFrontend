@@ -10,6 +10,7 @@ const styles = {
   root: {
     position: 'relative',
     background: `url(${party})`,
+    marginBottom: 15,
     backgroundSize: 'cover',
     height: 300,
     zIndex: 10,
