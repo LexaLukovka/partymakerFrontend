@@ -43,7 +43,7 @@ class RoomScene extends Component {
 
     actions.loadRoom(params.id)
     actions.loadRoomMessages(params.id)
-    actions.loadRoomGuests({ room_id: params.id })
+    actions.loadRoomGuests(params.id)
   }
 
   render() {

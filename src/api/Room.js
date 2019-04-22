@@ -1,4 +1,5 @@
 import Http from 'src/services/Http'
+import qs from 'querystring'
 
 class User {
 
@@ -20,6 +21,16 @@ class User {
 
   destroy(id) {
     return Http.delete(`/rooms/${id}`)
+  }
+
+  guests(id) {
+    return Http.get(`/rooms/${id}/guests`)
+  }
+
+  messages(id, params) {
+    const defaultParams = { page: 1, limit: 20 }
+
+    return Http.get(`/rooms/${id}/messages?${qs.stringify(params || defaultParams)}`)
   }
 }
 

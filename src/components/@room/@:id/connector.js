@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
   actions: {
     setCurrentRoom: bindActionCreators(actions.rooms.setCurrent, dispatch),
     loadRoom: bindActionCreators(actions.rooms.find, dispatch),
-    loadRoomMessages: bindActionCreators(actions.messages.list, dispatch),
-    loadRoomGuests: bindActionCreators(actions.users.list, dispatch),
+    loadRoomMessages: bindActionCreators(actions.rooms.messages, dispatch),
+    loadRoomGuests: bindActionCreators(actions.rooms.guests, dispatch),
   }
 })
 

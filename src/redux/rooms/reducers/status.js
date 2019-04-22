@@ -1,7 +1,11 @@
-import { SET_CURRENT_ROOM } from '../action'
+import { SET_CURRENT_ROOM, SET_ROOM_STATUS } from '../action'
 
 const initialState = {
   room_id: null,
+  messages: {
+    page: 1,
+    total: 0,
+  }
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -11,6 +15,13 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         room_id: payload,
       }
+
+    case SET_ROOM_STATUS: {
+      return {
+        ...state,
+        messages: payload.messages || state.messages,
+      }
+    }
 
     default:
       return state
