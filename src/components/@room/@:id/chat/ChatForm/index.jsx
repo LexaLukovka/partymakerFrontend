@@ -20,21 +20,32 @@ const styles = {
     borderTop: 'solid 1px rgba(0, 0, 0, 0.12)',
     display: 'flex',
     alignItems: 'center',
-    padding: 10,
+    padding: 5,
   },
   action: {
     margin: '0 5px'
   },
+  actionLabel: {
+    paddingLeft: 5,
+    marginTop: 4,
+  }
 }
 
 const ChatForm = ({ classes }) =>
   <Form className={classes.root}>
     <div className={classes.send}>
-      <Field name="message" className={classes.sendField} component={FormikMessageField} />
+      <Field name="text" className={classes.sendField} component={FormikMessageField} />
       <Button type="submit" color="primary">Отправить</Button>
     </div>
     <div className={classes.actions}>
-      <Typography color="textSecondary" variant="subtitle1" gutterBottom>Предложить:</Typography>
+      <Typography
+        color="textSecondary"
+        className={classes.actionLabel}
+        variant="subtitle1"
+        gutterBottom
+      >
+        Предложить:
+      </Typography>
       <Button className={classes.action} color="primary">МЕСТО</Button>
       <Button className={classes.action} color="primary">ГОСТЯ</Button>
       <Button className={classes.action} color="primary">ДАТУ И ВРЕМЯ</Button>

@@ -3,7 +3,6 @@ import { arrayOf, number, object, func, string, shape } from 'prop-types'
 import userShape from 'shapes/user'
 import placeShape from 'shapes/place'
 import { Typography, withStyles } from '@material-ui/core'
-import SearchField from 'components/elements/SearchField'
 import NotFound from 'components/modules/NotFound'
 import messageShape from 'shapes/message'
 import PersonButton from './PersonButton'
@@ -41,6 +40,11 @@ const styles = {
 }
 
 class RoomScene extends Component {
+
+  state = {
+    isScrollingBottom: false
+  }
+
   constructor(props) {
     super(props)
 
@@ -53,14 +57,31 @@ class RoomScene extends Component {
     await actions.loadRoom(match.params.id)
     await actions.loadRoomGuests(match.params.id)
     await actions.loadRoomMessages(match.params.id)
+    this.setState({ isScrollingBottom: true })
   }
 
   setPlace = () => {
     console.log('set place')
   }
 
+  sendMessage = async (form) => {
+    const { actions, match } = this.props
+    const room_id = match.params.id
+
+    const promise = await actions.sendMessage(room_id, form)
+
+    this.setState({ isScrollingBottom: true })
+
+    return promise
+  }
+
+  disableScrolling = () => {
+    this.setState({ isScrollingBottom: false })
+  }
+
   render() {
     const { classes, room, auth } = this.props
+    const { isScrollingBottom } = this.state
 
     if (!room) return <NotFound />
 
@@ -81,10 +102,10 @@ class RoomScene extends Component {
             place_title={room.place?.title}
             onSetPlace={this.setPlace}
           />
-          <ChatBody>
+          <ChatBody isScrollingBottom={isScrollingBottom} onScrollBottom={this.disableScrolling}>
             <Messages auth_id={auth.user_id} messages={room.messages} />
           </ChatBody>
-          <ChatForm />
+          <ChatForm onSubmit={this.sendMessage} />
         </Chat>
       </section>
     )
@@ -111,6 +132,7 @@ RoomScene.propTypes = {
     loadRoom: func.isRequired,
     loadRoomMessages: func.isRequired,
     loadRoomGuests: func.isRequired,
+    sendMessage: func.isRequired,
   }),
 }
 

@@ -39,9 +39,10 @@ const list = (room_id) => ({
   payload: Message.list(room_id)
 })
 
-const create = (form) => ({
+const create = (room_id, form) => ({
   type: CREATE_MESSAGE,
-  payload: Message.create(form)
+  payload: Message.create(room_id, form),
+  meta: { room_id, form }
 })
 
 const update = (id, form) => ({

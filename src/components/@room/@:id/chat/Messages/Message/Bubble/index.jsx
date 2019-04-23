@@ -1,23 +1,28 @@
 import React from 'react'
-import { object, func, bool, string, array, shape, node } from 'prop-types'
+import { object, bool, node } from 'prop-types'
 import { withStyles } from '@material-ui/core'
+import classNames from 'classnames'
 
 const styles = {
   root: {
     padding: 15,
     boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
     borderRadius: 20,
+    marginLeft: 10,
+    marginRight: 10,
   },
+  isMine: {}
 }
 
-const Bubble = ({ classes, children }) =>
-  <div className={classes.root}>
+const Bubble = ({ classes, children, isMine }) =>
+  <div className={classNames({ [classes.root]: true, isMine: isMine })}>
     {children}
   </div>
 
 Bubble.propTypes = {
   classes: object.isRequired,
   children: node.isRequired,
+  isMine: bool.isRequired,
 }
 
 export default withStyles(styles)(Bubble)

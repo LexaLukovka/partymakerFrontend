@@ -6,20 +6,24 @@ import transformValidationApi from 'src/utils/transformValidationApi'
 const formik = withFormik({
   validationSchema: Yup.object()
     .shape({
-      message: Yup.string().required('Это поле является обязательным'),
+      text: Yup.string().required('Это поле является обязательным'),
     }),
 
   mapPropsToValues: () => ({
-    message: '',
+    text: '',
   }),
 
-  handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
+  handleSubmit: async (form, { props, setErrors, setSubmitting, setFieldValue }) => {
 
     setSubmitting(true)
 
-    const [err] = await to(props.onSubmit(form))
+    const [err, response] = await to(props.onSubmit(form))
 
     if (err) setErrors(transformValidationApi(err))
+
+    if (response) {
+      setFieldValue('text', '')
+    }
 
     setSubmitting(false)
   },

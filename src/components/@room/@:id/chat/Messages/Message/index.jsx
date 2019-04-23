@@ -14,8 +14,7 @@ const styles = {
     padding: '5px 15px'
   },
   isMine: {
-    flexOrder: 'reverse',
-    justifyContent: 'flex-end'
+    flexDirection: 'row-reverse',
   }
 }
 
@@ -25,7 +24,7 @@ const Message = ({ classes, message, isMine }) =>
     [classes.isMine]: isMine,
   })}>
     <UserAvatar user={message.user} />
-    <Bubble>
+    <Bubble isMine={isMine}>
       {message.text}
     </Bubble>
   </div>
