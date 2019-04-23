@@ -25,8 +25,7 @@ class Chat extends Component {
     isLoading: false
   }
 
-  constructor(props) {
-    super(props)
+  componentDidMount() {
     this.loadAndScrollBottom().catch(console.error)
   }
 
