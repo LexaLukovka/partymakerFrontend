@@ -28,9 +28,13 @@ class User {
   }
 
   messages(id, params) {
-    const defaultParams = { page: 1, limit: 20 }
 
-    return Http.get(`/rooms/${id}/messages?${qs.stringify(params || defaultParams)}`)
+    const defaultParams = {
+      page: params?.page || 1,
+      limit: params?.limit || 20
+    }
+
+    return Http.get(`/rooms/${id}/messages?${qs.stringify(defaultParams)}`)
   }
 }
 

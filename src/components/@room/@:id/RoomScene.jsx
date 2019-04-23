@@ -14,6 +14,7 @@ import ChatForm from './chat/ChatForm'
 import Messages from './chat/Messages'
 import connector from './connector'
 import wait from 'utils/wait'
+import Loading from 'components/elements/Loading'
 
 const styles = {
   root: {
@@ -38,12 +39,21 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
   },
+
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 10,
+  }
 }
 
 class RoomScene extends Component {
 
   state = {
-    isScrollingBottom: false
+    isScrollingBottom: false,
+    isLoadingMessages: false,
+    page: 1,
+    limit: 20,
   }
 
   constructor(props) {
@@ -82,9 +92,22 @@ class RoomScene extends Component {
     this.setState({ isScrollingBottom: false })
   }
 
+  loadMoreMessages = async () => {
+    const { actions, match, room } = this.props
+    const { page, limit } = this.state
+
+    if (room.totalMessages <= page * limit) return null
+
+    this.setState({ page: page + 1, isLoadingMessages: true })
+    const promise = await actions.loadRoomMessages(match.params.id, { page: page + 1, limit })
+    this.setState({ isLoadingMessages: false })
+
+    return promise
+  }
+
   render() {
     const { classes, room, auth } = this.props
-    const { isScrollingBottom } = this.state
+    const { isScrollingBottom, isLoadingMessages } = this.state
 
     if (!room) return <NotFound />
 
@@ -103,7 +126,12 @@ class RoomScene extends Component {
             place_title={room.place?.title}
             onSetPlace={this.setPlace}
           />
-          <ChatBody isScrollingBottom={isScrollingBottom} onScrollBottom={this.disableScrolling}>
+          <ChatBody
+            isScrollingBottom={isScrollingBottom}
+            onScrollBottom={this.disableScrolling}
+            onScrollTop={this.loadMoreMessages}
+          >
+            {isLoadingMessages && <Loading className={classes.loading} />}
             <Messages auth_id={auth.user_id} messages={room.messages} />
           </ChatBody>
           <ChatForm onSubmit={this.sendMessage} />
@@ -122,6 +150,7 @@ RoomScene.propTypes = {
     place: placeShape,
     guests: arrayOf(userShape).isRequired,
     messages: arrayOf(messageShape).isRequired,
+    totalMessages: number,
   }),
   match: shape({
     params: shape({

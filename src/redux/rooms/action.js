@@ -87,9 +87,9 @@ const guests = (room_id) => ({
   meta: { room_id }
 })
 
-const messages = (room_id) => ({
+const messages = (room_id, params) => ({
   type: LOAD_ROOM_MESSAGES,
-  payload: Room.messages(room_id),
+  payload: Room.messages(room_id, params),
   meta: { room_id }
 })
 

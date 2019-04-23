@@ -29,11 +29,56 @@ class ChatBody extends Component {
     onScrollBottom()
   }
 
+  componentDidMount() {
+    this.chatBody.current.addEventListener('scroll', this.handleScroll)
+  }
+
+  componentWillUnmount() {
+    this.chatBody.current.removeEventListener('scroll', this.handleScroll)
+  }
+
+  handleScroll = (e) => {
+
+    requestAnimationFrame(async () => {
+
+      const scrollY = e.target.scrollTop
+
+      const isScrollingTop = this.oldScroll > scrollY
+
+      if (isScrollingTop && e.target.scrollTop <= 15) {
+        await this.handleScrolledTop(e)
+      }
+
+      this.oldScroll = scrollY
+
+    })
+  }
+
+  handleScrolledTop = async (e) => {
+    const { onScrollTop } = this.props
+
+    const oldScrollHeight = e.target.scrollHeight
+
+    await onScrollTop()
+
+    this.jumpToOriginalPosition(oldScrollHeight)
+  }
+
+  jumpToOriginalPosition = (oldScrollHeight) => {
+    const element = this.chatBody.current
+
+    if (!element) return
+
+    element.scrollTop = element.scrollHeight - oldScrollHeight + element.scrollTop
+  }
+
   render() {
     const { classes, children } = this.props
 
     return (
-      <div ref={this.chatBody} className={classes.root}>{children}</div>
+      <div ref={this.chatBody} className={classes.root}>
+        {children}
+      </div>
     )
   }
 }
@@ -42,6 +87,7 @@ ChatBody.propTypes = {
   classes: object.isRequired,
   children: node.isRequired,
   isScrollingBottom: bool.isRequired,
+  onScrollTop: func.isRequired,
   onScrollBottom: func.isRequired,
 }
 
