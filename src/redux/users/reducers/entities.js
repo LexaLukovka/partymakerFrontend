@@ -1,5 +1,6 @@
-import { SET_USER } from '../action'
+import { SET_USER, SET_USERS } from '../action'
 import Auth from 'services/Auth'
+import arrayToObject from 'utils/arrayToObject'
 
 const user = Auth.user()
 
@@ -11,6 +12,12 @@ const usersReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         [payload.id]: payload,
+      }
+
+    case SET_USERS:
+      return {
+        ...state,
+        ...arrayToObject(payload),
       }
 
     default:

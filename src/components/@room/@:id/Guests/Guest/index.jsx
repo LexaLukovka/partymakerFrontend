@@ -9,7 +9,7 @@ const styles = {
 }
 
 const Guest = ({ classes, guest }) =>
-  <ListItem className={classes.root}>
+  <ListItem button className={classes.root}>
     <UserAvatar user={guest} />
     <ListItemText
       primary={guest.name}

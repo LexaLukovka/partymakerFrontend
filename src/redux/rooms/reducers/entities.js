@@ -7,6 +7,7 @@ import {
   SET_ROOM_MESSAGES,
   SET_ROOM_MESSAGE
 } from '../action'
+import uniq from 'lodash/uniq'
 import arrayToObject from 'utils/arrayToObject'
 
 export default (state = {}, { type, payload, meta }) => {
@@ -37,7 +38,7 @@ export default (state = {}, { type, payload, meta }) => {
         ...state,
         [room.id]: {
           ...room,
-          guests_ids: [...room.guests_ids, ...payload]
+          guests_ids: uniq([...room.guests_ids, ...payload])
         },
       }
     }
@@ -49,7 +50,7 @@ export default (state = {}, { type, payload, meta }) => {
         ...state,
         [room.id]: {
           ...room,
-          guests_ids: [...room.guests_ids, payload]
+          guests_ids: uniq([...room.guests_ids, payload])
         },
       }
     }
@@ -61,7 +62,7 @@ export default (state = {}, { type, payload, meta }) => {
         ...state,
         [room.id]: {
           ...room,
-          messages_ids: [...room.messages_ids, ...payload]
+          messages_ids: uniq([...room.messages_ids, ...payload])
         },
       }
     }
@@ -73,7 +74,7 @@ export default (state = {}, { type, payload, meta }) => {
         ...state,
         [room.id]: {
           ...room,
-          messages_ids: [...room.messages_ids, payload]
+          messages_ids: uniq([...room.messages_ids, payload])
         },
       }
     }

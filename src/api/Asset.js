@@ -10,7 +10,10 @@ class Asset {
     return Http.get(`/assets/${id}`)
   }
 
-  create(form) {
+  create(file) {
+    const form = new FormData()
+    form.append('file', file)
+
     return Http.post('/assets', form)
   }
 

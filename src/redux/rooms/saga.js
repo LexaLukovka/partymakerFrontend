@@ -8,13 +8,13 @@ import {
   DESTROY_ROOM_FULFILLED,
   UPDATE_ROOM_FULFILLED,
   LOAD_ROOM_GUESTS_FULFILLED,
-  LOAD_ROOM_MESSAGES_FULFILLED
+  LOAD_ROOM_MESSAGES_FULFILLED,
 } from './action'
 
 const createRoom = room => ({
   ...room,
   guests_ids: [],
-  messages_ids: []
+  messages_ids: [],
 })
 
 function* setRoom({ payload: room }) {
@@ -35,7 +35,6 @@ function* addRoomGuests({ payload: users, meta: { room_id } }) {
 }
 
 function* addRoomMessages({ payload, meta: { room_id } }) {
-
   const { data: messages, total, page } = payload
 
   yield put(actions.rooms.status({ messages: { page, total } }))
