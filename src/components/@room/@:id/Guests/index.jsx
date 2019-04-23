@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { object, arrayOf } from 'prop-types'
+import { object, arrayOf, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
 import isEmpty from 'lodash/isEmpty'
 import Guest from './Guest'
 import arrayToObject from 'utils/arrayToObject'
+import Loading from 'components/elements/Loading'
 
 const styles = {
   root: {
@@ -21,7 +22,21 @@ class Guests extends Component {
 
   state = {
     searchString: '',
-    filtered_ids: []
+    filtered_ids: [],
+    isLoading: false,
+  }
+
+  componentDidMount() {
+    this.load().catch(console.error)
+  }
+
+  load = async () => {
+    const { onLoad } = this.props
+    this.setState({ isLoading: true })
+    const result = await onLoad()
+    this.setState({ isLoading: false })
+
+    return result
   }
 
   userSearchString = searchString => guest => {
@@ -50,7 +65,10 @@ class Guests extends Component {
 
   render() {
     const { classes, guests } = this.props
+    const { isLoading } = this.state
     const filtered = this.filterGuests(guests)
+
+    if (isLoading) return <Loading />
 
     return (
       <>
@@ -68,6 +86,7 @@ class Guests extends Component {
 Guests.propTypes = {
   classes: object.isRequired,
   guests: arrayOf(userShape).isRequired,
+  onLoad: func.isRequired,
 }
 
 export default withStyles(styles)(Guests)

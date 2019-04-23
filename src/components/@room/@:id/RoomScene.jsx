@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
-import { arrayOf, number, object, func, string, shape } from 'prop-types'
-import userShape from 'shapes/user'
-import placeShape from 'shapes/place'
+import { shape, object, func } from 'prop-types'
+import authShape from 'shapes/auth'
+import matchShape from 'shapes/match'
+import roomShape from 'shapes/room'
 import { Typography, withStyles } from '@material-ui/core'
 import NotFound from 'components/modules/NotFound'
-import messageShape from 'shapes/message'
+import Loading from 'components/elements/Loading'
 import PersonButton from './PersonButton'
 import Guests from './Guests'
-import Chat from './chat/Chat'
-import ChatHeader from './chat/ChatHeader'
-import ChatBody from './chat/ChatBody'
-import ChatForm from './chat/ChatForm'
-import Messages from './chat/Messages'
+import Chat from './Chat'
 import connector from './connector'
-import wait from 'utils/wait'
-import Loading from 'components/elements/Loading'
 
 const styles = {
   root: {
@@ -34,80 +29,52 @@ const styles = {
     alignItems: 'center',
     padding: '15px 20px 30px 20px',
   },
-  chat: {
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-
-  loading: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: 10,
-  }
 }
 
 class RoomScene extends Component {
 
   state = {
-    isScrollingBottom: false,
-    isLoadingMessages: false,
-    page: 1,
-    limit: 20,
+    isRoomLoading: false,
+    isGuestsLoaded: false,
   }
 
-  constructor(props) {
-    super(props)
-
+  componentDidMount() {
     this.loadRoom().catch(console.error)
   }
 
   loadRoom = async () => {
     const { actions, match } = this.props
     actions.setCurrentRoom(match.params.id)
+    this.setState({ isRoomLoading: true })
     await actions.loadRoom(match.params.id)
-    await actions.loadRoomGuests(match.params.id)
-    await actions.loadRoomMessages(match.params.id)
-    this.setState({ isScrollingBottom: true })
+    this.setState({ isRoomLoading: false })
   }
 
-  setPlace = () => {
-    console.log('set place')
-  }
-
-  sendMessage = async (form) => {
+  sendMessage = (form) => {
     const { actions, match } = this.props
-    const room_id = match.params.id
 
-    const promise = await actions.sendMessage(room_id, form)
-
-    await wait(50)
-
-    this.setState({ isScrollingBottom: true })
-
-    return promise
+    return actions.sendMessage(match.params.id, form)
   }
 
-  disableScrolling = () => {
-    this.setState({ isScrollingBottom: false })
+  loadMessages = ({ page, limit }) => {
+    const { actions, match } = this.props
+
+    return actions.loadRoomMessages(match.params.id, { page, limit })
   }
 
-  loadMoreMessages = async () => {
-    const { actions, match, room } = this.props
-    const { page, limit } = this.state
+  loadGuests = async () => {
+    const { actions, match } = this.props
+    const result = await actions.loadRoomGuests(match.params.id)
+    this.setState({ isGuestsLoaded: true })
 
-    if (room.totalMessages <= page * limit) return null
-
-    this.setState({ page: page + 1, isLoadingMessages: true })
-    const promise = await actions.loadRoomMessages(match.params.id, { page: page + 1, limit })
-    this.setState({ isLoadingMessages: false })
-
-    return promise
+    return result
   }
 
   render() {
     const { classes, room, auth } = this.props
-    const { isScrollingBottom, isLoadingMessages } = this.state
+    const { isRoomLoading, isGuestsLoaded } = this.state
+
+    if (isRoomLoading) return <Loading />
 
     if (!room) return <NotFound />
 
@@ -118,24 +85,16 @@ class RoomScene extends Component {
             <Typography variant="h5">Приглашенные гости</Typography>
             <PersonButton />
           </div>
-          <Guests guests={room.guests} />
+          <Guests guests={room.guests} onLoad={this.loadGuests} />
         </div>
-        <Chat className={classes.chat}>
-          <ChatHeader
-            title={room.title}
-            place_title={room.place?.title}
-            onSetPlace={this.setPlace}
+        {isGuestsLoaded && (
+          <Chat
+            auth_id={auth.user_id}
+            room={room}
+            onLoad={this.loadMessages}
+            onSend={this.sendMessage}
           />
-          <ChatBody
-            isScrollingBottom={isScrollingBottom}
-            onScrollBottom={this.disableScrolling}
-            onScrollTop={this.loadMoreMessages}
-          >
-            {isLoadingMessages && <Loading className={classes.loading} />}
-            <Messages auth_id={auth.user_id} messages={room.messages} />
-          </ChatBody>
-          <ChatForm onSubmit={this.sendMessage} />
-        </Chat>
+        )}
       </section>
     )
   }
@@ -143,20 +102,9 @@ class RoomScene extends Component {
 
 RoomScene.propTypes = {
   classes: object.isRequired,
-  auth: shape({
-    user_id: number.isRequired,
-  }),
-  room: shape({
-    place: placeShape,
-    guests: arrayOf(userShape).isRequired,
-    messages: arrayOf(messageShape).isRequired,
-    totalMessages: number,
-  }),
-  match: shape({
-    params: shape({
-      id: string.isRequired,
-    }),
-  }),
+  auth: authShape.isRequired,
+  room: roomShape,
+  match: matchShape,
   actions: shape({
     setCurrentRoom: func.isRequired,
     loadRoom: func.isRequired,

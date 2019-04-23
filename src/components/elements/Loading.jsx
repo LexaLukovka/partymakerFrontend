@@ -12,7 +12,7 @@ const Loading = ({ classes, className }) =>
 
 Loading.propTypes = {
   classes: object.isRequired,
-  className: string.isRequired,
+  className: string,
 }
 
 export default withStyles(styles)(Loading)

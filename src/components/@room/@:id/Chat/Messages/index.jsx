@@ -1,15 +1,22 @@
 import React from 'react'
-import { object, arrayOf, number } from 'prop-types'
+import { object, arrayOf, number, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import Message from './Message'
+import Loading from 'components/elements/Loading'
 
 const styles = {
   root: {},
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 10,
+  }
 }
 
-const Messages = ({ classes, messages, auth_id }) => (
+const Messages = ({ classes, isLoading, messages, auth_id }) => (
   <div className={classes.root}>
+    {isLoading && <Loading className={classes.loading} />}
     {messages.map(message => (
       <Message
         key={message.id}
@@ -24,6 +31,7 @@ Messages.propTypes = {
   classes: object.isRequired,
   messages: arrayOf(messageShape).isRequired,
   auth_id: number.isRequired,
+  isLoading: bool,
 }
 
 export default withStyles(styles)(Messages)

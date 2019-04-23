@@ -13,6 +13,7 @@ export default shape({
   place: placeShape,
   guests: arrayOf(userShape),
   messages: arrayOf(messageShape),
+  totalMessages: number,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })

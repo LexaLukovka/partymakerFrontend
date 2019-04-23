@@ -67,9 +67,9 @@ class ChatBody extends Component {
   jumpToOriginalPosition = (oldScrollHeight) => {
     const element = this.chatBody.current
 
-    if (!element) return
+    const { scrollTop, scrollHeight } = element
 
-    element.scrollTop = element.scrollHeight - oldScrollHeight + element.scrollTop
+    element.scrollTop = scrollHeight - oldScrollHeight + scrollTop
   }
 
   render() {

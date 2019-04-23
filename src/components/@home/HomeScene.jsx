@@ -28,6 +28,7 @@ const styles = {
     flexGrow: 1,
     zIndex: 10,
     display: 'flex',
+    overflow: 'auto',
     flexDirection: 'column'
   },
   mapElement: {
