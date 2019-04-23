@@ -32,7 +32,7 @@ const Message = ({ classes, message, isMine }) =>
 Message.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired,
-  isMine: bool,
+  isMine: bool.isRequired,
 }
 
 export default withStyles(styles)(Message)

@@ -13,6 +13,7 @@ import ChatBody from './chat/ChatBody'
 import ChatForm from './chat/ChatForm'
 import Messages from './chat/Messages'
 import connector from './connector'
+import wait from 'utils/wait'
 
 const styles = {
   root: {
@@ -70,6 +71,8 @@ class RoomScene extends Component {
 
     const promise = await actions.sendMessage(room_id, form)
 
+    await wait(50)
+
     this.setState({ isScrollingBottom: true })
 
     return promise
@@ -84,8 +87,6 @@ class RoomScene extends Component {
     const { isScrollingBottom } = this.state
 
     if (!room) return <NotFound />
-
-    console.log(room)
 
     return (
       <section className={classes.root}>
