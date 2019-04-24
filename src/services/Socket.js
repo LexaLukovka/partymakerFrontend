@@ -53,7 +53,7 @@ class Socket {
   }
 
   close() {
-    this.socket.close()
+    if (this.socket) this.socket.close()
   }
 }
 

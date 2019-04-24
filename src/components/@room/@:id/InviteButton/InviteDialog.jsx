@@ -1,19 +1,22 @@
 import React from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func, bool, number } from 'prop-types'
 import { Dialog, DialogContent, Typography, withStyles } from '@material-ui/core'
 import OutlineCard from 'components/elements/OutlineCard'
+import { FRONTEND_URL } from 'src/constants'
 
 const styles = {
-  root: {},
+  root: {
+    minWidth: 600,
+  },
   card: {
     display: 'flex',
-    justifyContent: 'center',
-    minWidth: 600,
+    alignItems: 'center',
+    padding: 25,
     minHeight: 400,
   }
 }
 
-const InviteDialog = ({ classes, isOpen, onClose }) =>
+const InviteDialog = ({ classes, isOpen, onClose, room_id }) =>
   <Dialog className={classes.root} open={isOpen} onClose={onClose}>
     <DialogContent>
       <OutlineCard className={classes.card}>
@@ -25,7 +28,7 @@ const InviteDialog = ({ classes, isOpen, onClose }) =>
             align="center"
             variant="subtitle1"
             color="primary"
-          >https://partymaker.zp.ua/invite/R2xRwaTs
+          >{FRONTEND_URL}/invite/{room_id}
           </Typography>
         </div>
       </OutlineCard>
@@ -34,6 +37,7 @@ const InviteDialog = ({ classes, isOpen, onClose }) =>
 
 InviteDialog.propTypes = {
   classes: object.isRequired,
+  room_id: number.isRequired,
   isOpen: bool.isRequired,
   onClose: func.isRequired,
 }

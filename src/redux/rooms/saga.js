@@ -17,6 +17,7 @@ const createRoom = room => ({
 })
 
 function* setRoom({ payload: room }) {
+  yield put(actions.rooms.setCurrent(room.id))
   yield put(actions.rooms.set(createRoom(room)))
 }
 
@@ -33,7 +34,7 @@ function* addRoomGuests({ payload: users, meta: { room_id } }) {
   yield put(actions.rooms.setGuests(room_id, users.map(u => u.id)))
 }
 
-function* addRoomMessages({ payload, meta: { room_id } }) {
+function* addRoomMessages({ payload }) {
   const { data: messages, total, page } = payload
 
   yield put(actions.rooms.status({ messages: { page, total } }))

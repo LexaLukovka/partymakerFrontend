@@ -49,7 +49,6 @@ class RoomScene extends Component {
 
   loadRoom = async () => {
     const { actions, match } = this.props
-    actions.setCurrentRoom(match.params.id)
     this.setState({ isRoomLoading: true })
     await actions.loadRoom(match.params.id)
     this.setState({ isRoomLoading: false })
@@ -84,7 +83,7 @@ class RoomScene extends Component {
         <div className={classes.guests}>
           <div className={classes.heading}>
             <Typography variant="h5">Приглашенные гости</Typography>
-            <InviteButton />
+            <InviteButton room_id={room?.id} />
           </div>
           <Guests guests={room?.guests || []} onLoad={this.loadGuests} />
         </div>
@@ -108,7 +107,6 @@ RoomScene.propTypes = {
   room: roomShape,
   match: matchShape,
   actions: shape({
-    setCurrentRoom: func.isRequired,
     loadRoom: func.isRequired,
     loadRoomMessages: func.isRequired,
     loadRoomGuests: func.isRequired,

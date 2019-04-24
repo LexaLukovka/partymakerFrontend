@@ -1,6 +1,5 @@
 /* eslint-disable class-methods-use-this,no-plusplus,no-console */
 import Cookies from 'universal-cookie'
-import { APP_DOMAIN, IS_DEV } from 'src/constants'
 import removeCookies from 'utils/removeCookies'
 
 class Cookie {
@@ -11,7 +10,7 @@ class Cookie {
   set(name, value) {
     const options = {
       path: '/',
-      domain: IS_DEV ? undefined : `.${APP_DOMAIN}`,
+      domain: undefined,
       secure: false,
     }
 
@@ -52,6 +51,7 @@ class Cookie {
     removeCookies()
   }
 }
+
 const cookie = new Cookie()
 
 export default cookie

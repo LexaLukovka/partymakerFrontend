@@ -12,7 +12,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    setCurrentRoom: bindActionCreators(actions.rooms.setCurrent, dispatch),
     loadRoom: bindActionCreators(actions.rooms.find, dispatch),
     loadRoomMessages: bindActionCreators(actions.rooms.messages, dispatch),
     loadRoomGuests: bindActionCreators(actions.rooms.guests, dispatch),
