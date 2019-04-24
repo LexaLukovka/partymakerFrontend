@@ -8,7 +8,7 @@ import withCodeSplitting from './utils/withCodeSplitting'
 import WithTheme from './components/WithTheme'
 import WithRedux from './components/WithRedux'
 import PreloadManager from './components/PreloadManager'
-import sagas from 'src/redux/sagas'
+import sagas from 'src/redux/saga'
 
 export default () => async (request, response) => {
   const sheetsRegistry = new SheetsRegistry()

@@ -3,7 +3,7 @@ import promise from 'redux-promise-middleware'
 import { persistStore } from 'redux-persist'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware, { END } from 'redux-saga'
-import rootSaga from 'src/redux/sagas'
+import rootSaga from 'src/redux/saga'
 import reducers from 'src/redux/app/reducers'
 
 const isClient = typeof window !== 'undefined'
