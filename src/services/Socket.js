@@ -6,13 +6,12 @@ class Socket {
 
   socket = WebSocket('ws://localhost:3333')
 
+  currentTopic = null
+
   isConnected = false
 
   constructor() {
-    this.socket
-      .withJwtToken(Auth.token)
-      .connect()
-      .subscribe('chat')
+    this.socket.withJwtToken(Auth.token).connect()
 
     this.socket.on('open', () => {
       this.isConnected = true
@@ -24,10 +23,17 @@ class Socket {
   }
 
   _handleOn(name, callback) {
-    return this.socket.getSubscription('chat').on(name, (data) => {
+    return this.socket.getSubscription(this.currentTopic).on(name, (data) => {
       console.log('ON:', name, data)
       callback(data)
     })
+  }
+
+  subscribe(topic) {
+    this.currentTopic = topic
+    this.socket.subscribe(topic)
+
+    return this
   }
 
   on(name, callback) {
@@ -35,11 +41,19 @@ class Socket {
       return name.map(n => this._handleOn(n, callback))
     }
 
-    return this._handleOn(name, callback)
+    this._handleOn(name, callback)
+
+    return this
   }
 
   emit(name, data) {
-    return this.socket.emit(name, data)
+    this.socket.emit(name, data)
+
+    return this
+  }
+
+  close() {
+    this.socket.close()
   }
 }
 

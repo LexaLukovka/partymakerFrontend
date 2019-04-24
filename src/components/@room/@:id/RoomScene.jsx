@@ -10,6 +10,7 @@ import PersonButton from './PersonButton'
 import Guests from './Guests'
 import Chat from './Chat'
 import connector from './connector'
+import Socket from 'services/Socket'
 
 const styles = {
   root: {
@@ -39,7 +40,13 @@ class RoomScene extends Component {
   }
 
   componentDidMount() {
+    const { match } = this.props
+    Socket.subscribe(`room:${match.params.id}`)
     this.loadRoom().catch(console.error)
+  }
+
+  componentWillUnmount() {
+    Socket.close()
   }
 
   loadRoom = async () => {

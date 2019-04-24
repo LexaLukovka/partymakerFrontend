@@ -9,7 +9,6 @@ export default shape({
   place_id: number,
   date: string,
   guests_ids: arrayOf(number).isRequired,
-  messages_ids: arrayOf(number).isRequired,
   place: placeShape,
   guests: arrayOf(userShape),
   messages: arrayOf(messageShape),

@@ -14,7 +14,6 @@ import {
 const createRoom = room => ({
   ...room,
   guests_ids: [],
-  messages_ids: [],
 })
 
 function* setRoom({ payload: room }) {
@@ -39,7 +38,6 @@ function* addRoomMessages({ payload, meta: { room_id } }) {
 
   yield put(actions.rooms.status({ messages: { page, total } }))
   yield put(actions.messages.setMany(messages))
-  yield put(actions.rooms.setMessages(room_id, messages.map(m => m.id)))
 }
 
 export default function* saga() {
