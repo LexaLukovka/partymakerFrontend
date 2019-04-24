@@ -79,11 +79,7 @@ class RoomScene extends Component {
 
   render() {
     const { classes, room, auth, actions: { setMessage } } = this.props
-    const { isRoomLoading, isGuestsLoaded } = this.state
-
-    if (isRoomLoading) return <Loading />
-
-    if (!room) return <NotFound />
+    const { isGuestsLoaded } = this.state
 
     return (
       <section className={classes.root}>
@@ -92,7 +88,7 @@ class RoomScene extends Component {
             <Typography variant="h5">Приглашенные гости</Typography>
             <PersonButton />
           </div>
-          <Guests guests={room.guests} onLoad={this.loadGuests} />
+          <Guests guests={room?.guests || []} onLoad={this.loadGuests} />
         </div>
         {isGuestsLoaded && (
           <Chat

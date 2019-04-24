@@ -16,6 +16,12 @@ const styles = {
   search: {
     padding: '0px 20px 30px 20px',
   },
+  loading: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1,
+  }
 }
 
 class Guests extends Component {
@@ -68,7 +74,7 @@ class Guests extends Component {
     const { isLoading } = this.state
     const filtered = this.filterGuests(guests)
 
-    if (isLoading) return <Loading />
+    if (isLoading) return <Loading className={classes.loading} />
 
     return (
       <>
