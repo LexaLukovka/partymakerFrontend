@@ -52,5 +52,6 @@ class Cookie {
     removeCookies()
   }
 }
+const cookie = new Cookie()
 
-export default new Cookie()
+export default cookie

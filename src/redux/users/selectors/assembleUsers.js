@@ -1,10 +1,10 @@
-import { createSelector } from 'reselect/lib/index'
+import { createSelector } from 'reselect'
 
-const assemblePlaces = (places) => {
-  return places
+const assembleUsers = (users) => {
+  return Object.values(users)
 }
 
 export default createSelector(
-  state => state.places.entities,
-  assemblePlaces,
+  state => state.users.entities,
+  assembleUsers,
 )

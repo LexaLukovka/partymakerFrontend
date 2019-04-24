@@ -12,7 +12,10 @@ export default (state = {}, { type, payload }) => {
     case SET_MESSAGE:
       return {
         ...state,
-        [payload.id]: payload,
+        [payload.id]: {
+          ...payload,
+          room_id: Number(payload.room_id)
+        },
       }
 
     case REMOVE_MESSAGE: {

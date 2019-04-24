@@ -22,6 +22,7 @@
     "analyze": "node index.js --analyze"
   },
   "dependencies": {
+    "@adonisjs/websocket-client": "^1.0.9",
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",

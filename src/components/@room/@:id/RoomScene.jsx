@@ -6,6 +6,7 @@ import roomShape from 'shapes/room'
 import { Typography, withStyles } from '@material-ui/core'
 import NotFound from 'components/modules/NotFound'
 import Loading from 'components/elements/Loading'
+import Socket from 'services/Socket'
 import PersonButton from './PersonButton'
 import Guests from './Guests'
 import Chat from './Chat'
@@ -40,6 +41,12 @@ class RoomScene extends Component {
 
   componentDidMount() {
     this.loadRoom().catch(console.error)
+
+    Socket.on('message', message => {
+      const { actions } = this.props
+
+      actions.setMessage(message)
+    })
   }
 
   loadRoom = async () => {
@@ -77,6 +84,8 @@ class RoomScene extends Component {
     if (isRoomLoading) return <Loading />
 
     if (!room) return <NotFound />
+
+    console.log(room)
 
     return (
       <section className={classes.root}>
