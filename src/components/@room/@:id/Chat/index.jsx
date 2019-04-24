@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { object, number, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import roomShape from 'shapes/room'
+import wait from 'utils/wait'
+import Socket from 'services/Socket'
 import ChatHeader from './ChatHeader'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
-import wait from 'utils/wait'
 
 const styles = {
   root: {
@@ -27,6 +28,12 @@ class Chat extends Component {
 
   componentDidMount() {
     this.loadAndScrollBottom().catch(console.error)
+    const { onMessage } = this.props
+
+    Socket.on('message', (message) => {
+      onMessage(message)
+      this.setState({ isScrollingBottom: true })
+    })
   }
 
   loadAndScrollBottom = async () => {
@@ -105,6 +112,7 @@ Chat.propTypes = {
   auth_id: number.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,
+  onMessage: func.isRequired,
 }
 
 export default withStyles(styles)(Chat)

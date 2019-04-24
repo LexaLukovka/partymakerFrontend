@@ -8,8 +8,6 @@ const currentRoom = (rooms, messages, users, places, room_id, totalMessages) => 
 
   if (!room) return null
 
-  console.log(messages)
-
   return {
     ...room,
     messages: messages.filter(m => m.room_id === room.id),
