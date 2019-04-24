@@ -21,12 +21,17 @@ const InviteDialog = ({ classes, isOpen, onClose, room_id }) =>
     <DialogContent>
       <OutlineCard className={classes.card}>
         <div>
-          <Typography align="center" color="textSecondary">
+          <Typography
+            gutterBottom
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+          >
             Скопируйте эту ссылку и отправьте её вашим гостям что бы пригласить
           </Typography>
           <Typography
             align="center"
-            variant="subtitle1"
+            variant="h5"
             color="primary"
           >{FRONTEND_URL}/invite/{room_id}
           </Typography>

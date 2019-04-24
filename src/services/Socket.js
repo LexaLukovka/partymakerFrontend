@@ -23,10 +23,12 @@ class Socket {
   }
 
   _handleOn(name, callback) {
-    return this.socket.getSubscription(this.currentTopic).on(name, (data) => {
-      console.log('ON:', name, data)
-      callback(data)
-    })
+    if (this.socket) {
+      this.socket.getSubscription(this.currentTopic).on(name, (data) => {
+        console.log('ON:', name, data)
+        callback(data)
+      })
+    }
   }
 
   subscribe(topic) {
@@ -47,7 +49,7 @@ class Socket {
   }
 
   emit(name, data) {
-    this.socket.emit(name, data)
+    if (this.socket) this.socket.emit(name, data)
 
     return this
   }
