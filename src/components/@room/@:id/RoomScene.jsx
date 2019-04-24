@@ -4,7 +4,7 @@ import authShape from 'shapes/auth'
 import matchShape from 'shapes/match'
 import roomShape from 'shapes/room'
 import { Typography, withStyles } from '@material-ui/core'
-import PersonButton from './PersonButton'
+import InviteButton from './InviteButton'
 import Guests from './Guests'
 import Chat from './Chat'
 import connector from './connector'
@@ -84,7 +84,7 @@ class RoomScene extends Component {
         <div className={classes.guests}>
           <div className={classes.heading}>
             <Typography variant="h5">Приглашенные гости</Typography>
-            <PersonButton />
+            <InviteButton />
           </div>
           <Guests guests={room?.guests || []} onLoad={this.loadGuests} />
         </div>
