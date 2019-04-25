@@ -8,36 +8,36 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: 400,
+    minHeight: 600,
+    marginBottom: 50
   },
   headline: {
-    padding: '30px 0 0 30px',
+    padding: '30px 0 0 0',
   },
   screenshots: {
     flexGrow: 1,
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '0 30px 30px 30px',
   },
   home: {
     width: '50%',
   },
   home1: {
     marginTop: 100,
-    marginLeft: -100,
+    marginLeft: -500,
     width: '50%',
   }
 }
 
 const Screenshots = ({ classes }) =>
-  <div className={classes.root}>
+  <section className={classes.root}>
     <Typography className={classes.headline} variant="h4">Скриншоты</Typography>
     <div className={classes.screenshots}>
       <img className={classes.home} alt="Home Page" src={home} />
       <img className={classes.home1} alt="Filled Home Page" src={home1} />
     </div>
-  </div>
+  </section>
 
 Screenshots.propTypes = {
   classes: object.isRequired,

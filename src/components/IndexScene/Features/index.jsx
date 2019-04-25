@@ -13,7 +13,7 @@ const styles = {
     minHeight: 500,
   },
   headline: {
-    padding: 30,
+    padding: '30px 0 0 0',
   },
   features: {
     flexGrow: 1,
@@ -25,7 +25,7 @@ const styles = {
 }
 
 const Features = ({ classes }) =>
-  <div className={classes.root}>
+  <section className={classes.root}>
     <Typography className={classes.headline} variant="h4">Организация вечеринок</Typography>
     <div className={classes.features}>
       <Feature icon={<FocusingIcon />} title="Найди место">
@@ -46,7 +46,7 @@ const Features = ({ classes }) =>
         вместе
       </Feature>
     </div>
-  </div>
+  </section>
 
 Features.propTypes = {
   classes: object.isRequired,
