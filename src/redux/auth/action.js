@@ -75,7 +75,7 @@ const logout = () => ({
  * Sync actions. Updating store
  */
 
-const setUser = (user) => ({
+const setCurrentUser = (user) => ({
   type: SET_AUTH_USER,
   payload: user,
 })
@@ -93,7 +93,7 @@ export default {
   facebook,
   forgotPassword,
   resetPassword,
-  setUser,
+  setCurrentUser,
   setEmail,
   logout,
 }

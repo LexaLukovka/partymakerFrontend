@@ -7,12 +7,8 @@ import initialsFromUserName from 'utils/initialsFromUserName'
 const styles = theme => ({
   root: {
     alignSelf: 'center',
-    width: 80,
-    height: 80,
-    [theme.breakpoints.up('sm')]: {
-      width: 120,
-      height: 120,
-    },
+    width: 45,
+    height: 45,
   },
   small: {
     width: 40,

@@ -12,15 +12,13 @@ export default ({ content, extractor, state, sheetsRegistry }) => {
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
         ${extractor.getStyleTags()}
+        <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0E-RRtQWldjEQLFkAOWDgMSj295C0Lo&libraries=places,visualization&language=ru-RU"></script>
     </head>
     <body>
         <div id="root">${renderToString(content)}</div>
         <style id="jss-server-side">${sheetsRegistry}</style>
         <script>
             window.__STATE__ = ${JSON.stringify(state)}
-        </script>
-        <script
-           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA0E-RRtQWldjEQLFkAOWDgMSj295C0Lo&libraries=places,visualization&language=ru-RU">
         </script>
         ${extractor.getScriptTags()}
         <script>

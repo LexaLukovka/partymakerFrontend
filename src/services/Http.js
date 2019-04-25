@@ -1,8 +1,8 @@
 import axios from 'axios'
-import Cookie from 'services/Cookie'
 import { BACKEND_URL } from 'src/constants'
 import store from 'src/redux/store'
 import actions from 'src/redux/action'
+import Auth from 'services/Auth'
 
 class Http {
   constructor() {
@@ -17,7 +17,7 @@ class Http {
   }
 
   authorize() {
-    const token = Cookie.get('token')
+    const token = Auth.token
     const { headers } = this.instance.defaults
     if (token) {
       headers.common.Authorization = `Bearer ${token}`
@@ -36,11 +36,11 @@ class Http {
     this.authorize()
     try {
       const { data } = await this.instance[method](url, params, config)
-      console.log(`${method.toUpperCase()}: ${url} FULFILLED`)
+      // console.log(`${method.toUpperCase()}: ${url} FULFILLED`)
 
       return data
     } catch (err) {
-      console.log(`${method.toUpperCase()}:${url} REJECTED`)
+      // console.error(`${method.toUpperCase()}:${url} REJECTED`)
 
       this.handleError(err)
     }
@@ -67,4 +67,6 @@ class Http {
   }
 }
 
-export default new Http()
+const http = new Http()
+
+export default http
