@@ -87,7 +87,7 @@ class RoomScene extends Component {
           </div>
           <Guests guests={room?.guests || []} onLoad={this.loadGuests} />
         </div>
-        {isGuestsLoaded && (
+        {isGuestsLoaded && room && (
           <Chat
             auth_id={auth.user_id}
             room={room}

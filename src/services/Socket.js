@@ -4,13 +4,16 @@ import Auth from 'services/Auth'
 
 class Socket {
 
-  socket = WebSocket('ws://localhost:3333')
-
   currentTopic = null
 
   isConnected = false
 
+  _connect() {
+    return WebSocket('ws://localhost:3333')
+  }
+
   constructor() {
+    this.socket = this._connect()
     this.socket.withJwtToken(Auth.token).connect()
 
     this.socket.on('open', () => {
@@ -33,6 +36,11 @@ class Socket {
 
   subscribe(topic) {
     this.currentTopic = topic
+
+    if (!this.socket) {
+      this.socket = this._connect()
+    }
+
     this.socket.subscribe(topic)
 
     return this
@@ -55,7 +63,12 @@ class Socket {
   }
 
   close() {
-    if (this.socket) this.socket.close()
+    try {
+      if (this.socket) this.socket.close()
+      this.socket = null
+    } catch (e) {
+      this.socket = null
+    }
   }
 }
 
