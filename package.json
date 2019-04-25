@@ -22,6 +22,7 @@
     "analyze": "node index.js --analyze"
   },
   "dependencies": {
+    "@adonisjs/websocket-client": "^1.0.9",
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
@@ -29,6 +30,7 @@
     "classnames": "^2.2.6",
     "express-minify-html": "^0.12.0",
     "formik": "^1.5.0",
+    "fsevents": "^2.0.6",
     "history": "^4.7.2",
     "isomorphic-fetch": "latest",
     "jss": "^9.8.7",
@@ -43,6 +45,7 @@
     "react-dom": "npm:@hot-loader/react-dom",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.0.2",
+    "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.7.0",
     "react-icon-loader": "^0.6.0",

@@ -1,7 +1,15 @@
 import auth from './auth/action'
-import entities from './entities/action'
+import users from 'src/redux/users/action'
+import rooms from 'src/redux/rooms/action'
+import places from 'src/redux/places/action'
+import assets from 'src/redux/assets/action'
+import messages from 'src/redux/messages/action'
 
 export default {
   auth,
-  entities,
+  users,
+  rooms,
+  places,
+  assets,
+  messages,
 }

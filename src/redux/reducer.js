@@ -1,8 +1,16 @@
 import { combineReducers } from 'redux'
 import auth from './auth/reducer'
-import entities from './entities/reducer'
+import rooms from './rooms/reducers'
+import users from './users/reducers'
+import places from './places/reducers'
+import messages from './messages/reducers'
+import assets from './assets/reducers'
 
 export default combineReducers({
   auth,
-  entities,
+  users,
+  rooms,
+  places,
+  messages,
+  assets,
 })
