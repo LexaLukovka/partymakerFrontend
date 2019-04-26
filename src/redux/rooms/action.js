@@ -25,16 +25,6 @@ export const DESTROY_ROOM_PENDING = 'DESTROY_ROOM_PENDING'
 export const DESTROY_ROOM_FULFILLED = 'DESTROY_ROOM_FULFILLED'
 export const DESTROY_ROOM_REJECTED = 'DESTROY_ROOM_REJECTED'
 
-export const LOAD_ROOM_GUESTS = 'LOAD_ROOM_GUESTS'
-export const LOAD_ROOM_GUESTS_PENDING = 'LOAD_ROOM_GUESTS_PENDING'
-export const LOAD_ROOM_GUESTS_FULFILLED = 'LOAD_ROOM_GUESTS_FULFILLED'
-export const LOAD_ROOM_GUESTS_REJECTED = 'LOAD_ROOM_GUESTS_REJECTED'
-
-export const LOAD_ROOM_MESSAGES = 'LOAD_ROOM_MESSAGES'
-export const LOAD_ROOM_MESSAGES_PENDING = 'LOAD_ROOM_MESSAGES_PENDING'
-export const LOAD_ROOM_MESSAGES_FULFILLED = 'LOAD_ROOM_MESSAGES_FULFILLED'
-export const LOAD_ROOM_MESSAGES_REJECTED = 'LOAD_ROOM_MESSAGES_REJECTED'
-
 export const SET_ROOM = 'SET_ROOM'
 export const SET_ROOMS = 'SET_ROOMS'
 export const REMOVE_ROOM = 'REMOVE_ROOM'
@@ -44,7 +34,7 @@ export const SET_ROOM_GUESTS = 'SET_ROOM_GUESTS'
 export const SET_ROOM_GUEST = 'SET_ROOM_GUEST'
 export const SET_ROOM_MESSAGES = 'SET_ROOM_MESSAGES'
 export const SET_ROOM_MESSAGE = 'SET_ROOM_MESSAGE'
-
+export const SET_ROOM_INVITE = 'SET_ROOM_INVITE'
 export const SET_ROOM_STATUS = 'SET_ROOM_STATUS'
 
 /**
@@ -74,22 +64,6 @@ const update = (id, form) => ({
 const destroy = (room_id) => ({
   type: UPDATE_ROOM,
   payload: Room.destroy(room_id),
-  meta: { room_id }
-})
-
-/**
- * Async actions. Making API requests to relations
- */
-
-const guests = (room_id) => ({
-  type: LOAD_ROOM_GUESTS,
-  payload: Room.guests(room_id),
-  meta: { room_id }
-})
-
-const messages = (room_id, params) => ({
-  type: LOAD_ROOM_MESSAGES,
-  payload: Room.messages(room_id, params),
   meta: { room_id }
 })
 
@@ -145,6 +119,12 @@ const setMessage = (room_id, message_id) => ({
   meta: { room_id }
 })
 
+const setInvite = (room_id, invite_id) => ({
+  type: SET_ROOM_INVITE,
+  payload: invite_id,
+  meta: { room_id }
+})
+
 /**
  * Sync actions. Room status
  */
@@ -159,8 +139,6 @@ export default {
   create,
   update,
   find,
-  guests,
-  messages,
   set,
   setCurrent,
   setMany,
@@ -170,5 +148,6 @@ export default {
   setGuest,
   setMessages,
   setMessage,
+  setInvite,
   status,
 }

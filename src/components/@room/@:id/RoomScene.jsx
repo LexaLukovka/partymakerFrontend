@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { shape, object, func } from 'prop-types'
+import { func, object, shape } from 'prop-types'
 import authShape from 'shapes/auth'
 import matchShape from 'shapes/match'
 import roomShape from 'shapes/room'
 import { Typography, withStyles } from '@material-ui/core'
-import InviteButton from './InviteButton'
+import Invite from './Invite'
 import Guests from './Guests'
 import Chat from './Chat'
 import connector from './connector'
@@ -63,15 +63,33 @@ class RoomScene extends Component {
   loadMessages = ({ page, limit }) => {
     const { actions, match } = this.props
 
-    return actions.loadRoomMessages(match.params.id, { page, limit })
+    return actions.loadMessages(match.params.id, { page, limit })
   }
 
   loadGuests = async () => {
     const { actions, match } = this.props
-    const result = await actions.loadRoomGuests(match.params.id)
+    const result = await actions.loadGuests(match.params.id)
     this.setState({ isGuestsLoaded: true })
 
     return result
+  }
+
+  loadInvite = () => {
+    const { actions, match } = this.props
+
+    return actions.loadInvite(match.params.id)
+  }
+
+  createInvite = async () => {
+    const { actions, match } = this.props
+
+    return actions.createInvite(match.params.id)
+  }
+
+  updateInvite = async () => {
+    const { actions, match } = this.props
+
+    return actions.updateInvite(match.params.id)
   }
 
   render() {
@@ -83,9 +101,17 @@ class RoomScene extends Component {
         <div className={classes.guests}>
           <div className={classes.heading}>
             <Typography variant="h5">Приглашенные гости</Typography>
-            <InviteButton room_id={room?.id} />
+            <Invite
+              room={room}
+              onLoad={this.loadInvite}
+              onCreate={this.createInvite}
+              onUpdate={this.updateInvite}
+            />
           </div>
-          <Guests guests={room?.guests || []} onLoad={this.loadGuests} />
+          <Guests
+            guests={room?.guests || []}
+            onLoad={this.loadGuests}
+          />
         </div>
         {isGuestsLoaded && room && (
           <Chat
@@ -108,8 +134,11 @@ RoomScene.propTypes = {
   match: matchShape,
   actions: shape({
     loadRoom: func.isRequired,
-    loadRoomMessages: func.isRequired,
-    loadRoomGuests: func.isRequired,
+    loadMessages: func.isRequired,
+    loadGuests: func.isRequired,
+    loadInvite: func.isRequired,
+    createInvite: func.isRequired,
+    updateInvite: func.isRequired,
     sendMessage: func.isRequired,
     setMessage: func.isRequired,
   }),

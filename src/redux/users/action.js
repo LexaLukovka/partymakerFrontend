@@ -1,4 +1,4 @@
-import User from 'api/User'
+import User from 'api/Guest'
 
 export const LOAD_USERS = 'LOAD_USERS'
 export const LOAD_USERS_PENDING = 'LOAD_USERS_PENDING'

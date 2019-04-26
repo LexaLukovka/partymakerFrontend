@@ -10,14 +10,19 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-const mapDispatchToProps = dispatch => ({
-  actions: {
-    loadRoom: bindActionCreators(actions.rooms.find, dispatch),
-    loadRoomMessages: bindActionCreators(actions.rooms.messages, dispatch),
-    loadRoomGuests: bindActionCreators(actions.rooms.guests, dispatch),
-    sendMessage: bindActionCreators(actions.messages.create, dispatch),
-    setMessage: bindActionCreators(actions.messages.set, dispatch),
-  }
-})
+const mapDispatchToProps = dispatch => {
+  return ({
+    actions: {
+      loadRoom: bindActionCreators(actions.rooms.find, dispatch),
+      loadMessages: bindActionCreators(actions.messages.list, dispatch),
+      loadGuests: bindActionCreators(actions.guests.list, dispatch),
+      loadInvite: bindActionCreators(actions.invites.load, dispatch),
+      createInvite: bindActionCreators(actions.invites.create, dispatch),
+      updateInvite: bindActionCreators(actions.invites.update, dispatch),
+      sendMessage: bindActionCreators(actions.messages.create, dispatch),
+      setMessage: bindActionCreators(actions.messages.set, dispatch),
+    }
+  })
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)
