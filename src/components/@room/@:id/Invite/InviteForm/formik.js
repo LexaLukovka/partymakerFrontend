@@ -14,13 +14,13 @@ const formik = withFormik({
       background_url: Yup.string()
     }),
 
-  mapPropsToValues: ({ invite, title, address, datetime }) => ({
-    headline: invite?.headline || 'Пришлашение',
-    preposition: invite?.preposition || 'на',
-    title: invite?.title || title || 'Вечеринку',
-    address: invite?.address || address || 'Вул. Червоногвардійська, 48/18',
-    datetime: invite?.datetime || datetime || '12 мая - 12:00',
-    background_url: invite?.background_url
+  mapPropsToValues: ({ room }) => ({
+    headline: room?.invite?.headline || 'Приглашение',
+    preposition: room?.invite?.preposition || 'на',
+    title: room?.invite?.title || room.title || 'Вечеринку',
+    address: room?.invite?.address || room.address || 'Вул. Червоногвардійська, 48/18',
+    datetime: room?.invite?.datetime || room.datetime || '2017-05-24T10:30',
+    background_url: room?.invite?.background_url || '/images/sparks.png'
   }),
 
   handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
@@ -29,9 +29,18 @@ const formik = withFormik({
 
     const [err] = await to(props.onSubmit(form))
 
-    if (err) setErrors(transformValidationApi(err))
+    if (err) {
+      setErrors(transformValidationApi(err))
+      setSubmitting(false)
+    }
 
-    setSubmitting(false)
+    if (!err) {
+      setErrors({ message: 'Приглашение обновлено!' })
+      setTimeout(() => {
+        setErrors({ message: '' })
+        setSubmitting(false)
+      }, 3000)
+    }
   },
   displayName: 'LoginForm',
 })

@@ -3,23 +3,21 @@ import { object, func, bool, node } from 'prop-types'
 import { Drawer, withStyles } from '@material-ui/core'
 
 const styles = {
-  root: {},
-  card: {
+  root: {
     display: 'flex',
-    alignItems: 'center',
-    padding: 25,
-    minHeight: 400,
-  }
+    flexGrow: 1,
+  },
 }
 
 const InviteDrawer = ({ classes, isOpen, onClose, children }) =>
   <Drawer
     anchor="right"
-    className={classes.root}
     open={isOpen}
     onClose={onClose}
   >
-    {children}
+    <div className={classes.root}>
+      {children}
+    </div>
   </Drawer>
 
 InviteDrawer.propTypes = {

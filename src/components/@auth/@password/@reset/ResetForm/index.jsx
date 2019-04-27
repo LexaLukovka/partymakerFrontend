@@ -2,7 +2,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { CardContent, withStyles } from '@material-ui/core'
 import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
-import FormikTextField from 'components/formik/FormikTextField'
+import TextField from 'components/formik/TextField'
 import { Field, Form } from 'formik'
 import formik from './formik'
 
@@ -27,7 +27,7 @@ const ResetForm = ({ classes }) =>
           variant="outlined"
           placeholder="*******"
           label="Введите новый пароль"
-          component={FormikTextField}
+          component={TextField}
         />
         <Field
           type="password"
@@ -36,7 +36,7 @@ const ResetForm = ({ classes }) =>
           variant="outlined"
           placeholder="*******"
           label="Повторите новый пароль"
-          component={FormikTextField}
+          component={TextField}
         />
       </CardContent>
       <AuthCardActions

@@ -1,17 +1,18 @@
 import { connect } from 'react-redux'
 import currentUser from 'src/redux/users/selectors/currentUser'
-import currentRoom from 'src/redux/rooms/selectors/currentRoom'
+import currentInvite from 'src/redux/invites/selectors/currentInvite'
 import { bindActionCreators } from 'redux'
 import actions from 'src/redux/action'
 
 const mapStateToProps = state => ({
   user: currentUser(state),
-  room: currentRoom(state)
+  invite: currentInvite(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
-    loadRoom: bindActionCreators(actions.rooms.find, dispatch)
+    loadInviteByToken: bindActionCreators(actions.invites.loadByToken, dispatch),
+    acceptInvite: bindActionCreators(actions.invites.accept, dispatch)
   }
 })
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { CardContent, Button, withStyles, CardActions } from '@material-ui/core'
 import { Field, Form } from 'formik'
-import FormikTextField from 'components/formik/FormikTextField'
+import TextField from 'components/formik/TextField'
 import formik from './formik'
 
 const styles = {
@@ -21,7 +21,7 @@ const ContactForm = ({ classes }) =>
           margin="normal"
           variant="outlined"
           placeholder="Вася Пупкин"
-          component={FormikTextField}
+          component={TextField}
         />
         <Field
           name="email"
@@ -30,7 +30,7 @@ const ContactForm = ({ classes }) =>
           autoComplete="email"
           variant="outlined"
           placeholder="email@example.com"
-          component={FormikTextField}
+          component={TextField}
         />
         <Field
           name="question"
@@ -40,7 +40,7 @@ const ContactForm = ({ classes }) =>
           rows={4}
           label="Ваш вопрос"
           placeholder="Пишите здесь..."
-          component={FormikTextField}
+          component={TextField}
         />
       </CardContent>
       <CardActions>

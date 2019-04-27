@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { object, shape, func } from 'prop-types'
-import roomShape from 'shapes/room'
-import matchShape from 'shapes/match'
-import { Typography, withStyles, Button } from '@material-ui/core'
+import { object, shape, func, string } from 'prop-types'
+import { withStyles } from '@material-ui/core'
+import InvitePage from 'components/modules/InvitePage'
+import Loading from 'components/elements/Loading'
+import NotFound from 'components/modules/NotFound'
+import inviteShape from 'shapes/invite'
+import userShape from 'shapes/user'
 import connector from './connector'
-import { Link } from 'react-router-dom'
+
 
 const styles = {
   root: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    textShadow: '0 3px 6px #000000',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   actions: {
     marginTop: 150,
@@ -22,47 +22,65 @@ const styles = {
 
 class InviteScene extends Component {
 
+  state = {
+    isLoading: false
+  }
+
   constructor(props) {
     super(props)
-    const { actions, match } = props
+    this.load().catch(console.error)
+  }
 
-    actions.loadRoom(match.params.id)
+  load = async () => {
+    const { actions, match } = this.props
+    this.setState({ isLoading: true })
+    await actions.loadInviteByToken(match.params.token)
+    this.setState({ isLoading: false })
+  }
+
+  acceptInvite = async (token) => {
+    const { actions, user, history } = this.props
+
+    const { value: room } = await actions.acceptInvite(user.id, token)
+
+    history.push(`/room/${room.id}`)
   }
 
   render() {
-    const { classes, room } = this.props
+    const { classes, invite, user } = this.props
+    const { isLoading } = this.state
+
+    if (isLoading) return <Loading />
+
+    if (!invite) return <NotFound />
 
     return (
       <div className={classes.root}>
-        <Typography color="secondary" gutterBottom align="center" variant="h2">Приглашение</Typography>
-        <Typography color="secondary" gutterBottom align="center" variant="h2">на</Typography>
-        <Typography color="secondary" align="center" variant="h1">{room?.title}</Typography>
-
-        <div className={classes.actions}>
-          {room &&
-          <Link to={`/room/${room.id}`}>
-            <Button
-              size="large"
-              variant="contained"
-              color="primary"
-            >
-              Принимаю приглашение
-            </Button>
-          </Link>
-          }
-        </div>
+        <InvitePage
+          user={user}
+          invite={invite}
+          onAccept={this.acceptInvite}
+        />
       </div>
     )
-
   }
 }
 
 InviteScene.propTypes = {
   classes: object.isRequired,
-  room: roomShape,
-  match: matchShape.isRequired,
+  invite: inviteShape,
+  history: shape({
+    push: func.isRequired,
+  }),
+  match: shape({
+    params: shape({
+      token: string,
+    })
+  }).isRequired,
+  user: userShape,
   actions: shape({
-    loadRoom: func.isRequired,
+    loadInviteByToken: func.isRequired,
+    acceptInvite: func.isRequired,
   })
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { func, number, object, shape, string } from 'prop-types'
 import { TextField } from '@material-ui/core'
 
-const FormikAddressField = ({ field, form, ...props }) =>
+const AddressField = ({ field, form, ...props }) =>
   <TextField
     {...props}
     {...field}
@@ -12,7 +12,7 @@ const FormikAddressField = ({ field, form, ...props }) =>
     helperText={(form.submitCount > 0) && form.errors[field.name]}
   />
 
-FormikAddressField.propTypes = {
+AddressField.propTypes = {
   field: shape({
     name: string,
     value: string,
@@ -25,4 +25,4 @@ FormikAddressField.propTypes = {
   }).isRequired,
 }
 
-export default FormikAddressField
+export default AddressField

@@ -80,16 +80,16 @@ class RoomScene extends Component {
     return actions.loadInvite(match.params.id)
   }
 
-  createInvite = async () => {
+  createInvite = async (form) => {
     const { actions, match } = this.props
 
-    return actions.createInvite(match.params.id)
+    return actions.createInvite(match.params.id, form)
   }
 
-  updateInvite = async () => {
+  updateInvite = async (form) => {
     const { actions, match } = this.props
 
-    return actions.updateInvite(match.params.id)
+    return actions.updateInvite(match.params.id, form)
   }
 
   render() {

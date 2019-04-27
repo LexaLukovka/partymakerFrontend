@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { CardContent, withStyles } from '@material-ui/core'
 import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
 import { Field, Form } from 'formik'
-import FormikTextField from 'components/formik/FormikTextField'
+import TextField from 'components/formik/TextField'
 import formik from './formik'
 
 const styles = {
@@ -22,7 +22,7 @@ const RegisterForm = ({ classes }) =>
           margin="normal"
           variant="outlined"
           placeholder="Вася Пупкин"
-          component={FormikTextField}
+          component={TextField}
         />
         <Field
           name="email"
@@ -31,7 +31,7 @@ const RegisterForm = ({ classes }) =>
           autoComplete="email"
           variant="outlined"
           placeholder="email@example.com"
-          component={FormikTextField}
+          component={TextField}
         />
         <Field
           type="password"
@@ -41,7 +41,7 @@ const RegisterForm = ({ classes }) =>
           variant="outlined"
           label="Пароль"
           placeholder="*******"
-          component={FormikTextField}
+          component={TextField}
         />
       </CardContent>
       <AuthCardActions

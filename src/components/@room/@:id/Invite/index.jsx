@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
-import { func } from 'prop-types'
+import { func, object } from 'prop-types'
 import roomShape from 'shapes/room'
-import { IconButton, SvgIcon, withStyles } from '@material-ui/core'
-import PersonAddIcon from 'mdi-react/PersonAddIcon'
+import { withStyles } from '@material-ui/core'
 import InviteDrawer from './InviteDrawer'
-import CopyLinkCard from './CopyLinkCard'
 import InviteForm from './InviteForm'
+import InviteButton from './InviteButton'
 
 const styles = {
   root: {},
 }
 
-class InviteButton extends Component {
+class Invite extends Component {
+
   state = {
+    isLoading: false,
     isDrawerOpen: false
+  }
+
+  load = async () => {
+    const { onLoad } = this.props
+    this.setState({ isLoading: true })
+    const result = await onLoad()
+    this.setState({ isLoading: false })
+
+    return result
   }
 
   open = () => {
     this.setState({ isDrawerOpen: true })
+    this.load().catch(console.error)
   }
 
   close = () => {
@@ -33,37 +44,35 @@ class InviteButton extends Component {
   }
 
   render() {
-    const { room } = this.props
+    const { classes, room } = this.props
     const { isDrawerOpen } = this.state
 
     if (!room) return null
 
-    return <>
-      <IconButton onClick={this.open}>
-        <SvgIcon color="primary">
-          <PersonAddIcon />
-        </SvgIcon>
-      </IconButton>
-      <InviteDrawer
-        isOpen={isDrawerOpen}
-        onClose={this.close}
-      >
-        <InviteForm
-          invite={room.invite}
-          address={room.address}
-          title={room.title}
-          datetime={room.datetime}
-          onSubmit={this.handleSubmit} />
-        <CopyLinkCard />
-      </InviteDrawer>
-    </>
+    return (
+      <div className={classes.root}>
+        <InviteButton onClick={this.open} />
+        <InviteDrawer
+          isOpen={isDrawerOpen}
+          onClose={this.close}
+        >
+          <InviteForm
+            room={room}
+            onSubmit={this.handleSubmit}
+            onCancel={this.close}
+          />
+        </InviteDrawer>
+      </div>
+    )
   }
 }
 
-InviteButton.propTypes = {
+Invite.propTypes = {
   room: roomShape,
+  classes: object.isRequired,
+  onLoad: func.isRequired,
   onCreate: func.isRequired,
   onUpdate: func.isRequired,
 }
 
-export default withStyles(styles)(InviteButton)
+export default withStyles(styles)(Invite)

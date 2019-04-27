@@ -1,18 +1,33 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles, AppBar, Toolbar, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
 import Navigation from './Navigation'
 import UserMenu from './UserMenu'
+import classNames from 'classnames'
 
 const styles = {
-  root: {}
+  root: {},
+
+  transparent: {
+    position: 'absolute',
+    background: 'transparent',
+    boxShadow: 'none',
+    top: 0,
+  },
 }
 
-const Header = ({ classes, user }) =>
-  <AppBar classes={classes} position="static" color="primary">
+const Header = ({ classes, user, isTransparent }) =>
+  <AppBar
+    position="static"
+    color="primary"
+    className={classNames({
+      [classes.root]: true,
+      [classes.transparent]: isTransparent
+    })}
+  >
     <Toolbar>
       <Link to="/"><Logo /></Link>
       <Navigation>
@@ -35,6 +50,7 @@ const Header = ({ classes, user }) =>
 
 Header.propTypes = {
   classes: object.isRequired,
+  isTransparent: bool,
   user: userShape,
 }
 

@@ -6,10 +6,16 @@ import {
   CREATE_INVITE_FULFILLED,
   DESTROY_INVITE_FULFILLED,
   UPDATE_INVITE_FULFILLED,
+  LOAD_INVITE_BY_TOKEN_FULFILLED,
 } from './action'
 
-function* setInvite({ payload: invite }) {
-  yield put(actions.rooms.setInvite(invite.id))
+function* setInvite({ payload: invite, meta: { room_id } }) {
+  yield put(actions.rooms.setInvite(room_id, invite.id))
+  yield put(actions.invites.set(invite))
+}
+
+function* setInviteFromToken({ payload: invite }) {
+  yield put(actions.invites.setCurrent(invite.id))
   yield put(actions.invites.set(invite))
 }
 
@@ -20,6 +26,7 @@ function* removeInvite({ meta: { invite_id } }) {
 export default function* saga() {
   yield all([
     takeEvery(LOAD_INVITE_FULFILLED, setInvite),
+    takeEvery(LOAD_INVITE_BY_TOKEN_FULFILLED, setInviteFromToken),
     takeEvery(CREATE_INVITE_FULFILLED, setInvite),
     takeEvery(UPDATE_INVITE_FULFILLED, setInvite),
     takeEvery(DESTROY_INVITE_FULFILLED, removeInvite),

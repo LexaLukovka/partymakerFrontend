@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { Field, Form } from 'formik'
 import { CardContent, withStyles } from '@material-ui/core'
 import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
-import TextField from 'components/formik/FormikTextField'
+import TextField from 'components/formik/TextField'
 import ServerMessage from 'components/formik/ServerMessage'
 import formik from './formik'
 

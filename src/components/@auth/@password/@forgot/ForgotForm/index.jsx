@@ -2,7 +2,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { CardContent, withStyles } from '@material-ui/core'
 import AuthCardActions from 'components/@auth/AuthCard/AuthCardActions'
-import FormikTextField from 'components/formik/FormikTextField'
+import TextField from 'components/formik/TextField'
 import ServerMessage from 'components/formik/ServerMessage'
 import { Field, Form } from 'formik'
 import formik from './formik'
@@ -27,7 +27,7 @@ const ForgotForm = ({ classes }) =>
           variant="outlined"
           margin="normal"
           placeholder="email@example.com"
-          component={FormikTextField}
+          component={TextField}
         />
         <ServerMessage variant="caption" color="primary" name="message" />
       </CardContent>

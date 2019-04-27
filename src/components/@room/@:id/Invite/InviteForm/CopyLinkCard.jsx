@@ -1,21 +1,23 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
-import matchShape from 'shapes/match'
 import OutlineCard from 'components/elements/OutlineCard'
-import { FRONTEND_URL } from 'constants/index'
-import { withRouter } from 'react-router-dom'
+import { FRONTEND_URL } from 'src/constants'
 
 const styles = {
-  root: {},
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    minHeight: 300,
+    padding: 30,
+  },
 }
 
-const CopyLinkCard = ({ classes, match }) =>
+const CopyLinkCard = ({ classes, token }) =>
   <OutlineCard className={classes.root}>
     <div>
       <Typography
         gutterBottom
-        variant="subtitle1"
         align="center"
         color="textSecondary"
       >
@@ -23,16 +25,17 @@ const CopyLinkCard = ({ classes, match }) =>
       </Typography>
       <Typography
         align="center"
-        variant="h5"
+        variant="subtitle1"
         color="primary"
-      >{FRONTEND_URL}/room/invite/{match.params.id}.
+      >
+        {FRONTEND_URL}/invite/{token}
       </Typography>
     </div>
   </OutlineCard>
 
 CopyLinkCard.propTypes = {
   classes: object.isRequired,
-  match: matchShape.isRequired,
+  token: string.isRequired,
 }
 
-export default withStyles(styles)(withRouter(CopyLinkCard))
+export default withStyles(styles)(CopyLinkCard)
