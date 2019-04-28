@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { func, object, shape } from 'prop-types'
-import authShape from 'shapes/auth'
 import matchShape from 'shapes/match'
 import roomShape from 'shapes/room'
 import { Typography, withStyles } from '@material-ui/core'
@@ -9,6 +8,7 @@ import Guests from './Guests'
 import Chat from './Chat'
 import connector from './connector'
 import Socket from 'services/Socket'
+import Place from './Place'
 
 const styles = {
   root: {
@@ -92,8 +92,26 @@ class RoomScene extends Component {
     return actions.updateInvite(match.params.id, form)
   }
 
+  loadPlace = () => {
+    const { actions, match } = this.props
+
+    return actions.loadPlace(match.params.id)
+  }
+
+  createPlace = async (form) => {
+    const { actions, match } = this.props
+
+    return actions.createPlace(match.params.id, form)
+  }
+
+  updatePlace = async (form) => {
+    const { actions, match } = this.props
+
+    return actions.updatePlace(match.params.id, form)
+  }
+
   render() {
-    const { classes, room, auth, actions: { setMessage } } = this.props
+    const { classes, room, actions: { setMessage } } = this.props
     const { isGuestsLoaded } = this.state
 
     return (
@@ -115,12 +133,18 @@ class RoomScene extends Component {
         </div>
         {isGuestsLoaded && room && (
           <Chat
-            auth_id={auth.user_id}
             room={room}
             onLoad={this.loadMessages}
             onSend={this.sendMessage}
             onMessage={setMessage}
-          />
+          >
+            <Place
+              place={room.place}
+              onLoad={this.loadPlace}
+              onCreate={this.createPlace}
+              onUpdate={this.updatePlace}
+            />
+          </Chat>
         )}
       </section>
     )
@@ -129,7 +153,6 @@ class RoomScene extends Component {
 
 RoomScene.propTypes = {
   classes: object.isRequired,
-  auth: authShape.isRequired,
   room: roomShape,
   match: matchShape,
   actions: shape({
@@ -139,6 +162,9 @@ RoomScene.propTypes = {
     loadInvite: func.isRequired,
     createInvite: func.isRequired,
     updateInvite: func.isRequired,
+    loadPlace: func.isRequired,
+    createPlace: func.isRequired,
+    updatePlace: func.isRequired,
     sendMessage: func.isRequired,
     setMessage: func.isRequired,
   }),

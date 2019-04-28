@@ -5,7 +5,9 @@ import {
   SET_ROOM_GUESTS,
   SET_ROOM_GUEST,
   SET_ROOM_MESSAGES,
-  SET_ROOM_MESSAGE, SET_ROOM_INVITE
+  SET_ROOM_MESSAGE,
+  SET_ROOM_INVITE,
+  SET_ROOM_PLACE
 } from '../action'
 import uniq from 'lodash/uniq'
 import arrayToObject from 'utils/arrayToObject'
@@ -89,6 +91,18 @@ export default (state = {}, { type, payload, meta }) => {
         [room.id]: {
           ...room,
           invite_id: payload,
+        }
+      }
+    }
+
+    case SET_ROOM_PLACE: {
+      const room = state[meta.room_id]
+
+      return {
+        ...state,
+        [room.id]: {
+          ...room,
+          place_id: payload,
         }
       }
     }

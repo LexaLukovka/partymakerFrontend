@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
-import { object, number, func } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { object, func, node } from 'prop-types'
+import { Typography, withStyles } from '@material-ui/core'
 import roomShape from 'shapes/room'
+import authShape from 'shapes/auth'
 import wait from 'utils/wait'
 import Socket from 'services/Socket'
 import ChatHeader from './ChatHeader'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
+import withAuth from './withAuth'
+import Title from './Title'
 
 const styles = {
   root: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+  },
+  titles: {
+    paddingLeft: 13,
   }
 }
 
@@ -77,18 +83,25 @@ class Chat extends Component {
   setPlace = () => {
     console.log('set place')
   }
+  changeTitle = () => {
+    console.log('change title')
+  }
 
   render() {
-    const { classes, auth_id, room } = this.props
+    const { classes, children, auth, room } = this.props
     const { isScrollingBottom, isLoading } = this.state
 
     return (
       <div className={classes.root}>
-        <ChatHeader
-          title={room.title}
-          place_title={room.place?.title}
-          onSetPlace={this.setPlace}
-        />
+        <ChatHeader>
+          {children}
+          <div className={classes.titles}>
+            <Title value={room.title} onChange={this.changeTitle} />
+            <Typography variant="subtitle1" color="textSecondary">
+              {room?.place?.title || room?.place?.address || 'Выберите место'}
+            </Typography>
+          </div>
+        </ChatHeader>
         <ChatBody
           isScrollingBottom={isScrollingBottom}
           onScrollBottom={this.disableScrolling}
@@ -96,7 +109,7 @@ class Chat extends Component {
         >
           <Messages
             isLoading={isLoading}
-            auth_id={auth_id}
+            auth_id={auth.user_id}
             messages={room.messages}
           />
         </ChatBody>
@@ -108,11 +121,12 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
+  children: node.isRequired,
   room: roomShape.isRequired,
-  auth_id: number.isRequired,
+  auth: authShape.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,
   onMessage: func.isRequired,
 }
 
-export default withStyles(styles)(Chat)
+export default withStyles(styles)(withAuth(Chat))

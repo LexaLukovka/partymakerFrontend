@@ -19,6 +19,9 @@ const mapDispatchToProps = dispatch => {
       loadInvite: bindActionCreators(actions.invites.load, dispatch),
       createInvite: bindActionCreators(actions.invites.create, dispatch),
       updateInvite: bindActionCreators(actions.invites.update, dispatch),
+      loadPlace: bindActionCreators(actions.places.load, dispatch),
+      createPlace: bindActionCreators(actions.places.create, dispatch),
+      updatePlace: bindActionCreators(actions.places.update, dispatch),
       sendMessage: bindActionCreators(actions.messages.create, dispatch),
       setMessage: bindActionCreators(actions.messages.set, dispatch),
     }

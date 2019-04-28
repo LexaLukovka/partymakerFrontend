@@ -1,29 +1,16 @@
 import Place from 'api/Place'
 
-export const LOAD_PLACES = 'LOAD_PLACES'
-export const LOAD_PLACES_PENDING = 'LOAD_PLACES_PENDING'
-export const LOAD_PLACES_FULFILLED = 'LOAD_PLACES_FULFILLED'
-export const LOAD_PLACES_REJECTED = 'LOAD_PLACES_REJECTED'
-
 export const LOAD_PLACE = 'LOAD_PLACE'
-export const LOAD_PLACE_PENDING = 'LOAD_PLACE_PENDING'
 export const LOAD_PLACE_FULFILLED = 'LOAD_PLACE_FULFILLED'
-export const LOAD_PLACE_REJECTED = 'LOAD_PLACE_REJECTED'
 
 export const CREATE_PLACE = 'CREATE_PLACE'
-export const CREATE_PLACE_PENDING = 'CREATE_PLACE_PENDING'
 export const CREATE_PLACE_FULFILLED = 'CREATE_PLACE_FULFILLED'
-export const CREATE_PLACE_REJECTED = 'CREATE_PLACE_REJECTED'
 
 export const UPDATE_PLACE = 'UPDATE_PLACE'
-export const UPDATE_PLACE_PENDING = 'UPDATE_PLACE_PENDING'
 export const UPDATE_PLACE_FULFILLED = 'UPDATE_PLACE_FULFILLED'
-export const UPDATE_PLACE_REJECTED = 'UPDATE_PLACE_REJECTED'
 
 export const DESTROY_PLACE = 'DESTROY_PLACE'
-export const DESTROY_PLACE_PENDING = 'DESTROY_PLACE_PENDING'
 export const DESTROY_PLACE_FULFILLED = 'DESTROY_PLACE_FULFILLED'
-export const DESTROY_PLACE_REJECTED = 'DESTROY_PLACE_REJECTED'
 
 export const SET_PLACE = 'SET_PLACE'
 export const SET_PLACES = 'SET_PLACES'
@@ -33,25 +20,28 @@ export const REMOVE_PLACE = 'REMOVE_PLACE'
  * Async actions. Making API requests
  */
 
-const list = () => ({
-  type: LOAD_PLACES,
-  payload: Place.list()
+const load = (room_id) => ({
+  type: LOAD_PLACE,
+  payload: Place.load(room_id),
+  meta: { room_id }
 })
 
-const create = () => ({
+const create = (room_id, form) => ({
   type: CREATE_PLACE,
-  payload: Place.create()
+  payload: Place.create(room_id, form),
+  meta: { room_id }
 })
 
-const update = (id, form) => ({
+const update = (room_id, form) => ({
   type: UPDATE_PLACE,
-  payload: Place.update(id, form)
+  payload: Place.update(room_id, form),
+  meta: { room_id }
 })
 
-const destroy = (place_id) => ({
-  type: UPDATE_PLACE,
-  payload: Place.destroy(place_id),
-  meta: { place_id }
+const destroy = (room_id) => ({
+  type: DESTROY_PLACE,
+  payload: Place.destroy(room_id),
+  meta: { room_id }
 })
 
 /**
@@ -74,7 +64,7 @@ const remove = place_id => ({
 })
 
 export default {
-  list,
+  load,
   create,
   update,
   set,

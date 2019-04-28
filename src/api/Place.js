@@ -1,25 +1,20 @@
 import Http from 'src/services/Http'
 
 const Place = {
-
-  list() {
-    return Http.get('/places')
+  load(room_id) {
+    return Http.get(`/rooms/${room_id}/place`)
   },
 
-  find(id) {
-    return Http.get(`/places/${id}`)
+  create(room_id, form) {
+    return Http.post(`/rooms/${room_id}/place`, form)
   },
 
-  create(form) {
-    return Http.post('/places', form)
+  update(room_id, form) {
+    return Http.put(`/rooms/${room_id}/place`, form)
   },
 
-  update(id, form) {
-    return Http.put(`/places/${id}`, form)
-  },
-
-  destroy(id) {
-    return Http.delete(`/places/${id}`)
+  destroy(room_id) {
+    return Http.delete(`room/${room_id}/place`)
   },
 }
 

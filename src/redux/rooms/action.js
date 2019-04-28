@@ -1,29 +1,19 @@
 import Room from 'api/Room'
 
 export const LOAD_ROOMS = 'LOAD_ROOMS'
-export const LOAD_ROOMS_PENDING = 'LOAD_ROOMS_PENDING'
 export const LOAD_ROOMS_FULFILLED = 'LOAD_ROOMS_FULFILLED'
-export const LOAD_ROOMS_REJECTED = 'LOAD_ROOMS_REJECTED'
 
 export const LOAD_ROOM = 'LOAD_ROOM'
-export const LOAD_ROOM_PENDING = 'LOAD_ROOM_PENDING'
 export const LOAD_ROOM_FULFILLED = 'LOAD_ROOM_FULFILLED'
-export const LOAD_ROOM_REJECTED = 'LOAD_ROOM_REJECTED'
 
 export const CREATE_ROOM = 'CREATE_ROOM'
-export const CREATE_ROOM_PENDING = 'CREATE_ROOM_PENDING'
 export const CREATE_ROOM_FULFILLED = 'CREATE_ROOM_FULFILLED'
-export const CREATE_ROOM_REJECTED = 'CREATE_ROOM_REJECTED'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
-export const UPDATE_ROOM_PENDING = 'UPDATE_ROOM_PENDING'
 export const UPDATE_ROOM_FULFILLED = 'UPDATE_ROOM_FULFILLED'
-export const UPDATE_ROOM_REJECTED = 'UPDATE_ROOM_REJECTED'
 
 export const DESTROY_ROOM = 'DESTROY_ROOM'
-export const DESTROY_ROOM_PENDING = 'DESTROY_ROOM_PENDING'
 export const DESTROY_ROOM_FULFILLED = 'DESTROY_ROOM_FULFILLED'
-export const DESTROY_ROOM_REJECTED = 'DESTROY_ROOM_REJECTED'
 
 export const SET_ROOM = 'SET_ROOM'
 export const SET_ROOMS = 'SET_ROOMS'
@@ -36,6 +26,7 @@ export const SET_ROOM_MESSAGES = 'SET_ROOM_MESSAGES'
 export const SET_ROOM_MESSAGE = 'SET_ROOM_MESSAGE'
 export const SET_ROOM_INVITE = 'SET_ROOM_INVITE'
 export const SET_ROOM_STATUS = 'SET_ROOM_STATUS'
+export const SET_ROOM_PLACE = 'SET_ROOM_PLACE'
 
 /**
  * Async actions. Making API requests
@@ -62,7 +53,7 @@ const update = (id, form) => ({
 })
 
 const destroy = (room_id) => ({
-  type: UPDATE_ROOM,
+  type: DESTROY_ROOM,
   payload: Room.destroy(room_id),
   meta: { room_id }
 })
@@ -125,6 +116,12 @@ const setInvite = (room_id, invite_id) => ({
   meta: { room_id }
 })
 
+const setPlace = (room_id, place_id) => ({
+  type: SET_ROOM_PLACE,
+  payload: place_id,
+  meta: { room_id }
+})
+
 /**
  * Sync actions. Room status
  */
@@ -149,5 +146,6 @@ export default {
   setMessages,
   setMessage,
   setInvite,
+  setPlace,
   status,
 }
