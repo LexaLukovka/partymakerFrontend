@@ -85,9 +85,9 @@ const set = invite => ({
   payload: invite,
 })
 
-const remove = invite_id => ({
+const remove = room_id => ({
   type: REMOVE_INVITE,
-  payload: invite_id,
+  payload: room_id,
 })
 
 const setCurrent = invite_id => ({

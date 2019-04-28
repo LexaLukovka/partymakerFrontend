@@ -1,5 +1,4 @@
-/* eslint-disable import/named,class-methods-use-this,no-console */
-import WebSocket from '@adonisjs/websocket-client'
+import WebSocket from '@adonisjs/websocket-client/dist/Ws.browser.min'
 import Auth from 'services/Auth'
 
 class Socket {
@@ -26,7 +25,7 @@ class Socket {
   }
 
   _handleOn(name, callback) {
-    if (this.socket) {
+    if (this.socket && this.socket.getSubscription(this.currentTopic)) {
       this.socket.getSubscription(this.currentTopic).on(name, (data) => {
         console.log('ON:', name, data)
         callback(data)

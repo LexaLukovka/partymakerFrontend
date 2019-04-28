@@ -34,6 +34,8 @@ export default (state = {}, { type, payload, meta }) => {
     case SET_ROOM_GUESTS: {
       const room = state[meta.room_id]
 
+      if (!room) break
+
       return {
         ...state,
         [room.id]: {

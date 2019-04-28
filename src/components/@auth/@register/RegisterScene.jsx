@@ -4,6 +4,7 @@ import AuthCard from 'components/@auth/AuthCard'
 import RegisterForm from './RegisterForm'
 import connector from './connector'
 import { Helmet } from 'react-helmet'
+import Storage from 'services/Storage'
 
 class RegisterScene extends Component {
 
@@ -11,7 +12,10 @@ class RegisterScene extends Component {
     const { history, actions } = this.props
 
     await actions.register(credentials)
-    history.push('/home')
+
+    const previous_user_location = Storage.get('previous_user_location')
+
+    history.push(previous_user_location || '/home')
   }
 
   render() {

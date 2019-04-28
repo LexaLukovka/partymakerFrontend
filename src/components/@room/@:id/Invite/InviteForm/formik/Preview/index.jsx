@@ -17,7 +17,8 @@ const getInvite = (values) => ({
   title: getIn(values, 'title'),
   preposition: getIn(values, 'preposition'),
   address: getIn(values, 'address'),
-  datetime: getIn(values, 'datetime'),
+  date: getIn(values, 'date'),
+  time: getIn(values, 'time'),
   background_url: getIn(values, 'background_url'),
 })
 

@@ -50,6 +50,20 @@ const styles = {
   },
   message: {
     padding: 9,
+  },
+  datetime: {
+    marginTop: 10,
+  },
+  dateFields: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  date: {
+    flexBasis: '70%',
+    marginRight: 5,
+  },
+  time: {
+    flexBasis: '30%',
   }
 }
 
@@ -88,13 +102,24 @@ const InviteForm = ({ classes, room, onCancel, isSubmitting }) =>
         margin="normal"
         component={AddressField}
       />
-      <Field
-        label="Дата и время"
-        name="datetime"
-        margin="normal"
-        type="datetime-local"
-        component={TextField}
-      />
+      <div className={classes.datetime}>
+        <Typography variant="caption" color="textSecondary">Дата и время</Typography>
+        <div className={classes.dateFields}>
+          <Field
+            className={classes.date}
+            name="date"
+            type="date"
+            component={TextField}
+          />
+          <Field
+            className={classes.time}
+            name="time"
+            step="3600"
+            type="time"
+            component={TextField}
+          />
+        </div>
+      </div>
       <Field
         label="Изменить фон"
         name="background_url"

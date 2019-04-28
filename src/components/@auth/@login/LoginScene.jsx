@@ -4,15 +4,19 @@ import { Helmet } from 'react-helmet'
 import LoginForm from './LoginForm'
 import { func, shape } from 'prop-types'
 import connector from './connector'
+import Storage from 'services/Storage'
 
 class LoginScene extends Component {
 
   login = async (credentials) => {
     const { actions, history } = this.props
 
-    await actions.login(credentials)
+    const result = await actions.login(credentials)
+    const previous_user_location = Storage.get('previous_user_location')
 
-    history.push('/home')
+    history.push(previous_user_location || '/home')
+
+    return result
   }
 
   render() {

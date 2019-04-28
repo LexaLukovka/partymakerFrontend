@@ -2,14 +2,17 @@ import React from 'react'
 import { func, number, object, shape, string } from 'prop-types'
 import { TextField } from '@material-ui/core'
 
-const FormikTextField = ({ field, form, ...props }) =>
+const FormikTextField = ({ field: { value, name, onChange, onBlur }, form, ...props }) =>
   <TextField
     {...props}
-    {...field}
+    name={name}
+    value={value}
     InputLabelProps={{ shrink: true }}
+    onChange={onChange}
+    onBlur={onBlur}
     fullWidth
-    error={(form.submitCount > 0) && !!form.errors[field.name]}
-    helperText={(form.submitCount > 0) && form.errors[field.name]}
+    error={(form.submitCount > 0) && !!form.errors[name]}
+    helperText={(form.submitCount > 0) && form.errors[name]}
   />
 
 FormikTextField.propTypes = {

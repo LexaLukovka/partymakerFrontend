@@ -77,7 +77,7 @@ const InvitePage = ({ classes, invite, onAccept }) =>
         align="center"
         variant="h5"
       >
-        {moment(invite.datetime).format('D MMMM, dddd, HH:mm')}
+        {moment(invite.date).format('D MMMM, dddd')}, {invite.time}
       </Typography>
       <Typography
         color="secondary"
@@ -109,7 +109,8 @@ InvitePage.propTypes = {
     preposition: string.isRequired,
     title: string.isRequired,
     address: string.isRequired,
-    datetime: string.isRequired,
+    time: string.isRequired,
+    date: string.isRequired,
     background_url: string.isRequired,
     token: string,
   }),

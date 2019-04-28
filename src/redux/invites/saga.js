@@ -10,6 +10,7 @@ import {
 } from './action'
 
 function* setInvite({ payload: invite, meta: { room_id } }) {
+  if (!invite) return null
   yield put(actions.rooms.setInvite(room_id, invite.id))
   yield put(actions.invites.set(invite))
 }

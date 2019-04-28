@@ -7,7 +7,7 @@ import NotFound from 'components/modules/NotFound'
 import inviteShape from 'shapes/invite'
 import userShape from 'shapes/user'
 import connector from './connector'
-
+import Storage from 'services/Storage'
 
 const styles = {
   root: {
@@ -26,8 +26,7 @@ class InviteScene extends Component {
     isLoading: false
   }
 
-  constructor(props) {
-    super(props)
+  componentWillMount() {
     this.load().catch(console.error)
   }
 
@@ -39,11 +38,18 @@ class InviteScene extends Component {
   }
 
   acceptInvite = async (token) => {
-    const { actions, user, history } = this.props
+    const { actions, user, history, location } = this.props
 
-    const { value: room } = await actions.acceptInvite(user.id, token)
+    Storage.put({
+      previous_user_location: location.pathname
+    })
 
-    history.push(`/room/${room.id}`)
+    if (!user) {
+      window.location.replace('/auth/login')
+    } else {
+      const { value: room } = await actions.acceptInvite(user.id, token)
+      history.push(`/room/${room.id}`)
+    }
   }
 
   render() {
@@ -71,6 +77,9 @@ InviteScene.propTypes = {
   invite: inviteShape,
   history: shape({
     push: func.isRequired,
+  }),
+  location: shape({
+    pathname: string,
   }),
   match: shape({
     params: shape({
