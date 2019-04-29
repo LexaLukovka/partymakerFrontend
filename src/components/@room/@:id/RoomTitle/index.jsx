@@ -15,7 +15,7 @@ const styles = {
   }
 }
 
-class Title extends Component {
+class RoomTitle extends Component {
 
   state = {
     isEditable: false,
@@ -27,10 +27,10 @@ class Title extends Component {
   }
 
   save = () => {
-    const { onChange } = this.props
+    const { onChange, title } = this.props
     const { value } = this.state
     this.setState({ isEditable: false })
-    onChange(value)
+    onChange(value || title)
   }
 
   change = (e) => {
@@ -38,7 +38,7 @@ class Title extends Component {
   }
 
   render() {
-    const { classes, value: initialValue } = this.props
+    const { classes, title } = this.props
     const { isEditable, value } = this.state
 
     if (!isEditable) {
@@ -48,7 +48,7 @@ class Title extends Component {
           variant="h6"
           onClick={this.edit}
         >
-          {initialValue}
+          {title || 'Назовите событие'}
         </Typography>
       )
     }
@@ -56,7 +56,7 @@ class Title extends Component {
     return (
       <div className={classes.root}>
         <TextField
-          value={value || initialValue}
+          value={value || title}
           className={classes.field}
           onChange={this.change}
         />
@@ -67,10 +67,10 @@ class Title extends Component {
 
 }
 
-Title.propTypes = {
+RoomTitle.propTypes = {
   classes: object.isRequired,
-  value: string,
+  title: string,
   onChange: func.isRequired,
 }
 
-export default withStyles(styles)(Title)
+export default withStyles(styles)(RoomTitle)

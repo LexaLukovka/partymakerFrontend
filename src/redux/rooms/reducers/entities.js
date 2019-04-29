@@ -10,6 +10,7 @@ import {
   SET_ROOM_PLACE
 } from '../action'
 import uniq from 'lodash/uniq'
+import isEmpty from 'lodash/isEmpty'
 import arrayToObject from 'utils/arrayToObject'
 
 export default (state = {}, { type, payload, meta }) => {
@@ -20,11 +21,20 @@ export default (state = {}, { type, payload, meta }) => {
         ...arrayToObject(payload)
       }
 
-    case SET_ROOM:
+    case SET_ROOM: {
+
+      const guests_ids = isEmpty(payload.guests_ids)
+        ? state[payload.id]?.guests_ids || []
+        : []
+
       return {
         ...state,
-        [payload.id]: payload,
+        [payload.id]: {
+          ...payload,
+          guests_ids,
+        }
       }
+    }
 
     case REMOVE_ROOM: {
       const rooms = { ...state }
@@ -36,7 +46,7 @@ export default (state = {}, { type, payload, meta }) => {
     case SET_ROOM_GUESTS: {
       const room = state[meta.room_id]
 
-      if (!room) break
+      if (!room) return state
 
       return {
         ...state,

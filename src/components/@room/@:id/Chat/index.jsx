@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { object, func, node } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import roomShape from 'shapes/room'
 import authShape from 'shapes/auth'
 import wait from 'utils/wait'
@@ -10,7 +10,6 @@ import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
 import withAuth from './withAuth'
-import Title from './Title'
 
 const styles = {
   root: {
@@ -80,13 +79,6 @@ class Chat extends Component {
     this.setState({ isScrollingBottom: false })
   }
 
-  setPlace = () => {
-    console.log('set place')
-  }
-  changeTitle = () => {
-    console.log('change title')
-  }
-
   render() {
     const { classes, children, auth, room } = this.props
     const { isScrollingBottom, isLoading } = this.state
@@ -95,12 +87,6 @@ class Chat extends Component {
       <div className={classes.root}>
         <ChatHeader>
           {children}
-          <div className={classes.titles}>
-            <Title value={room.title} onChange={this.changeTitle} />
-            <Typography variant="subtitle1" color="textSecondary">
-              {room?.place?.title || room?.place?.address || 'Выберите место'}
-            </Typography>
-          </div>
         </ChatHeader>
         <ChatBody
           isScrollingBottom={isScrollingBottom}

@@ -13,17 +13,28 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return ({
     actions: {
-      loadRoom: bindActionCreators(actions.rooms.find, dispatch),
-      loadMessages: bindActionCreators(actions.messages.list, dispatch),
-      loadGuests: bindActionCreators(actions.guests.list, dispatch),
-      loadInvite: bindActionCreators(actions.invites.load, dispatch),
-      createInvite: bindActionCreators(actions.invites.create, dispatch),
-      updateInvite: bindActionCreators(actions.invites.update, dispatch),
-      loadPlace: bindActionCreators(actions.places.load, dispatch),
-      createPlace: bindActionCreators(actions.places.create, dispatch),
-      updatePlace: bindActionCreators(actions.places.update, dispatch),
-      sendMessage: bindActionCreators(actions.messages.create, dispatch),
-      setMessage: bindActionCreators(actions.messages.set, dispatch),
+      room: {
+        load: bindActionCreators(actions.rooms.find, dispatch),
+        update: bindActionCreators(actions.rooms.update, dispatch),
+      },
+      guests: {
+        loadMany: bindActionCreators(actions.guests.list, dispatch),
+      },
+      message: {
+        loadMany: bindActionCreators(actions.messages.list, dispatch),
+        send: bindActionCreators(actions.messages.create, dispatch),
+        set: bindActionCreators(actions.messages.set, dispatch),
+      },
+      invite: {
+        load: bindActionCreators(actions.invites.load, dispatch),
+        create: bindActionCreators(actions.invites.create, dispatch),
+        update: bindActionCreators(actions.invites.update, dispatch),
+      },
+      place: {
+        load: bindActionCreators(actions.places.load, dispatch),
+        create: bindActionCreators(actions.places.create, dispatch),
+        update: bindActionCreators(actions.places.update, dispatch),
+      },
     }
   })
 }

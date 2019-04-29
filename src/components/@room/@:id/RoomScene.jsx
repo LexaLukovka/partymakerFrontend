@@ -9,6 +9,7 @@ import Chat from './Chat'
 import connector from './connector'
 import Socket from 'services/Socket'
 import Place from './Place'
+import RoomTitle from './RoomTitle'
 
 const styles = {
   root: {
@@ -50,7 +51,7 @@ class RoomScene extends Component {
   loadRoom = async () => {
     const { actions, match } = this.props
     this.setState({ isRoomLoading: true })
-    await actions.loadRoom(match.params.id)
+    await actions.room.load(match.params.id)
     this.setState({ isRoomLoading: false })
   }
 
@@ -63,12 +64,12 @@ class RoomScene extends Component {
   loadMessages = ({ page, limit }) => {
     const { actions, match } = this.props
 
-    return actions.loadMessages(match.params.id, { page, limit })
+    return actions.message.loadMany(match.params.id, { page, limit })
   }
 
   loadGuests = async () => {
     const { actions, match } = this.props
-    const result = await actions.loadGuests(match.params.id)
+    const result = await actions.guests.loadMany(match.params.id)
     this.setState({ isGuestsLoaded: true })
 
     return result
@@ -77,41 +78,47 @@ class RoomScene extends Component {
   loadInvite = () => {
     const { actions, match } = this.props
 
-    return actions.loadInvite(match.params.id)
+    return actions.invite.load(match.params.id)
   }
 
   createInvite = async (form) => {
     const { actions, match } = this.props
 
-    return actions.createInvite(match.params.id, form)
+    return actions.invite.create(match.params.id, form)
   }
 
   updateInvite = async (form) => {
     const { actions, match } = this.props
 
-    return actions.updateInvite(match.params.id, form)
+    return actions.invite.update(match.params.id, form)
   }
 
   loadPlace = () => {
     const { actions, match } = this.props
 
-    return actions.loadPlace(match.params.id)
+    return actions.place.load(match.params.id)
   }
 
   createPlace = async (form) => {
     const { actions, match } = this.props
 
-    return actions.createPlace(match.params.id, form)
+    return actions.place.create(match.params.id, form)
   }
 
   updatePlace = async (form) => {
     const { actions, match } = this.props
 
-    return actions.updatePlace(match.params.id, form)
+    return actions.place.update(match.params.id, form)
+  }
+
+  changeRoomTitle = (title) => {
+    const { actions, match } = this.props
+
+    return actions.room.update(match.params.id, { title })
   }
 
   render() {
-    const { classes, room, actions: { setMessage } } = this.props
+    const { classes, room, actions: { message: { set } } } = this.props
     const { isGuestsLoaded } = this.state
 
     return (
@@ -136,14 +143,19 @@ class RoomScene extends Component {
             room={room}
             onLoad={this.loadMessages}
             onSend={this.sendMessage}
-            onMessage={setMessage}
+            onMessage={set}
           >
             <Place
               place={room.place}
               onLoad={this.loadPlace}
               onCreate={this.createPlace}
               onUpdate={this.updatePlace}
-            />
+            >
+              <RoomTitle
+                title={room.title}
+                onChange={this.changeRoomTitle}
+              />
+            </Place>
           </Chat>
         )}
       </section>
@@ -156,17 +168,28 @@ RoomScene.propTypes = {
   room: roomShape,
   match: matchShape,
   actions: shape({
-    loadRoom: func.isRequired,
-    loadMessages: func.isRequired,
-    loadGuests: func.isRequired,
-    loadInvite: func.isRequired,
-    createInvite: func.isRequired,
-    updateInvite: func.isRequired,
-    loadPlace: func.isRequired,
-    createPlace: func.isRequired,
-    updatePlace: func.isRequired,
-    sendMessage: func.isRequired,
-    setMessage: func.isRequired,
+    room: shape({
+      load: func.isRequired,
+      update: func.isRequired,
+    }),
+    guests: shape({
+      loadMany: func.isRequired,
+    }),
+    invite: shape({
+      load: func.isRequired,
+      create: func.isRequired,
+      update: func.isRequired,
+    }),
+    place: shape({
+      load: func.isRequired,
+      create: func.isRequired,
+      update: func.isRequired,
+    }),
+    message: shape({
+      loadMany: func.isRequired,
+      send: func.isRequired,
+      set: func.isRequired,
+    }),
   }),
 }
 

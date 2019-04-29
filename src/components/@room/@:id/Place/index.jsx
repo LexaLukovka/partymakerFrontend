@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { object, func, node } from 'prop-types'
+import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import SetPlaceIcon from './SetPlaceIcon'
 import Loading from 'components/elements/Loading'
@@ -8,7 +8,16 @@ import PlaceDrawer from './PlaceDrawer'
 import PlaceForm from './PlaceForm'
 
 const styles = {
-  root: {},
+  root: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  titles: {
+    paddingLeft: 13,
+  },
+  placeText: {
+    cursor: 'pointer'
+  }
 }
 
 class Place extends Component {
@@ -50,7 +59,7 @@ class Place extends Component {
   }
 
   render() {
-    const { classes, place } = this.props
+    const { classes, place, children } = this.props
     const { isDrawerOpen, isLoading } = this.state
 
     if (isLoading) return <Loading />
@@ -58,6 +67,17 @@ class Place extends Component {
     return (
       <div className={classes.root}>
         <SetPlaceIcon onClick={this.open} />
+        <div className={classes.titles}>
+          {children}
+          <Typography
+            className={classes.placeText}
+            variant="subtitle1"
+            color="textSecondary"
+            onClick={this.open}
+          >
+            {place?.title || place?.address || 'Выберите место'}
+          </Typography>
+        </div>
         <PlaceDrawer isOpen={isDrawerOpen} onClose={this.close}>
           <PlaceForm place={place} onCancel={this.close} onSubmit={this.handleSubmit} />
         </PlaceDrawer>
@@ -72,6 +92,7 @@ Place.propTypes = {
   onLoad: func.isRequired,
   onCreate: func.isRequired,
   onUpdate: func.isRequired,
+  children: node.isRequired,
 }
 
 export default withStyles(styles)(Place)
