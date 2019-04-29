@@ -24,10 +24,9 @@ const styles = {
   },
 
   actions: {
-    flexGrow: 1,
     display: 'flex',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end'
+    marginTop: 25,
+    alignItems: 'center'
   },
   message: {
     padding: 9,
@@ -55,15 +54,17 @@ const PlaceForm = ({ classes, place, onCancel, isSubmitting }) =>
         margin="normal"
         component={AddressField}
       />
-      <ServerMessage className={classes.message} color="primary" name="message" />
-      <Button
-        disabled={isSubmitting}
-        type="submit"
-        variant="contained"
-        color="primary"
-      >
-        {place ? 'ОБНОВИТЬ' : 'ГОТОВО'}
-      </Button>
+      <div className={classes.actions}>
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          {place ? 'СОХРАНИТЬ' : 'ГОТОВО'}
+        </Button>
+        <ServerMessage className={classes.message} color="primary" name="message" />
+      </div>
     </div>
   </Form>
 

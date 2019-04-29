@@ -43,6 +43,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "latest",
     "react": "latest",
+    "react-click-outside": "^3.0.1",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.0.2",
