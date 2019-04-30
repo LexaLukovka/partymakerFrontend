@@ -6,6 +6,7 @@ const styles = {
   root: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     padding: '8px 20px',
     borderBottom: 'solid 1px rgba(0, 0, 0, 0.12)'
   },

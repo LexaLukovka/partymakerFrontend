@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { object, arrayOf, func } from 'prop-types'
 import userShape from 'shapes/user'
+import matchShape from 'shapes/match'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
 import isEmpty from 'lodash/isEmpty'
 import Guest from './Guest'
 import arrayToObject from 'utils/arrayToObject'
 import Loading from 'components/elements/Loading'
+import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -37,9 +39,9 @@ class Guests extends Component {
   }
 
   load = async () => {
-    const { onLoad } = this.props
+    const { match, onLoad } = this.props
     this.setState({ isLoading: true })
-    const result = await onLoad()
+    const result = await onLoad(match.params.id)
     this.setState({ isLoading: false })
 
     return result
@@ -91,8 +93,9 @@ class Guests extends Component {
 
 Guests.propTypes = {
   classes: object.isRequired,
+  match: matchShape.isRequired,
   guests: arrayOf(userShape).isRequired,
   onLoad: func.isRequired,
 }
 
-export default withStyles(styles)(Guests)
+export default withStyles(styles)(withRouter(Guests))

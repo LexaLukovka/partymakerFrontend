@@ -10,6 +10,8 @@ import connector from './connector'
 import Socket from 'services/Socket'
 import Place from './Place'
 import RoomTitle from './RoomTitle'
+import DropdownMenu from './DropdownMenu'
+import ChatHeader from './ChatHeader'
 
 const styles = {
   root: {
@@ -29,14 +31,14 @@ const styles = {
     alignItems: 'center',
     padding: '15px 20px 30px 20px',
   },
+  chat: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column'
+  }
 }
 
 class RoomScene extends Component {
-
-  state = {
-    isRoomLoading: false,
-    isGuestsLoaded: false,
-  }
 
   componentDidMount() {
     const { match } = this.props
@@ -50,76 +52,11 @@ class RoomScene extends Component {
 
   loadRoom = async () => {
     const { actions, match } = this.props
-    this.setState({ isRoomLoading: true })
     await actions.room.load(match.params.id)
-    this.setState({ isRoomLoading: false })
-  }
-
-  sendMessage = (form) => {
-    const { actions, match } = this.props
-
-    return actions.sendMessage(match.params.id, form)
-  }
-
-  loadMessages = ({ page, limit }) => {
-    const { actions, match } = this.props
-
-    return actions.message.loadMany(match.params.id, { page, limit })
-  }
-
-  loadGuests = async () => {
-    const { actions, match } = this.props
-    const result = await actions.guests.loadMany(match.params.id)
-    this.setState({ isGuestsLoaded: true })
-
-    return result
-  }
-
-  loadInvite = () => {
-    const { actions, match } = this.props
-
-    return actions.invite.load(match.params.id)
-  }
-
-  createInvite = async (form) => {
-    const { actions, match } = this.props
-
-    return actions.invite.create(match.params.id, form)
-  }
-
-  updateInvite = async (form) => {
-    const { actions, match } = this.props
-
-    return actions.invite.update(match.params.id, form)
-  }
-
-  loadPlace = () => {
-    const { actions, match } = this.props
-
-    return actions.place.load(match.params.id)
-  }
-
-  createPlace = async (form) => {
-    const { actions, match } = this.props
-
-    return actions.place.create(match.params.id, form)
-  }
-
-  updatePlace = async (form) => {
-    const { actions, match } = this.props
-
-    return actions.place.update(match.params.id, form)
-  }
-
-  changeRoomTitle = (title) => {
-    const { actions, match } = this.props
-
-    return actions.room.update(match.params.id, { title })
   }
 
   render() {
-    const { classes, room, actions: { message: { set } } } = this.props
-    const { isGuestsLoaded } = this.state
+    const { classes, room, actions } = this.props
 
     return (
       <section className={classes.root}>
@@ -128,35 +65,42 @@ class RoomScene extends Component {
             <Typography variant="h5">Приглашенные гости</Typography>
             <Invite
               room={room}
-              onLoad={this.loadInvite}
-              onCreate={this.createInvite}
-              onUpdate={this.updateInvite}
+              onLoad={actions.invite.load}
+              onCreate={actions.invite.create}
+              onUpdate={actions.invite.update}
             />
           </div>
           <Guests
             guests={room?.guests || []}
-            onLoad={this.loadGuests}
+            onLoad={actions.guests.loadMany}
           />
         </div>
-        {isGuestsLoaded && room && (
-          <Chat
-            room={room}
-            onLoad={this.loadMessages}
-            onSend={this.sendMessage}
-            onMessage={set}
-          >
-            <Place
-              place={room.place}
-              onLoad={this.loadPlace}
-              onCreate={this.createPlace}
-              onUpdate={this.updatePlace}
-            >
-              <RoomTitle
-                title={room.title}
-                onChange={this.changeRoomTitle}
+        {room?.guests && (
+          <div className={classes.chat}>
+            <ChatHeader>
+              <Place
+                place={room.place}
+                onLoad={actions.place.load}
+                onCreate={actions.place.create}
+                onUpdate={actions.place.update}
+              >
+                <RoomTitle
+                  room={room}
+                  onChange={actions.room.update}
+                />
+              </Place>
+              <DropdownMenu
+                room={room}
+                onLeave={actions.room.leave}
               />
-            </Place>
-          </Chat>
+            </ChatHeader>
+            <Chat
+              room={room}
+              onLoad={actions.message.loadMany}
+              onSend={actions.message.send}
+              onMessage={actions.message.set}
+            />
+          </div>
         )}
       </section>
     )

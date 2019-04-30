@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func, string } from 'prop-types'
+import { object, func, string, shape, number } from 'prop-types'
 import { Button, TextField, Typography, withStyles } from '@material-ui/core'
 
 const styles = {
@@ -27,10 +27,11 @@ class RoomTitle extends Component {
   }
 
   save = () => {
-    const { onChange, title } = this.props
+    const { onChange, room: { id, title } } = this.props
     const { value } = this.state
     this.setState({ isEditable: false })
-    onChange(value || title)
+
+    onChange(id, { title: value || title })
   }
 
   change = (e) => {
@@ -38,7 +39,7 @@ class RoomTitle extends Component {
   }
 
   render() {
-    const { classes, title } = this.props
+    const { classes, room: { title } } = this.props
     const { isEditable, value } = this.state
 
     if (!isEditable) {
@@ -69,7 +70,10 @@ class RoomTitle extends Component {
 
 RoomTitle.propTypes = {
   classes: object.isRequired,
-  title: string,
+  room: shape({
+    id: number,
+    title: string
+  }),
   onChange: func.isRequired,
 }
 

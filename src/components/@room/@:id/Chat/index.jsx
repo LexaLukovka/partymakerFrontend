@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { object, func, node } from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
+import { withRouter } from 'react-router-dom'
 import roomShape from 'shapes/room'
+import matchShape from 'shapes/match'
 import authShape from 'shapes/auth'
 import wait from 'utils/wait'
 import Socket from 'services/Socket'
-import ChatHeader from './ChatHeader'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
@@ -47,19 +48,19 @@ class Chat extends Component {
   }
 
   load = async (page = 1) => {
-    const { onLoad } = this.props
+    const { onLoad, match } = this.props
     const { limit } = this.state
 
     this.setState({ page, isLoading: true })
-    const result = await onLoad({ page, limit })
+    const result = await onLoad(match.params.id, { page, limit })
     this.setState({ isLoading: false })
 
     return result
   }
 
   sendMessage = async (form) => {
-    const { onSend } = this.props
-    const result = await onSend(form)
+    const { match, onSend } = this.props
+    const result = await onSend(match.params.id, form)
     await wait(50)
     this.setState({ isScrollingBottom: true })
 
@@ -80,14 +81,11 @@ class Chat extends Component {
   }
 
   render() {
-    const { classes, children, auth, room } = this.props
+    const { classes, auth, room } = this.props
     const { isScrollingBottom, isLoading } = this.state
 
     return (
       <div className={classes.root}>
-        <ChatHeader>
-          {children}
-        </ChatHeader>
         <ChatBody
           isScrollingBottom={isScrollingBottom}
           onScrollBottom={this.disableScrolling}
@@ -107,7 +105,7 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
-  children: node.isRequired,
+  match: matchShape.isRequired,
   room: roomShape.isRequired,
   auth: authShape.isRequired,
   onLoad: func.isRequired,
@@ -115,4 +113,4 @@ Chat.propTypes = {
   onMessage: func.isRequired,
 }
 
-export default withStyles(styles)(withAuth(Chat))
+export default withStyles(styles)(withAuth(withRouter(Chat)))

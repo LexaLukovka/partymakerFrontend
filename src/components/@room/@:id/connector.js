@@ -16,6 +16,7 @@ const mapDispatchToProps = dispatch => {
       room: {
         load: bindActionCreators(actions.rooms.find, dispatch),
         update: bindActionCreators(actions.rooms.update, dispatch),
+        leave: bindActionCreators(actions.rooms.leave, dispatch),
       },
       guests: {
         loadMany: bindActionCreators(actions.guests.list, dispatch),

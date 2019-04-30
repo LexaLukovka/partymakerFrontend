@@ -5,7 +5,7 @@ import {
   LOAD_ROOMS_FULFILLED,
   LOAD_ROOM_FULFILLED,
   CREATE_ROOM_FULFILLED,
-  DESTROY_ROOM_FULFILLED,
+  LEAVE_ROOM_FULFILLED,
   UPDATE_ROOM_FULFILLED,
 } from './action'
 
@@ -33,6 +33,6 @@ export default function* saga() {
     takeEvery(LOAD_ROOM_FULFILLED, setRoom),
     takeEvery(CREATE_ROOM_FULFILLED, setRoom),
     takeEvery(UPDATE_ROOM_FULFILLED, setRoom),
-    takeEvery(DESTROY_ROOM_FULFILLED, removeRoom),
+    takeEvery(LEAVE_ROOM_FULFILLED, removeRoom),
   ])
 }

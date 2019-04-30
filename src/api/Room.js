@@ -18,7 +18,7 @@ const Room = {
     return Http.put(`/rooms/${id}`, form)
   },
 
-  destroy(id) {
+  leave(id) {
     return Http.delete(`/rooms/${id}`)
   },
 

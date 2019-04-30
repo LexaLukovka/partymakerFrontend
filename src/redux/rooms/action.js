@@ -12,8 +12,8 @@ export const CREATE_ROOM_FULFILLED = 'CREATE_ROOM_FULFILLED'
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const UPDATE_ROOM_FULFILLED = 'UPDATE_ROOM_FULFILLED'
 
-export const DESTROY_ROOM = 'DESTROY_ROOM'
-export const DESTROY_ROOM_FULFILLED = 'DESTROY_ROOM_FULFILLED'
+export const LEAVE_ROOM = 'LEAVE_ROOM'
+export const LEAVE_ROOM_FULFILLED = 'LEAVE_ROOM_FULFILLED'
 
 export const SET_ROOM = 'SET_ROOM'
 export const SET_ROOMS = 'SET_ROOMS'
@@ -52,9 +52,9 @@ const update = (id, form) => ({
   payload: Room.update(id, form)
 })
 
-const destroy = (room_id) => ({
-  type: DESTROY_ROOM,
-  payload: Room.destroy(room_id),
+const leave = (room_id) => ({
+  type: LEAVE_ROOM,
+  payload: Room.leave(room_id),
   meta: { room_id }
 })
 
@@ -139,7 +139,7 @@ export default {
   set,
   setCurrent,
   setMany,
-  destroy,
+  leave,
   remove,
   setGuests,
   setGuest,

@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { object, func, node } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
+import matchShape from 'shapes/match'
 import SetPlaceIcon from './SetPlaceIcon'
 import Loading from 'components/elements/Loading'
 import PlaceDrawer from './PlaceDrawer'
 import PlaceForm from './PlaceForm'
+import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -32,10 +34,9 @@ class Place extends Component {
   }
 
   load = async () => {
-    const { onLoad } = this.props
-
+    const { match, onLoad } = this.props
     this.setState({ isLoading: true })
-    const result = await onLoad()
+    const result = await onLoad(match.params.id)
     this.setState({ isLoading: false })
 
     return result
@@ -51,11 +52,11 @@ class Place extends Component {
   }
 
   handleSubmit = (form) => {
-    const { place, onUpdate, onCreate } = this.props
+    const { match, place, onUpdate, onCreate } = this.props
 
-    if (!place) return onCreate(form)
+    if (!place) return onCreate(match.params.id, form)
 
-    return onUpdate(form)
+    return onUpdate(match.params.id, form)
   }
 
   render() {
@@ -79,7 +80,11 @@ class Place extends Component {
           </Typography>
         </div>
         <PlaceDrawer isOpen={isDrawerOpen} onClose={this.close}>
-          <PlaceForm place={place} onCancel={this.close} onSubmit={this.handleSubmit} />
+          <PlaceForm
+            place={place}
+            onCancel={this.close}
+            onSubmit={this.handleSubmit}
+          />
         </PlaceDrawer>
       </div>
     )
@@ -88,6 +93,7 @@ class Place extends Component {
 
 Place.propTypes = {
   classes: object.isRequired,
+  match: matchShape.isRequired,
   place: placeShape,
   onLoad: func.isRequired,
   onCreate: func.isRequired,
@@ -95,4 +101,4 @@ Place.propTypes = {
   children: node.isRequired,
 }
 
-export default withStyles(styles)(Place)
+export default withStyles(styles)(withRouter(Place))
