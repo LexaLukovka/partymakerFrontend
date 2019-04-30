@@ -6,7 +6,7 @@ const Guest = {
     return Http.get(`/rooms/${room_id}/guests`)
   },
 
-  destroy(room_id, id) {
+  kick(room_id, id) {
     return Http.delete(`/rooms/${room_id}/guests/${id}`)
   },
 }

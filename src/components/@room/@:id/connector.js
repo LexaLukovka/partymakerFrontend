@@ -20,6 +20,7 @@ const mapDispatchToProps = dispatch => {
       },
       guests: {
         loadMany: bindActionCreators(actions.guests.list, dispatch),
+        kick: bindActionCreators(actions.guests.kick, dispatch),
       },
       message: {
         loadMany: bindActionCreators(actions.messages.list, dispatch),

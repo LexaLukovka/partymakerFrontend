@@ -1,25 +1,84 @@
-import React from 'react'
-import { object } from 'prop-types'
+import React, { Component } from 'react'
+import { object, func, bool } from 'prop-types'
 import userShape from 'shapes/user'
-import { ListItem, ListItemText, withStyles } from '@material-ui/core'
+import { ListItem, Typography, withStyles } from '@material-ui/core'
 import UserAvatar from 'components/elements/UserAvatar'
+import CloseButton from 'components/elements/CloseButton'
+import KickGuestDialog from './KickGuestDialog'
 
 const styles = {
-  root: {},
+  root: {
+    '&:hover': {
+      background: 'rgba(0,0,0,0.08)'
+    },
+    '&:hover aside': {
+      display: 'flex'
+    }
+  },
+  listItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '0 15px',
+    flexGrow: 1,
+    alignItems: 'center',
+    minHeight: 48,
+  },
+  actions: {
+    display: 'none'
+  },
 }
 
-const Guest = ({ classes, guest }) =>
-  <ListItem button className={classes.root}>
-    <UserAvatar user={guest} />
-    <ListItemText
-      primary={guest.name}
-      secondary={guest.status}
-    />
-  </ListItem>
+class Guest extends Component {
+
+  state = {
+    isKickGuestDialogOpen: false,
+  }
+
+  openKickGuestDialog = () => {
+    this.setState({ isKickGuestDialogOpen: true })
+  }
+
+  closeKickGuestDialog = () => {
+    this.setState({ isKickGuestDialogOpen: false })
+  }
+
+  kickGuest = () => {
+    const { guest, onKick } = this.props
+    this.closeKickGuestDialog()
+    onKick(guest)
+  }
+
+  render() {
+    const { classes, isAdmin, guest } = this.props
+    const { isKickGuestDialogOpen } = this.state
+
+    return (
+      <ListItem className={classes.root}>
+        <UserAvatar user={guest} />
+        <div className={classes.listItem}>
+          <Typography variant="body1">{guest.name}</Typography>
+          {isAdmin && (
+            <aside className={classes.actions}>
+              <CloseButton onClick={this.openKickGuestDialog} />
+            </aside>
+          )}
+        </div>
+        <KickGuestDialog
+          guest={guest}
+          isOpen={isKickGuestDialogOpen}
+          onCancel={this.closeKickGuestDialog}
+          onConfirm={this.kickGuest}
+        />
+      </ListItem>
+    )
+  }
+}
 
 Guest.propTypes = {
   classes: object.isRequired,
-  guest: userShape.isRequired
+  isAdmin: bool.isRequired,
+  guest: userShape.isRequired,
+  onKick: func.isRequired,
 }
 
 export default withStyles(styles)(Guest)

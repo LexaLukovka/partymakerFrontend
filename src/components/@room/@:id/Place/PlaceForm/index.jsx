@@ -7,7 +7,7 @@ import placeShape from 'shapes/place'
 import TextField from 'components/formik/TextField'
 import AddressField from 'components/formik/AddressField'
 import ServerMessage from 'components/formik/ServerMessage'
-import CloseButton from './CloseButton'
+import CloseButton from 'components/elements/CloseButton'
 import formik from './formik'
 
 const styles = {

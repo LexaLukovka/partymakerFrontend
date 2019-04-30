@@ -1,5 +1,6 @@
 import React from 'react'
 import { object, func, bool } from 'prop-types'
+import userShape from 'shapes/user'
 import {
   withStyles,
   Dialog,
@@ -12,27 +13,29 @@ import {
 
 const styles = {
   root: {},
+  content: {}
 }
 
-const LeaveRoomDialog = ({ classes, isOpen, onConfirm, onCancel }) =>
+const KickGuestDialog = ({ classes, guest, isOpen, onConfirm, onCancel }) =>
   <Dialog className={classes.root} open={isOpen} onClose={onCancel}>
-    <DialogTitle>Вы действительно хотите покинуть событие?</DialogTitle>
-    <DialogContent>
+    <DialogTitle>Вы действительно хотите удалить гостя из события?</DialogTitle>
+    <DialogContent className={classes.content}>
       <DialogContentText>
-        Вы можете вернуться в это событие кликнув по пригласительной ссылке
+        Пользователь {guest.name} будет удален из вашего события
       </DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button onClick={onCancel}>Отмена</Button>
-      <Button color="primary" variant="outlined" onClick={onConfirm}>Покинуть</Button>
+      <Button color="primary" variant="outlined" onClick={onConfirm}>Удалить</Button>
     </DialogActions>
   </Dialog>
 
-LeaveRoomDialog.propTypes = {
+KickGuestDialog.propTypes = {
   classes: object.isRequired,
+  guest: userShape.isRequired,
   isOpen: bool.isRequired,
   onConfirm: func.isRequired,
   onCancel: func.isRequired,
 }
 
-export default withStyles(styles)(LeaveRoomDialog)
+export default withStyles(styles)(KickGuestDialog)

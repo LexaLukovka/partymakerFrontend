@@ -7,7 +7,8 @@ import {
   SET_ROOM_MESSAGES,
   SET_ROOM_MESSAGE,
   SET_ROOM_INVITE,
-  SET_ROOM_PLACE
+  SET_ROOM_PLACE,
+  REMOVE_ROOM_GUEST
 } from '../action'
 import uniq from 'lodash/uniq'
 import isEmpty from 'lodash/isEmpty'
@@ -65,6 +66,18 @@ export default (state = {}, { type, payload, meta }) => {
         [room.id]: {
           ...room,
           guests_ids: uniq([...room.guests_ids, payload])
+        },
+      }
+    }
+
+    case REMOVE_ROOM_GUEST: {
+      const room = state[meta.room_id]
+
+      return {
+        ...state,
+        [room.id]: {
+          ...room,
+          guests_ids: room.guests_ids.filter(id => id !== payload)
         },
       }
     }

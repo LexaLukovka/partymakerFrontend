@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { object, arrayOf, func } from 'prop-types'
+import { object, arrayOf, func, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import matchShape from 'shapes/match'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
+import { withRouter } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
-import Guest from './Guest'
 import arrayToObject from 'utils/arrayToObject'
 import Loading from 'components/elements/Loading'
-import { withRouter } from 'react-router-dom'
+import Guest from './Guest'
 
 const styles = {
   root: {
@@ -47,43 +47,52 @@ class Guests extends Component {
     return result
   }
 
-  userSearchString = searchString => guest => {
+  kick = (guest) => {
+    const { match, onKick } = this.props
+    onKick(match.params.id, guest.id)
+  }
+
+  look = searchString => guest => {
     return `${guest.name} ${guest.email}`.toLowerCase().includes(searchString.toLowerCase())
   }
 
-  searchGuests = e => {
+  search = e => {
     const searchString = e.target.value
     const { guests } = this.props
 
     const filtered_ids = guests
-      .filter(this.userSearchString(searchString))
+      .filter(this.look(searchString))
       .map(user => user.id)
 
     this.setState({ searchString, filtered_ids })
   }
 
-  filterGuests = (guests) => {
+  filter = (guests) => {
     const { filtered_ids, searchString } = this.state
     if (isEmpty(filtered_ids) && isEmpty(searchString)) return guests
     if (isEmpty(filtered_ids) && !isEmpty(searchString)) return []
 
     return filtered_ids.map(id => arrayToObject(guests)[id])
-
   }
 
   render() {
-    const { classes, guests } = this.props
+    const { classes, isAdmin, guests } = this.props
     const { isLoading } = this.state
-    const filtered = this.filterGuests(guests)
+    const filtered = this.filter(guests)
 
     if (isLoading) return <Loading className={classes.loading} />
 
     return (
       <>
-        <SearchField className={classes.search} onChange={this.searchGuests} />
+        <SearchField className={classes.search} onChange={this.search} />
         <List className={classes.root}>
           {filtered.map(guest => (
-            <Guest key={guest.id} guest={guest} />
+            <Guest
+              key={guest.id}
+              isAdmin={isAdmin}
+              guest={guest}
+              onKick={this.kick}
+            />
           ))}
         </List>
       </>
@@ -94,8 +103,10 @@ class Guests extends Component {
 Guests.propTypes = {
   classes: object.isRequired,
   match: matchShape.isRequired,
+  isAdmin: bool.isRequired,
   guests: arrayOf(userShape).isRequired,
   onLoad: func.isRequired,
+  onKick: func.isRequired,
 }
 
 export default withStyles(styles)(withRouter(Guests))

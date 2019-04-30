@@ -27,6 +27,7 @@ export const SET_ROOM_MESSAGE = 'SET_ROOM_MESSAGE'
 export const SET_ROOM_INVITE = 'SET_ROOM_INVITE'
 export const SET_ROOM_STATUS = 'SET_ROOM_STATUS'
 export const SET_ROOM_PLACE = 'SET_ROOM_PLACE'
+export const REMOVE_ROOM_GUEST = 'REMOVE_ROOM_GUEST'
 
 /**
  * Async actions. Making API requests
@@ -98,6 +99,12 @@ const setGuest = (room_id, guest_id) => ({
   meta: { room_id }
 })
 
+const removeGuest = (room_id, user_id) => ({
+  type: REMOVE_ROOM_GUEST,
+  payload: user_id,
+  meta: { room_id }
+})
+
 const setMessages = (room_id, messages_ids) => ({
   type: SET_ROOM_MESSAGES,
   payload: messages_ids,
@@ -142,6 +149,7 @@ export default {
   leave,
   remove,
   setGuests,
+  removeGuest,
   setGuest,
   setMessages,
   setMessage,

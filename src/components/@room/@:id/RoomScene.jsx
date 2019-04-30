@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { func, object, shape } from 'prop-types'
 import matchShape from 'shapes/match'
 import roomShape from 'shapes/room'
+import authShape from 'shapes/auth'
 import { Typography, withStyles } from '@material-ui/core'
 import Invite from './Invite'
 import Guests from './Guests'
@@ -56,7 +57,7 @@ class RoomScene extends Component {
   }
 
   render() {
-    const { classes, room, actions } = this.props
+    const { classes, room, auth, actions } = this.props
 
     return (
       <section className={classes.root}>
@@ -71,8 +72,10 @@ class RoomScene extends Component {
             />
           </div>
           <Guests
+            isAdmin={room?.admin_id === auth.user_id}
             guests={room?.guests || []}
             onLoad={actions.guests.loadMany}
+            onKick={actions.guests.kick}
           />
         </div>
         {room?.guests && (
@@ -110,6 +113,7 @@ class RoomScene extends Component {
 RoomScene.propTypes = {
   classes: object.isRequired,
   room: roomShape,
+  auth: authShape.isRequired,
   match: matchShape,
   actions: shape({
     room: shape({
@@ -118,6 +122,7 @@ RoomScene.propTypes = {
     }),
     guests: shape({
       loadMany: func.isRequired,
+      kick: func.isRequired,
     }),
     invite: shape({
       load: func.isRequired,

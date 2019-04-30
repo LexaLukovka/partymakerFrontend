@@ -1,4 +1,4 @@
-import WebSocket from '@adonisjs/websocket-client/dist/Ws.browser.min'
+import WebSocket from '@adonisjs/websocket-client'
 import Auth from 'services/Auth'
 
 class Socket {
@@ -25,12 +25,14 @@ class Socket {
   }
 
   _handleOn(name, callback) {
-    if (this.socket && this.socket.getSubscription(this.currentTopic)) {
-      this.socket.getSubscription(this.currentTopic).on(name, (data) => {
-        console.log('ON:', name, data)
-        callback(data)
-      })
-    }
+    const subscription = this.socket && this.socket.getSubscription(this.currentTopic)
+
+    if (!subscription) return
+
+    subscription.on(name, (data) => {
+      console.log('ON:', name, data)
+      callback(data)
+    })
   }
 
   subscribe(topic) {
