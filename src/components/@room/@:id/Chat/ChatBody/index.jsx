@@ -25,7 +25,6 @@ class ChatBody extends Component {
     const { onScrollBottom } = this.props
     const chatBody = this.chatBody.current
     chatBody.scrollTop = chatBody.scrollHeight
-
     onScrollBottom()
   }
 
@@ -40,15 +39,11 @@ class ChatBody extends Component {
   handleScroll = (e) => {
 
     requestAnimationFrame(async () => {
-
       const scrollY = e.target.scrollTop
-
       const isScrollingTop = this.oldScroll > scrollY
-
       if (isScrollingTop && e.target.scrollTop <= 15) {
         await this.handleScrolledTop(e)
       }
-
       this.oldScroll = scrollY
 
     })
@@ -56,19 +51,14 @@ class ChatBody extends Component {
 
   handleScrolledTop = async (e) => {
     const { onScrollTop } = this.props
-
     const oldScrollHeight = e.target.scrollHeight
-
     await onScrollTop()
-
     this.jumpToOriginalPosition(oldScrollHeight)
   }
 
   jumpToOriginalPosition = (oldScrollHeight) => {
     const element = this.chatBody.current
-
     const { scrollTop, scrollHeight } = element
-
     element.scrollTop = scrollHeight - oldScrollHeight + scrollTop
   }
 
