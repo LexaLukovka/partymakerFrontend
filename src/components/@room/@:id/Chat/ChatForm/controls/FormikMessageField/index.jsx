@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { object } from 'prop-types'
-import MessageField from '../../MessageField'
+import MessageField from './MessageField'
 import ClipboardImageDialog from './ClipboardImageDialog'
 
 class FormikMessageField extends Component {

@@ -7,15 +7,27 @@ import {
   CREATE_MESSAGE_FULFILLED,
 } from './action'
 
-function* setMessage({ payload: message }) {
+const createMessage = m => ({
+  ...m,
+  asset: undefined,
+})
+
+function* setMessage({ payload }) {
+  const message = createMessage(payload)
+  const asset = payload.asset
+
+  yield put(actions.assets.set(asset))
   yield put(actions.messages.set(message))
 }
 
-function* addMessages({ payload }) {
-  const { data: messages, total, page } = payload
+function* addMessages({ payload: { data, total, page } }) {
 
-  yield put(actions.rooms.status({ messages: { page, total } }))
+  const messages = data.map(createMessage)
+  const assets = data.map(m => m.asset).filter(a => !!a)
+
   yield put(actions.messages.setMany(messages))
+  yield put(actions.assets.setMany(assets))
+  yield put(actions.rooms.status({ messages: { page, total } }))
 }
 
 export default function* saga() {

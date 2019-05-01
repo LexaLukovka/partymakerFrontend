@@ -6,7 +6,6 @@ import {
   LOAD_ASSET_FULFILLED,
   CREATE_ASSET_FULFILLED,
   DESTROY_ASSET_FULFILLED,
-  UPDATE_ASSET_FULFILLED
 } from './action'
 
 function* setAsset({ payload: asset }) {
@@ -26,7 +25,6 @@ export default function* saga() {
     takeEvery(LOAD_ASSETS_FULFILLED, setAssets),
     takeEvery(LOAD_ASSET_FULFILLED, setAsset),
     takeEvery(CREATE_ASSET_FULFILLED, setAsset),
-    takeEvery(UPDATE_ASSET_FULFILLED, setAsset),
     takeEvery(DESTROY_ASSET_FULFILLED, removeAsset),
   ])
 }

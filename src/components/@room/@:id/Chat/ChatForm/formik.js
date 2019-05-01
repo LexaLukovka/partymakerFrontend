@@ -5,15 +5,16 @@ import transformValidationApi from 'src/utils/transformValidationApi'
 
 const formik = withFormik({
   validationSchema: Yup.object()
-    .shape({
-      text: Yup.string().required('Это поле является обязательным'),
-    }),
+    .shape({}),
 
   mapPropsToValues: () => ({
     text: '',
+    asset_id: null,
   }),
 
   handleSubmit: async (form, { props, setErrors, setSubmitting, setFieldValue }) => {
+
+    if (!form.text && !form.asset_id) return
 
     setSubmitting(true)
 
@@ -23,6 +24,7 @@ const formik = withFormik({
 
     if (response) {
       setFieldValue('text', '')
+      setFieldValue('asset_id', null)
     }
 
     setSubmitting(false)

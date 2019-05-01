@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import UserAvatar from 'components/elements/UserAvatar'
 import classNames from 'classnames'
 import Bubble from './Bubble'
+import TextMessage from './types/TextMessage'
+import PictureMessage from './types/PictureMessage'
+import FileMessage from './types/FileMessage'
 
 const styles = {
   root: {
@@ -18,16 +21,26 @@ const styles = {
   }
 }
 
-const Message = ({ classes, message, isMine }) =>
-  <div className={classNames({
-    [classes.root]: true,
-    [classes.isMine]: isMine,
-  })}>
-    <UserAvatar user={message.user} />
-    <Bubble isMine={isMine}>
-      {message.text}
-    </Bubble>
-  </div>
+class Message extends Component {
+
+  render() {
+    const { classes, message, isMine } = this.props
+
+    return (
+      <div className={classNames({
+        [classes.root]: true,
+        [classes.isMine]: isMine,
+      })}>
+        <UserAvatar user={message.user} />
+        <Bubble isMine={isMine}>
+          <PictureMessage message={message} />
+          <TextMessage message={message} />
+          <FileMessage message={message} />
+        </Bubble>
+      </div>
+    )
+  }
+}
 
 Message.propTypes = {
   classes: object.isRequired,

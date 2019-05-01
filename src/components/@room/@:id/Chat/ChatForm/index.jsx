@@ -2,16 +2,18 @@ import React from 'react'
 import { Form, Field } from 'formik'
 import { object } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
-import FormikMessageField from './controls/formik/MessageField'
+import FormikMessageField from './controls/FormikMessageField'
+import AssetField from './controls/FormikAssetField'
 import formik from './formik'
 
 const styles = {
   root: {
-
     borderTop: 'solid 1px rgba(0, 0, 0, 0.12)'
   },
   send: {
     display: 'flex',
+    alignItems: 'center',
+    margin: '0 5px'
   },
   sendField: {
     flexGrow: 1,
@@ -34,6 +36,9 @@ const styles = {
 const ChatForm = ({ classes }) =>
   <Form className={classes.root}>
     <div className={classes.send}>
+      <div>
+        <Field name="asset_id" component={AssetField} />
+      </div>
       <Field name="text" className={classes.sendField} component={FormikMessageField} />
       <Button type="submit" color="primary">Отправить</Button>
     </div>

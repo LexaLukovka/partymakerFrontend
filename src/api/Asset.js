@@ -12,6 +12,7 @@ class Asset {
 
   create(file) {
     const form = new FormData()
+    form.append('title', file.name)
     form.append('file', file)
 
     return Http.post('/assets', form)

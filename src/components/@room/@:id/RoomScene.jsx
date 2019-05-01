@@ -48,14 +48,6 @@ class RoomScene extends Component {
     this.loadRoom().catch(console.error)
   }
 
-  componentDidUpdate() {
-    const { match } = this.props
-
-    if (!Socket.currentTopic) {
-      Socket.subscribe(`room:${match.params.id}`)
-    }
-  }
-
   componentWillUnmount() {
     Socket.close()
   }
