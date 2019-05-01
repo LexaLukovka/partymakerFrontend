@@ -1,6 +1,8 @@
 const transformValidationApi = errors => {
 
-  if (errors?.error?.message) return { non_field_error: errors.message }
+  if (errors?.message) console.error(errors)
+
+  if (errors?.message) return { non_field_error: errors.message }
 
   const isNetworkError = errors?.message === 'Network Error'
   const isNotFoundError = errors?.response?.status === 404

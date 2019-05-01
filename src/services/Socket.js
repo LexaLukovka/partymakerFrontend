@@ -3,73 +3,60 @@ import Auth from 'services/Auth'
 
 class Socket {
 
-  currentTopic = null
+  socket = null
 
   isConnected = false
 
-  _connect() {
-    return WebSocket('ws://localhost:3333')
+  connect() {
+    this.ws = WebSocket('ws://localhost:3333').withJwtToken(Auth.token).connect()
   }
 
   constructor() {
-    this.socket = this._connect()
-    this.socket.withJwtToken(Auth.token).connect()
+    this.connect()
 
-    this.socket.on('open', () => {
+    this.ws.on('open', () => {
       this.isConnected = true
     })
 
-    this.socket.on('close', () => {
+    this.ws.on('close', () => {
       this.isConnected = false
     })
   }
 
-  _handleOn(name, callback) {
-    const subscription = this.socket && this.socket.getSubscription(this.currentTopic)
+  subscribe(topicName) {
+    if (!this.ws) this.connect()
 
-    if (!subscription) return
-
-    subscription.on(name, (data) => {
-      console.log('ON:', name, data)
-      callback(data)
-    })
-  }
-
-  subscribe(topic) {
-    this.currentTopic = topic
-
-    if (!this.socket) {
-      this.socket = this._connect()
+    if (this.socket?.topic !== topicName) {
+      this.ws.subscribe(topicName)
+      this.socket = this.ws.getSubscription(topicName)
     }
-
-    this.socket.subscribe(topic)
 
     return this
   }
 
   on(name, callback) {
-    if (Array.isArray(name)) {
-      return name.map(n => this._handleOn(n, callback))
-    }
+    if (!this.socket) throw new Error('You are not connected to any topic!')
 
-    this._handleOn(name, callback)
+    this.socket.on(name, (data) => {
+      console.log('ON:', name, data)
+      callback(data)
+    })
 
     return this
   }
 
   emit(name, data) {
-    if (this.socket) this.socket.emit(name, data)
+    if (!this.ws) throw new Error('You are not connected!')
+
+    this.ws.emit(name, data)
 
     return this
   }
 
   close() {
-    try {
-      if (this.socket) this.socket.close()
-      this.socket = null
-    } catch (e) {
-      this.socket = null
-    }
+    if (!this.ws) throw new Error('You are not connected!')
+    this.ws.close()
+    this.ws = null
   }
 }
 

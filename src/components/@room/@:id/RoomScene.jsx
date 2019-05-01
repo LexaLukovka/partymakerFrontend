@@ -35,7 +35,8 @@ const styles = {
   chat: {
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    maxHeight: 'calc(100vh - 65px)',
   }
 }
 
@@ -45,6 +46,14 @@ class RoomScene extends Component {
     const { match } = this.props
     Socket.subscribe(`room:${match.params.id}`)
     this.loadRoom().catch(console.error)
+  }
+
+  componentDidUpdate() {
+    const { match } = this.props
+
+    if (!Socket.currentTopic) {
+      Socket.subscribe(`room:${match.params.id}`)
+    }
   }
 
   componentWillUnmount() {

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { withRouter } from 'react-router-dom'
 import roomShape from 'shapes/room'
-import matchShape from 'shapes/match'
 import authShape from 'shapes/auth'
 import wait from 'utils/wait'
 import Socket from 'services/Socket'
@@ -17,6 +15,7 @@ const styles = {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+    maxHeight: 'calc(100vh - 141px)'
   },
   titles: {
     paddingLeft: 13,
@@ -38,31 +37,30 @@ class Chat extends Component {
 
     Socket.on('message', (message) => {
       onMessage(message)
-      this.setState({ isScrollingBottom: true })
+      this.scrollBottom()
     })
   }
 
   loadAndScrollBottom = async () => {
     await this.load()
-    this.setState({ isScrollingBottom: true })
+    this.scrollBottom()
   }
 
   load = async (page = 1) => {
-    const { onLoad, match } = this.props
+    const { room, onLoad } = this.props
     const { limit } = this.state
 
     this.setState({ page, isLoading: true })
-    const result = await onLoad(match.params.id, { page, limit })
+    const result = await onLoad(room.id, { page, limit })
     this.setState({ isLoading: false })
 
     return result
   }
 
   sendMessage = async (form) => {
-    const { match, onSend } = this.props
-    const result = await onSend(match.params.id, form)
-    await wait(50)
-    this.setState({ isScrollingBottom: true })
+    const { room, onSend } = this.props
+    const result = await onSend(room.id, form)
+    this.scrollBottom()
 
     return result
   }
@@ -74,6 +72,10 @@ class Chat extends Component {
     if (room.totalMessages <= page * limit) return null
 
     return this.load(page + 1)
+  }
+
+  scrollBottom = () => {
+    this.setState({ isScrollingBottom: true })
   }
 
   disableScrolling = () => {
@@ -105,7 +107,6 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
-  match: matchShape.isRequired,
   room: roomShape.isRequired,
   auth: authShape.isRequired,
   onLoad: func.isRequired,
@@ -113,4 +114,4 @@ Chat.propTypes = {
   onMessage: func.isRequired,
 }
 
-export default withStyles(styles)(withAuth(withRouter(Chat)))
+export default withStyles(styles)(withAuth(Chat))
