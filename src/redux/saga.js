@@ -6,14 +6,13 @@ import assets from './assets/saga'
 import messages from './messages/saga'
 import places from './places/saga'
 import invites from './invites/saga'
-import guests from './guests/saga'
 
 export default function* rootSaga() {
   yield all([
     fork(auth),
     fork(users),
     fork(rooms),
-    fork(guests),
+    fork(users),
     fork(invites),
     fork(assets),
     fork(messages),

@@ -1,7 +1,7 @@
-import { withFormik } from 'formik'
+import { withFormik } from 'formik/dist/index'
 import * as Yup from 'yup'
 import to from 'util-to'
-import transformValidationApi from 'src/utils/transformValidationApi'
+import transformValidationApi from 'utils/transformValidationApi'
 
 const formik = withFormik({
   validationSchema: Yup.object()

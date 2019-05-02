@@ -5,8 +5,7 @@ import placeShape from 'shapes/place'
 import matchShape from 'shapes/match'
 import SetPlaceIcon from './SetPlaceIcon'
 import Loading from 'components/elements/Loading'
-import PlaceDrawer from './PlaceDrawer'
-import PlaceForm from './PlaceForm'
+import PlaceDrawer from 'components/modules/PlaceDrawer'
 import { withRouter } from 'react-router-dom'
 
 const styles = {
@@ -51,7 +50,7 @@ class Place extends Component {
     this.setState({ isDrawerOpen: false })
   }
 
-  handleSubmit = (form) => {
+  submit = (form) => {
     const { match, place, onUpdate, onCreate } = this.props
 
     if (!place) return onCreate(match.params.id, form)
@@ -79,13 +78,12 @@ class Place extends Component {
             {place?.title || place?.address || 'Выберите место'}
           </Typography>
         </div>
-        <PlaceDrawer isOpen={isDrawerOpen} onClose={this.close}>
-          <PlaceForm
-            place={place}
-            onCancel={this.close}
-            onSubmit={this.handleSubmit}
-          />
-        </PlaceDrawer>
+        <PlaceDrawer
+          isOpen={isDrawerOpen}
+          place={place}
+          onClose={this.close}
+          onSubmit={this.submit}
+        />
       </div>
     )
   }

@@ -3,7 +3,7 @@ import currentUser from 'src/redux/users/selectors/currentUser'
 
 const mapStateToProps = state => ({
   user: currentUser(state),
-  guests: []
+  users: []
 })
 
 const mapDispatchToProps = () => ({})

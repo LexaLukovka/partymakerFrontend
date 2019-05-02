@@ -1,5 +1,8 @@
+import { all, put, takeEvery, fork } from 'redux-saga/effects'
 import actions from 'src/redux/action'
-import { all, put, takeEvery } from 'redux-saga/effects'
+import guests from './guests/saga'
+import place from './place/saga'
+import invite from './invite/saga'
 
 import {
   LOAD_ROOMS_FULFILLED,
@@ -15,7 +18,7 @@ const createRoom = room => ({
 })
 
 function* setRoom({ payload: room }) {
-  yield put(actions.rooms.setCurrent(room.id))
+  yield put(actions.rooms.current(room.id))
   yield put(actions.rooms.set(createRoom(room)))
 }
 
@@ -29,6 +32,9 @@ function* removeRoom({ meta: { room_id } }) {
 
 export default function* saga() {
   yield all([
+    fork(guests),
+    fork(place),
+    fork(invite),
     takeEvery(LOAD_ROOMS_FULFILLED, setRooms),
     takeEvery(LOAD_ROOM_FULFILLED, setRoom),
     takeEvery(CREATE_ROOM_FULFILLED, setRoom),

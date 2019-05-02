@@ -1,6 +1,6 @@
 import Http from 'src/services/Http'
 
-const Auth = {
+const auth = {
 
   register(credentials) {
     return Http.post('/auth/register', credentials)
@@ -40,4 +40,4 @@ const Auth = {
   },
 }
 
-export default Auth
+export default auth

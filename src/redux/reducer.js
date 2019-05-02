@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import auth from './auth/reducer'
-import rooms from './rooms/reducers'
+import rooms from './rooms/reducer'
 import users from './users/reducers'
-import places from './places/reducers'
-import messages from './messages/reducers'
+import places from './places/reducer'
+import messages from './messages/reducer'
 import assets from './assets/reducers'
-import invites from './invites/reducers'
+import invites from './invites/reducer'
 
 export default combineReducers({
   auth,

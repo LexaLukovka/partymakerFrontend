@@ -36,12 +36,9 @@ class Http {
     this.authorize()
     try {
       const { data } = await this.instance[method](url, params, config)
-      // console.log(`${method.toUpperCase()}: ${url} FULFILLED`)
 
       return data
     } catch (err) {
-      // console.error(`${method.toUpperCase()}:${url} REJECTED`)
-
       this.handleError(err)
     }
   }

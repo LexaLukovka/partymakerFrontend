@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect/lib/index'
 
 const currentInvite = (invites, invite_id) => {
   return invites[invite_id]

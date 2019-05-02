@@ -1,7 +1,7 @@
-import Http from 'src/services/Http'
+import Http from 'services/Http'
 import qs from 'querystring'
 
-const Message = {
+const message = {
 
   list(room_id, params = { page: 1, limit: 20 }) {
     return Http.get(`/rooms/${room_id}/messages?${qs.stringify(params)}`)
@@ -20,4 +20,4 @@ const Message = {
   },
 }
 
-export default Message
+export default message

@@ -18,10 +18,10 @@ const styles = {
 
 const KickGuestDialog = ({ classes, guest, isOpen, onConfirm, onCancel }) =>
   <Dialog className={classes.root} open={isOpen} onClose={onCancel}>
-    <DialogTitle>Вы действительно хотите удалить гостя из события?</DialogTitle>
+    <DialogTitle>Вы действительно хотите удалить из списка гостей?</DialogTitle>
     <DialogContent className={classes.content}>
       <DialogContentText>
-        Пользователь {guest.name} будет удален из вашего события
+        Пользователь {guest.name} будет удален из списка гостей
       </DialogContentText>
     </DialogContent>
     <DialogActions>

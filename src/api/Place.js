@@ -1,21 +1,26 @@
-import Http from 'src/services/Http'
+import Http from 'services/Http'
 
-const Place = {
-  load(room_id) {
-    return Http.get(`/rooms/${room_id}/place`)
+const place = {
+
+  list() {
+    return Http.get(`/places`)
   },
 
-  create(room_id, form) {
-    return Http.post(`/rooms/${room_id}/place`, form)
+  load(place_id) {
+    return Http.get(`/places/${place_id}`)
   },
 
-  update(room_id, form) {
-    return Http.put(`/rooms/${room_id}/place`, form)
+  create(form) {
+    return Http.post(`/places`, form)
   },
 
-  destroy(room_id) {
-    return Http.delete(`room/${room_id}/place`)
+  update(place_id, form) {
+    return Http.put(`/places/${place_id}`, form)
+  },
+
+  destroy(place_id) {
+    return Http.delete(`places/${place_id}`)
   },
 }
 
-export default Place
+export default place

@@ -1,6 +1,6 @@
-import Http from 'src/services/Http'
+import Http from 'services/Http'
 
-const Guest = {
+const guest = {
 
   list(room_id) {
     return Http.get(`/rooms/${room_id}/guests`)
@@ -11,4 +11,4 @@ const Guest = {
   },
 }
 
-export default Guest
+export default guest

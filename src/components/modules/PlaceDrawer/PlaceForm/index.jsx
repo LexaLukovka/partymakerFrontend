@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react'
-import { Form, Field } from 'formik'
+import { Form, Field } from 'formik/dist/index'
 import { object, func, bool } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
@@ -39,7 +39,7 @@ const PlaceForm = ({ classes, place, onCancel, isSubmitting }) =>
     <div className={classes.form}>
       <div className={classes.title}>
         <CloseButton onClick={onCancel} />
-        <Typography variant="h5">Выбрать место</Typography>
+        <Typography variant="h5">{place ? 'Изменить' : 'Добавить'} место</Typography>
       </div>
       <Field
         label="Название места"
@@ -70,7 +70,7 @@ const PlaceForm = ({ classes, place, onCancel, isSubmitting }) =>
 
 PlaceForm.propTypes = {
   classes: object.isRequired,
-  place: placeShape.isRequired,
+  place: placeShape,
   isSubmitting: bool.isRequired,
   onSubmit: func.isRequired,
   onCancel: func.isRequired,

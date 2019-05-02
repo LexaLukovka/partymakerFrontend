@@ -15,7 +15,7 @@ function* setAuthUser({ payload: { token } }) {
   const user = Auth.user(token)
 
   yield put(actions.users.set(user))
-  yield put(actions.auth.setCurrentUser(user))
+  yield put(actions.auth.user(user))
 }
 
 export default function* saga() {

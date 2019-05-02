@@ -1,7 +1,7 @@
-import { createSelector } from 'reselect/lib/index'
+import { createSelector } from 'reselect'
 import assembleMessages from 'src/redux/messages/selectors/assembleMessages'
 
-const currentRoom = (rooms, messagesArray, users, places, room_id, totalMessages, invites) => {
+const currentRoom = (rooms, messages, users, places, room_id, totalMessages, invites) => {
 
   const room = rooms[room_id]
 
@@ -9,10 +9,10 @@ const currentRoom = (rooms, messagesArray, users, places, room_id, totalMessages
 
   return {
     ...room,
-    messages: messagesArray.filter(m => m.room_id === room.id),
+    messages: messages.filter(m => m.room_id === room.id),
     guests: room.guests_ids.map(id => users[id]),
-    place: places[room.place_id],
-    invite: invites[room.invite_id],
+    place: places.find(place => place.room_id === room.id),
+    invite: invites.find(invite => invite.room_id === room.id),
     totalMessages,
   }
 }
@@ -21,9 +21,9 @@ export default createSelector(
   state => state.rooms.entities,
   state => assembleMessages(state),
   state => state.users.entities,
-  state => state.places.entities,
+  state => Object.values(state.places.entities),
   state => state.rooms.status.room_id,
   state => state.rooms.status.messages.total,
-  state => state.invites.entities,
+  state => Object.values(state.invites.entities),
   currentRoom,
 )

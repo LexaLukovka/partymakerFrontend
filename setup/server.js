@@ -21,7 +21,7 @@ export default () => async (request, response) => {
   const cookie = new Cookie(request.headers.cookie)
   const token = cookie.get('token')
   const user = JWT(token).data
-  store.dispatch(actions.auth.setCurrentUser(user))
+  store.dispatch(actions.auth.user(user))
 
   const [jsx, extractor] = withCodeSplitting(
     <WithTheme sheetsRegistry={sheetsRegistry}>

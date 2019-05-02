@@ -1,4 +1,8 @@
-import Room from 'api/Room'
+import room from 'api/Room'
+import guests from './guests/action'
+import invite from './invite/action'
+import place from './place/action'
+import messages from './messages/action'
 
 export const LOAD_ROOMS = 'LOAD_ROOMS'
 export const LOAD_ROOMS_FULFILLED = 'LOAD_ROOMS_FULFILLED'
@@ -20,14 +24,7 @@ export const SET_ROOMS = 'SET_ROOMS'
 export const REMOVE_ROOM = 'REMOVE_ROOM'
 export const SET_CURRENT_ROOM = 'SET_CURRENT_ROOM'
 
-export const SET_ROOM_GUESTS = 'SET_ROOM_GUESTS'
-export const SET_ROOM_GUEST = 'SET_ROOM_GUEST'
-export const SET_ROOM_MESSAGES = 'SET_ROOM_MESSAGES'
-export const SET_ROOM_MESSAGE = 'SET_ROOM_MESSAGE'
-export const SET_ROOM_INVITE = 'SET_ROOM_INVITE'
 export const SET_ROOM_STATUS = 'SET_ROOM_STATUS'
-export const SET_ROOM_PLACE = 'SET_ROOM_PLACE'
-export const REMOVE_ROOM_GUEST = 'REMOVE_ROOM_GUEST'
 
 /**
  * Async actions. Making API requests
@@ -35,27 +32,27 @@ export const REMOVE_ROOM_GUEST = 'REMOVE_ROOM_GUEST'
 
 const list = () => ({
   type: LOAD_ROOMS,
-  payload: Room.list()
+  payload: room.list()
 })
 
 const find = (id) => ({
   type: LOAD_ROOM,
-  payload: Room.find(id)
+  payload: room.find(id)
 })
 
-const create = () => ({
+const create = (form) => ({
   type: CREATE_ROOM,
-  payload: Room.create()
+  payload: room.create(form)
 })
 
 const update = (id, form) => ({
   type: UPDATE_ROOM,
-  payload: Room.update(id, form)
+  payload: room.update(id, form)
 })
 
 const leave = (room_id) => ({
   type: LEAVE_ROOM,
-  payload: Room.leave(room_id),
+  payload: room.leave(room_id),
   meta: { room_id }
 })
 
@@ -73,7 +70,7 @@ const set = room => ({
   payload: room,
 })
 
-const setCurrent = room_id => ({
+const current = room_id => ({
   type: SET_CURRENT_ROOM,
   payload: room_id,
 })
@@ -84,53 +81,7 @@ const remove = room_id => ({
 })
 
 /**
- * Sync actions. Updating relations
- */
-
-const setGuests = (room_id, guests_ids) => ({
-  type: SET_ROOM_GUESTS,
-  payload: guests_ids,
-  meta: { room_id }
-})
-
-const setGuest = (room_id, guest_id) => ({
-  type: SET_ROOM_GUEST,
-  payload: guest_id,
-  meta: { room_id }
-})
-
-const removeGuest = (room_id, user_id) => ({
-  type: REMOVE_ROOM_GUEST,
-  payload: user_id,
-  meta: { room_id }
-})
-
-const setMessages = (room_id, messages_ids) => ({
-  type: SET_ROOM_MESSAGES,
-  payload: messages_ids,
-  meta: { room_id }
-})
-
-const setMessage = (room_id, message_id) => ({
-  type: SET_ROOM_MESSAGE,
-  payload: message_id,
-  meta: { room_id }
-})
-
-const setInvite = (room_id, invite_id) => ({
-  type: SET_ROOM_INVITE,
-  payload: invite_id,
-  meta: { room_id }
-})
-
-const setPlace = (room_id, place_id) => ({
-  type: SET_ROOM_PLACE,
-  payload: place_id,
-  meta: { room_id }
-})
-
-/**
- * Sync actions. Room status
+ * Sync actions. room status
  */
 
 const status = (params) => ({
@@ -144,16 +95,13 @@ export default {
   update,
   find,
   set,
-  setCurrent,
+  current,
   setMany,
   leave,
   remove,
-  setGuests,
-  removeGuest,
-  setGuest,
-  setMessages,
-  setMessage,
-  setInvite,
-  setPlace,
+  guests,
+  messages,
+  invite,
+  place,
   status,
 }

@@ -1,6 +1,8 @@
 import React from 'react'
-import { object, func, bool, node } from 'prop-types'
+import { bool, func, object } from 'prop-types'
 import { Drawer, withStyles } from '@material-ui/core'
+import placeShape from 'shapes/place'
+import PlaceForm from './PlaceForm'
 
 const styles = {
   root: {
@@ -9,22 +11,27 @@ const styles = {
   },
 }
 
-const PlaceDrawer = ({ classes, isOpen, onClose, children }) =>
+const PlaceDrawer = ({ classes, place, isOpen, onSubmit, onClose }) =>
   <Drawer
     anchor="right"
     open={isOpen}
     onClose={onClose}
   >
     <div className={classes.root}>
-      {children}
+      <PlaceForm
+        place={place}
+        onCancel={onClose}
+        onSubmit={onSubmit}
+      />
     </div>
   </Drawer>
 
 PlaceDrawer.propTypes = {
   classes: object.isRequired,
+  place: placeShape,
   isOpen: bool.isRequired,
   onClose: func.isRequired,
-  children: node.isRequired,
+  onSubmit: func.isRequired,
 }
 
 export default withStyles(styles)(PlaceDrawer)

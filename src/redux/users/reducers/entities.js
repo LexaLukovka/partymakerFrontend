@@ -8,6 +8,7 @@ const initialState = user ? { [user.id]: user } : {}
 
 const usersReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+
     case SET_USER:
       return {
         ...state,

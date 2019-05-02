@@ -1,4 +1,4 @@
-import Auth from 'api/Auth'
+import auth from 'api/Auth'
 
 export const ACTIVATE_USER = 'ACTIVATE_USER'
 export const ACTIVATE_USER_FULFILLED = 'ACTIVATE_USER_FULFILLED'
@@ -32,55 +32,55 @@ export const SET_AUTH_EMAIL = 'SET_AUTH_EMAIL'
 
 const register = form => ({
   type: REGISTER_USER,
-  payload: Auth.register(form),
+  payload: auth.register(form),
 })
 
 const login = form => ({
   type: LOGIN_USER,
-  payload: Auth.login(form),
+  payload: auth.login(form),
 })
 
 const activate = hash => ({
   type: ACTIVATE_USER,
-  payload: Auth.activate(hash),
+  payload: auth.activate(hash),
 })
 
 const forgotPassword = form => ({
   type: FORGOT_PASSWORD,
-  payload: Auth.forgotPassword(form),
+  payload: auth.forgotPassword(form),
   meta: form,
 })
 
 const resetPassword = form => ({
   type: RESET_PASSWORD,
-  payload: Auth.resetPassword(form),
+  payload: auth.resetPassword(form),
 })
 
 const google = Guser => ({
   type: LOGIN_GOOGLE_USER,
-  payload: Auth.google(Guser),
+  payload: auth.google(Guser),
 })
 
 const facebook = FBUser => ({
   type: LOGIN_FACEBOOK_USER,
-  payload: Auth.facebook(FBUser),
+  payload: auth.facebook(FBUser),
 })
 
 const logout = () => ({
   type: LOGOUT_USER,
-  payload: Auth.logout()
+  payload: auth.logout()
 })
 
 /**
  * Sync actions. Updating store
  */
 
-const setCurrentUser = (user) => ({
+const user = (user) => ({
   type: SET_AUTH_USER,
   payload: user,
 })
 
-const setEmail = (email) => ({
+const email = (email) => ({
   type: SET_AUTH_EMAIL,
   payload: email,
 })
@@ -93,7 +93,7 @@ export default {
   facebook,
   forgotPassword,
   resetPassword,
-  setCurrentUser,
-  setEmail,
+  user,
+  email,
   logout,
 }

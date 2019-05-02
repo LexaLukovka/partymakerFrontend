@@ -4,6 +4,8 @@ import { object } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
 import FormikMessageField from './controls/FormikMessageField'
 import AssetField from './controls/FormikAssetField'
+import PlaceField from './controls/FormikPlaceField'
+
 import formik from './formik'
 
 const styles = {
@@ -51,7 +53,7 @@ const ChatForm = ({ classes }) =>
       >
         Предложить:
       </Typography>
-      <Button className={classes.action} color="primary">МЕСТО</Button>
+      <Field name="place_id" className={classes.action} component={PlaceField} />
       <Button className={classes.action} color="primary">ГОСТЯ</Button>
       <Button className={classes.action} color="primary">ДАТУ И ВРЕМЯ</Button>
     </div>

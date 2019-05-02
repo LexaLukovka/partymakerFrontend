@@ -60,6 +60,8 @@ class RoomScene extends Component {
   render() {
     const { classes, room, auth, actions } = this.props
 
+    console.log(room)
+
     return (
       <section className={classes.root}>
         <div className={classes.guests}>
@@ -100,9 +102,9 @@ class RoomScene extends Component {
             </ChatHeader>
             <Chat
               room={room}
-              onLoad={actions.message.loadMany}
-              onSend={actions.message.send}
-              onMessage={actions.message.set}
+              onLoad={actions.messages.loadMany}
+              onSend={actions.messages.create}
+              onMessage={actions.messages.set}
             />
           </div>
         )}
@@ -135,9 +137,9 @@ RoomScene.propTypes = {
       create: func.isRequired,
       update: func.isRequired,
     }),
-    message: shape({
+    messages: shape({
       loadMany: func.isRequired,
-      send: func.isRequired,
+      create: func.isRequired,
       set: func.isRequired,
     }),
   }),
