@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func, shape } from 'prop-types'
+import { object, func, shape, bool } from 'prop-types'
 import { Typography, withStyles, Button } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import PlaceDialog from './PlaceDialog'
@@ -10,6 +10,7 @@ const styles = {
     padding: 15,
     width: 300,
     height: 250,
+    overflow: 'hidden',
     backgroundSize: 'cover',
     borderRadius: 20,
     display: 'flex',
@@ -17,7 +18,7 @@ const styles = {
     alignItems: 'center',
     '&::before': {
       position: 'absolute',
-      overflow: 'none',
+      overflow: 'hidden',
       background: 'radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%)',
       borderRadius: '100%',
       width: '100%',
@@ -61,7 +62,7 @@ class PlaceMessage extends Component {
   }
 
   render() {
-    const { classes, message: { place } } = this.props
+    const { classes, message: { place }, isMeAdmin } = this.props
     const { isPlaceModalOpen } = this.state
     const background_url = place.background_url || '/images/sparks.png'
     const backgroundImage = background_url && `url(${background_url})`
@@ -71,7 +72,16 @@ class PlaceMessage extends Component {
         <div className={classes.content}>
           <Typography className={classes.title} variant="h5">{place.title}</Typography>
           <Typography gutterBottom variant="body1" className={classes.address}>{place.address}</Typography>
-          <Button variant="contained" color="primary" onClick={this.openModal} size="small">Принять</Button>
+          {isMeAdmin && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.openModal}
+              size="small"
+            >
+              Принять
+            </Button>
+          )}
         </div>
         <PlaceDialog
           place={place}
@@ -86,12 +96,14 @@ class PlaceMessage extends Component {
 
 PlaceMessage.propTypes = {
   classes: object.isRequired,
-  message: messageShape.isRequired,
+  isMeAdmin: bool.isRequired,
   actions: shape({
     rooms: shape({
       update: func.isRequired,
     })
   }),
+
+  message: messageShape.isRequired,
 }
 
 export default withStyles(styles)(connector(PlaceMessage))

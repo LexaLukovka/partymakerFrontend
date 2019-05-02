@@ -71,6 +71,11 @@ class RoomScene extends Component {
     return place
   }
 
+  loadMessages = async (params) => {
+    const { actions, match } = this.props
+    await actions.room.messages.loadMany(match.params.id, params)
+  }
+
   render() {
     const { classes, room, actions } = this.props
 
@@ -86,12 +91,14 @@ class RoomScene extends Component {
               onUpdate={actions.room.invite.update}
             />
           </div>
-          <Guests
-            admin={room?.admin}
-            guests={room?.guests || []}
-            onLoad={actions.room.guests.loadMany}
-            onKick={actions.room.guests.kick}
-          />
+          {room && (
+            <Guests
+              admin={room?.admin}
+              guests={room?.guests || []}
+              onLoad={actions.room.guests.loadMany}
+              onKick={actions.room.guests.kick}
+            />
+          )}
         </div>
         {room?.guests && (
           <div className={classes.chat}>
@@ -114,7 +121,7 @@ class RoomScene extends Component {
             </ChatHeader>
             <Chat
               room={room}
-              onLoad={actions.room.messages.loadMany}
+              onLoad={this.loadMessages}
               onSend={actions.room.messages.create}
               onMessage={actions.room.messages.set}
             />

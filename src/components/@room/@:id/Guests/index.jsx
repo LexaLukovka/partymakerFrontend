@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { object, arrayOf, func } from 'prop-types'
+import { object, bool, arrayOf, func } from 'prop-types'
 import userShape from 'shapes/user'
-import authShape from 'shapes/auth'
 import matchShape from 'shapes/match'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
@@ -78,10 +77,9 @@ class Guests extends Component {
   }
 
   render() {
-    const { classes, auth, admin, guests } = this.props
+    const { classes, isMeAdmin, admin, guests } = this.props
     const { isLoading } = this.state
     const filtered = this.filter(guests)
-    const isMeAdmin = admin?.id === auth.user_id
 
     if (isLoading) return <Loading className={classes.loading} />
 
@@ -106,8 +104,8 @@ class Guests extends Component {
 
 Guests.propTypes = {
   classes: object.isRequired,
-  auth: authShape.isRequired,
   match: matchShape.isRequired,
+  isMeAdmin: bool.isRequired,
 
   admin: userShape,
   guests: arrayOf(userShape).isRequired,

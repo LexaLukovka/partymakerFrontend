@@ -26,6 +26,7 @@ const formik = withFormik({
     if (response) {
       setFieldValue('text', '')
       setFieldValue('asset_id', null)
+      setFieldValue('place_id', null)
     }
 
     setSubmitting(false)

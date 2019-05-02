@@ -15,7 +15,7 @@ const styles = {
 }
 
 const Messages = ({ classes, isLoading, messages, auth_id }) => (
-  <div className={classes.root}>
+  <>
     {isLoading && <Loading className={classes.loading} />}
     {messages.map(message => (
       <Message
@@ -24,7 +24,7 @@ const Messages = ({ classes, isLoading, messages, auth_id }) => (
         message={message}
       />
     ))}
-  </div>
+  </>
 )
 
 Messages.propTypes = {

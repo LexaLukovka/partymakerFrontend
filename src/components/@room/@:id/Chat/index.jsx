@@ -46,11 +46,11 @@ class Chat extends Component {
   }
 
   load = async (page = 1) => {
-    const { room, onLoad } = this.props
+    const { onLoad } = this.props
     const { limit } = this.state
 
     this.setState({ page, isLoading: true })
-    const result = await onLoad(room.id, { page, limit })
+    const result = await onLoad({ page, limit })
     this.setState({ isLoading: false })
 
     return result

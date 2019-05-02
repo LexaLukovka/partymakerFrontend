@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
+import isMeAdmin from 'src/redux/rooms/selectors/isMeAdmin'
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  isMeAdmin: isMeAdmin(state)
 })
 
 const mapDispatchToProps = () => ({})
