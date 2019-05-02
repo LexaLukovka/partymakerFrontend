@@ -10,11 +10,12 @@ const formik = withFormik({
   mapPropsToValues: () => ({
     text: '',
     asset_id: null,
+    place_id: null,
   }),
 
   handleSubmit: async (form, { props, setErrors, setSubmitting, setFieldValue }) => {
 
-    if (!form.text && !form.asset_id) return
+    if (!form.text && !form.asset_id && !form.place_id) return
 
     setSubmitting(true)
 

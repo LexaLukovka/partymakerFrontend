@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles, Button } from '@material-ui/core'
 import { shape, func, string } from 'prop-types'
-import matchShape from 'shapes/match'
 import PlaceDrawer from 'components/modules/PlaceDrawer'
-import { withRouter } from 'react-router-dom'
 import connector from './connector'
 
 const styles = {
@@ -27,11 +25,12 @@ class PlaceField extends Component {
   }
 
   create = async (form) => {
-    const { name, match, actions, onChange } = this.props
+    const { name, actions, onChange } = this.props
 
-    const { value: place } = await actions.place.create(match.params.id, form)
+    const { value: place } = await actions.place.create(form)
 
     onChange(name, place)
+    this.close()
   }
 
   render() {
@@ -52,7 +51,6 @@ class PlaceField extends Component {
 }
 
 PlaceField.propTypes = {
-  match: matchShape.isRequired,
   className: string,
   actions: shape({
     place: shape({
@@ -63,4 +61,4 @@ PlaceField.propTypes = {
   onChange: func.isRequired
 }
 
-export default withStyles(styles)(connector(withRouter(PlaceField)))
+export default withStyles(styles)(connector(PlaceField))

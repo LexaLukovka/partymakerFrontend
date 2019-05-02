@@ -5,7 +5,6 @@ import { Button, Typography, withStyles } from '@material-ui/core'
 import FormikMessageField from './controls/FormikMessageField'
 import AssetField from './controls/FormikAssetField'
 import PlaceField from './controls/FormikPlaceField'
-
 import formik from './formik'
 
 const styles = {

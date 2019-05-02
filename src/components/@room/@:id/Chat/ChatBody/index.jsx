@@ -6,7 +6,8 @@ import background from './Background.max-300x300.jpg'
 const styles = {
   root: {
     flexGrow: 1,
-    overflow: 'auto',
+    overflowX: 'hidden',
+    overflowY: 'auto',
     padding: '15px 0',
     position: 'relative',
     background: `url(${background})`,

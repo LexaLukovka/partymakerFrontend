@@ -13,6 +13,9 @@ const styles = {
     },
     '&:hover aside': {
       display: 'flex'
+    },
+    '&:hover label': {
+      display: 'none'
     }
   },
   listItem: {
@@ -49,7 +52,7 @@ class Guest extends Component {
   }
 
   render() {
-    const { classes, isAdmin, guest } = this.props
+    const { classes, admin, isMeAdmin, guest } = this.props
     const { isKickGuestDialogOpen } = this.state
 
     return (
@@ -57,7 +60,10 @@ class Guest extends Component {
         <UserAvatar user={guest} />
         <div className={classes.listItem}>
           <Typography variant="body1">{guest.name}</Typography>
-          {isAdmin && (
+          {admin?.id === guest.id && (
+            <Typography component="label" color="textSecondary" variant="caption">админ</Typography>
+          )}
+          {isMeAdmin && (
             <aside className={classes.actions}>
               <CloseButton onClick={this.openKickGuestDialog} />
             </aside>
@@ -76,7 +82,8 @@ class Guest extends Component {
 
 Guest.propTypes = {
   classes: object.isRequired,
-  isAdmin: bool.isRequired,
+  isMeAdmin: bool.isRequired,
+  admin: userShape,
   guest: userShape.isRequired,
   onKick: func.isRequired,
 }

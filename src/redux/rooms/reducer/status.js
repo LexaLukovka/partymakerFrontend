@@ -1,4 +1,4 @@
-import { SET_CURRENT_ROOM, SET_ROOM_STATUS } from '../action'
+import { SELECT_ROOM, SET_ROOM_STATUS } from '../action'
 
 const initialState = {
   room_id: null,
@@ -10,7 +10,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_CURRENT_ROOM:
+    case SELECT_ROOM:
       return {
         ...state,
         room_id: payload,

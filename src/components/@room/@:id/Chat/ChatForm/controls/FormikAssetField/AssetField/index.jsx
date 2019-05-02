@@ -33,7 +33,6 @@ class AssetField extends Component {
     this.setState({ isLoading: false })
 
     onChange(name, response.value)
-    e.target.value = null
   }
 
   render() {

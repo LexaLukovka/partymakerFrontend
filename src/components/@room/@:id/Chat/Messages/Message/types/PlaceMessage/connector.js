@@ -7,8 +7,8 @@ const mapStateToProps = () => ({})
 const mapDispatchToProps = dispatch => {
   return ({
     actions: {
-      place: {
-        create: bindActionCreators(actions.places.create, dispatch),
+      rooms: {
+        update: bindActionCreators(actions.rooms.update, dispatch),
       },
     }
   })

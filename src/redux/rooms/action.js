@@ -1,7 +1,6 @@
 import room from 'api/Room'
 import guests from './guests/action'
 import invite from './invite/action'
-import place from './place/action'
 import messages from './messages/action'
 
 export const LOAD_ROOMS = 'LOAD_ROOMS'
@@ -22,7 +21,7 @@ export const LEAVE_ROOM_FULFILLED = 'LEAVE_ROOM_FULFILLED'
 export const SET_ROOM = 'SET_ROOM'
 export const SET_ROOMS = 'SET_ROOMS'
 export const REMOVE_ROOM = 'REMOVE_ROOM'
-export const SET_CURRENT_ROOM = 'SET_CURRENT_ROOM'
+export const SELECT_ROOM = 'SELECT_ROOM'
 
 export const SET_ROOM_STATUS = 'SET_ROOM_STATUS'
 
@@ -70,8 +69,8 @@ const set = room => ({
   payload: room,
 })
 
-const current = room_id => ({
-  type: SET_CURRENT_ROOM,
+const select = room_id => ({
+  type: SELECT_ROOM,
   payload: room_id,
 })
 
@@ -95,13 +94,12 @@ export default {
   update,
   find,
   set,
-  current,
+  select,
   setMany,
   leave,
   remove,
   guests,
   messages,
   invite,
-  place,
   status,
 }

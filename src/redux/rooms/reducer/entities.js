@@ -14,7 +14,10 @@ export default (state = {}, { type, payload, meta }) => {
     case SET_ROOM: {
       return {
         ...state,
-        [payload.id]: payload,
+        [payload.id]: {
+          ...payload,
+          guests_ids: payload.guests_ids || state[payload.id].guests_ids,
+        },
       }
     }
 

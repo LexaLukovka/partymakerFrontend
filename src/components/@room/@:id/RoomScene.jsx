@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { func, object, shape } from 'prop-types'
 import matchShape from 'shapes/match'
 import roomShape from 'shapes/room'
-import authShape from 'shapes/auth'
 import { Typography, withStyles } from '@material-ui/core'
 import Invite from './Invite'
 import Guests from './Guests'
@@ -57,10 +56,23 @@ class RoomScene extends Component {
     await actions.room.load(match.params.id)
   }
 
-  render() {
-    const { classes, room, auth, actions } = this.props
+  loadPlace = () => {
+    const { actions, room } = this.props
+    if (!room?.place_id) return
 
-    console.log(room)
+    return actions.place.load(room.place_id)
+  }
+
+  addPlace = async (form) => {
+    const { actions, room } = this.props
+    const { value: place } = await actions.place.create(form)
+    await actions.room.update(room.id, { place_id: place.id })
+
+    return place
+  }
+
+  render() {
+    const { classes, room, actions } = this.props
 
     return (
       <section className={classes.root}>
@@ -69,16 +81,16 @@ class RoomScene extends Component {
             <Typography variant="h5">Приглашенные гости</Typography>
             <Invite
               room={room}
-              onLoad={actions.invite.load}
-              onCreate={actions.invite.create}
-              onUpdate={actions.invite.update}
+              onLoad={actions.room.invite.load}
+              onCreate={actions.room.invite.create}
+              onUpdate={actions.room.invite.update}
             />
           </div>
           <Guests
-            isAdmin={room?.admin_id === auth.user_id}
+            admin={room?.admin}
             guests={room?.guests || []}
-            onLoad={actions.guests.loadMany}
-            onKick={actions.guests.kick}
+            onLoad={actions.room.guests.loadMany}
+            onKick={actions.room.guests.kick}
           />
         </div>
         {room?.guests && (
@@ -86,8 +98,8 @@ class RoomScene extends Component {
             <ChatHeader>
               <Place
                 place={room.place}
-                onLoad={actions.place.load}
-                onCreate={actions.place.create}
+                onLoad={this.loadPlace}
+                onCreate={this.addPlace}
                 onUpdate={actions.place.update}
               >
                 <RoomTitle
@@ -102,9 +114,9 @@ class RoomScene extends Component {
             </ChatHeader>
             <Chat
               room={room}
-              onLoad={actions.messages.loadMany}
-              onSend={actions.messages.create}
-              onMessage={actions.messages.set}
+              onLoad={actions.room.messages.loadMany}
+              onSend={actions.room.messages.create}
+              onMessage={actions.room.messages.set}
             />
           </div>
         )}
@@ -116,32 +128,32 @@ class RoomScene extends Component {
 RoomScene.propTypes = {
   classes: object.isRequired,
   room: roomShape,
-  auth: authShape.isRequired,
   match: matchShape,
   actions: shape({
     room: shape({
       load: func.isRequired,
       update: func.isRequired,
-    }),
-    guests: shape({
-      loadMany: func.isRequired,
-      kick: func.isRequired,
-    }),
-    invite: shape({
-      load: func.isRequired,
-      create: func.isRequired,
-      update: func.isRequired,
+      messages: shape({
+        loadMany: func.isRequired,
+        create: func.isRequired,
+        set: func.isRequired,
+      }),
+      guests: shape({
+        loadMany: func.isRequired,
+        kick: func.isRequired,
+      }),
+      invite: shape({
+        load: func.isRequired,
+        create: func.isRequired,
+        update: func.isRequired,
+      }),
     }),
     place: shape({
       load: func.isRequired,
       create: func.isRequired,
       update: func.isRequired,
     }),
-    messages: shape({
-      loadMany: func.isRequired,
-      create: func.isRequired,
-      set: func.isRequired,
-    }),
+
   }),
 }
 

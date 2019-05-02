@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { object, func, node } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
-import matchShape from 'shapes/match'
 import SetPlaceIcon from './SetPlaceIcon'
 import Loading from 'components/elements/Loading'
 import PlaceDrawer from 'components/modules/PlaceDrawer'
-import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -33,9 +31,9 @@ class Place extends Component {
   }
 
   load = async () => {
-    const { match, onLoad } = this.props
+    const { onLoad } = this.props
     this.setState({ isLoading: true })
-    const result = await onLoad(match.params.id)
+    const result = await onLoad()
     this.setState({ isLoading: false })
 
     return result
@@ -51,11 +49,11 @@ class Place extends Component {
   }
 
   submit = (form) => {
-    const { match, place, onUpdate, onCreate } = this.props
+    const { place, onUpdate, onCreate } = this.props
 
-    if (!place) return onCreate(match.params.id, form)
+    if (!place) return onCreate(form)
 
-    return onUpdate(match.params.id, form)
+    return onUpdate(place.id, form)
   }
 
   render() {
@@ -91,7 +89,6 @@ class Place extends Component {
 
 Place.propTypes = {
   classes: object.isRequired,
-  match: matchShape.isRequired,
   place: placeShape,
   onLoad: func.isRequired,
   onCreate: func.isRequired,
@@ -99,4 +96,4 @@ Place.propTypes = {
   children: node.isRequired,
 }
 
-export default withStyles(styles)(withRouter(Place))
+export default withStyles(styles)(Place)

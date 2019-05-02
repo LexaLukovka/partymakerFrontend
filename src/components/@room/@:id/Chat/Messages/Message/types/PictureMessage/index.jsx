@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
+import { object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import messageShape from 'shapes/message'
 import isPicture from 'utils/isPicture'
 import PictureModal from './PictureModal'
 
@@ -29,20 +28,20 @@ class PictureMessage extends Component {
   }
 
   render() {
-    const { classes, message } = this.props
+    const { classes, url } = this.props
     const { isPictureModalOpen } = this.state
 
-    if (!isPicture(message.asset?.url)) return null
+    if (!isPicture(url)) return null
 
     return (
       <>
         <div
           onClick={this.openPictureModal}
           className={classes.root}
-          style={{ backgroundImage: `url(${message.asset.url})` }}
+          style={{ backgroundImage: `url(${url})` }}
         />
         <PictureModal
-          url={message.asset.url}
+          url={url}
           isOpen={isPictureModalOpen}
           onClose={this.closePictureModal}
         />
@@ -54,7 +53,7 @@ class PictureMessage extends Component {
 
 PictureMessage.propTypes = {
   classes: object.isRequired,
-  message: messageShape.isRequired
+  url: string.isRequired
 }
 
 export default withStyles(styles)(PictureMessage)

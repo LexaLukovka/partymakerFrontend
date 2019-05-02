@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { object, arrayOf, func, bool } from 'prop-types'
+import { object, arrayOf, func } from 'prop-types'
 import userShape from 'shapes/user'
+import authShape from 'shapes/auth'
 import matchShape from 'shapes/match'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
@@ -9,6 +10,7 @@ import isEmpty from 'lodash/isEmpty'
 import arrayToObject from 'utils/arrayToObject'
 import Loading from 'components/elements/Loading'
 import Guest from './Guest'
+import connector from './connector'
 
 const styles = {
   root: {
@@ -76,9 +78,10 @@ class Guests extends Component {
   }
 
   render() {
-    const { classes, isAdmin, guests } = this.props
+    const { classes, auth, admin, guests } = this.props
     const { isLoading } = this.state
     const filtered = this.filter(guests)
+    const isMeAdmin = admin?.id === auth.user_id
 
     if (isLoading) return <Loading className={classes.loading} />
 
@@ -89,7 +92,8 @@ class Guests extends Component {
           {filtered.map(guest => (
             <Guest
               key={guest.id}
-              isAdmin={isAdmin}
+              isMeAdmin={isMeAdmin}
+              admin={admin}
               guest={guest}
               onKick={this.kick}
             />
@@ -102,11 +106,13 @@ class Guests extends Component {
 
 Guests.propTypes = {
   classes: object.isRequired,
+  auth: authShape.isRequired,
   match: matchShape.isRequired,
-  isAdmin: bool.isRequired,
+
+  admin: userShape,
   guests: arrayOf(userShape).isRequired,
   onLoad: func.isRequired,
   onKick: func.isRequired,
 }
 
-export default withStyles(styles)(withRouter(Guests))
+export default withStyles(styles)(connector(withRouter(Guests)))

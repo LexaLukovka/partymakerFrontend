@@ -8,6 +8,8 @@ import Bubble from './Bubble'
 import TextMessage from './types/TextMessage'
 import PictureMessage from './types/PictureMessage'
 import FileMessage from './types/FileMessage'
+import PlaceMessage from './types/PlaceMessage'
+import isPicture from 'utils/isPicture'
 
 const styles = {
   root: {
@@ -33,9 +35,23 @@ class Message extends Component {
       })}>
         <UserAvatar user={message.user} />
         <Bubble isMine={isMine}>
-          <PictureMessage message={message} />
-          <TextMessage message={message} />
-          <FileMessage message={message} />
+          {(() => {
+
+            if (isPicture(message.asset?.url)) {
+              return <PictureMessage url={message.asset.url} />
+            }
+
+            if (message.asset) {
+              return <FileMessage message={message} />
+            }
+
+            if (message.place) {
+              return <PlaceMessage message={message} />
+            }
+
+            return <TextMessage message={message} />
+          })()}
+
         </Bubble>
       </div>
     )
