@@ -23,7 +23,8 @@ class RoomTitle extends Component {
   }
 
   edit = () => {
-    this.setState({ isEditable: true })
+    const { room: { title } } = this.props
+    this.setState({ isEditable: true, value: title })
   }
 
   save = () => {
@@ -57,7 +58,7 @@ class RoomTitle extends Component {
     return (
       <div className={classes.root}>
         <TextField
-          value={value || title}
+          value={value}
           className={classes.field}
           onChange={this.change}
         />
