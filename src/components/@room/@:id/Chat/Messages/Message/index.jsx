@@ -41,11 +41,11 @@ class Message extends Component {
               return <PictureMessage url={message.asset.url} />
             }
 
-            if (message.asset) {
+            if (message.asset_id) {
               return <FileMessage message={message} />
             }
 
-            if (message.place) {
+            if (message.place_id) {
               return <PlaceMessage message={message} />
             }
 

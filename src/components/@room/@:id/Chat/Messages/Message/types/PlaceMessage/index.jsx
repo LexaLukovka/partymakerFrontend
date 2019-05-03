@@ -4,6 +4,7 @@ import { Typography, withStyles, Button } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import PlaceDialog from './PlaceDialog'
 import connector from './connector'
+import Loading from 'components/elements/Loading'
 
 const styles = {
   root: {
@@ -44,7 +45,20 @@ const styles = {
 class PlaceMessage extends Component {
 
   state = {
-    isPlaceModalOpen: false
+    isPlaceModalOpen: false,
+    isLoadingPlace: false,
+  }
+
+  componentDidMount() {
+    const { message: { place_id, place } } = this.props
+    if (!place) this.load(place_id).catch(console.error)
+  }
+
+  load = async (place_id) => {
+    const { actions } = this.props
+    this.setState({ isLoadingPlace: true })
+    await actions.places.load(place_id)
+    this.setState({ isLoadingPlace: false })
   }
 
   openModal = () => {
@@ -62,33 +76,42 @@ class PlaceMessage extends Component {
   }
 
   render() {
-    const { classes, message: { place }, isMeAdmin } = this.props
-    const { isPlaceModalOpen } = this.state
-    const background_url = place.background_url || '/images/sparks.png'
+    const { classes, message, isMeAdmin } = this.props
+    const { isPlaceModalOpen, isLoadingPlace } = this.state
+    const place = message.place
+    const background_url = place?.background_url || '/images/sparks.png'
     const backgroundImage = background_url && `url(${background_url})`
 
     return (
       <div className={classes.root} style={{ backgroundImage }}>
-        <div className={classes.content}>
-          <Typography className={classes.title} variant="h5">{place.title}</Typography>
-          <Typography gutterBottom variant="body1" className={classes.address}>{place.address}</Typography>
-          {isMeAdmin && (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.openModal}
-              size="small"
-            >
-              Принять
-            </Button>
+        {!message.place || isLoadingPlace
+          ? (
+            <Loading />
+          )
+          : (
+            <div className={classes.content}>
+              <Typography className={classes.title} variant="h5">{place.title}</Typography>
+              <Typography gutterBottom variant="body1" className={classes.address}>{place.address}</Typography>
+              {isMeAdmin && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.openModal}
+                  size="small"
+                >
+                  Принять
+                </Button>
+              )}
+            </div>
           )}
-        </div>
-        <PlaceDialog
-          place={place}
-          isOpen={isPlaceModalOpen}
-          onCancel={this.closeModal}
-          onConfirm={this.changePlace}
-        />
+        {place && (
+          <PlaceDialog
+            place={place}
+            isOpen={isPlaceModalOpen}
+            onCancel={this.closeModal}
+            onConfirm={this.changePlace}
+          />
+        )}
       </div>
     )
   }
@@ -100,6 +123,9 @@ PlaceMessage.propTypes = {
   actions: shape({
     rooms: shape({
       update: func.isRequired,
+    }),
+    places: shape({
+      load: func.isRequired,
     })
   }),
 

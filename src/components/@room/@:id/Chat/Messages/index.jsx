@@ -29,16 +29,12 @@ const Messages = ({ classes, isLoading, messages, auth_id }) =>
   <>
     {isLoading && <Loading className={classes.loading} />}
     {messages.map(message => (
-      <>
-        <UserCaption key={`caption-${message.id}`} isMine={message.user_id === auth_id}>
+      <div key={message.id}>
+        <UserCaption isMine={message.user_id === auth_id}>
           {displayUserName(message)}
         </UserCaption>
-        <Message
-          key={message.id}
-          isMine={message.user_id === auth_id}
-          message={message}
-        />
-      </>
+        <Message isMine={message.user_id === auth_id} message={message} />
+      </div>
     ))}
   </>
 

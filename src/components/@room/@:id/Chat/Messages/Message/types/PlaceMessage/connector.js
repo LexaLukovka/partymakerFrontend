@@ -13,6 +13,9 @@ const mapDispatchToProps = dispatch => {
       rooms: {
         update: bindActionCreators(actions.rooms.update, dispatch),
       },
+      places: {
+        load: bindActionCreators(actions.places.load, dispatch),
+      },
     }
   })
 }
