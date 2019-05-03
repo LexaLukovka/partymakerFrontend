@@ -1,10 +1,10 @@
 import React from 'react'
-import { arrayOf, bool, number, object } from 'prop-types'
+import { arrayOf, bool, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import Message from './Message'
 import Loading from 'components/elements/Loading'
-import UserCaption from './UserCaption'
+import UserNameCaption from './UserCaption'
 
 const styles = {
   root: {},
@@ -12,6 +12,9 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: 10,
+  },
+  message: {
+    width: '100%'
   }
 }
 
@@ -25,15 +28,15 @@ const displayUserName = (message) => {
   return isNameVisible ? message.user.name : null
 }
 
-const Messages = ({ classes, isLoading, messages, auth_id }) =>
+const Messages = ({ classes, isLoading, messages }) =>
   <>
     {isLoading && <Loading className={classes.loading} />}
     {messages.map(message => (
-      <div key={message.id}>
-        <UserCaption isMine={message.user_id === auth_id}>
+      <div className={classes.message} key={message.id}>
+        <UserNameCaption isMine={message.isMine}>
           {displayUserName(message)}
-        </UserCaption>
-        <Message isMine={message.user_id === auth_id} message={message} />
+        </UserNameCaption>
+        <Message message={message} />
       </div>
     ))}
   </>
@@ -41,7 +44,6 @@ const Messages = ({ classes, isLoading, messages, auth_id }) =>
 Messages.propTypes = {
   classes: object.isRequired,
   messages: arrayOf(messageShape).isRequired,
-  auth_id: number.isRequired,
   isLoading: bool,
 }
 

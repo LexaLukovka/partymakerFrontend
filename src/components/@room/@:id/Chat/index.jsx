@@ -91,10 +91,7 @@ class Chat extends Component {
           onScrollBottom={this.disableScrolling}
           onScrollTop={this.loadMoreMessages}
         >
-          <Messages
-            isLoading={isLoading}
-            auth_id={auth.user_id}
-            messages={room.messages}
+          <Messages isLoading={isLoading} messages={room.messages}
           />
         </ChatBody>
         <ChatForm auth={auth} onSubmit={this.sendMessage} />

@@ -5,9 +5,12 @@ import messageShape from 'shapes/message'
 import PlaceDialog from './PlaceDialog'
 import connector from './connector'
 import Loading from 'components/elements/Loading'
+import StatusCaption from '../StatusCaption'
 
-const styles = {
+
+const styles = theme => ({
   root: {
+    boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
     padding: 15,
     width: 300,
     height: 250,
@@ -39,8 +42,8 @@ const styles = {
   content: {
     zIndex: 10,
     textAlign: 'center'
-  }
-}
+  },
+})
 
 class PlaceMessage extends Component {
 
@@ -83,35 +86,38 @@ class PlaceMessage extends Component {
     const backgroundImage = background_url && `url(${background_url})`
 
     return (
-      <div className={classes.root} style={{ backgroundImage }}>
-        {!message.place || isLoadingPlace
-          ? (
-            <Loading />
-          )
-          : (
-            <div className={classes.content}>
-              <Typography className={classes.title} variant="h5">{place.title}</Typography>
-              <Typography gutterBottom variant="body1" className={classes.address}>{place.address}</Typography>
-              {isMeAdmin && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.openModal}
-                  size="small"
-                >
-                  Принять
-                </Button>
-              )}
-            </div>
+      <div>
+        <div className={classes.root} style={{ backgroundImage }}>
+          {!message.place || isLoadingPlace
+            ? (
+              <Loading />
+            )
+            : (
+              <div className={classes.content}>
+                <Typography className={classes.title} variant="h5">{place.title}</Typography>
+                <Typography gutterBottom variant="body1" className={classes.address}>{place.address}</Typography>
+                {isMeAdmin && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.openModal}
+                    size="small"
+                  >
+                    Принять
+                  </Button>
+                )}
+              </div>
+            )}
+          {place && (
+            <PlaceDialog
+              place={place}
+              isOpen={isPlaceModalOpen}
+              onCancel={this.closeModal}
+              onConfirm={this.changePlace}
+            />
           )}
-        {place && (
-          <PlaceDialog
-            place={place}
-            isOpen={isPlaceModalOpen}
-            onCancel={this.closeModal}
-            onConfirm={this.changePlace}
-          />
-        )}
+        </div>
+        <StatusCaption message={message} />
       </div>
     )
   }
@@ -128,7 +134,6 @@ PlaceMessage.propTypes = {
       load: func.isRequired,
     })
   }),
-
   message: messageShape.isRequired,
 }
 

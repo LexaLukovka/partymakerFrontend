@@ -7,6 +7,7 @@ export default shape({
   place_id: number,
   token: string,
   isLoading: bool,
+  isMine: bool,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })

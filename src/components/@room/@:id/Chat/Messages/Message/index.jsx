@@ -26,19 +26,19 @@ const styles = {
 class Message extends Component {
 
   render() {
-    const { classes, message, isMine } = this.props
+    const { classes, message } = this.props
 
     return (
       <div className={classNames({
         [classes.root]: true,
-        [classes.isMine]: isMine,
+        [classes.isMine]: message.isMine,
       })}>
         <UserAvatar user={message.user} />
-        <Bubble isMine={isMine}>
+        <Bubble isMine={message.isMine}>
           {(() => {
 
             if (isPicture(message.asset?.url)) {
-              return <PictureMessage url={message.asset.url} />
+              return <PictureMessage message={message} />
             }
 
             if (message.asset_id) {
@@ -61,7 +61,6 @@ class Message extends Component {
 Message.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired,
-  isMine: bool.isRequired,
 }
 
 export default withStyles(styles)(Message)
