@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import Message from './Message'
 import Loading from 'components/elements/Loading'
-import UserNameCaption from './UserCaption'
+import UserCaption from './UserCaption'
 
 const styles = {
   root: {},
@@ -33,9 +33,9 @@ const Messages = ({ classes, isLoading, messages }) =>
     {isLoading && <Loading className={classes.loading} />}
     {messages.map(message => (
       <div className={classes.message} key={message.id}>
-        <UserNameCaption isMine={message.isMine}>
+        <UserCaption isMine={message.isMine}>
           {displayUserName(message)}
-        </UserNameCaption>
+        </UserCaption>
         <Message message={message} />
       </div>
     ))}

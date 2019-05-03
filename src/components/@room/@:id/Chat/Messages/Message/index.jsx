@@ -33,7 +33,7 @@ class Message extends Component {
         [classes.root]: true,
         [classes.isMine]: message.isMine,
       })}>
-        <UserAvatar user={message.user} />
+        {!message.isMine && <UserAvatar user={message.user} />}
         <Bubble isMine={message.isMine}>
           {(() => {
 
