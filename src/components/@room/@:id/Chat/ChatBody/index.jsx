@@ -19,13 +19,30 @@ class ChatBody extends Component {
   chatBody = React.createRef()
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isScrollingBottom) this.scrollToBottom()
+    if (nextProps.isScrollingBottom) {
+      this.scrollToBottom()
+    }
+    if (nextProps.isForceScrollingBottom) {
+      this.forceScrollToBottom()
+    }
+  }
+
+  forceScrollToBottom = () => {
+    const { onForceScrollBottom } = this.props
+    const chatBody = this.chatBody.current
+    chatBody.scrollTop = chatBody.scrollHeight
+    onForceScrollBottom()
   }
 
   scrollToBottom = () => {
     const { onScrollBottom } = this.props
     const chatBody = this.chatBody.current
-    chatBody.scrollTop = chatBody.scrollHeight
+    const scrollPosition = chatBody.scrollHeight - chatBody.scrollTop
+
+    if (scrollPosition < 2000) {
+      chatBody.scrollTop = chatBody.scrollHeight
+    }
+
     onScrollBottom()
   }
 
@@ -78,8 +95,10 @@ ChatBody.propTypes = {
   classes: object.isRequired,
   children: node.isRequired,
   isScrollingBottom: bool.isRequired,
+  isForceScrollingBottom: bool.isRequired,
   onScrollTop: func.isRequired,
   onScrollBottom: func.isRequired,
+  onForceScrollBottom: func.isRequired,
 }
 
 export default withStyles(styles)(ChatBody)

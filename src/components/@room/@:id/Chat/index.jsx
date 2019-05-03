@@ -26,11 +26,12 @@ class Chat extends Component {
     page: 1,
     limit: 20,
     isScrollingBottom: false,
+    isForceScrollingBottom: false,
     isLoading: true
   }
 
   componentDidMount() {
-    this.loadAndScrollBottom().catch(console.error)
+    this.loadAndForceScrollBottom().catch(console.error)
     const { onMessage } = this.props
 
     Socket.on('message', (message) => {
@@ -39,9 +40,9 @@ class Chat extends Component {
     })
   }
 
-  loadAndScrollBottom = async () => {
+  loadAndForceScrollBottom = async () => {
     await this.load()
-    this.scrollBottom()
+    this.forceScrollBottom()
   }
 
   load = async (page = 1) => {
@@ -76,20 +77,30 @@ class Chat extends Component {
     this.setState({ isScrollingBottom: true })
   }
 
+  forceScrollBottom = () => {
+    this.setState({ isForceScrollingBottom: true })
+  }
+
   disableScrolling = () => {
     this.setState({ isScrollingBottom: false })
   }
 
+  disableForceScrolling = () => {
+    this.setState({ isForceScrollingBottom: false })
+  }
+
   render() {
     const { classes, auth, room } = this.props
-    const { isScrollingBottom, isLoading } = this.state
+    const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
       <div className={classes.root}>
         <ChatBody
           isScrollingBottom={isScrollingBottom}
+          isForceScrollingBottom={isForceScrollingBottom}
           onScrollBottom={this.disableScrolling}
           onScrollTop={this.loadMoreMessages}
+          onForceScrollBottom={this.disableForceScrolling}
         >
           <Messages isLoading={isLoading} messages={room.messages}
           />
