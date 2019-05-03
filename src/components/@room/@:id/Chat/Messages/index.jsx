@@ -1,9 +1,10 @@
 import React from 'react'
-import { object, arrayOf, number, bool } from 'prop-types'
+import { arrayOf, bool, number, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import Message from './Message'
 import Loading from 'components/elements/Loading'
+import UserCaption from './UserCaption'
 
 const styles = {
   root: {},
@@ -14,18 +15,32 @@ const styles = {
   }
 }
 
-const Messages = ({ classes, isLoading, messages, auth_id }) => (
+let prev_id = null
+
+const displayUserName = (message) => {
+  const isNameVisible = message.user_id !== prev_id
+
+  prev_id = message.user_id
+
+  return isNameVisible ? message.user.name : null
+}
+
+const Messages = ({ classes, isLoading, messages, auth_id }) =>
   <>
     {isLoading && <Loading className={classes.loading} />}
     {messages.map(message => (
-      <Message
-        key={message.id}
-        isMine={message.user_id === auth_id}
-        message={message}
-      />
+      <>
+        <UserCaption key={`caption-${message.id}`} isMine={message.user_id === auth_id}>
+          {displayUserName(message)}
+        </UserCaption>
+        <Message
+          key={message.id}
+          isMine={message.user_id === auth_id}
+          message={message}
+        />
+      </>
     ))}
   </>
-)
 
 Messages.propTypes = {
   classes: object.isRequired,
