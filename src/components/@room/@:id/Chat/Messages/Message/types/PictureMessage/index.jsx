@@ -7,6 +7,7 @@ import StatusCaption from '../StatusCaption'
 
 const styles = {
   root: {
+    boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
     padding: 15,
     width: 300,
     height: 300,

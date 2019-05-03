@@ -5,12 +5,10 @@ import Loading from 'components/elements/Loading'
 
 const styles = {
   picture: {
-    maxWidth: '50%',
-    maxHeight: '50%',
+    width: '100%',
+    maxHeight: 900,
   },
   pictureWrapper: {
-    minWidth: 300,
-    minHeight: 200,
     textAlign: 'center',
   },
 }

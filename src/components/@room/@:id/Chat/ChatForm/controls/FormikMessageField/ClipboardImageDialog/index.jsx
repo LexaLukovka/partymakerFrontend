@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { bool, object, func } from 'prop-types'
-import { Dialog, DialogActions, DialogTitle } from '@material-ui/core'
+import { Dialog, DialogActions, DialogTitle, withStyles } from '@material-ui/core'
 import Asset from 'api/Asset'
 import CancelButton from './CancelButton'
 import ConfirmButton from './ConfirmButton'
 import DialogPicture from './DialogPicture'
+
+const styles = {
+  dialog: {
+    maxWidth: 400,
+  }
+}
 
 class ClipboardImageDialog extends Component {
 
@@ -27,19 +33,19 @@ class ClipboardImageDialog extends Component {
   }
 
   render() {
-    const { isOpen, file, onClose } = this.props
+    const { classes, isOpen, file, onClose } = this.props
     const { isLoading } = this.state
 
     if (!isOpen) return null
 
     return (
       <Dialog
+        classes={{ paper: classes.dialog }}
         open={isOpen}
         onClose={onClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle>Ваше сообщение</DialogTitle>
         <DialogPicture file={file} />
         <DialogActions>
           <CancelButton onClick={onClose} />
@@ -54,6 +60,7 @@ class ClipboardImageDialog extends Component {
 }
 
 ClipboardImageDialog.propTypes = {
+  classes: object.isRequired,
   isOpen: bool.isRequired,
   file: object,
   onClose: func.isRequired,
@@ -64,4 +71,4 @@ ClipboardImageDialog.defaultProps = {
   file: null,
 }
 
-export default ClipboardImageDialog
+export default withStyles(styles)(ClipboardImageDialog)

@@ -1,7 +1,6 @@
 import React from 'react'
 import { object, bool, func } from 'prop-types'
-import { Button, withStyles } from '@material-ui/core'
-import Loading from 'components/elements/Loading'
+import { Button, withStyles, CircularProgress } from '@material-ui/core'
 
 const styles = {
   root: {
@@ -17,16 +16,16 @@ const ConfirmButton = ({ classes, isLoading, onClick }) =>
   <Button
     className={classes.root}
     onClick={onClick}
-    variant="contained"
+    variant="outlined"
     color="primary"
     autoFocus
   >
     {isLoading && (
-      <Loading
+      <CircularProgress
         className={classes.loading}
         color="inherit"
         debounce={0}
-        size={16}
+        size={15}
       />
     )}
     Отправить

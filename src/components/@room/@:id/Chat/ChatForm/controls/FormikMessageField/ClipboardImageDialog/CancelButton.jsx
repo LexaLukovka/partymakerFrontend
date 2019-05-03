@@ -10,8 +10,6 @@ const CancelButton = ({ classes, onClick }) =>
   <Button
     classes={classes}
     onClick={onClick}
-    variant="contained"
-    color="secondary"
   >
     Отменить
   </Button>

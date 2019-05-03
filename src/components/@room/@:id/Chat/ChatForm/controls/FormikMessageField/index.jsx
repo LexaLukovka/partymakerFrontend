@@ -29,13 +29,14 @@ class FormikMessageField extends Component {
     if (file) this.openDialog(file)
   }
 
-  saveAttachment = (assets) => {
+  saveAttachment = (asset) => {
     const { form } = this.props
-    const { values, submitForm, setFieldValue } = form
+    const { submitForm, setFieldValue } = form
 
-    setFieldValue('assets', [...values.assets, assets])
-    submitForm()
+    debugger
+    setFieldValue('asset_id', asset.id)
 
+    setTimeout(() => submitForm())
     this.closeDialog()
   }
 
