@@ -23,13 +23,17 @@ const mapDispatchToProps = dispatch => {
         messages: {
           loadMany: bindActionCreators(actions.rooms.messages.list, dispatch),
           create: bindActionCreators(actions.rooms.messages.create, dispatch),
-          set: bindActionCreators(actions.messages.set, dispatch),
         },
         invite: {
           load: bindActionCreators(actions.rooms.invite.load, dispatch),
           create: bindActionCreators(actions.rooms.invite.create, dispatch),
           update: bindActionCreators(actions.rooms.invite.update, dispatch),
         },
+      },
+
+      messages: {
+        set: bindActionCreators(actions.messages.set, dispatch),
+        remove: bindActionCreators(actions.messages.remove, dispatch),
       },
 
       place: {

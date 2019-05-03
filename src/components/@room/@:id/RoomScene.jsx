@@ -87,6 +87,12 @@ class RoomScene extends Component {
     this.setState({ isGuestsLoaded: true })
   }
 
+  addMessage = (message) => {
+    const { actions } = this.props
+    actions.messages.remove(message.token)
+    actions.messages.set(message)
+  }
+
   render() {
     const { classes, room, auth, actions } = this.props
     const { isGuestsLoaded } = this.state
@@ -137,7 +143,7 @@ class RoomScene extends Component {
                 room={room}
                 onLoad={this.loadMessages}
                 onSend={actions.room.messages.create}
-                onMessage={actions.room.messages.set}
+                onMessage={this.addMessage}
               />
             )}
           </div>
@@ -159,7 +165,6 @@ RoomScene.propTypes = {
       messages: shape({
         loadMany: func.isRequired,
         create: func.isRequired,
-        set: func.isRequired,
       }),
       guests: shape({
         loadMany: func.isRequired,
@@ -170,6 +175,10 @@ RoomScene.propTypes = {
         create: func.isRequired,
         update: func.isRequired,
       }),
+    }),
+    messages: shape({
+      remove: func.isRequired,
+      set: func.isRequired,
     }),
     place: shape({
       load: func.isRequired,
