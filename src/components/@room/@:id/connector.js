@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 const mapStateToProps = state => ({
   room: currentRoom(state),
+  auth: state.auth,
 })
 
 const mapDispatchToProps = dispatch => {

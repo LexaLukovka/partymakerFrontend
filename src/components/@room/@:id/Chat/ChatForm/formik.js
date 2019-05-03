@@ -2,18 +2,22 @@ import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import to from 'util-to'
 import transformValidationApi from 'src/utils/transformValidationApi'
+import uniqId from 'uniqid'
+
+const initialValues = ({ auth }) => ({
+  text: '',
+  asset_id: null,
+  place_id: null,
+  token: `temp-${uniqId()}`,
+  user_id: auth.user_id,
+})
 
 const formik = withFormik({
-  validationSchema: Yup.object()
-    .shape({}),
+  validationSchema: Yup.object().shape({}),
 
-  mapPropsToValues: () => ({
-    text: '',
-    asset_id: null,
-    place_id: null,
-  }),
+  mapPropsToValues: initialValues,
 
-  handleSubmit: async (form, { props, setErrors, setSubmitting, setFieldValue }) => {
+  handleSubmit: async (form, { props, setErrors, setSubmitting, resetForm }) => {
 
     if (!form.text && !form.asset_id && !form.place_id) return
 
@@ -24,9 +28,7 @@ const formik = withFormik({
     if (err) setErrors(transformValidationApi(err))
 
     if (response) {
-      setFieldValue('text', '')
-      setFieldValue('asset_id', null)
-      setFieldValue('place_id', null)
+      resetForm(initialValues(props))
     }
 
     setSubmitting(false)

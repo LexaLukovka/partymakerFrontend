@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { func, object, shape } from 'prop-types'
 import matchShape from 'shapes/match'
+import authShape from 'shapes/auth'
 import roomShape from 'shapes/room'
 import { Typography, withStyles } from '@material-ui/core'
 import Invite from './Invite'
@@ -41,6 +42,10 @@ const styles = {
 
 class RoomScene extends Component {
 
+  state = {
+    isGuestsLoaded: false
+  }
+
   componentDidMount() {
     const { match } = this.props
     Socket.subscribe(`room:${match.params.id}`)
@@ -76,8 +81,15 @@ class RoomScene extends Component {
     await actions.room.messages.loadMany(match.params.id, params)
   }
 
+  loadGuests = async () => {
+    const { match, actions } = this.props
+    await actions.room.guests.loadMany(match.params.id)
+    this.setState({ isGuestsLoaded: true })
+  }
+
   render() {
-    const { classes, room, actions } = this.props
+    const { classes, room, auth, actions } = this.props
+    const { isGuestsLoaded } = this.state
 
     return (
       <section className={classes.root}>
@@ -95,7 +107,7 @@ class RoomScene extends Component {
             <Guests
               admin={room?.admin}
               guests={room?.guests || []}
-              onLoad={actions.room.guests.loadMany}
+              onLoad={this.loadGuests}
               onKick={actions.room.guests.kick}
             />
           )}
@@ -119,12 +131,15 @@ class RoomScene extends Component {
                 onLeave={actions.room.leave}
               />
             </ChatHeader>
-            <Chat
-              room={room}
-              onLoad={this.loadMessages}
-              onSend={actions.room.messages.create}
-              onMessage={actions.room.messages.set}
-            />
+            {isGuestsLoaded && (
+              <Chat
+                auth={auth}
+                room={room}
+                onLoad={this.loadMessages}
+                onSend={actions.room.messages.create}
+                onMessage={actions.room.messages.set}
+              />
+            )}
           </div>
         )}
       </section>
@@ -135,6 +150,7 @@ class RoomScene extends Component {
 RoomScene.propTypes = {
   classes: object.isRequired,
   room: roomShape,
+  auth: authShape,
   match: matchShape,
   actions: shape({
     room: shape({

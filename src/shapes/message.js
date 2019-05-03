@@ -1,9 +1,12 @@
-import { number, shape, string } from 'prop-types'
+import { number, oneOfType, shape, string, bool } from 'prop-types'
 
 export default shape({
-  id: number.isRequired,
+  id: oneOfType([number, string]).isRequired,
   text: string.isRequired,
   asset_id: number,
+  place_id: number,
+  token: string,
+  isLoading: bool,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })

@@ -28,6 +28,10 @@ class Message extends Component {
   render() {
     const { classes, message, isMine } = this.props
 
+    if (!message.user) {
+      debugger
+    }
+
     return (
       <div className={classNames({
         [classes.root]: true,

@@ -7,7 +7,6 @@ import Socket from 'services/Socket'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
-import withAuth from './withAuth'
 
 const styles = {
   root: {
@@ -27,7 +26,7 @@ class Chat extends Component {
     page: 1,
     limit: 20,
     isScrollingBottom: false,
-    isLoading: false
+    isLoading: true
   }
 
   componentDidMount() {
@@ -98,7 +97,7 @@ class Chat extends Component {
             messages={room.messages}
           />
         </ChatBody>
-        <ChatForm onSubmit={this.sendMessage} />
+        <ChatForm auth={auth} onSubmit={this.sendMessage} />
       </div>
     )
   }
@@ -113,4 +112,4 @@ Chat.propTypes = {
   onMessage: func.isRequired,
 }
 
-export default withStyles(styles)(withAuth(Chat))
+export default withStyles(styles)(Chat)
