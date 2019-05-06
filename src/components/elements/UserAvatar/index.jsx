@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { bool, object, shape, string } from 'prop-types'
+import { bool, object, oneOfType, number, shape, string } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import initialsFromUserName from 'utils/initialsFromUserName'
+import GreenDot from './GreenDot'
 
-const styles = theme => ({
+const styles = () => ({
+  avatar: {
+    position: 'relative'
+  },
   root: {
     alignSelf: 'center',
     width: 45,
@@ -28,12 +32,15 @@ class UserAvatar extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { classes, user } = this.props
 
     return (
-      <Avatar className={this.overrides()} src={user.avatar_url}>
-        {user.avatar_url ? null : initialsFromUserName(user.name)}
-      </Avatar>
+      <div className={classes.avatar}>
+        <Avatar className={this.overrides()} src={user.avatar_url}>
+          {user.avatar_url ? null : initialsFromUserName(user.name)}
+        </Avatar>
+        <GreenDot is_online={user.is_online} />
+      </div>
     )
   }
 }
@@ -44,6 +51,7 @@ UserAvatar.propTypes = {
   user: shape({
     avatar_url: string,
     name: string,
+    is_online: oneOfType([bool, number]),
   }).isRequired,
 }
 

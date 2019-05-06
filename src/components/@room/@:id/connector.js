@@ -23,6 +23,8 @@ const mapDispatchToProps = dispatch => {
         messages: {
           loadMany: bindActionCreators(actions.rooms.messages.list, dispatch),
           create: bindActionCreators(actions.rooms.messages.create, dispatch),
+          read: bindActionCreators(actions.rooms.messages.read, dispatch),
+          receive: bindActionCreators(actions.rooms.messages.receive, dispatch)
         },
         invite: {
           load: bindActionCreators(actions.rooms.invite.load, dispatch),
@@ -41,6 +43,10 @@ const mapDispatchToProps = dispatch => {
         create: bindActionCreators(actions.places.create, dispatch),
         update: bindActionCreators(actions.places.update, dispatch),
       },
+      users: {
+        online: bindActionCreators(actions.users.online, dispatch),
+        offline: bindActionCreators(actions.users.offline, dispatch),
+      }
     }
   })
 }

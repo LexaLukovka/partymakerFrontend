@@ -5,6 +5,7 @@ export default shape({
   text: string.isRequired,
   asset_id: number,
   place_id: number,
+  is_read: number,
   token: string,
   isLoading: bool,
   isMine: bool,

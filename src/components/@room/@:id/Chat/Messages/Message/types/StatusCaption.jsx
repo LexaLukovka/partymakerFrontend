@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, bool, string, shape } from 'prop-types'
+import { object, bool, string, shape, number } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import moment from 'moment/moment'
@@ -30,16 +30,20 @@ const StatusCaption = ({ classes, message }) =>
     <Typography color="textSecondary" component="div" variant="caption">
       {moment(message.created_at, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}
     </Typography>
-    {message.isLoading && <TimerIcon className={classes.check} />}
-    {!(message.isRead || message.isLoading) && <CheckIcon className={classes.check} />}
-    {message.isRead && <DoneAllIcon className={classes.check} />}
+    {message.isMine && (
+      <>
+        {message.isLoading && <TimerIcon className={classes.check} />}
+        {!(Boolean(message.is_read) || message.isLoading) && <CheckIcon className={classes.check} />}
+        {Boolean(message.is_read) && <DoneAllIcon className={classes.check} />}
+      </>
+    )}
   </div>
 
 StatusCaption.propTypes = {
   classes: object.isRequired,
   message: shape({
     isMine: bool,
-    isRead: bool,
+    is_read: number,
     isLoading: bool,
     created_at: string,
   }).isRequired,

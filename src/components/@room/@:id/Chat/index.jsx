@@ -32,12 +32,7 @@ class Chat extends Component {
 
   componentDidMount() {
     this.loadAndForceScrollBottom().catch(console.error)
-    const { onMessage } = this.props
-
-    Socket.on('message', (message) => {
-      onMessage(message)
-      this.scrollBottom()
-    })
+    Socket.on('message', this.scrollBottom)
   }
 
   loadAndForceScrollBottom = async () => {
@@ -102,8 +97,7 @@ class Chat extends Component {
           onScrollTop={this.loadMoreMessages}
           onForceScrollBottom={this.disableForceScrolling}
         >
-          <Messages isLoading={isLoading} messages={room.messages}
-          />
+          <Messages isLoading={isLoading} messages={room.messages} />
         </ChatBody>
         <ChatForm auth={auth} onSubmit={this.sendMessage} />
       </div>
@@ -117,7 +111,6 @@ Chat.propTypes = {
   auth: authShape.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,
-  onMessage: func.isRequired,
 }
 
 export default withStyles(styles)(Chat)

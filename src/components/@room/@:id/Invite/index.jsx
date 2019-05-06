@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { func, object } from 'prop-types'
 import roomShape from 'shapes/room'
-import matchShape from 'shapes/match'
 import { withStyles } from '@material-ui/core'
 import InviteDrawer from './InviteDrawer'
 import InviteForm from './InviteForm'
 import InviteButton from './InviteButton'
-import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {},

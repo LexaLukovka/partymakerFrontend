@@ -7,6 +7,7 @@ const initialState = {
   isLoading: false,
   user_id: user?.id,
   email: null,
+  is_online: true,
 }
 
 const authReducer = (state = initialState, { type, payload }) => {

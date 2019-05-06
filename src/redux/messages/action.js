@@ -1,7 +1,7 @@
 export const SET_MESSAGE = 'SET_MESSAGE'
 export const SET_MESSAGES = 'SET_MESSAGES'
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
-
+export const READ_MESSAGES = 'READ_MESSAGES'
 /**
  * Sync actions. Updating store
  */
@@ -21,8 +21,14 @@ const remove = message_id => ({
   payload: message_id,
 })
 
+const read = room_id => ({
+  type: READ_MESSAGES,
+  payload: room_id,
+})
+
 export default {
   set,
   setMany,
   remove,
+  read,
 }

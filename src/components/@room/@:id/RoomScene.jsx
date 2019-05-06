@@ -13,6 +13,7 @@ import Place from './Place'
 import RoomTitle from './RoomTitle'
 import DropdownMenu from './DropdownMenu'
 import ChatHeader from './ChatHeader'
+import connectToSockets from './sockets'
 
 const styles = {
   root: {
@@ -47,12 +48,14 @@ class RoomScene extends Component {
   }
 
   componentDidMount() {
-    const { match } = this.props
-    Socket.subscribe(`room:${match.params.id}`)
+    connectToSockets(this.props).catch(console.error)
     this.loadRoom().catch(console.error)
   }
 
   componentWillUnmount() {
+    const { match, } = this.props
+    const room_id = match.params.id
+    Socket.emit('leave', room_id)
     Socket.close()
   }
 
@@ -85,12 +88,6 @@ class RoomScene extends Component {
     const { match, actions } = this.props
     await actions.room.guests.loadMany(match.params.id)
     this.setState({ isGuestsLoaded: true })
-  }
-
-  addMessage = (message) => {
-    const { actions } = this.props
-    actions.messages.remove(message.token)
-    actions.messages.set(message)
   }
 
   render() {
@@ -143,7 +140,6 @@ class RoomScene extends Component {
                 room={room}
                 onLoad={this.loadMessages}
                 onSend={actions.room.messages.create}
-                onMessage={this.addMessage}
               />
             )}
           </div>
@@ -165,6 +161,8 @@ RoomScene.propTypes = {
       messages: shape({
         loadMany: func.isRequired,
         create: func.isRequired,
+        read: func.isRequired,
+        receive: func.isRequired,
       }),
       guests: shape({
         loadMany: func.isRequired,
@@ -185,7 +183,10 @@ RoomScene.propTypes = {
       create: func.isRequired,
       update: func.isRequired,
     }),
-
+    users: shape({
+      online: func.isRequired,
+      offline: func.isRequired,
+    })
   }),
 }
 

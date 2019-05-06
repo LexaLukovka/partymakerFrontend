@@ -13,6 +13,8 @@ const UserCaption = ({ classes, isMine, children }) => {
 
   if (!children) return null
 
+  if (isMine) return null
+
   return (
     <Typography
       className={classes.root}

@@ -1,4 +1,4 @@
-import { SET_USER, SET_USERS } from '../action'
+import { SET_USER, SET_USERS, SET_USER_ONLINE, SET_USER_OFFLINE } from '../action'
 import Auth from 'services/Auth'
 import arrayToObject from 'utils/arrayToObject'
 
@@ -19,6 +19,24 @@ const usersReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         ...arrayToObject(payload),
+      }
+
+    case SET_USER_ONLINE:
+      return {
+        ...state,
+        [payload]: {
+          ...state[payload],
+          is_online: true
+        }
+      }
+
+    case SET_USER_OFFLINE:
+      return {
+        ...state,
+        [payload]: {
+          ...state[payload],
+          is_online: false
+        }
       }
 
     default:
