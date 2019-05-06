@@ -39,7 +39,7 @@ class UserAvatar extends Component {
         <Avatar className={this.overrides()} src={user.avatar_url}>
           {user.avatar_url ? null : initialsFromUserName(user.name)}
         </Avatar>
-        <GreenDot is_online={user.is_online} />
+        <GreenDot is_online={user.pivot?.is_online} />
       </div>
     )
   }

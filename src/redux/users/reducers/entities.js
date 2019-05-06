@@ -26,7 +26,10 @@ const usersReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload]: {
           ...state[payload],
-          is_online: true
+          pivot: {
+            ...state[payload].pivot,
+            is_online: true,
+          },
         }
       }
 
@@ -35,7 +38,10 @@ const usersReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload]: {
           ...state[payload],
-          is_online: false
+          pivot: {
+            ...state[payload].pivot,
+            is_online: false,
+          },
         }
       }
 

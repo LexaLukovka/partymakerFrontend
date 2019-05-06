@@ -6,7 +6,7 @@ const isSomeoneOnline = (rooms, room_id, users) => {
 
   return room.guests_ids
     .map(id => users[id])
-    .find(u => Boolean(u.is_online))
+    .find(u => Boolean(u.pivot?.is_online))
 }
 
 export default createSelector(

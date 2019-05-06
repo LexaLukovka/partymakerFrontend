@@ -13,7 +13,9 @@ export default async function connectToSockets({ match, actions, auth }) {
     actions.users.online(user_id)
   })
 
-  Socket.on('leave', actions.users.offline)
+  Socket.on('leave', (user_id) => {
+    actions.users.offline(user_id)
+  })
 
   Socket.on('message', actions.room.messages.receive)
 
