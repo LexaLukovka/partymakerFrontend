@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import { object, func, string, shape, number } from 'prop-types'
 import { Button, TextField, Typography, withStyles } from '@material-ui/core'
 
@@ -78,10 +78,4 @@ RoomTitle.propTypes = {
   onChange: func.isRequired,
 }
 
-const isEqual = (prev, next) => {
-  if (prev.room?.id !== next.room?.id) return false
-
-  return prev.room?.title === next.room?.title
-}
-
-export default withStyles(styles)(memo(RoomTitle, isEqual))
+export default withStyles(styles)(RoomTitle)

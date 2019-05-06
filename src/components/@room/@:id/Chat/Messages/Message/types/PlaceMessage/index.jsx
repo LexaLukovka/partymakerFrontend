@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import { object, func, shape, bool } from 'prop-types'
 import { Typography, withStyles, Button } from '@material-ui/core'
 import messageShape from 'shapes/message'
@@ -19,15 +19,15 @@ const styles = () => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    '&::before': {
-      position: 'absolute',
-      overflow: 'hidden',
-      background: 'radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%)',
-      borderRadius: '100%',
-      width: '100%',
-      height: '100%',
-      content: `' '`,
-    }
+    //  '&::before': {
+    //    position: 'absolute',
+    //    overflow: 'hidden',
+    //    // background: 'radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%)',
+    //    borderRadius: '100%',
+    //    width: '100%',
+    //    height: '100%',
+    //    content: `' '`,
+    //  }
   },
   title: {
     textShadow: '0 3px 6px #000000',
@@ -136,13 +136,14 @@ PlaceMessage.propTypes = {
   message: messageShape.isRequired,
 }
 
-const isEqual = (prev, next) => {
-  if (prev.message?.place?.title !== next.message?.place?.title) return false
-  if (prev.message?.place?.address !== next.message?.place?.address) return false
-  if (prev.message?.place_id !== next.message?.place_id) return false
-  if (prev.isMeAdmin !== next.isMeAdmin) return false
+// const isEqual = (prev, next) => {
+//   if (JSON.stringify(prev.classes) !== JSON.stringify(next.classes)) return false
+//   if (prev.message?.place?.title !== next.message?.place?.title) return false
+//   if (prev.message?.place?.address !== next.message?.place?.address) return false
+//   if (prev.message?.place_id !== next.message?.place_id) return false
+//   if (prev.isMeAdmin !== next.isMeAdmin) return false
+//
+//   return prev.place?.background_url === next.place?.background_url
+// }
 
-  return prev.place?.background_url === next.place?.background_url
-}
-
-export default withStyles(styles)(connector(memo(PlaceMessage, isEqual)))
+export default withStyles(styles)(connector(PlaceMessage))

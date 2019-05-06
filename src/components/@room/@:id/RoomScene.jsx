@@ -124,10 +124,7 @@ class RoomScene extends Component {
                 onCreate={this.addPlace}
                 onUpdate={actions.place.update}
               >
-                <RoomTitle
-                  room={room}
-                  onChange={actions.room.update}
-                />
+                <RoomTitle room={room} onChange={actions.room.update} />
               </Place>
               <DropdownMenu
                 room={room}
