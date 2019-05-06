@@ -2,7 +2,7 @@ import actions from 'src/redux/action'
 import { all, put, takeEvery } from 'redux-saga/effects'
 
 import {
-  LOAD_INVITE_FULFILLED,
+  LOAD_ROOM_INVITE_FULFILLED,
   DESTROY_ROOM_INVITE_FULFILLED,
   UPDATE_ROOM_INVITE_FULFILLED,
   CREATE_ROOM_INVITE_FULFILLED,
@@ -19,7 +19,7 @@ function* removeInvite({ meta: { invite_id } }) {
 
 export default function* saga() {
   yield all([
-    takeEvery(LOAD_INVITE_FULFILLED, setInvite),
+    takeEvery(LOAD_ROOM_INVITE_FULFILLED, setInvite),
     takeEvery(CREATE_ROOM_INVITE_FULFILLED, setInvite),
     takeEvery(UPDATE_ROOM_INVITE_FULFILLED, setInvite),
     takeEvery(DESTROY_ROOM_INVITE_FULFILLED, removeInvite),
