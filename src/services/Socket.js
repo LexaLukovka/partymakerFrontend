@@ -5,11 +5,16 @@ class Socket {
 
   socket = null
 
+  isConnected = false
+
   connect() {
     this.ws = WebSocket('ws://localhost:3333').withJwtToken(Auth.token).connect()
 
     return new Promise((resolve, reject) => {
-      this.ws.on('open', resolve)
+      this.ws.on('open', () => {
+        this.isConnected = true
+        resolve()
+      })
       this.ws.on('error', reject)
     })
   }
@@ -43,14 +48,25 @@ class Socket {
   emit(name, data) {
     if (!this.socket) throw new Error('You are not connected to any topic!')
 
-    this.socket.emit(name, data)
+    try {
+      this.socket.emit(name, data)
+    } catch (e) {
+      setTimeout(() => {
+        try {
+          this.socket.emit(name, data)
+        } catch (e) {
+          location.reload()
+        }
+      }, 4000)
+    }
 
     return this
   }
 
   close() {
+    if (!this.isConnected) return
     if (!this.ws) throw new Error('You are not connected!')
-    this.ws.close('ginn')
+    this.ws.close()
     this.ws = null
   }
 }
