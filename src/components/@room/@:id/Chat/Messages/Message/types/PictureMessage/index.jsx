@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
@@ -56,4 +56,8 @@ PictureMessage.propTypes = {
   message: messageShape.isRequired
 }
 
-export default withStyles(styles)(PictureMessage)
+const isEqual = (prev, next) => {
+  return prev.message.asset.url === next.message.asset.url
+}
+
+export default withStyles(styles)(memo(PictureMessage, isEqual))

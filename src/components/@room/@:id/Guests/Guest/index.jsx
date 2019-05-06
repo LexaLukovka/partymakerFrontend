@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
 import { object, func, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import { ListItem, Typography, withStyles } from '@material-ui/core'
@@ -88,4 +88,12 @@ Guest.propTypes = {
   onKick: func.isRequired,
 }
 
-export default withStyles(styles)(Guest)
+const isEqual = (prev, next) => {
+  if (prev.isMeAdmin !== next.isMeAdmin) return false
+  if (prev.admin?.id !== next.admin?.id) return false
+  if (prev.guest?.id !== next.guest?.id) return false
+
+  return prev.guest?.name === next.guest?.name
+}
+
+export default withStyles(styles)(memo(Guest, isEqual))

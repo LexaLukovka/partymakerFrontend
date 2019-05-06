@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object, bool, node } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 
@@ -33,4 +33,10 @@ UserCaption.propTypes = {
   children: node
 }
 
-export default withStyles(styles)(UserCaption)
+const isEqual = (prev, next) => {
+  if (prev.isMine !== next.isMine) return false
+
+  return prev.children === next.children
+}
+
+export default withStyles(styles)(memo(UserCaption, isEqual))

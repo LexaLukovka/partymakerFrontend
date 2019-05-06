@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
 import { object, func, shape, bool } from 'prop-types'
 import { Typography, withStyles, Button } from '@material-ui/core'
 import messageShape from 'shapes/message'
@@ -136,4 +136,13 @@ PlaceMessage.propTypes = {
   message: messageShape.isRequired,
 }
 
-export default withStyles(styles)(connector(PlaceMessage))
+const isEqual = (prev, next) => {
+  if (prev.message?.place?.title !== next.message?.place?.title) return false
+  if (prev.message?.place?.address !== next.message?.place?.address) return false
+  if (prev.message?.place_id !== next.message?.place_id) return false
+  if (prev.isMeAdmin !== next.isMeAdmin) return false
+
+  return prev.place?.background_url === next.place?.background_url
+}
+
+export default withStyles(styles)(connector(memo(PlaceMessage, isEqual)))

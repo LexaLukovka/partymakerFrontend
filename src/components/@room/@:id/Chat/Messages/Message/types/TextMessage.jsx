@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
@@ -34,5 +34,8 @@ TextMessage.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired
 }
+const isEqual = (prev, next) => {
+  return prev.message.text === next.message.text
+}
 
-export default withStyles(styles)(TextMessage)
+export default withStyles(styles)(memo(TextMessage, isEqual))

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { withStyles } from '@material-ui/core'
 import { string, func, object } from 'prop-types'
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
 import MessageInput from './MessageInput'
 
 const styles = {
@@ -52,4 +52,11 @@ MessageField.propTypes = {
   onPaste: func.isRequired,
 }
 
-export default withStyles(styles)(MessageField)
+const isEqual = (prev, next) => {
+  if (prev.value !== next.value) return false
+  if (prev.placeholder !== next.placeholder) return false
+
+  return prev.name === next.name
+}
+
+export default withStyles(styles)(memo(MessageField, isEqual))

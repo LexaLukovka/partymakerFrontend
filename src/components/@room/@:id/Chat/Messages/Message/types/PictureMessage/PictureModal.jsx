@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object, func, bool, string } from 'prop-types'
 import { withStyles, Dialog } from '@material-ui/core'
 
@@ -22,4 +22,10 @@ PictureModal.propTypes = {
   onClose: func.isRequired,
 }
 
-export default withStyles(styles)(PictureModal)
+const isEqual = (prev, next) => {
+  if (prev.url !== next.url) return false
+
+  return prev.isOpen === next.isOpen
+}
+
+export default withStyles(styles)(memo(PictureModal, isEqual))

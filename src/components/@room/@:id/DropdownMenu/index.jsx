@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
 import { object, func, shape, number } from 'prop-types'
 import { IconButton, withStyles, Menu, MenuItem } from '@material-ui/core'
 import MoreIcon from 'mdi-react/MoreVertIcon'
@@ -84,4 +84,8 @@ DropdownMenu.propTypes = {
   onLeave: func.isRequired,
 }
 
-export default withStyles(styles)(withRouter(DropdownMenu))
+const isEqual = (prev, next) => {
+  return prev.room?.id !== next.room?.id
+}
+
+export default withStyles(styles)(withRouter(memo(DropdownMenu, isEqual)))

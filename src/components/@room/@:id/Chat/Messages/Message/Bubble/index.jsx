@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object, bool, node } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import classNames from 'classnames'
@@ -26,4 +26,10 @@ Bubble.propTypes = {
   isMine: bool.isRequired,
 }
 
-export default withStyles(styles)(Bubble)
+const isEqual = (prev, next) => {
+  if (prev.isMine !== next.isMine) return false
+
+  return prev.children === next.children
+}
+
+export default withStyles(styles)(memo(Bubble, isEqual))

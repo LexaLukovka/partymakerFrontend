@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles, AppBar, Toolbar, Button } from '@material-ui/core'
@@ -58,4 +58,10 @@ Header.defaultProps = {
   user: null,
 }
 
-export default withStyles(styles)(Header)
+const isEqual = (prev, next) => {
+  if (prev.user?.id === next.user?.id) return false
+
+  return prev.isTransparent !== next.isTransparent
+}
+
+export default withStyles(styles)(memo(Header, isEqual))

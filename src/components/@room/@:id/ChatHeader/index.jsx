@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object, node, } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 
@@ -22,4 +22,8 @@ ChatHeader.propTypes = {
   children: node.isRequired,
 }
 
-export default withStyles(styles)(ChatHeader)
+const isEqual = (prev, next) => {
+  return prev.children === next.children
+}
+
+export default withStyles(styles)(memo(ChatHeader, isEqual))

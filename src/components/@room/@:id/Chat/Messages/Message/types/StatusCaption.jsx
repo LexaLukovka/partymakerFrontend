@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { object, bool, string, shape, number, oneOfType } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
@@ -49,4 +49,13 @@ StatusCaption.propTypes = {
   }).isRequired,
 }
 
-export default withStyles(styles)(StatusCaption)
+const isEqual = (prev, next) => {
+  if (prev.message.isMine !== next.message.isMine) return false
+  if (prev.message.is_read !== next.message.is_read) return false
+  if (prev.message.isLoading !== next.message.isLoading) return false
+
+  return prev.message.created_at === next.message.created_at
+
+}
+
+export default withStyles(styles)(memo(StatusCaption, isEqual))
