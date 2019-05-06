@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, bool, string, shape, number } from 'prop-types'
+import { object, bool, string, shape, number, oneOfType } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import moment from 'moment/moment'
@@ -43,7 +43,7 @@ StatusCaption.propTypes = {
   classes: object.isRequired,
   message: shape({
     isMine: bool,
-    is_read: number,
+    is_read: oneOfType([number, bool]),
     isLoading: bool,
     created_at: string,
   }).isRequired,

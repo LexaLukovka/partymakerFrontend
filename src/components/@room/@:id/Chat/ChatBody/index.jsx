@@ -59,7 +59,7 @@ class ChatBody extends Component {
     requestAnimationFrame(async () => {
       const scrollY = e.target.scrollTop
       const isScrollingTop = this.oldScroll > scrollY
-      if (isScrollingTop && e.target.scrollTop <= 15) {
+      if (isScrollingTop && e.target.scrollTop <= 70) {
         await this.handleScrolledTop(e)
       }
       this.oldScroll = scrollY

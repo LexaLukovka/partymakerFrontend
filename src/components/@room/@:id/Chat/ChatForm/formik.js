@@ -20,12 +20,9 @@ const formik = withFormik({
   handleSubmit: async (form, { props, setErrors, setSubmitting, resetForm }) => {
     if (!form.text && !form.asset_id && !form.place_id) return
     setSubmitting(true)
-    const [err, response] = await to(props.onSubmit(form))
+    resetForm(initialValues(props))
+    const [err] = await to(props.onSubmit(form))
     if (err) setErrors(transformValidationApi(err))
-
-    if (response) {
-      resetForm(initialValues(props))
-    }
 
     setSubmitting(false)
   },

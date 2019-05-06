@@ -7,6 +7,7 @@ import Socket from 'services/Socket'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
+import wait from 'src/utils/wait'
 
 const styles = {
   root: {
@@ -51,12 +52,12 @@ class Chat extends Component {
     return result
   }
 
-  sendMessage = async (form) => {
+  sendMessage = (form) => {
     const { room, onSend } = this.props
-    const result = await onSend(room.id, form)
+    const promise = onSend(room.id, form)
     this.scrollBottom()
 
-    return result
+    return promise
   }
 
   loadMoreMessages = () => {
@@ -76,7 +77,8 @@ class Chat extends Component {
     this.setState({ isForceScrollingBottom: true })
   }
 
-  disableScrolling = () => {
+  disableScrolling = async () => {
+    await wait(500)
     this.setState({ isScrollingBottom: false })
   }
 
