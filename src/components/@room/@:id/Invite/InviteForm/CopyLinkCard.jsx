@@ -28,7 +28,7 @@ const CopyLinkCard = ({ classes, token }) =>
         variant="subtitle1"
         color="primary"
       >
-        {FRONTEND_URL}/invite/{token}
+        <a target="_blank" href={`${FRONTEND_URL}/invite/${token}`}>{FRONTEND_URL}/invite/{token}</a>
       </Typography>
     </div>
   </OutlineCard>

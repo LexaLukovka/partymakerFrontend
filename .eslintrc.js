@@ -11,7 +11,7 @@ module.exports = {
     'generator-star-spacing': 0,
     'jsx-quotes': ['error', 'prefer-double'],
     'comma-dangle': 0,
-    'newline-before-return': ['error'],
+    'newline-before-return': 0,
     'padded-blocks': 0,
     'no-trailing-spaces': 0,
     'camelcase': 0,

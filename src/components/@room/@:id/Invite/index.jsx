@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { func, object } from 'prop-types'
-import roomShape from 'shapes/room'
+import inviteShape from 'shapes/invite'
 import { withStyles } from '@material-ui/core'
 import InviteDrawer from './InviteDrawer'
 import InviteForm from './InviteForm'
@@ -18,11 +18,10 @@ class Invite extends Component {
   }
 
   load = async () => {
-    const { room, onLoad } = this.props
+    const { onLoad } = this.props
     this.setState({ isLoading: true })
-    const result = await onLoad(room.id)
+    const result = await onLoad()
     this.setState({ isLoading: false })
-
     return result
   }
 
@@ -36,18 +35,14 @@ class Invite extends Component {
   }
 
   handleSubmit = (form) => {
-    const { room, onUpdate, onCreate } = this.props
-
-    if (!room.invite) return onCreate(room.id, form)
-
-    return onUpdate(room.id, form)
+    const { invite, onUpdate, onCreate } = this.props
+    if (!invite) return onCreate(form)
+    return onUpdate(form)
   }
 
   render() {
-    const { classes, room } = this.props
+    const { classes, invite } = this.props
     const { isDrawerOpen } = this.state
-
-    if (!room) return null
 
     return (
       <div className={classes.root}>
@@ -57,7 +52,7 @@ class Invite extends Component {
           onClose={this.close}
         >
           <InviteForm
-            room={room}
+            invite={invite}
             onSubmit={this.handleSubmit}
             onCancel={this.close}
           />
@@ -68,7 +63,7 @@ class Invite extends Component {
 }
 
 Invite.propTypes = {
-  room: roomShape,
+  invite: inviteShape,
   classes: object.isRequired,
   onLoad: func.isRequired,
   onCreate: func.isRequired,

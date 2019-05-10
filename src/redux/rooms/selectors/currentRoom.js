@@ -1,7 +1,17 @@
 import { createSelector } from 'reselect'
 import assembleMessages from 'src/redux/messages/selectors/assembleMessages'
+import assembleInvites from 'src/redux/invites/selectors/assembleInvites'
+import isMeAdmin from 'src/redux/rooms/selectors/isMeAdmin'
 
-const currentRoom = (rooms, messages, users, places, room_id, totalMessages, invites) => {
+const currentRoom = (
+  rooms,
+  messages,
+  users,
+  places,
+  room_id,
+  totalMessages,
+  invites,
+  isMeAdmin) => {
 
   const room = rooms[room_id]
 
@@ -15,6 +25,7 @@ const currentRoom = (rooms, messages, users, places, room_id, totalMessages, inv
     place: places[room.place_id],
     invite: invites.find(invite => invite.room_id === room.id),
     totalMessages,
+    isMeAdmin,
   }
 }
 
@@ -25,6 +36,7 @@ export default createSelector(
   state => state.places.entities,
   state => state.rooms.status.room_id,
   state => state.rooms.status.messages.total,
-  state => Object.values(state.invites.entities),
+  state => assembleInvites(state),
+  state => isMeAdmin(state),
   currentRoom,
 )

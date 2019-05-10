@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import { bool, object, oneOfType, number, shape, string } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
@@ -58,13 +58,5 @@ UserAvatar.propTypes = {
 UserAvatar.defaultProps = {
   small: false,
 }
-const isEqual = (prev, next) => {
-  if (prev.user.name !== next.user.name) return false
-  if (prev.user.avatar_url !== next.user.avatar_url) return false
-  if (prev.user.is_online !== next.user.is_online) return false
 
-  return prev.small === next.small
-
-}
-
-export default withStyles(styles)(memo(UserAvatar, isEqual))
+export default withStyles(styles)(UserAvatar)

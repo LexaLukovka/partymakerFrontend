@@ -3,9 +3,8 @@ import React from 'react'
 import { Form, Field } from 'formik'
 import { object, func, bool } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
-import roomShape from 'shapes/room'
+import inviteShape from 'shapes/invite'
 import TextField from 'components/formik/TextField'
-import AddressField from 'components/formik/AddressField'
 import ServerMessage from 'components/formik/ServerMessage'
 import BackgroundField from './formik/BackgroundField'
 import CloseButton from '../../../../elements/CloseButton'
@@ -67,7 +66,7 @@ const styles = {
   }
 }
 
-const InviteForm = ({ classes, room, onCancel, isSubmitting }) =>
+const InviteForm = ({ classes, invite, onCancel, isSubmitting }) =>
   <Form className={classes.root}>
     <div className={classes.form}>
       <div className={classes.title}>
@@ -95,12 +94,6 @@ const InviteForm = ({ classes, room, onCancel, isSubmitting }) =>
         name="title"
         margin="normal"
         component={TextField}
-      />
-      <Field
-        label="Адрес"
-        name="address"
-        margin="normal"
-        component={AddressField}
       />
       <div className={classes.datetime}>
         <Typography variant="caption" color="textSecondary">Дата и время</Typography>
@@ -130,7 +123,7 @@ const InviteForm = ({ classes, room, onCancel, isSubmitting }) =>
     </div>
     <div className={classes.preview}>
       <Preview />
-      {room.invite?.token && <CopyLinkCard token={room.invite.token} />}
+      {invite?.token && <CopyLinkCard token={invite.token} />}
       <div className={classes.actions}>
         <ServerMessage className={classes.message} color="primary" name="message" />
         <Button
@@ -139,7 +132,7 @@ const InviteForm = ({ classes, room, onCancel, isSubmitting }) =>
           variant="contained"
           color="primary"
         >
-          {room.invite ? 'ОБНОВИТЬ' : 'ГОТОВО'}
+          {invite ? 'ОБНОВИТЬ' : 'ГОТОВО'}
         </Button>
       </div>
     </div>
@@ -147,7 +140,7 @@ const InviteForm = ({ classes, room, onCancel, isSubmitting }) =>
 
 InviteForm.propTypes = {
   classes: object.isRequired,
-  room: roomShape.isRequired,
+  invite: inviteShape,
   isSubmitting: bool.isRequired,
   onSubmit: func.isRequired,
   onCancel: func.isRequired,

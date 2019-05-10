@@ -1,4 +1,4 @@
-import { arrayOf, number, shape, string } from 'prop-types'
+import { arrayOf, number, shape, string, bool } from 'prop-types'
 import userShape from './user'
 import messageShape from './message'
 import placeShape from './place'
@@ -18,6 +18,7 @@ export default shape({
   date: string,
   time: string,
   totalMessages: number,
+  isMeAdmin: bool.isRequired,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })

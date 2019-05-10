@@ -67,7 +67,6 @@ class RoomScene extends Component {
   loadPlace = () => {
     const { actions, room } = this.props
     if (!room?.place_id) return
-
     return actions.place.load(room.place_id)
   }
 
@@ -75,7 +74,6 @@ class RoomScene extends Component {
     const { actions, room } = this.props
     const { value: place } = await actions.place.create(form)
     await actions.room.update(room.id, { place_id: place.id })
-
     return place
   }
 
@@ -90,6 +88,26 @@ class RoomScene extends Component {
     this.setState({ isGuestsLoaded: true })
   }
 
+  loadInvite = () => {
+    const { actions, match } = this.props
+    return actions.room.invite.load(match.params.id)
+  }
+
+  createInvite = (form) => {
+    const { actions, match } = this.props
+    return actions.room.invite.create(match.params.id, form)
+  }
+
+  updateInvite = (form) => {
+    const { actions, match } = this.props
+    return actions.room.invite.update(match.params.id, form)
+  }
+
+  sendMessage = (form) => {
+    const { actions, match } = this.props
+    return actions.room.messages.create(match.params.id, form)
+  }
+
   render() {
     const { classes, room, auth, actions } = this.props
     const { isGuestsLoaded } = this.state
@@ -100,16 +118,15 @@ class RoomScene extends Component {
           <div className={classes.heading}>
             <Typography variant="h5">Приглашенные гости</Typography>
             <Invite
-              room={room}
-              onLoad={actions.room.invite.load}
-              onCreate={actions.room.invite.create}
-              onUpdate={actions.room.invite.update}
+              invite={room?.invite}
+              onLoad={this.loadInvite}
+              onCreate={this.createInvite}
+              onUpdate={this.updateInvite}
             />
           </div>
           {room && (
             <Guests
-              admin={room?.admin}
-              guests={room?.guests || []}
+              room={room}
               onLoad={this.loadGuests}
               onKick={actions.room.guests.kick}
             />
@@ -134,9 +151,10 @@ class RoomScene extends Component {
             {isGuestsLoaded && (
               <Chat
                 auth={auth}
-                room={room}
+                messages={room?.messages}
+                totalMessages={room?.totalMessages}
                 onLoad={this.loadMessages}
-                onSend={actions.room.messages.create}
+                onSend={this.sendMessage}
               />
             )}
           </div>

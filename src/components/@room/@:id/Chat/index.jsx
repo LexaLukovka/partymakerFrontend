@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import { object, func, number, arrayOf } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import roomShape from 'shapes/room'
+import messageShape from 'shapes/message'
 import authShape from 'shapes/auth'
 import Socket from 'services/Socket'
 import ChatBody from './ChatBody'
@@ -55,18 +55,18 @@ class Chat extends Component {
   }
 
   sendMessage = (form) => {
-    const { room, onSend } = this.props
-    const promise = onSend(room.id, form)
+    const { onSend } = this.props
+    const promise = onSend(form)
     this.scrollBottom()
 
     return promise
   }
 
   loadMoreMessages = () => {
-    const { room } = this.props
+    const { totalMessages } = this.props
     const { page, limit } = this.state
 
-    if (room.totalMessages <= page * limit) return null
+    if (totalMessages <= page * limit) return null
 
     return this.load(page + 1)
   }
@@ -89,7 +89,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { classes, auth, room } = this.props
+    const { classes, auth, messages } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
@@ -101,7 +101,7 @@ class Chat extends Component {
           onScrollTop={this.loadMoreMessages}
           onForceScrollBottom={this.disableForceScrolling}
         >
-          <Messages isLoading={isLoading} messages={room.messages} />
+          <Messages isLoading={isLoading} messages={messages || []} />
         </ChatBody>
         <ChatForm auth={auth} onSubmit={this.sendMessage} />
       </div>
@@ -111,7 +111,8 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
-  room: roomShape.isRequired,
+  messages: arrayOf(messageShape).isRequired,
+  totalMessages: number.isRequired,
   auth: authShape.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,

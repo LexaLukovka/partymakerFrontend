@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import { object, bool, arrayOf, func } from 'prop-types'
-import userShape from 'shapes/user'
-import matchShape from 'shapes/match'
+import { object, func } from 'prop-types'
+import roomShape from 'shapes/room'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
-import { withRouter } from 'react-router-dom'
 import isEmpty from 'lodash/isEmpty'
 import arrayToObject from 'utils/arrayToObject'
 import Loading from 'components/elements/Loading'
 import Guest from './Guest'
-import connector from './connector'
 
 const styles = {
   root: {
@@ -40,17 +37,17 @@ class Guests extends Component {
   }
 
   load = async () => {
-    const { match, onLoad } = this.props
+    const { room, onLoad } = this.props
     this.setState({ isLoading: true })
-    const result = await onLoad(match.params.id)
+    const result = await onLoad(room.id)
     this.setState({ isLoading: false })
 
     return result
   }
 
   kick = (guest) => {
-    const { match, onKick } = this.props
-    onKick(match.params.id, guest.id)
+    const { room, onKick } = this.props
+    onKick(room.id, guest.id)
   }
 
   look = searchString => guest => {
@@ -77,9 +74,9 @@ class Guests extends Component {
   }
 
   render() {
-    const { classes, isMeAdmin, admin, guests } = this.props
+    const { classes, room } = this.props
     const { isLoading } = this.state
-    const filtered = this.filter(guests)
+    const filtered = this.filter(room.guests)
 
     if (isLoading) return <Loading className={classes.loading} />
 
@@ -90,8 +87,8 @@ class Guests extends Component {
           {filtered.map(guest => (
             <Guest
               key={guest.id}
-              isMeAdmin={isMeAdmin}
-              admin={admin}
+              isMeAdmin={room.isMeAdmin}
+              admin={room.admin}
               guest={guest}
               onKick={this.kick}
             />
@@ -104,13 +101,9 @@ class Guests extends Component {
 
 Guests.propTypes = {
   classes: object.isRequired,
-  match: matchShape.isRequired,
-  isMeAdmin: bool.isRequired,
-
-  admin: userShape,
-  guests: arrayOf(userShape).isRequired,
+  room: roomShape.isRequired,
   onLoad: func.isRequired,
   onKick: func.isRequired,
 }
 
-export default withStyles(styles)(connector(withRouter(Guests)))
+export default withStyles(styles)(Guests)

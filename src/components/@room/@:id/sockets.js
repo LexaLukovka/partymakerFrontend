@@ -1,6 +1,6 @@
 import Socket from 'services/Socket'
 
-export default async function connectToSockets({ match, actions, auth }) {
+export default async ({ match, actions }) => {
 
   const room_id = match.params.id
 
@@ -18,5 +18,4 @@ export default async function connectToSockets({ match, actions, auth }) {
   })
 
   Socket.on('message', actions.room.messages.receive)
-
 }
