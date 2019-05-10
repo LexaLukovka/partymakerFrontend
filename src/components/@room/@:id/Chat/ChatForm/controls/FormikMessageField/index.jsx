@@ -33,7 +33,6 @@ class FormikMessageField extends Component {
     const { form } = this.props
     const { submitForm, setFieldValue } = form
 
-    debugger
     setFieldValue('asset_id', asset.id)
 
     setTimeout(() => submitForm())
@@ -43,15 +42,15 @@ class FormikMessageField extends Component {
   render() {
     const { field, form, ...props } = this.props
     const { file, isOpenDialog } = this.state
-    const { name, value, onBlur, onChange } = field
-    const { handleSubmit } = form
+    const { name, value, onBlur } = field
+    const { handleSubmit, setFieldValue } = form
 
     return (
       <Fragment>
         <MessageField
           {...props}
           onPaste={this.handlePaste}
-          onChange={onChange}
+          onChange={setFieldValue}
           onBlur={onBlur}
           placeholder={'Ваше сообщение...'}
           onSend={handleSubmit}

@@ -4,6 +4,7 @@ import { Input, withStyles } from '@material-ui/core'
 
 const styles = {
   root: {
+    flexGrow: 1,
     paddingLeft: 15,
     maxHeight: 72,
     minHeight: 72,

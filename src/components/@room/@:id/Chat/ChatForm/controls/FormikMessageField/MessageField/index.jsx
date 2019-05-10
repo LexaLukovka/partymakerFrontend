@@ -3,12 +3,16 @@ import { withStyles } from '@material-ui/core'
 import { string, func, object } from 'prop-types'
 import React, { Component, memo } from 'react'
 import MessageInput from './MessageInput'
+import EmojiPicker from './EmojiPicker'
+import { emojify } from 'react-emojione'
 
 const styles = {
   root: {
     flexGrow: 1,
     maxHeight: 72,
     overflow: 'auto',
+    display: 'flex',
+    alignItems: 'center'
   },
 }
 
@@ -23,18 +27,31 @@ class MessageField extends Component {
     }
   }
 
+  addEmoji = (emojiPic) => {
+    const { name, value, onChange } = this.props
+
+    onChange(name, value + emojiPic)
+  }
+
+  change = (e) => {
+    const { name, onChange } = this.props
+
+    onChange(name, e.target.value)
+  }
+
   render() {
-    const { classes, name, value, placeholder, onChange, onPaste } = this.props
+    const { classes, name, value, placeholder, onPaste } = this.props
 
     return (
       <div className={classes.root}>
+        <EmojiPicker onSelect={this.addEmoji} />
         <MessageInput
           name={name}
           value={value}
           placeholder={placeholder}
           className={classes.root}
           onKeyPress={this.listenForEnter}
-          onChange={onChange}
+          onChange={this.change}
           onPaste={onPaste}
         />
       </div>

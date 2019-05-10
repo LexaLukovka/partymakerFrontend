@@ -1,11 +1,12 @@
 import React from 'react'
 import { Form, Field } from 'formik'
 import { object } from 'prop-types'
-import { Button, Typography, withStyles } from '@material-ui/core'
+import { Button, Typography, IconButton, withStyles } from '@material-ui/core'
 import FormikMessageField from './controls/FormikMessageField'
 import AssetField from './controls/FormikAssetField'
 import PlaceField from './controls/FormikPlaceField'
 import formik from './formik'
+import SendIcon from 'mdi-react/SendIcon'
 
 const styles = {
   root: {
@@ -34,14 +35,15 @@ const styles = {
   }
 }
 
-const ChatForm = ({ classes }) =>
+const ChatForm = ({ classes, values }) =>
   <Form className={classes.root}>
     <div className={classes.send}>
-      <div>
-        <Field name="asset_id" component={AssetField} />
-      </div>
       <Field name="text" className={classes.sendField} component={FormikMessageField} />
-      <Button type="submit" color="primary">Отправить</Button>
+      {values['text']
+        ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
+        : <Field name="asset_id" component={AssetField} />
+      }
+
     </div>
     <div className={classes.actions}>
       <Typography
