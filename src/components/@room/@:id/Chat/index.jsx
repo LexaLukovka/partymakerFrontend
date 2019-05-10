@@ -33,7 +33,9 @@ class Chat extends Component {
 
   componentDidMount() {
     this.loadAndForceScrollBottom().catch(console.error)
-    Socket.on('message', this.scrollBottom)
+    if (typeof window !== 'undefined') {
+      Socket.on('message', this.scrollBottom)
+    }
   }
 
   loadAndForceScrollBottom = async () => {

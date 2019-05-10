@@ -63,7 +63,6 @@ class ChatBody extends Component {
         await this.handleScrolledTop(e)
       }
       this.oldScroll = scrollY
-
     })
   }
 

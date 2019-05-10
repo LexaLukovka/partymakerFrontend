@@ -1,6 +1,4 @@
-import store from 'src/redux/store'
 import room from 'api/Room'
-import isSomeoneOnline from 'src/redux/rooms/selectors/isSomeoneOnline'
 
 export const LOAD_ROOM_MESSAGES = 'LOAD_ROOM_MESSAGES'
 export const LOAD_ROOM_MESSAGES_FULFILLED = 'LOAD_ROOM_MESSAGES_FULFILLED'

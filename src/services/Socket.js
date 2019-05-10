@@ -1,4 +1,3 @@
-import WebSocket from '@adonisjs/websocket-client'
 import Auth from 'services/Auth'
 
 class Socket {
@@ -7,8 +6,14 @@ class Socket {
 
   isConnected = false
 
-  connect() {
-    this.ws = WebSocket('ws://localhost:3333').withJwtToken(Auth.token).connect()
+  constructor() {
+    this.connect().catch(console.error)
+  }
+
+  connect = async () => {
+    if (typeof window === 'undefined') return
+    const WebSocket = await import('@adonisjs/websocket-client')
+    this.ws = WebSocket.default('ws://localhost:3333').withJwtToken(Auth.token).connect()
 
     return new Promise((resolve, reject) => {
       this.ws.on('open', () => {
@@ -19,12 +24,8 @@ class Socket {
     })
   }
 
-  constructor() {
-    this.connect()
-  }
-
-  subscribe(topicName) {
-    if (!this.ws) this.connect()
+  subscribe = async (topicName) => {
+    if (!this.ws) await this.connect()
 
     if (this.socket?.topic !== topicName) {
       this.ws.subscribe(topicName)
@@ -34,8 +35,8 @@ class Socket {
     return this
   }
 
-  on(name, callback) {
-    if (!this.socket) throw new Error('You are not connected to any topic!')
+  on = (name, callback) => {
+    if (!this.socket) return console.warn('You not connected to Socket!')
 
     this.socket.on(name, (data) => {
       console.log('ON:', name, data)
@@ -45,8 +46,8 @@ class Socket {
     return this
   }
 
-  emit(name, data) {
-    if (!this.socket) throw new Error('You are not connected to any topic!')
+  emit = (name, data) => {
+    if (!this.socket) return
 
     try {
       this.socket.emit(name, data)
@@ -63,7 +64,7 @@ class Socket {
     return this
   }
 
-  close() {
+  close = () => {
     if (!this.isConnected) return
     if (!this.ws) throw new Error('You are not connected!')
     this.ws.close()
