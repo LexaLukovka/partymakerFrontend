@@ -38,6 +38,18 @@ a {
     display: none;
 }
 
+.emoji-mart-category .emoji-mart-emoji span:focus {
+    outline: unset;
+}
+
+.emoji-mart .emoji-mart-emoji:focus {
+    outline: unset;
+}
+
+.emoji-mart-category-list li:focus {
+    outline: unset;
+}
+
 
 @keyframes hide {
     from {

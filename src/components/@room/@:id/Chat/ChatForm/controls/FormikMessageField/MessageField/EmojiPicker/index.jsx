@@ -41,6 +41,7 @@ class EmojiPicker extends Component {
       // console.log(codesArray)  // ["0x1f3f3", "0xfe0f"]
       let emojiPic = String.fromCodePoint(...codesArray)
       onSelect(emojiPic)
+      this.close()
     }
   }
 
@@ -58,12 +59,12 @@ class EmojiPicker extends Component {
           anchorEl={anchorEl}
           onClose={this.close}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+            vertical: 'bottom',
+            horizontal: 'right',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'right',
           }}
         >
           <Picker showPreview={false} onSelect={this.select} />
