@@ -5,7 +5,7 @@ export default shape({
   headline: string.isRequired,
   preposition: string.isRequired,
   title: string.isRequired,
-  address: string.isRequired,
+  address: string,
   time: string.isRequired,
   date: string.isRequired,
   background_url: string.isRequired,

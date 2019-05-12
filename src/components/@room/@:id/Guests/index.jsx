@@ -56,9 +56,9 @@ class Guests extends Component {
 
   search = e => {
     const searchString = e.target.value
-    const { guests } = this.props
+    const { room } = this.props
 
-    const filtered_ids = guests
+    const filtered_ids = room.guests
       .filter(this.look(searchString))
       .map(user => user.id)
 

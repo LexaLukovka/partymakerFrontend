@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Field } from 'formik'
-import { object } from 'prop-types'
+import { object, shape, string } from 'prop-types'
 import { Button, Typography, IconButton, withStyles } from '@material-ui/core'
 import FormikMessageField from './controls/FormikMessageField'
 import AssetField from './controls/FormikAssetField'
@@ -39,7 +39,7 @@ const ChatForm = ({ classes, values }) =>
   <Form className={classes.root}>
     <div className={classes.send}>
       <Field name="text" className={classes.sendField} component={FormikMessageField} />
-      {values['text']
+      {values.text
         ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
         : <Field name="asset_id" component={AssetField} />
       }
@@ -62,6 +62,9 @@ const ChatForm = ({ classes, values }) =>
 
 ChatForm.propTypes = {
   classes: object.isRequired,
+  values: shape({
+    text: string.isRequired,
+  })
 }
 
 export default withStyles(styles)(formik(ChatForm))

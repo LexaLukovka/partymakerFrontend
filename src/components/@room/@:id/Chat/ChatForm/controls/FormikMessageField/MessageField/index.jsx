@@ -69,11 +69,4 @@ MessageField.propTypes = {
   onPaste: func.isRequired,
 }
 
-const isEqual = (prev, next) => {
-  if (prev.value !== next.value) return false
-  if (prev.placeholder !== next.placeholder) return false
-
-  return prev.name === next.name
-}
-
-export default withStyles(styles)(memo(MessageField, isEqual))
+export default withStyles(styles)(MessageField)
