@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import { ListItem, Typography, withStyles } from '@material-ui/core'
@@ -57,7 +57,7 @@ class Guest extends Component {
 
     return (
       <ListItem className={classes.root}>
-        <UserAvatar user={guest} />
+        <UserAvatar is_online={guest.pivot?.is_online} user={guest} />
         <div className={classes.listItem}>
           <Typography variant="body1">{guest.name}</Typography>
           {admin?.id === guest.id && (
@@ -82,18 +82,10 @@ class Guest extends Component {
 
 Guest.propTypes = {
   classes: object.isRequired,
-  isMeAdmin: bool.isRequired,
+  isMeAdmin: bool,
   admin: userShape,
   guest: userShape.isRequired,
   onKick: func.isRequired,
 }
 
-const isEqual = (prev, next) => {
-  if (prev.isMeAdmin !== next.isMeAdmin) return false
-  if (prev.admin?.id !== next.admin?.id) return false
-  if (prev.guest?.id !== next.guest?.id) return false
-
-  return prev.guest?.name === next.guest?.name
-}
-
-export default withStyles(styles)(memo(Guest, isEqual))
+export default withStyles(styles)(Guest)

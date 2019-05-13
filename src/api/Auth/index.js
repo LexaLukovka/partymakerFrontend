@@ -1,6 +1,12 @@
-import Http from 'src/services/Http'
+import Http from 'services/Http'
+import password from './Password'
+import user from './User'
 
 const auth = {
+
+  password,
+
+  user,
 
   register(credentials) {
     return Http.post('/auth/register', credentials)
@@ -20,19 +26,6 @@ const auth = {
 
   activate(hash) {
     return Http.get(`/auth/activate/${hash}`)
-  },
-
-  forgotPassword(credentials) {
-    return Http.post('/auth/password/forgot', credentials)
-  },
-
-  resetPassword(credentials) {
-    const { password } = credentials
-
-    return Http.post(`/auth/password/reset/${credentials.hash}`, {
-      password,
-      password_repeat: password
-    })
   },
 
   logout() {

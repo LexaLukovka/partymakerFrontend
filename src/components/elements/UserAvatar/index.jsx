@@ -4,15 +4,17 @@ import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import initialsFromUserName from 'utils/initialsFromUserName'
 import GreenDot from './GreenDot'
+import PictureModal from 'components/modules/PictureModal'
 
 const styles = () => ({
   avatar: {
-    position: 'relative'
+    position: 'relative',
   },
   root: {
     alignSelf: 'center',
     width: 45,
     height: 45,
+    cursor: 'pointer',
   },
   small: {
     width: 40,
@@ -22,24 +24,44 @@ const styles = () => ({
 })
 
 class UserAvatar extends Component {
+
+  state = {
+    isModalOpen: false,
+  }
+
+  open = () => {
+    this.setState({ isModalOpen: true })
+  }
+
+  close = () => {
+    this.setState({ isModalOpen: false })
+  }
+
   overrides = () => {
-    const { classes, small } = this.props
+    const { classes, small, className } = this.props
 
     return classNames({
       [classes.root]: true,
       [classes.small]: small,
+      [className]: true,
     })
   }
 
   render() {
-    const { classes, user } = this.props
+    const { classes, user, is_online } = this.props
+    const { isModalOpen } = this.state
 
     return (
       <div className={classes.avatar}>
-        <Avatar className={this.overrides()} src={user.avatar_url}>
+        <Avatar onClick={this.open} className={this.overrides()} src={user.avatar_url}>
           {user.avatar_url ? null : initialsFromUserName(user.name)}
         </Avatar>
-        <GreenDot is_online={user.pivot?.is_online} />
+        <GreenDot is_online={is_online} />
+        <PictureModal
+          url={user.avatar_url}
+          isOpen={isModalOpen}
+          onClose={this.close}
+        />
       </div>
     )
   }
@@ -47,11 +69,12 @@ class UserAvatar extends Component {
 
 UserAvatar.propTypes = {
   classes: object.isRequired,
+  className: string,
   small: bool,
+  is_online: oneOfType([bool, number]),
   user: shape({
-    avatar_url: string,
     name: string,
-    is_online: oneOfType([bool, number]),
+    avatar_url: string,
   }).isRequired,
 }
 

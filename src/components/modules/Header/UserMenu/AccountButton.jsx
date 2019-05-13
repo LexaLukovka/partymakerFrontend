@@ -1,7 +1,7 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object, shape, string, oneOfType, bool, number } from 'prop-types'
 import { IconButton, withStyles } from '@material-ui/core'
-import AccountCircleIcon from 'mdi-react/AccountCircleIcon'
+import UserAvatar from 'components/elements/UserAvatar'
 
 const styles = (theme) => ({
   icon: {
@@ -9,14 +9,18 @@ const styles = (theme) => ({
   },
 })
 
-const AccountButton = ({ classes, onClick }) =>
-  <IconButton className={classes.root} onClick={onClick}>
-    <AccountCircleIcon className={classes.icon} />
+const AccountButton = ({ classes, user }) =>
+  <IconButton className={classes.root}>
+    <UserAvatar small user={user} />
   </IconButton>
 
 AccountButton.propTypes = {
   classes: object.isRequired,
-  onClick: func.isRequired,
+  user: shape({
+    avatar_url: string,
+    name: string,
+    is_online: oneOfType([bool, number]),
+  }).isRequired,
 }
 
 export default withStyles(styles)(AccountButton)

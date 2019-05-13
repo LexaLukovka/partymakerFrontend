@@ -124,7 +124,7 @@ class PlaceMessage extends Component {
 
 PlaceMessage.propTypes = {
   classes: object.isRequired,
-  isMeAdmin: bool.isRequired,
+  isMeAdmin: bool,
   actions: shape({
     rooms: shape({
       update: func.isRequired,

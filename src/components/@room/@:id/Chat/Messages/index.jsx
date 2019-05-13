@@ -25,7 +25,7 @@ const displayUserName = (message) => {
 
   prev_id = message.user_id
 
-  return isNameVisible ? message.user.name : null
+  return isNameVisible ? message.set.name : null
 }
 
 const Messages = ({ classes, isLoading, messages }) =>

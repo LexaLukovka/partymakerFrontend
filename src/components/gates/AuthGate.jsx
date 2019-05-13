@@ -6,12 +6,13 @@ import Storage from 'services/Storage'
 
 const AuthGate = (props) => {
   const { ...rest } = props
+  const user = Auth.user()
 
   Storage.put({
     previous_user_location: props.location.pathname
   })
 
-  if (!Auth.user()) return <Redirect to="/auth/login" />
+  if (!user) return <Redirect to="/auth/login" />
 
   return <Route {...rest} />
 }

@@ -2,7 +2,7 @@ import React, { Component, memo } from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
-import PictureModal from './PictureModal'
+import PictureModal from 'components/modules/PictureModal'
 import StatusCaption from '../StatusCaption'
 
 const styles = {

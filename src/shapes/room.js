@@ -18,7 +18,7 @@ export default shape({
   date: string,
   time: string,
   totalMessages: number,
-  isMeAdmin: bool.isRequired,
+  isMeAdmin: bool,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })

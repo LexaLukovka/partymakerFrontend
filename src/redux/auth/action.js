@@ -1,16 +1,12 @@
 import auth from 'api/Auth'
+import user from './user/action'
+import password from './password/action'
 
 export const ACTIVATE_USER = 'ACTIVATE_USER'
 export const ACTIVATE_USER_FULFILLED = 'ACTIVATE_USER_FULFILLED'
 
 export const REGISTER_USER = 'REGISTER_USER'
 export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
-
-export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
-export const FORGOT_PASSWORD_FULFILLED = 'FORGOT_PASSWORD_FULFILLED'
-
-export const RESET_PASSWORD = 'RESET_PASSWORD'
-export const RESET_PASSWORD_FULFILLED = 'RESET_PASSWORD_FULFILLED'
 
 export const LOGIN_GOOGLE_USER = 'LOGIN_GOOGLE_USER'
 export const LOGIN_GOOGLE_USER_FULFILLED = 'LOGIN_GOOGLE_USER_FULFILLED'
@@ -45,17 +41,6 @@ const activate = hash => ({
   payload: auth.activate(hash),
 })
 
-const forgotPassword = form => ({
-  type: FORGOT_PASSWORD,
-  payload: auth.forgotPassword(form),
-  meta: form,
-})
-
-const resetPassword = form => ({
-  type: RESET_PASSWORD,
-  payload: auth.resetPassword(form),
-})
-
 const google = Guser => ({
   type: LOGIN_GOOGLE_USER,
   payload: auth.google(Guser),
@@ -75,7 +60,7 @@ const logout = () => ({
  * Sync actions. Updating store
  */
 
-const user = (user) => ({
+const set = (user) => ({
   type: SET_AUTH_USER,
   payload: user,
 })
@@ -86,14 +71,14 @@ const email = (email) => ({
 })
 
 export default {
+  user,
+  password,
   register,
   login,
   activate,
   google,
   facebook,
-  forgotPassword,
-  resetPassword,
-  user,
+  set,
   email,
   logout,
 }

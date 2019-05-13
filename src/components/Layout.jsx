@@ -6,6 +6,7 @@ import IndexScene from './IndexScene'
 import HomeScene from './@home/HomeScene'
 import RoomLayout from './@room/RoomLayout'
 import InviteLayout from './@invite/InviteLayout'
+import ProfileScene from './@profile/ProfileLayout'
 
 const AuthLayout = loadable(() => import('./@auth/AuthLayout'))
 
@@ -16,6 +17,7 @@ const Layout = () =>
     <Route path="/invite" component={InviteLayout} />
     <AuthGate path="/home" component={HomeScene} />
     <AuthGate path="/room" component={RoomLayout} />
+    <AuthGate path="/profile" component={ProfileScene} />
   </Switch>
 
 export default Layout

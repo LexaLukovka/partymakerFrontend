@@ -6,7 +6,7 @@ const assembleMessages = (messages, assets, users, places, auth, rooms) => {
     Object.values(messages).map(message => ({
       ...message,
       asset: assets[message.asset_id],
-      user: users[message.user_id],
+      set: users[message.user_id],
       place: places[message.place_id],
       room: rooms[message.room_id],
       isMine: message.user_id === auth.user_id,
