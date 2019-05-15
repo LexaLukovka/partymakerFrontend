@@ -9,7 +9,7 @@ const styles = {
 
 const ServerMessage = ({ classes, formik: { status, errors }, name, ...rest }) => {
   const message = getIn(errors, name) || (status && status[name])
-
+  
   return (
     <Typography {...rest}>
       {message}

@@ -40,11 +40,13 @@ const formik = withFormik({
 
     if (err) setErrors(transformValidationApi(err))
 
-    if (!err) setStatus({ message: 'Пароль обновлен!' })
+    if (!err) {
+      setStatus({ message: 'Пароль обновлен!' })
+      resetForm(initialValues)
+    }
 
     await wait(3000)
     setSubmitting(false)
-    resetForm(initialValues)
     setStatus({})
   },
   displayName: 'PasswordForm',
