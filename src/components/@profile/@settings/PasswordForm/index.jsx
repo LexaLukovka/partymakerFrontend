@@ -3,9 +3,8 @@ import { object } from 'prop-types'
 import { Field, Form } from 'formik'
 import { CardContent, withStyles } from '@material-ui/core'
 import TextField from 'components/formik/TextField'
-import ServerMessage from 'components/formik/ServerMessage'
 import formik from './formik'
-import SubmitButton from './SubmitButton'
+import SubmitButton from '../SubmitButton'
 
 const styles = {
   root: {
@@ -42,7 +41,6 @@ const PasswordForm = ({ classes }) =>
           component={TextField}
         />
       </CardContent>
-      <ServerMessage color="error" name="non_field_error" />
       <SubmitButton>обновить</SubmitButton>
     </Form>
   </div>

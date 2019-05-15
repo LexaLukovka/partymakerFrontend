@@ -7,12 +7,12 @@ const styles = {
   root: {},
 }
 
-const ServerMessage = ({ classes, formik, name, ...rest }) => {
-  const error = getIn(formik.errors, name)
+const ServerMessage = ({ classes, formik: { status, errors }, name, ...rest }) => {
+  const message = getIn(errors, name) || (status && status[name])
 
   return (
     <Typography {...rest}>
-      {error}
+      {message}
     </Typography>
   )
 }

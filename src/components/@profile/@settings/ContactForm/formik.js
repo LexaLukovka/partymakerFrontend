@@ -7,15 +7,17 @@ import wait from 'utils/wait'
 const formik = withFormik({
   validationSchema: Yup.object()
     .shape({
-      name: Yup.string().required('Это поле является обязательным'),
-      phone: Yup.string()
-        .min(6, 'Номер должен быть больше чем 6 символов')
-        .required('Это поле является обязательным'),
+      instagram: Yup.string(),
+      facebook: Yup.string(),
+      skype: Yup.string(),
+      telegram: Yup.string(),
     }),
 
-  mapPropsToValues: ({ user }) => ({
-    name: user.name || '',
-    phone: user.phone || '',
+  mapPropsToValues: ({ account }) => ({
+    facebook: account?.facebook || '',
+    telegram: account?.telegram || '',
+    skype: account?.skype || '',
+    instagram: account?.instagram || '',
   }),
 
   enableReinitialize: true,
@@ -34,7 +36,7 @@ const formik = withFormik({
     setSubmitting(false)
     setStatus({})
   },
-  displayName: 'UserForm',
+  displayName: 'ContactForm',
 })
 
 export default formik

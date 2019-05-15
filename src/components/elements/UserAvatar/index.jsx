@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { bool, object, oneOfType, number, shape, string } from 'prop-types'
+import { bool, object, oneOfType, number, shape, string, func } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import initialsFromUserName from 'utils/initialsFromUserName'
@@ -48,12 +48,16 @@ class UserAvatar extends Component {
   }
 
   render() {
-    const { classes, user, is_online } = this.props
+    const { classes, user, is_online, clickable } = this.props
     const { isModalOpen } = this.state
 
     return (
       <div className={classes.avatar}>
-        <Avatar onClick={this.open} className={this.overrides()} src={user.avatar_url}>
+        <Avatar
+          onClick={clickable ? this.open : undefined}
+          className={this.overrides()}
+          src={user.avatar_url}
+        >
           {user.avatar_url ? null : initialsFromUserName(user.name)}
         </Avatar>
         <GreenDot is_online={is_online} />
@@ -76,6 +80,7 @@ UserAvatar.propTypes = {
     name: string,
     avatar_url: string,
   }).isRequired,
+  clickable: bool,
 }
 
 UserAvatar.defaultProps = {

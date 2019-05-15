@@ -5,7 +5,7 @@ import { CardContent, withStyles } from '@material-ui/core'
 import TextField from 'components/formik/TextField'
 import ServerMessage from 'components/formik/ServerMessage'
 import formik from './formik'
-import SubmitButton from './SubmitButton'
+import SubmitButton from '../SubmitButton'
 
 const styles = {
   root: {
@@ -32,16 +32,7 @@ const UserForm = ({ classes }) =>
           placeholder="+380683188524"
           component={TextField}
         />
-        <Field
-          type="text"
-          name="instagram"
-          label="instagram"
-          margin="normal"
-          placeholder="@pavliha"
-          component={TextField}
-        />
       </CardContent>
-      <ServerMessage color="error" name="non_field_error" />
       <SubmitButton>сохранить</SubmitButton>
     </Form>
   </div>

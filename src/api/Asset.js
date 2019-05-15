@@ -10,12 +10,12 @@ const asset = {
     return Http.get(`/assets/${id}`)
   },
 
-  create(file) {
+  create(file, config) {
     const form = new FormData()
     form.append('title', file.name)
     form.append('file', file)
 
-    return Http.post('/assets', form)
+    return Http.post('/assets', form, config)
   },
 
   update(id, form) {

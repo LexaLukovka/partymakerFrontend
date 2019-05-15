@@ -31,7 +31,7 @@ const styles = {
 const ProfileScene = ({ classes, user, }) => {
   return (
     <div className={classes.root}>
-      <UserAvatar className={classes.avatar} user={user} />
+      <UserAvatar clickable className={classes.avatar} user={user} />
       <Typography gutterBottom variant="h5">{user.name}</Typography>
       <Typography gutterBottom color="textSecondary">{user.email}</Typography>
       <Typography gutterBottom color="textSecondary">{user.phone}</Typography>

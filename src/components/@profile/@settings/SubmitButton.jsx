@@ -2,30 +2,33 @@ import React from 'react'
 import { connect } from 'formik'
 import { object, bool, shape, node } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
+import ServerMessage from 'components/formik/ServerMessage'
 
 const styles = {
   root: {
     display: 'flex',
     alignItems: 'center',
-    padding: '0 15px',
-    marginBottom: 20,
   },
   button: {
     minWidth: 130,
-    marginRight: 40,
+    marginRight: 15,
   }
 }
 
 const SubmitButton = ({ formik, classes, children }) =>
-  <Button
-    disabled={formik.isSubmitting}
-    className={classes.button}
-    type="submit"
-    size="large"
-    color="primary"
-  >
-    {children}
-  </Button>
+  <div className={classes.root}>
+    <Button
+      disabled={formik.isSubmitting}
+      className={classes.button}
+      type="submit"
+      size="large"
+      color="primary"
+    >
+      {children}
+    </Button>
+    <ServerMessage color="primary" name="message" />
+    <ServerMessage color="error" name="non_field_error" />
+  </div>
 
 SubmitButton.propTypes = {
   formik: shape({

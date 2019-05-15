@@ -1,4 +1,5 @@
 import auth from 'api/Auth'
+import account from './account/action'
 
 export const LOAD_AUTH_USER = 'LOAD_AUTH_USER'
 export const LOAD_AUTH_USER_FULFILLED = 'LOAD_AUTH_USER_FULFILLED'
@@ -21,6 +22,7 @@ const update = (user_id, form) => ({
 })
 
 export default {
+  account,
   load,
   update,
 }

@@ -3,9 +3,10 @@ import { object, shape, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles } from '@material-ui/core'
 import OutlineCard from 'components/elements/OutlineCard'
-import UserAvatar from 'components/elements/UserAvatar'
+import ContactForm from './ContactForm'
 import UserForm from './UserForm'
 import PasswordForm from './PasswordForm'
+import AvatarForm from './AvatarForm'
 import connector from './connector'
 
 const styles = {
@@ -24,23 +25,28 @@ const styles = {
     width: 450,
     marginBottom: 30,
   },
-  avatar: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
-  },
+
 }
 
 class SettingsScene extends Component {
+
+  componentDidMount() {
+    const { actions } = this.props
+
+    actions.auth.user.account.load()
+  }
 
   render() {
     const { classes, user, actions } = this.props
     return (
       <div className={classes.root}>
         <div className={classes.container}>
-          <UserAvatar className={classes.avatar} user={user} />
+          <AvatarForm user={user} onSubmit={actions.auth.user.update} />
           <OutlineCard className={classes.card} title="Общее">
             <UserForm user={user} onSubmit={actions.auth.user.update} />
+          </OutlineCard>
+          <OutlineCard className={classes.card} title="Контакты">
+            <ContactForm account={user.account} onSubmit={actions.auth.user.account.update} />
           </OutlineCard>
           <OutlineCard className={classes.card} title="Пароль">
             <PasswordForm onSubmit={actions.auth.password.update} />
@@ -57,6 +63,10 @@ SettingsScene.propTypes = {
   actions: shape({
     auth: shape({
       user: shape({
+        account: shape({
+          load: func.isRequired,
+          update: func.isRequired,
+        }),
         update: func.isRequired,
       }),
       password: shape({

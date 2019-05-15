@@ -5,6 +5,7 @@ import places from 'src/redux/places/action'
 import assets from 'src/redux/assets/action'
 import messages from 'src/redux/messages/action'
 import invites from 'src/redux/invites/action'
+import accounts from 'src/redux/accounts/action'
 
 export default {
   auth,
@@ -14,4 +15,5 @@ export default {
   places,
   assets,
   messages,
+  accounts,
 }

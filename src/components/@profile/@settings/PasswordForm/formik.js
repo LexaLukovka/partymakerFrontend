@@ -2,6 +2,13 @@ import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import to from 'util-to'
 import transformValidationApi from 'src/utils/transformValidationApi'
+import wait from 'utils/wait'
+
+const initialValues = {
+  password: '',
+  password_new: '',
+  password_repeat: '',
+}
 
 const formik = withFormik({
   validationSchema: Yup.object()
@@ -18,18 +25,14 @@ const formik = withFormik({
         .min(6, 'Пароль должен быть больше чем 6 символов')
         .required('Это поле является обязательным'),
       password_repeat: Yup.string().oneOf(
-        [Yup.ref('password')],
+        [Yup.ref('password_new')],
         'Пароли не совпадают',
       ),
     }),
 
-  mapPropsToValues: () => ({
-    password: '',
-    password_new: '',
-    password_repeat: '',
-  }),
+  mapPropsToValues: () => initialValues,
 
-  handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
+  handleSubmit: async (form, { props, setErrors, setStatus, resetForm, setSubmitting }) => {
 
     setSubmitting(true)
 
@@ -37,7 +40,12 @@ const formik = withFormik({
 
     if (err) setErrors(transformValidationApi(err))
 
+    if (!err) setStatus({ message: 'Пароль обновлен!' })
+
+    await wait(3000)
     setSubmitting(false)
+    resetForm(initialValues)
+    setStatus({})
   },
   displayName: 'PasswordForm',
 })

@@ -11,6 +11,10 @@ const mapDispatchToProps = dispatch => ({
   actions: {
     auth: {
       user: {
+        account: {
+          load: bindActionCreators(actions.auth.user.account.load, dispatch),
+          update: bindActionCreators(actions.auth.user.account.update, dispatch),
+        },
         update: bindActionCreators(actions.auth.user.update, dispatch)
       },
       password: {

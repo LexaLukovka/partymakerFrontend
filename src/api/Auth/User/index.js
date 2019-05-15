@@ -1,6 +1,9 @@
 import Http from 'services/Http'
+import account from './Account'
 
 const user = {
+
+  account,
 
   load() {
     return Http.get(`/auth/user`)

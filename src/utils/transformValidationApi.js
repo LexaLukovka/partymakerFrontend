@@ -1,6 +1,13 @@
 const transformValidationApi = errors => {
 
-  if (errors?.message) console.error(errors)
+  if (errors?.error?.status === 500) {
+    console.error(errors)
+    return { non_field_error: 'Внутренння ошибка сервера!' }
+  }
+  if (errors?.error?.message) {
+    console.error(errors)
+    return { non_field_error: 'Неизвестная ошибка!' }
+  }
 
   if (errors?.message) return { non_field_error: errors.message }
 
