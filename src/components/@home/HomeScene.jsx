@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { arrayOf, shape, func, object } from 'prop-types'
-import { Paper, Typography, withStyles } from '@material-ui/core'
+import { Button, Paper, Typography, withStyles } from '@material-ui/core'
 import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
 import Header from 'components/modules/Header'
 import Parties from './Parties'
 import Rooms from './Rooms'
 import Map from './Map'
+import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
 
 const styles = {
@@ -37,6 +38,12 @@ const styles = {
     height: `100%`,
     zIndex: 1,
   },
+  action: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    height: 50,
+  }
 }
 
 class HomeScene extends Component {
@@ -66,6 +73,15 @@ class HomeScene extends Component {
             <div className={classes.events}>
               <Typography gutterBottom variant="h5">Мои события</Typography>
               <Rooms rooms={rooms} onCreate={this.createRoom} />
+              {!isEmpty(rooms) && (
+                <Button
+                  variant="contained"
+                  onClick={this.createRoom}
+                  color="primary"
+                >
+                  создать событие
+                </Button>
+              )}
             </div>
           </Paper>
           <Map

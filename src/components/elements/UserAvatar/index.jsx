@@ -51,6 +51,8 @@ class UserAvatar extends Component {
     const { classes, user, is_online, clickable } = this.props
     const { isModalOpen } = this.state
 
+    if (!user) return null
+
     return (
       <div className={classes.avatar}>
         <Avatar

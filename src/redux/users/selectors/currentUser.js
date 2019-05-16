@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
 
 const currentUser = (users, user_id, accounts) => {
+  if (!user_id) return null
+
   return {
     ...users[user_id],
     account: accounts.find(a => a.user_id),

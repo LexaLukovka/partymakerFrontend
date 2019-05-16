@@ -19,10 +19,10 @@ const formik = withFormik({
     return ({
       headline: invite?.headline || 'Приглашение',
       preposition: invite?.preposition || 'на',
-      title: invite?.title || invite?.room.title || 'Вечеринку',
-      address: invite?.room.place.address,
-      date: moment(invite?.date || invite?.room.date || new Date()).format('YYYY-MM-DD'),
-      time: invite?.time || invite?.room.time || '18:30',
+      title: invite?.title || invite?.room?.title || 'Вечеринку',
+      address: invite?.room?.place?.address,
+      date: moment(invite?.date || invite?.room?.date || new Date()).format('YYYY-MM-DD'),
+      time: invite?.time || invite?.room?.time || '18:30',
       background_url: invite?.background_url || '/images/sparks.png'
     })
   },
