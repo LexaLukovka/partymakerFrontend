@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, bool } from 'prop-types'
+import { object, bool, string } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles, AppBar, Toolbar, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
@@ -19,13 +19,14 @@ const styles = {
   },
 }
 
-const Header = ({ classes, user, isTransparent }) =>
+const Header = ({ classes, className, user, isTransparent }) =>
   <AppBar
     position="static"
     color="primary"
     className={classNames({
       [classes.root]: true,
-      [classes.transparent]: isTransparent
+      [classes.transparent]: isTransparent,
+      [className]: true,
     })}
   >
     <Toolbar>
@@ -50,6 +51,7 @@ const Header = ({ classes, user, isTransparent }) =>
 
 Header.propTypes = {
   classes: object.isRequired,
+  className: string,
   isTransparent: bool,
   user: userShape,
 }

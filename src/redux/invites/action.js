@@ -36,6 +36,11 @@ const set = invite => ({
   payload: invite,
 })
 
+const setMany = invites => ({
+  type: SET_INVITES,
+  payload: invites,
+})
+
 const remove = room_id => ({
   type: REMOVE_INVITE,
   payload: room_id,
@@ -50,6 +55,7 @@ export default {
   loadByToken,
   accept,
   set,
+  setMany,
   remove,
   current
 }

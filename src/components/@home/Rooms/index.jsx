@@ -2,10 +2,11 @@ import React from 'react'
 import { object, func, arrayOf } from 'prop-types'
 import isEmpty from 'lodash/isEmpty'
 import roomShape from 'shapes/room'
-import { withStyles } from '@material-ui/core'
+import { Typography, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import NewRoom from './NewRoom'
-import Room from './Room'
+import RoomCard from './RoomCard'
+import CreateRoom from '../CreateRoom'
 
 const styles = {
   root: {
@@ -17,10 +18,14 @@ const styles = {
   centered: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  title: {
+    marginTop: '40px',
+    marginBottom: '20px',
   }
 }
 
-const Rooms = ({ classes, rooms, onCreate }) => {
+const Rooms = ({ classes, rooms, onCreate, onLeave }) => {
   if (isEmpty(rooms)) {
     return (
       <div className={classNames([classes.root, classes.centered])}>
@@ -31,7 +36,21 @@ const Rooms = ({ classes, rooms, onCreate }) => {
 
   return (
     <div className={classes.root}>
-      {rooms.map(room => <Room key={room.id} room={room} />)}
+      <CreateRoom onCreate={onCreate} />
+      <Typography
+        className={classes.title}
+        gutterBottom
+        variant="h5"
+      >
+        Мои события
+      </Typography>
+      {rooms.map(room => (
+        <RoomCard
+          key={room.id}
+          room={room}
+          onLeave={onLeave}
+        />
+      ))}
     </div>
   )
 }
@@ -40,6 +59,7 @@ Rooms.propTypes = {
   classes: object.isRequired,
   rooms: arrayOf(roomShape).isRequired,
   onCreate: func.isRequired,
+  onLeave: func.isRequired,
 }
 
 export default withStyles(styles)(Rooms)

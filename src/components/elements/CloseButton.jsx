@@ -1,7 +1,8 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object, func, string } from 'prop-types'
 import { IconButton, withStyles } from '@material-ui/core'
 import CloseIcon from 'mdi-react/CloseIcon'
+import classNames from 'classnames'
 
 const styles = {
   root: {
@@ -9,8 +10,8 @@ const styles = {
   },
 }
 
-const CloseButton = ({ classes, onClick }) =>
-  <div className={classes.root}>
+const CloseButton = ({ classes, onClick, className }) =>
+  <div className={classNames(classes.root, className)}>
     <IconButton color="primary" onClick={onClick}>
       <CloseIcon />
     </IconButton>
@@ -18,6 +19,7 @@ const CloseButton = ({ classes, onClick }) =>
 
 CloseButton.propTypes = {
   classes: object.isRequired,
+  className: string,
   onClick: func.isRequired
 }
 

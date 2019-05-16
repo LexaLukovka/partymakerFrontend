@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { object, func } from 'prop-types'
 import roomShape from 'shapes/room'
+import authShape from 'shapes/auth'
 import { withStyles, List } from '@material-ui/core'
 import SearchField from 'components/elements/SearchField'
 import isEmpty from 'lodash/isEmpty'
@@ -74,7 +75,7 @@ class Guests extends Component {
   }
 
   render() {
-    const { classes, room } = this.props
+    const { classes, room, auth } = this.props
     const { isLoading } = this.state
     const filtered = this.filter(room.guests)
 
@@ -87,7 +88,7 @@ class Guests extends Component {
           {filtered.map(guest => (
             <Guest
               key={guest.id}
-              isMeAdmin={room.isMeAdmin}
+              auth={auth}
               admin={room.admin}
               guest={guest}
               onKick={this.kick}
@@ -101,6 +102,7 @@ class Guests extends Component {
 
 Guests.propTypes = {
   classes: object.isRequired,
+  auth: authShape.isRequired,
   room: roomShape.isRequired,
   onLoad: func.isRequired,
   onKick: func.isRequired,

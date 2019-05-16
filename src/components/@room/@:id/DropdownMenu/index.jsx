@@ -3,7 +3,7 @@ import { object, func, shape, number } from 'prop-types'
 import { IconButton, withStyles, Menu, MenuItem } from '@material-ui/core'
 import MoreIcon from 'mdi-react/MoreVertIcon'
 import { withRouter } from 'react-router-dom'
-import LeaveRoomDialog from './LeaveRoomDialog'
+import LeaveRoomDialog from 'components/elements/LeaveRoomDialog'
 
 const styles = (theme) => ({
   root: {},

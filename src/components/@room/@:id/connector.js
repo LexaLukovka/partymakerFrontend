@@ -2,10 +2,11 @@ import { connect } from 'react-redux'
 import currentRoom from 'src/redux/rooms/selectors/currentRoom'
 import actions from 'src/redux/action'
 import { bindActionCreators } from 'redux'
+import assembleAuth from 'src/redux/auth/selectors/assembleAuth'
 
 const mapStateToProps = state => ({
   room: currentRoom(state),
-  auth: state.auth,
+  auth: assembleAuth(state),
 })
 
 const mapDispatchToProps = dispatch => {

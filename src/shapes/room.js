@@ -6,7 +6,7 @@ import inviteShape from './invite'
 
 export default shape({
   id: number.isRequired,
-  title: string.isRequired,
+  title: string,
   admin: userShape,
   admin_id: number.isRequired,
   place: placeShape,

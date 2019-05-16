@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func } from 'prop-types'
 import userShape from 'shapes/user'
+import authShape from 'shapes/auth'
 import { ListItem, Typography, withStyles } from '@material-ui/core'
 import UserAvatar from 'components/elements/UserAvatar'
 import CloseButton from 'components/elements/CloseButton'
@@ -52,7 +53,7 @@ class Guest extends Component {
   }
 
   render() {
-    const { classes, admin, isMeAdmin, guest } = this.props
+    const { classes, admin, guest, auth } = this.props
     const { isKickGuestDialogOpen } = this.state
 
     return (
@@ -63,7 +64,7 @@ class Guest extends Component {
           {admin?.id === guest.id && (
             <Typography component="label" color="textSecondary" variant="caption">админ</Typography>
           )}
-          {isMeAdmin && (
+          {admin.id !== auth.user_id && (
             <aside className={classes.actions}>
               <CloseButton onClick={this.openKickGuestDialog} />
             </aside>
@@ -82,7 +83,7 @@ class Guest extends Component {
 
 Guest.propTypes = {
   classes: object.isRequired,
-  isMeAdmin: bool,
+  auth: authShape.isRequired,
   admin: userShape,
   guest: userShape.isRequired,
   onKick: func.isRequired,

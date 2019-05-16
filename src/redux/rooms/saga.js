@@ -15,14 +15,23 @@ import {
 const createRoom = room => ({
   ...room,
   guests_ids: [],
+  invite: undefined,
+  place: undefined,
 })
 
 function* setRoom({ payload: room }) {
   yield put(actions.rooms.select(room.id))
+  if (room.invite) yield put(actions.invites.set(room.invite))
+  if (room.place) yield put(actions.places.set(room.place))
   yield put(actions.rooms.set(createRoom(room)))
 }
 
 function* setRooms({ payload: { data: rooms } }) {
+  const invites = rooms.map(r => r.invite).filter(i => !!i)
+  const places = rooms.map(r => r.place).filter(i => !!i)
+
+  if (invites.length) yield put(actions.invites.setMany(invites))
+  if (places.length) yield put(actions.places.setMany(places))
   yield put(actions.rooms.setMany(rooms.map(createRoom)))
 }
 

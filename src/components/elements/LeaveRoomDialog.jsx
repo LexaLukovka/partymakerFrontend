@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { object, func, bool } from 'prop-types'
 import {
   withStyles,
@@ -35,8 +35,4 @@ LeaveRoomDialog.propTypes = {
   onCancel: func.isRequired,
 }
 
-const isEqual = (prev, next) => {
-  return prev.isOpen !== next.isOpen
-}
-
-export default withStyles(styles)(memo(LeaveRoomDialog, isEqual))
+export default withStyles(styles)(LeaveRoomDialog)

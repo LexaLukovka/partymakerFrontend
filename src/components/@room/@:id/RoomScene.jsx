@@ -126,6 +126,7 @@ class RoomScene extends Component {
           </div>
           {room && (
             <Guests
+              auth={auth}
               room={room}
               onLoad={this.loadGuests}
               onKick={actions.room.guests.kick}

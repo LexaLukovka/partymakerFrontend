@@ -19,8 +19,8 @@ const styles = {
   }
 }
 
-const OutlineCard = ({ classes, className, title, children }) =>
-  <div className={classNames([classes.root, className])}>
+const OutlineCard = ({ classes, className, title, children, style }) =>
+  <div className={classNames([classes.root, className])} style={style}>
     {title && (
       <Typography
         color="textSecondary"
@@ -36,6 +36,7 @@ const OutlineCard = ({ classes, className, title, children }) =>
 OutlineCard.propTypes = {
   classes: object.isRequired,
   className: string,
+  style: object,
   title: string,
   children: node,
 }

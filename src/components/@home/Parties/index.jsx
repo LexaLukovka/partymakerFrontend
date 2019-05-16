@@ -8,6 +8,8 @@ import mafia from './mafia.png'
 
 const styles = {
   root: {
+    position: 'fixed',
+    right: 40,
     margin: 10,
     maxWidth: 150,
   },

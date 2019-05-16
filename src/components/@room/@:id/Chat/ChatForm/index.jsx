@@ -43,7 +43,6 @@ const ChatForm = ({ classes, values }) =>
         ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
         : <Field name="asset_id" component={AssetField} />
       }
-
     </div>
     <div className={classes.actions}>
       <Typography
@@ -55,7 +54,6 @@ const ChatForm = ({ classes, values }) =>
         Предложить:
       </Typography>
       <Field name="place_id" className={classes.action} component={PlaceField} />
-      <Button className={classes.action} color="primary">ГОСТЯ</Button>
       <Button className={classes.action} color="primary">ДАТУ И ВРЕМЯ</Button>
     </div>
   </Form>

@@ -1,35 +1,35 @@
 import React, { Component } from 'react'
 import { arrayOf, shape, func, object } from 'prop-types'
-import { Button, Paper, Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
 import Header from 'components/modules/Header'
 import Parties from './Parties'
 import Rooms from './Rooms'
-import Map from './Map'
-import isEmpty from 'lodash/isEmpty'
 import connector from './connector'
 
 const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100vh'
+    height: '100vh',
+    backgroundColor: 'white'
   },
   container: {
     flexGrow: 1,
     display: 'flex',
-  },
-  paper: {
-    display: 'flex',
-    minWidth: 650,
+    justifyContent: 'center',
+    overflow: 'auto',
   },
   events: {
+    maxWidth: 600,
+    margin: '0 auto',
+    paddingBottom: 200,
     padding: 15,
     flexGrow: 1,
+    height: '100%',
     zIndex: 10,
     display: 'flex',
-    overflow: 'auto',
     flexDirection: 'column'
   },
   mapElement: {
@@ -51,14 +51,19 @@ class HomeScene extends Component {
   componentDidMount() {
     const { actions } = this.props
 
-    actions.loadRooms()
+    actions.rooms.loadMany()
   }
 
   createRoom = async () => {
     const { actions, history } = this.props
-    const { action } = await actions.createRoom()
+    const { action } = await actions.rooms.create()
 
     history.push(`/room/${action.payload.id}`)
+  }
+
+  leaveRoom = async (room_id) => {
+    const { actions } = this.props
+    actions.rooms.leave(room_id)
   }
 
   render() {
@@ -68,27 +73,14 @@ class HomeScene extends Component {
       <div className={classes.root}>
         <Header user={user} />
         <div className={classes.container}>
-          <Paper className={classes.paper}>
-            <Parties />
-            <div className={classes.events}>
-              <Typography gutterBottom variant="h5">Мои события</Typography>
-              <Rooms rooms={rooms} onCreate={this.createRoom} />
-              {!isEmpty(rooms) && (
-                <Button
-                  variant="contained"
-                  onClick={this.createRoom}
-                  color="primary"
-                >
-                  создать событие
-                </Button>
-              )}
-            </div>
-          </Paper>
-          <Map
-            loadingElement={<div className={classes.mapElement} />}
-            containerElement={<div className={classes.mapElement} />}
-            mapElement={<div className={classes.mapElement} />}
-          />
+          <div className={classes.events}>
+            <Rooms
+              rooms={rooms}
+              onCreate={this.createRoom}
+              onLeave={this.leaveRoom}
+            />
+          </div>
+          <Parties />
         </div>
       </div>
     )
@@ -103,8 +95,11 @@ HomeScene.propTypes = {
     push: func.isRequired,
   }),
   actions: shape({
-    createRoom: func.isRequired,
-    loadRooms: func.isRequired,
+    rooms: shape({
+      loadMany: func.isRequired,
+      create: func.isRequired,
+      leave: func.isRequired,
+    })
   })
 }
 
