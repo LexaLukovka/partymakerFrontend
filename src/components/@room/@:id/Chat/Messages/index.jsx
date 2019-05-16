@@ -25,7 +25,7 @@ const displayUserName = (message) => {
 
   prev_id = message.user_id
 
-  return isNameVisible ? message.set.name : null
+  return isNameVisible ? message.user?.name : null
 }
 
 const Messages = ({ classes, isLoading, messages }) =>
@@ -34,7 +34,7 @@ const Messages = ({ classes, isLoading, messages }) =>
     {messages.map(message => (
       <div className={classes.message} key={message.id}>
         <UserCaption isMine={message.isMine}>
-          {displayUserName(message)}
+          {Boolean(message.user_id) && displayUserName(message)}
         </UserCaption>
         <Message message={message} />
       </div>

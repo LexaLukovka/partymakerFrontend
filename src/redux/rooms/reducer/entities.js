@@ -2,7 +2,7 @@ import uniq from 'lodash/uniq'
 import arrayToObject from 'utils/arrayToObject'
 import isEmpty from 'lodash/isEmpty'
 import { SET_ROOM, SET_ROOMS, REMOVE_ROOM } from '../action'
-import { SET_ROOM_GUESTS, REMOVE_ROOM_GUEST } from '../guests/action'
+import { SET_ROOM_GUESTS, REMOVE_ROOM_GUEST, SET_ROOM_GUEST } from '../guests/action'
 
 export default (state = {}, { type, payload, meta }) => {
   switch (type) {
@@ -29,6 +29,20 @@ export default (state = {}, { type, payload, meta }) => {
       delete rooms[payload]
 
       return rooms
+    }
+
+    case SET_ROOM_GUEST: {
+      const room = state[meta.room_id]
+
+      if (!room) return state
+
+      return {
+        ...state,
+        [room.id]: {
+          ...room,
+          guests_ids: uniq([...room.guests_ids, payload])
+        },
+      }
     }
 
     case SET_ROOM_GUESTS: {

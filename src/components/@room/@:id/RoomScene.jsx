@@ -61,7 +61,7 @@ class RoomScene extends Component {
 
   loadRoom = async () => {
     const { actions, match } = this.props
-    await actions.room.load(match.params.id)
+    await actions.rooms.load(match.params.id)
   }
 
   loadPlace = () => {
@@ -73,39 +73,39 @@ class RoomScene extends Component {
   addPlace = async (form) => {
     const { actions, room } = this.props
     const { value: place } = await actions.place.create(form)
-    await actions.room.update(room.id, { place_id: place.id })
+    await actions.rooms.update(room.id, { place_id: place.id })
     return place
   }
 
   loadMessages = async (params) => {
     const { actions, match } = this.props
-    await actions.room.messages.loadMany(match.params.id, params)
+    await actions.rooms.messages.loadMany(match.params.id, params)
   }
 
   loadGuests = async () => {
     const { match, actions } = this.props
-    await actions.room.guests.loadMany(match.params.id)
+    await actions.rooms.guests.loadMany(match.params.id)
     this.setState({ isGuestsLoaded: true })
   }
 
   loadInvite = () => {
     const { actions, match } = this.props
-    return actions.room.invite.load(match.params.id)
+    return actions.rooms.invite.load(match.params.id)
   }
 
   createInvite = (form) => {
     const { actions, match } = this.props
-    return actions.room.invite.create(match.params.id, form)
+    return actions.rooms.invite.create(match.params.id, form)
   }
 
   updateInvite = (form) => {
     const { actions, match } = this.props
-    return actions.room.invite.update(match.params.id, form)
+    return actions.rooms.invite.update(match.params.id, form)
   }
 
   sendMessage = (form) => {
     const { actions, match } = this.props
-    return actions.room.messages.create(match.params.id, form)
+    return actions.rooms.messages.create(match.params.id, form)
   }
 
   render() {
@@ -129,7 +129,7 @@ class RoomScene extends Component {
               auth={auth}
               room={room}
               onLoad={this.loadGuests}
-              onKick={actions.room.guests.kick}
+              onKick={actions.rooms.guests.kick}
             />
           )}
         </div>
@@ -142,11 +142,11 @@ class RoomScene extends Component {
                 onCreate={this.addPlace}
                 onUpdate={actions.place.update}
               >
-                <RoomTitle room={room} onChange={actions.room.update} />
+                <RoomTitle room={room} onChange={actions.rooms.update} />
               </Place>
               <DropdownMenu
                 room={room}
-                onLeave={actions.room.leave}
+                onLeave={actions.rooms.leave}
               />
             </ChatHeader>
             {isGuestsLoaded && (
@@ -171,7 +171,7 @@ RoomScene.propTypes = {
   auth: authShape,
   match: matchShape,
   actions: shape({
-    room: shape({
+    rooms: shape({
       load: func.isRequired,
       update: func.isRequired,
       messages: shape({
@@ -181,6 +181,8 @@ RoomScene.propTypes = {
         receive: func.isRequired,
       }),
       guests: shape({
+        joined: func.isRequired,
+        left: func.isRequired,
         loadMany: func.isRequired,
         kick: func.isRequired,
       }),

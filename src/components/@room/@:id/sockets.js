@@ -9,7 +9,7 @@ export default async ({ match, actions }) => {
   Socket.emit('join', room_id)
 
   Socket.on('join', (user_id) => {
-    actions.room.messages.read(room_id)
+    actions.rooms.messages.read(room_id)
     actions.users.online(user_id)
   })
 
@@ -17,5 +17,13 @@ export default async ({ match, actions }) => {
     actions.users.offline(user_id)
   })
 
-  Socket.on('message', actions.room.messages.receive)
+  Socket.on('guest:joined', (user) => {
+    actions.rooms.guests.joined(room_id, user)
+  })
+
+  Socket.on('guest:left', (user) => {
+    actions.rooms.guests.left(room_id, user)
+  })
+
+  Socket.on('message', actions.rooms.messages.receive)
 }

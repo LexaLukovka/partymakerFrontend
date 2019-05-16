@@ -9,6 +9,7 @@ import TextMessage from './types/TextMessage'
 import PictureMessage from './types/PictureMessage'
 import FileMessage from './types/FileMessage'
 import PlaceMessage from './types/PlaceMessage'
+import NotificationMessage from './types/NotificationMessage'
 import isPicture from 'utils/isPicture'
 
 const styles = {
@@ -20,6 +21,9 @@ const styles = {
   },
   isMine: {
     flexDirection: 'row-reverse',
+  },
+  center: {
+    justifyContent: 'center',
   }
 }
 
@@ -32,10 +36,14 @@ class Message extends Component {
       <div className={classNames({
         [classes.root]: true,
         [classes.isMine]: message.isMine,
+        [classes.center]: !message.user_id
       })}>
-        {!message.isMine && <UserAvatar user={message.set} />}
+        {message.user && !message.isMine && <UserAvatar user={message.user} />}
         <Bubble isMine={message.isMine}>
           {(() => {
+            if (!message.user_id) {
+              return <NotificationMessage message={message} />
+            }
 
             if (isPicture(message.asset?.url)) {
               return <PictureMessage message={message} />

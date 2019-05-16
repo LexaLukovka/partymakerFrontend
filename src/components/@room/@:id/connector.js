@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return ({
     actions: {
-      room: {
+      rooms: {
         load: bindActionCreators(actions.rooms.find, dispatch),
         update: bindActionCreators(actions.rooms.update, dispatch),
         leave: bindActionCreators(actions.rooms.leave, dispatch),
@@ -20,6 +20,8 @@ const mapDispatchToProps = dispatch => {
         guests: {
           loadMany: bindActionCreators(actions.rooms.guests.list, dispatch),
           kick: bindActionCreators(actions.rooms.guests.kick, dispatch),
+          joined: bindActionCreators(actions.rooms.guests.joined, dispatch),
+          left: bindActionCreators(actions.rooms.guests.left, dispatch),
         },
         messages: {
           loadMany: bindActionCreators(actions.rooms.messages.list, dispatch),
