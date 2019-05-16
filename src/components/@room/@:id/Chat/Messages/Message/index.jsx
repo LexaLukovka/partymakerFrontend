@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { bool, object } from 'prop-types'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import UserAvatar from 'components/elements/UserAvatar'
