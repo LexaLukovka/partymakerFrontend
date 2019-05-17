@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import { object, func, node } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
@@ -95,11 +95,5 @@ Place.propTypes = {
   onUpdate: func.isRequired,
   children: node.isRequired,
 }
-const isEqual = (prev, next) => {
-  if (prev.place?.title !== next.place?.title) return false
-  if (prev.place?.address !== next.place?.address) return false
 
-  return prev.place?.id === next.place?.id
-}
-
-export default withStyles(styles)(memo(Place, isEqual))
+export default withStyles(styles)(Place)
