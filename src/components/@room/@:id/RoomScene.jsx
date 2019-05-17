@@ -10,7 +10,7 @@ import Chat from './Chat'
 import connector from './connector'
 import Socket from 'services/Socket'
 import Place from './Place'
-import RoomTitle from './RoomTitle'
+import Title from './Title'
 import DropdownMenu from './DropdownMenu'
 import ChatHeader from './ChatHeader'
 import connectToSockets from './sockets'
@@ -58,6 +58,10 @@ class RoomScene extends Component {
     Socket.emit('leave', room_id)
     Socket.close()
   }
+
+  // componentDidUpdate(prev) {
+  //   console.log({ RoomScene_prevTitle: prev.room?.title, nextTitle: this.props.room?.title })
+  // }
 
   loadRoom = async () => {
     const { actions, match } = this.props
@@ -112,6 +116,10 @@ class RoomScene extends Component {
     const { classes, room, auth, actions } = this.props
     const { isGuestsLoaded } = this.state
 
+    const title = room?.title
+
+    console.log(title, 'parent')
+
     return (
       <section className={classes.root}>
         <div className={classes.guests}>
@@ -142,7 +150,11 @@ class RoomScene extends Component {
                 onCreate={this.addPlace}
                 onUpdate={actions.place.update}
               >
-                <RoomTitle room={room} onChange={actions.rooms.update} />
+                {room && (<Title
+                  room_id={room.id}
+                  title={room.title}
+                  onUpdate={actions.rooms.update}
+                />)}
               </Place>
               <DropdownMenu
                 room={room}
