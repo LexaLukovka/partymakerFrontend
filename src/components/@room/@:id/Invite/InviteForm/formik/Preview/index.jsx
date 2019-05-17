@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { connect, getIn } from 'formik'
+import inviteShape from 'shapes/invite'
 import InvitePage from 'components/modules/InvitePage'
 
 const styles = {
@@ -12,13 +13,11 @@ const styles = {
   },
 }
 
-const getInvite = (values) => ({
+const getInvite = (invite, values) => ({
+  ...invite,
   headline: getIn(values, 'headline'),
   title: getIn(values, 'title'),
   preposition: getIn(values, 'preposition'),
-  address: getIn(values, 'address'),
-  date: getIn(values, 'date'),
-  time: getIn(values, 'time'),
   background_url: getIn(values, 'background_url'),
 })
 
@@ -30,10 +29,11 @@ class Preview extends Component {
   }
 
   render() {
-    const { classes, formik } = this.props
+    const { classes, formik, invite } = this.props
+
     return (
       <div className={classes.root} onClick={this.preview}>
-        <InvitePage invite={getInvite(formik.values)} />
+        <InvitePage invite={getInvite(invite, formik.values)} />
       </div>
     )
   }
@@ -42,6 +42,7 @@ class Preview extends Component {
 Preview.propTypes = {
   classes: object.isRequired,
   formik: object.isRequired,
+  invite: inviteShape.isRequired,
 }
 
 export default withStyles(styles)(connect(Preview))

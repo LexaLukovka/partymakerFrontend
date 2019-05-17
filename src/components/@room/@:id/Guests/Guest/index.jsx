@@ -64,7 +64,7 @@ class Guest extends Component {
           {admin?.id === guest.id && (
             <Typography component="label" color="textSecondary" variant="caption">админ</Typography>
           )}
-          {admin.id !== auth.user_id && (
+          {guest.id !== auth.user_id && (
             <aside className={classes.actions}>
               <CloseButton onClick={this.openKickGuestDialog} />
             </aside>

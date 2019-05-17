@@ -95,24 +95,6 @@ const InviteForm = ({ classes, invite, onCancel, isSubmitting }) =>
         margin="normal"
         component={TextField}
       />
-      <div className={classes.datetime}>
-        <Typography variant="caption" color="textSecondary">Дата и время</Typography>
-        <div className={classes.dateFields}>
-          <Field
-            className={classes.date}
-            name="date"
-            type="date"
-            component={TextField}
-          />
-          <Field
-            className={classes.time}
-            name="time"
-            step="3600"
-            type="time"
-            component={TextField}
-          />
-        </div>
-      </div>
       <Field
         label="Изменить фон"
         name="background_url"
@@ -122,7 +104,7 @@ const InviteForm = ({ classes, invite, onCancel, isSubmitting }) =>
       />
     </div>
     <div className={classes.preview}>
-      <Preview />
+      <Preview invite={invite} />
       {invite?.token && <CopyLinkCard token={invite.token} />}
       <div className={classes.actions}>
         <ServerMessage className={classes.message} color="primary" name="message" />

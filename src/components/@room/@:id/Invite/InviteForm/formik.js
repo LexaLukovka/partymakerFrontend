@@ -1,7 +1,6 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import to from 'util-to'
-import moment from 'moment'
 import transformValidationApi from 'src/utils/transformValidationApi'
 
 const formik = withFormik({
@@ -10,8 +9,6 @@ const formik = withFormik({
       headline: Yup.string().required('Это поле является обязательным'),
       preposition: Yup.string().required('Это поле является обязательным'),
       title: Yup.string().required('Это поле является обязательным'),
-      date: Yup.string(),
-      time: Yup.string(),
       background_url: Yup.string()
     }),
 
@@ -21,8 +18,6 @@ const formik = withFormik({
       preposition: invite?.preposition || 'на',
       title: invite?.title || invite?.room?.title || 'Вечеринку',
       address: invite?.room?.place?.address,
-      date: moment(invite?.date || invite?.room?.date || new Date()).format('YYYY-MM-DD'),
-      time: invite?.time || invite?.room?.time || '18:30',
       background_url: invite?.background_url || '/images/sparks.png'
     })
   },

@@ -18,8 +18,8 @@ function* addGuest({ payload: user, meta: { room_id } }) {
   yield put(actions.rooms.guests.set(room_id, user.id))
 }
 
-function* removeGuest({ payload: user, meta: { room_id } }) {
-  yield put(actions.rooms.guests.remove(room_id, user.id))
+function* removeGuest({ payload: user, meta: { user_id, room_id } }) {
+  yield put(actions.rooms.guests.remove(room_id, user?.id || user_id))
 }
 
 export default function* saga() {

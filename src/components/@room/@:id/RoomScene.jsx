@@ -116,10 +116,6 @@ class RoomScene extends Component {
     const { classes, room, auth, actions } = this.props
     const { isGuestsLoaded } = this.state
 
-    const title = room?.title
-
-    console.log(title, 'parent')
-
     return (
       <section className={classes.root}>
         <div className={classes.guests}>

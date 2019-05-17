@@ -43,8 +43,8 @@ const styles = {
   },
 }
 
-const InvitePage = ({ classes, invite, onAccept }) =>
-  <section className={classes.root} style={{ backgroundImage: `url(${invite.background_url})` }}>
+const InvitePage = ({ classes, invite, onAccept }) => {
+  return <section className={classes.root} style={{ backgroundImage: `url(${invite.background_url})` }}>
     <div className={classes.container}>
       <Header isTransparent />
       <Typography
@@ -77,14 +77,14 @@ const InvitePage = ({ classes, invite, onAccept }) =>
         align="center"
         variant="h5"
       >
-        {moment(invite.date).format('D MMMM, dddd')}, {invite.time}
+        {invite.room?.date && `${moment(invite.room.date).format('D MMMM, dddd')},`} {invite.room?.time}
       </Typography>
       <Typography
         color="secondary"
         align="center"
         variant="h4"
       >
-        {invite.address}
+        {invite.room?.place?.address}
       </Typography>
       <div className={classes.actions}>
         <Link to={`/invite/${invite.token}`}>
@@ -101,6 +101,7 @@ const InvitePage = ({ classes, invite, onAccept }) =>
       </div>
     </div>
   </section>
+}
 
 InvitePage.propTypes = {
   classes: object.isRequired,
@@ -108,9 +109,6 @@ InvitePage.propTypes = {
     headline: string.isRequired,
     preposition: string,
     title: string.isRequired,
-    address: string,
-    time: string,
-    date: string,
     background_url: string.isRequired,
     token: string,
   }),
