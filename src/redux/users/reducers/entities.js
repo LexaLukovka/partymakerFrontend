@@ -14,7 +14,7 @@ const usersReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload.id]: {
           ...payload,
-          pivot: payload.pivot || state[payload.id].pivot
+          pivot: payload?.pivot || state[payload.id]?.pivot
         },
       }
 
@@ -30,7 +30,7 @@ const usersReducer = (state = initialState, { type, payload }) => {
         [payload]: {
           ...state[payload],
           pivot: {
-            ...state[payload].pivot,
+            ...state[payload]?.pivot,
             is_online: true,
           },
         }
@@ -42,7 +42,7 @@ const usersReducer = (state = initialState, { type, payload }) => {
         [payload]: {
           ...state[payload],
           pivot: {
-            ...state[payload].pivot,
+            ...state[payload]?.pivot,
             is_online: false,
           },
         }

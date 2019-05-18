@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import { withStyles, Button } from '@material-ui/core'
 import { shape, func, string } from 'prop-types'
 import { PlaceDrawer } from 'components'
@@ -61,8 +61,4 @@ PlaceField.propTypes = {
   onChange: func.isRequired
 }
 
-const isEqual = (prev, next) => {
-  return prev.name !== next.name
-}
-
-export default withStyles(styles)(connector(memo(PlaceField, isEqual)))
+export default withStyles(styles)(connector(PlaceField))

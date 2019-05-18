@@ -1,10 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { withStyles } from '@material-ui/core'
 import { string, func, object } from 'prop-types'
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import MessageInput from './MessageInput'
 import EmojiPicker from './EmojiPicker'
-import { emojify } from 'react-emojione'
 
 const styles = {
   root: {

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { object, func } from 'prop-types'
 import { IconButton, SvgIcon, withStyles } from '@material-ui/core'
 import AddLocationIcon from 'mdi-react/AddLocationIcon'
@@ -29,4 +29,4 @@ SetPlaceIcon.propTypes = {
   onClick: func.isRequired,
 }
 
-export default withStyles(styles)(memo(SetPlaceIcon, () => true))
+export default withStyles(styles)(SetPlaceIcon)

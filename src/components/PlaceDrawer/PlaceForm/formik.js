@@ -1,7 +1,7 @@
-import { withFormik } from 'formik/dist/index'
+import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import to from 'util-to'
-import transformValidationApi from 'src/utils/transformValidationApi'
+import transformValidationApi from 'utils/transformValidationApi'
 
 const formik = withFormik({
   validationSchema: Yup.object()
@@ -14,6 +14,8 @@ const formik = withFormik({
     title: place?.title || '',
     address: place?.address || '',
   }),
+
+  enableReinitialize: true,
 
   handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
 
