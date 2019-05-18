@@ -4,8 +4,8 @@ import userShape from 'shapes/user'
 import authShape from 'shapes/auth'
 import { ListItem, Typography, withStyles } from '@material-ui/core'
 import UserAvatar from 'components/elements/UserAvatar'
-import CloseButton from 'components/elements/CloseButton'
 import KickGuestDialog from './KickGuestDialog'
+import GuestItemText from './GuestItemText'
 
 const styles = {
   root: {
@@ -18,17 +18,6 @@ const styles = {
     '&:hover label': {
       display: 'none'
     }
-  },
-  listItem: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0 15px',
-    flexGrow: 1,
-    alignItems: 'center',
-    minHeight: 48,
-  },
-  actions: {
-    display: 'none'
   },
 }
 
@@ -55,21 +44,15 @@ class Guest extends Component {
   render() {
     const { classes, admin, guest, auth } = this.props
     const { isKickGuestDialogOpen } = this.state
-
     return (
       <ListItem className={classes.root}>
         <UserAvatar is_online={guest.pivot?.is_online} user={guest} />
-        <div className={classes.listItem}>
-          <Typography variant="body1">{guest.name}</Typography>
-          {admin?.id === guest.id && (
-            <Typography component="label" color="textSecondary" variant="caption">админ</Typography>
-          )}
-          {guest.id !== auth.user_id && (
-            <aside className={classes.actions}>
-              <CloseButton onClick={this.openKickGuestDialog} />
-            </aside>
-          )}
-        </div>
+        <GuestItemText
+          isAdmin={admin?.id === guest.id}
+          isMe={guest.id !== auth.user_id}
+          guest={guest}
+          onClose={this.openKickGuestDialog}
+        />
         <KickGuestDialog
           guest={guest}
           isOpen={isKickGuestDialogOpen}

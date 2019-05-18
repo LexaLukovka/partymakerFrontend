@@ -12,7 +12,10 @@ const usersReducer = (state = initialState, { type, payload }) => {
     case SET_USER:
       return {
         ...state,
-        [payload.id]: payload,
+        [payload.id]: {
+          ...payload,
+          pivot: payload.pivot || state[payload.id].pivot
+        },
       }
 
     case SET_USERS:
