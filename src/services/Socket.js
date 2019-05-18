@@ -20,7 +20,10 @@ class Socket {
         this.isConnected = true
         resolve()
       })
-      this.ws.on('error', reject)
+      this.ws.on('error', (error) => {
+        this.isConnected = false
+        reject(error)
+      })
     })
   }
 
@@ -37,7 +40,6 @@ class Socket {
 
   on = (name, callback) => {
     if (!this.socket) return console.warn('You not connected to Socket!')
-
     this.socket.on(name, (data) => {
       console.log('ON:', name, data)
       callback(data)
@@ -50,6 +52,7 @@ class Socket {
     if (!this.socket) return
 
     try {
+      console.log('EMIT:', name, data)
       this.socket.emit(name, data)
     } catch (e) {
       setTimeout(() => {
@@ -68,6 +71,7 @@ class Socket {
     if (!this.isConnected) return
     if (!this.ws) throw new Error('You are not connected!')
     this.ws.close()
+    this.isConnected = false
     this.ws = null
   }
 }

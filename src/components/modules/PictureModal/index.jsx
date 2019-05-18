@@ -1,16 +1,19 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { object, func, bool, string } from 'prop-types'
 import { withStyles, Dialog } from '@material-ui/core'
 
 const styles = {
-  root: {},
+  root: {
+    maxWidth: '100%',
+    backgroundImage: `url(/images/transparent-background.svg)`,
+  },
 }
 
 const PictureModal = ({ classes, url, isOpen, onClose }) =>
   <Dialog
     open={isOpen}
+    classes={{ paperWidthSm: classes.root }}
     onClose={onClose}
-    className={classes.root}
   >
     <img alt={url} src={url} width="100%" height="100%" onClick={onClose} />
   </Dialog>
@@ -21,11 +24,4 @@ PictureModal.propTypes = {
   isOpen: bool.isRequired,
   onClose: func.isRequired,
 }
-
-const isEqual = (prev, next) => {
-  if (prev.url !== next.url) return false
-
-  return prev.isOpen === next.isOpen
-}
-
-export default withStyles(styles)(memo(PictureModal, isEqual))
+export default withStyles(styles)(PictureModal)

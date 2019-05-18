@@ -1,4 +1,4 @@
-import { number, shape, string } from 'prop-types'
+import { bool, number, oneOfType, shape, string } from 'prop-types'
 
 export default shape({
   id: number.isRequired,
@@ -6,7 +6,7 @@ export default shape({
   email: string.isRequired,
   phone: string,
   pivot: shape({
-    is_online: number.isRequired,
+    is_online: oneOfType([bool, number]).isRequired,
     last_seen: string,
   })
 })
