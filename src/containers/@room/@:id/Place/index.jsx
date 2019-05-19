@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { object, func, node } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { Drawer, Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import SetPlaceIcon from './SetPlaceIcon'
-import { Loading, PlaceDrawer } from 'components'
+import { Loading } from 'components'
+import PlaceForm from 'src/containers/@room/@:id/Chat/ChatForm/controls/FormikPlaceField/PlaceField/PlaceForm'
 
 const styles = {
   root: {
@@ -75,12 +76,13 @@ class Place extends Component {
             {place?.title || place?.address || 'Выберите место'}
           </Typography>
         </div>
-        <PlaceDrawer
-          isOpen={isDrawerOpen}
-          place={place}
+        <Drawer
+          anchor="right"
+          open={isDrawerOpen}
           onClose={this.close}
-          onSubmit={this.submit}
-        />
+        >
+          <PlaceForm onCancel={this.close} onSubmit={this.submit} />
+        </Drawer>
       </div>
     )
   }

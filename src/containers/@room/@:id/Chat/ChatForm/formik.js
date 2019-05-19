@@ -1,15 +1,15 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import to from 'util-to'
-import transformValidationApi from 'src/utils/transformValidationApi'
+import transformValidationApi from 'utils/transformValidationApi'
 import uniqId from 'uniqid'
 
 const initialValues = ({ auth }) => ({
   text: '',
   asset_id: null,
   place_id: null,
-  token: `temp-${uniqId()}`,
   user_id: auth.user_id,
+  token: `temp-${uniqId()}`,
 })
 
 const formik = withFormik({

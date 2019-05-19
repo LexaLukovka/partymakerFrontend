@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { withStyles, Button } from '@material-ui/core'
+import { withStyles, Button, Drawer } from '@material-ui/core'
 import { shape, func, string } from 'prop-types'
-import { PlaceDrawer } from 'components'
 import connector from './connector'
+import PlaceForm from './PlaceForm'
 
 const styles = {
   root: {
@@ -40,11 +40,13 @@ class PlaceField extends Component {
     return (
       <>
         <Button className={className} color="primary" onClick={this.open}>МЕСТО</Button>
-        <PlaceDrawer
-          isOpen={isDrawerOpen}
+        <Drawer
+          anchor="right"
+          open={isDrawerOpen}
           onClose={this.close}
-          onSubmit={this.create}
-        />
+        >
+          <PlaceForm onCancel={this.close} onSubmit={this.create} />
+        </Drawer>
       </>
     )
   }

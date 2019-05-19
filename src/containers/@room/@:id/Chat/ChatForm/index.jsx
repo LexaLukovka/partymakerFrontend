@@ -1,10 +1,11 @@
 import React from 'react'
 import { Form, Field } from 'formik'
 import { object, shape, string } from 'prop-types'
-import { Button, Typography, IconButton, withStyles } from '@material-ui/core'
+import { Typography, IconButton, withStyles } from '@material-ui/core'
 import FormikMessageField from './controls/FormikMessageField'
 import AssetField from './controls/FormikAssetField'
 import PlaceField from './controls/FormikPlaceField'
+import DateField from './controls/FormikDateField'
 import formik from './formik'
 import SendIcon from 'mdi-react/SendIcon'
 
@@ -54,7 +55,7 @@ const ChatForm = ({ classes, values }) =>
         Предложить:
       </Typography>
       <Field name="place_id" className={classes.action} component={PlaceField} />
-      <Button className={classes.action} color="primary">ДАТУ И ВРЕМЯ</Button>
+      <Field name="date" className={classes.action} component={DateField} />
     </div>
   </Form>
 

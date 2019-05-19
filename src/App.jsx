@@ -5,6 +5,7 @@ import moment from 'moment'
 
 moment.locale('ru')
 
-const App = () => <Layout />
+const App = () =>
+  <Layout />
 
 export default App

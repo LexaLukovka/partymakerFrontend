@@ -3,14 +3,15 @@ import React from 'react'
 import { Form, Field } from 'formik'
 import { object, func, bool } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
-import placeShape from 'shapes/place'
-import { TextField, AddressField, ServerMessage } from 'components/formik'
+import placeShape from 'src/shapes/place'
+import { TextField, AddressField, ServerMessage } from 'src/components/formik'
 import { CloseButton } from 'components'
 import formik from './formik'
 
 const styles = {
   root: {
-    display: 'flex'
+    display: 'flex',
+    flexGrow: 1,
   },
   title: {
     display: 'flex',

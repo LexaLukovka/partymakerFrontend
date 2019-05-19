@@ -9,7 +9,11 @@ class FormikPlaceField extends Component {
     const { submitForm, setFieldValue } = form
 
     setFieldValue(name, place.id)
-    setTimeout(() => submitForm())
+    this.timeout = setTimeout(() => submitForm())
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout)
   }
 
   render() {
