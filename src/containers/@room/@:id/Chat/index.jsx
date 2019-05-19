@@ -3,7 +3,6 @@ import { object, func, number, arrayOf } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import authShape from 'shapes/auth'
-import Socket from 'services/Socket'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
@@ -32,10 +31,11 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    const { socket } = this.props
     this.loadAndForceScrollBottom().catch(console.error)
-    if (typeof window !== 'undefined') {
-      Socket.on('message', this.scrollBottom)
-    }
+    if (!socket) return
+
+    socket.on('message', this.scrollBottom)
   }
 
   loadAndForceScrollBottom = async () => {
@@ -111,6 +111,7 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
+  socket: object,
   messages: arrayOf(messageShape).isRequired,
   totalMessages: number.isRequired,
   auth: authShape.isRequired,

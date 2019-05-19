@@ -8,7 +8,7 @@ import Invite from './Invite'
 import Guests from './Guests'
 import Chat from './Chat'
 import connector from './connector'
-import Socket from 'services/Socket'
+import Ws from 'services/Ws'
 import Place from './Place'
 import Title from './Title'
 import DropdownMenu from './DropdownMenu'
@@ -43,25 +43,25 @@ const styles = {
 
 class RoomScene extends Component {
 
+  socket = null
+
   state = {
     isGuestsLoaded: false
   }
 
-  componentDidMount() {
-    connectToSockets(this.props).catch(console.error)
-    this.loadRoom().catch(console.error)
+  async componentDidMount() {
+    const props = this.props
+    this.socket = await connectToSockets(props)
+    await this.loadRoom()
   }
 
   componentWillUnmount() {
     const { match, } = this.props
     const room_id = match.params.id
-    Socket.emit('leave', room_id)
-    Socket.close()
+    this.socket.emit('leave', room_id)
+    this.socket.close()
+    Ws.close()
   }
-
-  // componentDidUpdate(prev) {
-  //   console.log({ RoomScene_prevTitle: prev.room?.title, nextTitle: this.props.room?.title })
-  // }
 
   loadRoom = async () => {
     const { actions, match } = this.props
@@ -160,6 +160,7 @@ class RoomScene extends Component {
             {isGuestsLoaded && (
               <Chat
                 auth={auth}
+                socket={this.socket}
                 messages={room?.messages}
                 totalMessages={room?.totalMessages}
                 onLoad={this.loadMessages}
