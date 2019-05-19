@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
-
+import emojiRegex from 'emoji-regex'
 import StatusCaption from './StatusCaption'
+import replace from 'string-replace-to-array'
 
 const styles = theme => ({
   root: {
@@ -16,20 +17,39 @@ const styles = theme => ({
   },
   text: {
     fontSize: 15,
+    lineHeight: 1.5,
   },
+  emoji: {
+    fontSize: 17,
+    lineHeight: 1,
+  }
 })
 
-const TextMessage = ({ classes, message }) => {
+class TextMessage extends Component {
 
-  if (!message.text) return null
+  formatEmoji = (text) => {
 
-  return (
-    <div className={classes.root}>
-      <Typography className={classes.text}>{message.text}</Typography> {' '}
-      <StatusCaption message={message} />
-    </div>
-  )
+    const { classes } = this.props
+
+    const format = (emoji, offset) => <span key={offset} className={classes.emoji}>{emoji}</span>
+
+    return replace(text, emojiRegex(), format)
+  }
+
+  render() {
+    const { classes, message } = this.props
+
+    if (!message.text) return null
+
+    return (
+      <div className={classes.root}>
+        <Typography className={classes.text}>{this.formatEmoji(message.text)}</Typography> {' '}
+        <StatusCaption message={message} />
+      </div>
+    )
+  }
 }
+
 TextMessage.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired
