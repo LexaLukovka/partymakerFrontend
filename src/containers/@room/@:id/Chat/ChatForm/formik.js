@@ -10,6 +10,7 @@ const initialValues = ({ auth }) => ({
   place_id: null,
   user_id: auth.user_id,
   token: `temp-${uniqId()}`,
+  date: '',
 })
 
 const formik = withFormik({
@@ -18,7 +19,7 @@ const formik = withFormik({
   mapPropsToValues: initialValues,
 
   handleSubmit: async (form, { props, setErrors, setSubmitting, resetForm }) => {
-    if (!form.text && !form.asset_id && !form.place_id) return
+    if (!form.text && !form.asset_id && !form.place_id && !form.date) return
     setSubmitting(true)
     resetForm(initialValues(props))
     const [err] = await to(props.onSubmit(form))

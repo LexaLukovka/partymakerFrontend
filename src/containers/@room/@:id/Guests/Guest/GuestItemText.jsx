@@ -22,7 +22,7 @@ const styles = {
 class GuestItemText extends Component {
   lastSeen = (guest) => {
     if (guest?.pivot?.is_online) return 'Онлайн'
-    if (guest?.pivot.last_seen) {
+    if (guest?.pivot?.last_seen) {
       const lastSeen = moment(guest.pivot?.last_seen, 'YYYY-MM-DD HH:mm:ss').fromNow()
 
       return `Был(а) в сети ${lastSeen}`

@@ -28,9 +28,7 @@ const styles = theme => ({
 class TextMessage extends Component {
 
   formatEmoji = (text) => {
-
     const { classes } = this.props
-
     const format = (emoji, offset) => <span key={offset} className={classes.emoji}>{emoji}</span>
 
     return replace(text, emojiRegex(), format)
@@ -54,8 +52,5 @@ TextMessage.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired
 }
-// const isEqual = (prev, next) => {
-//   return prev.message.text === next.message.text
-// }
 
 export default withStyles(styles)(TextMessage)

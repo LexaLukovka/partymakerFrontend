@@ -10,6 +10,7 @@ import PictureMessage from './types/PictureMessage'
 import FileMessage from './types/FileMessage'
 import PlaceMessage from './types/PlaceMessage'
 import NotificationMessage from './types/NotificationMessage'
+import DateMessage from './types/DateMessage'
 import isPicture from 'utils/isPicture'
 
 const styles = {
@@ -43,6 +44,10 @@ class Message extends Component {
           {(() => {
             if (!message.user_id) {
               return <NotificationMessage message={message} />
+            }
+
+            if (message.date) {
+              return <DateMessage message={message} />
             }
 
             if (isPicture(message.asset?.url)) {

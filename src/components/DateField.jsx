@@ -15,24 +15,19 @@ const styles = {
 
 class DateField extends Component {
   changeFirstInput = (e) => {
-    // const { name, onChange } = this.props
+    const { name, onChange } = this.props
 
-    // onChange(name, e.target.value)
-  }
-
-  changeLastInput = (value) => {
-    // const { name, onChange } = this.props
-
-    // onChange(name, value)
+    onChange(name, e.target.value)
   }
 
   render() {
-    const { classes, helperText, error } = this.props
+    const { classes, helperText, value, error } = this.props
     return (
       <div className={classes.root}>
         <TextField
           type="date"
           fullWidth
+          value={value}
           margin="normal"
           error={error}
           helperText={helperText}
