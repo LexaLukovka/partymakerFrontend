@@ -78,7 +78,7 @@ class PlaceMessage extends Component {
   }
 
   render() {
-    const { classes, message, isMeAdmin } = this.props
+    const { classes, message } = this.props
     const { isPlaceModalOpen, isLoadingPlace } = this.state
     const place = message.place
     const background_url = place?.background_url || '/images/sparks.png'
@@ -127,7 +127,6 @@ class PlaceMessage extends Component {
 
 PlaceMessage.propTypes = {
   classes: object.isRequired,
-  isMeAdmin: bool,
   actions: shape({
     rooms: shape({
       update: func.isRequired,
@@ -138,15 +137,5 @@ PlaceMessage.propTypes = {
   }),
   message: messageShape.isRequired,
 }
-
-// const isEqual = (prev, next) => {
-//   if (JSON.stringify(prev.classes) !== JSON.stringify(next.classes)) return false
-//   if (prev.message?.place?.title !== next.message?.place?.title) return false
-//   if (prev.message?.place?.address !== next.message?.place?.address) return false
-//   if (prev.message?.place_id !== next.message?.place_id) return false
-//   if (prev.isMeAdmin !== next.isMeAdmin) return false
-//
-//   return prev.place?.background_url === next.place?.background_url
-// }
 
 export default withStyles(styles)(connector(PlaceMessage))

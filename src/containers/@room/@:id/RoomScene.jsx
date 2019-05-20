@@ -9,7 +9,7 @@ import Guests from './Guests'
 import Chat from './Chat'
 import connector from './connector'
 import Ws from 'services/Ws'
-import Place from './Place'
+import RoomStatus from './RoomStatus'
 import Title from './Title'
 import DropdownMenu from './DropdownMenu'
 import ChatHeader from './ChatHeader'
@@ -140,18 +140,13 @@ class RoomScene extends Component {
         {room?.guests && (
           <div className={classes.chat}>
             <ChatHeader>
-              <Place
-                place={room.place}
-                onLoad={this.loadPlace}
-                onCreate={this.addPlace}
-                onUpdate={actions.place.update}
-              >
+              <RoomStatus room={room}>
                 {room && (<Title
                   room_id={room.id}
                   title={room.title}
                   onUpdate={actions.rooms.update}
                 />)}
-              </Place>
+              </RoomStatus>
               <DropdownMenu
                 room={room}
                 onLeave={actions.rooms.leave}
