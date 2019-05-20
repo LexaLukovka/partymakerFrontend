@@ -42,7 +42,7 @@ class Preview extends Component {
 Preview.propTypes = {
   classes: object.isRequired,
   formik: object.isRequired,
-  invite: inviteShape.isRequired,
+  invite: inviteShape,
 }
 
 export default withStyles(styles)(connect(Preview))

@@ -65,14 +65,16 @@ class DateMessage extends Component {
             <Typography gutterBottom variant="body1" className={classes.address}>
               {moment(message.date).format('D MMMM, dddd')}
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.openModal}
-              size="small"
-            >
-              Принять
-            </Button>
+            {message.date !== message.room.date
+              ? <Button
+                variant="contained"
+                color="primary"
+                onClick={this.openModal}
+                size="small"
+              >
+                Принять
+              </Button>
+              : <Typography color="secondary">Установленая дата</Typography>}
           </div>
         </div>
         <DateDialog

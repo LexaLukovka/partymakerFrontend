@@ -67,7 +67,7 @@ class EmojiPicker extends Component {
             horizontal: 'right',
           }}
         >
-          <Picker showPreview={false} onSelect={this.select} />
+          <Picker showPreview={false} native onSelect={this.select} />
         </Popover>
       </>
     )

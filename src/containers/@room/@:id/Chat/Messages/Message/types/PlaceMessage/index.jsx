@@ -95,16 +95,19 @@ class PlaceMessage extends Component {
               <div className={classes.content}>
                 <Typography className={classes.title} variant="h5">{place.title}</Typography>
                 <Typography gutterBottom variant="body1" className={classes.address}>{place.address}</Typography>
-                {isMeAdmin && (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.openModal}
-                    size="small"
-                  >
-                    Принять
-                  </Button>
-                )}
+                {message.room.place_id !== message.place_id
+                  ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.openModal}
+                      size="small"
+                    >
+                      Принять
+                    </Button>
+                  )
+                  : <Typography color="secondary">Установленное место</Typography>
+                }
               </div>
             )}
           {place && (
