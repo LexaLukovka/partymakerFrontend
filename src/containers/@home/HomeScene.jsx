@@ -13,7 +13,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   container: {
     flexGrow: 1,
@@ -30,7 +30,7 @@ const styles = {
     height: '100%',
     zIndex: 10,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   mapElement: {
     flexGrow: 1,
@@ -43,7 +43,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-around',
     height: 50,
-  }
+  },
 }
 
 class HomeScene extends Component {
@@ -99,8 +99,8 @@ HomeScene.propTypes = {
       loadMany: func.isRequired,
       create: func.isRequired,
       leave: func.isRequired,
-    })
-  })
+    }),
+  }),
 }
 
 export default withStyles(styles)(connector(HomeScene))

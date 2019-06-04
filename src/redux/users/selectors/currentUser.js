@@ -1,10 +1,13 @@
 import { createSelector } from 'reselect'
 
 const currentUser = (users, user_id, accounts) => {
-  if (!user_id) return null
+
+  const user = users[user_id]
+
+  if (!user) return null
 
   return {
-    ...users[user_id],
+    ...user,
     account: accounts.find(a => a.user_id),
   }
 }
