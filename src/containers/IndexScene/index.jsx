@@ -15,7 +15,6 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
   },
   headerRoot: {
     position: 'absolute',
@@ -25,10 +24,10 @@ const styles = {
   sections: {
     margin: '0 auto',
     maxWidth: 1280,
-  }
+  },
 }
 
-class LandingScene extends Component {
+class IndexScene extends Component {
 
   logout = () => {
     const { actions } = this.props
@@ -58,11 +57,11 @@ class LandingScene extends Component {
   }
 }
 
-LandingScene.propTypes = {
+IndexScene.propTypes = {
   classes: object.isRequired,
   user: userShape,
   actions: shape({
     logout: func.isRequired,
-  })
+  }),
 }
-export default withStyles(styles)(connector(LandingScene))
+export default withStyles(styles)(connector(IndexScene))

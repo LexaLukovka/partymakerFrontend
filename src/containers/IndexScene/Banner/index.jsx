@@ -31,29 +31,29 @@ const styles = {
       width: '100%',
       height: '100%',
       content: `' '`,
-    }
+    },
   },
   container: {
-    zIndex: 10
+    zIndex: 10,
   },
   started: {
-    marginLeft: '-200px'
+    marginLeft: '-200px',
   },
   with: {
-    marginLeft: '100px'
+    marginLeft: '100px',
   },
 
   button: {
     borderRadius: '30px',
-    minWidth: '250px'
+    minWidth: '250px',
   },
 
   action: {
     marginTop: '150px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 
 }
 

@@ -7,6 +7,7 @@ import moment from 'moment'
 import 'assets/index.css'
 import { Provider as ReduxProvider } from 'react-redux'
 import store from './redux/store'
+import { createMuiTheme } from '@material-ui/core/styles'
 
 moment.locale('ru')
 
@@ -18,7 +19,7 @@ const App = () => {
 
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={createMuiTheme(theme)}>
         <Layout />
       </ThemeProvider>
     </ReduxProvider>
