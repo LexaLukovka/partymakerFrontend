@@ -53,7 +53,7 @@ const facebook = FBUser => ({
 
 const logout = () => ({
   type: LOGOUT_USER,
-  payload: auth.logout()
+  payload: auth.logout(),
 })
 
 /**

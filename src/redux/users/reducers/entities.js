@@ -1,12 +1,7 @@
 import { SET_USER, SET_USERS, SET_USER_ONLINE, SET_USER_OFFLINE } from '../action'
-import Auth from 'services/Auth'
 import arrayToObject from 'utils/arrayToObject'
 
-const user = Auth.user()
-
-const initialState = user ? { [user.id]: user } : {}
-
-const usersReducer = (state = initialState, { type, payload }) => {
+const usersReducer = (state = {}, { type, payload }) => {
   switch (type) {
 
     case SET_USER:
