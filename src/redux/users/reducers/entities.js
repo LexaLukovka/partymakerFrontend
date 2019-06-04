@@ -9,7 +9,7 @@ const usersReducer = (state = {}, { type, payload }) => {
         ...state,
         [payload.id]: {
           ...payload,
-          pivot: payload?.pivot || state[payload.id]?.pivot
+          pivot: payload?.pivot || state[payload.id]?.pivot,
         },
       }
 
@@ -28,7 +28,7 @@ const usersReducer = (state = {}, { type, payload }) => {
             ...state[payload]?.pivot,
             is_online: true,
           },
-        }
+        },
       }
 
     case SET_USER_OFFLINE:
@@ -40,7 +40,7 @@ const usersReducer = (state = {}, { type, payload }) => {
             ...state[payload]?.pivot,
             is_online: false,
           },
-        }
+        },
       }
 
     default:

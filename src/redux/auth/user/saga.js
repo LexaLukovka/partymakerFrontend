@@ -5,9 +5,7 @@ import Auth from 'services/Auth'
 import account from './account/saga'
 
 function* setUser({ payload: { token } }) {
-
   const user = Auth.user(token)
-
   yield put(actions.users.set(user))
 }
 

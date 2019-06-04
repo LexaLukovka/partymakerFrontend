@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { bool, object, oneOfType, number, shape, string, func } from 'prop-types'
+import { bool, object, oneOfType, number, shape, string } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
-import initialsFromUserName from 'src/utils/initialsFromUserName'
+import initialsFromUserName from 'utils/initialsFromUserName'
 import GreenDot from './GreenDot'
 import { PictureModal } from 'components'
 

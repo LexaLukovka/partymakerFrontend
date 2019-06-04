@@ -19,7 +19,7 @@ const styles = {
   container: {
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   card: {
     width: 450,
@@ -71,9 +71,9 @@ SettingsScene.propTypes = {
       }),
       password: shape({
         update: func.isRequired,
-      })
-    })
-  })
+      }),
+    }),
+  }),
 }
 
 export default withStyles(styles)(connector(SettingsScene))

@@ -9,9 +9,10 @@ const Loadable = require('@loadable/webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const Clean = require('clean-webpack-plugin')
 const Copy = require('copy-webpack-plugin')
+const dotenv = require('dotenv').config({ path: path.join(__dirname, '/.env') })
 
 const universal = {
-  devtool: false,
+  devtool: 'cheap-module-source-map',
   mode: isDevelop ? 'development' : 'production',
 
   stats: {
@@ -30,7 +31,6 @@ const universal = {
       src: path.resolve(__dirname, './src'),
       api: path.resolve(__dirname, './src/api'),
       assets: path.resolve(__dirname, './src/assets'),
-      constants: path.resolve(__dirname, './src/constants'),
       components: path.resolve(__dirname, './src/components'),
       containers: path.resolve(__dirname, './src/containers'),
       services: path.resolve(__dirname, './src/services'),
@@ -149,6 +149,7 @@ const client = merge(universal, {
     new Clean('./public', { root: path.resolve(__dirname, './dist') }),
     new Copy([{ from: './src/assets', to: './' }]),
     new Loadable({ writeToDisk: true }),
+    new webpack.DefinePlugin({ 'process.env': JSON.stringify(dotenv.parsed) }),
   ],
 })
 

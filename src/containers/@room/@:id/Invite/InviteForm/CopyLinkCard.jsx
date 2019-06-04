@@ -2,7 +2,6 @@ import React from 'react'
 import { object, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { OutlineCard } from 'components'
-import { FRONTEND_URL } from 'src/constants'
 
 const styles = {
   root: {
@@ -28,7 +27,8 @@ const CopyLinkCard = ({ classes, token }) =>
         variant="subtitle1"
         color="primary"
       >
-        <a target="_blank" href={`${FRONTEND_URL}/invite/${token}`}>{FRONTEND_URL}/invite/{token}</a>
+        <a target="_blank" href={`${window.location.hostname}/invite/${token}`}>{window.location.hostname}/invite/{token}</a>
+
       </Typography>
     </div>
   </OutlineCard>
