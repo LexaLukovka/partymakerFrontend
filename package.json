@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.1.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "latest",
     "classnames": "^2.2.6",
     "compression": "latest",
